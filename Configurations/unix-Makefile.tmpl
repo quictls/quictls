@@ -1132,8 +1132,6 @@ lint:
 	lint -DLINT $(INCLUDES) $(SRCS)
 
 generate_apps:
-	( cd $(SRCDIR); $(PERL) VMS/VMSify-conf.pl \
-				< apps/openssl.cnf > apps/openssl-vms.cnf )
 
 generate_crypto_bn:
 	( cd $(SRCDIR); $(PERL) crypto/bn/bn_prime.pl > crypto/bn/bn_prime.h )
