@@ -23,9 +23,9 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
-        path: openssl
+        path: quictls
     - name: check style for each commit 
-      working-directory: openssl
+      working-directory: quictls
       shell: bash
       run: |
         ERRORS_FOUND=0
