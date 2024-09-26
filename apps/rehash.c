@@ -11,7 +11,7 @@
 #include "apps.h"
 #include "progs.h"
 
-# ifndef WIN32
+# ifndef OPENSSL_SYS_WIN32
 #  include <unistd.h>
 # endif
 # include <stdio.h>
@@ -30,7 +30,7 @@
 # endif
 # define MAX_COLLISIONS  256
 
-# if defined(OPENSSL_SYS_VXWORKS) || defined(OPENSSL_SYS_WINDOWS)
+# if defined(OPENSSL_SYS_VXWORKS) || defined(OPENSSL_SYS_WIN32)
 
 #  define lstat(path, buf) stat(path, buf)
 
