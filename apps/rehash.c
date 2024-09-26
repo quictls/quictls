@@ -11,7 +11,9 @@
 #include "apps.h"
 #include "progs.h"
 
-# include <unistd.h>
+# ifndef WIN32
+#  include <unistd.h>
+# endif
 # include <stdio.h>
 # include <limits.h>
 # include <errno.h>
