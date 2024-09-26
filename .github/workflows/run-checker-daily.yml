@@ -47,7 +47,6 @@ jobs:
           no-deprecated,
           no-des,
           no-devcryptoeng,
-          no-dh,
           no-dsa,
           no-dtls1,
           no-dtls1_2,
