@@ -11,28 +11,28 @@
 #include "apps.h"
 #include "progs.h"
 
-# ifndef OPENSSL_SYS_WIN32
-#  include <unistd.h>
-# endif
-# include <stdio.h>
-# include <limits.h>
-# include <errno.h>
-# include <string.h>
-# include <ctype.h>
-# include <sys/stat.h>
-# include "internal/o_dir.h"
-# include <openssl/evp.h>
-# include <openssl/pem.h>
-# include <openssl/x509.h>
+#ifndef OPENSSL_SYS_WIN32
+# include <unistd.h>
+#endif
+#include <stdio.h>
+#include <limits.h>
+#include <errno.h>
+#include <string.h>
+#include <ctype.h>
+#include <sys/stat.h>
+#include "internal/o_dir.h"
+#include <openssl/evp.h>
+#include <openssl/pem.h>
+#include <openssl/x509.h>
 
-# ifndef PATH_MAX
-#  define PATH_MAX 4096
-# endif
-# define MAX_COLLISIONS  256
+#ifndef PATH_MAX
+# define PATH_MAX 4096
+#endif
+#define MAX_COLLISIONS  256
 
-# if defined(OPENSSL_SYS_VXWORKS) || defined(OPENSSL_SYS_WIN32)
+#if defined(OPENSSL_SYS_VXWORKS) || defined(OPENSSL_SYS_WIN32)
 
-#  define lstat(path, buf) stat(path, buf)
+# define lstat(path, buf) stat(path, buf)
 
 int symlink(const char *target, const char *linkpath)
 {
@@ -45,7 +45,7 @@ ssize_t readlink(const char *pathname, char *buf, size_t bufsiz)
     errno = ENOSYS;
     return -1;
 }
-# endif
+#endif
 
 typedef struct hentry_st {
     struct hentry_st *next;
@@ -307,10 +307,10 @@ static int ends_with_dirsep(const char *path)
 {
     if (*path != '\0')
         path += strlen(path) - 1;
-# if defined _WIN32
+#if defined _WIN32
     if (*path == '\\')
         return 1;
-# endif
+#endif
     return *path == '/';
 }
 
