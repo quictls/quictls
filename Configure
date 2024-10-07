@@ -364,14 +364,7 @@ foreach (sort glob($pattern)) {
 }
 
 if (defined env($local_config_envname)) {
-    if ($^O eq 'VMS') {
-        # VMS environment variables are logical names,
-        # which can be used as is
-        $pattern = $local_config_envname . ':' . '*.conf';
-    } else {
-        $pattern = catfile(env($local_config_envname), '*.conf');
-    }
-
+    $pattern = catfile(env($local_config_envname), '*.conf');
     foreach (sort glob($pattern)) {
         &read_config($_);
     }
@@ -672,8 +665,7 @@ while ((my $first, my $second) = (shift @list, shift @list)) {
 # The default is the Unix like separator, :, but as an exception, we also
 # support the space as separator.
 my $list_separator_re =
-    { VMS           => qr/(?<!\^),/,
-      MSWin32       => qr/(?<!\\);/ } -> {$^O} // qr/(?<!\\)[:\s]/;
+    { MSWin32       => qr/(?<!\\);/ } -> {$^O} // qr/(?<!\\)[:\s]/;
 # All the "make variables" we support
 # Some get pre-populated for the sake of backward compatibility
 # (we supported those before the change to "make variable" support.
@@ -3222,9 +3214,7 @@ sub compiler_predefined {
     state %predefined;
     my $cc = shift;
 
-    return () if $^O eq 'VMS';
-
-    die 'compiler_predefined called without a compiler command'
+     die 'compiler_predefined called without a compiler command'
         unless $cc;
 
     if (! $predefined{$cc}) {
@@ -3370,7 +3360,7 @@ sub isabsolute {
     my $file = shift;
 
     # On non-platforms, we just use file_name_is_absolute().
-    return file_name_is_absolute($file) unless $^O eq "VMS";
+    return file_name_is_absolute($file);
 
     # If the file spec includes a device or a directory spec,
     # file_name_is_absolute() is perfectly safe.
@@ -3392,9 +3382,6 @@ sub absolutedir {
     # will return the volume name for the device, no matter what.  Also,
     # it will return an incorrect directory spec if the argument is a
     # directory that doesn't exist.
-    if ($^O eq "VMS") {
-        return rel2abs($dir);
-    }
 
     # realpath() on Windows seems to check if the directory actually exists,
     # which isn't what is wanted here.  All we want to know is if a directory
