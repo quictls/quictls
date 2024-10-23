@@ -66,12 +66,6 @@ jobs:
             target: linux-armv4,
             tests: -test_includes -test_store -test_x509_store
           }, {
-            arch: hppa-linux-gnu,
-            libs: libc6-dev-hppa-cross,
-            target: -static linux-generic32,
-            fips: no,
-            tests: -test_includes -test_store -test_x509_store
-          }, {
             arch: m68k-linux-gnu,
             libs: libc6-dev-m68k-cross,
             target: -static -m68040 linux-latomic -Wno-stringop-overflow,
@@ -119,11 +113,6 @@ jobs:
           # They mirror static builds above in order to cover more of the
           # code base.
           {
-            arch: hppa-linux-gnu,
-            libs: libc6-dev-hppa-cross,
-            target: linux-generic32,
-            tests: none
-          }, {
             arch: m68k-linux-gnu,
             libs: libc6-dev-m68k-cross,
             target: -mcfv4e -mxgot linux-latomic -Wno-stringop-overflow no-quic,

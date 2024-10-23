@@ -119,7 +119,7 @@ check-c99:
         path: artifacts/
 
   self-hosted:
-    if: github.repository == 'openssl/openssl'
+    if: github.repository == 'quictls/quictls'
     strategy:
       matrix:
         os: [freebsd-13.2, ubuntu-arm64-22.04]
@@ -596,7 +596,7 @@ check-c99:
     - uses: actions/checkout@v4
       with:
         submodules: recursive
-    - name: Configure OpenSSL
+    - name: config
       run: ./config --banner=Configured --strict-warnings --debug enable-external-tests && perl configdata.pm --dump
     - name: make
       run: make -s -j4
@@ -620,7 +620,7 @@ check-c99:
     - uses: actions/checkout@v4
       with:
         submodules: recursive
-    - name: Configure OpenSSL
+    - name: config
       run: ./config --banner=Configured --strict-warnings enable-external-tests && perl configdata.pm --dump
     - name: make
       run: make -s -j4
