@@ -921,7 +921,7 @@ while (@argvcopy)
                 # No longer an automatic choice
                 $auto_threads = 0 if ($1 eq "threads");
                 }
-        elsif (/^-?enable-(.+)$/)
+        elsif (/^enable-(.+)$/)
                 {
                 if ($1 eq "static-engine")
                         {
