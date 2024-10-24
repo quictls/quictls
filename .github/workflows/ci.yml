@@ -21,9 +21,6 @@ on: [pull_request, push]
 permissions:
   contents: read
 
-env:
-  OSSL_RUN_CI_TESTS: 1
-
 jobs:
   check_update:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
@@ -54,15 +51,13 @@ jobs:
       run: make -s build_generated
     - name: make doc-nits
       run: make doc-nits
-    - name: make help
-      run: make help
     - name: make md-nits
       run: |
           sudo gem install mdl
           make md-nits
 
-# This checks that we use ANSI C99.
-check-c99:
+  # It's C99 time
+  check-c99:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
     - uses: actions/checkout@v4
@@ -75,48 +70,25 @@ check-c99:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
     - uses: actions/checkout@v4
-    - name: checkout fuzz/corpora submodule
-      run: git submodule update --init --depth 1 fuzz/corpora
     - name: localegen
       run: sudo locale-gen tr_TR.UTF-8
     - name: config
-      # enable-boring-quic-api is on by default, but we leave it here to check we're testing the explicit enable somewhere
-      run: CC=gcc ./config --banner=Configured enable-fips enable-boring-quic-api --strict-warnings && perl configdata.pm --dump
+      run: CC=gcc ./config --banner=Configured enable-fips --strict-warnings && perl configdata.pm --dump
     - name: make
       run: make -s -j4
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
     - name: make test
-      run: .github/workflows/make-test
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@basic-gcc"
-        path: artifacts/
+      run: make test HARNESS_JOBS=${HARNESS_JOBS:-4}
 
   basic_clang:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
     - uses: actions/checkout@v4
-    - name: checkout fuzz/corpora submodule
-      run: git submodule update --init --depth 1 fuzz/corpora
     - name: config
       run: CC=clang ./config --banner=Configured no-fips --strict-warnings && perl configdata.pm --dump
     - name: make
       run: make -s -j4
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
     - name: make test
-      run: .github/workflows/make-test
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@basic-clang"
-        path: artifacts/
+      run: make test HARNESS_JOBS=${HARNESS_JOBS:-4}
 
   self-hosted:
     if: github.repository == 'quictls/quictls'
@@ -136,79 +108,40 @@ check-c99:
     - name: get cpu info
       run: ./util/opensslwrap.sh version -c
     - name: make test
-      run: .github/workflows/make-test
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@self-hosted-${{ matrix.os }}"
-        path: artifacts/
+      run: make test HARNESS_JOBS=${HARNESS_JOBS:-4}
 
   minimal:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
     - uses: actions/checkout@v4
-    - name: checkout fuzz/corpora submodule
-      run: git submodule update --init --depth 1 fuzz/corpora
     - name: config
       run: ./config --banner=Configured --strict-warnings no-bulk no-pic no-asm -DOPENSSL_NO_SECURE_MEMORY -DOPENSSL_SMALL_FOOTPRINT && perl configdata.pm --dump
     - name: make
       run: make -j4 # verbose, so no -s here
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
     - name: make test
-      run: .github/workflows/make-test
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@minimal"
-        path: artifacts/
-        if-no-files-found: ignore
+      run: make test HARNESS_JOBS=${HARNESS_JOBS:-4}
 
   no-deprecated:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
     - uses: actions/checkout@v4
-    - name: checkout fuzz/corpora submodule
-      run: git submodule update --init --depth 1 fuzz/corpora
     - name: config
       run: ./config --banner=Configured --strict-warnings no-deprecated enable-fips && perl configdata.pm --dump
     - name: make
       run: make -s -j4
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
     - name: make test
-      run: .github/workflows/make-test
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@no-deprecated"
-        path: artifacts/
+      run: make test HARNESS_JOBS=${HARNESS_JOBS:-4}
 
   no-shared-ubuntu:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
     - uses: actions/checkout@v4
-    - name: checkout fuzz/corpora submodule
-      run: git submodule update --init --depth 1 fuzz/corpora
     - name: config
       run: ./config --banner=Configured --strict-warnings no-shared no-fips && perl configdata.pm --dump
     - name: make
       run: make -s -j4
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
     - name: make test
-      run: .github/workflows/make-test
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@no-shared-ubuntu"
-        path: artifacts/
+      run: make test HARNESS_JOBS=${HARNESS_JOBS:-4}
 
   no-shared-macos:
     strategy:
@@ -219,30 +152,17 @@ check-c99:
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
-    - name: checkout fuzz/corpora submodule
-      run: git submodule update --init --depth 1 fuzz/corpora
     - name: config
       run: ./config --banner=Configured --strict-warnings no-shared no-fips && perl configdata.pm --dump
     - name: make
       run: make -s -j4
-    - name: get cpu info
-      run: |
-        sysctl machdep.cpu
-        ./util/opensslwrap.sh version -c
     - name: make test
-      run: .github/workflows/make-test
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@no-shared-${{ matrix.os }}"
-        path: artifacts/
+      run: make test HARNESS_JOBS=${HARNESS_JOBS:-4}
 
   non-caching:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
     - uses: actions/checkout@v4
-    - name: checkout fuzz/corpora submodule
-      run: git submodule update --init --depth 1 fuzz/corpora
     - name: Adjust ASLR for sanitizer
       run: |
         sudo cat /proc/sys/vm/mmap_rnd_bits
@@ -251,77 +171,28 @@ check-c99:
       run: ./config --banner=Configured --debug enable-asan enable-ubsan no-cached-fetch no-fips no-dtls no-tls1 no-tls1-method no-tls1_1 no-tls1_1-method no-async && perl configdata.pm --dump
     - name: make
       run: make -s -j4
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
     - name: make test
-      run: .github/workflows/make-test OPENSSL_TEST_RAND_ORDER=0 TESTS="-test_fuzz* -test_ssl_* -test_sslapi -test_evp -test_cmp_http -test_verify -test_cms -test_store -test_enc -[01][0-9]"
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@non-caching"
-        path: artifacts/
+      run: make test HARNESS_JOBS=${HARNESS_JOBS:-4} OPENSSL_TEST_RAND_ORDER=0 TESTS="-test_fuzz* -test_ssl_* -test_sslapi -test_evp -test_cmp_http -test_verify -test_cms -test_store -test_enc -[01][0-9]"
 
   address_ub_sanitizer:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
     - uses: actions/checkout@v4
-    - name: checkout fuzz/corpora submodule
-      run: git submodule update --init --depth 1 fuzz/corpora
     - name: Adjust ASLR for sanitizer
       run: |
         sudo cat /proc/sys/vm/mmap_rnd_bits
         sudo sysctl -w vm.mmap_rnd_bits=28
     - name: config
-      run: ./config --banner=Configured --debug enable-asan enable-ubsan enable-rc5 enable-md2 enable-ec_nistp_64_gcc_128 enable-fips && perl configdata.pm --dump
+      run: ./config --banner=Configured --debug enable-asan enable-ubsan enable-rc5 enable-md2 enable-ec_nistp_64_gcc_128 enable-fips -DFUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION && perl configdata.pm --dump
     - name: make
       run: make -s -j4
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
     - name: make test
-      run: .github/workflows/make-test OPENSSL_TEST_RAND_ORDER=0
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@address_ub_sanitizer"
-        path: artifacts/
-
-  fuzz_tests:
-    runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
-    steps:
-    - uses: actions/checkout@v4
-    - name: checkout fuzz/corpora submodule
-      run: git submodule update --init --depth 1 fuzz/corpora
-    - name: Adjust ASLR for sanitizer
-      run: |
-        sudo cat /proc/sys/vm/mmap_rnd_bits
-        sudo sysctl -w vm.mmap_rnd_bits=28
-    - name: config
-      run: ./config --banner=Configured --debug -DPEDANTIC -DFUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION enable-asan enable-ubsan enable-rc5 enable-md2 enable-ec_nistp_64_gcc_128 enable-weak-ssl-ciphers enable-ssl3 enable-ssl3-method enable-nextprotoneg && perl configdata.pm --dump
-    - name: make
-      run: make -s -j4
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
-    - name: make test
-      run: .github/workflows/make-test OPENSSL_TEST_RAND_ORDER=0 TESTS="test_fuzz*"
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@fuzz_tests"
-        path: artifacts/
-        if-no-files-found: ignore
+      run: make test HARNESS_JOBS=${HARNESS_JOBS:-4} OPENSSL_TEST_RAND_ORDER=0
 
   memory_sanitizer:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
     - uses: actions/checkout@v4
-    - name: checkout fuzz/corpora submodule
-      run: git submodule update --init --depth 1 fuzz/corpora
     - name: Adjust ASLR for sanitizer
       run: |
         sudo cat /proc/sys/vm/mmap_rnd_bits
@@ -331,24 +202,13 @@ check-c99:
       run: CC=clang ./config --banner=Configured --debug -O1 -fsanitize=memory -DOSSL_SANITIZE_MEMORY -fno-optimize-sibling-calls enable-rc5 enable-md2 enable-ec_nistp_64_gcc_128 enable-fips && perl configdata.pm --dump
     - name: make
       run: make -s -j4
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
     - name: make test
-      run: .github/workflows/make-test OPENSSL_TEST_RAND_ORDER=0
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@memory_sanitizer"
-        path: artifacts/
+      run: make test HARNESS_JOBS=${HARNESS_JOBS:-4} OPENSSL_TEST_RAND_ORDER=0
 
   threads_sanitizer:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
     - uses: actions/checkout@v4
-    - name: checkout fuzz/corpora submodule
-      run: git submodule update --init --depth 1 fuzz/corpora
     - name: Adjust ASLR for sanitizer
       run: |
         sudo cat /proc/sys/vm/mmap_rnd_bits
@@ -357,115 +217,67 @@ check-c99:
       run: CC=clang ./config --banner=Configured no-fips --strict-warnings -fsanitize=thread && perl configdata.pm --dump
     - name: make
       run: make -s -j4
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
     - name: make test
-      run: .github/workflows/make-test V=1 TESTS="test_threads test_internal_provider test_provfetch test_provider test_pbe test_evp_kdf test_pkcs12 test_store test_evp test_quic*"
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@threads_sanitizer"
-        path: artifacts/
+      run: make V=1 TESTS="test_threads test_internal_provider test_provfetch test_provider test_pbe test_evp_kdf test_pkcs12 test_store test_evp" test HARNESS_JOBS=${HARNESS_JOBS:-4}
 
   enable_non-default_options:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
     - uses: actions/checkout@v4
-    - name: checkout fuzz/corpora submodule
-      run: git submodule update --init --depth 1 fuzz/corpora
     - name: modprobe tls
       run: sudo modprobe tls
     - name: config
-      run: ./config --banner=Configured --strict-warnings no-ec enable-ssl-trace enable-zlib enable-zlib-dynamic enable-crypto-mdebug enable-egd enable-ktls enable-fips no-threads && perl configdata.pm --dump
+      run: ./config --banner=Configured --strict-warnings no-ec enable-ssl-trace enable-zlib enable-zlib-dynamic enable-crypto-mdebug enable-egd enable-ktls enable-fips && perl configdata.pm --dump
     - name: make
       run: make -s -j4
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
     - name: make test
-      run: .github/workflows/make-test
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@enable_non-default_options"
-        path: artifacts/
+      run: make test HARNESS_JOBS=${HARNESS_JOBS:-4}
 
-  full_featured:
+  fips_and_ktls:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
     - uses: actions/checkout@v4
-    - name: checkout fuzz/corpora submodule
-      run: git submodule update --init --depth 1 fuzz/corpora
     - name: modprobe tls
       run: sudo modprobe tls
-    - name: Enable sctp
-      run: sudo modprobe sctp
-    - name: Enable auth in sctp
-      run: sudo sysctl -w net.sctp.auth_enable=1 
-    - name: install extra config support
-      run: sudo apt-get -y install libsctp-dev abigail-tools libzstd-dev zstd
     - name: config
-      run: ./config --banner=Configured --strict-warnings enable-ktls enable-fips enable-egd enable-ec_nistp_64_gcc_128 enable-md2 enable-rc5 enable-sctp enable-ssl3 enable-ssl3-method enable-trace enable-zlib enable-zstd && perl configdata.pm --dump
+      run: ./config --banner=Configured --strict-warnings enable-ktls enable-fips && perl configdata.pm --dump
     - name: make
       run: make -s -j4
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
     - name: make test
-      run: .github/workflows/make-test
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@full_featured"
-        path: artifacts/
+      run: make test HARNESS_JOBS=${HARNESS_JOBS:-4}
 
   no-legacy:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
     - uses: actions/checkout@v4
-    - name: checkout fuzz/corpora submodule
-      run: git submodule update --init --depth 1 fuzz/corpora
     - name: config
       run: ./config --banner=Configured --strict-warnings no-legacy enable-fips && perl configdata.pm --dump
     - name: make
       run: make -s -j4
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
     - name: make test
-      run: .github/workflows/make-test
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@no-legacy"
-        path: artifacts/
+      run: make test HARNESS_JOBS=${HARNESS_JOBS:-4}
 
   legacy:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
     - uses: actions/checkout@v4
-    - name: checkout fuzz/corpora submodule
-      run: git submodule update --init --depth 1 fuzz/corpora
     - name: config
       run: ./config --banner=Configured -Werror --debug no-afalgeng no-shared enable-crypto-mdebug enable-rc5 enable-md2 enable-ssl3 enable-ssl3-method enable-weak-ssl-ciphers enable-zlib enable-ec_nistp_64_gcc_128 no-fips && perl configdata.pm --dump
     - name: make
       run: make -s -j4
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
     - name: make test
-      run: .github/workflows/make-test
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@legacy"
-        path: artifacts/
+      run: make test HARNESS_JOBS=${HARNESS_JOBS:-4}
+
+  buildtest:
+    runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: config
+      run: ./config --banner=Configured no-asm no-makedepend enable-buildtest-c++ enable-fips --strict-warnings -D_DEFAULT_SOURCE && perl configdata.pm --dump
+    - name: make
+      run: make -s -j4
+    - name: make test
+      run: make test HARNESS_JOBS=${HARNESS_JOBS:-4}
 
   # out-of-source-and-install checks multiple things at the same time:
   # - That building, testing and installing works from an out-of-source
@@ -478,9 +290,6 @@ check-c99:
     - uses: actions/checkout@v4
       with:
         path: ./source
-    - name: checkout fuzz/corpora submodule
-      run: git submodule update --init --depth 1 fuzz/corpora
-      working-directory: ./source
     - name: make source read-only
       run: chmod -R a-w ./source
     - name: create build and install directories
@@ -489,25 +298,15 @@ check-c99:
         mkdir ./install
     - name: config
       run: |
-        ../source/config --banner=Configured enable-fips  enable-acvp-tests --strict-warnings --prefix=$(cd ../install; pwd)
+        ../source/config --banner=Configured enable-fips enable-acvp-tests --strict-warnings --prefix=$(cd ../install; pwd)
         perl configdata.pm --dump
       working-directory: ./build
     - name: make
       run: make -s -j4
       working-directory: ./build
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
-      working-directory: ./build
     - name: make test
-      run: ../source/.github/workflows/make-test
+      run: make test HARNESS_JOBS=${HARNESS_JOBS:-4}
       working-directory: ./build
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@out-of-readonly-source-and-install-ubuntu"
-        path: build/artifacts/
     - name: make install
       run: make install
       working-directory: ./build
@@ -523,9 +322,6 @@ check-c99:
     - uses: actions/checkout@v4
       with:
         path: ./source
-    - name: checkout fuzz/corpora submodule
-      run: git submodule update --init --depth 1 fuzz/corpora
-      working-directory: ./source
     - name: make source read-only
       run: chmod -R a-w ./source
     - name: create build and install directories
@@ -540,19 +336,9 @@ check-c99:
     - name: make
       run: make -s -j4
       working-directory: ./build
-    - name: get cpu info
-      run: |
-        sysctl machdep.cpu
-        ./util/opensslwrap.sh version -c
-      working-directory: ./build
     - name: make test
-      run: ../source/.github/workflows/make-test
+      run: make test HARNESS_JOBS=${HARNESS_JOBS:-4}
       working-directory: ./build
-    - name: save artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: "ci@out-of-readonly-source-and-install-${{ matrix.os }}"
-        path: build/artifacts/
     - name: make install
       run: make install
       working-directory: ./build
@@ -573,10 +359,6 @@ check-c99:
       run: ./config --banner=Configured --strict-warnings --debug no-afalgeng enable-rc5 enable-md2 enable-ssl3 enable-ssl3-method enable-weak-ssl-ciphers enable-zlib enable-ec_nistp_64_gcc_128 enable-external-tests no-fips && perl configdata.pm --dump
     - name: make
       run: make -s -j4
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
     - name: test external krb5
       run: make test TESTS="test_external_krb5"
     - name: test external_tlsfuzzer
@@ -596,38 +378,16 @@ check-c99:
     - uses: actions/checkout@v4
       with:
         submodules: recursive
-    - name: config
+    - name: Configure
       run: ./config --banner=Configured --strict-warnings --debug enable-external-tests && perl configdata.pm --dump
     - name: make
       run: make -s -j4
     - name: Setup Python
-      uses: actions/setup-python@v5.1.0
+      uses: actions/setup-python@v5.1.1
       with:
         python-version: ${{ matrix.PYTHON }}
     - uses: dtolnay/rust-toolchain@master
       with:
         toolchain: ${{ matrix.RUST }}
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
     - name: test external pyca
       run: make test TESTS="test_external_pyca" VERBOSE=1
-
-  external-test-cf-quiche:
-    runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-    - name: config
-      run: ./config --banner=Configured --strict-warnings enable-external-tests && perl configdata.pm --dump
-    - name: make
-      run: make -s -j4
-    - uses: dtolnay/rust-toolchain@stable
-    - name: get cpu info
-      run: |
-        cat /proc/cpuinfo
-        ./util/opensslwrap.sh version -c
-    - name: test external Cloudflare quiche
-      run: make test TESTS="test_external_cf_quiche" VERBOSE=1
