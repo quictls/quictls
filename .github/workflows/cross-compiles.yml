@@ -42,12 +42,6 @@ jobs:
         #   ppa:   Launchpad PPA repository to download packages from.
         platform: [
           {
-            arch: i386-pc-msdosdjgpp,
-            libs: libc-djgpp-dev libwatt-djgpp-dev djgpp-utils,
-            target: no-threads 386 DJGPP,
-            tests: none,
-            ppa: jwt27/djgpp-toolchain
-          }, {
             arch: aarch64-linux-gnu,
             libs: libc6-dev-arm64-cross,
             target: linux-aarch64
