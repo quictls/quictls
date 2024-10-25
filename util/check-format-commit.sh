@@ -22,6 +22,7 @@ EXCLUDED_FILE_REGEX=("\.pod" \
                      "\.yml" \
                      "\.md"  \
 		     "tools/" \
+		     "Configure" \
                      "\.sh")
 
 # Exit code for the script
