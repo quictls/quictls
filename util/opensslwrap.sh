@@ -18,9 +18,7 @@ if [ -x "${OPENSSL}.exe" ]; then
 	# *all* possible situations is to copy newly built .DLLs to apps/
 	# and test/, which is now done elsewhere... The $PATH is adjusted
 	# for backward compatibility (and nostagical reasons:-).
-	if [ "$OSTYPE" != msdosdjgpp ]; then
-		PATH="${HERE}..:$PATH"; export PATH
-	fi
+	PATH="${HERE}..:$PATH"; export PATH
 	exec "${OPENSSL}.exe" "$@"
 elif [ -x "${OPENSSL}" -a -x "${HERE}shlib_wrap.sh" ]; then
 	exec "${HERE}shlib_wrap.sh" "${OPENSSL}" "$@"

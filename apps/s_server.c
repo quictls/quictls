@@ -2542,7 +2542,7 @@ static int sv_body(int s, int stype, int prot, unsigned char *context)
              */
 #if defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_MSDOS)
             /*
-             * Under DOS (non-djgpp) and Windows we can't select on stdin:
+             * Under DOS and Windows we can't select on stdin:
              * only on sockets. As a workaround we timeout the select every
              * second and check for any keypress. In a proper Windows
              * application we wouldn't do this because it is inefficient.

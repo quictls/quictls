@@ -102,9 +102,7 @@ NONSTOP_KERNEL)
 	# necessarily does the trick. Trouble is that with introduction
 	# of SafeDllSearchMode in XP/2003 it's more appropriate to copy
 	# .DLLs in vicinity of executable, which is done elsewhere...
-	if [ "$OSTYPE" != msdosdjgpp ]; then
-		PATH="${THERE}:$PATH"; export PATH
-	fi
+	PATH="${THERE}:$PATH"; export PATH
 	;;
 esac
 

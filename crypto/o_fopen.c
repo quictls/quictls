@@ -31,9 +31,6 @@
 #if !defined(OPENSSL_NO_STDIO)
 
 # include <stdio.h>
-# ifdef __DJGPP__
-#  include <unistd.h>
-# endif
 
 FILE *openssl_fopen(const char *filename, const char *mode)
 {
@@ -78,37 +75,6 @@ FILE *openssl_fopen(const char *filename, const char *mode)
         }
     } else if (GetLastError() == ERROR_NO_UNICODE_TRANSLATION) {
         file = fopen(filename, mode);
-    }
-# elif defined(__DJGPP__)
-    {
-        char *newname = NULL;
-
-        if (pathconf(filename, _PC_NAME_MAX) <= 12) {  /* 8.3 file system? */
-            char *iterator;
-            char lastchar;
-
-            if ((newname = OPENSSL_malloc(strlen(filename) + 1)) == NULL) {
-                ERR_raise(ERR_LIB_CRYPTO, ERR_R_MALLOC_FAILURE);
-                return NULL;
-            }
-
-            for (iterator = newname, lastchar = '\0';
-                *filename; filename++, iterator++) {
-                if (lastchar == '/' && filename[0] == '.'
-                    && filename[1] != '.' && filename[1] != '/') {
-                    /* Leading dots are not permitted in plain DOS. */
-                    *iterator = '_';
-                } else {
-                    *iterator = *filename;
-                }
-                lastchar = *filename;
-            }
-            *iterator = '\0';
-            filename = newname;
-        }
-        file = fopen(filename, mode);
-
-        OPENSSL_free(newname);
     }
 # else
     file = fopen(filename, mode);

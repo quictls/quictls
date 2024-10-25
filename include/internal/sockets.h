@@ -27,16 +27,7 @@
 # ifdef OPENSSL_NO_SOCK
 
 # elif defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_MSDOS)
-#  if defined(__DJGPP__)
-#   define WATT32
-#   define WATT32_NO_OLDIES
-#   include <sys/socket.h>
-#   include <sys/un.h>
-#   include <tcp.h>
-#   include <netdb.h>
-#   include <arpa/inet.h>
-#   include <netinet/tcp.h>
-#  elif defined(_WIN32_WCE) && _WIN32_WCE<410
+#  if defined(_WIN32_WCE) && _WIN32_WCE<410
 #   define getservbyname _masked_declaration_getservbyname
 #  endif
 #  if !defined(IPPROTO_IP)
@@ -144,10 +135,6 @@ struct servent *PASCAL getservbyname(const char *, const char *);
 #  define clear_socket_error()    WSASetLastError(0)
 #  define readsocket(s,b,n)       recv((s),(b),(n),0)
 #  define writesocket(s,b,n)      send((s),(b),(n),0)
-# elif defined(__DJGPP__)
-#  define closesocket(s)          close_s(s)
-#  define readsocket(s,b,n)       read_s(s,b,n)
-#  define writesocket(s,b,n)      send(s,b,n,0)
 # elif defined(OPENSSL_SYS_VMS)
 #  define ioctlsocket(a,b,c)      ioctl(a,b,c)
 #  define closesocket(s)          close(s)

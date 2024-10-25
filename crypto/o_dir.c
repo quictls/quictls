@@ -23,7 +23,7 @@
 #include "internal/o_dir.h"
 
 #define LPDIR_H
-#if defined OPENSSL_SYS_UNIX || defined DJGPP \
+#if defined OPENSSL_SYS_UNIX DJGPP \
     || (defined __VMS_VER && __VMS_VER >= 70000000)
 # include "LPdir_unix.c"
 #elif defined OPENSSL_SYS_VMS
