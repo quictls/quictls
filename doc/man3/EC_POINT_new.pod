@@ -18,9 +18,6 @@ EC_POINT_set_compressed_coordinates,
 EC_POINT_set_affine_coordinates_GFp,
 EC_POINT_get_affine_coordinates_GFp,
 EC_POINT_set_compressed_coordinates_GFp,
-EC_POINT_set_affine_coordinates_GF2m,
-EC_POINT_get_affine_coordinates_GF2m,
-EC_POINT_set_compressed_coordinates_GF2m,
 EC_POINT_point2oct,
 EC_POINT_oct2point,
 EC_POINT_point2bn,
@@ -83,16 +80,6 @@ see L<openssl_user_macros(7)>:
                                              EC_POINT *p,
                                              const BIGNUM *x, int y_bit,
                                              BN_CTX *ctx);
- int EC_POINT_set_affine_coordinates_GF2m(const EC_GROUP *group, EC_POINT *p,
-                                          const BIGNUM *x, const BIGNUM *y,
-                                          BN_CTX *ctx);
- int EC_POINT_get_affine_coordinates_GF2m(const EC_GROUP *group,
-                                          const EC_POINT *p,
-                                          BIGNUM *x, BIGNUM *y, BN_CTX *ctx);
- int EC_POINT_set_compressed_coordinates_GF2m(const EC_GROUP *group,
-                                              EC_POINT *p,
-                                              const BIGNUM *x, int y_bit,
-                                              BN_CTX *ctx);
  BIGNUM *EC_POINT_point2bn(const EC_GROUP *group, const EC_POINT *p,
                            point_conversion_form_t form, BIGNUM *bn,
                            BN_CTX *ctx);
@@ -130,15 +117,13 @@ coordinates for the point B<p> defined over the curve given in B<group>. The
 function EC_POINT_get_affine_coordinates() sets B<x> and B<y>, either of which
 may be NULL, to the corresponding coordinates of B<p>.
 
-The functions EC_POINT_set_affine_coordinates_GFp() and
-EC_POINT_set_affine_coordinates_GF2m() are synonyms for
-EC_POINT_set_affine_coordinates(). They are defined for backwards compatibility
-only and should not be used.
+The functions EC_POINT_set_affine_coordinates_GFp() is an alias for
+EC_POINT_set_affine_coordinates(). It is defined for backwards
+compatibility only and should not be used.
 
-The functions EC_POINT_get_affine_coordinates_GFp() and
-EC_POINT_get_affine_coordinates_GF2m() are synonyms for
-EC_POINT_get_affine_coordinates(). They are defined for backwards compatibility
-only and should not be used.
+The functions EC_POINT_get_affine_coordinates_GFp() is an alias for
+EC_POINT_get_affine_coordinates(). It is defined for backwards
+compatibility only and should not be used.
 
 As well as the affine coordinates, a point can alternatively be described in
 terms of its Jacobian projective coordinates (for Fp curves only). Jacobian
@@ -163,9 +148,8 @@ using the EC_POINT_set_compressed_coordinates() function where B<x> is the x
 coordinate and B<y_bit> is a value 0 or 1 to identify which of the two
 possible values for y should be used.
 
-The functions EC_POINT_set_compressed_coordinates_GFp() and
-EC_POINT_set_compressed_coordinates_GF2m() are synonyms for
-EC_POINT_set_compressed_coordinates(). They are defined for backwards
+The functions EC_POINT_set_compressed_coordinates_GFp() is an alias
+for EC_POINT_set_compressed_coordinates(). It is defined for backwards
 compatibility only and should not be used.
 
 In addition B<EC_POINT> can be converted to and from various external
@@ -225,9 +209,7 @@ The following functions return 1 on success or 0 on error: EC_POINT_copy(),
 EC_POINT_set_to_infinity(), EC_POINT_set_Jprojective_coordinates_GFp(),
 EC_POINT_get_Jprojective_coordinates_GFp(),
 EC_POINT_set_affine_coordinates_GFp(), EC_POINT_get_affine_coordinates_GFp(),
-EC_POINT_set_compressed_coordinates_GFp(),
-EC_POINT_set_affine_coordinates_GF2m(), EC_POINT_get_affine_coordinates_GF2m(),
-EC_POINT_set_compressed_coordinates_GF2m() and EC_POINT_oct2point().
+EC_POINT_set_compressed_coordinates_GFp(), and EC_POINT_oct2point().
 
 EC_POINT_method_of returns the EC_METHOD associated with the supplied EC_POINT.
 
@@ -258,8 +240,6 @@ EC_POINT_set_Jprojective_coordinates_GFp(),
 EC_POINT_get_Jprojective_coordinates_GFp(),
 EC_POINT_set_affine_coordinates_GFp(), EC_POINT_get_affine_coordinates_GFp(),
 EC_POINT_set_compressed_coordinates_GFp(),
-EC_POINT_set_affine_coordinates_GF2m(), EC_POINT_get_affine_coordinates_GF2m(),
-EC_POINT_set_compressed_coordinates_GF2m(),
 EC_POINT_point2bn(), and EC_POINT_bn2point() were deprecated in OpenSSL 3.0.
 
 

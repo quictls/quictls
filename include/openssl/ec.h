@@ -150,18 +150,6 @@ OSSL_DEPRECATEDIN_3_0 const EC_METHOD *EC_GFp_nistp256_method(void);
 OSSL_DEPRECATEDIN_3_0 const EC_METHOD *EC_GFp_nistp521_method(void);
 #   endif /* OPENSSL_NO_EC_NISTP_64_GCC_128 */
 
-#   ifndef OPENSSL_NO_EC2M
-/********************************************************************/
-/*           EC_METHOD for curves over GF(2^m)                      */
-/********************************************************************/
-
-/** Returns the basic GF2m ec method
- *  \return  EC_METHOD object
- */
-OSSL_DEPRECATEDIN_3_0 const EC_METHOD *EC_GF2m_simple_method(void);
-
-#   endif
-
 /********************************************************************/
 /*                   EC_GROUP functions                             */
 /********************************************************************/
@@ -304,10 +292,8 @@ size_t EC_GROUP_get_seed_len(const EC_GROUP *);
 size_t EC_GROUP_set_seed(EC_GROUP *, const unsigned char *, size_t len);
 
 /** Sets the parameters of an ec curve defined by y^2 = x^3 + a*x + b (for GFp)
- *  or y^2 + x*y = x^3 + a*x^2 + b (for GF2m)
  *  \param  group  EC_GROUP object
- *  \param  p      BIGNUM with the prime number (GFp) or the polynomial
- *                 defining the underlying field (GF2m)
+ *  \param  p      BIGNUM with the prime number (GFp)
  *  \param  a      BIGNUM with parameter a of the equation
  *  \param  b      BIGNUM with parameter b of the equation
  *  \param  ctx    BN_CTX object (optional)
@@ -317,10 +303,8 @@ int EC_GROUP_set_curve(EC_GROUP *group, const BIGNUM *p, const BIGNUM *a,
                        const BIGNUM *b, BN_CTX *ctx);
 
 /** Gets the parameters of the ec curve defined by y^2 = x^3 + a*x + b (for GFp)
- *  or y^2 + x*y = x^3 + a*x^2 + b (for GF2m)
  *  \param  group  EC_GROUP object
- *  \param  p      BIGNUM with the prime number (GFp) or the polynomial
- *                 defining the underlying field (GF2m)
+ *  \param  p      BIGNUM with the prime number (GFp)
  *  \param  a      BIGNUM for parameter a of the equation
  *  \param  b      BIGNUM for parameter b of the equation
  *  \param  ctx    BN_CTX object (optional)
@@ -332,8 +316,7 @@ int EC_GROUP_get_curve(const EC_GROUP *group, BIGNUM *p, BIGNUM *a, BIGNUM *b,
 #  ifndef OPENSSL_NO_DEPRECATED_3_0
 /** Sets the parameters of an ec curve. Synonym for EC_GROUP_set_curve
  *  \param  group  EC_GROUP object
- *  \param  p      BIGNUM with the prime number (GFp) or the polynomial
- *                 defining the underlying field (GF2m)
+ *  \param  p      BIGNUM with the prime number (GFp)
  *  \param  a      BIGNUM with parameter a of the equation
  *  \param  b      BIGNUM with parameter b of the equation
  *  \param  ctx    BN_CTX object (optional)
@@ -347,8 +330,7 @@ OSSL_DEPRECATEDIN_3_0 int EC_GROUP_set_curve_GFp(EC_GROUP *group,
 
 /** Gets the parameters of an ec curve. Synonym for EC_GROUP_get_curve
  *  \param  group  EC_GROUP object
- *  \param  p      BIGNUM with the prime number (GFp) or the polynomial
- *                 defining the underlying field (GF2m)
+ *  \param  p      BIGNUM with the prime number (GFp)
  *  \param  a      BIGNUM for parameter a of the equation
  *  \param  b      BIGNUM for parameter b of the equation
  *  \param  ctx    BN_CTX object (optional)
@@ -359,36 +341,6 @@ OSSL_DEPRECATEDIN_3_0 int EC_GROUP_get_curve_GFp(const EC_GROUP *group,
                                                  BIGNUM *a, BIGNUM *b,
                                                  BN_CTX *ctx);
 
-#   ifndef OPENSSL_NO_EC2M
-/** Sets the parameter of an ec curve. Synonym for EC_GROUP_set_curve
- *  \param  group  EC_GROUP object
- *  \param  p      BIGNUM with the prime number (GFp) or the polynomial
- *                 defining the underlying field (GF2m)
- *  \param  a      BIGNUM with parameter a of the equation
- *  \param  b      BIGNUM with parameter b of the equation
- *  \param  ctx    BN_CTX object (optional)
- *  \return 1 on success and 0 if an error occurred
- */
-OSSL_DEPRECATEDIN_3_0 int EC_GROUP_set_curve_GF2m(EC_GROUP *group,
-                                                  const BIGNUM *p,
-                                                  const BIGNUM *a,
-                                                  const BIGNUM *b,
-                                                  BN_CTX *ctx);
-
-/** Gets the parameters of an ec curve. Synonym for EC_GROUP_get_curve
- *  \param  group  EC_GROUP object
- *  \param  p      BIGNUM with the prime number (GFp) or the polynomial
- *                 defining the underlying field (GF2m)
- *  \param  a      BIGNUM for parameter a of the equation
- *  \param  b      BIGNUM for parameter b of the equation
- *  \param  ctx    BN_CTX object (optional)
- *  \return 1 on success and 0 if an error occurred
- */
-OSSL_DEPRECATEDIN_3_0 int EC_GROUP_get_curve_GF2m(const EC_GROUP *group,
-                                                  BIGNUM *p,
-                                                  BIGNUM *a, BIGNUM *b,
-                                                  BN_CTX *ctx);
-#   endif /* OPENSSL_NO_EC2M */
 #  endif /* OPENSSL_NO_DEPRECATED_3_0 */
 
 /** Returns the number of bits needed to represent a field element
@@ -434,19 +386,6 @@ int EC_GROUP_cmp(const EC_GROUP *a, const EC_GROUP *b, BN_CTX *ctx);
  */
 EC_GROUP *EC_GROUP_new_curve_GFp(const BIGNUM *p, const BIGNUM *a,
                                  const BIGNUM *b, BN_CTX *ctx);
-#  ifndef OPENSSL_NO_EC2M
-/** Creates a new EC_GROUP object with the specified parameters defined
- *  over GF2m (defined by the equation y^2 + x*y = x^3 + a*x^2 + b)
- *  \param  p    BIGNUM with the polynomial defining the underlying field
- *  \param  a    BIGNUM with the parameter a of the equation
- *  \param  b    BIGNUM with the parameter b of the equation
- *  \param  ctx  BN_CTX object (optional)
- *  \return newly created EC_GROUP object with the specified parameters
- */
-EC_GROUP *EC_GROUP_new_curve_GF2m(const BIGNUM *p, const BIGNUM *a,
-                                  const BIGNUM *b, BN_CTX *ctx);
-#  endif
-
 /**
  * Creates a EC_GROUP object with a curve specified by parameters.
  * The parameters may be explicit or a named curve,
@@ -705,46 +644,6 @@ int EC_POINT_set_compressed_coordinates(const EC_GROUP *group, EC_POINT *p,
 OSSL_DEPRECATEDIN_3_0 int EC_POINT_set_compressed_coordinates_GFp
                       (const EC_GROUP *group, EC_POINT *p,
                        const BIGNUM *x, int y_bit, BN_CTX *ctx);
-#   ifndef OPENSSL_NO_EC2M
-/** Sets the affine coordinates of an EC_POINT. A synonym of
- *  EC_POINT_set_affine_coordinates
- *  \param  group  underlying EC_GROUP object
- *  \param  p      EC_POINT object
- *  \param  x      BIGNUM with the x-coordinate
- *  \param  y      BIGNUM with the y-coordinate
- *  \param  ctx    BN_CTX object (optional)
- *  \return 1 on success and 0 if an error occurred
- */
-OSSL_DEPRECATEDIN_3_0 int EC_POINT_set_affine_coordinates_GF2m
-                      (const EC_GROUP *group, EC_POINT *p,
-                       const BIGNUM *x, const BIGNUM *y, BN_CTX *ctx);
-
-/** Gets the affine coordinates of an EC_POINT. A synonym of
- *  EC_POINT_get_affine_coordinates
- *  \param  group  underlying EC_GROUP object
- *  \param  p      EC_POINT object
- *  \param  x      BIGNUM for the x-coordinate
- *  \param  y      BIGNUM for the y-coordinate
- *  \param  ctx    BN_CTX object (optional)
- *  \return 1 on success and 0 if an error occurred
- */
-OSSL_DEPRECATEDIN_3_0 int EC_POINT_get_affine_coordinates_GF2m
-                      (const EC_GROUP *group, const EC_POINT *p,
-                       BIGNUM *x, BIGNUM *y, BN_CTX *ctx);
-
-/** Sets the x9.62 compressed coordinates of a EC_POINT. A synonym of
- *  EC_POINT_set_compressed_coordinates
- *  \param  group  underlying EC_GROUP object
- *  \param  p      EC_POINT object
- *  \param  x      BIGNUM with x-coordinate
- *  \param  y_bit  integer with the y-Bit (either 0 or 1)
- *  \param  ctx    BN_CTX object (optional)
- *  \return 1 on success and 0 if an error occurred
- */
-OSSL_DEPRECATEDIN_3_0 int EC_POINT_set_compressed_coordinates_GF2m
-                      (const EC_GROUP *group, EC_POINT *p,
-                       const BIGNUM *x, int y_bit, BN_CTX *ctx);
-#   endif
 #  endif /* OPENSSL_NO_DEPRECATED_3_0 */
 
 /** Encodes a EC_POINT object to a octet string
@@ -922,11 +821,6 @@ DECLARE_ASN1_ALLOC_FUNCTIONS(ECPARAMETERS)
  * represent the field elements
  */
 int EC_GROUP_get_basis_type(const EC_GROUP *);
-#  ifndef OPENSSL_NO_EC2M
-int EC_GROUP_get_trinomial_basis(const EC_GROUP *, unsigned int *k);
-int EC_GROUP_get_pentanomial_basis(const EC_GROUP *, unsigned int *k1,
-                                   unsigned int *k2, unsigned int *k3);
-#  endif
 
 EC_GROUP *d2i_ECPKParameters(EC_GROUP **, const unsigned char **in, long len);
 int i2d_ECPKParameters(const EC_GROUP *, unsigned char **out);

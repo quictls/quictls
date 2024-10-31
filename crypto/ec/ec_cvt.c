@@ -65,25 +65,3 @@ EC_GROUP *EC_GROUP_new_curve_GFp(const BIGNUM *p, const BIGNUM *a,
 
     return ret;
 }
-
-#ifndef OPENSSL_NO_EC2M
-EC_GROUP *EC_GROUP_new_curve_GF2m(const BIGNUM *p, const BIGNUM *a,
-                                  const BIGNUM *b, BN_CTX *ctx)
-{
-    const EC_METHOD *meth;
-    EC_GROUP *ret;
-
-    meth = EC_GF2m_simple_method();
-
-    ret = ossl_ec_group_new_ex(ossl_bn_get_libctx(ctx), NULL, meth);
-    if (ret == NULL)
-        return NULL;
-
-    if (!EC_GROUP_set_curve(ret, p, a, b, ctx)) {
-        EC_GROUP_free(ret);
-        return NULL;
-    }
-
-    return ret;
-}
-#endif

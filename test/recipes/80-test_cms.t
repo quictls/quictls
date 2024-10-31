@@ -45,8 +45,8 @@ my $datadir = srctop_dir("test", "recipes", "80-test_cms_data");
 my $smdir    = srctop_dir("test", "smime-certs");
 my $smcont   = srctop_file("test", "smcont.txt");
 my $smcont_zero = srctop_file("test", "smcont_zero.txt");
-my ($no_des, $no_dh, $no_dsa, $no_ec, $no_ec2m, $no_rc2, $no_zlib)
-    = disabled qw/des dh dsa ec ec2m rc2 zlib/;
+my ($no_des, $no_dh, $no_dsa, $no_ec, $no_rc2, $no_zlib)
+    = disabled qw/des dh dsa ec rc2 zlib/;
 
 $no_rc2 = 1 if disabled("legacy");
 
@@ -618,16 +618,6 @@ my @smime_cms_param_tests = (
       \&final_compare
     ],
 
-    [ "enveloped content test streaming S/MIME format, ECDH, K-283, cofactor DH",
-      [ "{cmd1}", @prov, "-encrypt", "-in", $smcont,
-        "-stream", "-out", "{output}.cms",
-        "-recip", catfile($smdir, "smec2.pem"), "-aes128",
-        "-keyopt", "ecdh_kdf_md:sha256", "-keyopt", "ecdh_cofactor_mode:1" ],
-      [ "{cmd2}", @prov, "-decrypt", "-recip", catfile($smdir, "smec2.pem"),
-        "-in", "{output}.cms", "-out", "{output}.txt" ],
-      \&final_compare
-    ],
-
     [ "enveloped content test streaming S/MIME format, X9.42 DH",
       [ "{cmd1}", @prov, "-encrypt", "-in", $smcont,
         "-stream", "-out", "{output}.cms",
@@ -1107,8 +1097,6 @@ sub check_availability {
         if ($no_ec && $tnam =~ /ECDH/);
     return "$tnam: skipped, ECDH disabled\n"
         if ($no_ec && $tnam =~ /ECDH/);
-    return "$tnam: skipped, EC2M disabled\n"
-        if ($no_ec2m && $tnam =~ /K-283/);
     return "$tnam: skipped, DH disabled\n"
         if ($no_dh && $tnam =~ /X9\.42/);
     return "$tnam: skipped, RC2 disabled\n"

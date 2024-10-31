@@ -69,8 +69,7 @@ ENDIF
 
 $COMMON=ec_lib.c ecp_smpl.c ecp_mont.c ecp_nist.c ec_cvt.c ec_mult.c \
         ec_curve.c ec_check.c ec_key.c ec_kmeth.c ec_asn1.c \
-        ec2_smpl.c \
-        ecp_oct.c ec2_oct.c ec_oct.c ecdh_ossl.c \
+        ecp_oct.c ec_oct.c ecdh_ossl.c \
         ecdsa_ossl.c ecdsa_sign.c ecdsa_vrf.c \
         $ECASM ec_backend.c ecdh_kdf.c
 

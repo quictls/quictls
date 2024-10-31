@@ -459,57 +459,6 @@ int ossl_ec_GFp_nist_field_mul(const EC_GROUP *, BIGNUM *r, const BIGNUM *a,
 int ossl_ec_GFp_nist_field_sqr(const EC_GROUP *, BIGNUM *r, const BIGNUM *a,
                                BN_CTX *);
 
-/* method functions in ec2_smpl.c */
-int ossl_ec_GF2m_simple_group_init(EC_GROUP *);
-void ossl_ec_GF2m_simple_group_finish(EC_GROUP *);
-void ossl_ec_GF2m_simple_group_clear_finish(EC_GROUP *);
-int ossl_ec_GF2m_simple_group_copy(EC_GROUP *, const EC_GROUP *);
-int ossl_ec_GF2m_simple_group_set_curve(EC_GROUP *, const BIGNUM *p,
-                                        const BIGNUM *a, const BIGNUM *b,
-                                        BN_CTX *);
-int ossl_ec_GF2m_simple_group_get_curve(const EC_GROUP *, BIGNUM *p, BIGNUM *a,
-                                        BIGNUM *b, BN_CTX *);
-int ossl_ec_GF2m_simple_group_get_degree(const EC_GROUP *);
-int ossl_ec_GF2m_simple_group_check_discriminant(const EC_GROUP *, BN_CTX *);
-int ossl_ec_GF2m_simple_point_init(EC_POINT *);
-void ossl_ec_GF2m_simple_point_finish(EC_POINT *);
-void ossl_ec_GF2m_simple_point_clear_finish(EC_POINT *);
-int ossl_ec_GF2m_simple_point_copy(EC_POINT *, const EC_POINT *);
-int ossl_ec_GF2m_simple_point_set_to_infinity(const EC_GROUP *, EC_POINT *);
-int ossl_ec_GF2m_simple_point_set_affine_coordinates(const EC_GROUP *,
-                                                     EC_POINT *,
-                                                     const BIGNUM *x,
-                                                     const BIGNUM *y, BN_CTX *);
-int ossl_ec_GF2m_simple_point_get_affine_coordinates(const EC_GROUP *,
-                                                     const EC_POINT *, BIGNUM *x,
-                                                     BIGNUM *y, BN_CTX *);
-int ossl_ec_GF2m_simple_set_compressed_coordinates(const EC_GROUP *, EC_POINT *,
-                                                   const BIGNUM *x, int y_bit,
-                                                   BN_CTX *);
-size_t ossl_ec_GF2m_simple_point2oct(const EC_GROUP *, const EC_POINT *,
-                                     point_conversion_form_t form,
-                                     unsigned char *buf, size_t len, BN_CTX *);
-int ossl_ec_GF2m_simple_oct2point(const EC_GROUP *, EC_POINT *,
-                                  const unsigned char *buf, size_t len, BN_CTX *);
-int ossl_ec_GF2m_simple_add(const EC_GROUP *, EC_POINT *r, const EC_POINT *a,
-                            const EC_POINT *b, BN_CTX *);
-int ossl_ec_GF2m_simple_dbl(const EC_GROUP *, EC_POINT *r, const EC_POINT *a,
-                            BN_CTX *);
-int ossl_ec_GF2m_simple_invert(const EC_GROUP *, EC_POINT *, BN_CTX *);
-int ossl_ec_GF2m_simple_is_at_infinity(const EC_GROUP *, const EC_POINT *);
-int ossl_ec_GF2m_simple_is_on_curve(const EC_GROUP *, const EC_POINT *, BN_CTX *);
-int ossl_ec_GF2m_simple_cmp(const EC_GROUP *, const EC_POINT *a,
-                            const EC_POINT *b, BN_CTX *);
-int ossl_ec_GF2m_simple_make_affine(const EC_GROUP *, EC_POINT *, BN_CTX *);
-int ossl_ec_GF2m_simple_points_make_affine(const EC_GROUP *, size_t num,
-                                           EC_POINT *[], BN_CTX *);
-int ossl_ec_GF2m_simple_field_mul(const EC_GROUP *, BIGNUM *r, const BIGNUM *a,
-                                  const BIGNUM *b, BN_CTX *);
-int ossl_ec_GF2m_simple_field_sqr(const EC_GROUP *, BIGNUM *r, const BIGNUM *a,
-                                  BN_CTX *);
-int ossl_ec_GF2m_simple_field_div(const EC_GROUP *, BIGNUM *r, const BIGNUM *a,
-                                 const BIGNUM *b, BN_CTX *);
-
 #ifndef OPENSSL_NO_EC_NISTP_64_GCC_128
 # ifdef B_ENDIAN
 #  error "Can not enable ec_nistp_64_gcc_128 on big-endian systems"

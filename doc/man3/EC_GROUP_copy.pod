@@ -11,8 +11,7 @@ EC_GROUP_get_point_conversion_form, EC_GROUP_get0_seed,
 EC_GROUP_get_seed_len, EC_GROUP_set_seed, EC_GROUP_get_degree,
 EC_GROUP_check, EC_GROUP_check_named_curve,
 EC_GROUP_check_discriminant, EC_GROUP_cmp,
-EC_GROUP_get_basis_type, EC_GROUP_get_trinomial_basis,
-EC_GROUP_get_pentanomial_basis, EC_GROUP_get0_field,
+EC_GROUP_get_basis_type, EC_GROUP_get0_field,
 EC_GROUP_get_field_type
 - Functions for manipulating EC_GROUP objects
 
@@ -58,9 +57,6 @@ EC_GROUP_get_field_type
  int EC_GROUP_cmp(const EC_GROUP *a, const EC_GROUP *b, BN_CTX *ctx);
 
  int EC_GROUP_get_basis_type(const EC_GROUP *group);
- int EC_GROUP_get_trinomial_basis(const EC_GROUP *group, unsigned int *k);
- int EC_GROUP_get_pentanomial_basis(const EC_GROUP *group, unsigned int *k1,
-                                    unsigned int *k2, unsigned int *k3);
 
  int EC_GROUP_get_field_type(const EC_GROUP *group);
 
@@ -176,20 +172,7 @@ The B<ctx> parameter may be NULL.
 
 EC_GROUP_cmp() compares B<a> and B<b> to determine whether they represent the same curve or not.
 
-The functions EC_GROUP_get_basis_type(), EC_GROUP_get_trinomial_basis() and EC_GROUP_get_pentanomial_basis() should only be called for curves
-defined over an F2^m field. Addition and multiplication operations within an F2^m field are performed using an irreducible polynomial
-function f(x). This function is either a trinomial of the form:
-
-f(x) = x^m + x^k + 1 with m > k >= 1
-
-or a pentanomial of the form:
-
-f(x) = x^m + x^k3 + x^k2 + x^k1 + 1 with m > k3 > k2 > k1 >= 1
-
-The function EC_GROUP_get_basis_type() returns a NID identifying whether a trinomial or pentanomial is in use for the field. The
-function EC_GROUP_get_trinomial_basis() must only be called where f(x) is of the trinomial form, and returns the value of B<k>. Similarly
-the function EC_GROUP_get_pentanomial_basis() must only be called where f(x) is of the pentanomial form, and returns the values of B<k1>,
-B<k2> and B<k3> respectively.
+EC_GROUP_get_basis_type() returns 0.
 
 =head1 RETURN VALUES
 

@@ -170,12 +170,8 @@ static int ec_group_explicit_todata(const EC_GROUP *group, OSSL_PARAM_BLD *tmpl,
     if (fid == NID_X9_62_prime_field) {
         field_type = SN_X9_62_prime_field;
     } else if (fid == NID_X9_62_characteristic_two_field) {
-#ifdef OPENSSL_NO_EC2M
         ERR_raise(ERR_LIB_EC, EC_R_GF2M_NOT_SUPPORTED);
         goto err;
-#else
-        field_type = SN_X9_62_characteristic_two_field;
-#endif
     } else {
         ERR_raise(ERR_LIB_EC, EC_R_INVALID_FIELD);
         return 0;

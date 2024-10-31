@@ -18,8 +18,8 @@ use OpenSSL::Test::Utils;
 
 setup("test_ecparam");
 
-plan skip_all => "EC or EC2M isn't supported in this build"
-    if disabled("ec") || disabled("ec2m");
+plan skip_all => "EC isn't supported in this build"
+    if disabled("ec");
 
 my @valid = glob(data_file("valid", "*.pem"));
 my @noncanon = glob(data_file("noncanon", "*.pem"));

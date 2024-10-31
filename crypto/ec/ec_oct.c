@@ -37,16 +37,10 @@ int EC_POINT_set_compressed_coordinates(const EC_GROUP *group, EC_POINT *point,
         if (group->meth->field_type == NID_X9_62_prime_field)
             return ossl_ec_GFp_simple_set_compressed_coordinates(group, point, x,
                                                                  y_bit, ctx);
-        else
-#ifdef OPENSSL_NO_EC2M
-        {
+        else {
             ERR_raise(ERR_LIB_EC, EC_R_GF2M_NOT_SUPPORTED);
             return 0;
         }
-#else
-            return ossl_ec_GF2m_simple_set_compressed_coordinates(group, point,
-                                                                  x, y_bit, ctx);
-#endif
     }
     return group->meth->point_set_compressed_coordinates(group, point, x,
                                                          y_bit, ctx);
@@ -59,15 +53,6 @@ int EC_POINT_set_compressed_coordinates_GFp(const EC_GROUP *group,
 {
     return EC_POINT_set_compressed_coordinates(group, point, x, y_bit, ctx);
 }
-
-# ifndef OPENSSL_NO_EC2M
-int EC_POINT_set_compressed_coordinates_GF2m(const EC_GROUP *group,
-                                             EC_POINT *point, const BIGNUM *x,
-                                             int y_bit, BN_CTX *ctx)
-{
-    return EC_POINT_set_compressed_coordinates(group, point, x, y_bit, ctx);
-}
-# endif
 #endif
 
 size_t EC_POINT_point2oct(const EC_GROUP *group, const EC_POINT *point,
@@ -87,16 +72,10 @@ size_t EC_POINT_point2oct(const EC_GROUP *group, const EC_POINT *point,
         if (group->meth->field_type == NID_X9_62_prime_field)
             return ossl_ec_GFp_simple_point2oct(group, point, form, buf, len,
                                                 ctx);
-        else
-#ifdef OPENSSL_NO_EC2M
-        {
+        else {
             ERR_raise(ERR_LIB_EC, EC_R_GF2M_NOT_SUPPORTED);
             return 0;
         }
-#else
-            return ossl_ec_GF2m_simple_point2oct(group, point,
-                                                 form, buf, len, ctx);
-#endif
     }
 
     return group->meth->point2oct(group, point, form, buf, len, ctx);
@@ -118,14 +97,10 @@ int EC_POINT_oct2point(const EC_GROUP *group, EC_POINT *point,
         if (group->meth->field_type == NID_X9_62_prime_field)
             return ossl_ec_GFp_simple_oct2point(group, point, buf, len, ctx);
         else
-#ifdef OPENSSL_NO_EC2M
         {
             ERR_raise(ERR_LIB_EC, EC_R_GF2M_NOT_SUPPORTED);
             return 0;
         }
-#else
-            return ossl_ec_GF2m_simple_oct2point(group, point, buf, len, ctx);
-#endif
     }
     return group->meth->oct2point(group, point, buf, len, ctx);
 }

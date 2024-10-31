@@ -64,12 +64,6 @@ static OSSL_PARAM_BLD *bld_prime = NULL;
 static OSSL_PARAM *ec_explicit_prime_params_nc = NULL;
 static OSSL_PARAM *ec_explicit_prime_params_explicit = NULL;
 
-# ifndef OPENSSL_NO_EC2M
-static OSSL_PARAM_BLD *bld_tri_nc = NULL;
-static OSSL_PARAM_BLD *bld_tri = NULL;
-static OSSL_PARAM *ec_explicit_tri_params_nc = NULL;
-static OSSL_PARAM *ec_explicit_tri_params_explicit = NULL;
-# endif
 #endif
 
 #ifndef OPENSSL_NO_KEYPARAMS
@@ -1024,14 +1018,6 @@ IMPLEMENT_TEST_SUITE_LEGACY(ECExplicitPrimeNamedCurve, "EC")
 DOMAIN_KEYS(ECExplicitPrime2G);
 IMPLEMENT_TEST_SUITE(ECExplicitPrime2G, "EC", 0)
 IMPLEMENT_TEST_SUITE_LEGACY(ECExplicitPrime2G, "EC")
-# ifndef OPENSSL_NO_EC2M
-DOMAIN_KEYS(ECExplicitTriNamedCurve);
-IMPLEMENT_TEST_SUITE(ECExplicitTriNamedCurve, "EC", 1)
-IMPLEMENT_TEST_SUITE_LEGACY(ECExplicitTriNamedCurve, "EC")
-DOMAIN_KEYS(ECExplicitTri2G);
-IMPLEMENT_TEST_SUITE(ECExplicitTri2G, "EC", 0)
-IMPLEMENT_TEST_SUITE_LEGACY(ECExplicitTri2G, "EC")
-# endif
 KEYS(ED25519);
 IMPLEMENT_TEST_SUITE(ED25519, "ED25519", 1)
 KEYS(ED448);
@@ -1159,88 +1145,6 @@ static int create_ec_explicit_prime_params(OSSL_PARAM_BLD *bld)
                                               sizeof(prime256v1_gen2));
 }
 
-# ifndef OPENSSL_NO_EC2M
-static int do_create_ec_explicit_trinomial_params(OSSL_PARAM_BLD *bld,
-                                                  const unsigned char *gen,
-                                                  size_t gen_len)
-{
-    BIGNUM *a, *b, *poly, *order, *cofactor;
-    /* sect233k1 characteristic-two-field tpBasis */
-    static const unsigned char poly_data[] = {
-        0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-    };
-    static const unsigned char a_data[] = {
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-    };
-    static const unsigned char b_data[] = {
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x01
-    };
-    static const unsigned char order_data[] = {
-        0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x06, 0x9D, 0x5B, 0xB9, 0x15, 0xBC, 0xD4, 0x6E, 0xFB,
-        0x1A, 0xD5, 0xF1, 0x73, 0xAB, 0xDF
-    };
-    static const unsigned char cofactor_data[]= {
-        0x4
-    };
-    return TEST_ptr(a = BN_CTX_get(bnctx))
-           && TEST_ptr(b = BN_CTX_get(bnctx))
-           && TEST_ptr(poly = BN_CTX_get(bnctx))
-           && TEST_ptr(order = BN_CTX_get(bnctx))
-           && TEST_ptr(cofactor = BN_CTX_get(bnctx))
-           && TEST_ptr(BN_bin2bn(poly_data, sizeof(poly_data), poly))
-           && TEST_ptr(BN_bin2bn(a_data, sizeof(a_data), a))
-           && TEST_ptr(BN_bin2bn(b_data, sizeof(b_data), b))
-           && TEST_ptr(BN_bin2bn(order_data, sizeof(order_data), order))
-           && TEST_ptr(BN_bin2bn(cofactor_data, sizeof(cofactor_data), cofactor))
-           && TEST_true(OSSL_PARAM_BLD_push_utf8_string(bld,
-                            OSSL_PKEY_PARAM_EC_FIELD_TYPE,
-                            SN_X9_62_characteristic_two_field, 0))
-           && TEST_true(OSSL_PARAM_BLD_push_BN(bld, OSSL_PKEY_PARAM_EC_P, poly))
-           && TEST_true(OSSL_PARAM_BLD_push_BN(bld, OSSL_PKEY_PARAM_EC_A, a))
-           && TEST_true(OSSL_PARAM_BLD_push_BN(bld, OSSL_PKEY_PARAM_EC_B, b))
-           && TEST_true(OSSL_PARAM_BLD_push_BN(bld,
-                            OSSL_PKEY_PARAM_EC_ORDER, order))
-           && TEST_true(OSSL_PARAM_BLD_push_octet_string(bld,
-                            OSSL_PKEY_PARAM_EC_GENERATOR, gen, gen_len))
-           && TEST_true(OSSL_PARAM_BLD_push_BN(bld, OSSL_PKEY_PARAM_EC_COFACTOR,
-                                               cofactor));
-}
-
-static int create_ec_explicit_trinomial_params_namedcurve(OSSL_PARAM_BLD *bld)
-{
-    static const unsigned char gen[] = {
-        0x04,
-        0x01, 0x72, 0x32, 0xBA, 0x85, 0x3A, 0x7E, 0x73, 0x1A, 0xF1, 0x29, 0xF2,
-        0x2F, 0xF4, 0x14, 0x95, 0x63, 0xA4, 0x19, 0xC2, 0x6B, 0xF5, 0x0A, 0x4C,
-        0x9D, 0x6E, 0xEF, 0xAD, 0x61, 0x26,
-        0x01, 0xDB, 0x53, 0x7D, 0xEC, 0xE8, 0x19, 0xB7, 0xF7, 0x0F, 0x55, 0x5A,
-        0x67, 0xC4, 0x27, 0xA8, 0xCD, 0x9B, 0xF1, 0x8A, 0xEB, 0x9B, 0x56, 0xE0,
-        0xC1, 0x10, 0x56, 0xFA, 0xE6, 0xA3
-    };
-    return do_create_ec_explicit_trinomial_params(bld, gen, sizeof(gen));
-}
-
-static int create_ec_explicit_trinomial_params(OSSL_PARAM_BLD *bld)
-{
-    static const unsigned char gen2[] = {
-        0x04,
-        0x00, 0xd7, 0xba, 0xd0, 0x26, 0x6c, 0x31, 0x6a, 0x78, 0x76, 0x01, 0xd1,
-        0x32, 0x4b, 0x8f, 0x30, 0x29, 0x2d, 0x78, 0x30, 0xca, 0x43, 0xaa, 0xf0,
-        0xa2, 0x5a, 0xd4, 0x0f, 0xb3, 0xf4,
-        0x00, 0x85, 0x4b, 0x1b, 0x8d, 0x50, 0x10, 0xa5, 0x1c, 0x80, 0xf7, 0x86,
-        0x40, 0x62, 0x4c, 0x87, 0xd1, 0x26, 0x7a, 0x9c, 0x5c, 0xe9, 0x82, 0x29,
-        0xd1, 0x67, 0x70, 0x41, 0xea, 0xcb
-    };
-    return do_create_ec_explicit_trinomial_params(bld, gen2, sizeof(gen2));
-}
-# endif /* OPENSSL_NO_EC2M */
 #endif /* OPENSSL_NO_EC */
 
 typedef enum OPTION_choice {
@@ -1365,14 +1269,6 @@ int setup_tests(void)
         || !create_ec_explicit_prime_params(bld_prime)
         || !TEST_ptr(ec_explicit_prime_params_nc = OSSL_PARAM_BLD_to_param(bld_prime_nc))
         || !TEST_ptr(ec_explicit_prime_params_explicit = OSSL_PARAM_BLD_to_param(bld_prime))
-# ifndef OPENSSL_NO_EC2M
-        || !TEST_ptr(bld_tri_nc = OSSL_PARAM_BLD_new())
-        || !TEST_ptr(bld_tri = OSSL_PARAM_BLD_new())
-        || !create_ec_explicit_trinomial_params_namedcurve(bld_tri_nc)
-        || !create_ec_explicit_trinomial_params(bld_tri)
-        || !TEST_ptr(ec_explicit_tri_params_nc = OSSL_PARAM_BLD_to_param(bld_tri_nc))
-        || !TEST_ptr(ec_explicit_tri_params_explicit = OSSL_PARAM_BLD_to_param(bld_tri))
-# endif
         )
         return 0;
 #endif
@@ -1393,10 +1289,6 @@ int setup_tests(void)
     MAKE_DOMAIN_KEYS(EC, "EC", EC_params);
     MAKE_DOMAIN_KEYS(ECExplicitPrimeNamedCurve, "EC", ec_explicit_prime_params_nc);
     MAKE_DOMAIN_KEYS(ECExplicitPrime2G, "EC", ec_explicit_prime_params_explicit);
-# ifndef OPENSSL_NO_EC2M
-    MAKE_DOMAIN_KEYS(ECExplicitTriNamedCurve, "EC", ec_explicit_tri_params_nc);
-    MAKE_DOMAIN_KEYS(ECExplicitTri2G, "EC", ec_explicit_tri_params_explicit);
-# endif
     MAKE_KEYS(ED25519, "ED25519", NULL);
     MAKE_KEYS(ED448, "ED448", NULL);
     MAKE_KEYS(X25519, "X25519", NULL);
@@ -1437,12 +1329,6 @@ int setup_tests(void)
         ADD_TEST_SUITE_LEGACY(ECExplicitPrimeNamedCurve);
         ADD_TEST_SUITE(ECExplicitPrime2G);
         ADD_TEST_SUITE_LEGACY(ECExplicitPrime2G);
-# ifndef OPENSSL_NO_EC2M
-        ADD_TEST_SUITE(ECExplicitTriNamedCurve);
-        ADD_TEST_SUITE_LEGACY(ECExplicitTriNamedCurve);
-        ADD_TEST_SUITE(ECExplicitTri2G);
-        ADD_TEST_SUITE_LEGACY(ECExplicitTri2G);
-# endif
         ADD_TEST_SUITE(ED25519);
         ADD_TEST_SUITE(ED448);
         ADD_TEST_SUITE(X25519);
@@ -1476,12 +1362,6 @@ void cleanup_tests(void)
     OSSL_PARAM_free(ec_explicit_prime_params_explicit);
     OSSL_PARAM_BLD_free(bld_prime_nc);
     OSSL_PARAM_BLD_free(bld_prime);
-# ifndef OPENSSL_NO_EC2M
-    OSSL_PARAM_free(ec_explicit_tri_params_nc);
-    OSSL_PARAM_free(ec_explicit_tri_params_explicit);
-    OSSL_PARAM_BLD_free(bld_tri_nc);
-    OSSL_PARAM_BLD_free(bld_tri);
-# endif
     BN_CTX_free(bnctx);
 #endif /* OPENSSL_NO_EC */
 
@@ -1496,10 +1376,6 @@ void cleanup_tests(void)
     FREE_DOMAIN_KEYS(EC);
     FREE_DOMAIN_KEYS(ECExplicitPrimeNamedCurve);
     FREE_DOMAIN_KEYS(ECExplicitPrime2G);
-# ifndef OPENSSL_NO_EC2M
-    FREE_DOMAIN_KEYS(ECExplicitTriNamedCurve);
-    FREE_DOMAIN_KEYS(ECExplicitTri2G);
-# endif
     FREE_KEYS(ED25519);
     FREE_KEYS(ED448);
     FREE_KEYS(X25519);
