@@ -604,535 +604,6 @@ err:
     return r;
 }
 
-#ifndef OPENSSL_NO_EC2M
-
-static struct c2_curve_test {
-    const char *name;
-    const char *p;
-    const char *a;
-    const char *b;
-    const char *x;
-    const char *y;
-    int ybit;
-    const char *order;
-    const char *cof;
-    int degree;
-} char2_curve_tests[] = {
-    /* Curve K-163 (FIPS PUB 186-2, App. 6) */
-    {
-        "NIST curve K-163",
-        "0800000000000000000000000000000000000000C9",
-        "1",
-        "1",
-        "02FE13C0537BBC11ACAA07D793DE4E6D5E5C94EEE8",
-        "0289070FB05D38FF58321F2E800536D538CCDAA3D9",
-        1, "04000000000000000000020108A2E0CC0D99F8A5EF", "2", 163
-    },
-    /* Curve B-163 (FIPS PUB 186-2, App. 6) */
-    {
-        "NIST curve B-163",
-        "0800000000000000000000000000000000000000C9",
-        "1",
-        "020A601907B8C953CA1481EB10512F78744A3205FD",
-        "03F0EBA16286A2D57EA0991168D4994637E8343E36",
-        "00D51FBC6C71A0094FA2CDD545B11C5C0C797324F1",
-        1, "040000000000000000000292FE77E70C12A4234C33", "2", 163
-    },
-    /* Curve K-233 (FIPS PUB 186-2, App. 6) */
-    {
-        "NIST curve K-233",
-        "020000000000000000000000000000000000000004000000000000000001",
-        "0",
-        "1",
-        "017232BA853A7E731AF129F22FF4149563A419C26BF50A4C9D6EEFAD6126",
-        "01DB537DECE819B7F70F555A67C427A8CD9BF18AEB9B56E0C11056FAE6A3",
-        0,
-        "008000000000000000000000000000069D5BB915BCD46EFB1AD5F173ABDF",
-        "4", 233
-    },
-    /* Curve B-233 (FIPS PUB 186-2, App. 6) */
-    {
-        "NIST curve B-233",
-        "020000000000000000000000000000000000000004000000000000000001",
-        "000000000000000000000000000000000000000000000000000000000001",
-        "0066647EDE6C332C7F8C0923BB58213B333B20E9CE4281FE115F7D8F90AD",
-        "00FAC9DFCBAC8313BB2139F1BB755FEF65BC391F8B36F8F8EB7371FD558B",
-        "01006A08A41903350678E58528BEBF8A0BEFF867A7CA36716F7E01F81052",
-        1,
-        "01000000000000000000000000000013E974E72F8A6922031D2603CFE0D7",
-        "2", 233
-    },
-    /* Curve K-283 (FIPS PUB 186-2, App. 6) */
-    {
-        "NIST curve K-283",
-                                                                "08000000"
-        "00000000000000000000000000000000000000000000000000000000000010A1",
-        "0",
-        "1",
-                                                                "0503213F"
-        "78CA44883F1A3B8162F188E553CD265F23C1567A16876913B0C2AC2458492836",
-                                                                "01CCDA38"
-        "0F1C9E318D90F95D07E5426FE87E45C0E8184698E45962364E34116177DD2259",
-        0,
-                                                                "01FFFFFF"
-        "FFFFFFFFFFFFFFFFFFFFFFFFFFFFE9AE2ED07577265DFF7F94451E061E163C61",
-        "4", 283
-    },
-    /* Curve B-283 (FIPS PUB 186-2, App. 6) */
-    {
-        "NIST curve B-283",
-                                                                "08000000"
-        "00000000000000000000000000000000000000000000000000000000000010A1",
-                                                                "00000000"
-        "0000000000000000000000000000000000000000000000000000000000000001",
-                                                                "027B680A"
-        "C8B8596DA5A4AF8A19A0303FCA97FD7645309FA2A581485AF6263E313B79A2F5",
-                                                                "05F93925"
-        "8DB7DD90E1934F8C70B0DFEC2EED25B8557EAC9C80E2E198F8CDBECD86B12053",
-                                                                "03676854"
-        "FE24141CB98FE6D4B20D02B4516FF702350EDDB0826779C813F0DF45BE8112F4",
-        1,
-                                                                "03FFFFFF"
-        "FFFFFFFFFFFFFFFFFFFFFFFFFFFFEF90399660FC938A90165B042A7CEFADB307",
-        "2", 283
-    },
-    /* Curve K-409 (FIPS PUB 186-2, App. 6) */
-    {
-        "NIST curve K-409",
-                                "0200000000000000000000000000000000000000"
-        "0000000000000000000000000000000000000000008000000000000000000001",
-        "0",
-        "1",
-                                "0060F05F658F49C1AD3AB1890F7184210EFD0987"
-        "E307C84C27ACCFB8F9F67CC2C460189EB5AAAA62EE222EB1B35540CFE9023746",
-                                "01E369050B7C4E42ACBA1DACBF04299C3460782F"
-        "918EA427E6325165E9EA10E3DA5F6C42E9C55215AA9CA27A5863EC48D8E0286B",
-        1,
-                                "007FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
-        "FFFFFFFFFFFFFE5F83B2D4EA20400EC4557D5ED3E3E7CA5B4B5C83B8E01E5FCF",
-        "4", 409
-    },
-    /* Curve B-409 (FIPS PUB 186-2, App. 6) */
-    {
-        "NIST curve B-409",
-                                "0200000000000000000000000000000000000000"
-        "0000000000000000000000000000000000000000008000000000000000000001",
-                                "0000000000000000000000000000000000000000"
-        "0000000000000000000000000000000000000000000000000000000000000001",
-                                "0021A5C2C8EE9FEB5C4B9A753B7B476B7FD6422E"
-        "F1F3DD674761FA99D6AC27C8A9A197B272822F6CD57A55AA4F50AE317B13545F",
-                                "015D4860D088DDB3496B0C6064756260441CDE4A"
-        "F1771D4DB01FFE5B34E59703DC255A868A1180515603AEAB60794E54BB7996A7",
-                                "0061B1CFAB6BE5F32BBFA78324ED106A7636B9C5"
-        "A7BD198D0158AA4F5488D08F38514F1FDF4B4F40D2181B3681C364BA0273C706",
-        1,
-                                "0100000000000000000000000000000000000000"
-        "00000000000001E2AAD6A612F33307BE5FA47C3C9E052F838164CD37D9A21173",
-        "2", 409
-    },
-    /* Curve K-571 (FIPS PUB 186-2, App. 6) */
-    {
-        "NIST curve K-571",
-                                                         "800000000000000"
-        "0000000000000000000000000000000000000000000000000000000000000000"
-        "0000000000000000000000000000000000000000000000000000000000000425",
-        "0",
-        "1",
-                                                        "026EB7A859923FBC"
-        "82189631F8103FE4AC9CA2970012D5D46024804801841CA44370958493B205E6"
-        "47DA304DB4CEB08CBBD1BA39494776FB988B47174DCA88C7E2945283A01C8972",
-                                                        "0349DC807F4FBF37"
-        "4F4AEADE3BCA95314DD58CEC9F307A54FFC61EFC006D8A2C9D4979C0AC44AEA7"
-        "4FBEBBB9F772AEDCB620B01A7BA7AF1B320430C8591984F601CD4C143EF1C7A3",
-        0,
-                                                        "0200000000000000"
-        "00000000000000000000000000000000000000000000000000000000131850E1"
-        "F19A63E4B391A8DB917F4138B630D84BE5D639381E91DEB45CFE778F637C1001",
-        "4", 571
-    },
-    /* Curve B-571 (FIPS PUB 186-2, App. 6) */
-    {
-        "NIST curve B-571",
-                                                         "800000000000000"
-        "0000000000000000000000000000000000000000000000000000000000000000"
-        "0000000000000000000000000000000000000000000000000000000000000425",
-                                                        "0000000000000000"
-        "0000000000000000000000000000000000000000000000000000000000000000"
-        "0000000000000000000000000000000000000000000000000000000000000001",
-                                                        "02F40E7E2221F295"
-        "DE297117B7F3D62F5C6A97FFCB8CEFF1CD6BA8CE4A9A18AD84FFABBD8EFA5933"
-        "2BE7AD6756A66E294AFD185A78FF12AA520E4DE739BACA0C7FFEFF7F2955727A",
-                                                        "0303001D34B85629"
-        "6C16C0D40D3CD7750A93D1D2955FA80AA5F40FC8DB7B2ABDBDE53950F4C0D293"
-        "CDD711A35B67FB1499AE60038614F1394ABFA3B4C850D927E1E7769C8EEC2D19",
-                                                        "037BF27342DA639B"
-        "6DCCFFFEB73D69D78C6C27A6009CBBCA1980F8533921E8A684423E43BAB08A57"
-        "6291AF8F461BB2A8B3531D2F0485C19B16E2F1516E23DD3C1A4827AF1B8AC15B",
-        1,
-                                                        "03FFFFFFFFFFFFFF"
-        "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE661CE18"
-        "FF55987308059B186823851EC7DD9CA1161DE93D5174D66E8382E9BB2FE84E47",
-        "2", 571
-    }
-};
-
-static int char2_curve_test(int n)
-{
-    int r = 0;
-    BN_CTX *ctx = NULL;
-    BIGNUM *p = NULL, *a = NULL, *b = NULL;
-    BIGNUM *x = NULL, *y = NULL, *z = NULL, *cof = NULL, *yplusone = NULL;
-    EC_GROUP *group = NULL;
-    EC_POINT *P = NULL, *Q = NULL, *R = NULL;
-# ifndef OPENSSL_NO_DEPRECATED_3_0
-    const EC_POINT *points[3];
-    const BIGNUM *scalars[3];
-# endif
-    struct c2_curve_test *const test = char2_curve_tests + n;
-
-    if (!TEST_ptr(ctx = BN_CTX_new())
-        || !TEST_ptr(p = BN_new())
-        || !TEST_ptr(a = BN_new())
-        || !TEST_ptr(b = BN_new())
-        || !TEST_ptr(x = BN_new())
-        || !TEST_ptr(y = BN_new())
-        || !TEST_ptr(z = BN_new())
-        || !TEST_ptr(yplusone = BN_new())
-        || !TEST_true(BN_hex2bn(&p, test->p))
-        || !TEST_true(BN_hex2bn(&a, test->a))
-        || !TEST_true(BN_hex2bn(&b, test->b))
-        || !TEST_true(group = EC_GROUP_new_curve_GF2m(p, a, b, ctx))
-        || !TEST_ptr(P = EC_POINT_new(group))
-        || !TEST_ptr(Q = EC_POINT_new(group))
-        || !TEST_ptr(R = EC_POINT_new(group))
-        || !TEST_true(BN_hex2bn(&x, test->x))
-        || !TEST_true(BN_hex2bn(&y, test->y))
-        || !TEST_true(BN_add(yplusone, y, BN_value_one())))
-        goto err;
-
-/* Change test based on whether binary point compression is enabled or not. */
-# ifdef OPENSSL_EC_BIN_PT_COMP
-    /*
-     * When (x, y) is on the curve, (x, y + 1) is, as it happens, not,
-     * and therefore setting the coordinates should fail.
-     */
-    if (!TEST_false(EC_POINT_set_affine_coordinates(group, P, x, yplusone, ctx))
-        || !TEST_true(EC_POINT_set_compressed_coordinates(group, P, x,
-                                                          test->y_bit,
-                                                          ctx))
-        || !TEST_int_gt(EC_POINT_is_on_curve(group, P, ctx), 0)
-        || !TEST_true(BN_hex2bn(&z, test->order))
-        || !TEST_true(BN_hex2bn(&cof, test->cof))
-        || !TEST_true(EC_GROUP_set_generator(group, P, z, cof))
-        || !TEST_true(EC_POINT_get_affine_coordinates(group, P, x, y, ctx)))
-        goto err;
-    TEST_info("%s -- Generator", test->name);
-    test_output_bignum("x", x);
-    test_output_bignum("y", y);
-    /* G_y value taken from the standard: */
-    if (!TEST_true(BN_hex2bn(&z, test->y))
-        || !TEST_BN_eq(y, z))
-        goto err;
-# else
-    /*
-     * When (x, y) is on the curve, (x, y + 1) is, as it happens, not,
-     * and therefore setting the coordinates should fail.
-     */
-    if (!TEST_false(EC_POINT_set_affine_coordinates(group, P, x, yplusone, ctx))
-        || !TEST_true(EC_POINT_set_affine_coordinates(group, P, x, y, ctx))
-        || !TEST_int_gt(EC_POINT_is_on_curve(group, P, ctx), 0)
-        || !TEST_true(BN_hex2bn(&z, test->order))
-        || !TEST_true(BN_hex2bn(&cof, test->cof))
-        || !TEST_true(EC_GROUP_set_generator(group, P, z, cof)))
-        goto err;
-    TEST_info("%s -- Generator:", test->name);
-    test_output_bignum("x", x);
-    test_output_bignum("y", y);
-# endif
-
-    if (!TEST_int_eq(EC_GROUP_get_degree(group), test->degree)
-        || !group_order_tests(group))
-        goto err;
-
-    /* more tests using the last curve */
-    if (n == OSSL_NELEM(char2_curve_tests) - 1) {
-        if (!TEST_true(EC_POINT_set_affine_coordinates(group, P, x, y, ctx))
-            || !TEST_true(EC_POINT_copy(Q, P))
-            || !TEST_false(EC_POINT_is_at_infinity(group, Q))
-            || !TEST_true(EC_POINT_dbl(group, P, P, ctx))
-            || !TEST_int_gt(EC_POINT_is_on_curve(group, P, ctx), 0)
-            || !TEST_true(EC_POINT_invert(group, Q, ctx))       /* P = -2Q */
-            || !TEST_true(EC_POINT_add(group, R, P, Q, ctx))
-            || !TEST_true(EC_POINT_add(group, R, R, Q, ctx))
-            || !TEST_true(EC_POINT_is_at_infinity(group, R))   /* R = P + 2Q */
-            || !TEST_false(EC_POINT_is_at_infinity(group, Q)))
-            goto err;
-
-# ifndef OPENSSL_NO_DEPRECATED_3_0
-        TEST_note("combined multiplication ...");
-        points[0] = Q;
-        points[1] = Q;
-        points[2] = Q;
-
-        if (!TEST_true(BN_add(y, z, BN_value_one()))
-            || !TEST_BN_even(y)
-            || !TEST_true(BN_rshift1(y, y)))
-            goto err;
-        scalars[0] = y;         /* (group order + 1)/2, so y*Q + y*Q = Q */
-        scalars[1] = y;
-
-        /* z is still the group order */
-        if (!TEST_true(EC_POINTs_mul(group, P, NULL, 2, points, scalars, ctx))
-            || !TEST_true(EC_POINTs_mul(group, R, z, 2, points, scalars, ctx))
-            || !TEST_int_eq(0, EC_POINT_cmp(group, P, R, ctx))
-            || !TEST_int_eq(0, EC_POINT_cmp(group, R, Q, ctx)))
-            goto err;
-
-        if (!TEST_true(BN_rand(y, BN_num_bits(y), 0, 0))
-            || !TEST_true(BN_add(z, z, y)))
-            goto err;
-        BN_set_negative(z, 1);
-        scalars[0] = y;
-        scalars[1] = z;         /* z = -(order + y) */
-
-        if (!TEST_true(EC_POINTs_mul(group, P, NULL, 2, points, scalars, ctx))
-            || !TEST_true(EC_POINT_is_at_infinity(group, P)))
-            goto err;
-
-        if (!TEST_true(BN_rand(x, BN_num_bits(y) - 1, 0, 0))
-            || !TEST_true(BN_add(z, x, y)))
-            goto err;
-        BN_set_negative(z, 1);
-        scalars[0] = x;
-        scalars[1] = y;
-        scalars[2] = z;         /* z = -(x+y) */
-
-        if (!TEST_true(EC_POINTs_mul(group, P, NULL, 3, points, scalars, ctx))
-            || !TEST_true(EC_POINT_is_at_infinity(group, P)))
-            goto err;
-# endif
-    }
-
-    r = 1;
-err:
-    BN_CTX_free(ctx);
-    BN_free(p);
-    BN_free(a);
-    BN_free(b);
-    BN_free(x);
-    BN_free(y);
-    BN_free(z);
-    BN_free(yplusone);
-    BN_free(cof);
-    EC_POINT_free(P);
-    EC_POINT_free(Q);
-    EC_POINT_free(R);
-    EC_GROUP_free(group);
-    return r;
-}
-
-static int char2_field_tests(void)
-{
-    BN_CTX *ctx = NULL;
-    BIGNUM *p = NULL, *a = NULL, *b = NULL;
-    EC_GROUP *group = NULL;
-    EC_POINT *P = NULL, *Q = NULL, *R = NULL;
-    BIGNUM *x = NULL, *y = NULL, *z = NULL, *cof = NULL, *yplusone = NULL;
-    unsigned char buf[100];
-    size_t len;
-    int k, r = 0;
-
-    if (!TEST_ptr(ctx = BN_CTX_new())
-        || !TEST_ptr(p = BN_new())
-        || !TEST_ptr(a = BN_new())
-        || !TEST_ptr(b = BN_new())
-        || !TEST_true(BN_hex2bn(&p, "13"))
-        || !TEST_true(BN_hex2bn(&a, "3"))
-        || !TEST_true(BN_hex2bn(&b, "1")))
-        goto err;
-
-    if (!TEST_ptr(group = EC_GROUP_new_curve_GF2m(p, a, b, ctx))
-        || !TEST_true(EC_GROUP_get_curve(group, p, a, b, ctx)))
-        goto err;
-
-    TEST_info("Curve defined by Weierstrass equation");
-    TEST_note("     y^2 + x*y = x^3 + a*x^2 + b (mod p)");
-    test_output_bignum("a", a);
-    test_output_bignum("b", b);
-    test_output_bignum("p", p);
-
-     if (!TEST_ptr(P = EC_POINT_new(group))
-        || !TEST_ptr(Q = EC_POINT_new(group))
-        || !TEST_ptr(R = EC_POINT_new(group))
-        || !TEST_true(EC_POINT_set_to_infinity(group, P))
-        || !TEST_true(EC_POINT_is_at_infinity(group, P)))
-        goto err;
-
-    buf[0] = 0;
-    if (!TEST_true(EC_POINT_oct2point(group, Q, buf, 1, ctx))
-        || !TEST_true(EC_POINT_add(group, P, P, Q, ctx))
-        || !TEST_true(EC_POINT_is_at_infinity(group, P))
-        || !TEST_ptr(x = BN_new())
-        || !TEST_ptr(y = BN_new())
-        || !TEST_ptr(z = BN_new())
-        || !TEST_ptr(cof = BN_new())
-        || !TEST_ptr(yplusone = BN_new())
-        || !TEST_true(BN_hex2bn(&x, "6"))
-/* Change test based on whether binary point compression is enabled or not. */
-# ifdef OPENSSL_EC_BIN_PT_COMP
-        || !TEST_true(EC_POINT_set_compressed_coordinates(group, Q, x, 1, ctx))
-# else
-        || !TEST_true(BN_hex2bn(&y, "8"))
-        || !TEST_true(EC_POINT_set_affine_coordinates(group, Q, x, y, ctx))
-# endif
-       )
-        goto err;
-    if (!TEST_int_gt(EC_POINT_is_on_curve(group, Q, ctx), 0)) {
-/* Change test based on whether binary point compression is enabled or not. */
-# ifdef OPENSSL_EC_BIN_PT_COMP
-        if (!TEST_true(EC_POINT_get_affine_coordinates(group, Q, x, y, ctx)))
-            goto err;
-# endif
-        TEST_info("Point is not on curve");
-        test_output_bignum("x", x);
-        test_output_bignum("y", y);
-        goto err;
-    }
-
-    TEST_note("A cyclic subgroup:");
-    k = 100;
-    do {
-        if (!TEST_int_ne(k--, 0))
-            goto err;
-
-        if (EC_POINT_is_at_infinity(group, P))
-            TEST_note("     point at infinity");
-        else {
-            if (!TEST_true(EC_POINT_get_affine_coordinates(group, P, x, y,
-                                                           ctx)))
-                goto err;
-
-            test_output_bignum("x", x);
-            test_output_bignum("y", y);
-        }
-
-        if (!TEST_true(EC_POINT_copy(R, P))
-            || !TEST_true(EC_POINT_add(group, P, P, Q, ctx)))
-            goto err;
-    }
-    while (!EC_POINT_is_at_infinity(group, P));
-
-    if (!TEST_true(EC_POINT_add(group, P, Q, R, ctx))
-        || !TEST_true(EC_POINT_is_at_infinity(group, P)))
-        goto err;
-
-/* Change test based on whether binary point compression is enabled or not. */
-# ifdef OPENSSL_EC_BIN_PT_COMP
-    len = EC_POINT_point2oct(group, Q, POINT_CONVERSION_COMPRESSED,
-                             buf, sizeof(buf), ctx);
-    if (!TEST_size_t_ne(len, 0)
-        || !TEST_true(EC_POINT_oct2point(group, P, buf, len, ctx))
-        || !TEST_int_eq(0, EC_POINT_cmp(group, P, Q, ctx)))
-        goto err;
-    test_output_memory("Generator as octet string, compressed form:",
-                       buf, len);
-# endif
-
-    len = EC_POINT_point2oct(group, Q, POINT_CONVERSION_UNCOMPRESSED,
-                             buf, sizeof(buf), ctx);
-    if (!TEST_size_t_ne(len, 0)
-        || !TEST_true(EC_POINT_oct2point(group, P, buf, len, ctx))
-        || !TEST_int_eq(0, EC_POINT_cmp(group, P, Q, ctx)))
-        goto err;
-    test_output_memory("Generator as octet string, uncompressed form:",
-                       buf, len);
-
-/* Change test based on whether binary point compression is enabled or not. */
-# ifdef OPENSSL_EC_BIN_PT_COMP
-    len =
-        EC_POINT_point2oct(group, Q, POINT_CONVERSION_HYBRID, buf, sizeof(buf),
-                           ctx);
-    if (!TEST_size_t_ne(len, 0)
-        || !TEST_true(EC_POINT_oct2point(group, P, buf, len, ctx))
-        || !TEST_int_eq(0, EC_POINT_cmp(group, P, Q, ctx)))
-        goto err;
-    test_output_memory("Generator as octet string, hybrid form:",
-                       buf, len);
-# endif
-
-    if (!TEST_true(EC_POINT_invert(group, P, ctx))
-        || !TEST_int_eq(0, EC_POINT_cmp(group, P, R, ctx)))
-        goto err;
-
-    TEST_note("\n");
-
-    r = 1;
-err:
-    BN_CTX_free(ctx);
-    BN_free(p);
-    BN_free(a);
-    BN_free(b);
-    EC_GROUP_free(group);
-    EC_POINT_free(P);
-    EC_POINT_free(Q);
-    EC_POINT_free(R);
-    BN_free(x);
-    BN_free(y);
-    BN_free(z);
-    BN_free(cof);
-    BN_free(yplusone);
-    return r;
-}
-
-static int hybrid_point_encoding_test(void)
-{
-    BIGNUM *x = NULL, *y = NULL;
-    EC_GROUP *group = NULL;
-    EC_POINT *point = NULL;
-    unsigned char *buf = NULL;
-    size_t len;
-    int r = 0;
-
-    if (!TEST_true(BN_dec2bn(&x, "0"))
-        || !TEST_true(BN_dec2bn(&y, "1"))
-        || !TEST_ptr(group = EC_GROUP_new_by_curve_name(NID_sect571k1))
-        || !TEST_ptr(point = EC_POINT_new(group))
-        || !TEST_true(EC_POINT_set_affine_coordinates(group, point, x, y, NULL))
-        || !TEST_size_t_ne(0, (len = EC_POINT_point2oct(group,
-                                                        point,
-                                                        POINT_CONVERSION_HYBRID,
-                                                        NULL,
-                                                        0,
-                                                        NULL)))
-        || !TEST_ptr(buf = OPENSSL_malloc(len))
-        || !TEST_size_t_eq(len, EC_POINT_point2oct(group,
-                                                   point,
-                                                   POINT_CONVERSION_HYBRID,
-                                                   buf,
-                                                   len,
-                                                   NULL)))
-        goto err;
-
-    r = 1;
-
-    /* buf contains a valid hybrid point, check that we can decode it. */
-    if (!TEST_true(EC_POINT_oct2point(group, point, buf, len, NULL)))
-        r = 0;
-
-    /* Flip the y_bit and verify that the invalid encoding is rejected. */
-    buf[0] ^= 1;
-    if (!TEST_false(EC_POINT_oct2point(group, point, buf, len, NULL)))
-        r = 0;
-
-err:
-    BN_free(x);
-    BN_free(y);
-    EC_GROUP_free(group);
-    EC_POINT_free(point);
-    OPENSSL_free(buf);
-    return r;
-}
-#endif
 
 static int internal_curve_test(int n)
 {
@@ -1171,9 +642,7 @@ static int group_field_test(void)
 {
     int r = 1;
     BIGNUM *secp521r1_field = NULL;
-    BIGNUM *sect163r2_field = NULL;
     EC_GROUP *secp521r1_group = NULL;
-    EC_GROUP *sect163r2_group = NULL;
 
     BN_hex2bn(&secp521r1_field,
                 "01FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
@@ -1183,24 +652,11 @@ static int group_field_test(void)
                 "FFFF");
 
 
-    BN_hex2bn(&sect163r2_field,
-                "08000000000000000000000000000000"
-                "00000000C9");
-
     secp521r1_group = EC_GROUP_new_by_curve_name(NID_secp521r1);
     if (BN_cmp(secp521r1_field, EC_GROUP_get0_field(secp521r1_group)))
       r = 0;
-
-    # ifndef OPENSSL_NO_EC2M
-    sect163r2_group = EC_GROUP_new_by_curve_name(NID_sect163r2);
-    if (BN_cmp(sect163r2_field, EC_GROUP_get0_field(sect163r2_group)))
-      r = 0;
-    # endif
-
     EC_GROUP_free(secp521r1_group);
-    EC_GROUP_free(sect163r2_group);
     BN_free(secp521r1_field);
-    BN_free(sect163r2_field);
     return r;
 }
 
@@ -1757,29 +1213,6 @@ int are_ec_nids_compatible(int n1d, int n2d)
 {
     int ret = 0;
     switch (n1d) {
-#ifndef OPENSSL_NO_EC2M
-        case NID_sect113r1:
-        case NID_wap_wsg_idm_ecid_wtls4:
-            ret = (n2d == NID_sect113r1 || n2d == NID_wap_wsg_idm_ecid_wtls4);
-            break;
-        case NID_sect163k1:
-        case NID_wap_wsg_idm_ecid_wtls3:
-            ret = (n2d == NID_sect163k1 || n2d == NID_wap_wsg_idm_ecid_wtls3);
-            break;
-        case NID_sect233k1:
-        case NID_wap_wsg_idm_ecid_wtls10:
-            ret = (n2d == NID_sect233k1 || n2d == NID_wap_wsg_idm_ecid_wtls10);
-            break;
-        case NID_sect233r1:
-        case NID_wap_wsg_idm_ecid_wtls11:
-            ret = (n2d == NID_sect233r1 || n2d == NID_wap_wsg_idm_ecid_wtls11);
-            break;
-        case NID_X9_62_c2pnb163v1:
-        case NID_wap_wsg_idm_ecid_wtls5:
-            ret = (n2d == NID_X9_62_c2pnb163v1
-                   || n2d == NID_wap_wsg_idm_ecid_wtls5);
-            break;
-#endif /* OPENSSL_NO_EC2M */
         case NID_secp112r1:
         case NID_wap_wsg_idm_ecid_wtls6:
             ret = (n2d == NID_secp112r1 || n2d == NID_wap_wsg_idm_ecid_wtls6);
@@ -2298,15 +1731,8 @@ static int cardinality_test(int n)
                       EC_GROUP_get0_generator(g1), g1_x, g1_y, ctx))
         || !TEST_true(BN_copy(g1_order, EC_GROUP_get0_order(g1)))
         || !TEST_true(EC_GROUP_get_cofactor(g1, g1_cf, ctx))
-        /* construct g2 manually with g1 parameters */
-#ifndef OPENSSL_NO_EC2M
-        || !TEST_ptr(g2 = (is_binary) ?
-                           EC_GROUP_new_curve_GF2m(g1_p, g1_a, g1_b, ctx) :
-                           EC_GROUP_new_curve_GFp(g1_p, g1_a, g1_b, ctx))
-#else
         || !TEST_int_eq(0, is_binary)
         || !TEST_ptr(g2 = EC_GROUP_new_curve_GFp(g1_p, g1_a, g1_b, ctx))
-#endif
         || !TEST_ptr(g2_gen = EC_POINT_new(g2))
         || !TEST_true(EC_POINT_set_affine_coordinates(g2, g2_gen, g1_x, g1_y, ctx))
         /* pass NULL cofactor: lib should compute it */
@@ -2371,13 +1797,6 @@ static int check_ec_key_field_public_range_test(int id)
      * be the same point on the curve). The add is different for char2 fields.
      */
     type = EC_GROUP_get_field_type(group);
-#ifndef OPENSSL_NO_EC2M
-    if (type == NID_X9_62_characteristic_two_field) {
-        /* test for binary curves */
-        if (!TEST_true(BN_GF2m_add(x, x, field)))
-            goto err;
-    } else
-#endif
     if (type == NID_X9_62_prime_field) {
         /* test for prime curves */
         if (!TEST_true(BN_add(x, x, field)))
@@ -2513,10 +1932,6 @@ static int do_test_custom_explicit_fromdata(EC_GROUP *group, BN_CTX *ctx,
     char name[80];
     unsigned char buf[1024];
     size_t buf_len, name_len;
-#ifndef OPENSSL_NO_EC2M
-    unsigned int k1 = 0, k2 = 0, k3 = 0;
-    const char *basis_name = NULL;
-#endif
 
     p = BN_CTX_get(ctx);
     a = BN_CTX_get(ctx);
@@ -2530,17 +1945,6 @@ static int do_test_custom_explicit_fromdata(EC_GROUP *group, BN_CTX *ctx,
         field_name = SN_X9_62_prime_field;
     } else {
         field_name = SN_X9_62_characteristic_two_field;
-#ifndef OPENSSL_NO_EC2M
-        if (EC_GROUP_get_basis_type(group) == NID_X9_62_tpBasis) {
-            basis_name = SN_X9_62_tpBasis;
-            if (!TEST_true(EC_GROUP_get_trinomial_basis(group, &k1)))
-                goto err;
-        } else {
-            basis_name = SN_X9_62_ppBasis;
-            if (!TEST_true(EC_GROUP_get_pentanomial_basis(group, &k1, &k2, &k3)))
-                goto err;
-        }
-#endif /* OPENSSL_NO_EC2M */
     }
     if (!TEST_true(EC_GROUP_get_curve(group, p, a, b, ctx))
         || !TEST_true(OSSL_PARAM_BLD_push_utf8_string(bld,
@@ -2644,43 +2048,6 @@ static int do_test_custom_explicit_fromdata(EC_GROUP *group, BN_CTX *ctx,
                                OSSL_PKEY_PARAM_EC_CHAR2_TYPE, name, sizeof(name),
                                &name_len)))
             goto err;
-    } else {
-#ifndef OPENSSL_NO_EC2M
-        if (!TEST_true(EVP_PKEY_get_int_param(pkeyparam,
-                           OSSL_PKEY_PARAM_EC_CHAR2_M, &i_out))
-            || !TEST_int_eq(EC_GROUP_get_degree(group), i_out)
-            || !TEST_true(EVP_PKEY_get_utf8_string_param(pkeyparam,
-                              OSSL_PKEY_PARAM_EC_CHAR2_TYPE, name, sizeof(name),
-                              &name_len))
-            || !TEST_str_eq(name, basis_name))
-            goto err;
-
-        if (EC_GROUP_get_basis_type(group) == NID_X9_62_tpBasis) {
-            if (!TEST_true(EVP_PKEY_get_int_param(pkeyparam,
-                               OSSL_PKEY_PARAM_EC_CHAR2_TP_BASIS, &i_out))
-                || !TEST_int_eq(k1, i_out)
-                || !TEST_false(EVP_PKEY_get_int_param(pkeyparam,
-                                   OSSL_PKEY_PARAM_EC_CHAR2_PP_K1, &i_out))
-                || !TEST_false(EVP_PKEY_get_int_param(pkeyparam,
-                                   OSSL_PKEY_PARAM_EC_CHAR2_PP_K2, &i_out))
-                || !TEST_false(EVP_PKEY_get_int_param(pkeyparam,
-                                   OSSL_PKEY_PARAM_EC_CHAR2_PP_K3, &i_out)))
-                goto err;
-        } else {
-            if (!TEST_false(EVP_PKEY_get_int_param(pkeyparam,
-                                OSSL_PKEY_PARAM_EC_CHAR2_TP_BASIS, &i_out))
-                || !TEST_true(EVP_PKEY_get_int_param(pkeyparam,
-                                  OSSL_PKEY_PARAM_EC_CHAR2_PP_K1, &i_out))
-                || !TEST_int_eq(k1, i_out)
-                || !TEST_true(EVP_PKEY_get_int_param(pkeyparam,
-                                  OSSL_PKEY_PARAM_EC_CHAR2_PP_K2, &i_out))
-                || !TEST_int_eq(k2, i_out)
-                || !TEST_true(EVP_PKEY_get_int_param(pkeyparam,
-                                  OSSL_PKEY_PARAM_EC_CHAR2_PP_K3, &i_out))
-                || !TEST_int_eq(k3, i_out))
-                goto err;
-        }
-#endif /* OPENSSL_NO_EC2M */
     }
     if (!TEST_ptr(gettable = EVP_PKEY_gettable_params(pkeyparam))
         || !TEST_ptr(OSSL_PARAM_locate_const(gettable, OSSL_PKEY_PARAM_GROUP_NAME))
@@ -2693,14 +2060,6 @@ static int do_test_custom_explicit_fromdata(EC_GROUP *group, BN_CTX *ctx,
         || !TEST_ptr(OSSL_PARAM_locate_const(gettable, OSSL_PKEY_PARAM_EC_ORDER))
         || !TEST_ptr(OSSL_PARAM_locate_const(gettable, OSSL_PKEY_PARAM_EC_COFACTOR))
         || !TEST_ptr(OSSL_PARAM_locate_const(gettable, OSSL_PKEY_PARAM_EC_SEED))
-#ifndef OPENSSL_NO_EC2M
-        || !TEST_ptr(OSSL_PARAM_locate_const(gettable, OSSL_PKEY_PARAM_EC_CHAR2_M))
-        || !TEST_ptr(OSSL_PARAM_locate_const(gettable, OSSL_PKEY_PARAM_EC_CHAR2_TYPE))
-        || !TEST_ptr(OSSL_PARAM_locate_const(gettable, OSSL_PKEY_PARAM_EC_CHAR2_TP_BASIS))
-        || !TEST_ptr(OSSL_PARAM_locate_const(gettable, OSSL_PKEY_PARAM_EC_CHAR2_PP_K1))
-        || !TEST_ptr(OSSL_PARAM_locate_const(gettable, OSSL_PKEY_PARAM_EC_CHAR2_PP_K2))
-        || !TEST_ptr(OSSL_PARAM_locate_const(gettable, OSSL_PKEY_PARAM_EC_CHAR2_PP_K3))
-#endif
         )
         goto err;
     ret = 1;
@@ -2847,12 +2206,10 @@ static int custom_params_test(int id)
         goto err;
 
     is_prime = EC_GROUP_get_field_type(group) == NID_X9_62_prime_field;
-#ifdef OPENSSL_NO_EC2M
     if (!is_prime) {
         ret = TEST_skip("binary curves not supported in this build");
         goto err;
     }
-#endif
 
     /* expected byte length of encoded points */
     bsize = (EC_GROUP_get_degree(group) + 7) / 8;
@@ -2882,12 +2239,6 @@ static int custom_params_test(int id)
         if (!TEST_ptr(altgroup = EC_GROUP_new_curve_GFp(p, a, b, ctx)))
             goto err;
     }
-#ifndef OPENSSL_NO_EC2M
-    else {
-        if (!TEST_ptr(altgroup = EC_GROUP_new_curve_GF2m(p, a, b, ctx)))
-            goto err;
-    }
-#endif
 
     /* set 2*G as the generator of altgroup */
     EC_POINT_free(G2); /* discard G2 as it refers to the original group */
@@ -3131,11 +2482,6 @@ int setup_tests(void)
     ADD_TEST(cofactor_range_test);
     ADD_ALL_TESTS(cardinality_test, crv_len);
     ADD_TEST(prime_field_tests);
-#ifndef OPENSSL_NO_EC2M
-    ADD_TEST(hybrid_point_encoding_test);
-    ADD_TEST(char2_field_tests);
-    ADD_ALL_TESTS(char2_curve_test, OSSL_NELEM(char2_curve_tests));
-#endif
     ADD_ALL_TESTS(nistp_single_test, OSSL_NELEM(nistp_tests_params));
     ADD_ALL_TESTS(internal_curve_test, crv_len);
     ADD_ALL_TESTS(internal_curve_test_method, crv_len);

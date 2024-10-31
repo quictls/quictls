@@ -125,43 +125,15 @@ static const TLS_GROUP_CONSTANTS group_list[] = {
 
 static const OSSL_PARAM param_group_list[][10] = {
 # ifndef OPENSSL_NO_EC
-#  ifndef OPENSSL_NO_EC2M
-    TLS_GROUP_ENTRY("sect163k1", "sect163k1", "EC", 0),
-    TLS_GROUP_ENTRY("K-163", "sect163k1", "EC", 0), /* Alias of above */
-#  endif
 #  ifndef FIPS_MODULE
     TLS_GROUP_ENTRY("sect163r1", "sect163r1", "EC", 1),
-#  endif
-#  ifndef OPENSSL_NO_EC2M
-    TLS_GROUP_ENTRY("sect163r2", "sect163r2", "EC", 2),
-    TLS_GROUP_ENTRY("B-163", "sect163r2", "EC", 2), /* Alias of above */
 #  endif
 #  ifndef FIPS_MODULE
     TLS_GROUP_ENTRY("sect193r1", "sect193r1", "EC", 3),
     TLS_GROUP_ENTRY("sect193r2", "sect193r2", "EC", 4),
 #  endif
-#  ifndef OPENSSL_NO_EC2M
-    TLS_GROUP_ENTRY("sect233k1", "sect233k1", "EC", 5),
-    TLS_GROUP_ENTRY("K-233", "sect233k1", "EC", 5), /* Alias of above */
-    TLS_GROUP_ENTRY("sect233r1", "sect233r1", "EC", 6),
-    TLS_GROUP_ENTRY("B-233", "sect233r1", "EC", 6), /* Alias of above */
-#  endif
 #  ifndef FIPS_MODULE
     TLS_GROUP_ENTRY("sect239k1", "sect239k1", "EC", 7),
-#  endif
-#  ifndef OPENSSL_NO_EC2M
-    TLS_GROUP_ENTRY("sect283k1", "sect283k1", "EC", 8),
-    TLS_GROUP_ENTRY("K-283", "sect283k1", "EC", 8), /* Alias of above */
-    TLS_GROUP_ENTRY("sect283r1", "sect283r1", "EC", 9),
-    TLS_GROUP_ENTRY("B-283", "sect283r1", "EC", 9), /* Alias of above */
-    TLS_GROUP_ENTRY("sect409k1", "sect409k1", "EC", 10),
-    TLS_GROUP_ENTRY("K-409", "sect409k1", "EC", 10), /* Alias of above */
-    TLS_GROUP_ENTRY("sect409r1", "sect409r1", "EC", 11),
-    TLS_GROUP_ENTRY("B-409", "sect409r1", "EC", 11), /* Alias of above */
-    TLS_GROUP_ENTRY("sect571k1", "sect571k1", "EC", 12),
-    TLS_GROUP_ENTRY("K-571", "sect571k1", "EC", 12), /* Alias of above */
-    TLS_GROUP_ENTRY("sect571r1", "sect571r1", "EC", 13),
-    TLS_GROUP_ENTRY("B-571", "sect571r1", "EC", 13), /* Alias of above */
 #  endif
 #  ifndef FIPS_MODULE
     TLS_GROUP_ENTRY("secp160k1", "secp160k1", "EC", 14),

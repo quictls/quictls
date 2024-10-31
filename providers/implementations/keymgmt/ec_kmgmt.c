@@ -583,53 +583,7 @@ const OSSL_PARAM *ec_export_types(int selection)
 
 static int ec_get_ecm_params(const EC_GROUP *group, OSSL_PARAM params[])
 {
-#ifdef OPENSSL_NO_EC2M
     return 1;
-#else
-    int ret = 0, m;
-    unsigned int k1 = 0, k2 = 0, k3 = 0;
-    int basis_nid;
-    const char *basis_name = NULL;
-    int fid = EC_GROUP_get_field_type(group);
-
-    if (fid != NID_X9_62_characteristic_two_field)
-        return 1;
-
-    basis_nid = EC_GROUP_get_basis_type(group);
-    if (basis_nid == NID_X9_62_tpBasis)
-        basis_name = SN_X9_62_tpBasis;
-    else if (basis_nid == NID_X9_62_ppBasis)
-        basis_name = SN_X9_62_ppBasis;
-    else
-        goto err;
-
-    m = EC_GROUP_get_degree(group);
-    if (!ossl_param_build_set_int(NULL, params, OSSL_PKEY_PARAM_EC_CHAR2_M, m)
-        || !ossl_param_build_set_utf8_string(NULL, params,
-                                             OSSL_PKEY_PARAM_EC_CHAR2_TYPE,
-                                             basis_name))
-        goto err;
-
-    if (basis_nid == NID_X9_62_tpBasis) {
-        if (!EC_GROUP_get_trinomial_basis(group, &k1)
-            || !ossl_param_build_set_int(NULL, params,
-                                         OSSL_PKEY_PARAM_EC_CHAR2_TP_BASIS,
-                                         (int)k1))
-            goto err;
-    } else {
-        if (!EC_GROUP_get_pentanomial_basis(group, &k1, &k2, &k3)
-            || !ossl_param_build_set_int(NULL, params,
-                                         OSSL_PKEY_PARAM_EC_CHAR2_PP_K1, (int)k1)
-            || !ossl_param_build_set_int(NULL, params,
-                                         OSSL_PKEY_PARAM_EC_CHAR2_PP_K2, (int)k2)
-            || !ossl_param_build_set_int(NULL, params,
-                                         OSSL_PKEY_PARAM_EC_CHAR2_PP_K3, (int)k3))
-            goto err;
-    }
-    ret = 1;
-err:
-    return ret;
-#endif /* OPENSSL_NO_EC2M */
 }
 
 static
@@ -769,17 +723,6 @@ int ec_get_params(void *key, OSSL_PARAM params[])
     return common_get_params(key, params, 0);
 }
 
-#ifndef OPENSSL_NO_EC2M
-# define EC2M_GETTABLE_DOM_PARAMS                                              \
-        OSSL_PARAM_int(OSSL_PKEY_PARAM_EC_CHAR2_M, NULL),                      \
-        OSSL_PARAM_utf8_string(OSSL_PKEY_PARAM_EC_CHAR2_TYPE, NULL, 0),        \
-        OSSL_PARAM_int(OSSL_PKEY_PARAM_EC_CHAR2_TP_BASIS, NULL),               \
-        OSSL_PARAM_int(OSSL_PKEY_PARAM_EC_CHAR2_PP_K1, NULL),                  \
-        OSSL_PARAM_int(OSSL_PKEY_PARAM_EC_CHAR2_PP_K2, NULL),                  \
-        OSSL_PARAM_int(OSSL_PKEY_PARAM_EC_CHAR2_PP_K3, NULL),
-#else
-# define EC2M_GETTABLE_DOM_PARAMS
-#endif
 
 static const OSSL_PARAM ec_known_gettable_params[] = {
     OSSL_PARAM_int(OSSL_PKEY_PARAM_BITS, NULL),
@@ -789,7 +732,6 @@ static const OSSL_PARAM ec_known_gettable_params[] = {
     OSSL_PARAM_octet_string(OSSL_PKEY_PARAM_ENCODED_PUBLIC_KEY, NULL, 0),
     OSSL_PARAM_int(OSSL_PKEY_PARAM_EC_DECODED_FROM_EXPLICIT_PARAMS, NULL),
     EC_IMEXPORTABLE_DOM_PARAMETERS,
-    EC2M_GETTABLE_DOM_PARAMS
     EC_IMEXPORTABLE_PUBLIC_KEY,
     OSSL_PARAM_BN(OSSL_PKEY_PARAM_EC_PUB_X, NULL, 0),
     OSSL_PARAM_BN(OSSL_PKEY_PARAM_EC_PUB_Y, NULL, 0),

@@ -72,4 +72,8 @@ extern "C" {
 }
 # endif
 
+/* Features completely removed */
+#ifndef OPENSSL_NO_EC2M
+#define OPENSSL_NO_EC2M
+#endif
 #endif                          /* OPENSSL_CONFIGURATION_H */

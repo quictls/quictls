@@ -585,20 +585,6 @@ int EC_GROUP_get_curve_GFp(const EC_GROUP *group, BIGNUM *p, BIGNUM *a,
 {
     return EC_GROUP_get_curve(group, p, a, b, ctx);
 }
-
-# ifndef OPENSSL_NO_EC2M
-int EC_GROUP_set_curve_GF2m(EC_GROUP *group, const BIGNUM *p, const BIGNUM *a,
-                            const BIGNUM *b, BN_CTX *ctx)
-{
-    return EC_GROUP_set_curve(group, p, a, b, ctx);
-}
-
-int EC_GROUP_get_curve_GF2m(const EC_GROUP *group, BIGNUM *p, BIGNUM *a,
-                            BIGNUM *b, BN_CTX *ctx)
-{
-    return EC_GROUP_get_curve(group, p, a, b, ctx);
-}
-# endif
 #endif
 
 int EC_GROUP_get_degree(const EC_GROUP *group)
@@ -885,15 +871,6 @@ int EC_POINT_set_affine_coordinates_GFp(const EC_GROUP *group,
 {
     return EC_POINT_set_affine_coordinates(group, point, x, y, ctx);
 }
-
-# ifndef OPENSSL_NO_EC2M
-int EC_POINT_set_affine_coordinates_GF2m(const EC_GROUP *group,
-                                         EC_POINT *point, const BIGNUM *x,
-                                         const BIGNUM *y, BN_CTX *ctx)
-{
-    return EC_POINT_set_affine_coordinates(group, point, x, y, ctx);
-}
-# endif
 #endif
 
 int EC_POINT_get_affine_coordinates(const EC_GROUP *group,
@@ -923,14 +900,6 @@ int EC_POINT_get_affine_coordinates_GFp(const EC_GROUP *group,
     return EC_POINT_get_affine_coordinates(group, point, x, y, ctx);
 }
 
-# ifndef OPENSSL_NO_EC2M
-int EC_POINT_get_affine_coordinates_GF2m(const EC_GROUP *group,
-                                         const EC_POINT *point, BIGNUM *x,
-                                         BIGNUM *y, BN_CTX *ctx)
-{
-    return EC_POINT_get_affine_coordinates(group, point, x, y, ctx);
-}
-# endif
 #endif
 
 int EC_POINT_add(const EC_GROUP *group, EC_POINT *r, const EC_POINT *a,
@@ -1341,50 +1310,6 @@ int EC_GROUP_get_basis_type(const EC_GROUP *group)
         return 0;
 }
 
-#ifndef OPENSSL_NO_EC2M
-int EC_GROUP_get_trinomial_basis(const EC_GROUP *group, unsigned int *k)
-{
-    if (group == NULL)
-        return 0;
-
-    if (EC_GROUP_get_field_type(group) != NID_X9_62_characteristic_two_field
-        || !((group->poly[0] != 0) && (group->poly[1] != 0)
-             && (group->poly[2] == 0))) {
-        ERR_raise(ERR_LIB_EC, ERR_R_SHOULD_NOT_HAVE_BEEN_CALLED);
-        return 0;
-    }
-
-    if (k)
-        *k = group->poly[1];
-
-    return 1;
-}
-
-int EC_GROUP_get_pentanomial_basis(const EC_GROUP *group, unsigned int *k1,
-                                   unsigned int *k2, unsigned int *k3)
-{
-    if (group == NULL)
-        return 0;
-
-    if (EC_GROUP_get_field_type(group) != NID_X9_62_characteristic_two_field
-        || !((group->poly[0] != 0) && (group->poly[1] != 0)
-             && (group->poly[2] != 0) && (group->poly[3] != 0)
-             && (group->poly[4] == 0))) {
-        ERR_raise(ERR_LIB_EC, ERR_R_SHOULD_NOT_HAVE_BEEN_CALLED);
-        return 0;
-    }
-
-    if (k1)
-        *k1 = group->poly[3];
-    if (k2)
-        *k2 = group->poly[2];
-    if (k3)
-        *k3 = group->poly[1];
-
-    return 1;
-}
-#endif
-
 #ifndef FIPS_MODULE
 /*
  * Check if the explicit parameters group matches any built-in curves.
@@ -1643,20 +1568,8 @@ EC_GROUP *EC_GROUP_new_from_params(const OSSL_PARAM params[],
         /* create the EC_GROUP structure */
         group = EC_GROUP_new_curve_GFp(p, a, b, bnctx);
     } else {
-# ifdef OPENSSL_NO_EC2M
         ERR_raise(ERR_LIB_EC, EC_R_GF2M_NOT_SUPPORTED);
         goto err;
-# else
-        /* create the EC_GROUP structure */
-        group = EC_GROUP_new_curve_GF2m(p, a, b, NULL);
-        if (group != NULL) {
-            field_bits = EC_GROUP_get_degree(group);
-            if (field_bits > OPENSSL_ECC_MAX_FIELD_BITS) {
-                ERR_raise(ERR_LIB_EC, EC_R_FIELD_TOO_LARGE);
-                goto err;
-            }
-        }
-# endif /* OPENSSL_NO_EC2M */
     }
 
     if (group == NULL) {
