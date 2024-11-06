@@ -35,6 +35,15 @@ issue appeals to you, feel free to jump in and get started on it.
 However, there's a bunch of design stuff that also needs to happen, but we'll
 make sure to have the conversation in an open manner.
 
+Where/how can I report vulnerabilities?
+---------------------------------------
+
+Please see our [this
+document](https://github.com/quictls/quictls/blob/main/SECURITY.md)
+for information on how to report vulnerabilities in
+QuicTLS to us.
+
+
 What about sonames and the like?
 -------------------------------
 
