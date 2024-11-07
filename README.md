@@ -38,8 +38,8 @@ make sure to have the conversation in an open manner.
 Where/how can I report vulnerabilities?
 ---------------------------------------
 
-Please see our [this
-document](https://github.com/quictls/quictls/blob/main/SECURITY.md)
+Please see our [security
+policy](https://github.com/quictls/quictls/blob/main/SECURITY.md)
 for information on how to report vulnerabilities in
 QuicTLS to us.
 
