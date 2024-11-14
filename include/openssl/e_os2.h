@@ -34,7 +34,7 @@ extern "C" {
 
 /*
  * Note that MSDOS actually denotes 32-bit environments running on top of
- * MS-DOS
+ * MS-DOS.
  */
 # if defined(OPENSSL_SYS_MSDOS)
 #  undef OPENSSL_SYS_UNIX
