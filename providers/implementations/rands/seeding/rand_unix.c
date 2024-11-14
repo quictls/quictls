@@ -801,4 +801,4 @@ static uint64_t get_time_stamp(void)
     return time(NULL);
 }
 
-#endif /* (defined(OPENSSL_SYS_UNIX) && !defined(OPENSSL_SYS_VXWORKS)) */
+#endif /* defined(OPENSSL_SYS_UNIX) && !defined(OPENSSL_SYS_VXWORKS) */
