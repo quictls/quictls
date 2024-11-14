@@ -11,7 +11,7 @@
 #include "internal/e_os.h"
 
 /* system-specific variants defining OSSL_sleep() */
-#if defined(OPENSSL_SYS_UNIX) || defined(__DJGPP__)
+#if defined(OPENSSL_SYS_UNIX)
 #include <unistd.h>
 
 void OSSL_sleep(uint64_t millis)
@@ -84,4 +84,4 @@ void OSSL_sleep(uint64_t millis)
     ossl_sleep_secs(millis / 1000);
     ossl_sleep_millis(millis % 1000);
 }
-#endif /* defined(OPENSSL_SYS_UNIX) || defined(__DJGPP__) */
+#endif /* defined(OPENSSL_SYS_UNIX) */
