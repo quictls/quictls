@@ -10,4 +10,4 @@ pick the appropriate release branch.
 QuicTLS Releases
 ----------------
 
-Removed DJPP support.
+Removed DJGPP support.
