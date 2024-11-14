@@ -748,7 +748,7 @@ size_t ossl_pool_acquire_entropy(RAND_POOL *pool)
 # endif
 #endif
 
-#if (defined(OPENSSL_SYS_UNIX) && !defined(OPENSSL_SYS_VXWORKS))
+#if defined(OPENSSL_SYS_UNIX) && !defined(OPENSSL_SYS_VXWORKS)
 int ossl_pool_add_nonce_data(RAND_POOL *pool)
 {
     struct {
