@@ -390,11 +390,7 @@ static void xcloselog(BIO *bp)
 
 static void xopenlog(BIO *bp, char *name, int level)
 {
-#  if defined(LOG_NDELAY)
-    openlog(name, LOG_PID | LOG_CONS | LOG_NDELAY, level);
-#  else
     openlog(name, LOG_PID | LOG_CONS, level);
-#  endif
 }
 
 static void xsyslog(BIO *bp, int priority, const char *string)
