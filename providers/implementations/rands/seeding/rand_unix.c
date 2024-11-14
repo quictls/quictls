@@ -87,7 +87,7 @@ static uint64_t get_time_stamp(void);
 #   define OSSL_POSIX_TIMER_OKAY
 #  endif
 # endif
-#endif /* (defined(OPENSSL_SYS_UNIX) && !defined(OPENSSL_SYS_VXWORKS)) */
+#endif /* defined(OPENSSL_SYS_UNIX) && !defined(OPENSSL_SYS_VXWORKS) */
 
 #if defined(OPENSSL_RAND_SEED_NONE)
 /* none means none. this simplifies the following logic */
