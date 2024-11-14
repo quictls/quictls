@@ -41,7 +41,7 @@
 # include <sys/random.h>
 #endif
 
-#if (defined(OPENSSL_SYS_UNIX) && !defined(OPENSSL_SYS_VXWORKS))
+#if defined(OPENSSL_SYS_UNIX) && !defined(OPENSSL_SYS_VXWORKS)
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
