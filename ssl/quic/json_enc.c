@@ -606,9 +606,7 @@ void ossl_json_f64(OSSL_JSON_ENC *json, double value)
 #if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
     {
         int checks = isnan(value);
-# if !defined(OPENSSL_SYS_VMS)
         checks |= isinf(value);
-# endif
 
         if (checks) {
             json_raise_error(json);

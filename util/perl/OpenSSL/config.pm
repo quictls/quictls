@@ -340,29 +340,6 @@ sub determine_compiler_settings {
 
     # Vendor specific overrides, only if we didn't determine the compiler here
     if ( ! $cc ) {
-        if ( $SYSTEM eq 'OpenVMS' ) {
-            my $v = `CC/VERSION NLA0:`;
-            if ($? == 0) {
-                # The normal releases have a version number prefixed with a V.
-                # However, other letters have been seen as well (for example X),
-                # and it's documented that HP (now VSI) reserve the letter W, X,
-                # Y and Z for their own uses.
-                my ($vendor, $arch, $version, $extra) =
-                    ( $v =~ m/^
-                              ([A-Z]+)                  # Usually VSI
-                              \s+ C
-                              (?:\s+(.*?))?             # Possible build arch
-                              \s+ [VWXYZ]([0-9\.-]+)    # Version
-                              (?:\s+\((.*?)\))?         # Possible extra data
-                              \s+ on
-                             /x );
-                my ($major, $minor, $patch) =
-                    ( $version =~ m/^([0-9]+)\.([0-9]+)-0*?(0|[1-9][0-9]*)$/ );
-                $CC = 'CC';
-                $CCVENDOR = $vendor;
-                $CCVER = ( $major * 100 + $minor ) * 100 + $patch;
-            }
-        }
 
         if ( ${SYSTEM} eq 'AIX' ) {
             # favor vendor cc over gcc

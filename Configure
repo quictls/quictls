@@ -3441,12 +3441,10 @@ sub print_table_entry
     }
 }
 
-# Utility routines ###################################################
-
 sub isabsolute {
     my $file = shift;
 
-    # On non-platforms, we just use file_name_is_absolute().
+    # Just use file_name_is_absolute().
     return file_name_is_absolute($file);
 }
 

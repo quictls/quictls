@@ -150,7 +150,7 @@ sub fixup_cmd_elements {
         sub { $_ = shift;
               ($_ eq '' || /\s|[\{\}\\\$\[\]\*\?\|\&:;<>]/) ? "'$_'" : $_ };
 
-    if ( $^O eq "MSWin32") {
+    if ( $^O eq "MSWin32") { # MSWin setup
         $arg_formatter = sub {
             $_ = shift;
             if ($_ eq '' || /\s|["\|\&\*\;<>]/) {

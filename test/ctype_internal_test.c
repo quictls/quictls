@@ -13,18 +13,6 @@
 #include <ctype.h>
 #include <stdio.h>
 
-/*
- * Even though the VMS C RTL claims to be C99 compatible, it's not entirely
- * so far (C RTL version 8.4). Same applies to OSF. For the sake of these
- * tests, we therefore define our own.
- */
-#if (defined(__VMS) && __CRTL_VER <= 80400000) || defined(__osf__)
-static int isblank(int c)
-{
-    return c == ' ' || c == '\t';
-}
-#endif
-
 static int test_ctype_chars(int n)
 {
     if (!TEST_int_eq(isascii((unsigned char)n) != 0, ossl_isascii(n) != 0))

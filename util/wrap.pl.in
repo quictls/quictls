@@ -46,6 +46,10 @@ local $ENV{OPENSSL_MODULES} = $std_providers
     if ($ENV{OPENSSL_MODULES} // '') eq '' && -d $std_providers;
 local $ENV{OPENSSL_CONF} = $std_openssl_conf
     if ($ENV{OPENSSL_CONF} // '') eq '' && -f $std_openssl_conf;
+{-
+     use File::Spec::Functions qw(rel2abs);
+
+-}
 my $use_system = 0;
 my @cmd;
 

@@ -679,9 +679,7 @@ char *CONF_get1_default_config_file(void)
         return OPENSSL_strdup(file);
 
     t = X509_get_default_cert_area();
-#ifndef OPENSSL_SYS_VMS
     sep = "/";
-#endif
     size = strlen(t) + strlen(sep) + strlen(OPENSSL_CONF) + 1;
     file = OPENSSL_malloc(size);
 
