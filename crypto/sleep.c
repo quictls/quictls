@@ -22,11 +22,6 @@ void OSSL_sleep(uint64_t millis)
     ts.tv_sec = (long int) (millis / 1000);
     ts.tv_nsec = (long int) (millis % 1000) * 1000000ul;
     nanosleep(&ts, NULL);
-# elif defined(__TANDEM) && !defined(_REENTRANT)
-#   include <cextdecs.h(PROCESS_DELAY_)>
-
-    /* HPNS does not support usleep for non threaded apps */
-    PROCESS_DELAY_(millis * 1000);
 # else
     unsigned int s = (unsigned int)(millis / 1000);
     unsigned int us = (unsigned int)((millis % 1000) * 1000);

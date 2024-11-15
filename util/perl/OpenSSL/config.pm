@@ -170,11 +170,6 @@ my $guess_patterns = [
     # VMS installation aren't multiarch (yet)
     [ 'OpenVMS:.*',                 "$Config{archname}-whatever-OpenVMS" ],
 
-    # Note: there's also NEO and NSR, but they are old and unsupported
-    [ 'NONSTOP_KERNEL:.*:NSE-.*?',  'nse-tandem-nsk${RELEASE}' ],
-    [ 'NONSTOP_KERNEL:.*:NSV-.*?',  'nsv-tandem-nsk${RELEASE}' ],
-    [ 'NONSTOP_KERNEL:.*:NSX-.*?',  'nsx-tandem-nsk${RELEASE}' ],
-
     [ sub { -d '/usr/apollo' },     'whatever-apollo-whatever' ],
 ];
 
@@ -978,9 +973,6 @@ _____
       #
       # nsv is a virtual x86 environment, equivalent to nsx, so we enforce
       # the latter.
-      [ 'nse-tandem-nsk.*',       { target => 'nonstop-nse' } ],
-      [ 'nsv-tandem-nsk.*',       { target => 'nonstop-nsx' } ],
-      [ 'nsx-tandem-nsk.*',       { target => 'nonstop-nsx' } ],
 
     ];
 

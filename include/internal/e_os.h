@@ -287,64 +287,6 @@ struct servent *getservbyname(const char *name, const char *proto);
 # endif
 /* end vxworks */
 
-/* ----------------------------- HP NonStop -------------------------------- */
-/* Required to support platform variant without getpid() and pid_t. */
-# if defined(__TANDEM) && defined(_GUARDIAN_TARGET)
-#  include <strings.h>
-#  include <netdb.h>
-#  define getservbyname(name,proto)          getservbyname((char*)name,proto)
-#  define gethostbyname(name)                gethostbyname((char*)name)
-#  define ioctlsocket(a,b,c)	ioctl(a,b,c)
-#  ifdef NO_GETPID
-inline int nssgetpid(void);
-#   ifndef NSSGETPID_MACRO
-#    define NSSGETPID_MACRO
-#    include <cextdecs.h(PROCESSHANDLE_GETMINE_)>
-#    include <cextdecs.h(PROCESSHANDLE_DECOMPOSE_)>
-       inline int nssgetpid(void)
-       {
-         short phandle[10]={0};
-         union pseudo_pid {
-          struct {
-           short cpu;
-           short pin;
-         } cpu_pin ;
-         int ppid;
-        } ppid = { 0 };
-        PROCESSHANDLE_GETMINE_(phandle);
-        PROCESSHANDLE_DECOMPOSE_(phandle, &ppid.cpu_pin.cpu, &ppid.cpu_pin.pin);
-        return ppid.ppid;
-       }
-#    define getpid(a) nssgetpid(a)
-#   endif /* NSSGETPID_MACRO */
-#  endif /* NO_GETPID */
-/*#  define setsockopt(a,b,c,d,f) setsockopt(a,b,c,(char*)d,f)*/
-/*#  define getsockopt(a,b,c,d,f) getsockopt(a,b,c,(char*)d,f)*/
-/*#  define connect(a,b,c) connect(a,(struct sockaddr *)b,c)*/
-/*#  define bind(a,b,c) bind(a,(struct sockaddr *)b,c)*/
-/*#  define sendto(a,b,c,d,e,f) sendto(a,(char*)b,c,d,(struct sockaddr *)e,f)*/
-#  if defined(OPENSSL_THREADS) && !defined(_PUT_MODEL_)
-  /*
-   * HPNS SPT threads
-   */
-#   define  SPT_THREAD_SIGNAL 1
-#   define  SPT_THREAD_AWARE 1
-#   include <spthread.h>
-#   undef close
-#   define close spt_close
-/*
-#   define get_last_socket_error()	errno
-#   define clear_socket_error()	errno=0
-#   define ioctlsocket(a,b,c)	ioctl(a,b,c)
-#   define closesocket(s)		close(s)
-#   define readsocket(s,b,n)	read((s),(char*)(b),(n))
-#   define writesocket(s,b,n)	write((s),(char*)(b),(n)
-*/
-#   define accept(a,b,c)        accept(a,(struct sockaddr *)b,c)
-#   define recvfrom(a,b,c,d,e,f) recvfrom(a,b,(socklen_t)c,d,e,f)
-#  endif
-# endif
-
 # ifdef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
 #  define CRYPTO_memcmp memcmp
 # endif
@@ -375,8 +317,7 @@ inline int nssgetpid(void);
 #  define strncasecmp_l _strnicmp_l
 #  define strcasecmp _stricmp
 #  define strncasecmp _strnicmp
-# elif !defined(_POSIX_C_SOURCE) || _POSIX_C_SOURCE < 200809L \
-     || defined(OPENSSL_SYS_TANDEM)
+# elif !defined(_POSIX_C_SOURCE) || _POSIX_C_SOURCE < 200809L
 #  ifndef OPENSSL_NO_LOCALE
 #   define OPENSSL_NO_LOCALE
 #  endif

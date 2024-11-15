@@ -127,10 +127,6 @@
 #  define TTY_set(tty,data)      ioctl(tty,TIOCSETP,data)
 # endif
 
-# if !defined(_LIBC) && !defined(OPENSSL_SYS_MSDOS) && !defined(OPENSSL_SYS_VMS) && ! (defined(OPENSSL_SYS_TANDEM) && defined(_SPT_MODEL_))
-#  include <sys/ioctl.h>
-# endif
-
 # ifdef OPENSSL_SYS_MSDOS
 #  include <conio.h>
 # endif
