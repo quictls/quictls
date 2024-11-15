@@ -89,7 +89,7 @@ if ($flavour =~ /64|n32/i) {
 	$SZREG=4;
 	$REG_S="sw";
 	$REG_L="lw";
-	$code="#if !(defined (__mips_isa_rev) && (__mips_isa_rev >= 6))\n.set     mips2\n#endif\n";
+	$code="#if !(defined(__mips_isa_rev) && (__mips_isa_rev >= 6))\n.set     mips2\n#endif\n";
 }
 
 $output and open STDOUT,">$output";

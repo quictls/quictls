@@ -198,7 +198,7 @@ void OSSL_trace_end(int category, BIO *channel);
  * call OSSL_TRACE_CANCEL(category).
  */
 
-# if !defined OPENSSL_NO_TRACE && !defined FIPS_MODULE
+# if !defined(OPENSSL_NO_TRACE) && !defined(FIPS_MODULE)
 
 #  define OSSL_TRACE_BEGIN(category) \
     do { \
@@ -237,7 +237,7 @@ void OSSL_trace_end(int category, BIO *channel);
  *         ...
  *     }
  */
-# if !defined OPENSSL_NO_TRACE && !defined FIPS_MODULE
+# if !defined(OPENSSL_NO_TRACE) && !defined(FIPS_MODULE)
 
 #  define OSSL_TRACE_ENABLED(category) \
     OSSL_trace_enabled(OSSL_TRACE_CATEGORY_##category)
@@ -270,7 +270,7 @@ void OSSL_trace_end(int category, BIO *channel);
  *                42, "What do you get when you multiply six by nine?");
  */
 
-# if !defined OPENSSL_NO_TRACE && !defined FIPS_MODULE
+# if !defined(OPENSSL_NO_TRACE) && !defined(FIPS_MODULE)
 
 #  define OSSL_TRACEV(category, args) \
     OSSL_TRACE_BEGIN(category) \

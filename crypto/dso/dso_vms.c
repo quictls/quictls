@@ -23,7 +23,7 @@
 
 /* Some compiler options may mask the declaration of "_malloc32". */
 # define DSO_MALLOC OPENSSL_malloc
-# if __INITIAL_POINTER_SIZE && defined _ANSI_C_SOURCE
+# if __INITIAL_POINTER_SIZE && defined(_ANSI_C_SOURCE)
 #  if __INITIAL_POINTER_SIZE == 64
 #   pragma pointer_size save
 #   pragma pointer_size 32
@@ -101,7 +101,7 @@ static int vms_load(DSO *dso)
     char *filename = DSO_convert_filename(dso, NULL);
 
 /* Ensure 32-bit pointer for "p", and appropriate malloc() function. */
-# if __INITIAL_POINTER_SIZE && defined _ANSI_C_SOURCE
+# if __INITIAL_POINTER_SIZE && defined(_ANSI_C_SOURCE)
 #  if __INITIAL_POINTER_SIZE == 64
 #   pragma pointer_size save
 #   pragma pointer_size 32
@@ -111,7 +111,7 @@ static int vms_load(DSO *dso)
 
     DSO_VMS_INTERNAL *p = NULL;
 
-# if __INITIAL_POINTER_SIZE && defined _ANSI_C_SOURCE
+# if __INITIAL_POINTER_SIZE && defined(_ANSI_C_SOURCE)
 #  if __INITIAL_POINTER_SIZE == 64
 #   pragma pointer_size restore
 #  endif                        /* __INITIAL_POINTER_SIZE == 64 */

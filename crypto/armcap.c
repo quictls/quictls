@@ -115,7 +115,7 @@ static unsigned long getauxval(unsigned long key)
 # ifndef AT_HWCAP2
 #  define AT_HWCAP2              26
 # endif
-# if defined(__arm__) || defined (__arm)
+# if defined(__arm__) || defined(__arm)
 #  define OSSL_HWCAP                  AT_HWCAP
 #  define OSSL_HWCAP_NEON             (1 << 12)
 

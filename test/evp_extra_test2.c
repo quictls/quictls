@@ -1298,7 +1298,7 @@ static int test_evp_md_ctx_copy(void)
     return ret;
 }
 
-#if !defined OPENSSL_NO_DES && !defined OPENSSL_NO_MD5
+#if !defined(OPENSSL_NO_DES) && !defined(OPENSSL_NO_MD5)
 static int test_evp_pbe_alg_add(void)
 {
     int ret = 0;
@@ -1392,7 +1392,7 @@ int setup_tests(void)
     ADD_TEST(test_evp_md_ctx_dup);
     ADD_TEST(test_evp_md_ctx_copy);
     ADD_ALL_TESTS(test_provider_unload_effective, 2);
-#if !defined OPENSSL_NO_DES && !defined OPENSSL_NO_MD5
+#if !defined(OPENSSL_NO_DES) && !defined(OPENSSL_NO_MD5)
     ADD_TEST(test_evp_pbe_alg_add);
 #endif
     return 1;

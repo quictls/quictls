@@ -32,7 +32,7 @@
 # include <lib$routines.h>
 # include <starlet.h>
 /* Some compiler options may mask the declaration of "_malloc32". */
-# if __INITIAL_POINTER_SIZE && defined _ANSI_C_SOURCE
+# if __INITIAL_POINTER_SIZE && defined(_ANSI_C_SOURCE)
 #  if __INITIAL_POINTER_SIZE == 64
 #   pragma pointer_size save
 #   pragma pointer_size 32

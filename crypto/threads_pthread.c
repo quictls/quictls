@@ -635,7 +635,7 @@ CRYPTO_RWLOCK *CRYPTO_THREAD_lock_new(void)
      * We don't use recursive mutexes, but try to catch errors if we do.
      */
     pthread_mutexattr_init(&attr);
-#  if !defined (__TANDEM) && !defined (_SPT_MODEL_)
+#  if !defined(__TANDEM) && !defined(_SPT_MODEL_)
 #   if !defined(NDEBUG) && !defined(OPENSSL_NO_MUTEX_ERRORCHECK)
     pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_ERRORCHECK);
 #   endif

@@ -210,7 +210,7 @@ extern unsigned int OPENSSL_armv8_rsa_neonized;
     .popsection;
 #  endif
 
-# endif  /* defined __ASSEMBLER__ */
+# endif  /* defined(__ASSEMBLER__) */
 
 # define IS_CPU_SUPPORT_UNROLL8_EOR3() \
            (OPENSSL_armcap_P & ARMV8_UNROLL8_EOR3)
