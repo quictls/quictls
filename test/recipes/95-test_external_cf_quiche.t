@@ -15,8 +15,8 @@ setup("test_external_cf_quiche");
 
 plan skip_all => "No external tests in this configuration"
     if disabled("external-tests");
-plan skip_all => "Cloudflare quiche tests not available on Windows or VMS"
-    if $^O =~ /^(VMS|MSWin32)$/;
+plan skip_all => "Cloudflare quiche tests not available on Windows"
+    if $^O =~ /^MSWin32$/;
 plan skip_all => "Cloudflare quiche tests only available with QUIC support"
     if disabled("quic");
 plan skip_all => "Cloudflare & Boringssl not checked out"

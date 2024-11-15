@@ -27,16 +27,9 @@
  * include/openssl/__DECC_INCLUDE_PROLOGUE.H and __DECC_INCLUDE_EPILOGUE.H),
  * but not for internal headers.
  */
-# ifdef __VMS
-#  pragma names save
-#  pragma names as_is,shortened
-# endif
 
 # include "internal/o_dir.h"
 
-# ifdef __VMS
-#  pragma names restore
-# endif
 
 # include <openssl/evp.h>
 # include <openssl/pem.h>
@@ -327,10 +320,7 @@ static int ends_with_dirsep(const char *path)
 {
     if (*path != '\0')
         path += strlen(path) - 1;
-# if defined __VMS
-    if (*path == ']' || *path == '>' || *path == ':')
-        return 1;
-# elif defined _WIN32
+# if defined _WIN32
     if (*path == '\\')
         return 1;
 # endif

@@ -37,15 +37,7 @@ SUBDIRS = man1
                                catdir($buildtop, "doc"));
 
          # The build.info format requires file specs to be in Unix format.
-         # Especially, since VMS file specs use [ and ], the build.info parser
-         # will otherwise get terribly confused.
-         if ($^O eq 'VMS') {
-             $htmlfile = VMS::Filespec::unixify($htmlfile);
-             $manfile = VMS::Filespec::unixify($manfile);
-             $podfile = VMS::Filespec::unixify($podfile);
-             $podinfile = VMS::Filespec::unixify($podinfile)
-                 if defined $podinfile;
-         } elsif ($^O eq 'MSWin32') {
+         if ($^O eq 'MSWin32') {
              $htmlfile =~ s|\\|/|g;
              $manfile =~ s|\\|/|g;
              $podfile =~ s|\\|/|g;

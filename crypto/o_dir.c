@@ -27,7 +27,7 @@
     || (defined __VMS_VER && __VMS_VER >= 70000000)
 # include "LPdir_unix.c"
 #elif defined OPENSSL_SYS_VMS
-# include "LPdir_vms.c"
+# error "not supported"
 #elif defined OPENSSL_SYS_WIN32
 # include "LPdir_win32.c"
 #else

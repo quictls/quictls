@@ -170,7 +170,6 @@ FILE *__iob_func(void);
 #  endif
 
 #  ifdef OPENSSL_SYS_VMS
-#   define VMS 1
   /*
    * some programs don't include stdlib, so exit() and others give implicit
    * function warnings

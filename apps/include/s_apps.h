@@ -55,10 +55,6 @@ int generate_cookie_callback(SSL *ssl, unsigned char *cookie,
 int verify_cookie_callback(SSL *ssl, const unsigned char *cookie,
                            unsigned int cookie_len);
 
-#ifdef __VMS                     /* 31 char symbol name limit */
-# define generate_stateless_cookie_callback      generate_stateless_cookie_cb
-# define verify_stateless_cookie_callback        verify_stateless_cookie_cb
-#endif
 
 int generate_stateless_cookie_callback(SSL *ssl, unsigned char *cookie,
                                        size_t *cookie_len);

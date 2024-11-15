@@ -164,12 +164,6 @@ my $guess_patterns = [
     [ 'CYGWIN.*',                   '${MACHINE}-pc-cygwin' ],
     [ 'vxworks.*',                  '${MACHINE}-whatever-vxworks' ],
 
-    # The MACHINE part of the array POSIX::uname() returns on VMS isn't
-    # worth the bits wasted on it.  It's better, then, to rely on perl's
-    # %Config, which has a trustworthy item 'archname', especially since
-    # VMS installation aren't multiarch (yet)
-    [ 'OpenVMS:.*',                 "$Config{archname}-whatever-OpenVMS" ],
-
     [ sub { -d '/usr/apollo' },     'whatever-apollo-whatever' ],
 ];
 
@@ -957,11 +951,6 @@ _____
             return $config;
         }
       ],
-
-      # VMS values found by observation on existing machinery.
-      [ 'VMS_AXP-.*?-OpenVMS',    { target => 'vms-alpha'  } ],
-      [ 'VMS_IA64-.*?-OpenVMS',   { target => 'vms-ia64'   } ],
-      [ 'VMS_x86_64-.*?-OpenVMS', { target => 'vms-x86_64' } ],
 
       # TODO: There are a few more choices among OpenSSL config targets, but
       # reaching them involves a bit more than just a host tripet.  Select

@@ -34,7 +34,6 @@ my $verbose = 0;
 my $ctest = 0;
 my $debug = 0;
 
-# For VMS, some modules may have case insensitive names
 my $case_insensitive = 0;
 
 GetOptions('name=s'     => \$name,
@@ -43,9 +42,7 @@ GetOptions('name=s'     => \$name,
            'OS=s'       => \$OS,
            'type=s'     => \$type,
            'ctest'      => \$ctest,
-           'verbose'    => \$verbose,
-           # For VMS
-           'case-insensitive' => \$case_insensitive)
+           'verbose'    => \$verbose)
     or die "Error in command line arguments\n";
 
 die "Please supply arguments\n"
@@ -118,10 +115,6 @@ my %OS_data = (
                      sort       => sorter_unix(),
                      platforms  => { UNIX                       => 1 } },
     "aix-solib" => 'aix',       # alias
-    VMS         => { writer     => \&writer_VMS,
-                     sort       => OpenSSL::Ordinals::by_number(),
-                     platforms  => { VMS                        => 1 } },
-    vms         => 'VMS',       # alias
     WINDOWS     => { writer     => \&writer_windows,
                      sort       => OpenSSL::Ordinals::by_name(),
                      platforms  => { WIN32                      => 1,

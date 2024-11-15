@@ -38,7 +38,7 @@ sub testordinals
             #Ignore this line
             next;
         }
-        #Some ordinals can be repeated, e.g. if one is VMS and another is !VMS
+        #Some ordinals can be repeated, e.g. if on different platforms
         $newqual = $tokens[4];
         $newqual =~ s/!//g;
         my $number = $tokens[1];

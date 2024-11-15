@@ -40,7 +40,7 @@ if (eval { require Win32::API; 1; }) {
     }
 } elsif ($^O eq "MSWin32") {
     plan skip_all => "Win32::API unavailable";
-} elsif ($^O ne "VMS") {
+} else {
     # Running MinGW tests transparently under Wine apparently requires
     # UTF-8 locale...
 
@@ -64,9 +64,6 @@ ok(run(test(["pkcs12_format_test", "-legacy"])), "test pkcs12 formats using lega
 ok(run(test(["pkcs12_format_test", "-context"])), "test pkcs12 formats using a non-default library context");
 
 SKIP: {
-     skip "VMS doesn't have command line UTF-8 support yet in DCL", 1
-         if $^O eq "VMS";
-
      # just see that we can read shibboleth.pfx protected with $pass
      ok(run(app(["openssl", "pkcs12", "-noout",
                  "-password", "pass:$pass",

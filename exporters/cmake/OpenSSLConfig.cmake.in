@@ -38,7 +38,6 @@
 
        # We know that $volume is ignored by File::Spec::Unix, so we handle it specially
        # according to the conventions of the platform.
-       $volume =~ s|^(.*?):$|/$1| if $^O eq "vms"; # On VMS, DEV: -> /DEV
 
        return $volume . File::Spec::Unix->catpath('', $directories, $no_file ? () : $file);
    }

@@ -88,7 +88,7 @@ our \$CMAKECONFIGDIR     = '$ENV{CMAKECONFIGDIR}';
 our \$CMAKECONFIGDIR_REL = '$ENV{CMAKECONFIGDIR_REL}';
 our \$VERSION            = '$ENV{VERSION}';
 our \@LDLIBS             =
-    # Unix and Windows use space separation, VMS uses comma separation
+    # Unix and Windows use space separation
     split(/ +| *, */, '$ENV{LDLIBS}');
 
 1;

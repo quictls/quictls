@@ -763,8 +763,8 @@ IF[{- !$disabled{tests} -}]
 
   # Internal test programs.  These are essentially a collection of internal
   # test routines.  Some of them need to reach internal symbols that aren't
-  # available through the shared library (at least on Linux, Solaris, Windows
-  # and VMS, where the exported symbols are those listed in util/*.num), these
+  # available through the shared library (at least on Linux, Solaris, and
+  # Windows, where the exported symbols are those listed in util/*.num), these
   # programs are forcibly linked with the static libraries, where all symbols
   # are always available.
   IF[1]

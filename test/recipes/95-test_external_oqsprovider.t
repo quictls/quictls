@@ -15,8 +15,8 @@ setup("test_external_oqsprovider");
 
 plan skip_all => "No external tests in this configuration"
     if disabled("external-tests");
-plan skip_all => "oqsprovider tests not available on Windows or VMS"
-    if $^O =~ /^(VMS|MSWin32)$/;
+plan skip_all => "oqsprovider tests not available on Windows"
+    if $^O =~ /^MSWin32$/;
 plan skip_all => "oqsprovider tests only available in a shared build"
     if disabled("shared");
 plan skip_all => "oqsprovider tests not supported in out of tree builds"

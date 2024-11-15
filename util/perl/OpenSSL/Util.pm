@@ -139,7 +139,6 @@ escapes have been injected as necessary depending on the content of each
 LIST string.
 
 This can also be used to put quotes around the executable of a command.
-I<This must never ever be done on VMS.>
 
 =back
 
@@ -151,17 +150,7 @@ sub fixup_cmd_elements {
         sub { $_ = shift;
               ($_ eq '' || /\s|[\{\}\\\$\[\]\*\?\|\&:;<>]/) ? "'$_'" : $_ };
 
-    if ( $^O eq "VMS") {        # VMS setup
-        $arg_formatter = sub {
-            $_ = shift;
-            if ($_ eq '' || /\s|[!"[:upper:]]/) {
-                s/"/""/g;
-                '"'.$_.'"';
-            } else {
-                $_;
-            }
-        };
-    } elsif ( $^O eq "MSWin32") { # MSWin setup
+    if ( $^O eq "MSWin32") {
         $arg_formatter = sub {
             $_ = shift;
             if ($_ eq '' || /\s|["\|\&\*\;<>]/) {
@@ -181,58 +170,14 @@ sub fixup_cmd_elements {
 =item fixup_cmd LIST
 
 This is a sibling of fixup_cmd_elements() that expects the LIST to be a
-complete command line.  It does the same thing as fixup_cmd_elements(),
-expect that it treats the first LIST element specially on VMS.
+complete command line.
 
 =back
 
 =cut
 
 sub fixup_cmd {
-    return fixup_cmd_elements(@_) unless $^O eq 'VMS';
-
-    # The rest is VMS specific
-    my $cmd = shift;
-
-    # Prefix to be applied as needed.  Essentially, we need to determine
-    # if the command is an executable file (something.EXE), and invoke it
-    # with the MCR command in that case.  MCR is an old PDP-11 command that
-    # stuck around.
-    my @prefix;
-
-    if ($cmd =~ m|^\@|) {
-        # The command is an invocation of a command procedure (also known as
-        # "script"), no modification needed.
-        @prefix = ();
-    } elsif ($cmd =~ m|^MCR$|) {
-        # The command is MCR, so there's nothing much to do apart from
-        # making sure that the file name following it isn't treated with
-        # fixup_cmd_elements(), 'cause MCR doesn't like strings.
-        @prefix = ( $cmd );
-        $cmd = shift;
-    } else {
-        # All that's left now is to check whether the command is an executable
-        # file, and if it's not, simply assume that it is a DCL command.
-
-        # Make sure we have a proper file name, i.e. add the default
-        # extension '.exe' if there isn't one already.
-        my $executable = ($cmd =~ m|.[a-z0-9\$]*$|) ? $cmd : $cmd . '.exe';
-        if (-e $executable) {
-            # It seems to be an executable, so we make sure to prefix it
-            # with MCR, for proper invocation.  We also make sure that
-            # there's a directory specification, or otherwise, MCR will
-            # assume that the executable is in SYS$SYSTEM:
-            @prefix = ( 'MCR' );
-            $cmd = '[]' . $cmd unless $cmd =~ /^(?:[\$a-z0-9_]+:)?[<\[]/i;
-        } else {
-            # If it isn't an executable, then we assume that it's a DCL
-            # command, and do no further processing, apart from argument
-            # fixup.
-            @prefix = ();
-        }
-    }
-
-    return ( @prefix, $cmd, fixup_cmd_elements(@_) );
+    return fixup_cmd_elements(@_);
 }
 
 =item dump_data REF, OPTS

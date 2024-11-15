@@ -13,7 +13,7 @@ package ssltests;
 sub test_pem
 {
     my ($file) = @_;
-    my $dir_sep = $^O ne "VMS" ? "/" : "";
+    my $dir_sep = "/";
     return "\${ENV::TEST_CERTS_DIR}" . $dir_sep . $file,
 }
 

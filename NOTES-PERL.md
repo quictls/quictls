@@ -3,7 +3,6 @@ Notes on Perl
 
  - [General Notes](#general-notes)
  - [Perl on Windows](#perl-on-windows)
- - [Perl on VMS](#perl-on-vms)
  - [Required Perl modules](#required-perl-modules)
  - [Notes on installing a Perl module](#notes-on-installing-a-perl-module])
 
@@ -41,15 +40,6 @@ For VC-* builds, we recommend Strawberry Perl, from <http://strawberryperl.com>.
 An alternative is ActiveState Perl, from <http://www.activestate.com/ActivePerl>
 for which you may need to explicitly select the Perl module Win32/Console.pm
 available via <https://platform.activestate.com/ActiveState>.
-
-Perl on VMS
------------
-
-You will need to install Perl separately.  One way to do so is to
-download the source from <http://perl.org/>, unpacking it, reading
-`README-VMS.md` and follow the instructions.  Another way is to download a
-`.PCSI` file from <http://www.vmsperl.com/> and install it using the
-POLYCENTER install tool.
 
 Required Perl modules
 ---------------------
@@ -104,12 +94,3 @@ descriptions below, `Text::Template` will serve as an example.
    seen the tests succeed!):
 
        $ cpan -f -i Text::Template
-
-   Note: on VMS, you must quote any argument that contains uppercase
-   characters, so the lines above would be:
-
-       $ cpan -i "Text::Template"
-
-   and:
-
-       $ cpan -f -i "Text::Template"

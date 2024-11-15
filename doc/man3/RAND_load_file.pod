@@ -46,17 +46,13 @@ Otherwise, the file is called C<.rnd>, found in platform dependent locations:
 
  %HOME%, %USERPROFILE%, %SYSTEMROOT%, C:\
 
-=item On VMS
-
- SYS$LOGIN:
-
 =item On all other systems
 
  $HOME
 
 =back
 
-If C<$HOME> (on non-Windows and non-VMS system) is not set either, or
+If C<$HOME> would be used and is not set, or
 B<num> is too small for the pathname, an error occurs.
 
 =head1 RETURN VALUES

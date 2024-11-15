@@ -65,7 +65,7 @@
 # endif
 
 /*
- * There are 6 types of terminal interface supported, TERMIO, TERMIOS, VMS,
+ * There are 5 types of terminal interface supported, TERMIO, TERMIOS,
  * MSDOS, WIN32 Console and SGTTY.
  *
  * If someone defines one of the macros TERMIO, TERMIOS or SGTTY, it will
