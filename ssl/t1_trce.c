@@ -1709,19 +1709,6 @@ void SSL_trace(int write_p, int version, int content_type,
     const unsigned char *msg = buf;
     BIO *bio = arg;
     SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(ssl);
-#ifndef OPENSSL_NO_QUIC
-    QUIC_CONNECTION *qc = QUIC_CONNECTION_FROM_SSL(ssl);
-
-    if (qc != NULL) {
-        if (ossl_quic_trace(write_p, version, content_type, buf, msglen, ssl,
-                            arg))
-            return;
-        /*
-         * Otherwise ossl_quic_trace didn't handle this content_type so we
-         * fallback to standard TLS handling
-         */
-    }
-#endif
 
     if (sc == NULL)
         return;

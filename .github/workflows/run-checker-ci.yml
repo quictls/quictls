@@ -40,7 +40,6 @@ jobs:
           no-tls1_3,
           enable-trace,
           no-ui,
-          no-quic
         ]
     runs-on: ubuntu-latest
     steps:

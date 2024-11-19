@@ -93,7 +93,6 @@ EOF
 # zlib-dynamic  Like "zlib", but the zlib library is expected to be a shared
 #               library and will be loaded at run-time by the OpenSSL library.
 # sctp          include SCTP support
-# no-quic       disable QUIC support
 # no-uplink     Don't build support for UPLINK interface.
 # enable-weak-ssl-ciphers
 #               Enable weak ciphers that are disabled by default.
@@ -486,8 +485,6 @@ my @disablables = (
     "poly1305",
     "posix-io",
     "psk",
-    "quic",
-    "unstable-qlog",
     "rc2",
     "rc4",
     "rc5",
@@ -573,7 +570,6 @@ our %disabled = ( # "what"         => "comment"
                   "ktls"                => "default",
                   "md2"                 => "default",
                   "msan"                => "default",
-		  "quic"                => "default",
                   "rc5"                 => "default",
                   "sctp"                => "default",
                   "ssl3"                => "default",
@@ -618,7 +614,7 @@ my @disable_cascades = (
     "zstd"              => [ "zstd-dynamic" ],
     "des"               => [ "mdc2" ],
     "ec"                => [ "ecdsa", "ecdh", "sm2", "gost", "ecx", "boring-quic-api" ],
-    "dgram"             => [ "dtls", "quic", "sctp" ],
+    "dgram"             => [ "dtls", "sctp" ],
     "sock"              => [ "dgram", "tfo" ],
     "dtls"              => [ @dtls ],
     sub { 0 == scalar grep { !$disabled{$_} } @dtls }
@@ -627,8 +623,7 @@ my @disable_cascades = (
     "tls"               => [ @tls ],
     sub { 0 == scalar grep { !$disabled{$_} } @tls }
                         => [ "tls" ],
-    "tls1_3"            => [ "quic" , "boring-quic-api"],
-    "quic"              => [ "unstable-qlog" ],
+    "tls1_3"            => [ "boring-quic-api"],
 
     "crypto-mdebug"     => [ "crypto-mdebug-backtrace" ],
 
@@ -1204,11 +1199,6 @@ if (grep { /-rpath\b/ } ($user{LDFLAGS} ? @{$user{LDFLAGS}} : ())
     && !($disabled{asan} && $disabled{msan} && $disabled{ubsan})) {
     die "***** Cannot simultaneously use -rpath, shared libraries, and\n",
         "***** any of asan, msan or ubsan\n";
-}
-
-if (!($disabled{quic} || $disabled{"boring-quic-api"})) {
-    die "**** boring-quic-api and quic are incompatible options.\n",
-	"**** If you want to turn on quic explicitly disable boring-quic-api.\n";
 }
 
 # If no target was given, try guessing.
