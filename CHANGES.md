@@ -7,6 +7,8 @@ pick the appropriate release branch.
 
   [log]: https://github.com/quictls/quictls/commits/
 
+Remove WinCE support.
+
 QuicTLS Releases
 ----------------
 

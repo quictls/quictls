@@ -208,10 +208,6 @@ typedef size_t socklen_t;        /* Currently appears to be missing on VMS */
 # endif
 
 /* also in apps/include/apps.h */
-# if defined(OPENSSL_SYS_WIN32) || defined(OPENSSL_SYS_WINCE)
-#  define openssl_fdset(a, b) FD_SET((unsigned int)(a), b)
-# else
-#  define openssl_fdset(a, b) FD_SET(a, b)
-# endif
+# define openssl_fdset(a, b) FD_SET(a, b)
 
 #endif
