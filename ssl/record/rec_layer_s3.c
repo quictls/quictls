@@ -12,7 +12,6 @@
 #include <errno.h>
 #include <assert.h>
 #include "../ssl_local.h"
-#include "../quic/quic_local.h"
 #include <openssl/evp.h>
 #include <openssl/buffer.h>
 #include <openssl/rand.h>
@@ -206,8 +205,9 @@ void SSL_set_default_read_buffer_len(SSL *s, size_t len)
 {
     SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(s);
 
-    if (sc == NULL || IS_QUIC(s))
-        return;
+    if (sc == NULL)
+      return;
+
     sc->rlayer.default_read_buf_len = len;
 }
 

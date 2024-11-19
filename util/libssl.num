@@ -520,8 +520,6 @@ SSL_set0_tmp_dh_pkey                    521	3_0_0	EXIST::FUNCTION:
 SSL_CTX_set0_tmp_dh_pkey                522	3_0_0	EXIST::FUNCTION:
 SSL_group_to_name                       523	3_0_0	EXIST::FUNCTION:
 SSL_client_hello_get_extension_order    524	3_2_0	EXIST::FUNCTION:
-OSSL_QUIC_client_method                 525	3_2_0	EXIST::FUNCTION:QUIC
-OSSL_QUIC_client_thread_method          526	3_2_0	EXIST::FUNCTION:QUIC
 SSL_CTX_set1_cert_comp_preference       527	3_2_0	EXIST::FUNCTION:
 SSL_set1_cert_comp_preference           528	3_2_0	EXIST::FUNCTION:
 SSL_CTX_compress_certs                  529	3_2_0	EXIST::FUNCTION:
@@ -539,7 +537,6 @@ SSL_net_read_desired                    540	3_2_0	EXIST::FUNCTION:
 SSL_net_write_desired                   541	3_2_0	EXIST::FUNCTION:
 SSL_shutdown_ex                         542	3_2_0	EXIST::FUNCTION:
 SSL_stream_conclude                     543	3_2_0	EXIST::FUNCTION:
-SSL_inject_net_dgram                    544	3_2_0	EXIST::FUNCTION:QUIC
 SSL_get0_peer_rpk                       545	3_2_0	EXIST::FUNCTION:
 SSL_SESSION_get0_peer_rpk               546	3_2_0	EXIST::FUNCTION:
 SSL_set1_client_cert_type               547	3_2_0	EXIST::FUNCTION:
@@ -555,7 +552,6 @@ SSL_get_negotiated_server_cert_type     556	3_2_0	EXIST::FUNCTION:
 SSL_add_expected_rpk                    557	3_2_0	EXIST::FUNCTION:
 d2i_SSL_SESSION_ex                      558	3_2_0	EXIST::FUNCTION:
 SSL_is_tls                              559	3_2_0	EXIST::FUNCTION:
-SSL_is_quic                             560	3_2_0	NOEXIST::FUNCTION:
 SSL_get_handshake_rtt                   561	3_2_0	EXIST::FUNCTION:
 SSL_new_stream                          562	3_2_0	EXIST::FUNCTION:
 SSL_get0_connection                     563	3_2_0	EXIST::FUNCTION:

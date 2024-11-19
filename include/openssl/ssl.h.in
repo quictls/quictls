@@ -2311,13 +2311,6 @@ __owur int SSL_set_incoming_stream_policy(SSL *s, int policy, uint64_t aec);
 __owur SSL *SSL_accept_stream(SSL *s, uint64_t flags);
 __owur size_t SSL_get_accept_stream_queue_len(SSL *s);
 
-# ifndef OPENSSL_NO_QUIC
-__owur int SSL_inject_net_dgram(SSL *s, const unsigned char *buf,
-                                size_t buf_len,
-                                const BIO_ADDR *peer,
-                                const BIO_ADDR *local);
-# endif
-
 typedef struct ssl_shutdown_ex_args_st {
     uint64_t    quic_error_code;
     const char  *quic_reason;

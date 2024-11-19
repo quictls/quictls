@@ -80,19 +80,6 @@ int SSL_poll(SSL_POLL_ITEM *items,
                 break;
 
             switch (ssl->type) {
-#ifndef OPENSSL_NO_QUIC
-            case SSL_TYPE_QUIC_CONNECTION:
-            case SSL_TYPE_QUIC_XSO:
-                if (!ossl_quic_conn_poll_events(ssl, events, do_tick, &revents))
-                    /* above call raises ERR */
-                    FAIL_ITEM(i);
-
-                if (revents != 0)
-                    ++result_count;
-
-                break;
-#endif
-
             default:
                 ERR_raise_data(ERR_LIB_SSL, SSL_R_POLL_REQUEST_NOT_SUPPORTED,
                                "SSL_poll currently only supports QUIC SSL "
