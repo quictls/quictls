@@ -112,6 +112,7 @@
 # endif
 
 # ifdef TERMIO
+#  include <ioctl.h>
 #  include <termio.h>
 #  define TTY_STRUCT             struct termio
 #  define TTY_FLAGS              c_lflag
@@ -120,6 +121,7 @@
 # endif
 
 # ifdef SGTTY
+#  include <ioctl.h>
 #  include <sgtty.h>
 #  define TTY_STRUCT             struct sgttyb
 #  define TTY_FLAGS              sg_flags
@@ -127,7 +129,7 @@
 #  define TTY_set(tty,data)      ioctl(tty,TIOCSETP,data)
 # endif
 
-# ifdef OPENSSL_SYS_MSDOS
+# if defined(OPENSSL_SYS_MSDOS)
 #  include <conio.h>
 # endif
 
