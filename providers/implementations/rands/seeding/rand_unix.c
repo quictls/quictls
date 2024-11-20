@@ -41,8 +41,7 @@
 # include <sys/random.h>
 #endif
 
-#if (defined(OPENSSL_SYS_UNIX) && !defined(OPENSSL_SYS_VXWORKS)) \
-     || defined(__DJGPP__)
+#if defined(OPENSSL_SYS_UNIX) && !defined(OPENSSL_SYS_VXWORKS)
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -88,8 +87,7 @@ static uint64_t get_time_stamp(void);
 #   define OSSL_POSIX_TIMER_OKAY
 #  endif
 # endif
-#endif /* (defined(OPENSSL_SYS_UNIX) && !defined(OPENSSL_SYS_VXWORKS))
-          || defined(__DJGPP__) */
+#endif /* defined(OPENSSL_SYS_UNIX) && !defined(OPENSSL_SYS_VXWORKS) */
 
 #if defined(OPENSSL_RAND_SEED_NONE)
 /* none means none. this simplifies the following logic */
@@ -669,8 +667,7 @@ size_t ossl_pool_acquire_entropy(RAND_POOL *pool)
 }
 #endif
 
-#if (defined(OPENSSL_SYS_UNIX) && !defined(OPENSSL_SYS_VXWORKS)) \
-     || defined(__DJGPP__)
+#if defined(OPENSSL_SYS_UNIX) && !defined(OPENSSL_SYS_VXWORKS)
 int ossl_pool_add_nonce_data(RAND_POOL *pool)
 {
     struct {
@@ -723,5 +720,4 @@ static uint64_t get_time_stamp(void)
     return time(NULL);
 }
 
-#endif /* (defined(OPENSSL_SYS_UNIX) && !defined(OPENSSL_SYS_VXWORKS))
-          || defined(__DJGPP__) */
+#endif /* defined(OPENSSL_SYS_UNIX) && !defined(OPENSSL_SYS_VXWORKS) */

@@ -69,8 +69,6 @@ jobs:
           no-fuzz-afl,
           no-fuzz-libfuzzer,
           no-gost,
-          enable-heartbeats,
-          no-heartbeats,
           no-hw,
           no-hw-padlock,
           no-idea,

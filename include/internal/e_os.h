@@ -59,17 +59,6 @@
 
 # if (defined(WINDOWS) || defined(MSDOS))
 
-#  ifdef __DJGPP__
-#   include <unistd.h>
-#   include <sys/stat.h>
-#   define _setmode setmode
-#   define _O_TEXT O_TEXT
-#   define _O_BINARY O_BINARY
-#   undef DEVRANDOM_EGD  /*  Neither MS-DOS nor FreeDOS provide 'egd' sockets.  */
-#   undef DEVRANDOM
-#   define DEVRANDOM "/dev/urandom\x24"
-#  endif                        /* __DJGPP__ */
-
 #  ifndef S_IFDIR
 #   define S_IFDIR     _S_IFDIR
 #  endif
@@ -78,7 +67,7 @@
 #   define S_IFMT      _S_IFMT
 #  endif
 
-#  if !defined(WINNT) && !defined(__DJGPP__)
+#  if !defined(WINNT)
 #   define NO_SYSLOG
 #  endif
 

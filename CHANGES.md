@@ -16,9 +16,9 @@ QuicTLS Releases
 
 None yet :)
 
-
 Currrent Changes
 ----------------
 - Based on OpenSSL 3.3
 
 - Removed support for old HPE platfors: NonmStop and Tandem
+- Removed DJGPP support.

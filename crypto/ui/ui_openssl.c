@@ -167,7 +167,7 @@ static unsigned short channel = 0;
 # elif defined(_WIN32) && !defined(_WIN32_WCE)
 static DWORD tty_orig, tty_new;
 # else
-#  if !defined(OPENSSL_SYS_MSDOS) || defined(__DJGPP__)
+#  if !defined(OPENSSL_SYS_MSDOS)
 static TTY_STRUCT tty_orig, tty_new;
 #  endif
 # endif
