@@ -17,10 +17,8 @@ algorithm is used via the high level APIs a provider is selected. It is that
 provider implementation that actually does the required work. There are five
 providers distributed with OpenSSL. In the future, we expect third parties to
 distribute their own providers which can be added to OpenSSL dynamically.
-Documentation about writing providers is available on the [provider(7)]
+Documentation about writing providers is available on the provider(7)
 manual page.
-
- [provider(7)]: https://www.openssl.org/docs/manmaster/man7/provider.html
 
 The Default Provider
 --------------------
@@ -54,13 +52,10 @@ BF (Blowfish), IDEA, SEED, RC2, RC4, RC5 and DES (but not 3DES).
 The FIPS Provider
 -----------------
 
-The FIPS provider contains a sub-set of the algorithm implementations available
-from the default provider, consisting of algorithms conforming to FIPS standards.
-It is intended that this provider will be FIPS140-2 validated.
-
-In some cases, there may be minor behavioural differences between algorithm
-implementations in this provider compared to the equivalent algorithm in the
-default provider. This is typically in order to conform to FIPS standards.
+QuicTLS does not provide a FIPS-validated module. OpenSSL provides one
+in its "FIPS Provider" library. That provider can be loaded and used by
+the QuicTLS runtime. If you run into issues doing this, pleae file a bug
+with QuicTLS.
 
 The Base Provider
 -----------------
