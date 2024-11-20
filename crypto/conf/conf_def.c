@@ -12,10 +12,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "internal/e_os.h" /* struct stat */
-#ifdef __TANDEM
-# include <sys/types.h> /* needed for stat.h */
-# include <sys/stat.h> /* struct stat */
-#endif
 #include "internal/cryptlib.h"
 #include "internal/o_dir.h"
 #include <openssl/lhash.h>

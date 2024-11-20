@@ -19,7 +19,6 @@ use platform;
 plan skip_all => 'Test is disabled with disabled fips' if disabled('fips');
 plan skip_all => 'Test only supported in a shared build' if disabled('shared');
 plan skip_all => 'Test is disabled on AIX' if config('target') =~ m|^aix|;
-plan skip_all => 'Test is disabled on NonStop ia64' if config('target') =~ m|^nonstop-nse|;
 plan skip_all => 'Test only supported in a dso build' if disabled('dso');
 plan skip_all => 'Test is disabled in an address sanitizer build' unless disabled('asan');
 

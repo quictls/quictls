@@ -7,7 +7,18 @@ pick the appropriate release branch.
 
   [log]: https://github.com/quictls/quictls/commits/
 
+*NOTE:*
+The FIPS provider in QuicTLS is *not* the same code as the validated
+OpenSSL FIPS provider.
+
 QuicTLS Releases
 ----------------
 
-Removed DJGPP support.
+None yet :)
+
+Currrent Changes
+----------------
+- Based on OpenSSL 3.3
+
+- Removed support for old HPE platfors: NonmStop and Tandem
+- Removed DJGPP support.

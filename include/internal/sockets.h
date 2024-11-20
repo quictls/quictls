@@ -108,9 +108,7 @@ typedef size_t socklen_t;        /* Currently appears to be missing on VMS */
 #  endif
 
 #  ifdef OPENSSL_SYS_UNIX
-#    ifndef OPENSSL_SYS_TANDEM
-#     include <poll.h>
-#    endif
+#    include <poll.h>
 #    include <errno.h>
 #  endif
 
@@ -176,17 +174,6 @@ typedef size_t socklen_t;        /* Currently appears to be missing on VMS */
 #  define closesocket(s)              close(s)
 #  define readsocket(s,b,n)           read((s),(b),(n))
 #  define writesocket(s,b,n)          write((s),(char *)(b),(n))
-# elif defined(OPENSSL_SYS_TANDEM)
-#  if defined(OPENSSL_TANDEM_FLOSS)
-#   include <floss.h(floss_read, floss_write)>
-#   define readsocket(s,b,n)       floss_read((s),(b),(n))
-#   define writesocket(s,b,n)      floss_write((s),(b),(n))
-#  else
-#   define readsocket(s,b,n)       read((s),(b),(n))
-#   define writesocket(s,b,n)      write((s),(b),(n))
-#  endif
-#  define ioctlsocket(a,b,c)      ioctl(a,b,c)
-#  define closesocket(s)          close(s)
 # else
 #  define ioctlsocket(a,b,c)      ioctl(a,b,c)
 #  define closesocket(s)          close(s)

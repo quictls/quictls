@@ -108,108 +108,28 @@ static uint64_t get_time_stamp(void);
     || defined(OPENSSL_SYS_VMS) || defined(OPENSSL_SYS_VXWORKS) \
     || defined(OPENSSL_SYS_UEFI))
 
-# if defined(OPENSSL_SYS_VOS)
+# if defined(OPENSSL_RAND_SEED_EGD) && \
+       (defined(OPENSSL_NO_EGD) || !defined(DEVRANDOM_EGD))
+#  error "Seeding uses EGD but EGD is turned off or no device given"
+# endif
 
-#  ifndef OPENSSL_RAND_SEED_OS
-#   error "Unsupported seeding method configured; must be os"
+# if defined(OPENSSL_RAND_SEED_DEVRANDOM) && !defined(DEVRANDOM)
+#  error "Seeding uses urandom but DEVRANDOM is not configured"
+# endif
+
+# if defined(OPENSSL_RAND_SEED_OS)
+#  if !defined(DEVRANDOM)
+#   error "OS seeding requires DEVRANDOM to be configured"
 #  endif
+#  define OPENSSL_RAND_SEED_GETRANDOM
+#  define OPENSSL_RAND_SEED_DEVRANDOM
+# endif
 
-#  if defined(OPENSSL_SYS_VOS_HPPA) && defined(OPENSSL_SYS_VOS_IA32)
-#   error "Unsupported HP-PA and IA32 at the same time."
-#  endif
-#  if !defined(OPENSSL_SYS_VOS_HPPA) && !defined(OPENSSL_SYS_VOS_IA32)
-#   error "Must have one of HP-PA or IA32"
-#  endif
+# if defined(OPENSSL_RAND_SEED_LIBRANDOM)
+#  error "librandom not (yet) supported"
+# endif
 
-/*
- * The following algorithm repeatedly samples the real-time clock (RTC) to
- * generate a sequence of unpredictable data.  The algorithm relies upon the
- * uneven execution speed of the code (due to factors such as cache misses,
- * interrupts, bus activity, and scheduling) and upon the rather large
- * relative difference between the speed of the clock and the rate at which
- * it can be read.  If it is ported to an environment where execution speed
- * is more constant or where the RTC ticks at a much slower rate, or the
- * clock can be read with fewer instructions, it is likely that the results
- * would be far more predictable.  This should only be used for legacy
- * platforms.
- *
- * As a precaution, we assume only 2 bits of entropy per byte.
- */
-size_t ossl_pool_acquire_entropy(RAND_POOL *pool)
-{
-    short int code;
-    int i, k;
-    size_t bytes_needed;
-    struct timespec ts;
-    unsigned char v;
-#  ifdef OPENSSL_SYS_VOS_HPPA
-    long duration;
-    extern void s$sleep(long *_duration, short int *_code);
-#  else
-    long long duration;
-    extern void s$sleep2(long long *_duration, short int *_code);
-#  endif
-
-    bytes_needed = ossl_rand_pool_bytes_needed(pool, 4 /*entropy_factor*/);
-
-    for (i = 0; i < bytes_needed; i++) {
-        /*
-         * burn some cpu; hope for interrupts, cache collisions, bus
-         * interference, etc.
-         */
-        for (k = 0; k < 99; k++)
-            ts.tv_nsec = random();
-
-#  ifdef OPENSSL_SYS_VOS_HPPA
-        /* sleep for 1/1024 of a second (976 us).  */
-        duration = 1;
-        s$sleep(&duration, &code);
-#  else
-        /* sleep for 1/65536 of a second (15 us).  */
-        duration = 1;
-        s$sleep2(&duration, &code);
-#  endif
-
-        /* Get wall clock time, take 8 bits. */
-        clock_gettime(CLOCK_REALTIME, &ts);
-        v = (unsigned char)(ts.tv_nsec & 0xFF);
-        ossl_rand_pool_add(pool, arg, &v, sizeof(v), 2);
-    }
-    return ossl_rand_pool_entropy_available(pool);
-}
-
-void ossl_rand_pool_cleanup(void)
-{
-}
-
-void ossl_rand_pool_keep_random_devices_open(int keep)
-{
-}
-
-# else
-
-#  if defined(OPENSSL_RAND_SEED_EGD) && \
-        (defined(OPENSSL_NO_EGD) || !defined(DEVRANDOM_EGD))
-#   error "Seeding uses EGD but EGD is turned off or no device given"
-#  endif
-
-#  if defined(OPENSSL_RAND_SEED_DEVRANDOM) && !defined(DEVRANDOM)
-#   error "Seeding uses urandom but DEVRANDOM is not configured"
-#  endif
-
-#  if defined(OPENSSL_RAND_SEED_OS)
-#   if !defined(DEVRANDOM)
-#    error "OS seeding requires DEVRANDOM to be configured"
-#   endif
-#   define OPENSSL_RAND_SEED_GETRANDOM
-#   define OPENSSL_RAND_SEED_DEVRANDOM
-#  endif
-
-#  if defined(OPENSSL_RAND_SEED_LIBRANDOM)
-#   error "librandom not (yet) supported"
-#  endif
-
-#  if (defined(__FreeBSD__) || defined(__NetBSD__)) && defined(KERN_ARND)
+# if (defined(__FreeBSD__) || defined(__NetBSD__)) && defined(KERN_ARND)
 /*
  * sysctl_random(): Use sysctl() to read a random number from the kernel
  * Returns the number of bytes returned in buf on success, -1 on failure.
@@ -231,12 +151,12 @@ static ssize_t sysctl_random(char *buf, size_t buflen)
      * when the sysctl returns long and we want to request something not a
      * multiple of longs, which should never be the case.
      */
-#if   defined(__FreeBSD__)
+#  if defined(__FreeBSD__)
     if (!ossl_assert(buflen % sizeof(long) == 0)) {
         errno = EINVAL;
         return -1;
     }
-#endif
+#  endif
 
     /*
      * On NetBSD before 4.0 KERN_ARND was an alias for KERN_URND, and only
@@ -245,10 +165,10 @@ static ssize_t sysctl_random(char *buf, size_t buflen)
      * up to 256 bytes.
      * Just return an error on older NetBSD versions.
      */
-#if   defined(__NetBSD__) && __NetBSD_Version__ < 400000000
+#  if defined(__NetBSD__) && __NetBSD_Version__ < 400000000
     errno = ENOSYS;
     return -1;
-#endif
+#  endif
 
     mib[0] = CTL_KERN;
     mib[1] = KERN_ARND;
@@ -264,63 +184,63 @@ static ssize_t sysctl_random(char *buf, size_t buflen)
 
     return done;
 }
-#  endif
+# endif
 
-#  if defined(OPENSSL_RAND_SEED_GETRANDOM)
+# if defined(OPENSSL_RAND_SEED_GETRANDOM)
 
-#   if defined(__linux) && !defined(__NR_getrandom)
-#    if defined(__arm__)
-#     define __NR_getrandom    (__NR_SYSCALL_BASE+384)
-#    elif defined(__i386__)
-#     define __NR_getrandom    355
-#    elif defined(__x86_64__)
-#     if defined(__ILP32__)
-#      define __NR_getrandom   (__X32_SYSCALL_BIT + 318)
-#     else
-#      define __NR_getrandom   318
-#     endif
-#    elif defined(__xtensa__)
-#     define __NR_getrandom    338
-#    elif defined(__s390__) || defined(__s390x__)
-#     define __NR_getrandom    349
-#    elif defined(__bfin__)
-#     define __NR_getrandom    389
-#    elif defined(__powerpc__)
-#     define __NR_getrandom    359
-#    elif defined(__mips__) || defined(__mips64)
-#     if _MIPS_SIM == _MIPS_SIM_ABI32
-#      define __NR_getrandom   (__NR_Linux + 353)
-#     elif _MIPS_SIM == _MIPS_SIM_ABI64
-#      define __NR_getrandom   (__NR_Linux + 313)
-#     elif _MIPS_SIM == _MIPS_SIM_NABI32
-#      define __NR_getrandom   (__NR_Linux + 317)
-#     endif
-#    elif defined(__hppa__)
-#     define __NR_getrandom    (__NR_Linux + 339)
-#    elif defined(__sparc__)
-#     define __NR_getrandom    347
-#    elif defined(__ia64__)
-#     define __NR_getrandom    1339
-#    elif defined(__alpha__)
-#     define __NR_getrandom    511
-#    elif defined(__sh__)
-#     if defined(__SH5__)
-#      define __NR_getrandom   373
-#     else
-#      define __NR_getrandom   384
-#     endif
-#    elif defined(__avr32__)
-#     define __NR_getrandom    317
-#    elif defined(__microblaze__)
-#     define __NR_getrandom    385
-#    elif defined(__m68k__)
-#     define __NR_getrandom    352
-#    elif defined(__cris__)
-#     define __NR_getrandom    356
-#    else /* generic (f.e. aarch64, loongarch, loongarch64) */
-#     define __NR_getrandom    278
+#  if defined(__linux) && !defined(__NR_getrandom)
+#   if defined(__arm__)
+#    define __NR_getrandom    (__NR_SYSCALL_BASE+384)
+#   elif defined(__i386__)
+#    define __NR_getrandom    355
+#   elif defined(__x86_64__)
+#    if defined(__ILP32__)
+#     define __NR_getrandom   (__X32_SYSCALL_BIT + 318)
+#    else
+#     define __NR_getrandom   318
 #    endif
+#   elif defined(__xtensa__)
+#    define __NR_getrandom    338
+#   elif defined(__s390__) || defined(__s390x__)
+#    define __NR_getrandom    349
+#   elif defined(__bfin__)
+#    define __NR_getrandom    389
+#   elif defined(__powerpc__)
+#    define __NR_getrandom    359
+#   elif defined(__mips__) || defined(__mips64)
+#    if _MIPS_SIM == _MIPS_SIM_ABI32
+#     define __NR_getrandom   (__NR_Linux + 353)
+#    elif _MIPS_SIM == _MIPS_SIM_ABI64
+#     define __NR_getrandom   (__NR_Linux + 313)
+#    elif _MIPS_SIM == _MIPS_SIM_NABI32
+#     define __NR_getrandom   (__NR_Linux + 317)
+#    endif
+#   elif defined(__hppa__)
+#    define __NR_getrandom    (__NR_Linux + 339)
+#   elif defined(__sparc__)
+#    define __NR_getrandom    347
+#   elif defined(__ia64__)
+#    define __NR_getrandom    1339
+#   elif defined(__alpha__)
+#    define __NR_getrandom    511
+#   elif defined(__sh__)
+#    if defined(__SH5__)
+#     define __NR_getrandom   373
+#    else
+#     define __NR_getrandom   384
+#    endif
+#   elif defined(__avr32__)
+#    define __NR_getrandom    317
+#   elif defined(__microblaze__)
+#    define __NR_getrandom    385
+#   elif defined(__m68k__)
+#    define __NR_getrandom    352
+#   elif defined(__cris__)
+#    define __NR_getrandom    356
+#   else /* generic (f.e. aarch64, loongarch, loongarch64) */
+#    define __NR_getrandom    278
 #   endif
+#  endif
 
 /*
  * syscall_random(): Try to get random data using a system call
@@ -352,7 +272,7 @@ static ssize_t syscall_random(void *buf, size_t buflen)
      * internally. So we need to check errno for ENOSYS
      */
 #  if !defined(__DragonFly__) && !defined(__NetBSD__)
-#    if defined(__GNUC__) && __GNUC__>=2 && defined(__ELF__) && !defined(__hpux)
+#   if defined(__GNUC__) && __GNUC__>=2 && defined(__ELF__) && !defined(__hpux)
     extern int getentropy(void *buffer, size_t length) __attribute__((weak));
 
     if (getentropy != NULL) {
@@ -361,13 +281,13 @@ static ssize_t syscall_random(void *buf, size_t buflen)
         if (errno != ENOSYS)
             return -1;
     }
-#    elif defined(OPENSSL_APPLE_CRYPTO_RANDOM)
+#   elif defined(OPENSSL_APPLE_CRYPTO_RANDOM)
 
     if (CCRandomGenerateBytes(buf, buflen) == kCCSuccess)
 	    return (ssize_t)buflen;
 
     return -1;
-#    else
+#   else
     union {
         void *p;
         int (*f)(void *buffer, size_t length);
@@ -382,7 +302,7 @@ static ssize_t syscall_random(void *buf, size_t buflen)
     ERR_pop_to_mark();
     if (p_getentropy.p != NULL)
         return p_getentropy.f(buf, buflen) == 0 ? (ssize_t)buflen : -1;
-#    endif
+#   endif
 #  endif /* !__DragonFly__ */
 
     /* Linux supports this since version 3.17 */
@@ -402,9 +322,9 @@ static ssize_t syscall_random(void *buf, size_t buflen)
     return -1;
 #  endif
 }
-#  endif    /* defined(OPENSSL_RAND_SEED_GETRANDOM) */
+# endif    /* defined(OPENSSL_RAND_SEED_GETRANDOM) */
 
-#  if defined(OPENSSL_RAND_SEED_DEVRANDOM)
+# if defined(OPENSSL_RAND_SEED_DEVRANDOM)
 static const char *random_device_paths[] = { DEVRANDOM };
 static struct random_device {
     int fd;
@@ -415,7 +335,7 @@ static struct random_device {
 } random_devices[OSSL_NELEM(random_device_paths)];
 static int keep_random_devices_open = 1;
 
-#   if defined(__linux) && defined(DEVRANDOM_WAIT) \
+#  if defined(__linux) && defined(DEVRANDOM_WAIT) \
        && defined(OPENSSL_RAND_SEED_GETRANDOM)
 static void *shm_addr;
 
@@ -494,12 +414,12 @@ static int wait_random_seeded(void)
     }
     return seeded;
 }
-#   else /* defined __linux && DEVRANDOM_WAIT && OPENSSL_RAND_SEED_GETRANDOM */
+#  else /* defined __linux && DEVRANDOM_WAIT && OPENSSL_RAND_SEED_GETRANDOM */
 static int wait_random_seeded(void)
 {
     return 1;
 }
-#   endif
+#  endif
 
 /*
  * Verify that the file descriptor associated with the random source is
@@ -588,7 +508,7 @@ void ossl_rand_pool_keep_random_devices_open(int keep)
     keep_random_devices_open = keep;
 }
 
-#  else     /* !defined(OPENSSL_RAND_SEED_DEVRANDOM) */
+# else     /* !defined(OPENSSL_RAND_SEED_DEVRANDOM) */
 
 int ossl_rand_pool_init(void)
 {
@@ -603,7 +523,7 @@ void ossl_rand_pool_keep_random_devices_open(int keep)
 {
 }
 
-#  endif    /* defined(OPENSSL_RAND_SEED_DEVRANDOM) */
+# endif    /* defined(OPENSSL_RAND_SEED_DEVRANDOM) */
 
 /*
  * Try the various seeding methods in turn, exit when successful.
@@ -624,14 +544,14 @@ void ossl_rand_pool_keep_random_devices_open(int keep)
  */
 size_t ossl_pool_acquire_entropy(RAND_POOL *pool)
 {
-#  if defined(OPENSSL_RAND_SEED_NONE)
+# if defined(OPENSSL_RAND_SEED_NONE)
     return ossl_rand_pool_entropy_available(pool);
-#  else
+# else
     size_t entropy_available = 0;
 
     (void)entropy_available;    /* avoid compiler warning */
 
-#   if defined(OPENSSL_RAND_SEED_GETRANDOM)
+#  if defined(OPENSSL_RAND_SEED_GETRANDOM)
     {
         size_t bytes_needed;
         unsigned char *buffer;
@@ -655,15 +575,15 @@ size_t ossl_pool_acquire_entropy(RAND_POOL *pool)
     entropy_available = ossl_rand_pool_entropy_available(pool);
     if (entropy_available > 0)
         return entropy_available;
-#   endif
+#  endif
 
-#   if defined(OPENSSL_RAND_SEED_LIBRANDOM)
+#  if defined(OPENSSL_RAND_SEED_LIBRANDOM)
     {
         /* Not yet implemented. */
     }
-#   endif
+#  endif
 
-#   if defined(OPENSSL_RAND_SEED_DEVRANDOM)
+#  if defined(OPENSSL_RAND_SEED_DEVRANDOM)
     if (wait_random_seeded()) {
         size_t bytes_needed;
         unsigned char *buffer;
@@ -701,21 +621,21 @@ size_t ossl_pool_acquire_entropy(RAND_POOL *pool)
         if (entropy_available > 0)
             return entropy_available;
     }
-#   endif
+#  endif
 
-#   if defined(OPENSSL_RAND_SEED_RDTSC)
+#  if defined(OPENSSL_RAND_SEED_RDTSC)
     entropy_available = ossl_prov_acquire_entropy_from_tsc(pool);
     if (entropy_available > 0)
         return entropy_available;
-#   endif
+#  endif
 
-#   if defined(OPENSSL_RAND_SEED_RDCPU)
+#  if defined(OPENSSL_RAND_SEED_RDCPU)
     entropy_available = ossl_prov_acquire_entropy_from_cpu(pool);
     if (entropy_available > 0)
         return entropy_available;
-#   endif
+#  endif
 
-#   if defined(OPENSSL_RAND_SEED_EGD)
+#  if defined(OPENSSL_RAND_SEED_EGD)
     {
         static const char *paths[] = { DEVRANDOM_EGD, NULL };
         size_t bytes_needed;
@@ -740,12 +660,11 @@ size_t ossl_pool_acquire_entropy(RAND_POOL *pool)
         if (entropy_available > 0)
             return entropy_available;
     }
-#   endif
+#  endif
 
     return ossl_rand_pool_entropy_available(pool);
-#  endif
-}
 # endif
+}
 #endif
 
 #if defined(OPENSSL_SYS_UNIX) && !defined(OPENSSL_SYS_VXWORKS)

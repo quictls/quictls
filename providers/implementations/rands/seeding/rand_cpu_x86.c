@@ -13,13 +13,8 @@
 #include "prov/seeding.h"
 
 #ifdef OPENSSL_RAND_SEED_RDCPU
-# if defined(OPENSSL_SYS_TANDEM) && defined(_TNS_X_TARGET)
-#  include <builtin.h> /* _rdrand64 */
-#  include <string.h> /* memcpy */
-# else
 size_t OPENSSL_ia32_rdseed_bytes(unsigned char *buf, size_t len);
 size_t OPENSSL_ia32_rdrand_bytes(unsigned char *buf, size_t len);
-# endif
 
 static size_t get_hardware_random_value(unsigned char *buf, size_t len);
 
@@ -56,38 +51,6 @@ size_t ossl_prov_acquire_entropy_from_cpu(RAND_POOL *pool)
     return ossl_rand_pool_entropy_available(pool);
 }
 
-#if defined(OPENSSL_SYS_TANDEM) && defined(_TNS_X_TARGET)
-/* Obtain random bytes from the x86 hardware random function in 64 bit chunks */
-static size_t get_hardware_random_value(unsigned char *buf, size_t len)
-{
-    size_t bytes_remaining = len;
-
-    while (bytes_remaining > 0) {
-        /* Always use 64 bit fetch, then use the lower bytes as needed. */
-        /* The platform is big-endian. */
-        uint64_t random_value = 0;
-
-        if (_rdrand64(&random_value) != 0) {
-            unsigned char *random_buffer = (unsigned char *)&random_value;
-
-            if (bytes_remaining >= sizeof(random_value)) {
-                memcpy(buf, random_buffer, sizeof(random_value));
-                bytes_remaining -= sizeof(random_value);
-                buf += sizeof(random_value);
-            } else {
-                memcpy(buf,
-                    random_buffer + (sizeof(random_value) - bytes_remaining),
-                    bytes_remaining);
-                bytes_remaining = 0; /* This will terminate the loop */
-            }
-        } else
-            break;
-    }
-    if (bytes_remaining == 0)
-        return len;
-    return 0;
-}
-#else
 static size_t get_hardware_random_value(unsigned char *buf, size_t len) {
     /* Whichever comes first, use RDSEED, RDRAND or nothing */
     if ((OPENSSL_ia32cap_P[2] & (1 << 18)) != 0) {
@@ -100,7 +63,6 @@ static size_t get_hardware_random_value(unsigned char *buf, size_t len) {
 	return 0;
     return len;
 }
-#endif
 
 #else
 NON_EMPTY_TRANSLATION_UNIT

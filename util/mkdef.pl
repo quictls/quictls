@@ -133,9 +133,6 @@ my %OS_data = (
     NT          => 'WIN32',     # alias
     nt          => 'WIN32',     # alias
     mingw       => 'WINDOWS',   # alias
-    nonstop     => { writer     => \&writer_nonstop,
-                     sort       => OpenSSL::Ordinals::by_name(),
-                     platforms  => { TANDEM                     => 1 } },
    );
 
 do {
