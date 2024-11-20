@@ -54,7 +54,7 @@ The FIPS Provider
 
 QuicTLS does not provide a FIPS-validated module. OpenSSL provides one
 in its "FIPS Provider" library. That provider can be loaded and used by
-the QuicTLS runtime. If you run into issues doing this, pleae file a bug
+the QuicTLS runtime. If you run into issues doing this, please file a bug
 with QuicTLS.
 
 The Base Provider
