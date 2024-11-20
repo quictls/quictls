@@ -112,7 +112,7 @@
 # endif
 
 # ifdef TERMIO
-#  include <ioctl.h>
+#  include <sys/ioctl.h>
 #  include <termio.h>
 #  define TTY_STRUCT             struct termio
 #  define TTY_FLAGS              c_lflag
@@ -121,7 +121,7 @@
 # endif
 
 # ifdef SGTTY
-#  include <ioctl.h>
+#  include <sys/ioctl.h>
 #  include <sgtty.h>
 #  define TTY_STRUCT             struct sgttyb
 #  define TTY_FLAGS              sg_flags
