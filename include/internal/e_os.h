@@ -161,7 +161,7 @@ FILE *__iob_func(void);
 #  ifndef R_OK
 #   define R_OK        4
 #  endif
-#   define DEFAULT_HOME  "C:"
+#  define DEFAULT_HOME  "C:"
 
 /* Avoid Visual Studio 13 GetVersion deprecated problems */
 #  if defined(_MSC_VER) && _MSC_VER>=1800

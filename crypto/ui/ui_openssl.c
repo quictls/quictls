@@ -61,7 +61,7 @@
 
 # ifdef WIN_CONSOLE_BUG
 #  include <windows.h>
-#   include <wincon.h>
+#  include <wincon.h>
 # endif
 
 /*
