@@ -13,12 +13,12 @@ OpenSSL FIPS provider.
 
 QuicTLS Releases
 ----------------
-
 None yet :)
 
 Currrent Changes
 ----------------
 - Based on OpenSSL 3.3
 
-- Removed support for old HPE platfors: NonmStop and Tandem
+- Removed support for old HPE platforms: NonStop and Tandem
 - Removed DJGPP support.
+- Removed WinCE support.

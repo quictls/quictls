@@ -142,10 +142,6 @@ FILE *__iob_func(void);
 #  include <io.h>
 #  include <fcntl.h>
 
-#  ifdef OPENSSL_SYS_WINCE
-#   define OPENSSL_NO_POSIX_IO
-#  endif
-
 #  define EXIT(n) exit(n)
 #  define LIST_SEPARATOR_CHAR ';'
 #  ifndef W_OK
@@ -154,11 +150,7 @@ FILE *__iob_func(void);
 #  ifndef R_OK
 #   define R_OK        4
 #  endif
-#  ifdef OPENSSL_SYS_WINCE
-#   define DEFAULT_HOME  ""
-#  else
-#   define DEFAULT_HOME  "C:"
-#  endif
+#  define DEFAULT_HOME  "C:"
 
 /* Avoid Visual Studio 13 GetVersion deprecated problems */
 #  if defined(_MSC_VER) && _MSC_VER>=1800
