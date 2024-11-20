@@ -549,10 +549,7 @@ static long dgram_ctrl(BIO *b, int cmd, long num, void *ptr)
     long ret = 1;
     int *ip;
     bio_dgram_data *data = NULL;
-# ifndef __DJGPP__
-    /* There are currently no cases where this is used on djgpp/watt32. */
     int sockopt_val = 0;
-# endif
     int d_errno;
 # if defined(OPENSSL_SYS_LINUX) && (defined(IP_MTU_DISCOVER) || defined(IP_MTU))
     socklen_t sockopt_len;      /* assume that system supporting IP_MTU is

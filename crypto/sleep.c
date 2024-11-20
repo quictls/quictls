@@ -11,7 +11,7 @@
 #include "internal/e_os.h"
 
 /* system-specific variants defining OSSL_sleep() */
-#if defined(OPENSSL_SYS_UNIX) || defined(__DJGPP__)
+#if defined(OPENSSL_SYS_UNIX)
 #include <unistd.h>
 
 void OSSL_sleep(uint64_t millis)
@@ -22,11 +22,6 @@ void OSSL_sleep(uint64_t millis)
     ts.tv_sec = (long int) (millis / 1000);
     ts.tv_nsec = (long int) (millis % 1000) * 1000000ul;
     nanosleep(&ts, NULL);
-# elif defined(__TANDEM) && !defined(_REENTRANT)
-#   include <cextdecs.h(PROCESS_DELAY_)>
-
-    /* HPNS does not support usleep for non threaded apps */
-    PROCESS_DELAY_(millis * 1000);
 # else
     unsigned int s = (unsigned int)(millis / 1000);
     unsigned int us = (unsigned int)((millis % 1000) * 1000);
@@ -84,4 +79,4 @@ void OSSL_sleep(uint64_t millis)
     ossl_sleep_secs(millis / 1000);
     ossl_sleep_millis(millis % 1000);
 }
-#endif /* defined(OPENSSL_SYS_UNIX) || defined(__DJGPP__) */
+#endif /* defined(OPENSSL_SYS_UNIX) */

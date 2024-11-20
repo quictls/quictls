@@ -23,13 +23,7 @@
 static int wsa_init_done = 0;
 # endif
 
-# if defined __TANDEM
-#  include <unistd.h>
-#  include <sys/time.h> /* select */
-#  if defined(OPENSSL_TANDEM_FLOSS)
-#   include <floss.h(floss_select)>
-#  endif
-# elif defined _WIN32
+# if defined _WIN32
 #  include <winsock.h> /* for type fd_set */
 # else
 #  include <unistd.h>
@@ -214,10 +208,8 @@ int BIO_socket_ioctl(int fd, long type, void *arg)
 {
     int i;
 
-#  ifdef __DJGPP__
-    i = ioctlsocket(fd, type, (char *)arg);
-#  else
-#   if defined(OPENSSL_SYS_VMS)
+#  define ARG arg
+#  if defined(OPENSSL_SYS_VMS) && __INITIAL_POINTER_SIZE == 64
     /*-
      * 2011-02-18 SMS.
      * VMS ioctl() can't tolerate a 64-bit "void *arg", but we
@@ -225,24 +217,17 @@ int BIO_socket_ioctl(int fd, long type, void *arg)
      * so we arrange a local copy with a short pointer, and use
      * that, instead.
      */
-#    if __INITIAL_POINTER_SIZE == 64
-#     define ARG arg_32p
-#     pragma pointer_size save
-#     pragma pointer_size 32
+#    undef ARG
+#    define ARG arg_32p
+#    pragma pointer_size save
+#    pragma pointer_size 32
     unsigned long arg_32;
     unsigned long *arg_32p;
-#     pragma pointer_size restore
+#    pragma pointer_size restore
     arg_32p = &arg_32;
     arg_32 = *((unsigned long *)arg);
-#    else                       /* __INITIAL_POINTER_SIZE == 64 */
-#     define ARG arg
-#    endif                      /* __INITIAL_POINTER_SIZE == 64 [else] */
-#   else                        /* defined(OPENSSL_SYS_VMS) */
-#    define ARG arg
-#   endif                       /* defined(OPENSSL_SYS_VMS) [else] */
-
+#  endif
     i = ioctlsocket(fd, type, ARG);
-#  endif                        /* __DJGPP__ */
     if (i < 0)
         ERR_raise_data(ERR_LIB_SYS, get_last_socket_error(),
                        "calling ioctlsocket()");

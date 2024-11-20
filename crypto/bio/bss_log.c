@@ -39,7 +39,7 @@ void *_malloc32(__size_t);
 #  endif                        /* __INITIAL_POINTER_SIZE == 64 */
 # endif                         /* __INITIAL_POINTER_SIZE && defined
                                  * _ANSI_C_SOURCE */
-#elif defined(__DJGPP__) && defined(OPENSSL_NO_SOCK)
+#elif defined(OPENSSL_NO_SOCK)
 # define NO_SYSLOG
 #elif (!defined(MSDOS) || defined(WATT32)) && !defined(OPENSSL_SYS_VXWORKS) && !defined(NO_SYSLOG)
 # include <syslog.h>
@@ -388,11 +388,7 @@ static void xcloselog(BIO *bp)
 
 static void xopenlog(BIO *bp, char *name, int level)
 {
-#  ifdef WATT32                 /* djgpp/DOS */
-    openlog(name, LOG_PID | LOG_CONS | LOG_NDELAY, level);
-#  else
     openlog(name, LOG_PID | LOG_CONS, level);
-#  endif
 }
 
 static void xsyslog(BIO *bp, int priority, const char *string)

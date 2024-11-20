@@ -34,7 +34,7 @@ extern "C" {
 
 /*
  * Note that MSDOS actually denotes 32-bit environments running on top of
- * MS-DOS, such as DJGPP one.
+ * MS-DOS.
  */
 # if defined(OPENSSL_SYS_MSDOS)
 #  undef OPENSSL_SYS_UNIX
@@ -122,32 +122,6 @@ extern "C" {
 #  if defined(_AIX) && !defined(OPENSSL_SYS_AIX)
 #   define OPENSSL_SYS_AIX
 #  endif
-# endif
-
-/* -------------------------------- VOS ----------------------------------- */
-# if defined(__VOS__) && !defined(OPENSSL_SYS_VOS)
-#  define OPENSSL_SYS_VOS
-#  ifdef __HPPA__
-#   define OPENSSL_SYS_VOS_HPPA
-#  endif
-#  ifdef __IA32__
-#   define OPENSSL_SYS_VOS_IA32
-#  endif
-# endif
-
-/* ---------------------------- HP NonStop -------------------------------- */
-# ifdef __TANDEM
-#  ifdef _STRING
-#   include <strings.h>
-#  endif
-# define OPENSSL_USE_BUILD_DATE
-# if defined(OPENSSL_THREADS) && defined(_SPT_MODEL_)
-#  define  SPT_THREAD_SIGNAL 1
-#  define  SPT_THREAD_AWARE 1
-#  include <spthread.h>
-# elif defined(OPENSSL_THREADS) && defined(_PUT_MODEL_)
-#  include <pthread.h>
-# endif
 # endif
 
 /**
@@ -245,10 +219,8 @@ typedef int int32_t;
 typedef unsigned int uint32_t;
 typedef __int64 int64_t;
 typedef unsigned __int64 uint64_t;
-# elif defined(OPENSSL_SYS_TANDEM)
-#  include <stdint.h>
-#  include <sys/types.h>
 # else
+#  include <sys/types.h>
 #  include <stdint.h>
 #  undef OPENSSL_NO_STDINT_H
 # endif
