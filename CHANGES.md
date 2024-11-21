@@ -27,3 +27,4 @@ Currrent Changes
   - Removed support for old HPE platforms: NonStop and Tandem
   - Removed DJGPP support.
   - Removed WinCE support.
+  - Removed IRIX support.

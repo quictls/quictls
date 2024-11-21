@@ -44,7 +44,7 @@ Notes for UNIX-like platforms
     -R /whatever/path           # Solaris
     -Wl,-R,/whatever/path       # AIX (-bsvr4 is passed internally)
     -Wl,+b,/whatever/path       # HP-UX
-    -rpath /whatever/path       # Tru64, IRIX
+    -rpath /whatever/path       # Tru64
 
  OpenSSL's configuration scripts recognise all these options and pass
  them to the Makefile that they build. (In fact, all arguments starting
