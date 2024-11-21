@@ -69,7 +69,7 @@ jobs:
 
       - name: config release
         run: |
-          ./config --banner=Configured enable-shared enable-fips ${{ env.opts }}
+          ./config --banner=Configured enable-shared ${{ env.opts }}
         working-directory: ${{ matrix.release.dir }}
       - name: config dump release
         run: ./configdata.pm --dump
@@ -135,7 +135,7 @@ jobs:
 
       - name: config branch
         run: |
-          ./config --banner=Configured enable-shared enable-fips ${{ env.opts }}
+          ./config --banner=Configured enable-shared ${{ env.opts }}
         working-directory: ${{ matrix.branch.dir }}
       - name: config dump current
         run: ./configdata.pm --dump

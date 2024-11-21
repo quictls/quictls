@@ -19,11 +19,7 @@ BEGIN {
 use lib srctop_dir('Configurations');
 use lib bldtop_dir('.');
 
-my $no_check = disabled('fips-securitychecks');
-
-plan tests =>
-    ($no_check ? 0 : 1)         # FIPS security check
-    + 9;
+plan tests => 9;
 
 my @prov = ( );
 my $provconf = srctop_file("test", "fips-and-base.cnf");
@@ -39,21 +35,6 @@ my $key_file = srctop_file("test", "testrsa2048.pem");
 my $small_key_file = srctop_file("test", "testrsa.pem");
 
 $ENV{OPENSSL_TEST_LIBCTX} = "1";
-
-unless ($no_check) {
-    @prov = ( "-provider-path", $provpath, "-config", $provconf );
-    ok(!run(app(['openssl', 'pkeyutl',
-                 @prov,
-                 '-encrypt',
-                 '-in', $msg_file,
-                 '-inkey', $small_key_file,
-                 '-pkeyopt', 'pad-mode:oaep',
-                 '-pkeyopt', 'oaep-label:123',
-                 '-pkeyopt', 'digest:sha1',
-                 '-pkeyopt', 'mgf1-digest:sha1',
-                 '-out', $enc1_file])),
-       "RSA OAEP Encryption with a key smaller than 2048 in fips mode should fail");
-}
 
 ok(run(app(['openssl', 'pkeyutl',
             @prov,

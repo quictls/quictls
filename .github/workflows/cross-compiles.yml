@@ -24,8 +24,6 @@ jobs:
         #   libs: the Debian package for the necessary link/runtime libraries.
         #   target: the OpenSSL configuration target to use, this is passed
         #           directly to the config command line.
-        #   fips:   set to "no" to disable building FIPS, leave unset to
-        #           build the FIPS provider.
         #   tests: omit this to run all the tests using QEMU, set it to "none"
         #          to never run the tests, otherwise its value is passed to
         #          the "make test" command to allow selective disabling of
@@ -54,13 +52,11 @@ jobs:
             arch: m68k-linux-gnu,
             libs: libc6-dev-m68k-cross,
             target: -static -m68040 linux-latomic -Wno-stringop-overflow,
-            fips: no,
             tests: -test_includes -test_store -test_x509_store
           }, {
             arch: mips64-linux-gnuabi64,
             libs: libc6-dev-mips64-cross,
             target: -static linux64-mips64,
-            fips: no
           }, {
             arch: mipsel-linux-gnu,
             libs: libc6-dev-mipsel-cross,
@@ -104,14 +100,7 @@ jobs:
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
 
-    - name: config with FIPS
-      if: matrix.platform.fips != 'no'
-      run: |
-        ./config --banner=Configured --strict-warnings enable-fips \
-                 --cross-compile-prefix=${{ matrix.platform.arch }}- \
-                 ${{ matrix.platform.target }}
-    - name: config without FIPS
-      if: matrix.platform.fips == 'no'
+    - name: config
       run: |
         ./config --banner=Configured --strict-warnings \
                  --cross-compile-prefix=${{ matrix.platform.arch }}- \

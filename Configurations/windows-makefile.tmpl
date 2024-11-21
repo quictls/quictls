@@ -38,7 +38,6 @@
 PLATFORM={- $config{target} -}
 SRCDIR={- $config{sourcedir} -}
 BLDDIR={- $config{builddir} -}
-FIPSKEY={- $config{FIPSKEY} -}
 
 VERSION={- "$config{full_version}" -}
 VERSION_NUMBER={- "$config{version}" -}
@@ -59,16 +58,6 @@ MODULES={- our @MODULES = map { platform->dso($_) }
                           @{$unified_info{modules}};
            join(" ", @MODULES) -}
 MODULEPDBS={- join(" ", map { platform->dsopdb($_) } @{$unified_info{modules}}) -}
-FIPSMODULE={- # We do some extra checking here, as there should be only one
-              use File::Basename;
-              our @fipsmodules =
-                  grep { !$unified_info{attributes}->{modules}->{$_}->{noinst}
-                         && $unified_info{attributes}->{modules}->{$_}->{fips} }
-                  @{$unified_info{modules}};
-              die "More that one FIPS module" if scalar @fipsmodules > 1;
-              join(" ", map { platform->dso($_) } @fipsmodules) -}
-FIPSMODULENAME={- die "More that one FIPS module" if scalar @fipsmodules > 1;
-                  join(", ", map { basename(platform->dso($_)) } @fipsmodules) -}
 PROGRAMS={- our @PROGRAMS = map { platform->bin($_) } @{$unified_info{programs}}; join(" ", @PROGRAMS) -}
 PROGRAMPDBS={- join(" ", map { $_.".pdb" } @{$unified_info{programs}}) -}
 SCRIPTS={- our @SCRIPTS = @{$unified_info{scripts}}; join(" ", @SCRIPTS) -}
@@ -126,13 +115,6 @@ INSTALL_MODULEPDBS={-
                          && !$unified_info{attributes}->{modules}->{$_}->{engine} }
                   @{$unified_info{modules}})
 -}
-INSTALL_FIPSMODULE={-
-        join(" ", map { quotify1(platform->dso($_)) }
-                  grep { !$unified_info{attributes}->{modules}->{$_}->{noinst}
-                          && $unified_info{attributes}->{modules}->{$_}->{fips} }
-                  @{$unified_info{modules}})
--}
-INSTALL_FIPSMODULECONF=providers\fipsmodule.cnf
 INSTALL_PROGRAMS={-
         join(" ", map { quotify1(platform->bin($_)) }
                   grep { !$unified_info{attributes}->{programs}->{$_}->{noinst} }
@@ -450,7 +432,7 @@ test: tests
 	$(MAKE) /$(MAKEFLAGS) run_tests
 run_tests:
 	@{- output_off() if $disabled{tests}; "\@rem" -}
-	cmd /C "set "SRCTOP=$(SRCDIR)" & set "BLDTOP=$(BLDDIR)" & set "PERL=$(PERL)" & set "FIPSKEY=$(FIPSKEY)" & "$(PERL)" "$(SRCDIR)\test\run_tests.pl" $(TESTS)"
+	cmd /C "set "SRCTOP=$(SRCDIR)" & set "BLDTOP=$(BLDDIR)" & set "PERL=$(PERL)" & "$(PERL)" "$(SRCDIR)\test\run_tests.pl" $(TESTS)"
 	@{- if ($disabled{tests}) { output_on(); } else { output_off(); } "" -}
 	@$(ECHO) "Tests are not supported with your chosen Configure options"
 	@{- output_on() if !$disabled{tests}; "\@rem" -}
@@ -462,9 +444,9 @@ list-tests:
 	@$(ECHO) "Tests are not supported with your chosen Configure options"
 	@{- output_on() if !$disabled{tests}; "\@rem" -}
 
-install: install_sw install_ssldirs {- "install_docs" if !$disabled{docs}; -} {- $disabled{fips} ? "" : "install_fips" -}
+install: install_sw install_ssldirs {- "install_docs" if !$disabled{docs}; -}
 
-uninstall: {- "uninstall_docs" if !$disabled{docs}; -} uninstall_sw {- $disabled{fips} ? "" : "uninstall_fips" -}
+uninstall: {- "uninstall_docs" if !$disabled{docs}; -} uninstall_sw
 
 libclean:
 	"$(PERL)" -e "map { m/(.*)\.dll$$/; unlink glob """{.,apps,test,fuzz}/$$1.*"""; } @ARGV" $(SHLIBS)
@@ -505,31 +487,6 @@ uninstall_sw: uninstall_runtime uninstall_modules uninstall_engines uninstall_de
 install_docs: install_html_docs
 
 uninstall_docs: uninstall_html_docs
-
-{- output_off() if $disabled{fips}; "" -}
-install_fips: build_sw $(INSTALL_FIPSMODULECONF)
-#	@[ -n "$(INSTALLTOP)" ] || (echo INSTALLTOP should not be empty; exit 1)
-	@"$(PERL)" "$(SRCDIR)\util\mkdir-p.pl" "$(MODULESDIR)"
-	@"$(PERL)" "$(SRCDIR)\util\mkdir-p.pl" "$(OPENSSLDIR)"
-	@$(ECHO) "*** Installing FIPS module"
-	@$(ECHO) "install $(INSTALL_FIPSMODULE) -> $(MODULESDIR)\$(FIPSMODULENAME)"
-	@"$(PERL)" "$(SRCDIR)\util\copy.pl" "$(INSTALL_FIPSMODULE)" "$(MODULESDIR)"
-	@$(ECHO) "*** Installing FIPS module configuration"
-	@$(ECHO) "install $(INSTALL_FIPSMODULECONF) -> $(OPENSSLDIR)\fipsmodule.cnf"
-	@"$(PERL)" "$(SRCDIR)\util\copy.pl" "$(INSTALL_FIPSMODULECONF)" "$(OPENSSLDIR)"
-
-uninstall_fips:
-	@$(ECHO) "*** Uninstalling FIPS module configuration"
-	$(RM) "$(OPENSSLDIR)\fipsmodule.cnf"
-	@$(ECHO) "*** Uninstalling FIPS module"
-	$(RM) "$(MODULESDIR)\$(FIPSMODULENAME)"
-{- if ($disabled{fips}) { output_on(); } else { output_off(); } "" -}
-install_fips:
-	@$(ECHO) "The 'install_fips' target requires the 'enable-fips' option"
-
-uninstall_fips:
-	@$(ECHO) "The 'uninstall_fips' target requires the 'enable-fips' option"
-{- output_on() if !$disabled{fips}; "" -}
 
 install_ssldirs:
 	@"$(PERL)" "$(SRCDIR)\util\mkdir-p.pl" "$(OPENSSLDIR)\certs"

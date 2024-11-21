@@ -37,7 +37,7 @@ jobs:
         ref: ${{ matrix.branch }}
     - name: config
       run: |
-        ./config --banner=Configured no-shared -Wall -Werror enable-fips --strict-warnings -DOPENSSL_USE_IPV6=0 \
+        ./config --banner=Configured no-shared -Wall -Werror --strict-warnings -DOPENSSL_USE_IPV6=0 \
                  ${EXTRA_CFLAGS}
     - name: config dump
       run: ./configdata.pm --dump
@@ -114,7 +114,7 @@ jobs:
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
     - name: config
-      run: ./config --banner=Configured -Wall -Werror --strict-warnings enable-fips
+      run: ./config --banner=Configured -Wall -Werror --strict-warnings 
     - name: config dump
       run: ./configdata.pm --dump
     - name: make
@@ -145,7 +145,7 @@ jobs:
       run: mkdir _build
     - name: config
       working-directory: _build
-      run: perl ..\Configure --banner=Configured no-makedepend enable-fips
+      run: perl ..\Configure --banner=Configured no-makedepend
     - name: config dump
       working-directory: _build
       run: ./configdata.pm --dump
@@ -176,7 +176,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: config
-      run: ./config enable-fips enable-ec_nistp_64_gcc_128 enable-md2 enable-rc5 enable-ssl3 enable-ssl3-method enable-trace
+      run: ./config enable-ec_nistp_64_gcc_128 enable-md2 enable-rc5 enable-ssl3 enable-ssl3-method enable-trace
     - name: config dump
       run: ./configdata.pm --dump
     - name: make

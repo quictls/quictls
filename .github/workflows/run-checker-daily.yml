@@ -63,9 +63,7 @@ jobs:
           no-egd,
           no-engine,
           no-external-tests,
-          enable-fips,
-          enable-fips enable-acvp-tests,
-          enable-fips no-tls1_3,
+          no-tls1_3,
           no-fuzz-afl,
           no-fuzz-libfuzzer,
           no-gost,
@@ -333,7 +331,7 @@ jobs:
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
     - name: config
-      run: ./config --banner=Configured no-asm no-makedepend enable-buildtest-c++ enable-fips --strict-warnings -D_DEFAULT_SOURCE && perl configdata.pm --dump
+      run: ./config --banner=Configured no-asm no-makedepend enable-buildtest-c++ --strict-warnings -D_DEFAULT_SOURCE && perl configdata.pm --dump
     - name: make
       run: make -s -j4
     - name: get cpu info

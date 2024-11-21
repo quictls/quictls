@@ -70,7 +70,6 @@ OPTIONS={- $config{options} -}
 CONFIGURE_ARGS=({- join(", ",quotify_l(@{$config{perlargv}})) -})
 SRCDIR={- $config{sourcedir} -}
 BLDDIR={- $config{builddir} -}
-FIPSKEY={- $config{FIPSKEY} -}
 
 VERSION={- "$config{full_version}" -}
 VERSION_NUMBER={- "$config{version}" -}
@@ -103,16 +102,6 @@ MODULES={- join(" \\\n" . ' ' x 8,
                                   !grep { grep { $_ eq $x } @$_ }
                                         values %{$unified_info{depends}} }
                            @{$unified_info{modules}})) -}
-FIPSMODULE={- # We do some extra checking here, as there should be only one
-              use File::Basename;
-              our @fipsmodules =
-                  grep { !$unified_info{attributes}->{modules}->{$_}->{noinst}
-                         && $unified_info{attributes}->{modules}->{$_}->{fips} }
-                  @{$unified_info{modules}};
-              die "More that one FIPS module" if scalar @fipsmodules > 1;
-              join(" ", map { platform->dso($_) } @fipsmodules) -}
-FIPSMODULENAME={- die "More that one FIPS module" if scalar @fipsmodules > 1;
-                  join(" ", map { basename(platform->dso($_)) } @fipsmodules) -}
 
 PROGRAMS={- join(" \\\n" . ' ' x 9,
                  fill_lines(" ", $COLUMNS - 9,
@@ -189,15 +178,6 @@ INSTALL_MODULES={-
                                && !$unified_info{attributes}->{modules}->{$_}->{fips} }
                         @{$unified_info{modules}}))
 -}
-INSTALL_FIPSMODULE={-
-        join(" \\\n" . ' ' x 16,
-             fill_lines(" ", $COLUMNS - 16,
-                        map { platform->dso($_) }
-                        grep { !$unified_info{attributes}->{modules}->{$_}->{noinst}
-                               && $unified_info{attributes}->{modules}->{$_}->{fips} }
-                        @{$unified_info{modules}}))
--}
-INSTALL_FIPSMODULECONF=providers/fipsmodule.cnf
 INSTALL_PROGRAMS={-
         join(" \\\n" . ' ' x 16,
              fill_lines(" ", $COLUMNS - 16, map { platform->bin($_) }
@@ -571,7 +551,6 @@ run_tests: FORCE
 	( SRCTOP=$(SRCDIR) \
 	  BLDTOP=$(BLDDIR) \
 	  PERL="$(PERL)" \
-	  FIPSKEY="$(FIPSKEY)" \
 	  EXE_EXT={- platform->binext() -} \
 	  $(PERL) $(SRCDIR)/test/run_tests.pl $(TESTS) )
 	@ : {- if ($disabled{tests}) { output_on(); } else { output_off(); } "" -}
@@ -619,14 +598,13 @@ clean: libclean ## Clean the workspace, keep the configuration
 	$(RM) $(MANDOCS3)
 	$(RM) $(MANDOCS5)
 	$(RM) $(MANDOCS7)
-	$(RM) $(PROGRAMS) $(TESTPROGS) $(MODULES) $(FIPSMODULE) $(SCRIPTS)
+	$(RM) $(PROGRAMS) $(TESTPROGS) $(MODULES) $(SCRIPTS)
 	$(RM) $(GENERATED_MANDATORY) $(GENERATED)
 	-find . -name '*{- platform->depext() -}' \! -name '.*' \! -type d -exec $(RM) {} \;
 	-find . -name '*{- platform->objext() -}' \! -name '.*' \! -type d -exec $(RM) {} \;
 	$(RM) core
 	$(RM) tags TAGS doc-nits md-nits
 	$(RM) -r test/test-runs
-	$(RM) providers/fips*.new
 	-find . -type l \! -name '.*' -exec $(RM) {} \;
 
 distclean: clean ## Clean and remove the configuration
@@ -644,9 +622,9 @@ depend: Makefile
 # Install helper targets #############################################
 ##@ Installation
 
-install: install_sw install_ssldirs {- "install_docs" if !$disabled{docs}; -} {- $disabled{fips} ? "" : "install_fips" -} ## Install software and documentation, create OpenSSL directories
+install: install_sw install_ssldirs {- "install_docs" if !$disabled{docs}; -}  ## Install software and documentation, create OpenSSL directories
 
-uninstall: {- "uninstall_docs" if !$disabled{docs}; -} uninstall_sw {- $disabled{fips} ? "" : "uninstall_fips" -} ## Uninstall software and documentation
+uninstall: {- "uninstall_docs" if !$disabled{docs}; -} uninstall_sw ## Uninstall software and documentation
 
 install_sw: install_dev install_engines install_modules install_runtime ## Install just the software and libraries
 
@@ -656,35 +634,6 @@ install_docs: install_man_docs install_html_docs ## Install manpages and HTML do
 
 uninstall_docs: uninstall_man_docs uninstall_html_docs ## Uninstall manpages and HTML documentation
 	$(RM) -r "$(DESTDIR)$(DOCDIR)"
-
-{- output_off() if $disabled{fips}; "" -}
-install_fips: build_sw $(INSTALL_FIPSMODULECONF)
-	@[ -n "$(INSTALLTOP)" ] || (echo INSTALLTOP should not be empty; exit 1)
-	@$(PERL) $(SRCDIR)/util/mkdir-p.pl "$(DESTDIR)$(MODULESDIR)"
-	@$(PERL) $(SRCDIR)/util/mkdir-p.pl "$(DESTDIR)$(OPENSSLDIR)"
-	@$(ECHO) "*** Installing FIPS module"
-	@$(ECHO) "install $(INSTALL_FIPSMODULE) -> $(DESTDIR)$(MODULESDIR)/$(FIPSMODULENAME)"
-	@cp "$(INSTALL_FIPSMODULE)" "$(DESTDIR)$(MODULESDIR)/$(FIPSMODULENAME).new"
-	@chmod 755 "$(DESTDIR)$(MODULESDIR)/$(FIPSMODULENAME).new"
-	@mv -f "$(DESTDIR)$(MODULESDIR)/$(FIPSMODULENAME).new" \
-	       "$(DESTDIR)$(MODULESDIR)/$(FIPSMODULENAME)"
-	@$(ECHO) "*** Installing FIPS module configuration"
-	@$(ECHO) "install $(INSTALL_FIPSMODULECONF) -> $(DESTDIR)$(OPENSSLDIR)/fipsmodule.cnf"
-	@cp $(INSTALL_FIPSMODULECONF) "$(DESTDIR)$(OPENSSLDIR)/fipsmodule.cnf"
-
-uninstall_fips:
-	@$(ECHO) "*** Uninstalling FIPS module configuration"
-	$(RM) "$(DESTDIR)$(OPENSSLDIR)/fipsmodule.cnf"
-	@$(ECHO) "*** Uninstalling FIPS module"
-	$(RM) "$(DESTDIR)$(MODULESDIR)/$(FIPSMODULENAME)"
-{- if ($disabled{fips}) { output_on(); } else { output_off(); } "" -}
-install_fips:
-	@$(ECHO) "The 'install_fips' target requires the 'enable-fips' option"
-
-uninstall_fips:
-	@$(ECHO) "The 'uninstall_fips' target requires the 'enable-fips' option"
-{- output_on() if !$disabled{fips}; "" -}
-
 
 install_ssldirs:
 	@$(PERL) $(SRCDIR)/util/mkdir-p.pl "$(DESTDIR)$(OPENSSLDIR)/certs"
@@ -1244,57 +1193,6 @@ generate_doc_buildinfo:
                 mv $(SRCDIR)/doc/build.info.new $(SRCDIR)/doc/build.info; \
           fi )
 
-generate_fips_sources: providers/fips.module.sources.new
-providers/fips.module.sources.new: configdata.pm
-	rm -rf sources-tmp
-	mkdir sources-tmp
-	( \
-	  srcdir=`cd $(SRCDIR); pwd`; \
-	  cd sources-tmp \
-	  && $$srcdir/Configure --banner=Configured enable-fips -O0 \
-	  && ./configdata.pm --query 'get_sources("providers/fips")' > sources1 \
-	  && "$(MAKE)" -sj 4 build_generated providers/fips.so \
-	  && find . -name '*.d' | xargs cat > dep1 \
-          && "$(MAKE)" distclean \
-	  && $$srcdir/Configure --banner=Configured enable-fips no-asm -O0 \
-	  && ./configdata.pm --query 'get_sources("providers/fips")' > sources2 \
-	  && "$(MAKE)" -sj 4 build_generated providers/fips.so \
-	  && find . -name '*.d' | xargs cat > dep2 \
-	  && cat sources1 sources2 \
-	     | grep -v ' : \\$$' | grep -v util/providers.num \
-	     | sed -e 's/^ *//' -e 's/ *\\$$//' \
-	     | sort | uniq > sources \
-	  && cat dep1 dep2 \
-	     | $(PERL) -p -e 's/\\\n//' \
-	     | sed -e 's/^.*: *//' -e 's/  */ /g' \
-	     | fgrep -f sources \
-	     | tr ' ' '\n' \
-	     | sort | uniq > deps.raw \
-	  && cat deps.raw \
-	     | xargs ./configdata.pm --query 'get_sources(@ARGV)' \
-	     | $(PERL) -p -e 's/\\\n//' \
-	     | sed -e 's/\./\\\./g' -e 's/ : */:/' -e 's/^/s:/' -e 's/$$/:/' \
-	     > deps.sed \
-	  && cat deps.raw | sed -f deps.sed > deps \
-	)
-	( \
-	  cat sources-tmp/sources sources-tmp/deps \
-	     | $(PERL) -p -e 's:^ *\Q../\E:: ;' \
-			  -e 's:^\Q$(SRCDIR)/\E:: if "$(SRCDIR)" ne "." ;' \
-			  -e 'my $$x; do { $$x = $$_; s:(^|/)((?!\Q../\E)[^/]*/)\Q..\E($$|/):$$1: } while ($$x ne $$_) ;' ; \
-	  cd $(SRCDIR); \
-	  for x in crypto/bn/asm/*.pl crypto/bn/asm/*.S \
-		   crypto/aes/asm/*.pl crypto/aes/asm/*.S \
-		   crypto/ec/asm/*.pl \
-		   crypto/modes/asm/*.pl \
-		   crypto/sha/asm/*.pl \
-		   crypto/*cpuid.pl crypto/*cpuid.S \
-		   crypto/*cap.c; do \
-	    echo "$$x"; \
-	  done \
-	) | grep -v sm2p256 | sort | uniq > providers/fips.module.sources.new
-	rm -rf sources-tmp
-
 # Set to -force to force a rebuild
 ERROR_REBUILD=
 errors:
@@ -1409,32 +1307,6 @@ tags TAGS: FORCE
 	rm -f TAGS tags
 	-( cd $(SRCDIR); util/ctags.sh )
 	-etags `find . -name '*.[ch]' -o -name '*.pm'`
-
-providers/fips.checksum.new: providers/fips.module.sources.new
-	@which unifdef > /dev/null || \
-	( echo >&2 "ERROR: unifdef not in your \$$PATH, FIPS checksums not calculated"; \
-	  false )
-	( sources=`pwd`/providers/fips.module.sources.new; \
-	  cd $(SRCDIR) \
-	  && cat $$sources \
-	         | xargs ./util/fips-checksums.sh ) \
-	         > providers/fips-sources.checksums.new \
-	&& sha256sum providers/fips-sources.checksums.new \
-	     | sed -e 's|\.new||' > providers/fips.checksum.new
-
-fips-checksums: providers/fips.checksum.new
-
-$(SRCDIR)/providers/fips.checksum: providers/fips.checksum.new
-	cp -p providers/fips.module.sources.new $(SRCDIR)/providers/fips.module.sources
-	cp -p providers/fips-sources.checksums.new $(SRCDIR)/providers/fips-sources.checksums
-	cp -p providers/fips.checksum.new $(SRCDIR)/providers/fips.checksum
-
-update-fips-checksums: $(SRCDIR)/providers/fips.checksum
-
-diff-fips-checksums: fips-checksums
-	diff -u $(SRCDIR)/providers/fips.module.sources providers/fips.module.sources.new
-	diff -u $(SRCDIR)/providers/fips-sources.checksums providers/fips-sources.checksums.new
-	diff -u $(SRCDIR)/providers/fips.checksum providers/fips.checksum.new
 
 # Release targets (note: only available on Unix) #####################
 
@@ -1925,7 +1797,6 @@ EOF
       my @deps = compute_lib_depends(@{$args{deps}});
       my $shared_def = join("", map { ' '.$target{shared_defflag}.$_ } @defs);
       # Next line needs to become "less magic" (see PR #11950)
-      $shared_def .= ' '.$target{shared_fipsflag} if (defined $target{shared_fipsflag} && $shared_def =~ m/providers\/fips/);
       my $objs = join(" \\\n\t\t", fill_lines(' ', $COLUMNS - 16, @objs));
       my $deps = join(" \\\n" . ' ' x (length($dso) + 2),
                       fill_lines(' ', $COLUMNS - length($dso) - 2,
