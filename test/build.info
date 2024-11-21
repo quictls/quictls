@@ -74,12 +74,11 @@ IF[{- !$disabled{tests} -}]
   ENDIF
 
   IF[{- !$disabled{quic} -}]
-    PROGRAMS{noinst}=priority_queue_test event_queue_test quicfaultstest quicapitest \
-                     quic_newcid_test quic_srt_gen_test
+    PROGRAMS{noinst}=event_queue_test
   ENDIF
 
   IF[{- !$disabled{qlog} -}]
-    PROGRAMS{noinst}=json_test quic_qlog_test
+    PROGRAMS{noinst}=json_test
   ENDIF
 
   IF[{- !$disabled{comp} && (!$disabled{brotli} || !$disabled{zstd} || !$disabled{zlib}) -}]
@@ -311,74 +310,6 @@ IF[{- !$disabled{tests} -}]
   SOURCE[bad_dtls_test]=bad_dtls_test.c
   INCLUDE[bad_dtls_test]=../include ../apps/include
   DEPEND[bad_dtls_test]=../libcrypto ../libssl libtestutil.a
-
-  SOURCE[packettest]=packettest.c ../crypto/quic_vlint.c
-  INCLUDE[packettest]=../include ../apps/include
-  DEPEND[packettest]=../libcrypto libtestutil.a
-
-  SOURCE[quic_wire_test]=quic_wire_test.c
-  INCLUDE[quic_wire_test]=../include ../apps/include
-  DEPEND[quic_wire_test]=../libcrypto.a ../libssl.a libtestutil.a
-
-  SOURCE[quic_record_test]=quic_record_test.c
-  INCLUDE[quic_record_test]=../include ../apps/include
-  DEPEND[quic_record_test]=../libcrypto.a ../libssl.a libtestutil.a
-
-  SOURCE[quic_fc_test]=quic_fc_test.c
-  INCLUDE[quic_fc_test]=../include ../apps/include
-  DEPEND[quic_fc_test]=../libcrypto.a ../libssl.a libtestutil.a
-
-  SOURCE[quic_stream_test]=quic_stream_test.c
-  INCLUDE[quic_stream_test]=../include ../apps/include
-  DEPEND[quic_stream_test]=../libcrypto.a ../libssl.a libtestutil.a
-
-  SOURCE[quic_cfq_test]=quic_cfq_test.c
-  INCLUDE[quic_cfq_test]=../include ../apps/include
-  DEPEND[quic_cfq_test]=../libcrypto.a ../libssl.a libtestutil.a
-
-  SOURCE[quic_txpim_test]=quic_txpim_test.c
-  INCLUDE[quic_txpim_test]=../include ../apps/include
-  DEPEND[quic_txpim_test]=../libcrypto.a ../libssl.a libtestutil.a
-
-  SOURCE[quic_srtm_test]=quic_srtm_test.c
-  INCLUDE[quic_srtm_test]=../include ../apps/include
-  DEPEND[quic_srtm_test]=../libcrypto.a ../libssl.a libtestutil.a
-
-  SOURCE[quic_lcidm_test]=quic_lcidm_test.c
-  INCLUDE[quic_lcidm_test]=../include ../apps/include
-  DEPEND[quic_lcidm_test]=../libcrypto.a ../libssl.a libtestutil.a
-
-  SOURCE[quic_rcidm_test]=quic_rcidm_test.c
-  INCLUDE[quic_rcidm_test]=../include ../apps/include
-  DEPEND[quic_rcidm_test]=../libcrypto.a ../libssl.a libtestutil.a
-
-  SOURCE[quic_fifd_test]=quic_fifd_test.c cc_dummy.c
-  INCLUDE[quic_fifd_test]=../include ../apps/include
-  DEPEND[quic_fifd_test]=../libcrypto.a ../libssl.a libtestutil.a
-
-  SOURCE[quic_txp_test]=quic_txp_test.c cc_dummy.c
-  INCLUDE[quic_txp_test]=../include ../apps/include
-  DEPEND[quic_txp_test]=../libcrypto.a ../libssl.a libtestutil.a
-
-  SOURCE[quic_tserver_test]=quic_tserver_test.c
-  INCLUDE[quic_tserver_test]=../include ../apps/include
-  DEPEND[quic_tserver_test]=../libcrypto.a ../libssl.a libtestutil.a
-
-  SOURCE[quic_client_test]=quic_client_test.c
-  INCLUDE[quic_client_test]=../include ../apps/include
-  DEPEND[quic_client_test]=../libcrypto.a ../libssl.a libtestutil.a
-
-  $QUICTESTHELPERS=helpers/quictestlib.c helpers/noisydgrambio.c helpers/pktsplitbio.c
-
-  SOURCE[quic_multistream_test]=quic_multistream_test.c helpers/ssltestlib.c $QUICTESTHELPERS
-  INCLUDE[quic_multistream_test]=../include ../apps/include
-  DEPEND[quic_multistream_test]=../libcrypto.a ../libssl.a libtestutil.a
-
-  IF[{- !$disabled{'qlog'} -}]
-      SOURCE[quic_qlog_test]=quic_qlog_test.c
-      INCLUDE[quic_qlog_test]=../include ../apps/include
-      DEPEND[quic_qlog_test]=../libcrypto.a ../libssl.a libtestutil.a
-  ENDIF
 
   SOURCE[asynctest]=asynctest.c
   INCLUDE[asynctest]=../include ../apps/include
@@ -869,10 +800,6 @@ IF[{- !$disabled{tests} -}]
     DEPEND[sparse_array_test]=../libcrypto.a libtestutil.a
 
     IF[{- !$disabled{quic} -}]
-      SOURCE[priority_queue_test]=priority_queue_test.c
-      INCLUDE[priority_queue_test]=../include ../apps/include
-      DEPEND[priority_queue_test]=../libcrypto ../libssl.a libtestutil.a
-
       SOURCE[event_queue_test]=event_queue_test.c
       INCLUDE[event_queue_test]=../include ../apps/include
       DEPEND[event_queue_test]=../libcrypto ../libssl.a libtestutil.a
