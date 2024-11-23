@@ -22,6 +22,8 @@ Currrent Changes
 - Remove support for some old configuration options:
   - fips, no-fips since we do not build a FIPS-validated container
 
+- Remove support for EGD random source.
+
 
 - Removed support for some old platforms:
   - Removed support for old HPE platforms: NonStop and Tandem

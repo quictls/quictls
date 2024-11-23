@@ -69,8 +69,8 @@ static __FILE_ptr32 (*const vms_fopen)(const char *, const char *, ...) =
 
 /*
  * Note that these functions are intended for seed files only. Entropy
- * devices and EGD sockets are handled in rand_unix.c  If |bytes| is
- * -1 read the complete file; otherwise read the specified amount.
+ * devices are handled in rand_unix.c  If |bytes| is -1 read the
+ * complete file; otherwise read the specified amount.
  */
 int RAND_load_file(const char *file, long bytes)
 {
