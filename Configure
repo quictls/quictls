@@ -524,7 +524,6 @@ my @disablables = (
     "ts",
     "ubsan",
     "ui-console",
-    "unit-test",
     "uplink",
     "weak-ssl-ciphers",
     "whirlpool",
@@ -585,7 +584,6 @@ our %disabled = ( # "what"         => "comment"
                   "tfo"                 => "default",
                   "trace"               => "default",
                   "ubsan"               => "default",
-                  "unit-test"           => "default",
                   "weak-ssl-ciphers"    => "default",
                   "zlib"                => "default",
                   "zlib-dynamic"        => "default",
@@ -667,7 +665,6 @@ my @disable_cascades = (
     "tests"             => [ "external-tests" ],
     "comp"              => [ "zlib", "brotli", "zstd" ],
     "sm3"               => [ "sm2" ],
-    sub { !$disabled{"unit-test"} } => [ "heartbeats" ],
 
     sub { !$disabled{"msan"} } => [ "asm" ],
 

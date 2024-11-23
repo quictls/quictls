@@ -119,8 +119,6 @@ jobs:
           no-trace,
           no-ubsan,
           no-ui-console,
-          no-unit-test,
-          enable-unit-test,
           no-uplink,
           no-weak-ssl-ciphers,
           no-whirlpool,
