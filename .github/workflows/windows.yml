@@ -21,10 +21,8 @@ jobs:
           - windows-2019
           - windows-2022
         platform:
-          - arch: win64
-            config: enable-fips
           - arch: win32
-            config: --strict-warnings no-fips
+            config: --strict-warnings
     runs-on: ${{ github.server_url == 'https://github.com' && matrix.os || format('{0}-self-hosted', matrix.os) }}
     steps:
     - uses: actions/checkout@v4
@@ -88,7 +86,7 @@ jobs:
     - name: config
       working-directory: _build
       run: |
-        perl ..\Configure --banner=Configured no-makedepend no-shared no-fips enable-md2 enable-rc5 enable-ssl3 enable-ssl3-method enable-weak-ssl-ciphers enable-trace enable-crypto-mdebug VC-WIN64A-masm
+        perl ..\Configure --banner=Configured no-makedepend no-shared enable-md2 enable-rc5 enable-ssl3 enable-ssl3-method enable-weak-ssl-ciphers enable-trace enable-crypto-mdebug VC-WIN64A-masm
         perl configdata.pm --dump
     - name: build
       working-directory: _build
@@ -125,7 +123,7 @@ jobs:
     - name: config
       working-directory: _build
       run: |
-        perl ..\Configure --banner=Configured no-makedepend no-bulk no-deprecated no-fips no-asm no-threads -DOPENSSL_SMALL_FOOTPRINT
+        perl ..\Configure --banner=Configured no-makedepend no-bulk no-deprecated no-asm no-threads -DOPENSSL_SMALL_FOOTPRINT
         perl configdata.pm --dump
     - name: build
       working-directory: _build
@@ -155,10 +153,10 @@ jobs:
 #          - windows-2022
         platform:
           - arch: win64
-            config: -DCMAKE_C_COMPILER=gcc --strict-warnings no-fips
+            config: -DCMAKE_C_COMPILER=gcc --strict-warnings
 # are we really learning sth new from win32? So let's save some CO2 for now disabling this
 #          - arch: win32
-#            config: -DCMAKE_C_COMPILER=gcc --strict-warnings no-fips
+#            config: -DCMAKE_C_COMPILER=gcc --strict-warnings
     runs-on: ${{ github.server_url == 'https://github.com' && matrix.os || format('{0}-self-hosted', matrix.os) }}
     env:
       CYGWIN_NOWINPATH: 1

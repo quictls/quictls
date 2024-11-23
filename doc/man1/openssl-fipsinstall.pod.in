@@ -30,6 +30,10 @@ B<openssl fipsinstall>
 [B<-corrupt_type> I<selftest_type>]
 [B<-config> I<parent_config>]
 
+=head1 NOTE
+
+This command is not available in this release.
+
 =head1 DESCRIPTION
 
 This command is used to generate a FIPS module configuration file.
@@ -175,9 +179,6 @@ fails as described above.
 =item B<-no_security_checks>
 
 Configure the module to not perform run-time security checks as described above.
-
-Enabling the configuration option "no-fips-securitychecks" provides another way to
-turn off the check at compile time.
 
 =item B<-ems_check>
 

@@ -19,6 +19,11 @@ Currrent Changes
 ----------------
 - Based on OpenSSL 3.3
 
-- Removed support for old HPE platforms: NonStop and Tandem
-- Removed DJGPP support.
-- Removed WinCE support.
+- Remove support for some old configuration options:
+  - fips, no-fips since we do not build a FIPS-validated container
+
+
+- Removed support for some old platforms:
+  - Removed support for old HPE platforms: NonStop and Tandem
+  - Removed DJGPP support.
+  - Removed WinCE support.

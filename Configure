@@ -464,8 +464,6 @@ my @disablables = (
     "err",
     "external-tests",
     "filenames",
-    "fips",
-    "fips-securitychecks",
     "fuzz-afl",
     "fuzz-libfuzzer",
     "gost",
@@ -615,7 +613,7 @@ my @disable_cascades = (
                              "tfo",
                              "ts", "ui-console", "whirlpool",
                              "boring-quic-api",
-                             "fips-securitychecks" ],
+                             ],
     sub { $config{processor} eq "386" }
                         => [ "sse2" ],
     "ssl"               => [ "ssl3" ],
@@ -678,8 +676,6 @@ my @disable_cascades = (
 
     "cmp"               => [ "crmf" ],
     "tls1_3"            => [ "boring-quic-api" ],
-
-    "fips"              => [ "fips-securitychecks", "acvp-tests" ],
 
     "threads"           => [ "thread-pool" ],
     "thread-pool"       => [ "default-thread-pool" ],
@@ -848,7 +844,6 @@ while (@argvcopy)
         s /^threads$/enable-threads/;
         s /^zlib$/enable-zlib/;
         s /^zlib-dynamic$/enable-zlib-dynamic/;
-        s /^fips$/enable-fips/;
 
         if (/^(no|disable|enable)-(.+)$/)
                 {

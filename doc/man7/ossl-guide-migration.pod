@@ -71,15 +71,8 @@ All algorithm implementations available via providers are accessed through the
 "high level" APIs (for example those functions prefixed with C<EVP>). They cannot
 be accessed using the L</Low Level APIs>.
 
-One of the standard providers available is the FIPS provider. This makes
-available FIPS validated cryptographic algorithms.
-The FIPS provider is disabled by default and needs to be enabled explicitly
-at configuration time using the C<enable-fips> option. If it is enabled,
-the FIPS provider gets built and installed in addition to the other standard
-providers. No separate installation procedure is necessary.
-There is however a dedicated C<install_fips> make target, which serves the
-special purpose of installing only the FIPS provider into an existing
-OpenSSL installation.
+The provider interface is compatible with the OpenSSL 3.0 release.
+To meet FIPS requirements, you should use the provider for OpenSSL.
 
 Not all algorithms may be available for the application at a particular moment.
 If the application code uses any digest or cipher algorithm via the EVP interface,

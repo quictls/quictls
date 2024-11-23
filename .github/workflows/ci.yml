@@ -33,7 +33,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: config
-      run: ./config --banner=Configured --strict-warnings enable-fips && perl configdata.pm --dump
+      run: ./config --banner=Configured --strict-warnings && perl configdata.pm --dump
     - name: make build_generated
       run: make -s build_generated
     - name: make update
@@ -47,7 +47,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: config
-      run: CPPFLAGS=-std=c99 ./config --banner=Configured no-asm no-makedepend enable-buildtest-c++ enable-fips --strict-warnings -D_DEFAULT_SOURCE && perl configdata.pm --dump
+      run: CPPFLAGS=-std=c99 ./config --banner=Configured no-asm no-makedepend enable-buildtest-c++ --strict-warnings -D_DEFAULT_SOURCE && perl configdata.pm --dump
     - name: make
       run: make -s -j4
 
@@ -58,7 +58,7 @@ jobs:
     - name: localegen
       run: sudo locale-gen tr_TR.UTF-8
     - name: config
-      run: CC=gcc ./config --banner=Configured enable-fips --strict-warnings && perl configdata.pm --dump
+      run: CC=gcc ./config --banner=Configured --strict-warnings && perl configdata.pm --dump
     - name: make
       run: make -s -j4
     - name: make test
@@ -69,7 +69,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: config
-      run: CC=clang ./config --banner=Configured no-fips --strict-warnings && perl configdata.pm --dump
+      run: CC=clang ./config --banner=Configured --strict-warnings && perl configdata.pm --dump
     - name: make
       run: make -s -j4
     - name: make test
@@ -91,7 +91,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: config
-      run: ./config --banner=Configured --strict-warnings no-deprecated enable-fips && perl configdata.pm --dump
+      run: ./config --banner=Configured --strict-warnings no-deprecated && perl configdata.pm --dump
     - name: make
       run: make -s -j4
     - name: make test
@@ -102,7 +102,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: config
-      run: ./config --banner=Configured --strict-warnings no-shared no-fips && perl configdata.pm --dump
+      run: ./config --banner=Configured --strict-warnings no-shared && perl configdata.pm --dump
     - name: make
       run: make -s -j4
     - name: make test
@@ -118,7 +118,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: config
-      run: ./config --banner=Configured --strict-warnings no-shared no-fips && perl configdata.pm --dump
+      run: ./config --banner=Configured --strict-warnings no-shared && perl configdata.pm --dump
     - name: make
       run: make -s -j4
     - name: make test
@@ -133,7 +133,7 @@ jobs:
         sudo cat /proc/sys/vm/mmap_rnd_bits
         sudo sysctl -w vm.mmap_rnd_bits=28
     - name: config
-      run: ./config --banner=Configured --debug enable-asan enable-ubsan no-cached-fetch no-fips no-dtls no-tls1 no-tls1-method no-tls1_1 no-tls1_1-method no-async && perl configdata.pm --dump
+      run: ./config --banner=Configured --debug enable-asan enable-ubsan no-cached-fetch no-dtls no-tls1 no-tls1-method no-tls1_1 no-tls1_1-method no-async && perl configdata.pm --dump
     - name: make
       run: make -s -j4
     - name: make test
@@ -148,7 +148,7 @@ jobs:
         sudo cat /proc/sys/vm/mmap_rnd_bits
         sudo sysctl -w vm.mmap_rnd_bits=28
     - name: config
-      run: ./config --banner=Configured --debug enable-asan enable-ubsan enable-rc5 enable-md2 enable-ec_nistp_64_gcc_128 enable-fips -DFUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION && perl configdata.pm --dump
+      run: ./config --banner=Configured --debug enable-asan enable-ubsan enable-rc5 enable-md2 enable-ec_nistp_64_gcc_128 -DFUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION && perl configdata.pm --dump
     - name: make
       run: make -s -j4
     - name: make test
@@ -164,7 +164,7 @@ jobs:
         sudo sysctl -w vm.mmap_rnd_bits=28
     - name: config
       # --debug -O1 is to produce a debug build that runs in a reasonable amount of time
-      run: CC=clang ./config --banner=Configured --debug -O1 -fsanitize=memory -DOSSL_SANITIZE_MEMORY -fno-optimize-sibling-calls enable-rc5 enable-md2 enable-ec_nistp_64_gcc_128 enable-fips && perl configdata.pm --dump
+      run: CC=clang ./config --banner=Configured --debug -O1 -fsanitize=memory -DOSSL_SANITIZE_MEMORY -fno-optimize-sibling-calls enable-rc5 enable-md2 enable-ec_nistp_64_gcc_128 && perl configdata.pm --dump
     - name: make
       run: make -s -j4
     - name: make test
@@ -179,7 +179,7 @@ jobs:
         sudo cat /proc/sys/vm/mmap_rnd_bits
         sudo sysctl -w vm.mmap_rnd_bits=28
     - name: config
-      run: CC=clang ./config --banner=Configured no-fips --strict-warnings -fsanitize=thread && perl configdata.pm --dump
+      run: CC=clang ./config --banner=Configured --strict-warnings -fsanitize=thread && perl configdata.pm --dump
     - name: make
       run: make -s -j4
     - name: make test
@@ -192,7 +192,7 @@ jobs:
     - name: modprobe tls
       run: sudo modprobe tls
     - name: config
-      run: ./config --banner=Configured --strict-warnings no-ec enable-ssl-trace enable-zlib enable-zlib-dynamic enable-crypto-mdebug enable-egd enable-ktls enable-fips && perl configdata.pm --dump
+      run: ./config --banner=Configured --strict-warnings no-ec enable-ssl-trace enable-zlib enable-zlib-dynamic enable-crypto-mdebug enable-egd enable-ktls && perl configdata.pm --dump
     - name: make
       run: make -s -j4
     - name: make test
@@ -205,7 +205,7 @@ jobs:
     - name: modprobe tls
       run: sudo modprobe tls
     - name: config
-      run: ./config --banner=Configured --strict-warnings enable-ktls enable-fips && perl configdata.pm --dump
+      run: ./config --banner=Configured --strict-warnings enable-ktls && perl configdata.pm --dump
     - name: make
       run: make -s -j4
     - name: make test
@@ -216,7 +216,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: config
-      run: ./config --banner=Configured --strict-warnings no-legacy enable-fips && perl configdata.pm --dump
+      run: ./config --banner=Configured --strict-warnings no-legacy && perl configdata.pm --dump
     - name: make
       run: make -s -j4
     - name: make test
@@ -227,7 +227,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: config
-      run: ./config --banner=Configured -Werror --debug no-afalgeng no-shared enable-crypto-mdebug enable-rc5 enable-md2 enable-ssl3 enable-ssl3-method enable-weak-ssl-ciphers enable-zlib enable-ec_nistp_64_gcc_128 no-fips && perl configdata.pm --dump
+      run: ./config --banner=Configured -Werror --debug no-afalgeng no-shared enable-crypto-mdebug enable-rc5 enable-md2 enable-ssl3 enable-ssl3-method enable-weak-ssl-ciphers enable-zlib enable-ec_nistp_64_gcc_128 && perl configdata.pm --dump
     - name: make
       run: make -s -j4
     - name: make test
@@ -238,7 +238,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: config
-      run: ./config --banner=Configured no-asm no-makedepend enable-buildtest-c++ enable-fips --strict-warnings -D_DEFAULT_SOURCE && perl configdata.pm --dump
+      run: ./config --banner=Configured no-asm no-makedepend enable-buildtest-c++ --strict-warnings -D_DEFAULT_SOURCE && perl configdata.pm --dump
     - name: make
       run: make -s -j4
     - name: make test
@@ -257,7 +257,7 @@ jobs:
     - name: setup hostname workaround
       run: sudo hostname localhost
     - name: config
-      run: ./config --banner=Configured --strict-warnings --debug no-afalgeng enable-rc5 enable-md2 enable-ssl3 enable-ssl3-method enable-weak-ssl-ciphers enable-zlib enable-ec_nistp_64_gcc_128 enable-external-tests no-fips && perl configdata.pm --dump
+      run: ./config --banner=Configured --strict-warnings --debug no-afalgeng enable-rc5 enable-md2 enable-ssl3 enable-ssl3-method enable-weak-ssl-ciphers enable-zlib enable-ec_nistp_64_gcc_128 enable-external-tests && perl configdata.pm --dump
     - name: make
       run: make -s -j4
     - name: test external krb5
