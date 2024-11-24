@@ -848,3 +848,11 @@ void err_clear_last_constant_time(int clear)
                                      0, ERR_FLAG_CLEAR);
     es->err_flags[top] |= clear;
 }
+
+#ifndef OPENSSL_NO_DEPRECATED_3_0
+const char *ERR_func_error_string(unsigned long e)
+{
+    return NULL;
+}
+#endif
+
