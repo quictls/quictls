@@ -79,4 +79,8 @@ extern "C" {
 # ifndef OPENSSL_NO_UNIT_TEST
 #  define OPENSSL_NO_UNIT_TEST
 # endif
-#endif                          /* OPENSSL_CONFIGURATION_H */
+# ifndef OPENSSL_NO_EGD
+#  define OPENSSL_NO_EGD
+# endif
+
+#endif

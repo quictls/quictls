@@ -15,7 +15,7 @@ jobs:
   compute-abidiff:
     runs-on: ubuntu-latest
     env:
-      BUILD_OPTS: -g --strict-warnings enable-ktls enable-egd enable-ec_nistp_64_gcc_128 enable-md2 enable-rc5 enable-sctp enable-ssl3 enable-ssl3-method enable-trace enable-zlib enable-zstd
+      BUILD_OPTS: -g --strict-warnings enable-ktls enable-ec_nistp_64_gcc_128 enable-md2 enable-rc5 enable-sctp enable-ssl3 enable-ssl3-method enable-trace enable-zlib enable-zstd
     steps:
       - name: create build dirs
         run: |
@@ -51,7 +51,7 @@ jobs:
       - name: save PR number
         run: echo ${{ github.event.number }} > ./artifact/pr_num
       - name: save artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: abidiff
           path: artifact/

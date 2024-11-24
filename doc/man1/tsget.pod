@@ -18,7 +18,6 @@ B<-h> I<server_url>
 [B<-C> I<CA_certs.pem>]
 [B<-P> I<CA_path>]
 [B<-r> I<files>]
-[B<-g> I<EGD_socket>]
 [I<request> ...]
 
 =head1 DESCRIPTION
@@ -114,10 +113,6 @@ option B<-C> or option B<-P> must be given in case of HTTPS. (Optional)
 =item B<-r> I<files>
 
 See L<openssl(1)/Random State Options> for more information.
-
-=item B<-g> I<EGD_socket>
-
-The name of an EGD socket to get random data from. (Optional)
 
 =item I<request> ...
 
