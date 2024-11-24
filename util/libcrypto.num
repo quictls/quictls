@@ -512,7 +512,6 @@ DH_generate_parameters                  526	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_0
 BN_set_negative                         527	3_0_0	EXIST::FUNCTION:
 i2d_TS_RESP_bio                         528	3_0_0	EXIST::FUNCTION:TS
 ASYNC_WAIT_CTX_set_wait_fd              529	3_0_0	EXIST::FUNCTION:
-ERR_func_error_string                   530	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
 ASN1_STRING_data                        531	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_1_1_0
 X509_CRL_add1_ext_i2d                   532	3_0_0	EXIST::FUNCTION:
 i2d_TS_TST_INFO                         533	3_0_0	EXIST::FUNCTION:TS
@@ -748,7 +747,6 @@ EVP_rc5_32_12_16_cfb64                  775	3_0_0	EXIST::FUNCTION:RC5
 PKCS7_dataVerify                        776	3_0_0	EXIST::FUNCTION:
 PKCS7_SIGNER_INFO_free                  777	3_0_0	EXIST::FUNCTION:
 PKCS7_add_attrib_smimecap               778	3_0_0	EXIST::FUNCTION:
-ERR_peek_last_error_line_data           779	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
 EVP_PKEY_meth_set_sign                  780	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
 ASN1_i2d_bio                            781	3_0_0	EXIST::FUNCTION:
 DSA_verify                              782	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,DSA
@@ -959,7 +957,6 @@ DH_get_default_method                   993	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3
 PEM_proc_type                           994	3_0_0	EXIST::FUNCTION:
 BIO_printf                              995	3_0_0	EXIST::FUNCTION:
 a2i_IPADDRESS                           996	3_0_0	EXIST::FUNCTION:
-ERR_peek_error_line_data                997	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
 ERR_unload_strings                      998	3_0_0	EXIST::FUNCTION:
 SEED_cfb128_encrypt                     999	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,SEED
 ASN1_BIT_STRING_it                      1000	3_0_0	EXIST::FUNCTION:
@@ -1542,7 +1539,6 @@ SRP_VBASE_free                          1588	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_
 PKCS7_add0_attrib_signing_time          1589	3_0_0	EXIST::FUNCTION:
 X509_STORE_set_flags                    1590	3_0_0	EXIST::FUNCTION:
 UI_get0_output_string                   1591	3_0_0	EXIST::FUNCTION:
-ERR_get_error_line_data                 1592	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
 CTLOG_get0_name                         1593	3_0_0	EXIST::FUNCTION:CT
 ASN1_TBOOLEAN_it                        1594	3_0_0	EXIST::FUNCTION:
 RC2_set_key                             1595	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,RC2
@@ -2663,7 +2659,6 @@ PEM_read_RSAPublicKey                   2740	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_
 ENGINE_pkey_asn1_find_str               2741	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,ENGINE
 ENGINE_get_load_privkey_function        2742	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,ENGINE
 d2i_IPAddressRange                      2743	3_0_0	EXIST::FUNCTION:RFC3779
-ERR_remove_state                        2744	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_1_0_0
 X509_CRL_print_fp                       2745	3_0_0	EXIST::FUNCTION:STDIO
 TS_CONF_load_key                        2746	3_0_0	EXIST::FUNCTION:TS
 d2i_OCSP_REQINFO                        2747	3_0_0	EXIST::FUNCTION:OCSP
@@ -3152,7 +3147,6 @@ ERR_load_EVP_strings                    3241	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_
 X509_ATTRIBUTE_set1_data                3242	3_0_0	EXIST::FUNCTION:
 d2i_X509_fp                             3243	3_0_0	EXIST::FUNCTION:STDIO
 MD2_Init                                3244	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,MD2
-ERR_get_error_line                      3245	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
 X509_CRL_get_ext_by_NID                 3246	3_0_0	EXIST::FUNCTION:
 OPENSSL_INIT_free                       3247	3_0_0	EXIST::FUNCTION:
 PBE2PARAM_free                          3248	3_0_0	EXIST::FUNCTION:
@@ -3244,7 +3238,6 @@ RSA_setup_blinding                      3336	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_
 ERR_peek_error_line                     3337	3_0_0	EXIST::FUNCTION:
 d2i_PKCS7                               3338	3_0_0	EXIST::FUNCTION:
 ERR_reason_error_string                 3339	3_0_0	EXIST::FUNCTION:
-ERR_remove_thread_state                 3340	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_1_1_0
 PEM_write_PrivateKey                    3341	3_0_0	EXIST::FUNCTION:STDIO
 EVP_PKEY_CTX_str2ctrl                   3342	3_0_0	EXIST::FUNCTION:
 CMS_SignerInfo_verify_content           3343	3_0_0	EXIST::FUNCTION:CMS

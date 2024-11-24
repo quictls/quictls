@@ -1717,21 +1717,10 @@ See L</Providers are a replacement for engines and low-level method overrides>.
 
 =item *
 
-B<ERR_load_*()>, ERR_func_error_string(), ERR_get_error_line(),
-ERR_get_error_line_data(), ERR_get_state()
+B<ERR_load_*()>, ERR_func_error_string(),
+ERR_get_state()
 
 OpenSSL now loads error strings automatically so these functions are not needed.
-
-=item *
-
-ERR_peek_error_line_data(), ERR_peek_last_error_line_data()
-
-The new functions are L<ERR_peek_error_func(3)>, L<ERR_peek_last_error_func(3)>,
-L<ERR_peek_error_data(3)>, L<ERR_peek_last_error_data(3)>, L<ERR_get_error_all(3)>,
-L<ERR_peek_error_all(3)> and L<ERR_peek_last_error_all(3)>.
-Applications should use L<ERR_get_error_all(3)>, or pick information
-with ERR_peek functions and finish off with getting the error code by using
-L<ERR_get_error(3)>.
 
 =item *
 

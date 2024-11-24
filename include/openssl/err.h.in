@@ -50,25 +50,6 @@ extern "C" {
 # define ERR_TXT_MALLOCED        0x01
 # define ERR_TXT_STRING          0x02
 
-# if !defined(OPENSSL_NO_DEPRECATED_3_0) || defined(OSSL_FORCE_ERR_STATE)
-#  define ERR_FLAG_MARK           0x01
-#  define ERR_FLAG_CLEAR          0x02
-
-#  define ERR_NUM_ERRORS  16
-struct err_state_st {
-    int err_flags[ERR_NUM_ERRORS];
-    int err_marks[ERR_NUM_ERRORS];
-    unsigned long err_buffer[ERR_NUM_ERRORS];
-    char *err_data[ERR_NUM_ERRORS];
-    size_t err_data_size[ERR_NUM_ERRORS];
-    int err_data_flags[ERR_NUM_ERRORS];
-    char *err_file[ERR_NUM_ERRORS];
-    int err_line[ERR_NUM_ERRORS];
-    char *err_func[ERR_NUM_ERRORS];
-    int top, bottom;
-};
-# endif
-
 /* library */
 # define ERR_LIB_NONE            1
 # define ERR_LIB_SYS             2
@@ -407,13 +388,6 @@ unsigned long ERR_get_error(void);
 unsigned long ERR_get_error_all(const char **file, int *line,
                                 const char **func,
                                 const char **data, int *flags);
-# ifndef OPENSSL_NO_DEPRECATED_3_0
-OSSL_DEPRECATEDIN_3_0
-unsigned long ERR_get_error_line(const char **file, int *line);
-OSSL_DEPRECATEDIN_3_0
-unsigned long ERR_get_error_line_data(const char **file, int *line,
-                                      const char **data, int *flags);
-#endif
 unsigned long ERR_peek_error(void);
 unsigned long ERR_peek_error_line(const char **file, int *line);
 unsigned long ERR_peek_error_func(const char **func);
@@ -421,11 +395,6 @@ unsigned long ERR_peek_error_data(const char **data, int *flags);
 unsigned long ERR_peek_error_all(const char **file, int *line,
                                  const char **func,
                                  const char **data, int *flags);
-# ifndef OPENSSL_NO_DEPRECATED_3_0
-OSSL_DEPRECATEDIN_3_0
-unsigned long ERR_peek_error_line_data(const char **file, int *line,
-                                       const char **data, int *flags);
-# endif
 unsigned long ERR_peek_last_error(void);
 unsigned long ERR_peek_last_error_line(const char **file, int *line);
 unsigned long ERR_peek_last_error_func(const char **func);
@@ -433,20 +402,12 @@ unsigned long ERR_peek_last_error_data(const char **data, int *flags);
 unsigned long ERR_peek_last_error_all(const char **file, int *line,
                                       const char **func,
                                       const char **data, int *flags);
-# ifndef OPENSSL_NO_DEPRECATED_3_0
-OSSL_DEPRECATEDIN_3_0
-unsigned long ERR_peek_last_error_line_data(const char **file, int *line,
-                                            const char **data, int *flags);
-# endif
 
 void ERR_clear_error(void);
 
 char *ERR_error_string(unsigned long e, char *buf);
 void ERR_error_string_n(unsigned long e, char *buf, size_t len);
 const char *ERR_lib_error_string(unsigned long e);
-# ifndef OPENSSL_NO_DEPRECATED_3_0
-OSSL_DEPRECATEDIN_3_0 const char *ERR_func_error_string(unsigned long e);
-# endif
 const char *ERR_reason_error_string(unsigned long e);
 
 void ERR_print_errors_cb(int (*cb) (const char *str, size_t len, void *u),
@@ -469,12 +430,6 @@ int ERR_unload_strings(int lib, ERR_STRING_DATA *str);
 # define ERR_load_crypto_strings() \
     OPENSSL_init_crypto(OPENSSL_INIT_LOAD_CRYPTO_STRINGS, NULL)
 # define ERR_free_strings() while(0) continue
-#endif
-#ifndef OPENSSL_NO_DEPRECATED_1_1_0
-OSSL_DEPRECATEDIN_1_1_0 void ERR_remove_thread_state(void *);
-#endif
-#ifndef OPENSSL_NO_DEPRECATED_1_0_0
-OSSL_DEPRECATEDIN_1_0_0 void ERR_remove_state(unsigned long pid);
 #endif
 #ifndef OPENSSL_NO_DEPRECATED_3_0
 OSSL_DEPRECATEDIN_3_0 ERR_STATE *ERR_get_state(void);

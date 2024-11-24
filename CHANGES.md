@@ -22,6 +22,7 @@ Currrent Changes
 - Remove support for some old configuration options:
   - fips, no-fips since we do not build a FIPS-validated container
 
+Make ERR_STACK oaque and remove the deprecated functions.
 
 - Removed support for some old platforms:
   - Removed support for old HPE platforms: NonStop and Tandem

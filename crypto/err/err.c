@@ -358,19 +358,6 @@ unsigned long ERR_get_error_all(const char **file, int *line,
     return get_error_values(EV_POP, file, line, func, data, flags);
 }
 
-#ifndef OPENSSL_NO_DEPRECATED_3_0
-unsigned long ERR_get_error_line(const char **file, int *line)
-{
-    return get_error_values(EV_POP, file, line, NULL, NULL, NULL);
-}
-
-unsigned long ERR_get_error_line_data(const char **file, int *line,
-                                      const char **data, int *flags)
-{
-    return get_error_values(EV_POP, file, line, NULL, data, flags);
-}
-#endif
-
 unsigned long ERR_peek_error(void)
 {
     return get_error_values(EV_PEEK, NULL, NULL, NULL, NULL, NULL);
@@ -398,14 +385,6 @@ unsigned long ERR_peek_error_all(const char **file, int *line,
     return get_error_values(EV_PEEK, file, line, func, data, flags);
 }
 
-#ifndef OPENSSL_NO_DEPRECATED_3_0
-unsigned long ERR_peek_error_line_data(const char **file, int *line,
-                                       const char **data, int *flags)
-{
-    return get_error_values(EV_PEEK, file, line, NULL, data, flags);
-}
-#endif
-
 unsigned long ERR_peek_last_error(void)
 {
     return get_error_values(EV_PEEK_LAST, NULL, NULL, NULL, NULL, NULL);
@@ -432,14 +411,6 @@ unsigned long ERR_peek_last_error_all(const char **file, int *line,
 {
     return get_error_values(EV_PEEK_LAST, file, line, func, data, flags);
 }
-
-#ifndef OPENSSL_NO_DEPRECATED_3_0
-unsigned long ERR_peek_last_error_line_data(const char **file, int *line,
-                                            const char **data, int *flags)
-{
-    return get_error_values(EV_PEEK_LAST, file, line, NULL, data, flags);
-}
-#endif
 
 static unsigned long get_error_values(ERR_GET_ACTION g,
                                       const char **file, int *line,
@@ -602,13 +573,6 @@ const char *ERR_lib_error_string(unsigned long e)
 #endif
 }
 
-#ifndef OPENSSL_NO_DEPRECATED_3_0
-const char *ERR_func_error_string(unsigned long e)
-{
-    return NULL;
-}
-#endif
-
 const char *ERR_reason_error_string(unsigned long e)
 {
 #ifndef OPENSSL_NO_ERR
@@ -650,18 +614,6 @@ static void err_delete_thread_state(void *unused)
     CRYPTO_THREAD_set_local(&err_thread_local, NULL);
     OSSL_ERR_STATE_free(state);
 }
-
-#ifndef OPENSSL_NO_DEPRECATED_1_1_0
-void ERR_remove_thread_state(void *dummy)
-{
-}
-#endif
-
-#ifndef OPENSSL_NO_DEPRECATED_1_0_0
-void ERR_remove_state(unsigned long pid)
-{
-}
-#endif
 
 DEFINE_RUN_ONCE_STATIC(err_do_init)
 {
