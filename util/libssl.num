@@ -111,7 +111,6 @@ TLS_method                              111	3_0_0	EXIST::FUNCTION:
 SSL_CONF_CTX_clear_flags                112	3_0_0	EXIST::FUNCTION:
 TLSv1_client_method                     113	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_1_1_0,TLS1_METHOD
 SSL_CIPHER_get_bits                     114	3_0_0	EXIST::FUNCTION:
-SSL_test_functions                      115	3_0_0	EXIST::FUNCTION:UNIT_TEST
 SSL_get_SSL_CTX                         116	3_0_0	EXIST::FUNCTION:
 SSL_get_session                         117	3_0_0	EXIST::FUNCTION:
 SSL_CTX_callback_ctrl                   118	3_0_0	EXIST::FUNCTION:

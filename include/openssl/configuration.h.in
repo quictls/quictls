@@ -76,6 +76,9 @@ extern "C" {
 # ifndef OPENSSL_NO_EC2M
 #  define OPENSSL_NO_EC2M
 # endif
+# ifndef OPENSSL_NO_UNIT_TEST
+#  define OPENSSL_NO_UNIT_TEST
+# endif
 # ifndef OPENSSL_NO_EGD
 #  define OPENSSL_NO_EGD
 # endif

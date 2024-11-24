@@ -2451,10 +2451,6 @@ const SSL_METHOD *func_name(void)  \
         return &func_name##_data; \
         }
 
-struct openssl_ssl_test_functions {
-    int (*p_ssl_init_wbio_buffer) (SSL_CONNECTION *s);
-};
-
 const char *ssl_protocol_to_string(int version);
 
 static ossl_inline int tls12_rpk_and_privkey(const SSL_CONNECTION *sc, int idx)
