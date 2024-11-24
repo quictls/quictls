@@ -151,9 +151,6 @@ DEFINE_RUN_ONCE_STATIC(init_info_strings)
 #ifdef OPENSSL_RAND_SEED_DEVRANDOM
         add_seeds_stringlist("random-device", DEVRANDOM);
 #endif
-#ifdef OPENSSL_RAND_SEED_EGD
-        add_seeds_stringlist("EGD", DEVRANDOM_EGD);
-#endif
 #ifdef OPENSSL_RAND_SEED_OS
         add_seeds_string("os-specific");
 #endif

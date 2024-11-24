@@ -571,7 +571,6 @@ ASN1_TYPE_set                           592	3_0_0	EXIST::FUNCTION:
 i2d_PKCS8_PRIV_KEY_INFO                 593	3_0_0	EXIST::FUNCTION:
 i2d_PKCS7_bio                           594	3_0_0	EXIST::FUNCTION:
 EVP_MD_meth_get_copy                    595	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
-RAND_query_egd_bytes                    596	3_0_0	EXIST::FUNCTION:EGD
 i2d_ASN1_PRINTABLE                      597	3_0_0	EXIST::FUNCTION:
 ENGINE_cmd_is_executable                598	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,ENGINE
 BIO_puts                                599	3_0_0	EXIST::FUNCTION:
@@ -1275,7 +1274,6 @@ BN_BLINDING_set_flags                   1314	3_0_0	EXIST::FUNCTION:
 ERR_peek_last_error                     1315	3_0_0	EXIST::FUNCTION:
 ENGINE_set_cmd_defns                    1316	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,ENGINE
 d2i_ASN1_NULL                           1317	3_0_0	EXIST::FUNCTION:
-RAND_event                              1318	3_0_0	EXIST:_WIN32:FUNCTION:DEPRECATEDIN_1_1_0
 i2d_PKCS12_fp                           1319	3_0_0	EXIST::FUNCTION:STDIO
 EVP_PKEY_meth_get_init                  1320	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
 X509_check_trust                        1321	3_0_0	EXIST::FUNCTION:
@@ -1747,7 +1745,6 @@ OCSP_SINGLERESP_get_ext_by_NID          1800	3_0_0	EXIST::FUNCTION:OCSP
 a2i_IPADDRESS_NC                        1801	3_0_0	EXIST::FUNCTION:
 CTLOG_STORE_load_default_file           1802	3_0_0	EXIST::FUNCTION:CT
 PKCS12_SAFEBAG_create_pkcs8_encrypt     1803	3_0_0	EXIST::FUNCTION:
-RAND_screen                             1804	3_0_0	EXIST:_WIN32:FUNCTION:DEPRECATEDIN_1_1_0
 CONF_get_string                         1805	3_0_0	EXIST::FUNCTION:
 X509_cmp_current_time                   1806	3_0_0	EXIST::FUNCTION:
 i2d_DSAPrivateKey                       1807	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,DSA
@@ -2453,7 +2450,6 @@ d2i_NETSCAPE_SPKI                       2524	3_0_0	EXIST::FUNCTION:
 CRYPTO_mem_leaks                        2525	3_0_0	EXIST::FUNCTION:CRYPTO_MDEBUG,DEPRECATEDIN_3_0
 BN_get_rfc3526_prime_1536               2526	3_0_0	EXIST::FUNCTION:
 DSA_sign                                2527	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,DSA
-RAND_egd                                2528	3_0_0	EXIST::FUNCTION:EGD
 ASN1_d2i_bio                            2529	3_0_0	EXIST::FUNCTION:
 X509_REQ_digest                         2531	3_0_0	EXIST::FUNCTION:
 X509_set1_notAfter                      2532	3_0_0	EXIST::FUNCTION:
@@ -3334,7 +3330,6 @@ X509_ALGOR_free                         3429	3_0_0	EXIST::FUNCTION:
 OCSP_SINGLERESP_get_ext_count           3430	3_0_0	EXIST::FUNCTION:OCSP
 EC_POINT_free                           3431	3_0_0	EXIST::FUNCTION:EC
 EVP_OpenFinal                           3432	3_0_0	EXIST::FUNCTION:
-RAND_egd_bytes                          3433	3_0_0	EXIST::FUNCTION:EGD
 UI_method_get_writer                    3434	3_0_0	EXIST::FUNCTION:
 BN_secure_new                           3435	3_0_0	EXIST::FUNCTION:
 SHA1_Update                             3437	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0

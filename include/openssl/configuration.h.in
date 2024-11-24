@@ -73,7 +73,11 @@ extern "C" {
 # endif
 
 /* Features completely removed */
-#ifndef OPENSSL_NO_EC2M
-#define OPENSSL_NO_EC2M
+# ifndef OPENSSL_NO_EC2M
+#  define OPENSSL_NO_EC2M
+# endif
+# ifndef OPENSSL_NO_EGD
+#  define OPENSSL_NO_EGD
+# endif
+
 #endif
-#endif                          /* OPENSSL_CONFIGURATION_H */

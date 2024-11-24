@@ -97,7 +97,6 @@ static uint64_t get_time_stamp(void);
 # undef OPENSSL_RAND_SEED_DEVRANDOM
 # undef OPENSSL_RAND_SEED_RDTSC
 # undef OPENSSL_RAND_SEED_RDCPU
-# undef OPENSSL_RAND_SEED_EGD
 #endif
 
 #if defined(OPENSSL_SYS_UEFI) && !defined(OPENSSL_RAND_SEED_NONE)
@@ -107,11 +106,6 @@ static uint64_t get_time_stamp(void);
 #if !(defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_WIN32) \
     || defined(OPENSSL_SYS_VMS) || defined(OPENSSL_SYS_VXWORKS) \
     || defined(OPENSSL_SYS_UEFI))
-
-# if defined(OPENSSL_RAND_SEED_EGD) && \
-       (defined(OPENSSL_NO_EGD) || !defined(DEVRANDOM_EGD))
-#  error "Seeding uses EGD but EGD is turned off or no device given"
-# endif
 
 # if defined(OPENSSL_RAND_SEED_DEVRANDOM) && !defined(DEVRANDOM)
 #  error "Seeding uses urandom but DEVRANDOM is not configured"
@@ -635,32 +629,6 @@ size_t ossl_pool_acquire_entropy(RAND_POOL *pool)
         return entropy_available;
 #  endif
 
-#  if defined(OPENSSL_RAND_SEED_EGD)
-    {
-        static const char *paths[] = { DEVRANDOM_EGD, NULL };
-        size_t bytes_needed;
-        unsigned char *buffer;
-        int i;
-
-        bytes_needed = ossl_rand_pool_bytes_needed(pool, 1 /*entropy_factor*/);
-        for (i = 0; bytes_needed > 0 && paths[i] != NULL; i++) {
-            size_t bytes = 0;
-            int num;
-
-            buffer = ossl_rand_pool_add_begin(pool, bytes_needed);
-            num = RAND_query_egd_bytes(paths[i],
-                                       buffer, (int)bytes_needed);
-            if (num == (int)bytes_needed)
-                bytes = bytes_needed;
-
-            ossl_rand_pool_add_end(pool, bytes, 8 * bytes);
-            bytes_needed = ossl_rand_pool_bytes_needed(pool, 1);
-        }
-        entropy_available = ossl_rand_pool_entropy_available(pool);
-        if (entropy_available > 0)
-            return entropy_available;
-    }
-#  endif
 
     return ossl_rand_pool_entropy_available(pool);
 # endif
