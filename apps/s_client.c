@@ -2180,7 +2180,7 @@ int s_client_main(int argc, char **argv)
             ERR_print_errors(bio_err);
             goto end;
         }
-	BIO_printf(bio_c_out, "Turned on non blocking io\n");
+        BIO_printf(bio_c_out, "Turned on non blocking io\n");
     }
 #ifndef OPENSSL_NO_DTLS
     if (isdtls) {
