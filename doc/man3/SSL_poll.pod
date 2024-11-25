@@ -235,33 +235,6 @@ B<SSL_ERROR_ZERO_RETURN> waiting to be read.
 It is not raised in the event of the receiving part of the QUIC stream being
 reset by the peer; see B<SSL_POLL_EVENT_ER>.
 
-=item B<SSL_POLL_EVENT_W>
-
-Writable. This event is raised when a QUIC stream SSL object (or a QUIC
-connection SSL object with a default stream attached) could accept more
-application data using L<SSL_write_ex(3)>.
-
-This event is never raised by a receive-only stream.
-
-This event is never raised by a stream which has had its send part concluded
-normally (as with L<SSL_stream_conclude(3)>) or locally reset (as with
-L<SSL_stream_reset(3)>).
-
-This event does not guarantee that a subsequent call to L<SSL_write_ex(3)> will
-succeed.
-
-=item B<SSL_POLL_EVENT_ISB>
-
-This event, which is only raised by a QUIC connection SSL object, is raised when
-one or more incoming bidirectional streams are available to be accepted using
-L<SSL_accept_stream(3)>.
-
-=item B<SSL_POLL_EVENT_ISU>
-
-This event, which is only raised by a QUIC connection SSL object, is raised when
-one or more incoming unidirectional streams are available to be accepted using
-L<SSL_accept_stream(3)>.
-
 =item B<SSL_POLL_EVENT_OSB>
 
 This event, which is only raised by a QUIC connection SSL object, is raised when

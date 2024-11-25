@@ -6731,8 +6731,7 @@ static int test_key_update_peer_in_write(int tst)
     /* Write data that we know will fail with SSL_ERROR_WANT_WRITE */
     if (!TEST_int_eq(SSL_write(peerwrite, mess, strlen(mess)), -1)
             || !TEST_int_eq(SSL_get_error(peerwrite, 0), SSL_ERROR_WANT_WRITE)
-            || !TEST_true(SSL_want_write(peerwrite))
-            || !TEST_true(SSL_net_write_desired(peerwrite)))
+            || !TEST_true(SSL_want_write(peerwrite)))
         goto end;
 
     /* Reinstate the original writing endpoint's write BIO */
@@ -6742,8 +6741,7 @@ static int test_key_update_peer_in_write(int tst)
     /* Now read some data - we will read the key update */
     if (!TEST_int_eq(SSL_read(peerwrite, buf, sizeof(buf)), -1)
             || !TEST_int_eq(SSL_get_error(peerwrite, 0), SSL_ERROR_WANT_READ)
-            || !TEST_true(SSL_want_read(peerwrite))
-            || !TEST_true(SSL_net_read_desired(peerwrite)))
+            || !TEST_true(SSL_want_read(peerwrite)))
         goto end;
 
     /*
@@ -6759,9 +6757,8 @@ static int test_key_update_peer_in_write(int tst)
             || !TEST_int_eq(SSL_read(peerupdate, buf, sizeof(buf)), strlen(mess)))
         goto end;
 
-    if (!TEST_false(SSL_net_read_desired(peerwrite))
-        || !TEST_false(SSL_net_write_desired(peerwrite))
-        || !TEST_int_eq(SSL_want(peerwrite), SSL_NOTHING))
+    if (!TEST_false(SSL_want_read(peerwrite))
+        || !TEST_false(SSL_want_write(peerwrite)))
         goto end;
 
     testresult = 1;

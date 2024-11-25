@@ -89,8 +89,7 @@ use SSL_set0_rbio() and SSL_set0_wbio() instead.
 Where a new BIO is set on a QUIC connection SSL object, blocking mode will be
 disabled on that SSL object if the BIO cannot support blocking mode. If another
 BIO is subsequently set on the SSL object which can support blocking mode,
-blocking mode will not be automatically re-enabled. For more information, see
-L<SSL_set_blocking_mode(3)>.
+blocking mode will not be automatically re-enabled.
 
 =head1 RETURN VALUES
 

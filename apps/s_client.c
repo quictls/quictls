@@ -2175,20 +2175,12 @@ int s_client_main(int argc, char **argv)
     }
     BIO_printf(bio_c_out, "CONNECTED(%08X)\n", sock);
 
-    /*
-     * QUIC always uses a non-blocking socket - and we have to switch on
-     * non-blocking mode at the SSL level
-     */
-    if (c_nbio || isquic) {
+    if (c_nbio) {
         if (!BIO_socket_nbio(sock, 1)) {
             ERR_print_errors(bio_err);
             goto end;
         }
-        if (c_nbio) {
-            if (isquic && !SSL_set_blocking_mode(con, 0))
-                goto end;
-            BIO_printf(bio_c_out, "Turned on non blocking io\n");
-        }
+	BIO_printf(bio_c_out, "Turned on non blocking io\n");
     }
 #ifndef OPENSSL_NO_DTLS
     if (isdtls) {
@@ -2249,15 +2241,6 @@ int s_client_main(int argc, char **argv)
         }
     } else
 #endif /* OPENSSL_NO_DTLS */
-#ifndef OPENSSL_NO_QUIC
-    if (isquic) {
-        sbio = BIO_new_dgram(sock, BIO_NOCLOSE);
-        if (!SSL_set1_initial_peer_addr(con, peer_addr)) {
-            BIO_printf(bio_err, "Failed to set the initial peer address\n");
-            goto shut;
-        }
-    } else
-#endif
         sbio = BIO_new_socket(sock, BIO_NOCLOSE);
 
     if (sbio == NULL) {
@@ -3002,19 +2985,15 @@ int s_client_main(int argc, char **argv)
              * they become readable/writeable and then SSL_handle_events() doing
              * the right thing.
              */
-            if ((!isquic && read_ssl)
-                    || (isquic && SSL_net_read_desired(con)))
+            if (!isquic && read_ssl)
                 openssl_fdset(SSL_get_fd(con), &readfds);
-            if ((!isquic && write_ssl)
-                    || (isquic && (first_loop || SSL_net_write_desired(con))))
+            if (!isquic && write_ssl)
                 openssl_fdset(SSL_get_fd(con), &writefds);
 #else
             if (!tty_on || !write_tty) {
-                if ((!isquic && read_ssl)
-                        || (isquic && SSL_net_read_desired(con)))
+                if (!isquic && read_ssl)
                     openssl_fdset(SSL_get_fd(con), &readfds);
-                if ((!isquic && write_ssl)
-                        || (isquic && (first_loop || SSL_net_write_desired(con))))
+                if (!isquic && write_ssl)
                     openssl_fdset(SSL_get_fd(con), &writefds);
             }
 #endif
@@ -3872,10 +3851,7 @@ static int user_data_execute(struct user_data_st *user_data, int cmd, char *arg)
         }
 
     case USER_COMMAND_FIN:
-        if (!SSL_stream_conclude(user_data->con, 0))
-            break;
-        user_data->isfin = 1;
-        return USER_DATA_PROCESS_NO_DATA;
+      break;
 
     default:
         break;
