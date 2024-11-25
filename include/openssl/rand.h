@@ -102,21 +102,7 @@ int RAND_write_file(const char *file);
 const char *RAND_file_name(char *file, size_t num);
 int RAND_status(void);
 
-# ifndef OPENSSL_NO_EGD
-int RAND_query_egd_bytes(const char *path, unsigned char *buf, int bytes);
-int RAND_egd(const char *path);
-int RAND_egd_bytes(const char *path, int bytes);
-# endif
-
 int RAND_poll(void);
-
-# if defined(_WIN32) && (defined(BASETYPES) || defined(_WINDEF_H))
-/* application has to include <windows.h> in order to use these */
-#  ifndef OPENSSL_NO_DEPRECATED_1_1_0
-OSSL_DEPRECATEDIN_1_1_0 void RAND_screen(void);
-OSSL_DEPRECATEDIN_1_1_0 int RAND_event(UINT, WPARAM, LPARAM);
-#  endif
-# endif
 
 #ifdef  __cplusplus
 }

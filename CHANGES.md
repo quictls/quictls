@@ -20,7 +20,10 @@ Currrent Changes
 - Based on OpenSSL 3.3
 
 - Remove support for some old configuration options:
+  - unit-test as there was only one, so not worth the complication
   - fips, no-fips since we do not build a FIPS-validated container
+
+- Remove support for EGD random source.
 
 
 - Removed support for some old platforms:

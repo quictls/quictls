@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-RAND_add, RAND_poll, RAND_seed, RAND_status, RAND_event, RAND_screen,
+RAND_add, RAND_poll, RAND_seed, RAND_status,
 RAND_keep_random_devices_open
 - add randomness to the PRNG or get its status
 
@@ -17,13 +17,6 @@ RAND_keep_random_devices_open
  void RAND_seed(const void *buf, int num);
 
  void RAND_keep_random_devices_open(int keep);
-
-The following functions have been deprecated since OpenSSL 1.1.0, and can be
-hidden entirely by defining B<OPENSSL_API_COMPAT> with a suitable version value,
-see L<openssl_user_macros(7)>:
-
- int RAND_event(UINT iMsg, WPARAM wParam, LPARAM lParam);
- void RAND_screen(void);
 
 =head1 DESCRIPTION
 
@@ -72,9 +65,6 @@ file descriptors. This function is usually called during initialization
 and it takes effect immediately. This capability only applies to the default
 provider.
 
-RAND_event() and RAND_screen() are equivalent to RAND_poll() and exist
-for compatibility reasons only. See HISTORY section below.
-
 =head1 RETURN VALUES
 
 RAND_status() returns 1 if the random generator has been seeded
@@ -82,22 +72,14 @@ with enough data, 0 otherwise.
 
 RAND_poll() returns 1 if it generated seed data, 0 otherwise.
 
-RAND_event() returns RAND_status().
-
 The other functions do not return values.
 
 =head1 SEE ALSO
 
 L<RAND_bytes(3)>,
-L<RAND_egd(3)>,
 L<RAND_load_file(3)>,
 L<RAND(7)>
 L<EVP_RAND(7)>
-
-=head1 HISTORY
-
-RAND_event() and RAND_screen() were deprecated in OpenSSL 1.1.0 and should
-not be used.
 
 =head1 COPYRIGHT
 

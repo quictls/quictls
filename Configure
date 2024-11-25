@@ -27,7 +27,7 @@ use OpenSSL::config;
 my $orig_death_handler = $SIG{__DIE__};
 $SIG{__DIE__} = \&death_handler;
 
-my $usage="Usage: Configure [no-<feature> ...] [enable-<feature> ...] [-Dxxx] [-lxxx] [-Lxxx] [-fxxx] [-Kxxx] [no-hw-xxx|no-hw] [[no-]threads] [[no-]thread-pool] [[no-]default-thread-pool] [[no-]shared] [[no-]zlib|zlib-dynamic] [no-asm] [no-egd] [sctp] [386] [--prefix=DIR] [--openssldir=OPENSSLDIR] [--with-xxx[=vvv]] [--config=FILE] os/compiler[:flags]\n";
+my $usage="Usage: Configure [no-<feature> ...] [enable-<feature> ...] [-Dxxx] [-lxxx] [-Lxxx] [-fxxx] [-Kxxx] [no-hw-xxx|no-hw] [[no-]threads] [[no-]thread-pool] [[no-]default-thread-pool] [[no-]shared] [[no-]zlib|zlib-dynamic] [no-asm] [sctp] [386] [--prefix=DIR] [--openssldir=OPENSSLDIR] [--with-xxx[=vvv]] [--config=FILE] os/compiler[:flags]\n";
 
 my $banner = <<"EOF";
 
@@ -89,7 +89,6 @@ EOF
 # [no-]pic      [don't] try to build position independent code when supported.
 #               If disabled, it also disables shared and dynamic-engine.
 # no-asm        do not use assembler
-# no-egd        do not compile support for the entropy-gathering daemon APIs
 # [no-]zlib     [don't] compile support for zlib compression.
 # zlib-dynamic  Like "zlib", but the zlib library is expected to be a shared
 #               library and will be loaded at run-time by the OpenSSL library.
@@ -459,7 +458,6 @@ my @disablables = (
     "ecdh",
     "ecdsa",
     "ecx",
-    "egd",
     "engine",
     "err",
     "external-tests",
@@ -524,7 +522,6 @@ my @disablables = (
     "ts",
     "ubsan",
     "ui-console",
-    "unit-test",
     "uplink",
     "weak-ssl-ciphers",
     "whirlpool",
@@ -570,7 +567,6 @@ our %disabled = ( # "what"         => "comment"
                   "crypto-mdebug-backtrace" => "default",
                   "devcryptoeng"        => "default",
                   "ec_nistp_64_gcc_128" => "default",
-                  "egd"                 => "default",
                   "external-tests"      => "default",
                   "fuzz-afl"            => "default",
                   "fuzz-libfuzzer"      => "default",
@@ -585,7 +581,6 @@ our %disabled = ( # "what"         => "comment"
                   "tfo"                 => "default",
                   "trace"               => "default",
                   "ubsan"               => "default",
-                  "unit-test"           => "default",
                   "weak-ssl-ciphers"    => "default",
                   "zlib"                => "default",
                   "zlib-dynamic"        => "default",
@@ -662,12 +657,11 @@ my @disable_cascades = (
     # no-autoalginit is only useful when building non-shared
     "autoalginit"       => [ "shared", "apps", "fips" ],
 
-    "stdio"             => [ "apps", "capieng", "egd" ],
+    "stdio"             => [ "apps", "capieng" ],
     "apps"              => [ "tests" ],
     "tests"             => [ "external-tests" ],
     "comp"              => [ "zlib", "brotli", "zstd" ],
     "sm3"               => [ "sm2" ],
-    sub { !$disabled{"unit-test"} } => [ "heartbeats" ],
 
     sub { !$disabled{"msan"} } => [ "asm" ],
 
@@ -804,7 +798,7 @@ my %cmdvars = ();               # Stores FOO='blah' type arguments
 my %unsupported_options = ();
 my %deprecated_options = ();
 # If you change this, update apps/version.c
-my @known_seed_sources = qw(getrandom devrandom os egd none rdcpu librandom);
+my @known_seed_sources = qw(getrandom devrandom os none rdcpu librandom);
 my @seed_sources = ();
 while (@argvcopy)
         {
@@ -1290,9 +1284,6 @@ print "for target $target\n";
 if (scalar(@seed_sources) == 0) {
     print "Using os-specific seed configuration\n";
     push @seed_sources, 'os';
-}
-if (scalar(grep { $_ eq 'egd' } @seed_sources) > 0) {
-    delete $disabled{'egd'};
 }
 if (scalar(grep { $_ eq 'none' } @seed_sources) > 0) {
     die "Cannot seed with none and anything else" if scalar(@seed_sources) > 1;
