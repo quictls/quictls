@@ -402,23 +402,12 @@ static const SHA_LONG64 K512[80] = {
                                 : "0"(ret)); ret;               })
 #    endif
 #   elif (defined(__i386) || defined(__i386__)) && !defined(B_ENDIAN)
-#    if defined(I386_ONLY)
-#     define PULL64(x) ({ const unsigned int *p=(const unsigned int *)(&(x));\
-                          unsigned int hi=p[0],lo=p[1];          \
-                                asm("xchgb %%ah,%%al;xchgb %%dh,%%dl;"\
-                                    "roll $16,%%eax; roll $16,%%edx; "\
-                                    "xchgb %%ah,%%al;xchgb %%dh,%%dl;"\
-                                : "=a"(lo),"=d"(hi)             \
-                                : "0"(lo),"1"(hi) : "cc");      \
-                                ((SHA_LONG64)hi)<<32|lo;        })
-#    else
 #     define PULL64(x) ({ const unsigned int *p=(const unsigned int *)(&(x));\
                           unsigned int hi=p[0],lo=p[1];         \
                                 asm ("bswapl %0; bswapl %1;"    \
                                 : "=r"(lo),"=r"(hi)             \
                                 : "0"(lo),"1"(hi));             \
                                 ((SHA_LONG64)hi)<<32|lo;        })
-#    endif
 #   elif (defined(_ARCH_PPC) && defined(__64BIT__)) || defined(_ARCH_PPC64)
 #    define ROTR(a,n)    ({ SHA_LONG64 ret;             \
                                 asm ("rotrdi %0,%1,%2"  \
@@ -541,19 +530,6 @@ static const SHA_LONG64 K512[80] = {
 #   endif
 #   if defined(_M_IX86) && !defined(OPENSSL_NO_ASM) && \
        !defined(OPENSSL_NO_INLINE_ASM)
-#    if defined(I386_ONLY)
-static SHA_LONG64 __fastcall __pull64be(const void *x)
-{
-    _asm mov  edx,[ecx + 0]
-    _asm mov  eax,[ecx + 4]
-    _asm xchg dh, dl
-    _asm xchg ah, al
-    _asm rol  edx, 16
-    _asm rol  eax, 16
-    _asm xchg dh, dl
-    _asm xchg ah, al
-}
-#    else
 static SHA_LONG64 __fastcall __pull64be(const void *x)
 {
     _asm mov   edx,[ecx + 0]
@@ -561,7 +537,6 @@ static SHA_LONG64 __fastcall __pull64be(const void *x)
     _asm bswap edx
     _asm bswap eax
 }
-#    endif
 #    define PULL64(x) __pull64be(&(x))
 #   endif
 #  endif

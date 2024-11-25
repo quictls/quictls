@@ -337,7 +337,7 @@ void gcm_ghash_4bit(u64 Xi[2], const u128 Htable[16], const u8 *inp,
 # endif
 
 #if     (defined(GHASH_ASM) || defined(OPENSSL_CPUID_OBJ))
-# if    !defined(I386_ONLY) && \
+# if    \
         (defined(__i386)        || defined(__i386__)    || \
          defined(__x86_64)      || defined(__x86_64__)  || \
          defined(_M_IX86)       || defined(_M_AMD64)    || defined(_M_X64))

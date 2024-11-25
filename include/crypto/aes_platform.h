@@ -173,7 +173,7 @@ void gcm_ghash_v8(u64 Xi[2],const u128 Htable[16],const u8 *inp, size_t len);
 #  endif
 # endif
 
-# if     defined(AES_ASM) && !defined(I386_ONLY) &&      (  \
+# if     defined(AES_ASM) &&      (  \
          ((defined(__i386)       || defined(__i386__)    || \
            defined(_M_IX86)) && defined(OPENSSL_IA32_SSE2))|| \
          defined(__x86_64)       || defined(__x86_64__)  || \

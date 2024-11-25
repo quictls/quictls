@@ -30,3 +30,4 @@ Currrent Changes
   - Removed support for old HPE platforms: NonStop and Tandem
   - Removed DJGPP support.
   - Removed WinCE support.
+  - Remove `I386_only` support.
