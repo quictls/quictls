@@ -3851,7 +3851,7 @@ static int user_data_execute(struct user_data_st *user_data, int cmd, char *arg)
         }
 
     case USER_COMMAND_FIN:
-      break;
+        break;
 
     default:
         break;
