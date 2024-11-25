@@ -88,8 +88,6 @@ my $guess_patterns = [
           return "${MACHINE}-hp-hpux";
       }
     ],
-    [ 'IRIX:6\..*',                 'mips3-sgi-irix' ],
-    [ 'IRIX64:.*',                  'mips4-sgi-irix64' ],
     [ 'Linux:[2-9]\..*',            '${MACHINE}-whatever-linux2' ],
     [ 'Linux:1\..*',                '${MACHINE}-whatever-linux1' ],
     [ 'GNU:.*86-AT386',             'hurd-x86' ],
@@ -472,17 +470,6 @@ _____
 my $map_patterns =
     [ [ 'uClinux.*64.*',          { target => 'uClinux-dist64' } ],
       [ 'uClinux.*',              { target => 'uClinux-dist' } ],
-      [ 'mips3-sgi-irix',         { target => 'irix-mips3' } ],
-      [ 'mips4-sgi-irix64',
-        sub {
-            print <<EOF;
-WARNING! To build 64-bit package, do this:
-         $WHERE/Configure irix64-mips4-$CC
-EOF
-            maybe_abort();
-            return { target => "irix-mips3" };
-        }
-      ],
       [ 'ppc-apple-rhapsody',     { target => "rhapsody-ppc" } ],
       [ 'ppc-apple-darwin.*',
         sub {

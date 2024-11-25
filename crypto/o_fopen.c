@@ -18,7 +18,7 @@
  * access suffices for practical cases when you can run into large files,
  * such as fingerprinting, so we can let API alone. For reference, the list
  * of 32-bit platforms which allow for sequential access of large files
- * without extra "magic" comprise *BSD, Darwin, IRIX...
+ * without extra "magic" comprise *BSD, Darwin...
  */
 #  ifndef _FILE_OFFSET_BITS
 #   define _FILE_OFFSET_BITS 64

@@ -273,44 +273,6 @@ static char *dlfcn_name_converter(DSO *dso, const char *filename)
     return translated;
 }
 
-# ifdef __sgi
-/*-
-This is a quote from IRIX manual for dladdr(3c):
-
-     <dlfcn.h> does not contain a prototype for dladdr or definition of
-     Dl_info.  The #include <dlfcn.h>  in the SYNOPSIS line is traditional,
-     but contains no dladdr prototype and no IRIX library contains an
-     implementation.  Write your own declaration based on the code below.
-
-     The following code is dependent on internal interfaces that are not
-     part of the IRIX compatibility guarantee; however, there is no future
-     intention to change this interface, so on a practical level, the code
-     below is safe to use on IRIX.
-*/
-#  include <rld_interface.h>
-#  ifndef _RLD_INTERFACE_DLFCN_H_DLADDR
-#   define _RLD_INTERFACE_DLFCN_H_DLADDR
-typedef struct Dl_info {
-    const char *dli_fname;
-    void *dli_fbase;
-    const char *dli_sname;
-    void *dli_saddr;
-    int dli_version;
-    int dli_reserved1;
-    long dli_reserved[4];
-} Dl_info;
-#  else
-typedef struct Dl_info Dl_info;
-#  endif
-#  define _RLD_DLADDR             14
-
-static int dladdr(void *address, Dl_info *dl)
-{
-    void *v;
-    v = _rld_new_interface(_RLD_DLADDR, address, dl);
-    return (int)v;
-}
-# endif                         /* __sgi */
 
 # ifdef _AIX
 /*-
