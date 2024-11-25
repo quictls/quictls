@@ -2114,7 +2114,7 @@ static int setup_client_ctx(OSSL_CMP_CTX *ctx, ENGINE *engine)
     } else {
         char id_buf[100] = "id-it-";
 
-        strncat(id_buf, opt_infotype_s, sizeof(id_buf) - strlen(id_buf) - 1);
+        OPENSSL_strlcat(id_buf, opt_infotype_s, sizeof(id_buf));
         if ((opt_infotype = OBJ_sn2nid(id_buf)) == NID_undef) {
             CMP_err("unknown OID name in -infotype option");
             goto err;
