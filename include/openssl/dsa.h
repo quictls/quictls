@@ -158,15 +158,6 @@ DECLARE_ASN1_ENCODE_FUNCTIONS_only_attr(OSSL_DEPRECATEDIN_3_0,
                                         DSA, DSAparams)
 #  endif
 
-#  ifndef OPENSSL_NO_DEPRECATED_0_9_8
-/* Deprecated version */
-OSSL_DEPRECATEDIN_0_9_8
-DSA *DSA_generate_parameters(int bits, unsigned char *seed, int seed_len,
-                             int *counter_ret, unsigned long *h_ret,
-                             void (*callback) (int, int, void *),
-                             void *cb_arg);
-#  endif
-
 #  ifndef OPENSSL_NO_DEPRECATED_3_0
 /* New version */
 OSSL_DEPRECATEDIN_3_0 int DSA_generate_parameters_ex(DSA *dsa, int bits,

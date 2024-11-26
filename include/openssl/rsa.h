@@ -259,13 +259,6 @@ OSSL_DEPRECATEDIN_3_0 ENGINE *RSA_get0_engine(const RSA *r);
 # define EVP_RSA_gen(bits) \
     EVP_PKEY_Q_keygen(NULL, NULL, "RSA", (size_t)(0 + (bits)))
 
-/* Deprecated version */
-# ifndef OPENSSL_NO_DEPRECATED_0_9_8
-OSSL_DEPRECATEDIN_0_9_8 RSA *RSA_generate_key(int bits, unsigned long e, void
-                                              (*callback) (int, int, void *),
-                                              void *cb_arg);
-# endif
-
 /* New version */
 # ifndef OPENSSL_NO_DEPRECATED_3_0
 OSSL_DEPRECATEDIN_3_0 int RSA_generate_key_ex(RSA *rsa, int bits, BIGNUM *e,

@@ -4,8 +4,8 @@
 
 BN_generate_prime_ex2, BN_generate_prime_ex, BN_is_prime_ex, BN_check_prime,
 BN_is_prime_fasttest_ex, BN_GENCB_call, BN_GENCB_new, BN_GENCB_free,
-BN_GENCB_set_old, BN_GENCB_set, BN_GENCB_get_arg, BN_generate_prime,
-BN_is_prime, BN_is_prime_fasttest - generate primes and test for primality
+BN_GENCB_set_old, BN_GENCB_set, BN_GENCB_get_arg
+- generate primes and test for primality
 
 =head1 SYNOPSIS
 
@@ -33,21 +33,6 @@ BN_is_prime, BN_is_prime_fasttest - generate primes and test for primality
                    int (*callback)(int, int, BN_GENCB *), void *cb_arg);
 
  void *BN_GENCB_get_arg(BN_GENCB *cb);
-
-The following functions have been deprecated since OpenSSL 0.9.8, and can be
-hidden entirely by defining B<OPENSSL_API_COMPAT> with a suitable version value,
-see L<openssl_user_macros(7)>:
-
- BIGNUM *BN_generate_prime(BIGNUM *ret, int num, int safe, BIGNUM *add,
-                           BIGNUM *rem, void (*callback)(int, int, void *),
-                           void *cb_arg);
-
- int BN_is_prime(const BIGNUM *p, int nchecks,
-                 void (*callback)(int, int, void *), BN_CTX *ctx, void *cb_arg);
-
- int BN_is_prime_fasttest(const BIGNUM *p, int nchecks,
-                          void (*callback)(int, int, void *), BN_CTX *ctx,
-                          void *cb_arg, int do_trial_division);
 
 The following functions have been deprecated since OpenSSL 3.0, and can be
 hidden entirely by defining B<OPENSSL_API_COMPAT> with a suitable version value,
@@ -183,13 +168,6 @@ style callbacks or B<callback(a, b, cb_arg)> for old style.
 It is possible to obtain the argument associated with a BN_GENCB structure
 (set via a call to BN_GENCB_set or BN_GENCB_set_old) using BN_GENCB_get_arg.
 
-BN_generate_prime() (deprecated) works in the same way as
-BN_generate_prime_ex() but expects an old-style callback function
-directly in the B<callback> parameter, and an argument to pass to it in
-the B<cb_arg>. BN_is_prime() and BN_is_prime_fasttest()
-can similarly be compared to BN_is_prime_ex() and
-BN_is_prime_fasttest_ex(), respectively.
-
 =head1 RETURN VALUES
 
 BN_generate_prime_ex() return 1 on success or 0 on error.
@@ -198,8 +176,6 @@ BN_is_prime_ex(), BN_is_prime_fasttest_ex(), BN_is_prime(),
 BN_is_prime_fasttest() and BN_check_prime return 0 if the number is composite,
 1 if it is prime with an error probability of less than 0.25^B<nchecks>, and
 -1 on error.
-
-BN_generate_prime() returns the prime number on success, B<NULL> otherwise.
 
 BN_GENCB_new returns a pointer to a BN_GENCB structure on success, or B<NULL>
 otherwise.
@@ -229,8 +205,8 @@ Instead applications should create a BN_GENCB structure using BN_GENCB_new:
 
 =head1 SEE ALSO
 
-L<DH_generate_parameters(3)>, L<DSA_generate_parameters(3)>,
-L<RSA_generate_key(3)>, L<ERR_get_error(3)>, L<RAND_bytes(3)>,
+L<DH_generate_parameters_ex(3)>, L<DSA_generate_parameters_ex(3)>,
+L<RSA_generate_key_ex(3)>, L<ERR_get_error(3)>, L<RAND_bytes(3)>,
 L<RAND(7)>
 
 =head1 HISTORY

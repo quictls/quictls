@@ -727,10 +727,10 @@ DEPEND[html/man3/BN_copy.html]=man3/BN_copy.pod
 GENERATE[html/man3/BN_copy.html]=man3/BN_copy.pod
 DEPEND[man/man3/BN_copy.3]=man3/BN_copy.pod
 GENERATE[man/man3/BN_copy.3]=man3/BN_copy.pod
-DEPEND[html/man3/BN_generate_prime.html]=man3/BN_generate_prime.pod
-GENERATE[html/man3/BN_generate_prime.html]=man3/BN_generate_prime.pod
-DEPEND[man/man3/BN_generate_prime.3]=man3/BN_generate_prime.pod
-GENERATE[man/man3/BN_generate_prime.3]=man3/BN_generate_prime.pod
+DEPEND[html/man3/BN_generate_prime_ex.html]=man3/BN_generate_prime_ex.pod
+GENERATE[html/man3/BN_generate_prime_ex.html]=man3/BN_generate_prime_ex.pod
+DEPEND[man/man3/BN_generate_prime_ex.3]=man3/BN_generate_prime_ex.pod
+GENERATE[man/man3/BN_generate_prime_ex.3]=man3/BN_generate_prime_ex.pod
 DEPEND[html/man3/BN_mod_exp_mont.html]=man3/BN_mod_exp_mont.pod
 GENERATE[html/man3/BN_mod_exp_mont.html]=man3/BN_mod_exp_mont.pod
 DEPEND[man/man3/BN_mod_exp_mont.3]=man3/BN_mod_exp_mont.pod
@@ -919,10 +919,10 @@ DEPEND[html/man3/DH_generate_key.html]=man3/DH_generate_key.pod
 GENERATE[html/man3/DH_generate_key.html]=man3/DH_generate_key.pod
 DEPEND[man/man3/DH_generate_key.3]=man3/DH_generate_key.pod
 GENERATE[man/man3/DH_generate_key.3]=man3/DH_generate_key.pod
-DEPEND[html/man3/DH_generate_parameters.html]=man3/DH_generate_parameters.pod
-GENERATE[html/man3/DH_generate_parameters.html]=man3/DH_generate_parameters.pod
-DEPEND[man/man3/DH_generate_parameters.3]=man3/DH_generate_parameters.pod
-GENERATE[man/man3/DH_generate_parameters.3]=man3/DH_generate_parameters.pod
+DEPEND[html/man3/DH_generate_parameters_ex.html]=man3/DH_generate_parameters_ex.pod
+GENERATE[html/man3/DH_generate_parameters_ex.html]=man3/DH_generate_parameters_ex.pod
+DEPEND[man/man3/DH_generate_parameters_ex.3]=man3/DH_generate_parameters_ex.pod
+GENERATE[man/man3/DH_generate_parameters_ex.3]=man3/DH_generate_parameters_ex.pod
 DEPEND[html/man3/DH_get0_pqg.html]=man3/DH_get0_pqg.pod
 GENERATE[html/man3/DH_get0_pqg.html]=man3/DH_get0_pqg.pod
 DEPEND[man/man3/DH_get0_pqg.3]=man3/DH_get0_pqg.pod
@@ -967,10 +967,10 @@ DEPEND[html/man3/DSA_generate_key.html]=man3/DSA_generate_key.pod
 GENERATE[html/man3/DSA_generate_key.html]=man3/DSA_generate_key.pod
 DEPEND[man/man3/DSA_generate_key.3]=man3/DSA_generate_key.pod
 GENERATE[man/man3/DSA_generate_key.3]=man3/DSA_generate_key.pod
-DEPEND[html/man3/DSA_generate_parameters.html]=man3/DSA_generate_parameters.pod
-GENERATE[html/man3/DSA_generate_parameters.html]=man3/DSA_generate_parameters.pod
-DEPEND[man/man3/DSA_generate_parameters.3]=man3/DSA_generate_parameters.pod
-GENERATE[man/man3/DSA_generate_parameters.3]=man3/DSA_generate_parameters.pod
+DEPEND[html/man3/DSA_generate_parameters_ex.html]=man3/DSA_generate_parameters_ex.pod
+GENERATE[html/man3/DSA_generate_parameters_ex.html]=man3/DSA_generate_parameters_ex.pod
+DEPEND[man/man3/DSA_generate_parameters_ex.3]=man3/DSA_generate_parameters_ex.pod
+GENERATE[man/man3/DSA_generate_parameters_ex.3]=man3/DSA_generate_parameters_ex.pod
 DEPEND[html/man3/DSA_get0_pqg.html]=man3/DSA_get0_pqg.pod
 GENERATE[html/man3/DSA_get0_pqg.html]=man3/DSA_get0_pqg.pod
 DEPEND[man/man3/DSA_get0_pqg.3]=man3/DSA_get0_pqg.pod
@@ -2007,10 +2007,10 @@ DEPEND[html/man3/RSA_check_key.html]=man3/RSA_check_key.pod
 GENERATE[html/man3/RSA_check_key.html]=man3/RSA_check_key.pod
 DEPEND[man/man3/RSA_check_key.3]=man3/RSA_check_key.pod
 GENERATE[man/man3/RSA_check_key.3]=man3/RSA_check_key.pod
-DEPEND[html/man3/RSA_generate_key.html]=man3/RSA_generate_key.pod
-GENERATE[html/man3/RSA_generate_key.html]=man3/RSA_generate_key.pod
-DEPEND[man/man3/RSA_generate_key.3]=man3/RSA_generate_key.pod
-GENERATE[man/man3/RSA_generate_key.3]=man3/RSA_generate_key.pod
+DEPEND[html/man3/RSA_generate_key_ex.html]=man3/RSA_generate_key_ex.pod
+GENERATE[html/man3/RSA_generate_key_ex.html]=man3/RSA_generate_key_ex.pod
+DEPEND[man/man3/RSA_generate_key_ex.3]=man3/RSA_generate_key_ex.pod
+GENERATE[man/man3/RSA_generate_key_ex.3]=man3/RSA_generate_key_ex.pod
 DEPEND[html/man3/RSA_get0_key.html]=man3/RSA_get0_key.pod
 GENERATE[html/man3/RSA_get0_key.html]=man3/RSA_get0_key.pod
 DEPEND[man/man3/RSA_get0_key.3]=man3/RSA_get0_key.pod
@@ -3041,7 +3041,7 @@ html/man3/BN_add_word.html \
 html/man3/BN_bn2bin.html \
 html/man3/BN_cmp.html \
 html/man3/BN_copy.html \
-html/man3/BN_generate_prime.html \
+html/man3/BN_generate_prime_ex.html \
 html/man3/BN_mod_exp_mont.html \
 html/man3/BN_mod_inverse.html \
 html/man3/BN_mod_mul_montgomery.html \
@@ -3089,7 +3089,7 @@ html/man3/CT_POLICY_EVAL_CTX_new.html \
 html/man3/DEFINE_STACK_OF.html \
 html/man3/DES_random_key.html \
 html/man3/DH_generate_key.html \
-html/man3/DH_generate_parameters.html \
+html/man3/DH_generate_parameters_ex.html \
 html/man3/DH_get0_pqg.html \
 html/man3/DH_get_1024_160.html \
 html/man3/DH_meth_new.html \
@@ -3101,7 +3101,7 @@ html/man3/DSA_SIG_new.html \
 html/man3/DSA_do_sign.html \
 html/man3/DSA_dup_DH.html \
 html/man3/DSA_generate_key.html \
-html/man3/DSA_generate_parameters.html \
+html/man3/DSA_generate_parameters_ex.html \
 html/man3/DSA_get0_pqg.html \
 html/man3/DSA_meth_new.html \
 html/man3/DSA_new.html \
@@ -3361,7 +3361,7 @@ html/man3/RC4_set_key.html \
 html/man3/RIPEMD160_Init.html \
 html/man3/RSA_blinding_on.html \
 html/man3/RSA_check_key.html \
-html/man3/RSA_generate_key.html \
+html/man3/RSA_generate_key_ex.html \
 html/man3/RSA_get0_key.html \
 html/man3/RSA_meth_new.html \
 html/man3/RSA_new.html \
@@ -3668,7 +3668,7 @@ man/man3/BN_add_word.3 \
 man/man3/BN_bn2bin.3 \
 man/man3/BN_cmp.3 \
 man/man3/BN_copy.3 \
-man/man3/BN_generate_prime.3 \
+man/man3/BN_generate_prime_ex.3 \
 man/man3/BN_mod_exp_mont.3 \
 man/man3/BN_mod_inverse.3 \
 man/man3/BN_mod_mul_montgomery.3 \
@@ -3716,7 +3716,7 @@ man/man3/CT_POLICY_EVAL_CTX_new.3 \
 man/man3/DEFINE_STACK_OF.3 \
 man/man3/DES_random_key.3 \
 man/man3/DH_generate_key.3 \
-man/man3/DH_generate_parameters.3 \
+man/man3/DH_generate_parameters_ex.3 \
 man/man3/DH_get0_pqg.3 \
 man/man3/DH_get_1024_160.3 \
 man/man3/DH_meth_new.3 \
@@ -3728,7 +3728,7 @@ man/man3/DSA_SIG_new.3 \
 man/man3/DSA_do_sign.3 \
 man/man3/DSA_dup_DH.3 \
 man/man3/DSA_generate_key.3 \
-man/man3/DSA_generate_parameters.3 \
+man/man3/DSA_generate_parameters_ex.3 \
 man/man3/DSA_get0_pqg.3 \
 man/man3/DSA_meth_new.3 \
 man/man3/DSA_new.3 \
@@ -3988,7 +3988,7 @@ man/man3/RC4_set_key.3 \
 man/man3/RIPEMD160_Init.3 \
 man/man3/RSA_blinding_on.3 \
 man/man3/RSA_check_key.3 \
-man/man3/RSA_generate_key.3 \
+man/man3/RSA_generate_key_ex.3 \
 man/man3/RSA_get0_key.3 \
 man/man3/RSA_meth_new.3 \
 man/man3/RSA_new.3 \

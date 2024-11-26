@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-DSA_generate_parameters_ex, DSA_generate_parameters - generate DSA parameters
+DSA_generate_parameters_ex - generate DSA parameters
 
 =head1 SYNOPSIS
 
@@ -16,14 +16,6 @@ see L<openssl_user_macros(7)>:
                                 const unsigned char *seed, int seed_len,
                                 int *counter_ret, unsigned long *h_ret,
                                 BN_GENCB *cb);
-
-The following functions have been deprecated since OpenSSL 0.9.8, and can be
-hidden entirely by defining B<OPENSSL_API_COMPAT> with a suitable version value,
-see L<openssl_user_macros(7)>:
-
- DSA *DSA_generate_parameters(int bits, unsigned char *seed, int seed_len,
-                              int *counter_ret, unsigned long *h_ret,
-                              void (*callback)(int, int, void *), void *cb_arg);
 
 =head1 DESCRIPTION
 
@@ -49,11 +41,7 @@ A callback function may be used to provide feedback about the progress
 of the key generation. If B<cb> is not B<NULL>, it will be
 called as shown below. For information on the BN_GENCB structure and the
 BN_GENCB_call function discussed below, refer to
-L<BN_generate_prime(3)>.
-
-DSA_generate_parameters() is similar to DSA_generate_parameters_ex() but
-expects an old-style callback function; see
-L<BN_generate_prime(3)> for information on the old-style callback.
+L<BN_generate_prime_ex(3)>.
 
 =over 2
 
@@ -105,9 +93,6 @@ When the generator has been found, B<BN_GENCB_call(cb, 3, 1)> is called.
 DSA_generate_parameters_ex() returns a 1 on success, or 0 otherwise.
 The error codes can be obtained by L<ERR_get_error(3)>.
 
-DSA_generate_parameters() returns a pointer to the DSA structure or
-B<NULL> if the parameter generation fails.
-
 =head1 BUGS
 
 Seed lengths greater than 20 are not supported.
@@ -115,14 +100,11 @@ Seed lengths greater than 20 are not supported.
 =head1 SEE ALSO
 
 L<DSA_new(3)>, L<ERR_get_error(3)>, L<RAND_bytes(3)>,
-L<DSA_free(3)>, L<BN_generate_prime(3)>
+L<DSA_free(3)>, L<BN_generate_prime_ex(3)>
 
 =head1 HISTORY
 
 DSA_generate_parameters_ex() was deprecated in OpenSSL 3.0.
-
-DSA_generate_parameters() was deprecated in OpenSSL 0.9.8; use
-DSA_generate_parameters_ex() instead.
 
 =head1 COPYRIGHT
 
