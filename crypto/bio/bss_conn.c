@@ -601,22 +601,6 @@ static long conn_ctrl(BIO *b, int cmd, long num, void *ptr)
         }
 
         break;
-    case BIO_CTRL_GET_RPOLL_DESCRIPTOR:
-    case BIO_CTRL_GET_WPOLL_DESCRIPTOR:
-        {
-            BIO_POLL_DESCRIPTOR *pd = ptr;
-
-            if (data->state != BIO_CONN_S_OK)
-                conn_state(b, data); /* best effort */
-
-            if (data->state >= BIO_CONN_S_CREATE_SOCKET) {
-                pd->type        = BIO_POLL_DESCRIPTOR_TYPE_SOCK_FD;
-                pd->value.fd    = b->num;
-            } else {
-                ret = 0;
-            }
-        }
-        break;
     case BIO_C_SET_NBIO:
         if (num != 0)
             data->connect_mode |= BIO_SOCK_NONBLOCK;

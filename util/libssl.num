@@ -528,8 +528,6 @@ SSL_CTX_set1_compressed_cert            531	3_2_0	EXIST::FUNCTION:
 SSL_set1_compressed_cert                532	3_2_0	EXIST::FUNCTION:
 SSL_CTX_get1_compressed_cert            533	3_2_0	EXIST::FUNCTION:
 SSL_get1_compressed_cert                534	3_2_0	EXIST::FUNCTION:
-SSL_get_rpoll_descriptor                535	3_2_0	EXIST::FUNCTION:
-SSL_get_wpoll_descriptor                536	3_2_0	EXIST::FUNCTION:
 SSL_get0_peer_rpk                       545	3_2_0	EXIST::FUNCTION:
 SSL_SESSION_get0_peer_rpk               546	3_2_0	EXIST::FUNCTION:
 SSL_set1_client_cert_type               547	3_2_0	EXIST::FUNCTION:
@@ -550,7 +548,6 @@ SSL_handle_events                       577	3_2_0	EXIST::FUNCTION:
 SSL_get_event_timeout                   578	3_2_0	EXIST::FUNCTION:
 SSL_get0_group_name                     579	3_2_0	EXIST::FUNCTION:
 SSL_write_ex2                           581	3_3_0	EXIST::FUNCTION:
-SSL_poll                                584	3_3_0	EXIST::FUNCTION:
 SSL_SESSION_get_time_ex                 585	3_3_0	EXIST::FUNCTION:
 SSL_SESSION_set_time_ex                 586	3_3_0	EXIST::FUNCTION:
 SSL_quic_read_level                     20000	3_0_0	EXIST::FUNCTION:BORING_QUIC_API

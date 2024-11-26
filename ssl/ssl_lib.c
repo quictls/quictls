@@ -7203,27 +7203,6 @@ int SSL_get_event_timeout(SSL *s, struct timeval *tv, int *is_infinite)
     return 1;
 }
 
-int SSL_get_rpoll_descriptor(SSL *s, BIO_POLL_DESCRIPTOR *desc)
-{
-    SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(s);
-
-    if (sc == NULL || sc->rbio == NULL)
-        return 0;
-
-    return BIO_get_rpoll_descriptor(sc->rbio, desc);
-}
-
-int SSL_get_wpoll_descriptor(SSL *s, BIO_POLL_DESCRIPTOR *desc)
-{
-    SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(s);
-
-
-    if (sc == NULL || sc->wbio == NULL)
-        return 0;
-
-    return BIO_get_wpoll_descriptor(sc->wbio, desc);
-}
-
 int SSL_add_expected_rpk(SSL *s, EVP_PKEY *rpk)
 {
     unsigned char *data = NULL;
