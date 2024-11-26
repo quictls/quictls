@@ -134,8 +134,8 @@ not be freed by this function. This function may be NULL.
 
 DH_meth_get_generate_params() and DH_meth_set_generate_params() get and set the
 function used for generating DH parameters respectively. This function will be
-called in response to the application calling DH_generate_parameters_ex() (or
-DH_generate_parameters()). The parameters for the function have the same
+called in response to the application calling DH_generate_parameters_ex().
+The parameters for the function have the same
 meaning as for DH_generate_parameters_ex(). This function may be NULL.
 
 =head1 RETURN VALUES
@@ -155,7 +155,7 @@ DH_meth_set1_name() and all DH_meth_set_*() functions return 1 on success or
 
 =head1 SEE ALSO
 
-L<DH_new(3)>, L<DH_new(3)>, L<DH_generate_parameters(3)>, L<DH_generate_key(3)>,
+L<DH_new(3)>, L<DH_new(3)>, L<DH_generate_parameters_ex(3)>, L<DH_generate_key(3)>,
 L<DH_set_method(3)>, L<DH_size(3)>, L<DH_get0_pqg(3)>
 
 =head1 HISTORY

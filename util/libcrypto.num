@@ -65,7 +65,6 @@ RSA_up_ref                              67	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_
 EVP_PKEY_meth_set_ctrl                  68	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
 OCSP_basic_sign                         69	3_0_0	EXIST::FUNCTION:OCSP
 BN_GENCB_set                            70	3_0_0	EXIST::FUNCTION:
-BN_generate_prime                       71	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_0_9_8
 d2i_DSAPrivateKey_fp                    72	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,DSA,STDIO
 BIO_nread0                              73	3_0_0	EXIST::FUNCTION:
 NETSCAPE_SPKI_print                     74	3_0_0	EXIST::FUNCTION:
@@ -507,7 +506,6 @@ X509v3_addr_validate_path               522	3_0_0	EXIST::FUNCTION:RFC3779
 BIO_new_fp                              523	3_0_0	EXIST::FUNCTION:STDIO
 EC_GROUP_set_generator                  524	3_0_0	EXIST::FUNCTION:EC
 CRYPTO_memdup                           525	3_0_0	EXIST::FUNCTION:
-DH_generate_parameters                  526	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_0_9_8,DH
 BN_set_negative                         527	3_0_0	EXIST::FUNCTION:
 i2d_TS_RESP_bio                         528	3_0_0	EXIST::FUNCTION:TS
 ASYNC_WAIT_CTX_set_wait_fd              529	3_0_0	EXIST::FUNCTION:
@@ -711,7 +709,6 @@ DH_size                                 740	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3
 CONF_imodule_get_name                   741	3_0_0	EXIST::FUNCTION:
 ENGINE_get_pkey_meth_engine             742	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,ENGINE
 OCSP_BASICRESP_free                     743	3_0_0	EXIST::FUNCTION:OCSP
-BN_set_params                           744	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_0_9_8
 BN_add                                  745	3_0_0	EXIST::FUNCTION:
 OPENSSL_sk_free                         746	3_0_0	EXIST::FUNCTION:
 TS_TST_INFO_get_ext_d2i                 747	3_0_0	EXIST::FUNCTION:TS
@@ -1106,7 +1103,6 @@ OSSL_HTTP_REQ_CTX_new                   1145	3_0_0	EXIST::FUNCTION:HTTP
 X509_load_cert_crl_file                 1146	3_0_0	EXIST::FUNCTION:
 EVP_PKEY_new_mac_key                    1147	3_0_0	EXIST::FUNCTION:
 DIST_POINT_new                          1148	3_0_0	EXIST::FUNCTION:
-BN_is_prime_fasttest                    1149	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_0_9_8
 EC_POINT_dup                            1150	3_0_0	EXIST::FUNCTION:EC
 PKCS5_v2_scrypt_keyivgen                1151	3_0_0	EXIST::FUNCTION:SCRYPT
 X509_STORE_CTX_set0_param               1152	3_0_0	EXIST::FUNCTION:
@@ -3169,7 +3165,6 @@ d2i_ASN1_OCTET_STRING                   3265	3_0_0	EXIST::FUNCTION:
 ENGINE_set_load_pubkey_function         3266	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,ENGINE
 BIO_vprintf                             3267	3_0_0	EXIST::FUNCTION:
 CMS_RecipientInfo_decrypt               3268	3_0_0	EXIST::FUNCTION:CMS
-RSA_generate_key                        3269	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_0_9_8
 PKCS7_set0_type_other                   3270	3_0_0	EXIST::FUNCTION:
 OCSP_REQUEST_new                        3271	3_0_0	EXIST::FUNCTION:OCSP
 BIO_lookup                              3272	3_0_0	EXIST::FUNCTION:SOCK
@@ -3288,7 +3283,6 @@ CRYPTO_secure_actual_size               3387	3_0_0	EXIST::FUNCTION:
 COMP_CTX_free                           3388	3_0_0	EXIST::FUNCTION:COMP
 i2d_PBE2PARAM                           3389	3_0_0	EXIST::FUNCTION:
 EC_POINT_make_affine                    3390	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
-DSA_generate_parameters                 3391	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_0_9_8,DSA
 ASN1_BIT_STRING_num_asc                 3392	3_0_0	EXIST::FUNCTION:
 X509_INFO_free                          3394	3_0_0	EXIST::FUNCTION:
 d2i_PKCS8_PRIV_KEY_INFO_fp              3395	3_0_0	EXIST::FUNCTION:STDIO
@@ -3380,7 +3374,6 @@ PEM_read_bio_PKCS8_PRIV_KEY_INFO        3483	3_0_0	EXIST::FUNCTION:
 i2d_OCSP_BASICRESP                      3484	3_0_0	EXIST::FUNCTION:OCSP
 CMAC_Final                              3485	3_0_0	EXIST::FUNCTION:CMAC,DEPRECATEDIN_3_0
 X509V3_EXT_add_alias                    3486	3_0_0	EXIST::FUNCTION:
-BN_get_params                           3487	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_0_9_8
 PKCS5_pbkdf2_set                        3488	3_0_0	EXIST::FUNCTION:
 d2i_PKCS8PrivateKey_bio                 3489	3_0_0	EXIST::FUNCTION:
 ASN1_ENUMERATED_new                     3490	3_0_0	EXIST::FUNCTION:
@@ -3487,7 +3480,6 @@ PKCS7_free                              3597	3_0_0	EXIST::FUNCTION:
 X509_NAME_ENTRY_create_by_txt           3598	3_0_0	EXIST::FUNCTION:
 DES_cbc_cksum                           3599	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,DES
 UI_free                                 3600	3_0_0	EXIST::FUNCTION:
-BN_is_prime                             3601	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_0_9_8
 CMS_get0_signers                        3602	3_0_0	EXIST::FUNCTION:CMS
 i2d_PrivateKey_fp                       3603	3_0_0	EXIST::FUNCTION:STDIO
 OTHERNAME_cmp                           3604	3_0_0	EXIST::FUNCTION:

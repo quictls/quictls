@@ -33,6 +33,8 @@ Currrent Changes
 `SRP_VBASE_get_by_user`, `ENGINE_setup_bsd_cryptodev`,
 `PKCS12_get_attr`, and `SSL_set_debug`.
 
+- Removed the deprecated functions from OpenSSL 0.9.8
+
 - Removed support for some old platforms:
   - Removed support for old HPE platforms: NonStop and Tandem
   - Removed DJGPP support.
