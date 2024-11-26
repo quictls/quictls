@@ -25,6 +25,7 @@ Currrent Changes
 
 - Remove support for EGD random source.
 
+- Made the ERR_STACK datatype opaque.
 
 - Removed support for some old platforms:
   - Removed support for old HPE platforms: NonStop and Tandem
