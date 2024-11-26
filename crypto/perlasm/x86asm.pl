@@ -8,7 +8,7 @@
 
 
 # require 'x86asm.pl';
-# &asm_init(<flavor>[,$i386only]);
+# &asm_init(<flavor>[,$x86only]);
 # &function_begin("foo");
 # ...
 # &function_end("foo");

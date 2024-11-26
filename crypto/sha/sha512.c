@@ -402,7 +402,7 @@ static const SHA_LONG64 K512[80] = {
                                 : "0"(ret)); ret;               })
 #    endif
 #   elif (defined(__i386) || defined(__i386__)) && !defined(B_ENDIAN)
-#     define PULL64(x) ({ const unsigned int *p=(const unsigned int *)(&(x));\
+#    define PULL64(x)  ({ const unsigned int *p=(const unsigned int *)(&(x));\
                           unsigned int hi=p[0],lo=p[1];         \
                                 asm ("bswapl %0; bswapl %1;"    \
                                 : "=r"(lo),"=r"(hi)             \
