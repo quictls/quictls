@@ -50,7 +50,6 @@ extern "C" {
 # define ERR_TXT_MALLOCED        0x01
 # define ERR_TXT_STRING          0x02
 
-
 /* library */
 # define ERR_LIB_NONE            1
 # define ERR_LIB_SYS             2
