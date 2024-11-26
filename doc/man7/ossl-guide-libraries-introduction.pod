@@ -21,7 +21,7 @@ file or over a network.
 
 The C<libssl> library provides functions to perform secure communication between
 two peers across a network. Most significantly it implements support for the
-SSL/TLS, DTLS and QUIC standards.
+SSL/TLS and DTLS standards.
 
 The C<libssl> library depends on and uses many of the capabilities supplied by
 C<libcrypto>. Any application linked against C<libssl> will also link against

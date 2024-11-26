@@ -25,12 +25,6 @@ events, or to respond to the availability of new data to be read from an
 underlying BIO, or to respond to the opportunity to write pending data to an
 underlying BIO.
 
-SSL_handle_events() can be used only with the following types of SSL object:
-
-=over 4
-
-=item DTLS SSL objects
-
 Using SSL_handle_events() on an SSL object being used with a DTLS method allows timeout
 events to be handled properly. This is equivalent to a call to
 L<DTLSv1_handle_timeout(3)>. Since SSL_handle_events() handles a superset of the use
@@ -42,33 +36,6 @@ calls to L<SSL_get_event_timeout(3)>; event handling is not performed
 automatically by calls to other SSL functions such as L<SSL_read(3)> or
 L<SSL_write(3)>. Note that this is different to QUIC which also performs event
 handling implicitly; see below.
-
-=item QUIC connection SSL objects
-
-Using SSL_handle_events() on an SSL object which represents a QUIC connection allows
-timeout events to be handled properly, as well as incoming network data to be
-processed, and queued outgoing network data to be written, if the underlying BIO
-has the capacity to accept it.
-
-Ordinarily, when an application uses an SSL object in blocking mode, it does not
-need to call SSL_handle_events() because OpenSSL performs ticking internally on an
-automatic basis. However, if an application uses a QUIC connection in
-nonblocking mode, it must at a minimum ensure that SSL_handle_events() is called
-periodically to allow timeout events to be handled. An application can find out
-when it next needs to call SSL_handle_events() for this purpose (if at all) by calling
-L<SSL_get_event_timeout(3)>.
-
-Calling SSL_handle_events() on a QUIC connection SSL object being used in blocking mode
-is not necessary unless no I/O calls (such as L<SSL_read(3)> or L<SSL_write(3)>)
-will be made to the object for a substantial period of time. So long as at least
-one call to the SSL object is blocking, no such call is needed. However,
-SSL_handle_events() may optionally be used on a QUIC connection object if desired.
-
-With the thread-assisted mode of operation L<OSSL_QUIC_client_thread_method(3)>
-it is unnecessary to call SSL_handle_events() as the assist thread handles the QUIC
-connection events.
-
-=back
 
 Calling SSL_handle_events() on any other kind of SSL object is a no-op. This is
 considered a success case.

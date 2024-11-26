@@ -40,30 +40,6 @@ The I<flags> argument to SSL_write_ex2() can accept zero or more of the
 following flags. Note that which flags are supported will depend on the kind of
 SSL object and underlying protocol being used:
 
-=over 4
-
-=item B<SSL_WRITE_FLAG_CONCLUDE>
-
-This flag is only supported on QUIC stream SSL objects (or QUIC connection SSL
-objects with a default stream attached).
-
-If this flag is set, and the call to SSL_write_ex2() succeeds, and all of the
-data passed to the call is written (meaning that C<*written == num>), the
-relevant QUIC stream's send part is concluded automatically as though
-L<SSL_stream_conclude(3)> was called (causing transmission of a FIN for the
-stream).
-
-While using this flag is semantically equivalent to calling
-L<SSL_stream_conclude(3)> after a successful call to this function, using this
-flag enables greater efficiency than making these two API calls separately, as
-it enables the written stream data and the FIN flag indicating the end of the
-stream to be scheduled as part of the same QUIC STREAM frame and QUIC packet.
-
-Setting this flag does not cause a stream's send part to be concluded if not all
-of the data passed to the call was consumed.
-
-=back
-
 A call to SSL_write_ex2() fails if a flag is passed which is not supported or
 understood by the given SSL object. An application should determine if a flag is
 supported (for example, for B<SSL_WRITE_FLAG_CONCLUDE>, that a QUIC stream SSL
@@ -108,14 +84,6 @@ partial write has been successfully completed. In this case the write function
 operation is considered completed. The bytes are sent and a new write call with
 a new buffer (with the already sent bytes removed) must be started. A partial
 write is performed with the size of a message block, which is 16kB.
-
-When used with a QUIC SSL object, calling an I/O function such as SSL_write()
-allows internal network event processing to be performed. It is important that
-this processing is performed regularly. If an application is not using thread
-assisted mode, an application should ensure that an I/O function such as
-SSL_write() is called regularly, or alternatively ensure that SSL_handle_events()
-is called regularly. See L<openssl-quic(7)> and L<SSL_handle_events(3)> for more
-information.
 
 =head1 WARNINGS
 
