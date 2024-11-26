@@ -57,9 +57,6 @@ DEFINE_RUN_ONCE_STATIC(ossl_init_base)
     /* no need to init trace */
 
     OSSL_TRACE(INIT, "ossl_init_base: setting up stop handlers\n");
-#ifndef OPENSSL_NO_CRYPTO_MDEBUG
-    ossl_malloc_setup_failures();
-#endif
 
     if ((optsdone_lock = CRYPTO_THREAD_lock_new()) == NULL
         || (init_lock = CRYPTO_THREAD_lock_new()) == NULL)

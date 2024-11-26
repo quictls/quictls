@@ -12236,22 +12236,6 @@ int setup_tests(void)
         return 0;
 
 
-    if (getenv("OPENSSL_TEST_GETCOUNTS") != NULL) {
-#ifdef OPENSSL_NO_CRYPTO_MDEBUG
-        TEST_error("not supported in this build");
-        return 0;
-#else
-        int i, mcount, rcount, fcount;
-
-        for (i = 0; i < 4; i++)
-            test_export_key_mat(i);
-        CRYPTO_get_alloc_counts(&mcount, &rcount, &fcount);
-        test_printf_stdout("malloc %d realloc %d free %d\n",
-                mcount, rcount, fcount);
-        return 1;
-#endif
-    }
-
     cert = test_mk_file_path(certsdir, "servercert.pem");
     if (cert == NULL)
         goto err;

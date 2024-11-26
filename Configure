@@ -439,7 +439,6 @@ my @disablables = (
     "cmp",
     "cms",
     "comp",
-    "crypto-mdebug",
     "ct",
     "default-thread-pool",
     "deprecated",
@@ -544,7 +543,6 @@ my @disablables_int = qw(
 my %deprecated_disablables = (
     "ssl2" => undef,
     "buf-freelists" => undef,
-    "crypto-mdebug-backtrace" => undef,
     "hw" => "hw",               # causes cascade, but no macro
     "hw-padlock" => "padlockeng",
     "ripemd" => "rmd160",
@@ -560,8 +558,6 @@ our %disabled = ( # "what"         => "comment"
                   "brotli"              => "default",
                   "brotli-dynamic"      => "default",
                   "buildtest-c++"       => "default",
-                  "crypto-mdebug"       => "default",
-                  "crypto-mdebug-backtrace" => "default",
                   "devcryptoeng"        => "default",
                   "ec_nistp_64_gcc_128" => "default",
                   "external-tests"      => "default",
@@ -624,8 +620,6 @@ my @disable_cascades = (
     sub { 0 == scalar grep { !$disabled{$_} } @tls }
                         => [ "tls" ],
     "tls1_3"            => [ "boring-quic-api"],
-
-    "crypto-mdebug"     => [ "crypto-mdebug-backtrace" ],
 
     "module"            => [ "dynamic-engine", "fips" ],
 
