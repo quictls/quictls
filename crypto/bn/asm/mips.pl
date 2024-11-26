@@ -20,13 +20,6 @@
 #
 # This is drop-in MIPS III/IV ISA replacement for crypto/bn/bn_asm.c.
 #
-# The module is designed to work with either of the "new" MIPS ABI(5),
-# namely N32 or N64, offered by IRIX 6.x. It's not meant to work under
-# IRIX 5.x not only because it doesn't support new ABIs but also
-# because 5.x kernels put R4x00 CPU into 32-bit mode and all those
-# 64-bit instructions (daddu, dmultu, etc.) found below gonna only
-# cause illegal instruction exception:-(
-#
 # In addition the code depends on preprocessor flags set up by MIPSpro
 # compiler driver (either as or cc) and therefore (probably?) can't be
 # compiled by the GNU assembler. GNU C driver manages fine though...

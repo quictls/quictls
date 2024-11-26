@@ -89,11 +89,6 @@ static int test_set_min_max_version(int idx_tst)
         break;
 #endif
 
-#ifndef OPENSSL_NO_QUIC
-    case PROTO_QUIC:
-        meth = OSSL_QUIC_client_method();
-        break;
-#endif
     }
 
     if (meth == NULL)

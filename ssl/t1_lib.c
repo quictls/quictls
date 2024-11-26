@@ -24,7 +24,6 @@
 #include "internal/sizes.h"
 #include "internal/tlsgroups.h"
 #include "ssl_local.h"
-#include "quic/quic_local.h"
 #include <openssl/ct.h>
 
 static const SIGALG_LOOKUP *find_sig_alg(SSL_CONNECTION *s, X509 *x, EVP_PKEY *pkey);
@@ -2077,17 +2076,6 @@ int ssl_cipher_disabled(const SSL_CONNECTION *s, const SSL_CIPHER *c,
     if (s->s3.tmp.max_ver == 0)
         return 1;
 
-    if (SSL_IS_QUIC_HANDSHAKE(s))
-        /* For QUIC, only allow these ciphersuites. */
-        switch (SSL_CIPHER_get_id(c)) {
-        case TLS1_3_CK_AES_128_GCM_SHA256:
-        case TLS1_3_CK_AES_256_GCM_SHA384:
-        case TLS1_3_CK_CHACHA20_POLY1305_SHA256:
-            break;
-        default:
-            return 1;
-        }
-
     /*
      * For historical reasons we will allow ECHDE to be selected by a server
      * in SSLv3 if we are a client
@@ -3910,8 +3898,7 @@ int SSL_set_tlsext_max_fragment_length(SSL *ssl, uint8_t mode)
 {
     SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(ssl);
 
-    if (sc == NULL
-        || (IS_QUIC(ssl) && mode != TLSEXT_max_fragment_length_DISABLED))
+    if (sc == NULL)
         return 0;
 
     if (mode != TLSEXT_max_fragment_length_DISABLED

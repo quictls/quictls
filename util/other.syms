@@ -677,18 +677,6 @@ SSL_want_read                           define
 SSL_want_retry_verify                   define
 SSL_want_write                          define
 SSL_want_x509_lookup                    define
-SSL_get_feature_request_uint            define
-SSL_set_feature_request_uint            define
-SSL_get_feature_peer_request_uint       define
-SSL_get_feature_negotiated_uint         define
-SSL_get_generic_value_uint              define
-SSL_set_generic_value_uint              define
-SSL_get_quic_stream_bidi_local_avail    define
-SSL_get_quic_stream_bidi_remote_avail   define
-SSL_get_quic_stream_uni_local_avail     define
-SSL_get_quic_stream_uni_remote_avail    define
-SSL_get_event_handling_mode             define
-SSL_set_event_handling_mode             define
 SSL_get_stream_write_buf_size           define
 SSL_get_stream_write_buf_used           define
 SSL_get_stream_write_buf_avail          define
@@ -736,7 +724,6 @@ SSL_STREAM_STATE_FINISHED               define
 SSL_STREAM_STATE_RESET_LOCAL            define
 SSL_STREAM_STATE_RESET_REMOTE           define
 SSL_STREAM_STATE_CONN_CLOSED            define
-SSL_ACCEPT_STREAM_NO_BLOCK              define
 SSL_DEFAULT_STREAM_MODE_AUTO_BIDI       define
 SSL_DEFAULT_STREAM_MODE_AUTO_UNI        define
 SSL_DEFAULT_STREAM_MODE_NONE            define
@@ -744,22 +731,6 @@ SSL_INCOMING_STREAM_POLICY_ACCEPT       define
 SSL_INCOMING_STREAM_POLICY_AUTO         define
 SSL_INCOMING_STREAM_POLICY_REJECT       define
 SSL_WRITE_FLAG_CONCLUDE                 define
-SSL_VALUE_CLASS_GENERIC                 define
-SSL_VALUE_CLASS_FEATURE_REQUEST         define
-SSL_VALUE_CLASS_FEATURE_PEER_REQUEST    define
-SSL_VALUE_CLASS_FEATURE_NEGOTIATED      define
-SSL_VALUE_QUIC_IDLE_TIMEOUT             define
-SSL_VALUE_QUIC_STREAM_BIDI_LOCAL_AVAIL  define
-SSL_VALUE_QUIC_STREAM_BIDI_REMOTE_AVAIL define
-SSL_VALUE_QUIC_STREAM_UNI_LOCAL_AVAIL   define
-SSL_VALUE_QUIC_STREAM_UNI_REMOTE_AVAIL  define
-SSL_VALUE_EVENT_HANDLING_MODE           define
-SSL_VALUE_EVENT_HANDLING_MODE_INHERIT   define
-SSL_VALUE_EVENT_HANDLING_MODE_IMPLICIT  define
-SSL_VALUE_EVENT_HANDLING_MODE_EXPLICIT  define
-SSL_VALUE_STREAM_WRITE_BUF_SIZE         define
-SSL_VALUE_STREAM_WRITE_BUF_USED         define
-SSL_VALUE_STREAM_WRITE_BUF_AVAIL        define
 TLS_DEFAULT_CIPHERSUITES                define deprecated 3.0.0
 X509_CRL_http_nbio                      define deprecated 3.0.0
 X509_http_nbio                          define deprecated 3.0.0

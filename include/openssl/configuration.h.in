@@ -80,4 +80,7 @@ extern "C" {
 #  define OPENSSL_NO_EGD
 # endif
 
+#ifndef OPENSSL_NO_QUIC
+#define OPENSSL_NO_QUIC
 #endif
+#endif                          /* OPENSSL_CONFIGURATION_H */
