@@ -46,9 +46,6 @@ extern "C" {
     "";
 -}
 
-/* Generate 80386 code? */
-{- $config{processor} eq "386" ? "# define" : "# undef" -} I386_ONLY
-
 /*
  * The following are cipher-specific, but are part of the public API.
  */

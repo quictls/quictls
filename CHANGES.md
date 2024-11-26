@@ -31,3 +31,4 @@ Currrent Changes
   - Removed DJGPP support.
   - Removed WinCE support.
   - Removed IRIX support.
+  - Removed `I386_only` support.

@@ -336,11 +336,10 @@ void gcm_ghash_4bit(u64 Xi[2], const u128 Htable[16], const u8 *inp,
 #  define GHASH_CHUNK       (3*1024)
 # endif
 
-#if     (defined(GHASH_ASM) || defined(OPENSSL_CPUID_OBJ))
-# if    !defined(I386_ONLY) && \
-        (defined(__i386)        || defined(__i386__)    || \
-         defined(__x86_64)      || defined(__x86_64__)  || \
-         defined(_M_IX86)       || defined(_M_AMD64)    || defined(_M_X64))
+#if     defined(GHASH_ASM) || defined(OPENSSL_CPUID_OBJ)
+# if    defined(__i386)    || defined(__i386__)    || \
+        defined(__x86_64)  || defined(__x86_64__)  || \
+        defined(_M_IX86)   || defined(_M_AMD64)    || defined(_M_X64)
 #  define GHASH_ASM_X86_OR_64
 
 void gcm_init_clmul(u128 Htable[16], const u64 Xi[2]);

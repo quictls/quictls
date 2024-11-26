@@ -47,7 +47,7 @@ typedef unsigned char u8;
 #   define BSWAP4(x) ({ u32 ret_=(x);                   \
                         asm ("bswapl %0"                \
                         : "+r"(ret_));   ret_;          })
-#  elif (defined(__i386) || defined(__i386__)) && !defined(I386_ONLY)
+#  elif defined(__i386) || defined(__i386__)
 #   define BSWAP8(x) ({ u32 lo_=(u64)(x)>>32,hi_=(x);   \
                         asm ("bswapl %0; bswapl %1"     \
                         : "+r"(hi_),"+r"(lo_));         \
