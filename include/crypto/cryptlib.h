@@ -31,7 +31,6 @@ void ossl_ctx_thread_stop(OSSL_LIB_CTX *ctx);
 # define OPENSSL_INIT_BASE_ONLY              0x00040000L
 
 void ossl_trace_cleanup(void);
-void ossl_malloc_setup_failures(void);
 
 int ossl_crypto_alloc_ex_data_intern(int class_index, void *obj,
                                      CRYPTO_EX_DATA *ad, int idx);

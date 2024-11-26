@@ -344,7 +344,6 @@ size_t CRYPTO_secure_used(void);
 
 void OPENSSL_cleanse(void *ptr, size_t len);
 
-# ifndef OPENSSL_NO_CRYPTO_MDEBUG
 /*
  * The following can be used to detect memory leaks in the library. If
  * used, it turns on malloc checking
@@ -354,7 +353,6 @@ void OPENSSL_cleanse(void *ptr, size_t len);
 # define CRYPTO_MEM_CHECK_ENABLE  0x2   /* Control and mode bit */
 # define CRYPTO_MEM_CHECK_DISABLE 0x3   /* Control only */
 
-void CRYPTO_get_alloc_counts(int *mcount, int *rcount, int *fcount);
 #  ifndef OPENSSL_NO_DEPRECATED_3_0
 #    define OPENSSL_mem_debug_push(info) \
          CRYPTO_mem_debug_push(info, OPENSSL_FILE, OPENSSL_LINE)
@@ -387,7 +385,6 @@ OSSL_DEPRECATEDIN_3_0 int CRYPTO_mem_leaks_fp(FILE *);
 # ifndef OPENSSL_NO_DEPRECATED_3_0
 OSSL_DEPRECATEDIN_3_0 int CRYPTO_mem_leaks(BIO *bio);
 # endif
-# endif /* OPENSSL_NO_CRYPTO_MDEBUG */
 
 /* die if we have to */
 ossl_noreturn void OPENSSL_die(const char *assertion, const char *file, int line);
