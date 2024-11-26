@@ -162,8 +162,7 @@ void CRYPTO_clear_free(void *str, size_t num, const char *file, int line)
     CRYPTO_free(str, file, line);
 }
 
-
-# ifndef OPENSSL_NO_DEPRECATED_3_0
+#ifndef OPENSSL_NO_DEPRECATED_3_0
 int CRYPTO_mem_ctrl(int mode)
 {
     (void)mode;
@@ -211,13 +210,13 @@ int CRYPTO_mem_leaks(BIO *b)
     return -1;
 }
 
-#  ifndef OPENSSL_NO_STDIO
+# ifndef OPENSSL_NO_STDIO
 int CRYPTO_mem_leaks_fp(FILE *fp)
 {
     (void)fp;
     return -1;
 }
-#  endif
+# endif
 
 int CRYPTO_mem_leaks_cb(int (*cb)(const char *str, size_t len, void *u),
                         void *u)
@@ -226,5 +225,5 @@ int CRYPTO_mem_leaks_cb(int (*cb)(const char *str, size_t len, void *u),
     return -1;
 }
 
-# endif
+#endif
 

@@ -79,8 +79,8 @@ extern "C" {
 # ifndef OPENSSL_NO_EGD
 #  define OPENSSL_NO_EGD
 # endif
-# ifndef CRYPTO_NO_MDEBUG
-#  define CRYPTO_NO_MDEBUG
+# ifndef OPENSSL_NO_MDEBUG
+#  define OPENSSL_NO_MDEBUG
 # endif
 #ifndef OPENSSL_NO_QUIC
 #define OPENSSL_NO_QUIC
