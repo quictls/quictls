@@ -1,11 +1,3 @@
-# For installation: OpenSSLConfig.cmake, OpenSSLConfigVersion.cmake
-GENERATE[OpenSSLConfig.cmake]{exporter=cmake}=cmake/OpenSSLConfig.cmake.in
-DEPEND[OpenSSLConfig.cmake]=../installdata.pm
-GENERATE[OpenSSLConfigVersion.cmake]{exporter=cmake}=cmake/OpenSSLConfigVersion.cmake.in
-DEPEND[OpenSSLConfigVersion.cmake]=../installdata.pm
-DEPEND[OpenSSLConfigVersion.cmake]=OpenSSLConfig.cmake
-
-DEPEND[""]=OpenSSLConfigVersion.cmake
 
 # For installation: libcrypto.pc, libssl.pc, and openssl.pc
 GENERATE[libcrypto.pc]{exporter=pkg-config}=pkg-config/libcrypto.pc.in
@@ -22,5 +14,5 @@ GENERATE[../installdata.pm]=../util/mkinstallvars.pl \
     "PREFIX=$(INSTALLTOP)" BINDIR=bin "LIBDIR=$(LIBDIR)" \
     INCLUDEDIR=include APPLINKDIR=include/openssl \
     "ENGINESDIR=$(ENGINESDIR)" "MODULESDIR=$(MODULESDIR)" \
-    "PKGCONFIGDIR=$(PKGCONFIGDIR)" "CMAKECONFIGDIR=$(CMAKECONFIGDIR)" \
+    "PKGCONFIGDIR=$(PKGCONFIGDIR)" \
     "LDLIBS=$(LIB_EX_LIBS)" "VERSION=$(VERSION)"
