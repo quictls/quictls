@@ -132,7 +132,7 @@ typedef struct ossl_statem_st OSSL_STATEM;
  *                                                                           *
  *****************************************************************************/
 
-typedef struct ssl_connection_st SSL_CONNECTION;
+typedef struct ssl_st SSL_CONNECTION;
 
 __owur int ossl_statem_accept(SSL *s);
 __owur int ossl_statem_connect(SSL *s);

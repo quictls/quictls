@@ -207,19 +207,15 @@ static int test_ssl_cert_comp(int test)
     if (!TEST_true(create_ssl_connection(serverssl, clientssl, SSL_ERROR_NONE)))
         goto end;
     if (test == 3) {
-        /* coverity[deadcode] */
-        SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(serverssl);
-
         /* expect that the pre-compressed cert won't be used */
-        if (!TEST_int_eq(sc->cert->key->cert_comp_used, 0))
+        if (!TEST_int_eq(serverssl->cert->key->cert_comp_used, 0))
             goto end;
 
         if (!TEST_false(*(int*)SSL_get_app_data(clientssl)))
             goto end;
     } else {
-        SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(serverssl);
 
-        if (!TEST_int_gt(sc->cert->key->cert_comp_used, 0))
+        if (!TEST_int_gt(serverssl->cert->key->cert_comp_used, 0))
             goto end;
 
         if (!TEST_true(*(int*)SSL_get_app_data(clientssl)))

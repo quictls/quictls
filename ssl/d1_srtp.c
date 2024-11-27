@@ -146,21 +146,14 @@ int SSL_CTX_set_tlsext_use_srtp(SSL_CTX *ctx, const char *profiles)
 
 int SSL_set_tlsext_use_srtp(SSL *s, const char *profiles)
 {
-    SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL_ONLY(s);
-
-    if (sc == NULL)
-        return 1;
-
-    return ssl_ctx_make_profiles(profiles, &sc->srtp_profiles);
+    return ssl_ctx_make_profiles(profiles, &s->srtp_profiles);
 }
 
 STACK_OF(SRTP_PROTECTION_PROFILE) *SSL_get_srtp_profiles(SSL *s)
 {
-    SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL_ONLY(s);
-
-    if (sc != NULL) {
-        if (sc->srtp_profiles != NULL) {
-            return sc->srtp_profiles;
+    if (s != NULL) {
+      if (s->srtp_profiles != NULL) {
+            return s->srtp_profiles;
         } else if ((s->ctx != NULL) && (s->ctx->srtp_profiles != NULL)) {
             return s->ctx->srtp_profiles;
         }
@@ -171,11 +164,6 @@ STACK_OF(SRTP_PROTECTION_PROFILE) *SSL_get_srtp_profiles(SSL *s)
 
 SRTP_PROTECTION_PROFILE *SSL_get_selected_srtp_profile(SSL *s)
 {
-    SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL_ONLY(s);
-
-    if (sc == NULL)
-        return 0;
-
-    return sc->srtp_profile;
+     return s->srtp_profile;
 }
 #endif

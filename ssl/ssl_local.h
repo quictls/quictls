@@ -1196,11 +1196,6 @@ struct ssl_st {
     CRYPTO_RWLOCK *lock;
     /* extra application data */
     CRYPTO_EX_DATA ex_data;
-};
-
-struct ssl_connection_st {
-    /* type identifier and common data */
-    struct ssl_st ssl;
     /*
      * protocol version (one of SSL2_VERSION, SSL3_VERSION, TLS1_VERSION,
      * DTLS1_VERSION)
@@ -1818,8 +1813,8 @@ struct ssl_connection_st {
     SSL_CONNECTION_FROM_SSL_ONLY_int(ssl, SSL_CONNECTION_NO_CONST)
 # define SSL_CONNECTION_FROM_CONST_SSL_ONLY(ssl) \
     SSL_CONNECTION_FROM_SSL_ONLY_int(ssl, const)
-# define SSL_CONNECTION_GET_CTX(sc) ((sc)->ssl.ctx)
-# define SSL_CONNECTION_GET_SSL(sc) (&(sc)->ssl)
+# define SSL_CONNECTION_GET_CTX(sc) ((sc)->ctx)
+# define SSL_CONNECTION_GET_SSL(sc) ((SSL*) sc)
 #  define SSL_CONNECTION_FROM_SSL(ssl) \
     SSL_CONNECTION_FROM_SSL_ONLY_int(ssl, SSL_CONNECTION_NO_CONST)
 #  define SSL_CONNECTION_FROM_CONST_SSL(ssl) \

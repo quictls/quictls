@@ -1338,7 +1338,7 @@ static int ssl_print_certificates(BIO *bio, const SSL_CONNECTION *sc, int server
     msg += 3;
     if ((server && sc->ext.server_cert_type == TLSEXT_cert_type_rpk)
             || (!server && sc->ext.client_cert_type == TLSEXT_cert_type_rpk)) {
-        if (!ssl_print_raw_public_key(bio, &sc->ssl, server, indent, &msg, &clen))
+        if (!ssl_print_raw_public_key(bio, sc, server, indent, &msg, &clen))
             return 0;
         if (SSL_CONNECTION_IS_TLS13(sc)
             && !ssl_print_extensions(bio, indent + 2, server,

@@ -1038,17 +1038,16 @@ static int ping_pong_query(SSL *clientssl, SSL *serverssl)
     char srec_wseq_after[SEQ_NUM_SIZE];
     char srec_rseq_before[SEQ_NUM_SIZE];
     char srec_rseq_after[SEQ_NUM_SIZE];
-    SSL_CONNECTION *clientsc, *serversc;
-
-    if (!TEST_ptr(clientsc = SSL_CONNECTION_FROM_SSL_ONLY(clientssl))
-        || !TEST_ptr(serversc = SSL_CONNECTION_FROM_SSL_ONLY(serverssl)))
+ 
+    if (!TEST_ptr(clientssl)
+        || !TEST_ptr(serverssl))
         goto end;
 
     cbuf[0] = count++;
-    memcpy(crec_wseq_before, &clientsc->rlayer.wrl->sequence, SEQ_NUM_SIZE);
-    memcpy(srec_wseq_before, &serversc->rlayer.wrl->sequence, SEQ_NUM_SIZE);
-    memcpy(crec_rseq_before, &clientsc->rlayer.rrl->sequence, SEQ_NUM_SIZE);
-    memcpy(srec_rseq_before, &serversc->rlayer.rrl->sequence, SEQ_NUM_SIZE);
+    memcpy(crec_wseq_before, &clientssl->rlayer.wrl->sequence, SEQ_NUM_SIZE);
+    memcpy(srec_wseq_before, &serverssl->rlayer.wrl->sequence, SEQ_NUM_SIZE);
+    memcpy(crec_rseq_before, &clientsl->rlayer.rrl->sequence, SEQ_NUM_SIZE);
+    memcpy(srec_rseq_before, &serverssl->rlayer.rrl->sequence, SEQ_NUM_SIZE);
 
     if (!TEST_true(SSL_write(clientssl, cbuf, sizeof(cbuf)) == sizeof(cbuf)))
         goto end;
@@ -1068,10 +1067,10 @@ static int ping_pong_query(SSL *clientssl, SSL *serverssl)
         }
     }
 
-    memcpy(crec_wseq_after, &clientsc->rlayer.wrl->sequence, SEQ_NUM_SIZE);
-    memcpy(srec_wseq_after, &serversc->rlayer.wrl->sequence, SEQ_NUM_SIZE);
-    memcpy(crec_rseq_after, &clientsc->rlayer.rrl->sequence, SEQ_NUM_SIZE);
-    memcpy(srec_rseq_after, &serversc->rlayer.rrl->sequence, SEQ_NUM_SIZE);
+    memcpy(crec_wseq_after, &clientssl->rlayer.wrl->sequence, SEQ_NUM_SIZE);
+    memcpy(srec_wseq_after, &serverssl->rlayer.wrl->sequence, SEQ_NUM_SIZE);
+    memcpy(crec_rseq_after, &clientssl->rlayer.rrl->sequence, SEQ_NUM_SIZE);
+    memcpy(srec_rseq_after, &serverssl->rlayer.rrl->sequence, SEQ_NUM_SIZE);
 
     /* verify the payload */
     if (!TEST_mem_eq(cbuf, sizeof(cbuf), sbuf, sizeof(sbuf)))
@@ -1081,7 +1080,7 @@ static int ping_pong_query(SSL *clientssl, SSL *serverssl)
      * If ktls is used then kernel sequences are used instead of
      * OpenSSL sequences
      */
-    if (!BIO_get_ktls_send(clientsc->wbio)) {
+    if (!BIO_get_ktls_send(clientssl->wbio)) {
         if (!TEST_mem_ne(crec_wseq_before, SEQ_NUM_SIZE,
                          crec_wseq_after, SEQ_NUM_SIZE))
             goto end;
@@ -1091,7 +1090,7 @@ static int ping_pong_query(SSL *clientssl, SSL *serverssl)
             goto end;
     }
 
-    if (!BIO_get_ktls_send(serversc->wbio)) {
+    if (!BIO_get_ktls_send(serverssl->wbio)) {
         if (!TEST_mem_ne(srec_wseq_before, SEQ_NUM_SIZE,
                          srec_wseq_after, SEQ_NUM_SIZE))
             goto end;
@@ -1101,7 +1100,7 @@ static int ping_pong_query(SSL *clientssl, SSL *serverssl)
             goto end;
     }
 
-    if (!BIO_get_ktls_recv(clientsc->wbio)) {
+    if (!BIO_get_ktls_recv(clientssl->wbio)) {
         if (!TEST_mem_ne(crec_rseq_before, SEQ_NUM_SIZE,
                          crec_rseq_after, SEQ_NUM_SIZE))
             goto end;
@@ -1111,7 +1110,7 @@ static int ping_pong_query(SSL *clientssl, SSL *serverssl)
             goto end;
     }
 
-    if (!BIO_get_ktls_recv(serversc->wbio)) {
+    if (!BIO_get_ktls_recv(serverssl->wbio)) {
         if (!TEST_mem_ne(srec_rseq_before, SEQ_NUM_SIZE,
                          srec_rseq_after, SEQ_NUM_SIZE))
             goto end;
@@ -1134,8 +1133,7 @@ static int execute_test_ktls(int cis_ktls, int sis_ktls,
     int ktls_used = 0, testresult = 0;
     int cfd = -1, sfd = -1;
     int rx_supported;
-    SSL_CONNECTION *clientsc, *serversc;
-    unsigned char *buf = NULL;
+     unsigned char *buf = NULL;
     const size_t bufsz = SSL3_RT_MAX_PLAIN_LENGTH + 16;
     int ret;
     size_t offset = 0, i;
@@ -1175,10 +1173,6 @@ static int execute_test_ktls(int cis_ktls, int sis_ktls,
                                        &clientssl, sfd, cfd)))
         goto end;
 
-    if (!TEST_ptr(clientsc = SSL_CONNECTION_FROM_SSL_ONLY(clientssl))
-        || !TEST_ptr(serversc = SSL_CONNECTION_FROM_SSL_ONLY(serverssl)))
-        goto end;
-
     if (cis_ktls) {
         if (!TEST_true(SSL_set_options(clientssl, SSL_OP_ENABLE_KTLS)))
             goto end;
@@ -1198,18 +1192,18 @@ static int execute_test_ktls(int cis_ktls, int sis_ktls,
      * isn't enabled.
      */
     if (!cis_ktls) {
-        if (!TEST_false(BIO_get_ktls_send(clientsc->wbio)))
+        if (!TEST_false(BIO_get_ktls_send(clientssl->wbio)))
             goto end;
     } else {
-        if (BIO_get_ktls_send(clientsc->wbio))
+        if (BIO_get_ktls_send(clientssl->wbio))
             ktls_used = 1;
     }
 
     if (!sis_ktls) {
-        if (!TEST_false(BIO_get_ktls_send(serversc->wbio)))
+        if (!TEST_false(BIO_get_ktls_send(serverssl->wbio)))
             goto end;
     } else {
-        if (BIO_get_ktls_send(serversc->wbio))
+        if (BIO_get_ktls_send(serverssl->wbio))
             ktls_used = 1;
     }
 
@@ -1219,18 +1213,18 @@ static int execute_test_ktls(int cis_ktls, int sis_ktls,
     rx_supported = 1;
 #endif
     if (!cis_ktls || !rx_supported) {
-        if (!TEST_false(BIO_get_ktls_recv(clientsc->rbio)))
+        if (!TEST_false(BIO_get_ktls_recv(clientssl->rbio)))
             goto end;
     } else {
-        if (BIO_get_ktls_send(clientsc->rbio))
+        if (BIO_get_ktls_send(clientssl->rbio))
             ktls_used = 1;
     }
 
     if (!sis_ktls || !rx_supported) {
-        if (!TEST_false(BIO_get_ktls_recv(serversc->rbio)))
+        if (!TEST_false(BIO_get_ktls_recv(serverssl->rbio)))
             goto end;
     } else {
-        if (BIO_get_ktls_send(serversc->rbio))
+        if (BIO_get_ktls_send(serverssl->rbio))
             ktls_used = 1;
     }
 
@@ -1311,7 +1305,6 @@ static int execute_test_ktls_sendfile(int tls_version, const char *cipher,
     off_t chunk_off = 0;
     int testresult = 0;
     FILE *ffdp;
-    SSL_CONNECTION *serversc;
 
     buf = OPENSSL_zalloc(SENDFILE_SZ);
     buf_dst = OPENSSL_zalloc(SENDFILE_SZ);
@@ -1351,9 +1344,6 @@ static int execute_test_ktls_sendfile(int tls_version, const char *cipher,
                                        &clientssl, sfd, cfd)))
         goto end;
 
-    if (!TEST_ptr(serversc = SSL_CONNECTION_FROM_SSL_ONLY(serverssl)))
-        goto end;
-
     if (!TEST_true(SSL_set_options(serverssl, SSL_OP_ENABLE_KTLS)))
         goto end;
 
@@ -1367,7 +1357,7 @@ static int execute_test_ktls_sendfile(int tls_version, const char *cipher,
                                          SSL_ERROR_NONE)))
         goto end;
 
-    if (!BIO_get_ktls_send(serversc->wbio)) {
+    if (!BIO_get_ktls_send(serverssl->wbio)) {
         testresult = TEST_skip("Failed to enable KTLS for %s cipher %s",
                                tls_version == TLS1_3_VERSION ? "TLS 1.3" :
                                "TLS 1.2", cipher);
@@ -1710,7 +1700,6 @@ static int execute_cleanse_plaintext(const SSL_METHOD *smeth,
     SSL *clientssl = NULL, *serverssl = NULL;
     int testresult = 0;
     const unsigned char *zbuf;
-    SSL_CONNECTION *serversc;
     TLS_RECORD *rr;
 
     static unsigned char cbuf[16000];
@@ -1770,9 +1759,7 @@ static int execute_cleanse_plaintext(const SSL_METHOD *smeth,
      * layer is a plaintext record. We can gather the pointer to check
      * for zeroization after SSL_read().
      */
-    if (!TEST_ptr(serversc = SSL_CONNECTION_FROM_SSL_ONLY(serverssl)))
-        goto end;
-    rr = serversc->rlayer.tlsrecs;
+    rr = serverssl->rlayer.tlsrecs;
 
     zbuf = &rr->data[rr->off];
     if (!TEST_int_eq(rr->length, sizeof(cbuf)))
