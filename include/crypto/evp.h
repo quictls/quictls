@@ -653,7 +653,7 @@ union legacy_pkey_st {
 #  endif
 #  ifndef OPENSSL_NO_EC
     struct ec_key_st *ec;   /* ECC */
-#   ifndef OPENSSL_NO_ECX
+#   ifndef OPENSSL_NO_EC
     ECX_KEY *ecx;           /* X25519, X448, Ed25519, Ed448 */
 #   endif
 #  endif

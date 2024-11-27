@@ -566,7 +566,7 @@ err:
 
 /* ---------------------------------------------------------------------- */
 
-#ifndef OPENSSL_NO_ECX
+#ifndef OPENSSL_NO_EC
 static int ecx_to_text(BIO *out, const void *key, int selection)
 {
     const ECX_KEY *ecx = key;
@@ -869,7 +869,7 @@ MAKE_TEXT_ENCODER(ec, ec);
 # ifndef OPENSSL_NO_SM2
 MAKE_TEXT_ENCODER(sm2, ec);
 # endif
-# ifndef OPENSSL_NO_ECX
+# ifndef OPENSSL_NO_EC
 MAKE_TEXT_ENCODER(ed25519, ecx);
 MAKE_TEXT_ENCODER(ed448, ecx);
 MAKE_TEXT_ENCODER(x25519, ecx);
