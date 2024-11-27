@@ -269,9 +269,6 @@ subtest "generating certificate requests with Ed25519" => sub {
     plan tests => 2;
 
     SKIP: {
-        skip "Ed25519 is not supported by this OpenSSL build", 2
-            if disabled("ecx");
-
         ok(run(app(["openssl", "req",
                     "-config", srctop_file("test", "test.cnf"),
                     "-new", "-out", "testreq-ed25519.pem", "-utf8",
@@ -289,9 +286,6 @@ subtest "generating certificate requests with Ed448" => sub {
     plan tests => 2;
 
     SKIP: {
-        skip "Ed448 is not supported by this OpenSSL build", 2
-            if disabled("ecx");
-
         ok(run(app(["openssl", "req",
                     "-config", srctop_file("test", "test.cnf"),
                     "-new", "-out", "testreq-ed448.pem", "-utf8",

@@ -26,7 +26,6 @@ my $no_des = disabled("des");
 my $no_dh = disabled("dh");
 my $no_dsa = disabled("dsa");
 my $no_ec = disabled("ec");
-my $no_ecx = disabled("ecx");
 my $no_sm2 = disabled("sm2");
 my $no_siv = disabled("siv");
 my $no_argon2 = disabled("argon2");
@@ -76,7 +75,7 @@ push @files, qw(evppkey_dsa.txt) unless $no_dsa;
 push @files, qw(
                 evppkey_ecx.txt
                 evppkey_mismatch_ecx.txt
-               ) unless $no_ecx;
+               );
 push @files, qw(
                 evppkey_ecc.txt
                 evppkey_ecdh.txt

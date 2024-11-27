@@ -322,7 +322,6 @@ static int test_print_key_using_encoder(const char *alg, const EVP_PKEY *pk)
     return ret;
 }
 
-#ifndef OPENSSL_NO_ECX
 static int test_print_key_using_encoder_public(const char *alg,
                                                const EVP_PKEY *pk)
 {
@@ -334,7 +333,6 @@ static int test_print_key_using_encoder_public(const char *alg,
 
     return ret;
 }
-#endif
 
 /* Array indexes used in test_fromdata_rsa */
 #define N       0
@@ -1292,7 +1290,6 @@ err:
 
 
 #ifndef OPENSSL_NO_EC
-# ifndef OPENSSL_NO_ECX
 /* Array indexes used in test_fromdata_ecx */
 # define PRIV_KEY        0
 # define PUB_KEY         1
@@ -1570,7 +1567,6 @@ err:
 
     return ret;
 }
-# endif /* OPENSSL_NO_ECX */
 
 static int test_fromdata_ec(void)
 {
@@ -2204,9 +2200,7 @@ int setup_tests(void)
     ADD_TEST(test_fromdata_dsa_fips186_4);
 #endif
 #ifndef OPENSSL_NO_EC
-# ifndef OPENSSL_NO_ECX
     ADD_ALL_TESTS(test_fromdata_ecx, 4 * 3);
-# endif
     ADD_TEST(test_fromdata_ec);
     ADD_TEST(test_ec_dup_no_operation);
     ADD_TEST(test_ec_dup_keygen_operation);

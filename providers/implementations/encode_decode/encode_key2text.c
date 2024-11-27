@@ -566,7 +566,6 @@ err:
 
 /* ---------------------------------------------------------------------- */
 
-#ifndef OPENSSL_NO_ECX
 static int ecx_to_text(BIO *out, const void *key, int selection)
 {
     const ECX_KEY *ecx = key;
@@ -623,7 +622,6 @@ static int ecx_to_text(BIO *out, const void *key, int selection)
 # define ed448_input_type       "ED448"
 # define x25519_input_type      "X25519"
 # define x448_input_type        "X448"
-#endif
 
 /* ---------------------------------------------------------------------- */
 
@@ -869,12 +867,10 @@ MAKE_TEXT_ENCODER(ec, ec);
 # ifndef OPENSSL_NO_SM2
 MAKE_TEXT_ENCODER(sm2, ec);
 # endif
-# ifndef OPENSSL_NO_ECX
 MAKE_TEXT_ENCODER(ed25519, ecx);
 MAKE_TEXT_ENCODER(ed448, ecx);
 MAKE_TEXT_ENCODER(x25519, ecx);
 MAKE_TEXT_ENCODER(x448, ecx);
-# endif
 #endif
 MAKE_TEXT_ENCODER(rsa, rsa);
 MAKE_TEXT_ENCODER(rsapss, rsa);

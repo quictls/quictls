@@ -66,10 +66,8 @@ static CMP_PROTECT_TEST_FIXTURE *set_up(const char *const test_case_name)
 }
 
 static EVP_PKEY *prot_RSA_key = NULL;
-#ifndef OPENSSL_NO_ECX
 static EVP_PKEY *prot_Ed_key = NULL;
 static OSSL_CMP_MSG *genm_protected_Ed;
-#endif
 static EVP_PKEY *server_key = NULL;
 static X509 *server_cert = NULL;
 static unsigned char rand_data[OSSL_CMP_TRANSACTIONID_LENGTH];
@@ -158,7 +156,6 @@ static int test_cmp_calc_protection_pkey(void)
     return result;
 }
 
-#ifndef OPENSSL_NO_ECX
 static int test_cmp_calc_protection_pkey_Ed(void)
 {
     SETUP_TEST_FIXTURE(CMP_PROTECT_TEST_FIXTURE, set_up);
@@ -171,7 +168,6 @@ static int test_cmp_calc_protection_pkey_Ed(void)
     EXECUTE_TEST(execute_calc_protection_signature_test, tear_down);
     return result;
 }
-#endif
 
 static int test_cmp_calc_protection_pbmac(void)
 {
@@ -525,10 +521,8 @@ static int test_X509_STORE_only_self_issued(void)
 void cleanup_tests(void)
 {
     EVP_PKEY_free(prot_RSA_key);
-#ifndef OPENSSL_NO_ECX
     EVP_PKEY_free(prot_Ed_key);
     OSSL_CMP_MSG_free(genm_protected_Ed);
-#endif
     EVP_PKEY_free(server_key);
     X509_free(server_cert);
     X509_free(endentity1);
@@ -590,14 +584,10 @@ int setup_tests(void)
 
     if (!TEST_ptr(prot_RSA_key = load_pkey_pem(prot_RSA_f, libctx)))
         return 0;
-#ifndef OPENSSL_NO_ECX
     if (!TEST_ptr(prot_Ed_key = load_pkey_pem(prot_Ed_f, libctx)))
         return 0;
-#endif
     if (!TEST_ptr(ir_protected = load_pkimsg(ir_protected_f, libctx))
-#ifndef OPENSSL_NO_ECX
         || !TEST_ptr(genm_protected_Ed = load_pkimsg(genm_prot_Ed_f, libctx))
-#endif
         || !TEST_ptr(ir_unprotected = load_pkimsg(ir_unprotected_f, libctx)))
         return 0;
     if (!TEST_ptr(endentity1 = load_cert_pem(endentity1_f, libctx))
@@ -611,9 +601,7 @@ int setup_tests(void)
     /* Message protection tests */
     ADD_TEST(test_cmp_calc_protection_no_key_no_secret);
     ADD_TEST(test_cmp_calc_protection_pkey);
-#ifndef OPENSSL_NO_ECX
     ADD_TEST(test_cmp_calc_protection_pkey_Ed);
-#endif
     ADD_TEST(test_cmp_calc_protection_pbmac);
 
     ADD_TEST(test_MSG_protect_with_msg_sig_alg_protection_plus_rsa_key);

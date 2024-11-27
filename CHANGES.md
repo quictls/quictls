@@ -22,10 +22,15 @@ Currrent Changes
 - Remove support for some old configuration options:
   - unit-test as there was only one, so not worth the complication
   - fips, no-fips since we do not build a FIPS-validated container
+  - crypto-mdebug since there are better tools (valgrind, ASAN, etc)
+  - crypto-mdebug-backtrace since it did nothing
+
+- Some configuration options were removed because they're not optional:
+  - ecx, X25519 curve
 
 - Remove support for EGD random source.
 
-- Made the ERR_STACK datatype opaque.
+- Made the `ERR_STACK` datatype opaque.
 
 - Removed support for some old platforms:
   - Removed support for old HPE platforms: NonStop and Tandem

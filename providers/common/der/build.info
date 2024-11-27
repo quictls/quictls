@@ -57,19 +57,17 @@ IF[{- !$disabled{ec} -}]
 ENDIF
 
 #----- ECX
-IF[{- !$disabled{ecx} -}]
-  $DER_ECX_H=$INCDIR/der_ecx.h
-  $DER_ECX_GEN=der_ecx_gen.c
-  $DER_ECX_AUX=der_ecx_key.c
+$DER_ECX_H=$INCDIR/der_ecx.h
+$DER_ECX_GEN=der_ecx_gen.c
+$DER_ECX_AUX=der_ecx_key.c
 
-  GENERATE[$DER_ECX_GEN]=der_ecx_gen.c.in
-  DEPEND[$DER_ECX_GEN]=oids_to_c.pm ECX.asn1
+GENERATE[$DER_ECX_GEN]=der_ecx_gen.c.in
+DEPEND[$DER_ECX_GEN]=oids_to_c.pm ECX.asn1
 
-  DEPEND[${DER_ECX_AUX/.c/.o}]=$DER_ECX_H
-  DEPEND[${DER_ECX_GEN/.c/.o}]=$DER_ECX_H
-  GENERATE[$DER_ECX_H]=$INCDIR/der_ecx.h.in
-  DEPEND[$DER_ECX_H]=oids_to_c.pm ECX.asn1
-ENDIF
+DEPEND[${DER_ECX_AUX/.c/.o}]=$DER_ECX_H
+DEPEND[${DER_ECX_GEN/.c/.o}]=$DER_ECX_H
+GENERATE[$DER_ECX_H]=$INCDIR/der_ecx.h.in
+DEPEND[$DER_ECX_H]=oids_to_c.pm ECX.asn1
 
 #----- KEY WRAP
 $DER_WRAP_H=$INCDIR/der_wrap.h

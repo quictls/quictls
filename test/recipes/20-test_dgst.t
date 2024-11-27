@@ -128,9 +128,6 @@ SKIP: {
 }
 
 SKIP: {
-    skip "EdDSA is not supported by this OpenSSL build", 2
-        if disabled("ecx");
-
     skip "EdDSA is not supported with `dgst` CLI", 2;
 
     subtest "Ed25519 signature generation and verification with `dgst` CLI" => sub {
