@@ -25,7 +25,6 @@ jobs:
           no-dgram,
           no-dh,
           no-dtls,
-          no-ec,
           no-http,
           no-legacy,
           no-sock,
