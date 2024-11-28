@@ -1057,7 +1057,7 @@ static int test_lib_ctx_load_config(void)
                            1, default_provider);
 }
 
-#if !defined(OPENSSL_NO_DGRAM) && !defined(OPENSSL_NO_SOCK)
+#if !defined(OPENSSL_NO_SOCK)
 static BIO *multi_bio1, *multi_bio2;
 
 static void test_bio_dgram_pair_worker(void)
@@ -1244,7 +1244,7 @@ int setup_tests(void)
     ADD_TEST(test_multi_load_unload_provider);
     ADD_TEST(test_obj_add);
     ADD_TEST(test_lib_ctx_load_config);
-#if !defined(OPENSSL_NO_DGRAM) && !defined(OPENSSL_NO_SOCK)
+#if !defined(OPENSSL_NO_SOCK)
     ADD_TEST(test_bio_dgram_pair);
 #endif
     ADD_TEST(test_pem_read);

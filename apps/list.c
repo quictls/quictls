@@ -1326,9 +1326,6 @@ static void list_disabled(void)
 #ifdef OPENSSL_NO_DES
     BIO_puts(bio_out, "DES\n");
 #endif
-#ifdef OPENSSL_NO_DGRAM
-    BIO_puts(bio_out, "DGRAM\n");
-#endif
 #ifdef OPENSSL_NO_DH
     BIO_puts(bio_out, "DH\n");
 #endif

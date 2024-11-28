@@ -22,7 +22,6 @@ jobs:
         opt: [
           no-cmp,
           no-cms,
-          no-dgram,
           no-dh,
           no-dtls,
           no-ec,

@@ -257,7 +257,7 @@ EVP_des_ede3                            264	3_0_0	EXIST::FUNCTION:DES
 PKCS7_add1_attrib_digest                265	3_0_0	EXIST::FUNCTION:
 EC_POINT_get_affine_coordinates_GFp     266	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
 EVP_seed_ecb                            267	3_0_0	EXIST::FUNCTION:SEED
-BIO_dgram_sctp_wait_for_dry             268	3_0_0	EXIST::FUNCTION:DGRAM,SCTP
+BIO_dgram_sctp_wait_for_dry             268	3_0_0	EXIST::FUNCTION:SCTP
 ASN1_OCTET_STRING_NDEF_it               269	3_0_0	EXIST::FUNCTION:
 EVP_PKEY_asn1_get_count                 270	3_0_0	EXIST::FUNCTION:
 WHIRLPOOL_Init                          271	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,WHIRLPOOL
@@ -321,7 +321,7 @@ X509_OBJECT_up_ref_count                328	3_0_0	EXIST::FUNCTION:
 RAND_load_file                          329	3_0_0	EXIST::FUNCTION:
 BIO_ctrl_reset_read_request             330	3_0_0	EXIST::FUNCTION:
 CRYPTO_ccm128_tag                       331	3_0_0	EXIST::FUNCTION:
-BIO_new_dgram_sctp                      332	3_0_0	EXIST::FUNCTION:DGRAM,SCTP
+BIO_new_dgram_sctp                      332	3_0_0	EXIST::FUNCTION:SCTP
 d2i_RSAPrivateKey_fp                    333	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,STDIO
 s2i_ASN1_IA5STRING                      334	3_0_0	EXIST::FUNCTION:
 UI_get_ex_data                          335	3_0_0	EXIST::FUNCTION:
@@ -937,7 +937,7 @@ d2i_DSAPublicKey                        972	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3
 ENGINE_get_name                         973	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,ENGINE
 CRYPTO_THREAD_read_lock                 974	3_0_0	EXIST::FUNCTION:
 ASIdentifierChoice_free                 975	3_0_0	EXIST::FUNCTION:RFC3779
-BIO_dgram_sctp_msg_waiting              976	3_0_0	EXIST::FUNCTION:DGRAM,SCTP
+BIO_dgram_sctp_msg_waiting              976	3_0_0	EXIST::FUNCTION:SCTP
 BN_is_bit_set                           978	3_0_0	EXIST::FUNCTION:
 AES_ofb128_encrypt                      979	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
 X509_STORE_add_lookup                   980	3_0_0	EXIST::FUNCTION:
@@ -1069,7 +1069,7 @@ RSA_security_bits                       1108	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_
 X509v3_addr_add_prefix                  1109	3_0_0	EXIST::FUNCTION:RFC3779
 X509_REQ_print_fp                       1110	3_0_0	EXIST::FUNCTION:STDIO
 ASN1_item_ex_new                        1111	3_0_0	EXIST::FUNCTION:
-BIO_s_datagram                          1112	3_0_0	EXIST::FUNCTION:DGRAM
+BIO_s_datagram                          1112	3_0_0	EXIST::FUNCTION:SOCK
 PEM_write_bio_PKCS8                     1113	3_0_0	EXIST::FUNCTION:
 ASN1_str2mask                           1114	3_0_0	EXIST::FUNCTION:
 ASN1_TYPE_get                           1115	3_0_0	EXIST::FUNCTION:
@@ -1403,7 +1403,7 @@ EVP_PKEY_get0_asn1                      1450	3_0_0	EXIST::FUNCTION:
 EVP_camellia_192_ctr                    1451	3_0_0	EXIST::FUNCTION:CAMELLIA
 EVP_PKEY_free                           1452	3_0_0	EXIST::FUNCTION:
 X509_ATTRIBUTE_count                    1453	3_0_0	EXIST::FUNCTION:
-BIO_new_dgram                           1454	3_0_0	EXIST::FUNCTION:DGRAM
+BIO_new_dgram                           1454	3_0_0	EXIST::FUNCTION:SOCK
 CMS_RecipientInfo_kari_get0_reks        1455	3_0_0	EXIST::FUNCTION:CMS
 BASIC_CONSTRAINTS_new                   1456	3_0_0	EXIST::FUNCTION:
 PEM_read_bio_X509_REQ                   1457	3_0_0	EXIST::FUNCTION:
@@ -2291,7 +2291,7 @@ DES_decrypt3                            2362	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_
 OTHERNAME_it                            2363	3_0_0	EXIST::FUNCTION:
 X509at_add1_attr_by_txt                 2364	3_0_0	EXIST::FUNCTION:
 PKCS7_SIGN_ENVELOPE_free                2365	3_0_0	EXIST::FUNCTION:
-BIO_dgram_is_sctp                       2366	3_0_0	EXIST::FUNCTION:DGRAM,SCTP
+BIO_dgram_is_sctp                       2366	3_0_0	EXIST::FUNCTION:SCTP
 DH_check                                2367	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,DH
 Camellia_set_key                        2368	3_0_0	EXIST::FUNCTION:CAMELLIA,DEPRECATEDIN_3_0
 X509_LOOKUP_by_issuer_serial            2369	3_0_0	EXIST::FUNCTION:
@@ -2384,7 +2384,7 @@ X509_EXTENSION_get_critical             2457	3_0_0	EXIST::FUNCTION:
 DSA_set_default_method                  2458	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,DSA
 PEM_write_bio_DHxparams                 2459	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,DH
 DSA_set_ex_data                         2460	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,DSA
-BIO_s_datagram_sctp                     2461	3_0_0	EXIST::FUNCTION:DGRAM,SCTP
+BIO_s_datagram_sctp                     2461	3_0_0	EXIST::FUNCTION:SCTP
 SXNET_add_id_asc                        2462	3_0_0	EXIST::FUNCTION:
 X509_print_fp                           2463	3_0_0	EXIST::FUNCTION:STDIO
 TS_REQ_set_version                      2464	3_0_0	EXIST::FUNCTION:TS
@@ -2922,7 +2922,7 @@ EVP_PKEY_get0_RSA                       3011	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_
 DES_ede3_cfb64_encrypt                  3012	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,DES
 POLICY_MAPPING_free                     3014	3_0_0	EXIST::FUNCTION:
 EVP_aes_128_gcm                         3015	3_0_0	EXIST::FUNCTION:
-BIO_dgram_non_fatal_error               3016	3_0_0	EXIST::FUNCTION:DGRAM
+BIO_dgram_non_fatal_error               3016	3_0_0	EXIST::FUNCTION:SOCK
 OCSP_request_is_signed                  3017	3_0_0	EXIST::FUNCTION:OCSP
 i2d_BASIC_CONSTRAINTS                   3018	3_0_0	EXIST::FUNCTION:
 EC_KEY_get_method                       3019	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
@@ -3454,7 +3454,7 @@ PKCS7_decrypt                           3562	3_0_0	EXIST::FUNCTION:
 X509_STORE_set1_param                   3563	3_0_0	EXIST::FUNCTION:
 RAND_file_name                          3564	3_0_0	EXIST::FUNCTION:
 EVP_CipherInit_ex                       3566	3_0_0	EXIST::FUNCTION:
-BIO_dgram_sctp_notification_cb          3567	3_0_0	EXIST::FUNCTION:DGRAM,SCTP
+BIO_dgram_sctp_notification_cb          3567	3_0_0	EXIST::FUNCTION:SCTP
 ERR_load_RAND_strings                   3568	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
 X509_ATTRIBUTE_it                       3569	3_0_0	EXIST::FUNCTION:
 X509_ALGOR_it                           3570	3_0_0	EXIST::FUNCTION:
@@ -5429,7 +5429,7 @@ CMS_EnvelopedData_decrypt               5593	3_2_0	EXIST::FUNCTION:CMS
 CMS_SignedData_free                     5594	3_2_0	EXIST::FUNCTION:CMS
 CMS_SignedData_new                      5595	3_2_0	EXIST::FUNCTION:CMS
 CMS_SignedData_verify                   5596	3_2_0	EXIST::FUNCTION:CMS
-BIO_s_dgram_mem                         5597	3_2_0	EXIST::FUNCTION:DGRAM
+BIO_s_dgram_mem                         5597	3_2_0	EXIST::FUNCTION:SOCK
 BIO_recvmmsg                            5598	3_2_0	EXIST::FUNCTION:
 BIO_sendmmsg                            5599	3_2_0	EXIST::FUNCTION:
 BIO_meth_set_sendmmsg                   5600	3_2_0	EXIST::FUNCTION:
@@ -5437,8 +5437,8 @@ BIO_meth_get_sendmmsg                   5601	3_2_0	EXIST::FUNCTION:
 BIO_meth_set_recvmmsg                   5602	3_2_0	EXIST::FUNCTION:
 BIO_meth_get_recvmmsg                   5603	3_2_0	EXIST::FUNCTION:
 BIO_err_is_non_fatal                    5604	3_2_0	EXIST::FUNCTION:SOCK
-BIO_s_dgram_pair                        5605	3_2_0	EXIST::FUNCTION:DGRAM
-BIO_new_bio_dgram_pair                  5606	3_2_0	EXIST::FUNCTION:DGRAM
+BIO_s_dgram_pair                        5605	3_2_0	EXIST::FUNCTION:SOCK
+BIO_new_bio_dgram_pair                  5606	3_2_0	EXIST::FUNCTION:SOCK
 EVP_PKEY_auth_encapsulate_init          5607	3_2_0	EXIST::FUNCTION:
 EVP_PKEY_auth_decapsulate_init          5608	3_2_0	EXIST::FUNCTION:
 PKCS12_SAFEBAG_set0_attrs               5609	3_2_0	EXIST::FUNCTION:

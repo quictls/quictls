@@ -23,6 +23,7 @@ Currrent Changes
   - unit-test as there was only one, so not worth the complication
   - fips, no-fips since we do not build a FIPS-validated container
   - ecdh, it was a no-op
+  - no-dgram is now implied by no-sock (no longer can turn off just UDP)
 
 - Remove support for EGD random source.
 

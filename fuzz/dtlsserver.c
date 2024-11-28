@@ -590,15 +590,12 @@ int FuzzerTestOneInput(const uint8_t *buf, size_t len)
     SSL *server;
     BIO *in;
     BIO *out;
-#if !defined(OPENSSL_NO_EC)                     \
-    || (!defined(OPENSSL_NO_DSA) && !defined(OPENSSL_NO_DEPRECATED_3_0))
-    BIO *bio_buf;
-#endif
     SSL_CTX *ctx;
     int ret;
 #ifndef OPENSSL_NO_DEPRECATED_3_0
     RSA *privkey;
 #endif
+    BIO *bio_buf;
 #if !defined(OPENSSL_NO_DEPRECATED_3_0)
     EVP_PKEY *pkey;
 #endif

@@ -14,7 +14,7 @@
 #include "internal/sockets.h"
 #include "internal/bio_addr.h"
 
-#if !defined(OPENSSL_NO_DGRAM) && !defined(OPENSSL_NO_SOCK)
+#if !defined(OPENSSL_NO_SOCK)
 
 static int compare_addr(const BIO_ADDR *a, const BIO_ADDR *b)
 {
@@ -774,7 +774,7 @@ err:
     return testresult;
 }
 # endif /* !defined(OPENSSL_NO_CHACHA) */
-#endif /* !defined(OPENSSL_NO_DGRAM) && !defined(OPENSSL_NO_SOCK) */
+#endif /* !defined(OPENSSL_NO_SOCK) */
 
 int setup_tests(void)
 {
@@ -783,7 +783,7 @@ int setup_tests(void)
         return 0;
     }
 
-#if !defined(OPENSSL_NO_DGRAM) && !defined(OPENSSL_NO_SOCK)
+#if !defined(OPENSSL_NO_SOCK)
     ADD_ALL_TESTS(test_bio_dgram, OSSL_NELEM(bio_dgram_cases));
 # if !defined(OPENSSL_NO_CHACHA)
     ADD_ALL_TESTS(test_bio_dgram_pair, 3);
