@@ -50,7 +50,7 @@
 
 static int FIPS_conditional_error_check = 1;
 static CRYPTO_RWLOCK *self_test_lock = NULL;
-static unsigned char fixed_key[32] = { FIPS_KEY_ELEMENTS };
+static unsigned char fixed_key[32];/* = { FIPS_KEY_ELEMENTS };*/
 
 static CRYPTO_ONCE fips_self_test_init = CRYPTO_ONCE_STATIC_INIT;
 DEFINE_RUN_ONCE_STATIC(do_fips_self_test_init)
