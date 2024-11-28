@@ -22,6 +22,7 @@ Currrent Changes
 - Remove support for some old configuration options:
   - unit-test as there was only one, so not worth the complication
   - fips, no-fips since we do not build a FIPS-validated container
+  - ecdh, it was a no-op
 
 - Remove support for EGD random source.
 
