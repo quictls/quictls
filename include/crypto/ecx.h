@@ -15,7 +15,7 @@
 
 # include <openssl/opensslconf.h>
 
-# ifndef OPENSSL_NO_ECX
+# ifndef OPENSSL_NO_EC
 
 #  include <openssl/core.h>
 #  include <openssl/e_os2.h>
@@ -154,5 +154,5 @@ ECX_KEY *ossl_evp_pkey_get1_X25519(EVP_PKEY *pkey);
 ECX_KEY *ossl_evp_pkey_get1_X448(EVP_PKEY *pkey);
 ECX_KEY *ossl_evp_pkey_get1_ED25519(EVP_PKEY *pkey);
 ECX_KEY *ossl_evp_pkey_get1_ED448(EVP_PKEY *pkey);
-# endif /* OPENSSL_NO_ECX */
+# endif /* OPENSSL_NO_EC */
 #endif

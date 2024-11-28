@@ -370,10 +370,8 @@ static const OSSL_ALGORITHM deflt_keyexch[] = {
 #endif
 #ifndef OPENSSL_NO_EC
     { PROV_NAMES_ECDH, "provider=default", ossl_ecdh_keyexch_functions },
-# ifndef OPENSSL_NO_ECX
     { PROV_NAMES_X25519, "provider=default", ossl_x25519_keyexch_functions },
     { PROV_NAMES_X448, "provider=default", ossl_x448_keyexch_functions },
-# endif
 #endif
     { PROV_NAMES_TLS1_PRF, "provider=default", ossl_kdf_tls1_prf_keyexch_functions },
     { PROV_NAMES_HKDF, "provider=default", ossl_kdf_hkdf_keyexch_functions },
@@ -397,10 +395,8 @@ static const OSSL_ALGORITHM deflt_signature[] = {
 #endif
     { PROV_NAMES_RSA, "provider=default", ossl_rsa_signature_functions },
 #ifndef OPENSSL_NO_EC
-# ifndef OPENSSL_NO_ECX
     { PROV_NAMES_ED25519, "provider=default", ossl_ed25519_signature_functions },
     { PROV_NAMES_ED448, "provider=default", ossl_ed448_signature_functions },
-# endif
     { PROV_NAMES_ECDSA, "provider=default", ossl_ecdsa_signature_functions },
 # ifndef OPENSSL_NO_SM2
     { PROV_NAMES_SM2, "provider=default", ossl_sm2_signature_functions },
@@ -430,10 +426,8 @@ static const OSSL_ALGORITHM deflt_asym_cipher[] = {
 static const OSSL_ALGORITHM deflt_asym_kem[] = {
     { PROV_NAMES_RSA, "provider=default", ossl_rsa_asym_kem_functions },
 #ifndef OPENSSL_NO_EC
-# ifndef OPENSSL_NO_ECX
     { PROV_NAMES_X25519, "provider=default", ossl_ecx_asym_kem_functions },
     { PROV_NAMES_X448, "provider=default", ossl_ecx_asym_kem_functions },
-# endif
     { PROV_NAMES_EC, "provider=default", ossl_ec_asym_kem_functions },
 #endif
     { NULL, NULL, NULL }
@@ -457,7 +451,6 @@ static const OSSL_ALGORITHM deflt_keymgmt[] = {
 #ifndef OPENSSL_NO_EC
     { PROV_NAMES_EC, "provider=default", ossl_ec_keymgmt_functions,
       PROV_DESCS_EC },
-# ifndef OPENSSL_NO_ECX
     { PROV_NAMES_X25519, "provider=default", ossl_x25519_keymgmt_functions,
       PROV_DESCS_X25519 },
     { PROV_NAMES_X448, "provider=default", ossl_x448_keymgmt_functions,
@@ -466,7 +459,6 @@ static const OSSL_ALGORITHM deflt_keymgmt[] = {
       PROV_DESCS_ED25519 },
     { PROV_NAMES_ED448, "provider=default", ossl_ed448_keymgmt_functions,
       PROV_DESCS_ED448 },
-# endif
 #endif
     { PROV_NAMES_TLS1_PRF, "provider=default", ossl_kdf_keymgmt_functions,
       PROV_DESCS_TLS1_PRF_SIGN },
