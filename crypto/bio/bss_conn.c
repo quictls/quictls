@@ -95,7 +95,6 @@ static int conn_create_dgram_bio(BIO *b, BIO_CONNECT *c)
     if (c->connect_sock_type != SOCK_DGRAM)
         return 1;
 
-#ifndef OPENSSL_NO_DGRAM
     c->dgram_bio = BIO_new_dgram(b->num, 0);
     if (c->dgram_bio == NULL)
         goto err;
@@ -103,7 +102,6 @@ static int conn_create_dgram_bio(BIO *b, BIO_CONNECT *c)
     return 1;
 
 err:
-#endif
     c->state = BIO_CONN_S_CONNECT_ERROR;
     return 0;
 }

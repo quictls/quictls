@@ -10,7 +10,7 @@
 #include <openssl/bio.h>
 #include "testutil.h"
 
-#ifndef OPENSSL_NO_DGRAM
+#ifndef OPENSSL_NO_SOCK
 static int test_dgram(void)
 {
     BIO *bio = BIO_new(BIO_s_dgram_mem()), *rbio = NULL;
@@ -118,7 +118,7 @@ int setup_tests(void)
         return 0;
     }
 
-#ifndef OPENSSL_NO_DGRAM
+#ifndef OPENSSL_NO_SOCK
     ADD_TEST(test_dgram);
 #endif
 

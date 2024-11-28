@@ -13,7 +13,7 @@
 #include "internal/cryptlib.h"
 #include "internal/safe_math.h"
 
-#if !defined(OPENSSL_NO_DGRAM) && !defined(OPENSSL_NO_SOCK)
+#if !defined(OPENSSL_NO_SOCK)
 
 OSSL_SAFE_MATH_UNSIGNED(size_t, size_t)
 

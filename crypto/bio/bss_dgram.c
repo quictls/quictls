@@ -16,7 +16,7 @@
 
 #include "internal/time.h"
 #include "bio_local.h"
-#ifndef OPENSSL_NO_DGRAM
+#ifndef OPENSSL_NO_SOCK
 
 # ifndef OPENSSL_NO_SCTP
 #  include <netinet/sctp.h>
