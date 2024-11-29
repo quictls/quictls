@@ -29,8 +29,9 @@ IF[{- !$disabled{"fuzz-afl"} || !$disabled{"fuzz-libfuzzer"} -}]
     PROGRAMS{noinst}=x509
   ENDIF
 
-  IF[{- !$disabled{"dtls"} -}]
+  IF[{- !$disabled{"sock"} -}]
     PROGRAMS{noinst}=dtlsclient dtlsserver
+    PROGRAMS{noinst}=dtlsclient-test dtlsserver-test
   ENDIF
 
   SOURCE[asn1]=asn1.c driver.c fuzz_rand.c
@@ -129,10 +130,6 @@ IF[{- !$disabled{tests} -}]
 
   IF[{- !$disabled{"ocsp"} -}]
     PROGRAMS{noinst}=x509-test
-  ENDIF
-
-  IF[{- !$disabled{"dtls"} -}]
-    PROGRAMS{noinst}=dtlsclient-test dtlsserver-test
   ENDIF
 
   SOURCE[asn1-test]=asn1.c test-corpus.c fuzz_rand.c
