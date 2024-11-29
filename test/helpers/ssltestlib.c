@@ -1097,6 +1097,7 @@ int create_ssl_objects2(SSL_CTX *serverctx, SSL_CTX *clientctx, SSL **sssl,
 
     SSL_set_bio(clientssl, c_to_s_bio, c_to_s_bio);
     SSL_set_bio(serverssl, s_to_c_bio, s_to_c_bio);
+
     *sssl = serverssl;
     *cssl = clientssl;
     return 1;
