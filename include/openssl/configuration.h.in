@@ -82,7 +82,10 @@ extern "C" {
 # ifndef OPENSSL_NO_CRYPTO_MDEBUG
 #  define OPENSSL_NO_CRYPTO_MDEBUG
 # endif
-#ifndef OPENSSL_NO_QUIC
-#define OPENSSL_NO_QUIC
-#endif
+# ifndef OPENSSL_NO_SRP
+#  define OPENSSL_NO_SRP
+# endif
+# ifndef OPENSSL_NO_QUIC
+#  define OPENSSL_NO_QUIC
+# endif
 #endif                          /* OPENSSL_CONFIGURATION_H */

@@ -121,8 +121,6 @@ my %skip = (
   "20-cert-select.cnf" => disabled("tls1_2") || $no_ecx,
   "21-key-update.cnf" => disabled("tls1_3") || ($no_ec && $no_dh),
   "22-compression.cnf" => disabled("zlib") || $no_tls,
-  "23-srp.cnf" => (disabled("tls1") && disabled ("tls1_1")
-                    && disabled("tls1_2")) || disabled("srp"),
   "24-padding.cnf" => disabled("tls1_3") || ($no_ec && $no_dh),
   "25-cipher.cnf" => disabled("ec") || disabled("tls1_2"),
   "26-tls13_client_auth.cnf" => disabled("tls1_3") || ($no_ec && $no_dh),

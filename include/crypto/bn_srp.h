@@ -7,7 +7,6 @@
  * https://www.openssl.org/source/license.html
  */
 
-#ifndef OPENSSL_NO_SRP
 
 extern const BIGNUM ossl_bn_group_1024;
 
@@ -29,4 +28,3 @@ extern const BIGNUM ossl_bn_generator_5;
 
 extern const BIGNUM ossl_bn_generator_2;
 
-#endif

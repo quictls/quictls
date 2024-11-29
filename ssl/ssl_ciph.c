@@ -387,9 +387,6 @@ int ssl_load_ciphers(SSL_CTX *ctx)
     ctx->disabled_mkey_mask |= SSL_PSK;
     ctx->disabled_auth_mask |= SSL_aPSK;
 #endif
-#ifdef OPENSSL_NO_SRP
-    ctx->disabled_mkey_mask |= SSL_kSRP;
-#endif
 
     /*
      * Check for presence of GOST 34.10 algorithms, and if they are not

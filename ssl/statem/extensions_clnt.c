@@ -82,7 +82,6 @@ EXT_RETURN tls_construct_ctos_maxfragmentlen(SSL_CONNECTION *s, WPACKET *pkt,
     return EXT_RETURN_SENT;
 }
 
-#ifndef OPENSSL_NO_SRP
 EXT_RETURN tls_construct_ctos_srp(SSL_CONNECTION *s, WPACKET *pkt,
                                   unsigned int context,
                                   X509 *x, size_t chainidx)
@@ -107,7 +106,6 @@ EXT_RETURN tls_construct_ctos_srp(SSL_CONNECTION *s, WPACKET *pkt,
 
     return EXT_RETURN_SENT;
 }
-#endif
 
 static int use_ecc(SSL_CONNECTION *s, int min_version, int max_version)
 {

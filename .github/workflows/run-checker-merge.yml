@@ -29,7 +29,6 @@ jobs:
           no-module,
           no-ocsp,
           no-pinshared,
-          no-srp,
           no-srtp,
           no-ts,
           enable-weak-ssl-ciphers,

@@ -174,7 +174,7 @@ my $proxy = TLSProxy::Proxy->new(
 $proxy->serverconnects(2);
 $proxy->clientflags("-no_tls1_3 -sess_out ".$session);
 $proxy->start() or plan skip_all => "Unable to start up Proxy for tests";
-plan tests => 21;
+plan tests => 20;
 checkhandshake($proxy, checkhandshake::DEFAULT_HANDSHAKE,
                checkhandshake::DEFAULT_EXTENSIONS,
                "Default handshake test");
@@ -395,25 +395,8 @@ SKIP: {
                    "NPN handshake test");
 }
 
-SKIP: {
-    skip "No SRP support in this OpenSSL build", 1
-        if disabled("srp");
 
-    #Test 20: SRP extension
-    #Note: We are not actually going to perform an SRP handshake (TLSProxy
-    #does not support it). However it is sufficient for us to check that the
-    #SRP extension gets added on the client side. There is no SRP extension
-    #generated on the server side anyway.
-    $proxy->clear();
-    $proxy->clientflags("-no_tls1_3 -srpuser user -srppass pass:pass");
-    $proxy->start();
-    checkhandshake($proxy, checkhandshake::DEFAULT_HANDSHAKE,
-                   checkhandshake::DEFAULT_EXTENSIONS
-                   | checkhandshake::SRP_CLI_EXTENSION,
-                   "SRP extension test");
-}
-
-#Test 21: EC handshake
+#Test 20: EC handshake
 SKIP: {
     skip "No EC support in this OpenSSL build", 1 if disabled("ec");
     $proxy->clear();

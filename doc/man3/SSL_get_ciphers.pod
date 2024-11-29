@@ -37,7 +37,7 @@ SSL_get1_supported_ciphers() returns the stack of enabled SSL_CIPHERs for
 B<ssl> as would be sent in a ClientHello (that is, sorted by preference).
 The list depends on settings like the cipher list, the supported protocol
 versions, the security level, and the enabled signature algorithms.
-SRP and PSK ciphers are only enabled if the appropriate callbacks or settings
+PSK ciphers are only enabled if the appropriate callbacks or settings
 have been applied.
 The list of ciphers that would be sent in a ClientHello can differ from
 the list of ciphers that would be acceptable when acting as a server.

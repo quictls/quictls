@@ -147,9 +147,7 @@ static SSL_SESSION *ssl_session_dup_intern(const SSL_SESSION *src, int ticket)
     dest->ext.hostname = NULL;
     dest->ext.tick = NULL;
     dest->ext.alpn_selected = NULL;
-#ifndef OPENSSL_NO_SRP
     dest->srp_username = NULL;
-#endif
     dest->peer_chain = NULL;
     dest->peer = NULL;
     dest->peer_rpk = NULL;
@@ -235,13 +233,11 @@ static SSL_SESSION *ssl_session_dup_intern(const SSL_SESSION *src, int ticket)
             goto err;
     }
 
-#ifndef OPENSSL_NO_SRP
     if (src->srp_username) {
         dest->srp_username = OPENSSL_strdup(src->srp_username);
         if (dest->srp_username == NULL)
             goto err;
     }
-#endif
 
     if (src->ticket_appdata != NULL) {
         dest->ticket_appdata =
@@ -851,9 +847,7 @@ void SSL_SESSION_free(SSL_SESSION *ss)
     OPENSSL_free(ss->psk_identity_hint);
     OPENSSL_free(ss->psk_identity);
 #endif
-#ifndef OPENSSL_NO_SRP
     OPENSSL_free(ss->srp_username);
-#endif
     OPENSSL_free(ss->ext.alpn_selected);
     OPENSSL_free(ss->ticket_appdata);
     CRYPTO_FREE_REF(&ss->references);

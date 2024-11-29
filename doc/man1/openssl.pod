@@ -271,10 +271,6 @@ Algorithm Speed Measurement.
 
 SPKAC printing and generating command.
 
-=item B<srp>
-
-Maintain SRP password file. This command is deprecated.
-
 =item B<storeutl>
 
 Command to list and display certificates, keys, CRLs, etc.
@@ -844,7 +840,6 @@ L<openssl-sess_id(1)>,
 L<openssl-smime(1)>,
 L<openssl-speed(1)>,
 L<openssl-spkac(1)>,
-L<openssl-srp(1)>,
 L<openssl-storeutl(1)>,
 L<openssl-ts(1)>,
 L<openssl-verify(1)>,

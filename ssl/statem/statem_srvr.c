@@ -368,10 +368,8 @@ static int send_server_key_exchange(SSL_CONNECTION *s)
         /* For other PSK always send SKE */
         || (alg_k & (SSL_PSK & (SSL_kDHEPSK | SSL_kECDHEPSK)))
 #endif
-#ifndef OPENSSL_NO_SRP
         /* SRP: send ServerKeyExchange */
         || (alg_k & SSL_kSRP)
-#endif
         ) {
         return 1;
     }
@@ -1339,39 +1337,17 @@ WORK_STATE ossl_statem_server_post_process_message(SSL_CONNECTION *s,
     }
 }
 
-#ifndef OPENSSL_NO_SRP
 /* Returns 1 on success, 0 for retryable error, -1 for fatal error */
 static int ssl_check_srp_ext_ClientHello(SSL_CONNECTION *s)
 {
-    int ret;
-    int al = SSL_AD_UNRECOGNIZED_NAME;
-
-    if ((s->s3.tmp.new_cipher->algorithm_mkey & SSL_kSRP) &&
-        (s->srp_ctx.TLS_ext_srp_username_callback != NULL)) {
-        if (s->srp_ctx.login == NULL) {
-            /*
-             * RFC 5054 says SHOULD reject, we do so if There is no srp
-             * login name
-             */
-            SSLfatal(s, SSL_AD_UNKNOWN_PSK_IDENTITY,
-                     SSL_R_PSK_IDENTITY_NOT_FOUND);
-            return -1;
-        } else {
-            ret = ssl_srp_server_param_with_username_intern(s, &al);
-            if (ret < 0)
-                return 0;
-            if (ret == SSL3_AL_FATAL) {
-                SSLfatal(s, al,
-                         al == SSL_AD_UNKNOWN_PSK_IDENTITY
-                         ? SSL_R_PSK_IDENTITY_NOT_FOUND
-                         : SSL_R_CLIENTHELLO_TLSEXT);
-                return -1;
-            }
-        }
-    }
-    return 1;
+    /*
+     * RFC 5054 says SHOULD reject, we do so if There is no srp
+     * login name
+     */
+    SSLfatal(s, SSL_AD_UNKNOWN_PSK_IDENTITY,
+	    SSL_R_PSK_IDENTITY_NOT_FOUND);
+    return -1;
 }
-#endif
 
 int dtls_raw_hello_verify_request(WPACKET *pkt, unsigned char *cookie,
                                   size_t cookie_len)
@@ -2382,7 +2358,6 @@ WORK_STATE tls_post_process_client_hello(SSL_CONNECTION *s, WORK_STATE wst)
 
         wst = WORK_MORE_C;
     }
-#ifndef OPENSSL_NO_SRP
     if (wst == WORK_MORE_C) {
         int ret;
         if ((ret = ssl_check_srp_ext_ClientHello(s)) == 0) {
@@ -2397,7 +2372,6 @@ WORK_STATE tls_post_process_client_hello(SSL_CONNECTION *s, WORK_STATE wst)
             goto err;
         }
     }
-#endif
 
     return WORK_FINISHED_STOP;
  err:
@@ -2660,7 +2634,6 @@ CON_FUNC_RETURN tls_construct_server_key_exchange(SSL_CONNECTION *s,
         r[2] = NULL;
         r[3] = NULL;
     } else
-#ifndef OPENSSL_NO_SRP
     if (type & SSL_kSRP) {
         if ((s->srp_ctx.N == NULL) ||
             (s->srp_ctx.g == NULL) ||
@@ -2673,7 +2646,6 @@ CON_FUNC_RETURN tls_construct_server_key_exchange(SSL_CONNECTION *s,
         r[2] = s->srp_ctx.s;
         r[3] = s->srp_ctx.B;
     } else
-#endif
     {
         SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_R_UNKNOWN_KEY_EXCHANGE_TYPE);
         goto err;
@@ -2709,11 +2681,9 @@ CON_FUNC_RETURN tls_construct_server_key_exchange(SSL_CONNECTION *s,
         unsigned char *binval;
         int res;
 
-#ifndef OPENSSL_NO_SRP
         if ((i == 2) && (type & SSL_kSRP)) {
             res = WPACKET_start_sub_packet_u8(pkt);
         } else
-#endif
             res = WPACKET_start_sub_packet_u16(pkt);
 
         if (!res) {
@@ -3172,45 +3142,6 @@ static int tls_process_cke_ecdhe(SSL_CONNECTION *s, PACKET *pkt)
     return ret;
 }
 
-static int tls_process_cke_srp(SSL_CONNECTION *s, PACKET *pkt)
-{
-#ifndef OPENSSL_NO_SRP
-    unsigned int i;
-    const unsigned char *data;
-
-    if (!PACKET_get_net_2(pkt, &i)
-        || !PACKET_get_bytes(pkt, &data, i)) {
-        SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_SRP_A_LENGTH);
-        return 0;
-    }
-    if ((s->srp_ctx.A = BN_bin2bn(data, i, NULL)) == NULL) {
-        SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_BN_LIB);
-        return 0;
-    }
-    if (BN_ucmp(s->srp_ctx.A, s->srp_ctx.N) >= 0 || BN_is_zero(s->srp_ctx.A)) {
-        SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_SRP_PARAMETERS);
-        return 0;
-    }
-    OPENSSL_free(s->session->srp_username);
-    s->session->srp_username = OPENSSL_strdup(s->srp_ctx.login);
-    if (s->session->srp_username == NULL) {
-        SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_CRYPTO_LIB);
-        return 0;
-    }
-
-    if (!srp_generate_server_master_secret(s)) {
-        /* SSLfatal() already called */
-        return 0;
-    }
-
-    return 1;
-#else
-    /* Should never happen */
-    SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
-    return 0;
-#endif
-}
-
 static int tls_process_cke_gost(SSL_CONNECTION *s, PACKET *pkt)
 {
 #ifndef OPENSSL_NO_GOST
@@ -3432,10 +3363,8 @@ MSG_PROCESS_RETURN tls_process_client_key_exchange(SSL_CONNECTION *s,
             goto err;
         }
     } else if (alg_k & SSL_kSRP) {
-        if (!tls_process_cke_srp(s, pkt)) {
-            /* SSLfatal() already called */
-            goto err;
-        }
+        SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_SRP_PARAMETERS);
+	goto err;
     } else if (alg_k & SSL_kGOST) {
         if (!tls_process_cke_gost(s, pkt)) {
             /* SSLfatal() already called */

@@ -484,10 +484,6 @@ typedef enum OPTION_choice {
     OPT_MSG, OPT_MSGFILE, OPT_ENGINE, OPT_TRACE, OPT_SECURITY_DEBUG,
     OPT_SECURITY_DEBUG_VERBOSE, OPT_SHOWCERTS, OPT_NBIO_TEST, OPT_STATE,
     OPT_PSK_IDENTITY, OPT_PSK, OPT_PSK_SESS,
-#ifndef OPENSSL_NO_SRP
-    OPT_SRPUSER, OPT_SRPPASS, OPT_SRP_STRENGTH, OPT_SRP_LATEUSER,
-    OPT_SRP_MOREGROUPS,
-#endif
     OPT_SSL3, OPT_SSL_CONFIG,
     OPT_TLS1_3, OPT_TLS1_2, OPT_TLS1_1, OPT_TLS1, OPT_DTLS, OPT_DTLS1,
     OPT_DTLS1_2, OPT_QUIC, OPT_SCTP, OPT_TIMEOUT, OPT_MTU, OPT_KEYFORM,
@@ -711,16 +707,6 @@ const OPTIONS s_client_options[] = {
     {"use_srtp", OPT_USE_SRTP, 's',
      "Offer SRTP key management with a colon-separated profile list"},
 #endif
-#ifndef OPENSSL_NO_SRP
-    {"srpuser", OPT_SRPUSER, 's', "(deprecated) SRP authentication for 'user'"},
-    {"srppass", OPT_SRPPASS, 's', "(deprecated) Password for 'user'"},
-    {"srp_lateuser", OPT_SRP_LATEUSER, '-',
-     "(deprecated) SRP username into second ClientHello message"},
-    {"srp_moregroups", OPT_SRP_MOREGROUPS, '-',
-     "(deprecated) Tolerate other than the known g N values."},
-    {"srp_strength", OPT_SRP_STRENGTH, 'p',
-     "(deprecated) Minimal length in bits for N"},
-#endif
 #ifndef OPENSSL_NO_KTLS
     {"ktls", OPT_KTLS, '-', "Enable Kernel TLS for sending and receiving"},
 #endif
@@ -916,11 +902,6 @@ int s_client_main(int argc, char **argv)
     int serverinfo_count = 0, start = 0, len;
 #ifndef OPENSSL_NO_NEXTPROTONEG
     const char *next_proto_neg_in = NULL;
-#endif
-#ifndef OPENSSL_NO_SRP
-    char *srppass = NULL;
-    int srp_lateuser = 0;
-    SRP_ARG srp_arg = { NULL, NULL, 0, 0, 0, 1024 };
 #endif
 #ifndef OPENSSL_NO_SRTP
     char *srtp_profiles = NULL;
@@ -1246,35 +1227,6 @@ int s_client_main(int argc, char **argv)
         case OPT_PSK_SESS:
             psksessf = opt_arg();
             break;
-#ifndef OPENSSL_NO_SRP
-        case OPT_SRPUSER:
-            srp_arg.srplogin = opt_arg();
-            if (min_version < TLS1_VERSION)
-                min_version = TLS1_VERSION;
-            break;
-        case OPT_SRPPASS:
-            srppass = opt_arg();
-            if (min_version < TLS1_VERSION)
-                min_version = TLS1_VERSION;
-            break;
-        case OPT_SRP_STRENGTH:
-            srp_arg.strength = atoi(opt_arg());
-            BIO_printf(bio_err, "SRP minimal length for N is %d\n",
-                       srp_arg.strength);
-            if (min_version < TLS1_VERSION)
-                min_version = TLS1_VERSION;
-            break;
-        case OPT_SRP_LATEUSER:
-            srp_lateuser = 1;
-            if (min_version < TLS1_VERSION)
-                min_version = TLS1_VERSION;
-            break;
-        case OPT_SRP_MOREGROUPS:
-            srp_arg.amp = 1;
-            if (min_version < TLS1_VERSION)
-                min_version = TLS1_VERSION;
-            break;
-#endif
         case OPT_SSL_CONFIG:
             ssl_config = opt_arg();
             break;
@@ -1798,12 +1750,6 @@ int s_client_main(int argc, char **argv)
             goto end;
         }
     }
-#ifndef OPENSSL_NO_SRP
-    if (!app_passwd(srppass, NULL, &srp_arg.srppassin, NULL)) {
-        BIO_printf(bio_err, "Error getting password\n");
-        goto end;
-    }
-#endif
 
     ctx = SSL_CTX_new_ex(app_get0_libctx(), app_get0_propq(), meth);
     if (ctx == NULL) {
@@ -2037,11 +1983,6 @@ int s_client_main(int argc, char **argv)
         SSL_CTX_set_tlsext_servername_callback(ctx, ssl_servername_cb);
         SSL_CTX_set_tlsext_servername_arg(ctx, &tlsextcbp);
     }
-#ifndef OPENSSL_NO_SRP
-    if (srp_arg.srplogin != NULL
-            && !set_up_srp_arg(ctx, &srp_arg, srp_lateuser, c_msg, c_debug))
-        goto end;
-# endif
 
     if (dane_tlsa_domain != NULL) {
         if (SSL_CTX_dane_enable(ctx) <= 0) {
@@ -3305,9 +3246,6 @@ int s_client_main(int argc, char **argv)
     EVP_PKEY_free(key);
     OSSL_STACK_OF_X509_free(chain);
     OPENSSL_free(pass);
-#ifndef OPENSSL_NO_SRP
-    OPENSSL_free(srp_arg.srppassin);
-#endif
     OPENSSL_free(sname_alloc);
     BIO_ADDR_free(peer_addr);
     OPENSSL_free(connectstr);

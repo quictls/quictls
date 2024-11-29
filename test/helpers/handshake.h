@@ -88,11 +88,4 @@ HANDSHAKE_RESULT *do_handshake(SSL_CTX *server_ctx, SSL_CTX *server2_ctx,
                                SSL_CTX *resume_client_ctx,
                                const SSL_TEST_CTX *test_ctx);
 
-int configure_handshake_ctx_for_srp(SSL_CTX *server_ctx, SSL_CTX *server2_ctx,
-                                    SSL_CTX *client_ctx,
-                                    const SSL_TEST_EXTRA_CONF *extra,
-                                    CTX_DATA *server_ctx_data,
-                                    CTX_DATA *server2_ctx_data,
-                                    CTX_DATA *client_ctx_data);
-
 #endif  /* OSSL_TEST_HANDSHAKE_HELPER_H */

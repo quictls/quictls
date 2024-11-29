@@ -210,7 +210,6 @@ int tls_parse_ctos_maxfragmentlen(SSL_CONNECTION *s, PACKET *pkt,
     return 1;
 }
 
-#ifndef OPENSSL_NO_SRP
 int tls_parse_ctos_srp(SSL_CONNECTION *s, PACKET *pkt, unsigned int context,
                        X509 *x, size_t chainidx)
 {
@@ -229,7 +228,6 @@ int tls_parse_ctos_srp(SSL_CONNECTION *s, PACKET *pkt, unsigned int context,
 
     return 1;
 }
-#endif
 
 int tls_parse_ctos_ec_pt_formats(SSL_CONNECTION *s, PACKET *pkt,
                                  unsigned int context,

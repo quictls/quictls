@@ -576,9 +576,7 @@ struct ssl_session_st {
          */
         uint8_t max_fragment_len_mode;
     } ext;
-# ifndef OPENSSL_NO_SRP
     char *srp_username;
-# endif
     unsigned char *ticket_appdata;
     size_t ticket_appdata_len;
     uint32_t flags;
@@ -588,7 +586,6 @@ struct ssl_session_st {
 /* Extended master secret support */
 # define SSL_SESS_FLAG_EXTMS             0x1
 
-# ifndef OPENSSL_NO_SRP
 
 typedef struct srp_ctx_st {
     /* param for all the callbacks */
@@ -607,7 +604,6 @@ typedef struct srp_ctx_st {
     unsigned long srp_Mask;
 } SRP_CTX;
 
-# endif
 
 typedef enum {
     SSL_EARLY_DATA_NONE = 0,
@@ -1100,9 +1096,7 @@ struct ssl_ctx_st {
     SSL_psk_find_session_cb_func psk_find_session_cb;
     SSL_psk_use_session_cb_func psk_use_session_cb;
 
-# ifndef OPENSSL_NO_SRP
     SRP_CTX srp_ctx;            /* ctx for SRP authentication */
-# endif
 
     /* Shared DANE context */
     struct dane_ctx_st dane;
@@ -1789,10 +1783,8 @@ struct ssl_connection_st {
     int certreqs_sent;
     EVP_MD_CTX *pha_dgst; /* this is just the digest through ClientFinished */
 
-# ifndef OPENSSL_NO_SRP
     /* ctx for SRP authentication */
     SRP_CTX srp_ctx;
-# endif
     /*
      * Callback for disabling session caching and ticket support on a session
      * basis, depending on the chosen cipher.
@@ -2913,8 +2905,6 @@ __owur int ssl_log_secret(SSL_CONNECTION *s, const char *label,
 #define EARLY_EXPORTER_SECRET_LABEL "EARLY_EXPORTER_SECRET"
 #define EXPORTER_SECRET_LABEL "EXPORTER_SECRET"
 
-__owur int srp_generate_server_master_secret(SSL_CONNECTION *s);
-__owur int srp_generate_client_master_secret(SSL_CONNECTION *s);
 __owur int srp_verify_server_param(SSL_CONNECTION *s);
 
 /* statem/statem_srvr.c */
@@ -2982,14 +2972,6 @@ int ssl_hmac_old_init(SSL_HMAC *ctx, void *key, size_t len, char *md);
 int ssl_hmac_old_update(SSL_HMAC *ctx, const unsigned char *data, size_t len);
 int ssl_hmac_old_final(SSL_HMAC *ctx, unsigned char *md, size_t *len);
 size_t ssl_hmac_old_size(const SSL_HMAC *ctx);
-
-int ssl_ctx_srp_ctx_free_intern(SSL_CTX *ctx);
-int ssl_ctx_srp_ctx_init_intern(SSL_CTX *ctx);
-int ssl_srp_ctx_free_intern(SSL_CONNECTION *s);
-int ssl_srp_ctx_init_intern(SSL_CONNECTION *s);
-
-int ssl_srp_calc_a_param_intern(SSL_CONNECTION *s);
-int ssl_srp_server_param_with_username_intern(SSL_CONNECTION *s, int *ad);
 
 void ssl_session_calculate_timeout(SSL_SESSION *ss);
 

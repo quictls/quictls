@@ -41,9 +41,7 @@ static EXT_RETURN tls_construct_certificate_authorities(SSL_CONNECTION *s,
 static int tls_parse_certificate_authorities(SSL_CONNECTION *s, PACKET *pkt,
                                              unsigned int context, X509 *x,
                                              size_t chainidx);
-#ifndef OPENSSL_NO_SRP
 static int init_srp(SSL_CONNECTION *s, unsigned int context);
-#endif
 static int init_ec_point_formats(SSL_CONNECTION *s, unsigned int context);
 static int init_etm(SSL_CONNECTION *s, unsigned int context);
 static int init_ems(SSL_CONNECTION *s, unsigned int context);
@@ -162,15 +160,11 @@ static const EXTENSION_DEFINITION ext_defs[] = {
         tls_construct_stoc_maxfragmentlen, tls_construct_ctos_maxfragmentlen,
         final_maxfragmentlen
     },
-#ifndef OPENSSL_NO_SRP
     {
         TLSEXT_TYPE_srp,
         SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_2_AND_BELOW_ONLY,
         init_srp, tls_parse_ctos_srp, NULL, NULL, tls_construct_ctos_srp, NULL
     },
-#else
-    INVALID_EXTENSION,
-#endif
     {
         TLSEXT_TYPE_ec_point_formats,
         SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_2_SERVER_HELLO
@@ -1236,7 +1230,6 @@ static int init_sig_algs_cert(SSL_CONNECTION *s,
     return 1;
 }
 
-#ifndef OPENSSL_NO_SRP
 static int init_srp(SSL_CONNECTION *s, unsigned int context)
 {
     OPENSSL_free(s->srp_ctx.login);
@@ -1244,7 +1237,6 @@ static int init_srp(SSL_CONNECTION *s, unsigned int context)
 
     return 1;
 }
-#endif
 
 static int init_ec_point_formats(SSL_CONNECTION *s, unsigned int context)
 {
