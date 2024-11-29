@@ -57,7 +57,7 @@ ENCODER_TEXT("DSA", dsa, yes),
 #endif
 #ifndef OPENSSL_NO_EC
 ENCODER_TEXT("EC", ec, yes),
-# ifndef OPENSSL_NO_ECX
+# ifndef OPENSSL_NO_EC
 ENCODER_TEXT("ED25519", ed25519, yes),
 ENCODER_TEXT("ED448", ed448, yes),
 ENCODER_TEXT("X25519", x25519, yes),
@@ -183,7 +183,6 @@ ENCODER_w_structure("EC", ec, yes, pem, PrivateKeyInfo),
 ENCODER_w_structure("EC", ec, yes, der, SubjectPublicKeyInfo),
 ENCODER_w_structure("EC", ec, yes, pem, SubjectPublicKeyInfo),
 
-#ifndef OPENSSL_NO_ECX
 ENCODER_w_structure("X25519", x25519, yes, der, EncryptedPrivateKeyInfo),
 ENCODER_w_structure("X25519", x25519, yes, pem, EncryptedPrivateKeyInfo),
 ENCODER_w_structure("X25519", x25519, yes, der, PrivateKeyInfo),
@@ -211,7 +210,6 @@ ENCODER_w_structure("ED448", ed448, yes, der, PrivateKeyInfo),
 ENCODER_w_structure("ED448", ed448, yes, pem, PrivateKeyInfo),
 ENCODER_w_structure("ED448", ed448, yes, der, SubjectPublicKeyInfo),
 ENCODER_w_structure("ED448", ed448, yes, pem, SubjectPublicKeyInfo),
-# endif
 
 # ifndef OPENSSL_NO_SM2
 ENCODER_w_structure("SM2", sm2, no, der, EncryptedPrivateKeyInfo),

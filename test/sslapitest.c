@@ -4852,7 +4852,7 @@ static int test_ciphersuite_change(void)
 # ifndef OPENSSL_NO_EC
 static int ecdhe_kexch_groups[] = {NID_X9_62_prime256v1, NID_secp384r1,
                                    NID_secp521r1,
-#  ifndef OPENSSL_NO_ECX
+#  ifndef OPENSSL_NO_EC
                                    NID_X25519, NID_X448
 #  endif
                                    };
@@ -4896,7 +4896,6 @@ static int test_key_exchange(int idx)
             kexch_alg = NID_secp521r1;
             kexch_name0 = "secp521r1";
             break;
-#  ifndef OPENSSL_NO_ECX
         case 4:
             kexch_alg = NID_X25519;
             kexch_name0 = "x25519";
@@ -4905,7 +4904,6 @@ static int test_key_exchange(int idx)
             kexch_alg = NID_X448;
             kexch_name0 = "x448";
             break;
-#  endif
 # endif
 # ifndef OPENSSL_NO_DH
 # ifndef OPENSSL_NO_TLS1_2
@@ -9709,7 +9707,7 @@ static int test_sigalgs_available(int idx)
         } else {
             if (!TEST_true(filter_provider_set_filter(OSSL_OP_SIGNATURE,
                                                       "ECDSA"))
-# ifdef OPENSSL_NO_ECX
+# ifdef OPENSSL_NO_EC
                     || !TEST_true(filter_provider_set_filter(OSSL_OP_KEYMGMT, "EC"))
 # else
                     || !TEST_true(filter_provider_set_filter(OSSL_OP_KEYMGMT,
