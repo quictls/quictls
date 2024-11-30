@@ -2148,7 +2148,7 @@ int s_client_main(int argc, char **argv)
         BIO_printf(bio_c_out, "Connecting via TFO\n");
  re_start:
     if (init_client(&sock, host, port, bindhost, bindport, socket_family,
-                    socket_type, protocol, tfo, 1, &peer_addr) == 0) {
+                    socket_type, protocol, tfo, &peer_addr) == 0) {
         BIO_printf(bio_err, "connect:errno=%d\n", get_last_socket_error());
         BIO_closesocket(sock);
         goto end;
@@ -2865,7 +2865,7 @@ int s_client_main(int argc, char **argv)
         FD_ZERO(&readfds);
         FD_ZERO(&writefds);
 
-        if ((isdtls)
+        if (isdtls
             && SSL_get_event_timeout(con, &timeout, &is_infinite)
             && !is_infinite)
             timeoutp = &timeout;
