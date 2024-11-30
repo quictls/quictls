@@ -2,7 +2,8 @@
 
 =head1 NAME
 
-DH_generate_parameters, DH_generate_parameters_ex,
+DH_generate_parameters_ex,
+DH_generate_parameters,
 DH_check, DH_check_params,
 DH_check_ex, DH_check_params_ex, DH_check_pub_key_ex
 - generate and check Diffie-Hellman

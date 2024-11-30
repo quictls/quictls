@@ -95,6 +95,9 @@ RSA_generate_multi_prime_key() returns 1 on success or 0 on error.
 RSA_generate_key_ex() returns 1 on success or 0 on error.
 The error codes can be obtained by L<ERR_get_error(3)>.
 
+RSA_generate_key() returns a pointer to the RSA structure or
+NULL if the key generation fails.
+
 =head1 BUGS
 
 I<BN_GENCB_call(cb, 2, x)> is used with two different meanings.
