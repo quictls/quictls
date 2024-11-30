@@ -36,7 +36,6 @@ Currrent Changes
 `BN_is_prime_fasttest`, `CRYPTO_mem_ctrl`, `DH_generate_parameters`, and
 `RSA_generate_key` for compatibility with outside applications.
 
-
 - Removed support for some old platforms:
   - Removed support for old HPE platforms: NonStop and Tandem
   - Removed DJGPP support.

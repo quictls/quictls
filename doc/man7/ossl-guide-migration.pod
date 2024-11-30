@@ -1294,6 +1294,9 @@ See L</Deprecated low-level MAC functions>.
 
 CRYPTO_mem_ctrl()
 
+Memory-leak checking has been deprecated in favor of more modern development
+tools, such as compiler memory and leak sanitizers or Valgrind.
+
 =item *
 
 CRYPTO_cts128_encrypt_block(), CRYPTO_cts128_encrypt(),
