@@ -246,7 +246,6 @@ SSL_CIPHER_get_id                       247	3_0_0	EXIST::FUNCTION:
 SSL_SESSION_print_keylog                248	3_0_0	EXIST::FUNCTION:
 SSL_CTX_set_psk_client_callback         249	3_0_0	EXIST::FUNCTION:PSK
 SSL_SESSION_get_time                    250	3_0_0	EXIST::FUNCTION:
-SSL_set_debug                           251	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_1_1_0
 SSL_get_security_level                  252	3_0_0	EXIST::FUNCTION:
 SSL_CIPHER_description                  253	3_0_0	EXIST::FUNCTION:
 SSL_set_default_passwd_cb_userdata      254	3_0_0	EXIST::FUNCTION:

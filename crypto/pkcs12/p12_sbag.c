@@ -13,13 +13,6 @@
 #include "p12_local.h"
 #include "crypto/x509.h"
 
-#ifndef OPENSSL_NO_DEPRECATED_1_1_0
-ASN1_TYPE *PKCS12_get_attr(const PKCS12_SAFEBAG *bag, int attr_nid)
-{
-    return PKCS12_get_attr_gen(bag->attrib, attr_nid);
-}
-#endif
-
 const ASN1_TYPE *PKCS12_SAFEBAG_get0_attr(const PKCS12_SAFEBAG *bag,
                                           int attr_nid)
 {
