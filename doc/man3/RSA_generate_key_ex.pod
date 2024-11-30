@@ -3,6 +3,7 @@
 =head1 NAME
 
 EVP_RSA_gen,
+RSA_generate_key,
 RSA_generate_key_ex,
 RSA_generate_multi_prime_key - generate RSA key pair
 
@@ -18,6 +19,13 @@ see L<openssl_user_macros(7)>:
 
  int RSA_generate_key_ex(RSA *rsa, int bits, BIGNUM *e, BN_GENCB *cb);
  int RSA_generate_multi_prime_key(RSA *rsa, int bits, int primes, BIGNUM *e, BN_GENCB *cb);
+
+The following function has been deprecated since OpenSSL 0.9.8, and can be
+hidden entirely by defining B<OPENSSL_API_COMPAT> with a suitable version value,
+see L<openssl_user_macros(7)>:
+
+ RSA *RSA_generate_key(int bits, unsigned long e,
+                       void (*callback)(int, int, void *), void *cb_arg);
 
 =head1 DESCRIPTION
 
@@ -52,6 +60,10 @@ A callback function may be used to provide feedback about the
 progress of the key generation. If I<cb> is not NULL, it
 will be called as follows using the BN_GENCB_call() function
 described on the L<BN_generate_prime_ex(3)> page.
+
+RSA_generate_key() is similar to RSA_generate_key_ex() but
+expects an old-style callback function; see
+L<BN_generate_prime_ex(3)> for information on the old-style callback.
 
 =over 2
 

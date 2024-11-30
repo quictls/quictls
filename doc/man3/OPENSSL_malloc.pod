@@ -9,13 +9,10 @@ CRYPTO_malloc, CRYPTO_zalloc, CRYPTO_realloc, CRYPTO_free,
 OPENSSL_strdup, OPENSSL_strndup,
 OPENSSL_memdup, OPENSSL_strlcpy, OPENSSL_strlcat,
 CRYPTO_strdup, CRYPTO_strndup,
-OPENSSL_mem_debug_push, OPENSSL_mem_debug_pop,
-CRYPTO_mem_debug_push, CRYPTO_mem_debug_pop,
 CRYPTO_clear_realloc, CRYPTO_clear_free,
 CRYPTO_malloc_fn, CRYPTO_realloc_fn, CRYPTO_free_fn,
 CRYPTO_get_mem_functions, CRYPTO_set_mem_functions,
-CRYPTO_set_mem_debug, CRYPTO_mem_ctrl,
-CRYPTO_mem_leaks, CRYPTO_mem_leaks_fp, CRYPTO_mem_leaks_cb
+CRYPTO_mem_ctrl
 - Memory allocation functions
 
 =head1 SYNOPSIS
@@ -58,21 +55,11 @@ CRYPTO_mem_leaks, CRYPTO_mem_leaks_fp, CRYPTO_mem_leaks_cb
                               CRYPTO_realloc_fn realloc_fn,
                               CRYPTO_free_fn free_fn);
 
-The following functions have been deprecated since OpenSSL 3.0, and can be
+The following function has been deprecated since OpenSSL 3.0, and can be
 hidden entirely by defining B<OPENSSL_API_COMPAT> with a suitable version value,
 see L<openssl_user_macros(7)>:
 
- int CRYPTO_mem_leaks(BIO *b);
- int CRYPTO_mem_leaks_fp(FILE *fp);
- int CRYPTO_mem_leaks_cb(int (*cb)(const char *str, size_t len, void *u),
-                         void *u);
-
- int CRYPTO_set_mem_debug(int onoff);
  int CRYPTO_mem_ctrl(int mode);
- int OPENSSL_mem_debug_push(const char *info);
- int OPENSSL_mem_debug_pop(void);
- int CRYPTO_mem_debug_push(const char *info, const char *file, int line);
- int CRYPTO_mem_debug_pop(void);
 
 =head1 DESCRIPTION
 
@@ -137,22 +124,7 @@ return a pointer to allocated memory or NULL on error.
 CRYPTO_set_mem_functions() returns 1 on success or 0 on failure (almost
 always because allocations have already happened).
 
-CRYPTO_mem_leaks(), CRYPTO_mem_leaks_fp(), CRYPTO_mem_leaks_cb(),
-CRYPTO_set_mem_debug(), and CRYPTO_mem_ctrl() are deprecated and are no-ops that
-always return -1.
-OPENSSL_mem_debug_push(), OPENSSL_mem_debug_pop(),
-CRYPTO_mem_debug_push(), and CRYPTO_mem_debug_pop()
-are deprecated and are no-ops that always return 0.
-
-=head1 HISTORY
-
-OPENSSL_mem_debug_push(), OPENSSL_mem_debug_pop(),
-CRYPTO_mem_debug_push(), CRYPTO_mem_debug_pop(),
-CRYPTO_mem_leaks(), CRYPTO_mem_leaks_fp(),
-CRYPTO_mem_leaks_cb(), CRYPTO_set_mem_debug(), CRYPTO_mem_ctrl()
-were deprecated in OpenSSL 3.0.
-The memory-leak checking has been deprecated in OpenSSL 3.0 in favor of
-clang's memory and leak sanitizer.
+CRYPTO_mem_ctrl() is deprecated it is a no-op that always returns -1.
 
 
 =head1 COPYRIGHT

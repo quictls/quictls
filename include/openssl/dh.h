@@ -325,6 +325,13 @@ OSSL_DEPRECATEDIN_3_0 int DH_meth_set_generate_params(DH_METHOD *dhm,
                                                        BN_GENCB *));
 #  endif /* OPENSSL_NO_DEPRECATED_3_0 */
 
+#  ifndef OPENSSL_NO_DEPRECATED_0_9_8
+OSSL_DEPRECATEDIN_0_9_8 DH *DH_generate_parameters(int prime_len, int generator,
+                                                   void (*callback) (int, int,
+                                                                void *),
+                                                   void *cb_arg);
+#  endif
+
 # endif
 # ifdef  __cplusplus
 }
