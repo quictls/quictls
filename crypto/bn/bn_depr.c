@@ -19,15 +19,6 @@
 #include "internal/cryptlib.h"
 #include "bn_local.h"
 
-int BN_is_prime(const BIGNUM *a, int checks,
-                void (*callback) (int, int, void *), BN_CTX *ctx_passed,
-                void *cb_arg)
-{
-    BN_GENCB cb;
-    BN_GENCB_set_old(&cb, callback, cb_arg);
-    return ossl_bn_check_prime(a, checks, ctx_passed, 0, &cb);
-}
-
 int BN_is_prime_fasttest(const BIGNUM *a, int checks,
                          void (*callback) (int, int, void *),
                          BN_CTX *ctx_passed, void *cb_arg,

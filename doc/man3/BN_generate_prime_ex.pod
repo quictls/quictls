@@ -117,7 +117,7 @@ B<ctx> parameter is passed.
 In this case the random number generator associated with the default OSSL_LIB_CTX
 will be used.
 
-BN_check_prime(), BN_is_prime_ex(), BN_is_prime_fasttest_ex(), BN_is_prime()
+BN_check_prime(), BN_is_prime_ex(), BN_is_prime_fasttest_ex(),
 and BN_is_prime_fasttest() test if the number B<p> is prime.
 The functions tests until one of the tests shows that B<p> is composite,
 or all the tests passed.
@@ -135,13 +135,13 @@ If B<nchecks> is larger than the minimum above (64 or 128), B<nchecks>
 rounds of the Miller-Rabin test will be done.
 
 If B<do_trial_division> set to B<0>, the trial division will be skipped.
-BN_is_prime_ex() and BN_is_prime() always skip the trial division.
+BN_is_prime_ex() always skip the trial division.
 
-BN_is_prime_ex(), BN_is_prime_fasttest_ex(), BN_is_prime()
+BN_is_prime_ex(), BN_is_prime_fasttest_ex(),
 and BN_is_prime_fasttest() are deprecated.
 
-BN_is_prime_fasttest() and BN_is_prime() behave just like
-BN_is_prime_fasttest_ex() and BN_is_prime_ex() respectively, but with the old
+BN_is_prime_fasttest() behaves just like
+BN_is_prime_fasttest_ex(), but with the old
 style call back.
 
 B<ctx> is a preallocated B<BN_CTX> (to save the overhead of allocating and
@@ -181,7 +181,7 @@ It is possible to obtain the argument associated with a BN_GENCB structure
 
 BN_generate_prime_ex() return 1 on success or 0 on error.
 
-BN_is_prime_ex(), BN_is_prime_fasttest_ex(), BN_is_prime(),
+BN_is_prime_ex(), BN_is_prime_fasttest_ex(),
 BN_is_prime_fasttest() and BN_check_prime return 0 if the number is composite,
 1 if it is prime with an error probability of less than 0.25^B<nchecks>, and
 -1 on error.

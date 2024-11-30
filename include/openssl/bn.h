@@ -366,7 +366,6 @@ int BN_is_prime_fasttest(const BIGNUM *p, int nchecks,
                          BN_CTX *ctx, void *cb_arg,
                          int do_trial_division);
 # endif
-
 # ifndef OPENSSL_NO_DEPRECATED_3_0
 OSSL_DEPRECATEDIN_3_0
 int BN_is_prime_ex(const BIGNUM *p, int nchecks, BN_CTX *ctx, BN_GENCB *cb);
