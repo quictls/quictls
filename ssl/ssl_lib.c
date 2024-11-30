@@ -5752,15 +5752,6 @@ int SSL_is_server(const SSL *s)
     return sc->server;
 }
 
-#ifndef OPENSSL_NO_DEPRECATED_1_1_0
-void SSL_set_debug(SSL *s, int debug)
-{
-    /* Old function was do-nothing anyway... */
-    (void)s;
-    (void)debug;
-}
-#endif
-
 void SSL_set_security_level(SSL *s, int level)
 {
     SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(s);

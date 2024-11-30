@@ -530,19 +530,6 @@ int SRP_VBASE_add0_user(SRP_VBASE *vb, SRP_user_pwd *user_pwd)
     return 1;
 }
 
-# ifndef OPENSSL_NO_DEPRECATED_1_1_0
-/*
- * DEPRECATED: use SRP_VBASE_get1_by_user instead.
- * This method ignores the configured seed and fails for an unknown user.
- * Ownership of the returned pointer is not released to the caller.
- * In other words, caller must not free the result.
- */
-SRP_user_pwd *SRP_VBASE_get_by_user(SRP_VBASE *vb, char *username)
-{
-    return find_user(vb, username);
-}
-# endif
-
 /*
  * Ownership of the returned pointer is released to the caller.
  * In other words, caller must free the result once done.

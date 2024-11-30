@@ -26,7 +26,11 @@ Currrent Changes
 
 - Remove support for EGD random source.
 
-- Made the ERR_STACK datatype opaque.
+- Made the `ERR_STACK` datatype opaque.
+
+- Removed some functions deprecated in the OpenSSL 1.1.0 release:
+`SRP_VBASE_get_by_user`, `ENGINE_setup_bsd_cryptodev`,
+`PKCS12_get_attr`, and `SSL_set_debug`.
 
 - Removed support for some old platforms:
   - Removed support for old HPE platforms: NonStop and Tandem

@@ -6,8 +6,7 @@ SRP_VBASE_new,
 SRP_VBASE_free,
 SRP_VBASE_init,
 SRP_VBASE_add0_user,
-SRP_VBASE_get1_by_user,
-SRP_VBASE_get_by_user
+SRP_VBASE_get1_by_user
 - Functions to create and manage a stack of SRP user verifier information
 
 =head1 SYNOPSIS
@@ -25,7 +24,6 @@ see L<openssl_user_macros(7)>:
 
  int SRP_VBASE_add0_user(SRP_VBASE *vb, SRP_user_pwd *user_pwd);
  SRP_user_pwd *SRP_VBASE_get1_by_user(SRP_VBASE *vb, char *username);
- SRP_user_pwd *SRP_VBASE_get_by_user(SRP_VBASE *vb, char *username);
 
 =head1 DESCRIPTION
 
@@ -58,8 +56,7 @@ record.
 The library takes ownership of B<user_pwd>, it should not be freed by the caller.
 
 The SRP_VBASE_get1_by_user() function returns the password info for the user
-whose username matches B<username>. It replaces the deprecated
-SRP_VBASE_get_by_user().
+whose username matches B<username>.
 If no matching user is found but a seed_key and default gN parameters have been
 set, dummy authentication information is generated from the seed_key, allowing
 the server to hide the fact that it doesn't have a verifier for a particular

@@ -16,7 +16,6 @@ X509_PUBKEY_set0_param                  15	3_0_0	EXIST::FUNCTION:
 PKCS12_it                               16	3_0_0	EXIST::FUNCTION:
 i2d_ASN1_OCTET_STRING                   17	3_0_0	EXIST::FUNCTION:
 EC_KEY_set_private_key                  18	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
-SRP_VBASE_get_by_user                   19	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_1_1_0,SRP
 Camellia_cfb128_encrypt                 21	3_0_0	EXIST::FUNCTION:CAMELLIA,DEPRECATEDIN_3_0
 DES_ncbc_encrypt                        22	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,DES
 TS_REQ_get_ext_count                    23	3_0_0	EXIST::FUNCTION:TS
@@ -3161,7 +3160,6 @@ EVP_read_pw_string_min                  3254	3_0_0	EXIST::FUNCTION:
 X509_set1_notBefore                     3255	3_0_0	EXIST::FUNCTION:
 MD4                                     3256	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,MD4
 EVP_PKEY_CTX_dup                        3257	3_0_0	EXIST::FUNCTION:
-ENGINE_setup_bsd_cryptodev              3258	3_0_0	EXIST:__FreeBSD__:FUNCTION:DEPRECATEDIN_1_1_0,ENGINE
 PEM_read_bio_DHparams                   3259	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,DH
 CMS_SharedInfo_encode                   3260	3_0_0	EXIST::FUNCTION:CMS
 ASN1_OBJECT_create                      3261	3_0_0	EXIST::FUNCTION:
@@ -4015,7 +4013,6 @@ EVP_PKEY_get1_tls_encodedpoint          4139	3_0_0	NOEXIST::FUNCTION:
 ASN1_STRING_get0_data                   4140	3_0_0	EXIST::FUNCTION:
 X509_SIG_getm                           4141	3_0_0	EXIST::FUNCTION:
 X509_get0_serialNumber                  4142	3_0_0	EXIST::FUNCTION:
-PKCS12_get_attr                         4143	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_1_1_0
 X509_CRL_get0_lastUpdate                4144	3_0_0	EXIST::FUNCTION:
 X509_get0_notBefore                     4145	3_0_0	EXIST::FUNCTION:
 X509_get0_notAfter                      4146	3_0_0	EXIST::FUNCTION:
