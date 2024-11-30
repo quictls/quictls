@@ -176,16 +176,6 @@ OSSL_DEPRECATEDIN_3_0 int DSAparams_print_fp(FILE *fp, const DSA *x);
 OSSL_DEPRECATEDIN_3_0 int DSA_print_fp(FILE *bp, const DSA *x, int off);
 #   endif
 
-#   define DSS_prime_checks 64
-/*
- * Primality test according to FIPS PUB 186-4, Appendix C.3. Since we only
- * have one value here we set the number of checks to 64 which is the 128 bit
- * security level that is the highest level and valid for creating a 3072 bit
- * DSA key.
- */
-#   define DSA_is_prime(n, callback, cb_arg) \
-            BN_is_prime(n, DSS_prime_checks, callback, NULL, cb_arg)
-
 #   ifndef OPENSSL_NO_DH
 /*
  * Convert DSA structure (key or just parameters) into DH structure (be
