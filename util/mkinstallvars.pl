@@ -17,7 +17,7 @@ my @absolutes = qw(PREFIX);
 # These may be absolute directories, and if not, they are expected to be set up
 # as subdirectories to PREFIX
 my @subdirs = qw(BINDIR LIBDIR INCLUDEDIR APPLINKDIR ENGINESDIR MODULESDIR
-                 PKGCONFIGDIR CMAKECONFIGDIR);
+                 PKGCONFIGDIR);
 
 my %keys = ();
 foreach (@ARGV) {
@@ -66,7 +66,6 @@ our \@EXPORT = qw(\$PREFIX
                   \$ENGINESDIR \$ENGINESDIR_REL
                   \$MODULESDIR \$MODULESDIR_REL
                   \$PKGCONFIGDIR \$PKGCONFIGDIR_REL
-                  \$CMAKECONFIGDIR \$CMAKECONFIGDIR_REL
                   \$VERSION \@LDLIBS);
 
 our \$PREFIX             = '$ENV{PREFIX}';
@@ -84,8 +83,6 @@ our \$MODULESDIR         = '$ENV{MODULESDIR}';
 our \$MODULESDIR_REL     = '$ENV{MODULESDIR_REL}';
 our \$PKGCONFIGDIR       = '$ENV{PKGCONFIGDIR}';
 our \$PKGCONFIGDIR_REL   = '$ENV{PKGCONFIGDIR_REL}';
-our \$CMAKECONFIGDIR     = '$ENV{CMAKECONFIGDIR}';
-our \$CMAKECONFIGDIR_REL = '$ENV{CMAKECONFIGDIR_REL}';
 our \$VERSION            = '$ENV{VERSION}';
 our \@LDLIBS             =
     # Unix and Windows use space separation, VMS uses comma separation
