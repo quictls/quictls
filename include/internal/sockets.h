@@ -112,19 +112,6 @@ typedef size_t socklen_t;        /* Currently appears to be missing on VMS */
 #    include <errno.h>
 #  endif
 
-#  ifndef VMS
-#   include <sys/ioctl.h>
-#  else
-#   if !defined(TCPIP_TYPE_SOCKETSHR) && defined(__VMS_VER) && (__VMS_VER > 70000000)
-     /* ioctl is only in VMS > 7.0 and when socketshr is not used */
-#    include <sys/ioctl.h>
-#   endif
-#   include <unixio.h>
-#   if defined(TCPIP_TYPE_SOCKETSHR)
-#    include <socketshr.h>
-#   endif
-#  endif
-
 #  ifndef INVALID_SOCKET
 #   define INVALID_SOCKET      (-1)
 #  endif
