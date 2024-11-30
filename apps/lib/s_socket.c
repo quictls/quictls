@@ -59,7 +59,6 @@ BIO_ADDR *ourpeer = NULL;
  * @type: socket type, must be SOCK_STREAM or SOCK_DGRAM
  * @protocol: socket protocol, e.g. IPPROTO_TCP or IPPROTO_UDP (or 0 for any)
  * @tfo: flag to enable TCP Fast Open
- * @doconn: whether we should call BIO_connect() on the socket
  * @ba_ret: BIO_ADDR for the remote peer, to be freed by caller
  *
  * This will create a socket and use it to connect to a host:port, or if
@@ -73,7 +72,7 @@ BIO_ADDR *ourpeer = NULL;
  */
 int init_client(int *sock, const char *host, const char *port,
                 const char *bindhost, const char *bindport,
-                int family, int type, int protocol, int tfo, int doconn,
+                int family, int type, int protocol, int tfo,
                 BIO_ADDR **ba_ret)
 {
     BIO_ADDRINFO *res = NULL;
@@ -168,14 +167,14 @@ int init_client(int *sock, const char *host, const char *port,
                 options |= BIO_SOCK_TFO;
         }
 
-        if (doconn && !BIO_connect(*sock, BIO_ADDRINFO_address(ai), options)) {
+        if (!BIO_connect(*sock, BIO_ADDRINFO_address(ai), options)) {
             BIO_closesocket(*sock);
             *sock = INVALID_SOCKET;
             continue;
         }
 
         /* Save the address */
-        if (tfo || !doconn)
+        if (tfo)
             *ba_ret = BIO_ADDR_dup(BIO_ADDRINFO_address(ai));
 
         /* Success, don't try any more addresses */

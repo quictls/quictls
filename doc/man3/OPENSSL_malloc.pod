@@ -15,7 +15,7 @@ CRYPTO_clear_realloc, CRYPTO_clear_free,
 CRYPTO_malloc_fn, CRYPTO_realloc_fn, CRYPTO_free_fn,
 CRYPTO_get_mem_functions, CRYPTO_set_mem_functions,
 CRYPTO_set_mem_debug, CRYPTO_mem_ctrl,
-CRYPTO_mem_leaks, CRYPTO_mem_leaks_fp, CRYPTO_mem_leaks_cb,
+CRYPTO_mem_leaks, CRYPTO_mem_leaks_fp, CRYPTO_mem_leaks_cb
 - Memory allocation functions
 
 =head1 SYNOPSIS

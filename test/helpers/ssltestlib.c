@@ -1081,7 +1081,6 @@ int create_ssl_objects2(SSL_CTX *serverctx, SSL_CTX *clientctx, SSL **sssl,
 {
     SSL *serverssl = NULL, *clientssl = NULL;
     BIO *s_to_c_bio = NULL, *c_to_s_bio = NULL;
-    BIO_POLL_DESCRIPTOR rdesc = {0}, wdesc = {0};
 
     if (*sssl != NULL)
         serverssl = *sssl;
@@ -1096,28 +1095,8 @@ int create_ssl_objects2(SSL_CTX *serverctx, SSL_CTX *clientctx, SSL **sssl,
             || !TEST_ptr(c_to_s_bio = BIO_new_socket(cfd, BIO_NOCLOSE)))
         goto error;
 
-    if (!TEST_false(SSL_get_rpoll_descriptor(clientssl, &rdesc)
-        || !TEST_false(SSL_get_wpoll_descriptor(clientssl, &wdesc))))
-        goto error;
-
     SSL_set_bio(clientssl, c_to_s_bio, c_to_s_bio);
     SSL_set_bio(serverssl, s_to_c_bio, s_to_c_bio);
-
-    if (!TEST_true(SSL_get_rpoll_descriptor(clientssl, &rdesc))
-        || !TEST_true(SSL_get_wpoll_descriptor(clientssl, &wdesc))
-        || !TEST_int_eq(rdesc.type, BIO_POLL_DESCRIPTOR_TYPE_SOCK_FD)
-        || !TEST_int_eq(wdesc.type, BIO_POLL_DESCRIPTOR_TYPE_SOCK_FD)
-        || !TEST_int_eq(rdesc.value.fd, cfd)
-        || !TEST_int_eq(wdesc.value.fd, cfd))
-        goto error;
-
-    if (!TEST_true(SSL_get_rpoll_descriptor(serverssl, &rdesc))
-        || !TEST_true(SSL_get_wpoll_descriptor(serverssl, &wdesc))
-        || !TEST_int_eq(rdesc.type, BIO_POLL_DESCRIPTOR_TYPE_SOCK_FD)
-        || !TEST_int_eq(wdesc.type, BIO_POLL_DESCRIPTOR_TYPE_SOCK_FD)
-        || !TEST_int_eq(rdesc.value.fd, sfd)
-        || !TEST_int_eq(wdesc.value.fd, sfd))
-        goto error;
 
     *sssl = serverssl;
     *cssl = clientssl;

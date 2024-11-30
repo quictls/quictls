@@ -5480,8 +5480,6 @@ OSSL_HPKE_CTX_get_seq                   5641	3_2_0	EXIST::FUNCTION:
 OSSL_HPKE_CTX_set_seq                   5642	3_2_0	EXIST::FUNCTION:
 OSSL_HPKE_get_recommended_ikmelen       5643	3_2_0	EXIST::FUNCTION:
 OSSL_PROVIDER_get0_default_search_path  5644	3_2_0	EXIST::FUNCTION:
-BIO_get_rpoll_descriptor                5645	3_2_0	EXIST::FUNCTION:
-BIO_get_wpoll_descriptor                5646	3_2_0	EXIST::FUNCTION:
 ASN1_item_unpack_ex                     5647	3_2_0	EXIST::FUNCTION:
 PKCS12_SAFEBAG_get1_cert_ex             5648	3_2_0	EXIST::FUNCTION:
 PKCS12_SAFEBAG_get1_crl_ex              5649	3_2_0	EXIST::FUNCTION:
