@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-DH_generate_parameters_ex,
+DH_generate_parameters, DH_generate_parameters_ex,
 DH_check, DH_check_params,
 DH_check_ex, DH_check_params_ex, DH_check_pub_key_ex
 - generate and check Diffie-Hellman
@@ -24,6 +24,13 @@ see L<openssl_user_macros(7)>:
  int DH_check_ex(const DH *dh);
  int DH_check_params_ex(const DH *dh);
  int DH_check_pub_key_ex(const DH *dh, const BIGNUM *pub_key);
+
+The following functions have been deprecated since OpenSSL 0.9.8, and can be
+hidden entirely by defining B<OPENSSL_API_COMPAT> with a suitable version value,
+see L<openssl_user_macros(7)>:
+
+ DH *DH_generate_parameters(int prime_len, int generator,
+                            void (*callback)(int, int, void *), void *cb_arg);
 
 =head1 DESCRIPTION
 
@@ -48,6 +55,10 @@ called as described in L<BN_generate_prime_ex(3)> while a random prime
 number is generated, and when a prime has been found, B<BN_GENCB_call(cb, 3, 0)>
 is called. See L<BN_generate_prime_ex(3)> for information on
 the BN_GENCB_call() function.
+
+DH_generate_parameters() is similar to DH_generate_prime_ex() but
+expects an old-style callback function; see
+L<BN_generate_prime_ex(3)> for information on the old-style callback.
 
 DH_check_params() confirms that the B<p> and B<g> are likely enough to
 be valid.

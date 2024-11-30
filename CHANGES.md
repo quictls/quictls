@@ -32,7 +32,10 @@ Currrent Changes
 `SRP_VBASE_get_by_user`, `ENGINE_setup_bsd_cryptodev`,
 `PKCS12_get_attr`, and `SSL_set_debug`.
 
-- Removed the deprecated functions from OpenSSL 0.9.8
+- Removed most of the deprecated functions from OpenSSL 0.9.8, but keep
+`BN_is_prime_fasttest`, `CRYPTO_mem_ctrl`, `DH_generate_parameters`, and
+`RSA_generate_key` for compatibility with outside applications.
+
 
 - Removed support for some old platforms:
   - Removed support for old HPE platforms: NonStop and Tandem

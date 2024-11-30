@@ -359,6 +359,14 @@ BIGNUM *BN_mod_sqrt(BIGNUM *ret,
 void BN_consttime_swap(BN_ULONG swap, BIGNUM *a, BIGNUM *b, int nwords);
 
 /* Deprecated versions */
+# ifndef OPENSSL_NO_DEPRECATED_0_9_8
+OSSL_DEPRECATEDIN_0_9_8
+int BN_is_prime_fasttest(const BIGNUM *p, int nchecks,
+                         void (*callback) (int, int, void *),
+                         BN_CTX *ctx, void *cb_arg,
+                         int do_trial_division);
+# endif
+
 # ifndef OPENSSL_NO_DEPRECATED_3_0
 OSSL_DEPRECATEDIN_3_0
 int BN_is_prime_ex(const BIGNUM *p, int nchecks, BN_CTX *ctx, BN_GENCB *cb);

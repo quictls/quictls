@@ -1292,13 +1292,7 @@ See L</Deprecated low-level MAC functions>.
 
 =item *
 
-CRYPTO_mem_ctrl(), CRYPTO_mem_debug_free(), CRYPTO_mem_debug_malloc(),
-CRYPTO_mem_debug_pop(), CRYPTO_mem_debug_push(), CRYPTO_mem_debug_realloc(),
-CRYPTO_mem_leaks(), CRYPTO_mem_leaks_cb(), CRYPTO_mem_leaks_fp(),
-CRYPTO_set_mem_debug()
-
-Memory-leak checking has been deprecated in favor of more modern development
-tools, such as compiler memory and leak sanitizers or Valgrind.
+CRYPTO_mem_ctrl()
 
 =item *
 

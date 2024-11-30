@@ -255,6 +255,17 @@
 #  define OSSL_DEPRECATEDIN_1_0_0
 #  define OSSL_DEPRECATEDIN_1_0_0_FOR(msg)
 # endif
+# if OPENSSL_API_LEVEL >= 908
+#  ifndef OPENSSL_NO_DEPRECATED
+#   define OSSL_DEPRECATEDIN_0_9_8              OSSL_DEPRECATED(0.9.8)
+#   define OSSL_DEPRECATEDIN_0_9_8_FOR(msg)     OSSL_DEPRECATED_FOR(0.9.8, msg)
+#  else
+#   define OPENSSL_NO_DEPRECATED_0_9_8
+#  endif
+# else
+#  define OSSL_DEPRECATEDIN_0_9_8
+#  define OSSL_DEPRECATEDIN_0_9_8_FOR(msg)
+# endif
 
 /*
  * Make our own variants of __FILE__ and __LINE__, depending on configuration

@@ -2,6 +2,7 @@
 
 =head1 NAME
 
+BN_is_prime_fasttest,
 BN_generate_prime_ex2, BN_generate_prime_ex, BN_is_prime_ex, BN_check_prime,
 BN_is_prime_fasttest_ex, BN_GENCB_call, BN_GENCB_new, BN_GENCB_free,
 BN_GENCB_set_old, BN_GENCB_set, BN_GENCB_get_arg
@@ -42,6 +43,14 @@ see L<openssl_user_macros(7)>:
 
  int BN_is_prime_fasttest_ex(const BIGNUM *p, int nchecks, BN_CTX *ctx,
                              int do_trial_division, BN_GENCB *cb);
+
+The following functions have been deprecated since OpenSSL 0.9.8, and can be
+hidden entirely by defining B<OPENSSL_API_COMPAT> with a suitable version value,
+see L<openssl_user_macros(7)>:
+
+ int BN_is_prime_fasttest(const BIGNUM *p, int nchecks,
+                          void (*callback)(int, int, void *), BN_CTX *ctx,
+                          void *cb_arg, int do_trial_division);
 
 =head1 DESCRIPTION
 
