@@ -134,15 +134,6 @@ my $guess_patterns = [
     [ 'NetBSD:.*',                  '${MACHINE}-whatever-netbsd' ],
     [ 'OpenBSD:.*',                 '${MACHINE}-whatever-openbsd' ],
     [ 'OpenUNIX:.*',                '${MACHINE}-unknown-OpenUNIX${VERSION}' ],
-    [ 'OSF1:.*?:.*?:.*alpha.*',
-      sub {
-          my $OSFMAJOR = $RELEASE;
-          $OSFMAJOR =~ 's/^V([0-9]*)\..*$/\1/';
-          return "${MACHINE}-dec-tru64" if $OSFMAJOR =~ m@[45]@;
-          return "${MACHINE}-dec-osf";
-      }
-    ],
-    [ 'Paragon.*?:.*',              'i860-intel-osf1' ],
     [ 'Rhapsody:.*',                'ppc-apple-rhapsody' ],
     [ 'Darwin:.*?:.*?:Power.*',     'ppc-apple-darwin' ],
     [ 'Darwin:.*',                  '${MACHINE}-apple-darwin' ],
@@ -152,7 +143,6 @@ my $guess_patterns = [
     [ '.*?:4.*?:R4.*?:m88k',        '${MACHINE}-whatever-sysv4' ],
     [ 'DYNIX\/ptx:4.*?:.*',         '${MACHINE}-whatever-sysv4' ],
     [ '.*?:4\.0:3\.0:3[34]..(,.*)?', 'i486-ncr-sysv4' ],
-    [ 'ULTRIX:.*',                  '${MACHINE}-unknown-ultrix' ],
     [ 'POSIX-BC.*',                 'BS2000-siemens-sysv4' ],
     [ 'machten:.*',                 '${MACHINE}-tenon-${SYSTEM}' ],
     [ 'library:.*',                 '${MACHINE}-ncr-sysv4' ],
@@ -813,8 +803,6 @@ EOF
       [ '.*-.*-.*bsd.*',          { target => "BSD-generic32" } ],
       [ 'x86_64-.*-haiku',        { target => "haiku-x86_64" } ],
       [ '.*-.*-haiku',            { target => "haiku-x86" } ],
-      [ '.*-.*-osf',              { target => "osf1-alpha" } ],
-      [ '.*-.*-tru64',            { target => "tru64-alpha" } ],
       [ '.*-.*-[Uu]nix[Ww]are7',
         sub {
             return { target => "unixware-7",
