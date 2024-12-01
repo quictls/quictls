@@ -64,13 +64,6 @@ my %shared_info;
             shared_argfileflag => '@',
         };
     },
-    'alpha-osf1-shared' => sub {
-        return $shared_info{'gnu-shared'} if detect_gnu_ld();
-        return {
-            module_ldflags    => '-shared -Wl,-Bsymbolic',
-            shared_ldflag     => '-shared -Wl,-Bsymbolic -set_version $(SHLIB_VERSION_NUMBER)',
-        };
-    },
     'svr3-shared' => sub {
         return $shared_info{'gnu-shared'} if detect_gnu_ld();
         return {

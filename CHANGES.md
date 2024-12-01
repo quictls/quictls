@@ -43,3 +43,4 @@ Currrent Changes
   - Removed WinCE support.
   - Removed IRIX support.
   - Removed `I386_only` support.
+  - OSF/1, True64, and Utrix support.
