@@ -25,7 +25,6 @@
 #include "ext_dat.h"
 #include "x509_local.h"
 
-#ifndef OPENSSL_NO_RFC3779
 
 /*
  * OpenSSL ASN.1 template translation of RFC 3779 3.2.3.
@@ -903,4 +902,3 @@ int X509v3_asid_validate_resource_set(STACK_OF(X509) *chain,
     return asid_validate_path_internal(NULL, chain, ext);
 }
 
-#endif                          /* OPENSSL_NO_RFC3779 */

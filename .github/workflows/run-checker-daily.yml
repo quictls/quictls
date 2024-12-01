@@ -83,7 +83,6 @@ jobs:
           enable-rc5,
           no-rc5,
           no-rdrand,
-          no-rfc3779,
           no-ripemd,
           no-rmd160,
           no-scrypt,

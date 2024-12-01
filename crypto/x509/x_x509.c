@@ -49,10 +49,8 @@ static int x509_cb(int operation, ASN1_VALUE **pval, const ASN1_ITEM *it,
         ossl_policy_cache_free(ret->policy_cache);
         GENERAL_NAMES_free(ret->altname);
         NAME_CONSTRAINTS_free(ret->nc);
-#ifndef OPENSSL_NO_RFC3779
         sk_IPAddressFamily_pop_free(ret->rfc3779_addr, IPAddressFamily_free);
         ASIdentifiers_free(ret->rfc3779_asid);
-#endif
         ASN1_OCTET_STRING_free(ret->distinguishing_id);
 
         /* fall through */
@@ -70,10 +68,8 @@ static int x509_cb(int operation, ASN1_VALUE **pval, const ASN1_ITEM *it,
         ret->policy_cache = NULL;
         ret->altname = NULL;
         ret->nc = NULL;
-#ifndef OPENSSL_NO_RFC3779
         ret->rfc3779_addr = NULL;
         ret->rfc3779_asid = NULL;
-#endif
         ret->distinguishing_id = NULL;
         ret->aux = NULL;
         ret->crldp = NULL;
@@ -90,10 +86,8 @@ static int x509_cb(int operation, ASN1_VALUE **pval, const ASN1_ITEM *it,
         ossl_policy_cache_free(ret->policy_cache);
         GENERAL_NAMES_free(ret->altname);
         NAME_CONSTRAINTS_free(ret->nc);
-#ifndef OPENSSL_NO_RFC3779
         sk_IPAddressFamily_pop_free(ret->rfc3779_addr, IPAddressFamily_free);
         ASIdentifiers_free(ret->rfc3779_asid);
-#endif
         ASN1_OCTET_STRING_free(ret->distinguishing_id);
         OPENSSL_free(ret->propq);
         break;

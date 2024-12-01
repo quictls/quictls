@@ -39,7 +39,6 @@ end:
     return ret;
 }
 
-#ifndef OPENSSL_NO_RFC3779
 static int test_asid(void)
 {
     ASN1_INTEGER *val1 = NULL, *val2 = NULL;
@@ -452,7 +451,6 @@ end:
     return ret;
 }
 
-#endif /* OPENSSL_NO_RFC3779 */
 
 OPT_TEST_DECLARE_USAGE("cert.pem\n")
 
@@ -467,12 +465,10 @@ int setup_tests(void)
         return 0;
 
     ADD_TEST(test_pathlen);
-#ifndef OPENSSL_NO_RFC3779
     ADD_TEST(test_asid);
     ADD_TEST(test_addr_ranges);
     ADD_TEST(test_ext_syntax);
     ADD_TEST(test_addr_fam_len);
     ADD_TEST(test_addr_subset);
-#endif /* OPENSSL_NO_RFC3779 */
     return 1;
 }

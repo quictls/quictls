@@ -284,10 +284,8 @@ int X509_supported_extension(X509_EXTENSION *ex)
         NID_certificate_policies, /* 89 */
         NID_crl_distribution_points, /* 103 */
         NID_ext_key_usage,      /* 126 */
-#ifndef OPENSSL_NO_RFC3779
         NID_sbgp_ipAddrBlock,   /* 290 */
         NID_sbgp_autonomousSysNum, /* 291 */
-#endif
         NID_id_pkix_OCSP_noCheck, /* 369 */
         NID_policy_constraints, /* 401 */
         NID_proxyCertInfo,      /* 663 */
@@ -577,14 +575,12 @@ int ossl_x509v3_cache_extensions(X509 *x)
     if (res == 0)
         x->ex_flags |= EXFLAG_INVALID;
 
-#ifndef OPENSSL_NO_RFC3779
     x->rfc3779_addr = X509_get_ext_d2i(x, NID_sbgp_ipAddrBlock, &i, NULL);
     if (x->rfc3779_addr == NULL && i != -1)
         x->ex_flags |= EXFLAG_INVALID;
     x->rfc3779_asid = X509_get_ext_d2i(x, NID_sbgp_autonomousSysNum, &i, NULL);
     if (x->rfc3779_asid == NULL && i != -1)
         x->ex_flags |= EXFLAG_INVALID;
-#endif
     for (i = 0; i < X509_get_ext_count(x); i++) {
         X509_EXTENSION *ex = X509_get_ext(x, i);
         int nid = OBJ_obj2nid(X509_EXTENSION_get_object(ex));

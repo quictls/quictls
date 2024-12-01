@@ -257,13 +257,11 @@ static int verify_chain(X509_STORE_CTX *ctx)
     if ((ok = check_name_constraints(ctx)) <= 0)
         return ok;
 
-#ifndef OPENSSL_NO_RFC3779
     /* RFC 3779 path validation, now that CRL check has been done */
     if ((ok = X509v3_asid_validate_path(ctx)) <= 0)
         return ok;
     if ((ok = X509v3_addr_validate_path(ctx)) <= 0)
         return ok;
-#endif
 
     /* If we get this far evaluate policies */
     if ((ctx->param->flags & X509_V_FLAG_POLICY_CHECK) != 0)

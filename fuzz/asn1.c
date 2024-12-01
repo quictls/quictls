@@ -42,11 +42,9 @@
 
 static ASN1_ITEM_EXP *item_type[] = {
     ASN1_ITEM_ref(ACCESS_DESCRIPTION),
-#ifndef OPENSSL_NO_RFC3779
     ASN1_ITEM_ref(ASIdentifierChoice),
     ASN1_ITEM_ref(ASIdentifiers),
     ASN1_ITEM_ref(ASIdOrRange),
-#endif
     ASN1_ITEM_ref(ASN1_ANY),
     ASN1_ITEM_ref(ASN1_BIT_STRING),
     ASN1_ITEM_ref(ASN1_BMPSTRING),
@@ -73,9 +71,7 @@ static ASN1_ITEM_EXP *item_type[] = {
     ASN1_ITEM_ref(ASN1_UTCTIME),
     ASN1_ITEM_ref(ASN1_UTF8STRING),
     ASN1_ITEM_ref(ASN1_VISIBLESTRING),
-#ifndef OPENSSL_NO_RFC3779
     ASN1_ITEM_ref(ASRange),
-#endif
     ASN1_ITEM_ref(AUTHORITY_INFO_ACCESS),
     ASN1_ITEM_ref(AUTHORITY_KEYID),
     ASN1_ITEM_ref(BASIC_CONSTRAINTS),
@@ -103,12 +99,10 @@ static ASN1_ITEM_EXP *item_type[] = {
     ASN1_ITEM_ref(GENERAL_NAME),
     ASN1_ITEM_ref(GENERAL_NAMES),
     ASN1_ITEM_ref(GENERAL_SUBTREE),
-#ifndef OPENSSL_NO_RFC3779
     ASN1_ITEM_ref(IPAddressChoice),
     ASN1_ITEM_ref(IPAddressFamily),
     ASN1_ITEM_ref(IPAddressOrRange),
     ASN1_ITEM_ref(IPAddressRange),
-#endif
     ASN1_ITEM_ref(ISSUING_DIST_POINT),
 #ifndef OPENSSL_NO_DEPRECATED_3_0
     ASN1_ITEM_ref(LONG),
