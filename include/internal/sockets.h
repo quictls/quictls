@@ -96,7 +96,7 @@ typedef size_t socklen_t;        /* Currently appears to be missing on VMS */
 #    endif
 #   endif
 #   ifdef FILIO_H
-#    include <sys/filio.h> /* FIONBIO in some SVR4, e.g. unixware, solaris */
+#    include <sys/filio.h> /* FIONBIO in some SVR4, e.g. solaris */
 #   endif
 #   include <netinet/in.h>
 #   include <arpa/inet.h>
