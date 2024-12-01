@@ -17,7 +17,7 @@
  * Even though the OSF RTL claims to be C99 compatible, it's not entirely
  * so far, so we we therefore define our own.
  */
-#if defined(__osf__
+#if defined(__osf__)
 static int isblank(int c)
 {
     return c == ' ' || c == '\t';

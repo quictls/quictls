@@ -110,6 +110,7 @@ typedef size_t socklen_t;        /* Currently appears to be missing on VMS */
 #  ifdef OPENSSL_SYS_UNIX
 #    include <poll.h>
 #    include <errno.h>
+#    include <sys/ioctl.h>
 #  endif
 
 #  ifndef INVALID_SOCKET
