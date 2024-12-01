@@ -5,7 +5,7 @@
 # in the file LICENSE in the source distribution or at
 # https://www.openssl.org/source/license.html
 
-name: FIPS Check and ABIDIFF
+name: ABIDIFF
 on: [pull_request]
 
 permissions:
