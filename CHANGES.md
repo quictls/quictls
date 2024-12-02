@@ -54,6 +54,8 @@ aliases for others: `BUF_strdup`, `BUF_strndup`, `BUF_memdup`,
   - Removed support for SCO platforms.
   - Removed support for Apollo.
   - OSF/1, True64, and Ultrix support.
+  - Remove Itanium (IAK-64) support.
+  - Removed OSF/1, True64, and Ultrix support.
 
 - Simplified `util/shlib_wrap`; if your shell doesn't do "$@" properly
 when there are no arguments, please look at an earlier version.

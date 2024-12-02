@@ -32,12 +32,6 @@ IF[{- !$disabled{asm} -}]
   $BNDEF_x86_64=OPENSSL_BN_ASM_MONT OPENSSL_BN_ASM_MONT5
   $BNDEF_x86_64_sse2=OPENSSL_IA32_SSE2
 
-  IF[{- $config{target} !~ /^VC/ -}]
-    $BNASM_ia64=bn-ia64.s ia64-mont.s
-  ELSE
-    $BNASM_ia64=bn_asm.c ia64-mont.s
-  ENDIF
-
   $BNASM_sparcv9=asm/sparcv8plus.S sparcv9-mont.S sparcv9a-mont.S vis3-mont.S \
           sparct4-mont.S bn_sparc.c
   $BNDEF_sparcv9=OPENSSL_BN_ASM_MONT
@@ -135,9 +129,6 @@ GENERATE[rsaz-avx2.s]=asm/rsaz-avx2.pl
 GENERATE[rsaz-2k-avx512.s]=asm/rsaz-2k-avx512.pl
 GENERATE[rsaz-3k-avx512.s]=asm/rsaz-3k-avx512.pl
 GENERATE[rsaz-4k-avx512.s]=asm/rsaz-4k-avx512.pl
-
-GENERATE[bn-ia64.s]=asm/ia64.S
-GENERATE[ia64-mont.s]=asm/ia64-mont.pl
 
 # ppc - AIX, Linux, MacOS X...
 GENERATE[bn-ppc.s]=asm/ppc.pl
