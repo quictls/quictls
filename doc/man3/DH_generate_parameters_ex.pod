@@ -143,7 +143,7 @@ function.
 DH_generate_parameters_ex(), DH_check() and DH_check_params() return 1
 if the check could be performed, 0 otherwise.
 
-DH_generate_parameters_ex() returns a pointer to the DH structure or NULL if
+DH_generate_parameters() returns a pointer to the DH structure or NULL if
 the parameter generation fails.
 
 DH_check_ex(), DH_check_params() and DH_check_pub_key_ex() return 1 if the
