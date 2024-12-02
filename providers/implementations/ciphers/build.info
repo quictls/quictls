@@ -48,9 +48,6 @@ IF[{- !$disabled{asm} -}]
   $GHASHDEF_armv4=GHASH_ASM
   $GHASHDEF_aarch64=
 
-  $GHASHDEF_parisc11=GHASH_ASM
-  $GHASHDEF_parisc20_64=$GHASHDEF_parisc11
-
   $GHASHDEF_ppc32=
   $GHASHDEF_ppc64=$GHASHDEF_ppc32
 

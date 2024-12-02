@@ -39,9 +39,6 @@ IF[{- !$disabled{asm} -}]
     $ECDEF_aarch64=$ECDEF_aarch64 ECP_SM2P256_ASM
   ENDIF
 
-  $ECASM_parisc11=
-  $ECASM_parisc20_64=
-
   $ECASM_ppc32=
   $ECASM_ppc64=ecp_nistz256.c ecp_ppc.c ecp_nistz256-ppc64.s
   $ECDEF_ppc64=ECP_NISTZ256_ASM
