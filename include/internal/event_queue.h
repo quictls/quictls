@@ -57,31 +57,31 @@ int ossl_event_queue_add(OSSL_EVENT_QUEUE *queue, OSSL_EVENT *event,
 /*
  * Utility functions to extract event fields
  */
-static ossl_unused ossl_inline
+static ossl_unused inline
 uint32_t ossl_event_get_type(const OSSL_EVENT *event)
 {
     return event->type;
 }
 
-static ossl_unused ossl_inline
+static ossl_unused inline
 uint32_t ossl_event_get_priority(const OSSL_EVENT *event)
 {
     return event->priority;
 }
 
-static ossl_unused ossl_inline
+static ossl_unused inline
 OSSL_TIME ossl_event_get_when(const OSSL_EVENT *event)
 {
     return event->when;
 }
 
-static ossl_unused ossl_inline
+static ossl_unused inline
 void *ossl_event_get0_ctx(const OSSL_EVENT *event)
 {
     return event->ctx;
 }
 
-static ossl_unused ossl_inline
+static ossl_unused inline
 void *ossl_event_get0_payload(const OSSL_EVENT *event, size_t *length)
 {
     if (length != NULL)

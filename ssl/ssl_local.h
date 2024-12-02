@@ -2438,7 +2438,7 @@ const SSL_METHOD *func_name(void)  \
 
 const char *ssl_protocol_to_string(int version);
 
-static ossl_inline int tls12_rpk_and_privkey(const SSL_CONNECTION *sc, int idx)
+static inline int tls12_rpk_and_privkey(const SSL_CONNECTION *sc, int idx)
 {
     /*
      * This is to check for special cases when using RPK with just
@@ -2450,7 +2450,7 @@ static ossl_inline int tls12_rpk_and_privkey(const SSL_CONNECTION *sc, int idx)
         && sc->cert->pkeys[idx].x509 == NULL;
 }
 
-static ossl_inline int ssl_has_cert_type(const SSL_CONNECTION *sc, unsigned char ct)
+static inline int ssl_has_cert_type(const SSL_CONNECTION *sc, unsigned char ct)
 {
     unsigned char *ptr;
     size_t len;
@@ -2470,7 +2470,7 @@ static ossl_inline int ssl_has_cert_type(const SSL_CONNECTION *sc, unsigned char
 }
 
 /* Returns true if certificate and private key for 'idx' are present */
-static ossl_inline int ssl_has_cert(const SSL_CONNECTION *s, int idx)
+static inline int ssl_has_cert(const SSL_CONNECTION *s, int idx)
 {
     if (idx < 0 || idx >= (int)s->ssl_pkey_num)
         return 0;
@@ -2483,7 +2483,7 @@ static ossl_inline int ssl_has_cert(const SSL_CONNECTION *s, int idx)
         && s->cert->pkeys[idx].privatekey != NULL;
 }
 
-static ossl_inline void tls1_get_peer_groups(SSL_CONNECTION *s,
+static inline void tls1_get_peer_groups(SSL_CONNECTION *s,
                                              const uint16_t **pgroups,
                                              size_t *pgroupslen)
 {
@@ -3000,7 +3000,7 @@ void ssl_session_calculate_timeout(SSL_SESSION *ss);
 # endif
 
 /* Some helper routines to support TSAN operations safely */
-static ossl_unused ossl_inline int ssl_tsan_lock(const SSL_CTX *ctx)
+static ossl_unused inline int ssl_tsan_lock(const SSL_CTX *ctx)
 {
 #ifdef TSAN_REQUIRES_LOCKING
     if (!CRYPTO_THREAD_write_lock(ctx->tsan_lock))
@@ -3009,14 +3009,14 @@ static ossl_unused ossl_inline int ssl_tsan_lock(const SSL_CTX *ctx)
     return 1;
 }
 
-static ossl_unused ossl_inline void ssl_tsan_unlock(const SSL_CTX *ctx)
+static ossl_unused inline void ssl_tsan_unlock(const SSL_CTX *ctx)
 {
 #ifdef TSAN_REQUIRES_LOCKING
     CRYPTO_THREAD_unlock(ctx->tsan_lock);
 #endif
 }
 
-static ossl_unused ossl_inline void ssl_tsan_counter(const SSL_CTX *ctx,
+static ossl_unused inline void ssl_tsan_counter(const SSL_CTX *ctx,
                                                      TSAN_QUALIFIER int *stat)
 {
     if (ssl_tsan_lock(ctx)) {

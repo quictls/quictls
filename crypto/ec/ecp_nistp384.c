@@ -724,7 +724,7 @@ static void felem_mul_wrapper(widefelem out, const felem in1, const felem in2)
 # define felem_mul felem_mul_ref
 #endif
 
-static ossl_inline void felem_square_reduce(felem out, const felem in)
+static inline void felem_square_reduce(felem out, const felem in)
 {
     widefelem tmp;
 
@@ -732,7 +732,7 @@ static ossl_inline void felem_square_reduce(felem out, const felem in)
     felem_reduce(out, tmp);
 }
 
-static ossl_inline void felem_mul_reduce(felem out, const felem in1, const felem in2)
+static inline void felem_mul_reduce(felem out, const felem in1, const felem in2)
 {
     widefelem tmp;
 

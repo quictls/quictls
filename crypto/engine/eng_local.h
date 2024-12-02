@@ -158,7 +158,7 @@ typedef struct st_engine_pile ENGINE_PILE;
 
 DEFINE_LHASH_OF_EX(ENGINE_PILE);
 
-static ossl_unused ossl_inline int eng_struct_ref(ENGINE *e)
+static ossl_unused inline int eng_struct_ref(ENGINE *e)
 {
     int res;
 

@@ -104,22 +104,22 @@ static cbc_handles cbc_handle[] = {{AES_KEY_SIZE_128, NULL},
                                     {AES_KEY_SIZE_192, NULL},
                                     {AES_KEY_SIZE_256, NULL}};
 
-static ossl_inline int io_setup(unsigned n, aio_context_t *ctx)
+static inline int io_setup(unsigned n, aio_context_t *ctx)
 {
     return syscall(__NR_io_setup, n, ctx);
 }
 
-static ossl_inline int eventfd(int n)
+static inline int eventfd(int n)
 {
     return syscall(__NR_eventfd2, n, 0);
 }
 
-static ossl_inline int io_destroy(aio_context_t ctx)
+static inline int io_destroy(aio_context_t ctx)
 {
     return syscall(__NR_io_destroy, ctx);
 }
 
-static ossl_inline int io_read(aio_context_t ctx, long n, struct iocb **iocb)
+static inline int io_read(aio_context_t ctx, long n, struct iocb **iocb)
 {
     return syscall(__NR_io_submit, ctx, n, iocb);
 }
@@ -131,7 +131,7 @@ struct __timespec32
   __kernel_long_t tv_nsec;
 };
 
-static ossl_inline int io_getevents(aio_context_t ctx, long min, long max,
+static inline int io_getevents(aio_context_t ctx, long min, long max,
                                struct io_event *events,
                                struct timespec *timeout)
 {
@@ -403,7 +403,7 @@ static int afalg_fin_cipher_aio(afalg_aio *aio, int sfd, unsigned char *buf,
     return 1;
 }
 
-static ossl_inline void afalg_set_op_sk(struct cmsghdr *cmsg,
+static inline void afalg_set_op_sk(struct cmsghdr *cmsg,
                                    const ALG_OP_TYPE op)
 {
     cmsg->cmsg_level = SOL_ALG;
@@ -425,7 +425,7 @@ static void afalg_set_iv_sk(struct cmsghdr *cmsg, const unsigned char *iv,
     memcpy(aiv->iv, iv, len);
 }
 
-static ossl_inline int afalg_set_key(afalg_ctx *actx, const unsigned char *key,
+static inline int afalg_set_key(afalg_ctx *actx, const unsigned char *key,
                                 const int klen)
 {
     int ret;
