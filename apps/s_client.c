@@ -2952,10 +2952,8 @@ int s_client_main(int argc, char **argv)
                  */
                 if (read_tty && !at_eof)
                     openssl_fdset(fileno_stdin(), &readfds);
-#if !defined(OPENSSL_SYS_VMS)
                 if (write_tty)
                     openssl_fdset(fileno_stdout(), &writefds);
-#endif
             }
 
             /*
