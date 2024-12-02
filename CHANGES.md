@@ -43,7 +43,8 @@ Currrent Changes
   - Removed WinCE support.
   - Removed IRIX support.
   - Removed `I386_only` support.
-  - OSF/1, True64, and Ultrix support.
+  - Remove Itanium (IAK-64) support.
+  - Removed OSF/1, True64, and Ultrix support.
 
 - Simplified `util/shlib_wrap`; if your shell doesn't do "$@" properly
 when there are no arguments, please look at an earlier version.
