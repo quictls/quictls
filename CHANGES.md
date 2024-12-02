@@ -25,7 +25,6 @@ Currrent Changes
   - ecdh, it was a no-op
   - no-dgram is now implied by no-sock (no longer can turn off just UDP)
 
-
 - Remove support for EGD random source.
 
 - Made the `ERR_STACK` datatype opaque.
