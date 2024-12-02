@@ -24,7 +24,6 @@ Currrent Changes
   - fips, no-fips since we do not build a FIPS-validated container
   - ecdh, it was a no-op
 
-
 - Remove support for EGD random source.
 
 - Made the `ERR_STACK` datatype opaque.
