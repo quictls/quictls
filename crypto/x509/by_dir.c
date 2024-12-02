@@ -301,13 +301,13 @@ static int get_cert_by_subject_ex(X509_LOOKUP *xl, X509_LOOKUP_TYPE type,
                  * This is special.  When c == '\0', no directory separator
                  * should be added.
                  */
-                BIO_snprintf(b->data, b->max,
-                             "%s%08lx.%s%d", ent->dir, h, postfix, k);
+                snprintf(b->data, b->max,
+			 "%s%08lx.%s%d", ent->dir, h, postfix, k);
             } else
 #endif
             {
-                BIO_snprintf(b->data, b->max,
-                             "%s%c%08lx.%s%d", ent->dir, c, h, postfix, k);
+                snprintf(b->data, b->max,
+			 "%s%c%08lx.%s%d", ent->dir, c, h, postfix, k);
             }
 #ifndef OPENSSL_NO_POSIX_IO
 # ifdef _WIN32

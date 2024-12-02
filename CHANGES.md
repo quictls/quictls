@@ -47,3 +47,8 @@ Currrent Changes
 
 - Simplified `util/shlib_wrap`; if your shell doesn't do "$@" properly
 when there are no arguments, please look at an earlier version.
+
+- Make C99 the required language base.
+  - Use `inline`, not `ossl_inline`
+  - Remove `BIO_snprintf` in favor of snprintf.
+  - Keep `BIO_vsnprintf` for provider compatibility.

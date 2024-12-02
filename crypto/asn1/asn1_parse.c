@@ -34,11 +34,11 @@ static int asn1_print_info(BIO *bp, long offset, int depth, int hl, long len,
     else
         p = "prim: ";
     if (constructed != (V_ASN1_CONSTRUCTED | 1)) {
-        if (BIO_snprintf(str, sizeof(str), "%5ld:d=%-2d hl=%ld l=%4ld %s",
+        if (snprintf(str, sizeof(str), "%5ld:d=%-2d hl=%ld l=%4ld %s",
                          offset, depth, (long)hl, len, p) <= 0)
             goto err;
     } else {
-        if (BIO_snprintf(str, sizeof(str), "%5ld:d=%-2d hl=%ld l=inf  %s",
+        if (snprintf(str, sizeof(str), "%5ld:d=%-2d hl=%ld l=inf  %s",
                          offset, depth, (long)hl, p) <= 0)
             goto err;
     }
@@ -60,13 +60,13 @@ static int asn1_print_info(BIO *bp, long offset, int depth, int hl, long len,
      */
     p = str;
     if ((xclass & V_ASN1_PRIVATE) == V_ASN1_PRIVATE)
-        BIO_snprintf(str, sizeof(str), "priv [ %d ] ", tag);
+        snprintf(str, sizeof(str), "priv [ %d ] ", tag);
     else if ((xclass & V_ASN1_CONTEXT_SPECIFIC) == V_ASN1_CONTEXT_SPECIFIC)
-        BIO_snprintf(str, sizeof(str), "cont [ %d ]", tag);
+        snprintf(str, sizeof(str), "cont [ %d ]", tag);
     else if ((xclass & V_ASN1_APPLICATION) == V_ASN1_APPLICATION)
-        BIO_snprintf(str, sizeof(str), "appl [ %d ]", tag);
+        snprintf(str, sizeof(str), "appl [ %d ]", tag);
     else if (tag > 30)
-        BIO_snprintf(str, sizeof(str), "<ASN1 %d>", tag);
+        snprintf(str, sizeof(str), "<ASN1 %d>", tag);
     else
         p = ASN1_tag2str(tag);
 

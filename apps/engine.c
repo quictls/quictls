@@ -287,7 +287,7 @@ static void util_store_cap(const OSSL_STORE_LOADER *loader, void *arg)
 
     if (OSSL_STORE_LOADER_get0_engine(loader) == ctx->engine) {
         char buf[256];
-        BIO_snprintf(buf, sizeof(buf), "STORE(%s)",
+        snprintf(buf, sizeof(buf), "STORE(%s)",
                      OSSL_STORE_LOADER_get0_scheme(loader));
         if (!append_buf(ctx->cap_buf, ctx->cap_size, buf))
             ctx->ok = 0;

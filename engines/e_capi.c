@@ -677,7 +677,7 @@ static EVP_PKEY *capi_get_pkey(ENGINE *eng, CAPI_KEY *key)
         rp = (RSAPUBKEY *) (bh + 1);
         if (rp->magic != 0x31415352) {
             char magstr[10];
-            BIO_snprintf(magstr, 10, "%lx", rp->magic);
+            snprintf(magstr, 10, "%lx", rp->magic);
             CAPIerr(CAPI_F_CAPI_GET_PKEY,
                     CAPI_R_INVALID_RSA_PUBLIC_KEY_BLOB_MAGIC_NUMBER);
             ERR_add_error_data(2, "magic=0x", magstr);
@@ -732,7 +732,7 @@ static EVP_PKEY *capi_get_pkey(ENGINE *eng, CAPI_KEY *key)
         dp = (DSSPUBKEY *) (bh + 1);
         if (dp->magic != 0x31535344) {
             char magstr[10];
-            BIO_snprintf(magstr, 10, "%lx", dp->magic);
+            snprintf(magstr, 10, "%lx", dp->magic);
             CAPIerr(CAPI_F_CAPI_GET_PKEY,
                     CAPI_R_INVALID_DSA_PUBLIC_KEY_BLOB_MAGIC_NUMBER);
             ERR_add_error_data(2, "magic=0x", magstr);
@@ -792,7 +792,7 @@ static EVP_PKEY *capi_get_pkey(ENGINE *eng, CAPI_KEY *key)
 # endif
     } else {
         char algstr[10];
-        BIO_snprintf(algstr, 10, "%ux", bh->aiKeyAlg);
+        snprintf(algstr, 10, "%ux", bh->aiKeyAlg);
         CAPIerr(CAPI_F_CAPI_GET_PKEY,
                 CAPI_R_UNSUPPORTED_PUBLIC_KEY_ALGORITHM);
         ERR_add_error_data(2, "aiKeyAlg=0x", algstr);
@@ -894,7 +894,7 @@ int capi_rsa_sign(int dtype, const unsigned char *m, unsigned int m_len,
     default:
         {
             char algstr[10];
-            BIO_snprintf(algstr, 10, "%x", dtype);
+            snprintf(algstr, 10, "%x", dtype);
             CAPIerr(CAPI_F_CAPI_RSA_SIGN, CAPI_R_UNSUPPORTED_ALGORITHM_NID);
             ERR_add_error_data(2, "NID=0x", algstr);
             return -1;
@@ -976,7 +976,7 @@ int capi_rsa_priv_dec(int flen, const unsigned char *from,
     default:
         {
             char errstr[10];
-            BIO_snprintf(errstr, 10, "%d", padding);
+            snprintf(errstr, 10, "%d", padding);
             CAPIerr(CAPI_F_CAPI_RSA_PRIV_DEC, CAPI_R_UNSUPPORTED_PADDING);
             ERR_add_error_data(2, "padding=", errstr);
             return -1;
@@ -1128,7 +1128,7 @@ static void capi_addlasterror(void)
 static void capi_adderror(DWORD err)
 {
     char errstr[10];
-    BIO_snprintf(errstr, 10, "%lX", err);
+    snprintf(errstr, 10, "%lX", err);
     ERR_add_error_data(2, "Error code= 0x", errstr);
 }
 

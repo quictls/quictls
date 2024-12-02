@@ -399,8 +399,8 @@ static int do_dir(const char *dirname, enum Hash h)
     numfiles = sk_OPENSSL_STRING_num(files);
     for (n = 0; n < numfiles; ++n) {
         filename = sk_OPENSSL_STRING_value(files, n);
-        if (BIO_snprintf(buf, buflen, "%s%s%s",
-                         dirname, pathsep, filename) >= buflen)
+        if (snprintf(buf, buflen, "%s%s%s",
+		     dirname, pathsep, filename) >= buflen)
             continue;
         if (lstat(buf, &st) < 0)
             continue;
@@ -422,8 +422,8 @@ static int do_dir(const char *dirname, enum Hash h)
                 nextep = ep->next;
                 if (ep->old_id < bp->num_needed) {
                     /* Link exists, and is used as-is */
-                    BIO_snprintf(buf, buflen, "%08x.%s%d", bp->hash,
-                                 suffixes[bp->type], ep->old_id);
+                    snprintf(buf, buflen, "%08x.%s%d", bp->hash,
+			     suffixes[bp->type], ep->old_id);
                     if (verbose)
                         BIO_printf(bio_out, "link %s -> %s\n",
                                    ep->filename, buf);
@@ -432,9 +432,9 @@ static int do_dir(const char *dirname, enum Hash h)
                     while (bit_isset(idmask, nextid))
                         nextid++;
 
-                    BIO_snprintf(buf, buflen, "%s%s%08x.%s%d",
-                                 dirname, pathsep, bp->hash,
-                                 suffixes[bp->type], nextid);
+                    snprintf(buf, buflen, "%s%s%08x.%s%d",
+			     dirname, pathsep, bp->hash,
+			     suffixes[bp->type], nextid);
                     if (verbose)
                         BIO_printf(bio_out, "link %s -> %s\n",
                                    ep->filename, &buf[dirlen]);
@@ -454,9 +454,9 @@ static int do_dir(const char *dirname, enum Hash h)
                     bit_set(idmask, nextid);
                 } else if (remove_links) {
                     /* Link to be deleted */
-                    BIO_snprintf(buf, buflen, "%s%s%08x.%s%d",
-                                 dirname, pathsep, bp->hash,
-                                 suffixes[bp->type], ep->old_id);
+                    snprintf(buf, buflen, "%s%s%08x.%s%d",
+			     dirname, pathsep, bp->hash,
+			     suffixes[bp->type], ep->old_id);
                     if (verbose)
                         BIO_printf(bio_out, "unlink %s\n",
                                    &buf[dirlen]);

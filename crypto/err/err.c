@@ -531,7 +531,7 @@ void ossl_err_string_int(unsigned long e, const char *func,
     l = ERR_GET_LIB(e);
     ls = ERR_lib_error_string(e);
     if (ls == NULL) {
-        BIO_snprintf(lsbuf, sizeof(lsbuf), "lib(%lu)", l);
+        snprintf(lsbuf, sizeof(lsbuf), "lib(%lu)", l);
         ls = lsbuf;
     }
 
@@ -551,15 +551,15 @@ void ossl_err_string_int(unsigned long e, const char *func,
     }
 #endif
     if (rs == NULL) {
-        BIO_snprintf(rsbuf, sizeof(rsbuf), "reason(%lu)",
+        snprintf(rsbuf, sizeof(rsbuf), "reason(%lu)",
                      r & ~(ERR_RFLAGS_MASK << ERR_RFLAGS_OFFSET));
         rs = rsbuf;
     }
 
-    BIO_snprintf(buf, len, "error:%08lX:%s:%s:%s", e, ls, func, rs);
+    snprintf(buf, len, "error:%08lX:%s:%s:%s", e, ls, func, rs);
     if (strlen(buf) == len - 1) {
         /* Didn't fit; use a minimal format. */
-        BIO_snprintf(buf, len, "err:%lx:%lx:%lx:%lx", e, l, 0L, r);
+        snprintf(buf, len, "err:%lx:%lx:%lx:%lx", e, l, 0L, r);
     }
 }
 

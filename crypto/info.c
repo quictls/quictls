@@ -44,29 +44,29 @@ DEFINE_RUN_ONCE_STATIC(init_info_strings)
      defined(_M_AMD64) || defined(_M_X64)
     const char *env;
 
-    BIO_snprintf(ossl_cpu_info_str, sizeof(ossl_cpu_info_str),
+    snprintf(ossl_cpu_info_str, sizeof(ossl_cpu_info_str),
                  CPUINFO_PREFIX "OPENSSL_ia32cap=0x%llx:0x%llx",
                  (unsigned long long)OPENSSL_ia32cap_P[0] |
                  (unsigned long long)OPENSSL_ia32cap_P[1] << 32,
                  (unsigned long long)OPENSSL_ia32cap_P[2] |
                  (unsigned long long)OPENSSL_ia32cap_P[3] << 32);
     if ((env = getenv("OPENSSL_ia32cap")) != NULL)
-        BIO_snprintf(ossl_cpu_info_str + strlen(ossl_cpu_info_str),
+        snprintf(ossl_cpu_info_str + strlen(ossl_cpu_info_str),
                      sizeof(ossl_cpu_info_str) - strlen(ossl_cpu_info_str),
                      " env:%s", env);
 # elif defined(__arm__) || defined(__arm) || defined(__aarch64__)
     const char *env;
 
-    BIO_snprintf(ossl_cpu_info_str, sizeof(ossl_cpu_info_str),
+    snprintf(ossl_cpu_info_str, sizeof(ossl_cpu_info_str),
                  CPUINFO_PREFIX "OPENSSL_armcap=0x%x", OPENSSL_armcap_P);
     if ((env = getenv("OPENSSL_armcap")) != NULL)
-        BIO_snprintf(ossl_cpu_info_str + strlen(ossl_cpu_info_str),
+        snprintf(ossl_cpu_info_str + strlen(ossl_cpu_info_str),
                      sizeof(ossl_cpu_info_str) - strlen(ossl_cpu_info_str),
                      " env:%s", env);
 # elif defined(__s390__) || defined(__s390x__)
     const char *env;
 
-    BIO_snprintf(ossl_cpu_info_str, sizeof(ossl_cpu_info_str),
+    snprintf(ossl_cpu_info_str, sizeof(ossl_cpu_info_str),
                  CPUINFO_PREFIX "OPENSSL_s390xcap="
                  "stfle:0x%llx:0x%llx:0x%llx:0x%llx:"
                  "kimd:0x%llx:0x%llx:"
@@ -96,7 +96,7 @@ DEFINE_RUN_ONCE_STATIC(init_info_strings)
                  OPENSSL_s390xcap_P.pcc[0], OPENSSL_s390xcap_P.pcc[1],
                  OPENSSL_s390xcap_P.kdsa[0], OPENSSL_s390xcap_P.kdsa[1]);
     if ((env = getenv("OPENSSL_s390xcap")) != NULL)
-        BIO_snprintf(ossl_cpu_info_str + strlen(ossl_cpu_info_str),
+        snprintf(ossl_cpu_info_str + strlen(ossl_cpu_info_str),
                      sizeof(ossl_cpu_info_str) - strlen(ossl_cpu_info_str),
                      " env:%s", env);
 # endif

@@ -60,7 +60,7 @@ static char *alloc_kdf_algorithm_name(STACK_OF(OPENSSL_STRING) **optp,
         return NULL;
 
     res = app_malloc(len, "algorithm name");
-    BIO_snprintf(res, len, "%s:%s", name, arg);
+    snprintf(res, len, "%s:%s", name, arg);
     if (sk_OPENSSL_STRING_push(*optp, res))
         return res;
     OPENSSL_free(res);

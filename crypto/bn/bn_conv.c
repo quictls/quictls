@@ -45,7 +45,7 @@ char *BN_bn2hex(const BIGNUM *a)
 }
 
 #ifndef FIPS_MODULE
-/* No BIO_snprintf in FIPS_MODULE */
+/* No snprintf in FIPS_MODULE */
 /* Must 'OPENSSL_free' the returned data */
 char *BN_bn2dec(const BIGNUM *a)
 {
@@ -96,13 +96,13 @@ char *BN_bn2dec(const BIGNUM *a)
          * the last one needs truncation. The blocks need to be reversed in
          * order.
          */
-        n = BIO_snprintf(p, tbytes - (size_t)(p - buf), BN_DEC_FMT1, *lp);
+        n = snprintf(p, tbytes - (size_t)(p - buf), BN_DEC_FMT1, *lp);
         if (n < 0)
             goto err;
         p += n;
         while (lp != bn_data) {
             lp--;
-            n = BIO_snprintf(p, tbytes - (size_t)(p - buf), BN_DEC_FMT2, *lp);
+            n = snprintf(p, tbytes - (size_t)(p - buf), BN_DEC_FMT2, *lp);
             if (n < 0)
                 goto err;
             p += n;

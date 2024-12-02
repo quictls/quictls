@@ -611,9 +611,9 @@ static int check_params_PEM(const char *file, const int line,
     static char expected_pem_header[80];
 
     return
-        TEST_FL_int_gt(BIO_snprintf(expected_pem_header,
-                                 sizeof(expected_pem_header),
-                                 "-----BEGIN %s PARAMETERS-----", type), 0)
+        TEST_FL_int_gt(snprintf(expected_pem_header,
+                                sizeof(expected_pem_header),
+                                "-----BEGIN %s PARAMETERS-----", type), 0)
         && TEST_FL_strn_eq(data, expected_pem_header, strlen(expected_pem_header));
 }
 
@@ -643,9 +643,9 @@ static int check_unprotected_legacy_PEM(const char *file, const int line,
     static char expected_pem_header[80];
 
     return
-        TEST_FL_int_gt(BIO_snprintf(expected_pem_header,
-                                 sizeof(expected_pem_header),
-                                 "-----BEGIN %s PRIVATE KEY-----", type), 0)
+        TEST_FL_int_gt(snprintf(expected_pem_header,
+                                sizeof(expected_pem_header),
+                                "-----BEGIN %s PRIVATE KEY-----", type), 0)
         && TEST_FL_strn_eq(data, expected_pem_header, strlen(expected_pem_header));
 }
 
@@ -763,9 +763,9 @@ static int check_protected_legacy_PEM(const char *file, const int line,
     static char expected_pem_header[80];
 
     return
-        TEST_FL_int_gt(BIO_snprintf(expected_pem_header,
-                                 sizeof(expected_pem_header),
-                                 "-----BEGIN %s PRIVATE KEY-----", type), 0)
+        TEST_FL_int_gt(snprintf(expected_pem_header,
+                                sizeof(expected_pem_header),
+                                "-----BEGIN %s PRIVATE KEY-----", type), 0)
         && TEST_FL_strn_eq(data, expected_pem_header, strlen(expected_pem_header))
         && TEST_FL_ptr(strstr(data, "\nDEK-Info: "));
 }

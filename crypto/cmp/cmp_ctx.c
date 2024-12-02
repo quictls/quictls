@@ -369,9 +369,9 @@ int ossl_cmp_print_log(OSSL_CMP_severity level, const OSSL_CMP_CTX *ctx,
     if (OSSL_TRACE_ENABLED(CMP)) {
         OSSL_TRACE_BEGIN(CMP) {
             int printed =
-                BIO_snprintf(hugebuf, sizeof(hugebuf),
-                             "%s:%s:%d:" OSSL_CMP_LOG_PREFIX "%s: ",
-                             func, file, line, level_str);
+                snprintf(hugebuf, sizeof(hugebuf),
+			 "%s:%s:%d:" OSSL_CMP_LOG_PREFIX "%s: ",
+			 func, file, line, level_str);
             if (printed > 0 && (size_t)printed < sizeof(hugebuf)) {
                 if (BIO_vsnprintf(hugebuf + printed,
                                   sizeof(hugebuf) - printed, format, args) > 0)

@@ -171,13 +171,13 @@ void OSSL_CMP_print_errors_cb(OSSL_CMP_log_cb_t log_fn)
         }
 #endif
         if (rs == NULL) {
-            BIO_snprintf(rsbuf, sizeof(rsbuf), "reason(%lu)", reason);
+            snprintf(rsbuf, sizeof(rsbuf), "reason(%lu)", reason);
             rs = rsbuf;
         }
         if (data != NULL && (flags & ERR_TXT_STRING) != 0)
-            BIO_snprintf(msg, sizeof(msg), "%s:%s", rs, data);
+            snprintf(msg, sizeof(msg), "%s:%s", rs, data);
         else
-            BIO_snprintf(msg, sizeof(msg), "%s", rs);
+            snprintf(msg, sizeof(msg), "%s", rs);
 
         if (log_fn == NULL) {
 #ifndef OPENSSL_NO_STDIO

@@ -67,7 +67,7 @@ OSSL_CMP_MSG *OSSL_CMP_MSG_http_perform(OSSL_CMP_CTX *ctx,
         goto err;
 
     if (ctx->serverPort != 0)
-        BIO_snprintf(server_port, sizeof(server_port), "%d", ctx->serverPort);
+        snprintf(server_port, sizeof(server_port), "%d", ctx->serverPort);
     tls_used = ctx->tls_used >= 0 ? ctx->tls_used != 0
         : OSSL_CMP_CTX_get_http_cb_arg(ctx) != NULL; /* backward compat */
     if (ctx->http_ctx == NULL)

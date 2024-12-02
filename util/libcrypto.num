@@ -692,7 +692,6 @@ OCSP_RESPID_new                         722	3_0_0	EXIST::FUNCTION:OCSP
 ASN1_SET_ANY_it                         723	3_0_0	EXIST::FUNCTION:
 d2i_TS_RESP_bio                         724	3_0_0	EXIST::FUNCTION:TS
 PEM_write_X509_REQ                      725	3_0_0	EXIST::FUNCTION:STDIO
-BIO_snprintf                            726	3_0_0	EXIST::FUNCTION:
 EC_POINT_hex2point                      727	3_0_0	EXIST::FUNCTION:EC
 X509v3_get_ext_by_critical              728	3_0_0	EXIST::FUNCTION:
 ENGINE_get_default_RSA                  729	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,ENGINE

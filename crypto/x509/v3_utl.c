@@ -1046,7 +1046,7 @@ char *ossl_ipaddr_to_asc(unsigned char *p, int len)
 
     switch (len) {
     case 4: /* IPv4 */
-        BIO_snprintf(buf, sizeof(buf), "%d.%d.%d.%d", p[0], p[1], p[2], p[3]);
+        snprintf(buf, sizeof(buf), "%d.%d.%d.%d", p[0], p[1], p[2], p[3]);
         break;
     case 16: /* IPv6 */
         for (out = buf, i = 8, remain = sizeof(buf);
@@ -1054,12 +1054,12 @@ char *ossl_ipaddr_to_asc(unsigned char *p, int len)
              remain -= bytes, out += bytes) {
             const char *template = (i > 0 ? "%X:" : "%X");
 
-            bytes = BIO_snprintf(out, remain, template, p[0] << 8 | p[1]);
+            bytes = snprintf(out, remain, template, p[0] << 8 | p[1]);
             p += 2;
         }
         break;
     default:
-        BIO_snprintf(buf, sizeof(buf), "<invalid length=%d>", len);
+        snprintf(buf, sizeof(buf), "<invalid length=%d>", len);
         break;
     }
     return OPENSSL_strdup(buf);

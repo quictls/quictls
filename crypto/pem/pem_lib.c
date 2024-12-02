@@ -80,7 +80,7 @@ void PEM_proc_type(char *buf, int type)
     else
         str = "BAD-TYPE";
 
-    BIO_snprintf(p, PEM_BUFSIZE - (size_t)(p - buf), "Proc-Type: 4,%s\n", str);
+    snprintf(p, PEM_BUFSIZE - (size_t)(p - buf), "Proc-Type: 4,%s\n", str);
 }
 
 void PEM_dek_info(char *buf, const char *type, int len, const char *str)
@@ -89,12 +89,12 @@ void PEM_dek_info(char *buf, const char *type, int len, const char *str)
     char *p = buf + strlen(buf);
     int j = PEM_BUFSIZE - (size_t)(p - buf), n;
 
-    n = BIO_snprintf(p, j, "DEK-Info: %s,", type);
+    n = snprintf(p, j, "DEK-Info: %s,", type);
     if (n > 0) {
         j -= n;
         p += n;
         for (i = 0; i < len; i++) {
-            n = BIO_snprintf(p, j, "%02X", 0xff & str[i]);
+            n = snprintf(p, j, "%02X", 0xff & str[i]);
             if (n <= 0)
                 return;
             j -= n;

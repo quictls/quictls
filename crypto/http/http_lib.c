@@ -11,7 +11,7 @@
 #include <string.h>
 #include <openssl/http.h>
 #include <openssl/httperr.h>
-#include <openssl/bio.h> /* for BIO_snprintf() */
+#include <openssl/bio.h> /* for snprintf() */
 #include <openssl/err.h>
 #include "internal/cryptlib.h" /* for ossl_assert() */
 
@@ -171,7 +171,7 @@ int OSSL_parse_url(const char *url, char **pscheme, char **puser, char **phost,
 
         if ((*ppath = OPENSSL_malloc(buflen)) == NULL)
             goto err;
-        BIO_snprintf(*ppath, buflen, "/%s", path);
+        snprintf(*ppath, buflen, "/%s", path);
     }
     return 1;
 

@@ -576,7 +576,7 @@ static int test_query_cache_stochastic(void)
 
     for (i = 1; i <= max; i++) {
         v[i] = 2 * i;
-        BIO_snprintf(buf, sizeof(buf), "n=%d\n", i);
+        snprintf(buf, sizeof(buf), "n=%d\n", i);
         if (!TEST_true(ossl_method_store_add(store, &prov, i, buf, "abc",
                                              &up_ref, &down_ref))
                 || !TEST_true(ossl_method_store_cache_set(store, &prov, i,
@@ -590,7 +590,7 @@ static int test_query_cache_stochastic(void)
         }
     }
     for (i = 1; i <= max; i++) {
-        BIO_snprintf(buf, sizeof(buf), "n=%d\n", i);
+        snprintf(buf, sizeof(buf), "n=%d\n", i);
         if (!ossl_method_store_cache_get(store, NULL, i, buf, &result)
             || result != v + i)
             errors++;

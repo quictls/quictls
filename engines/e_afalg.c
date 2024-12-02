@@ -360,7 +360,7 @@ static int afalg_fin_cipher_aio(afalg_aio *aio, int sfd, unsigned char *buf,
                          * sometimes __s64 is defined as long long int
                          * but on some archs ( like mips64 or powerpc64 ) it's just long int
                          *
-                         * to be able to use BIO_snprintf() with %lld without warnings
+                         * to be able to use snprintf() with %lld without warnings
                          * copy events[0].res to an long long int variable
                          *
                          * because long long int should always be at least 64 bit this should work
@@ -374,7 +374,7 @@ static int afalg_fin_cipher_aio(afalg_aio *aio, int sfd, unsigned char *buf,
                         ALG_WARN
                             ("%s(%d): Crypto Operation failed with code %lld\n",
                              __FILE__, __LINE__, events[0].res);
-                        BIO_snprintf(strbuf, sizeof(strbuf), "%lld", op_ret);
+                        snprintf(strbuf, sizeof(strbuf), "%lld", op_ret);
                         switch (events[0].res) {
                         case -ENOMEM:
                             AFALGerr(0, AFALG_R_KERNEL_OP_FAILED);

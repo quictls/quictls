@@ -340,7 +340,7 @@ int pkeyutl_main(int argc, char **argv)
                 char passwd_buf[4096];
                 int r;
 
-                BIO_snprintf(passwd_buf, sizeof(passwd_buf), "Enter %s: ", opt);
+                snprintf(passwd_buf, sizeof(passwd_buf), "Enter %s: ", opt);
                 r = EVP_read_pw_string(passwd_buf, sizeof(passwd_buf) - 1,
                                        passwd_buf, 0);
                 if (r < 0) {

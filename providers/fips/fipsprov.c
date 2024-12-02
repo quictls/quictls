@@ -929,17 +929,6 @@ int CRYPTO_secure_allocated(const void *ptr)
     return c_CRYPTO_secure_allocated(ptr);
 }
 
-int BIO_snprintf(char *buf, size_t n, const char *format, ...)
-{
-    va_list args;
-    int ret;
-
-    va_start(args, format);
-    ret = c_BIO_vsnprintf(buf, n, format, args);
-    va_end(args);
-    return ret;
-}
-
 #define FIPS_FEATURE_CHECK(fname, field)                                    \
     int fname(OSSL_LIB_CTX *libctx)                                         \
     {                                                                       \

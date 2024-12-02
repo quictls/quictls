@@ -1125,8 +1125,8 @@ static int rsa_get_ctx_params(void *vprsactx, OSSL_PARAM *params)
                 break;
             default:
                 {
-                    int len = BIO_snprintf(p->data, p->data_size, "%d",
-                                           prsactx->saltlen);
+                    int len = snprintf(p->data, p->data_size, "%d",
+				       prsactx->saltlen);
 
                     if (len <= 0)
                         return 0;

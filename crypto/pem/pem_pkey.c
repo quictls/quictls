@@ -358,7 +358,7 @@ int PEM_write_bio_PrivateKey_traditional(BIO *bp, const EVP_PKEY *x,
         EVP_PKEY_free(copy);
         return 0;
     }
-    BIO_snprintf(pem_str, 80, "%s PRIVATE KEY", x->ameth->pem_str);
+    snprintf(pem_str, 80, "%s PRIVATE KEY", x->ameth->pem_str);
     ret = PEM_ASN1_write_bio((i2d_of_void *)i2d_PrivateKey,
                              pem_str, bp, x, enc, kstr, klen, cb, u);
 
@@ -398,7 +398,7 @@ PEM_write_fnsig(Parameters, EVP_PKEY, BIO, write_bio)
     if (!x->ameth || !x->ameth->param_encode)
         return 0;
 
-    BIO_snprintf(pem_str, 80, "%s PARAMETERS", x->ameth->pem_str);
+    snprintf(pem_str, 80, "%s PARAMETERS", x->ameth->pem_str);
     return PEM_ASN1_write_bio((i2d_of_void *)x->ameth->param_encode,
                               pem_str, out, x, NULL, NULL, 0, 0, NULL);
 }

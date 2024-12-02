@@ -915,40 +915,7 @@ int BIO_vprintf(BIO *bio, const char *format, va_list args)
     return ret;
 }
 
-/*
- * As snprintf is not available everywhere, we provide our own
- * implementation. This function has nothing to do with BIOs, but it's
- * closely related to BIO_printf, and we need *some* name prefix ... (XXX the
- * function should be renamed, but to what?)
- */
-int BIO_snprintf(char *buf, size_t n, const char *format, ...)
-{
-    va_list args;
-    int ret;
-
-    va_start(args, format);
-
-    ret = BIO_vsnprintf(buf, n, format, args);
-
-    va_end(args);
-    return ret;
-}
-
 int BIO_vsnprintf(char *buf, size_t n, const char *format, va_list args)
 {
-    size_t retlen;
-    int truncated;
-
-    if (!_dopr(&buf, NULL, &n, &retlen, &truncated, format, args))
-        return -1;
-
-    if (truncated)
-        /*
-         * In case of truncation, return -1 like traditional snprintf.
-         * (Current drafts for ISO/IEC 9899 say snprintf should return the
-         * number of characters that would have been written, had the buffer
-         * been large enough.)
-         */
-        return -1;
-    return (retlen <= INT_MAX) ? (int)retlen : -1;
+    return vsnprintf(buf, n, format, args);
 }

@@ -240,8 +240,8 @@ static int send_receive_check(OSSL_CMP_CTX *ctx, const OSSL_CMP_MSG *req,
                                                   sizeof(buf)) != NULL)
             ERR_add_error_data(1, buf);
         if (emc->errorCode != NULL
-                && BIO_snprintf(buf, sizeof(buf), "; errorCode: %08lX",
-                                ASN1_INTEGER_get(emc->errorCode)) > 0)
+                && snprintf(buf, sizeof(buf), "; errorCode: %08lX",
+			    ASN1_INTEGER_get(emc->errorCode)) > 0)
             ERR_add_error_data(1, buf);
         if (emc->errorDetails != NULL) {
             char *text = ossl_sk_ASN1_UTF8STRING2text(emc->errorDetails, ", ",
@@ -315,23 +315,23 @@ static int poll_for_response(OSSL_CMP_CTX *ctx, int sleep, int rid,
             if (check_after < 0 || (uint64_t)check_after
                 > (sleep ? ULONG_MAX / 1000 : INT_MAX)) {
                 ERR_raise(ERR_LIB_CMP, CMP_R_CHECKAFTER_OUT_OF_RANGE);
-                if (BIO_snprintf(str, OSSL_CMP_PKISI_BUFLEN, "value = %jd",
-                                 check_after) >= 0)
+                if (snprintf(str, OSSL_CMP_PKISI_BUFLEN, "value = %jd",
+			     check_after) >= 0)
                     ERR_add_error_data(1, str);
                 goto err;
             }
 
             if (pollRep->reason == NULL
-                    || (len = BIO_snprintf(str, OSSL_CMP_PKISI_BUFLEN,
-                                           " with reason = '")) < 0) {
+                    || (len = snprintf(str, OSSL_CMP_PKISI_BUFLEN,
+				       " with reason = '")) < 0) {
                 *str = '\0';
             } else {
                 char *text = ossl_sk_ASN1_UTF8STRING2text(pollRep->reason, ", ",
                                                           sizeof(str) - len - 2);
 
                 if (text == NULL
-                        || BIO_snprintf(str + len, sizeof(str) - len,
-                                        "%s'", text) < 0)
+                        || snprintf(str + len, sizeof(str) - len,
+				    "%s'", text) < 0)
                     *str = '\0';
                 OPENSSL_free(text);
             }
