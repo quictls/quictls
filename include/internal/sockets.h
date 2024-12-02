@@ -112,7 +112,7 @@ typedef size_t socklen_t;        /* Currently appears to be missing on VMS */
 #    include <errno.h>
 #  endif
 
-#   include <sys/ioctl.h>
+#  include <sys/ioctl.h>
 
 #  ifndef INVALID_SOCKET
 #   define INVALID_SOCKET      (-1)
