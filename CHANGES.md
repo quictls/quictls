@@ -25,6 +25,9 @@ Currrent Changes
   - ecdh, it was a no-op
   - no-dgram is now implied by no-sock (no longer can turn off just UDP)
 
+- Move the two apps, CA.pl and tsget, that were written in Perl, to a
+separate directory. Perl is optional on intalled systems.
+
 - Remove support for EGD random source.
 
 - Made the `ERR_STACK` datatype opaque.
