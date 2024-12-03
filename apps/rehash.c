@@ -427,8 +427,9 @@ static int do_dir(const char *dirname, enum Hash h)
                     }
                     if (symlink(ep->filename, buf) < 0) {
                         BIO_printf(bio_err,
-                                   "%s: Can't symlink %s, %s\n",
-                                   opt_getprog(), ep->filename,
+                                   "%s: Can't symlink(%s,%s), %s\n",
+                                   opt_getprog(),
+				   ep->filename, buf,
                                    strerror(errno));
                         errs++;
                     }
