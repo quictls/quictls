@@ -190,7 +190,8 @@ char *snprint_PKIStatusInfo_parts(int status, int fail_info,
     write_ptr += printed_chars; \
     bufsize -= printed_chars;
 
-    printed_chars = snprintf(write_ptr, bufsize, "%s", status_string);
+    OPENSSL_strlcpy(write_ptr, status_string, bufsize);
+    printed_chars = strlen(write_ptr);
     ADVANCE_BUFFER;
 
     /*

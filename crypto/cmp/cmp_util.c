@@ -177,7 +177,7 @@ void OSSL_CMP_print_errors_cb(OSSL_CMP_log_cb_t log_fn)
         if (data != NULL && (flags & ERR_TXT_STRING) != 0)
             snprintf(msg, sizeof(msg), "%s:%s", rs, data);
         else
-            snprintf(msg, sizeof(msg), "%s", rs);
+            OPENSSL_strlcpy(msg, rs, sizeof(msg));
 
         if (log_fn == NULL) {
 #ifndef OPENSSL_NO_STDIO

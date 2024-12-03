@@ -160,9 +160,10 @@ static unsigned int psk_client_cb(SSL *ssl, const char *hint, char *identity,
     /*
      * lookup PSK identity and PSK key based on the given identity hint here
      */
-    ret = snprintf(identity, max_identity_len, "%s", psk_identity);
-    if (ret < 0 || (unsigned int)ret > max_identity_len)
-        goto out_err;
+    ret = strlen(psk_identity);
+    if ((unsigned int)ret >= max_identity_len)
+	goto out_err;
+    strcpy(identity, identity);
     if (c_debug)
         BIO_printf(bio_c_out, "created identity '%s' len=%d\n", identity,
                    ret);

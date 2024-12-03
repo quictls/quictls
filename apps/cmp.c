@@ -2080,7 +2080,7 @@ static int setup_client_ctx(OSSL_CMP_CTX *ctx, ENGINE *engine)
     if (!OSSL_CMP_CTX_set_option(ctx, OSSL_CMP_OPT_USE_TLS, opt_tls_used))
         goto err;
 
-    snprintf(server_port, sizeof(server_port), "%s", port);
+    OPENSSL_strlcpy(server_port, port, sizeof(server_port));
     if (opt_path == NULL)
         used_path = path;
     if (!OSSL_CMP_CTX_set1_server(ctx, host)
