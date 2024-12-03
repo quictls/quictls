@@ -917,5 +917,6 @@ int BIO_vprintf(BIO *bio, const char *format, va_list args)
 
 int BIO_vsnprintf(char *buf, size_t n, const char *format, va_list args)
 {
-    return vsnprintf(buf, n, format, args);
+    size_t i = vsnprintf(buf, n, format, args);
+    return i > n ? -1 : (int)i;
 }
