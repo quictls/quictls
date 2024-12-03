@@ -127,6 +127,7 @@ typedef u64 u64_aX;
 #    define ROTATE(a,n)       ({ u64 ret; asm ("rorq %1,%0"   \
                                    : "=r"(ret) : "J"(n),"0"(a) : "cc"); ret; })
 #   endif
+#  endif
 # endif
 #endif
 
