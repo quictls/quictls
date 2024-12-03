@@ -127,6 +127,8 @@ sigaction
 sleep
 socket
 sprintf
+vsnprintf
+snprintf
 stderr
 stdin
 stdout
