@@ -1,9 +1,5 @@
 SUBDIRS = man1
 
-DEPEND[html/man1/CA.pl.html]=man1/CA.pl.pod
-GENERATE[html/man1/CA.pl.html]=man1/CA.pl.pod
-DEPEND[man/man1/CA.pl.1]=man1/CA.pl.pod
-GENERATE[man/man1/CA.pl.1]=man1/CA.pl.pod
 DEPEND[html/man1/openssl-asn1parse.html]=man1/openssl-asn1parse.pod
 GENERATE[html/man1/openssl-asn1parse.html]=man1/openssl-asn1parse.pod
 DEPEND[man/man1/openssl-asn1parse.1]=man1/openssl-asn1parse.pod
@@ -336,13 +332,8 @@ DEPEND[html/man1/openssl.html]=man1/openssl.pod
 GENERATE[html/man1/openssl.html]=man1/openssl.pod
 DEPEND[man/man1/openssl.1]=man1/openssl.pod
 GENERATE[man/man1/openssl.1]=man1/openssl.pod
-DEPEND[html/man1/tsget.html]=man1/tsget.pod
-GENERATE[html/man1/tsget.html]=man1/tsget.pod
-DEPEND[man/man1/tsget.1]=man1/tsget.pod
-GENERATE[man/man1/tsget.1]=man1/tsget.pod
 IMAGEDOCS[man1]=
-HTMLDOCS[man1]=html/man1/CA.pl.html \
-html/man1/openssl-asn1parse.html \
+HTMLDOCS[man1]=html/man1/openssl-asn1parse.html \
 html/man1/openssl-ca.html \
 html/man1/openssl-ciphers.html \
 html/man1/openssl-cmds.html \
@@ -398,10 +389,8 @@ html/man1/openssl-verification-options.html \
 html/man1/openssl-verify.html \
 html/man1/openssl-version.html \
 html/man1/openssl-x509.html \
-html/man1/openssl.html \
-html/man1/tsget.html
-MANDOCS[man1]=man/man1/CA.pl.1 \
-man/man1/openssl-asn1parse.1 \
+html/man1/openssl.html
+MANDOCS[man1]=man/man1/openssl-asn1parse.1 \
 man/man1/openssl-ca.1 \
 man/man1/openssl-ciphers.1 \
 man/man1/openssl-cmds.1 \
@@ -457,8 +446,7 @@ man/man1/openssl-verification-options.1 \
 man/man1/openssl-verify.1 \
 man/man1/openssl-version.1 \
 man/man1/openssl-x509.1 \
-man/man1/openssl.1 \
-man/man1/tsget.1
+man/man1/openssl.1
 DEPEND[html/man3/ADMISSIONS.html]=man3/ADMISSIONS.pod
 GENERATE[html/man3/ADMISSIONS.html]=man3/ADMISSIONS.pod
 DEPEND[man/man3/ADMISSIONS.3]=man3/ADMISSIONS.pod
