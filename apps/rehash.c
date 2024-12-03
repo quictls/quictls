@@ -11,60 +11,40 @@
 #include "apps.h"
 #include "progs.h"
 
-#if defined(OPENSSL_SYS_UNIX) || defined(__APPLE__)
+#ifndef OPENSSL_SYS_WIN32
 # include <unistd.h>
-# include <stdio.h>
-# include <limits.h>
-# include <errno.h>
-# include <string.h>
-# include <ctype.h>
-# include <sys/stat.h>
+#endif
+#include <stdio.h>
+#include <limits.h>
+#include <errno.h>
+#include <string.h>
+#include <ctype.h>
+#include <sys/stat.h>
 
-/*
- * Make sure that the processing of symbol names is treated the same as when
- * libcrypto is built.  This is done automatically for public headers (see
- * include/openssl/__DECC_INCLUDE_PROLOGUE.H and __DECC_INCLUDE_EPILOGUE.H),
- * but not for internal headers.
- */
-# ifdef __VMS
-#  pragma names save
-#  pragma names as_is,shortened
-# endif
+#include "internal/o_dir.h"
 
-# include "internal/o_dir.h"
+#include <openssl/evp.h>
+#include <openssl/pem.h>
+#include <openssl/x509.h>
 
-# ifdef __VMS
-#  pragma names restore
-# endif
+#ifndef PATH_MAX
+# define PATH_MAX 4096
+#endif
+#define MAX_COLLISIONS  256
 
-# include <openssl/evp.h>
-# include <openssl/pem.h>
-# include <openssl/x509.h>
-
-# ifndef PATH_MAX
-#  define PATH_MAX 4096
-# endif
-# define MAX_COLLISIONS  256
-
-# if defined(OPENSSL_SYS_VXWORKS)
-/*
- * VxWorks has no symbolic links
- */
-
-#  define lstat(path, buf) stat(path, buf)
-
+#if defined(OPENSSL_SYS_VXWORKS) || defined(OPENSSL_SYS_WIN32)
 int symlink(const char *target, const char *linkpath)
 {
     errno = ENOSYS;
     return -1;
 }
 
-ssize_t readlink(const char *pathname, char *buf, size_t bufsiz)
+int readlink(const char *pathname, char *buf, size_t bufsiz)
 {
     errno = ENOSYS;
     return -1;
 }
-# endif
+#endif
 
 typedef struct hentry_st {
     struct hentry_st *next;
@@ -187,6 +167,7 @@ static int add_entry(enum Type type, unsigned int hash, const char *filename,
     return 0;
 }
 
+#if defined(S_ISLNK)
 /*
  * Check if a symlink goes to the right spot; return 0 if okay.
  * This can be -1 if bad filename, or an error count.
@@ -226,6 +207,7 @@ static int handle_symlink(const char *filename, const char *fullpath)
 
     return add_entry(type, hash, linktarget, NULL, 0, id);
 }
+#endif
 
 /*
  * process a file, return number of errors.
@@ -326,13 +308,10 @@ static int ends_with_dirsep(const char *path)
 {
     if (*path != '\0')
         path += strlen(path) - 1;
-# if defined __VMS
-    if (*path == ']' || *path == '>' || *path == ':')
-        return 1;
-# elif defined _WIN32
+#if defined _WIN32
     if (*path == '\\')
         return 1;
-# endif
+#endif
     return *path == '/';
 }
 
@@ -402,10 +381,12 @@ static int do_dir(const char *dirname, enum Hash h)
         if (BIO_snprintf(buf, buflen, "%s%s%s",
                          dirname, pathsep, filename) >= buflen)
             continue;
+#if defined(S_ISLNK)
         if (lstat(buf, &st) < 0)
             continue;
         if (S_ISLNK(st.st_mode) && handle_symlink(filename, buf) == 0)
             continue;
+#endif
         errs += do_file(filename, buf, h);
     }
 
@@ -568,16 +549,3 @@ int rehash_main(int argc, char **argv)
  end:
     return errs;
 }
-
-#else
-const OPTIONS rehash_options[] = {
-    {NULL}
-};
-
-int rehash_main(int argc, char **argv)
-{
-    BIO_printf(bio_err, "Not available; use c_rehash script\n");
-    return 1;
-}
-
-#endif /* defined(OPENSSL_SYS_UNIX) || defined(__APPLE__) */
