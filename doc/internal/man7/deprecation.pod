@@ -127,7 +127,7 @@ any translation unit that uses it:
 
 =head1 SEE ALSO
 
-L<openssl_user_macros(7)>
+L<openssl-user-macros(7)>
 
 =head1 COPYRIGHT
 

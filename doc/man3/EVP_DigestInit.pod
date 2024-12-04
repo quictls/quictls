@@ -122,7 +122,7 @@ EVP_MD_CTX_type, EVP_MD_CTX_pkey_ctx, EVP_MD_CTX_md_data
 
 The following functions have been deprecated since OpenSSL 3.0, and can be
 hidden entirely by defining B<OPENSSL_API_COMPAT> with a suitable version value,
-see L<openssl_user_macros(7)>:
+see L<openssl-user-macros(7)>:
 
  const EVP_MD *EVP_MD_CTX_md(const EVP_MD_CTX *ctx);
 
