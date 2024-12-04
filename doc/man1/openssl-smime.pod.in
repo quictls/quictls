@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -45,11 +44,12 @@ B<openssl> B<smime>
 [B<-noindef>]
 [B<-stream>]
 [B<-md> I<digest>]
-{- $OpenSSL::safe::opt_trust_synopsis -}
-{- $OpenSSL::safe::opt_engine_synopsis -}{- $OpenSSL::safe::opt_r_synopsis -}
-{- $OpenSSL::safe::opt_v_synopsis -}
-{- $OpenSSL::safe::opt_provider_synopsis -}
-{- $OpenSSL::safe::opt_config_synopsis -}
+[B<-engine> I<id>]
+#include trust_synopsis
+#include r_synopsis
+#include v_synopsis
+#include provider_synopsis
+#include config_synopsis
 I<recipcert> ...
 
 =head1 DESCRIPTION
@@ -278,19 +278,19 @@ portion of a message so they may be included manually. If signing
 then many S/MIME mail clients check the signers certificate's email
 address matches that specified in the From: address.
 
-{- $OpenSSL::safe::opt_v_item -}
+#include v_item
 
 Any verification errors cause the command to exit.
 
-{- $OpenSSL::safe::opt_trust_item -}
+#include trust_item
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
-{- $OpenSSL::safe::opt_r_item -}
+#include r_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
-{- $OpenSSL::safe::opt_config_item -}
+#include config_item
 
 =item I<recipcert> ...
 

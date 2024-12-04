@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =for comment
 Original text by James Westby.
@@ -19,7 +18,7 @@ B<rehash>
 [B<-compat>]
 [B<-n>]
 [B<-v>]
-{- $OpenSSL::safe::opt_provider_synopsis -}
+#include provider_synopsis
 [I<directory>] ...
 
 B<c_rehash>
@@ -28,7 +27,7 @@ B<c_rehash>
 [B<-old>]
 [B<-n>]
 [B<-v>]
-{- $OpenSSL::safe::opt_provider_synopsis -}
+#include provider_synopsis
 [I<directory>] ...
 
 =head1 DESCRIPTION
@@ -119,7 +118,7 @@ releases.
 Print messages about old links removed and new links created.
 By default, this command only lists each directory as it is processed.
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =back
 

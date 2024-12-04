@@ -1,10 +1,5 @@
 =pod
 
-=begin comment
-{- join("\n", @autowarntext) -}
-
-=end comment
-
 =head1 NAME
 
 openssl-storeutl - STORE command
@@ -27,7 +22,8 @@ B<openssl> B<storeutl>
 [B<-alias> I<arg>]
 [B<-fingerprint> I<arg>]
 [B<-I<digest>>]
-{- $OpenSSL::safe::opt_engine_synopsis -}{- $OpenSSL::safe::opt_provider_synopsis -}
+[B<-engine> I<id>]
+#include provider_synopsis
 I<uri>
 
 =head1 DESCRIPTION
@@ -121,9 +117,9 @@ Search for an object having the given fingerprint.
 
 The digest that was used to compute the fingerprint given with B<-fingerprint>.
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =back
 

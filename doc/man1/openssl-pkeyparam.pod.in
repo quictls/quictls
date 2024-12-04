@@ -1,10 +1,5 @@
 =pod
 
-=begin comment
-{- join("\n", @autowarntext) -}
-
-=end comment
-
 =head1 NAME
 
 openssl-pkeyparam - public key algorithm parameter processing command
@@ -18,7 +13,8 @@ B<openssl> B<pkeyparam>
 [B<-text>]
 [B<-noout>]
 [B<-check>]
-{- $OpenSSL::safe::opt_engine_synopsis -}{- $OpenSSL::safe::opt_provider_synopsis -}
+[B<-engine> I<id>]
+#include provider_synopsis
 
 =head1 DESCRIPTION
 
@@ -55,9 +51,9 @@ Do not output the encoded version of the parameters.
 
 This option checks the correctness of parameters.
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =back
 

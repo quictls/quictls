@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -23,7 +22,7 @@ B<openssl> B<ciphers>
 [B<-stdname>]
 [B<-convert> I<name>]
 [B<-ciphersuites> I<val>]
-{- $OpenSSL::safe::opt_provider_synopsis -}
+#include provider_synopsis
 [I<cipherlist>]
 
 =head1 DESCRIPTION
@@ -40,7 +39,7 @@ determine the appropriate cipherlist.
 
 Print a usage message.
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =item B<-s>
 

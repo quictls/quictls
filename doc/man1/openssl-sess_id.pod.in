@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -16,7 +15,7 @@ B<openssl> B<sess_id>
 [B<-text>]
 [B<-cert>]
 [B<-noout>]
-[B<-context> I<ID>]
+[B<-context> I<id>]
 
 =head1 DESCRIPTION
 

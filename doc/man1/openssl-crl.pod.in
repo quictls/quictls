@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -28,9 +27,9 @@ B<openssl> B<crl>
 [B<-issuer>]
 [B<-lastupdate>]
 [B<-nextupdate>]
-{- $OpenSSL::safe::opt_name_synopsis -}
-{- $OpenSSL::safe::opt_trust_synopsis -}
-{- $OpenSSL::safe::opt_provider_synopsis -}
+#include name_synopsis
+#include trust_synopsis
+#include provider_synopsis
 
 =head1 DESCRIPTION
 
@@ -134,11 +133,11 @@ Output the lastUpdate field.
 
 Output the nextUpdate field.
 
-{- $OpenSSL::safe::opt_name_item -}
+#include name_item
 
-{- $OpenSSL::safe::opt_trust_item -}
+#include trust_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =back
 

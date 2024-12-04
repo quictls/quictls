@@ -1,10 +1,5 @@
 =pod
 
-=begin comment
-{- join("\n", @autowarntext) -}
-
-=end comment
-
 =head1 NAME
 
 openssl-dsa - DSA key processing
@@ -39,7 +34,8 @@ B<openssl> B<dsa>
 [B<-pvk-strong>]
 [B<-pvk-weak>]
 [B<-pvk-none>]
-{- $OpenSSL::safe::opt_engine_synopsis -}{- $OpenSSL::safe::opt_provider_synopsis -}
+[B<-engine> I<id>]
+#include provider_synopsis
 
 =head1 DESCRIPTION
 
@@ -137,9 +133,9 @@ Enable 'Weak' PVK encoding level.
 
 Don't enforce PVK encoding.
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =back
 

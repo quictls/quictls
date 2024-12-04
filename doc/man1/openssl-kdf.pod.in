@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -16,7 +15,7 @@ B<openssl kdf>
 [B<-keylen> I<num>]
 [B<-out> I<filename>]
 [B<-binary>]
-{- $OpenSSL::safe::opt_provider_synopsis -}
+#include provider_synopsis
 I<kdf_name>
 
 =head1 DESCRIPTION
@@ -135,7 +134,7 @@ This option is identical to the B<-mac> option.
 
 =back
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =item I<kdf_name>
 

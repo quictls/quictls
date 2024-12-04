@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -54,9 +53,10 @@ B<openssl> B<req>
 [B<-batch>]
 [B<-verbose>]
 [B<-quiet>]
-{- $OpenSSL::safe::opt_name_synopsis -}
-{- $OpenSSL::safe::opt_r_synopsis -}
-{- $OpenSSL::safe::opt_engine_synopsis -}{- $OpenSSL::safe::opt_provider_synopsis -}
+[B<-engine> I<id>]
+#include name_synopsis
+#include r_synopsis
+#include provider_synopsis
 
 =head1 DESCRIPTION
 
@@ -416,13 +416,13 @@ during key generation are suppressed).
 Specifies an engine (by its unique I<id> string) which would be used
 for key generation operations.
 
-{- $OpenSSL::safe::opt_name_item -}
+#include name_item
 
-{- $OpenSSL::safe::opt_r_item -}
+#include r_item
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =back
 

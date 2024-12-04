@@ -1,10 +1,5 @@
 =pod
 
-=begin comment
-{- join("\n", @autowarntext) -}
-
-=end comment
-
 =head1 NAME
 
 openssl-pkcs7 - PKCS#7 command
@@ -22,7 +17,8 @@ B<openssl> B<pkcs7>
 [B<-quiet>]
 [B<-text>]
 [B<-noout>]
-{- $OpenSSL::safe::opt_engine_synopsis -}{- $OpenSSL::safe::opt_provider_synopsis -}
+[B<-engine> I<id>]
+#include provider_synopsis
 
 =head1 DESCRIPTION
 
@@ -79,9 +75,9 @@ issuer names.
 Don't output the encoded version of the PKCS#7 structure (or certificates
 if B<-print_certs> is set).
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =back
 

@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -27,8 +26,9 @@ B<openssl speed>
 [B<-bytes> I<num>]
 [B<-mr>]
 [B<-mlock>]
-{- $OpenSSL::safe::opt_r_synopsis -}
-{- $OpenSSL::safe::opt_engine_synopsis -}{- $OpenSSL::safe::opt_provider_synopsis -}
+[B<-engine> I<id>]
+#include r_synopsis
+#include provider_synopsis
 [I<algorithm> ...]
 
 =head1 DESCRIPTION
@@ -130,11 +130,11 @@ Produce the summary in a mechanical, machine-readable, format.
 
 Lock memory into RAM for more deterministic measurements.
 
-{- $OpenSSL::safe::opt_r_item -}
+#include r_item
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =item I<algorithm> ...
 
