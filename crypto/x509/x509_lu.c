@@ -310,7 +310,6 @@ X509_OBJECT *X509_STORE_CTX_get_obj_by_subject(X509_STORE_CTX *ctx,
     return ret;
 }
 
-
 static int x509_object_up_ref(X509_OBJECT *a)
 {
     switch (a->type) {
@@ -323,6 +322,7 @@ static int x509_object_up_ref(X509_OBJECT *a)
     }
     return 1;
 }
+
 /*
  * May be called with |ret| == NULL just for the side effect of
  * caching all certs matching the given subject DN in |ctx->store->objs|.

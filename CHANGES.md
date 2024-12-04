@@ -29,6 +29,9 @@ Currrent Changes
 
 - Made the `ERR_STACK` datatype opaque.
 
+- The undocumented function `X509_OBJECT_up_ref_count` has been
+made private.
+
 - Removed some functions deprecated in the OpenSSL 1.1.0 release:
 `SRP_VBASE_get_by_user`, `ENGINE_setup_bsd_cryptodev`,
 `PKCS12_get_attr`, and `SSL_set_debug`.
