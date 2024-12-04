@@ -163,7 +163,7 @@ static unsigned int psk_client_cb(SSL *ssl, const char *hint, char *identity,
     ret = strlen(psk_identity);
     if ((unsigned int)ret >= max_identity_len)
 	goto out_err;
-    strcpy(identity, identity);
+    strcpy(identity, psk_identity);
     if (c_debug)
         BIO_printf(bio_c_out, "created identity '%s' len=%d\n", identity,
                    ret);
