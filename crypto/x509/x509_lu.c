@@ -311,7 +311,7 @@ X509_OBJECT *X509_STORE_CTX_get_obj_by_subject(X509_STORE_CTX *ctx,
 }
 
 
-static int x509_object_up_ref_count(X509_OBJECT *a)
+static int x509_object_up_ref(X509_OBJECT *a)
 {
     switch (a->type) {
     case X509_LU_NONE:
@@ -380,7 +380,7 @@ static int ossl_x509_store_ctx_get_by_subject(const X509_STORE_CTX *ctx,
         if (tmp == NULL)
             return 0;
     }
-    if (!x509_object_up_ref_count(tmp))
+    if (!x509_object_up_ref(tmp))
         return -1;
 
     ret->type = tmp->type;
@@ -414,7 +414,7 @@ static int x509_store_add(X509_STORE *store, void *x, int crl)
         obj->type = X509_LU_X509;
         obj->data.x509 = (X509 *)x;
     }
-    if (!x509_object_up_ref_count(obj)) {
+    if (!x509_object_up_ref(obj)) {
         obj->type = X509_LU_NONE;
         X509_OBJECT_free(obj);
         return 0;
@@ -591,7 +591,7 @@ static X509_OBJECT *x509_object_dup(const X509_OBJECT *obj)
 
     ret->type = obj->type;
     ret->data = obj->data;
-    x509_object_up_ref_count(ret);
+    x509_object_up_ref(ret);
     return ret;
 }
 
