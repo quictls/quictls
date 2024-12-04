@@ -32,18 +32,11 @@
 #endif
 #define MAX_COLLISIONS  256
 
-#if defined(OPENSSL_SYS_VXWORKS) || defined(OPENSSL_SYS_WIN32)
-int symlink(const char *target, const char *linkpath)
-{
-    errno = ENOSYS;
-    return -1;
-}
-
-int readlink(const char *pathname, char *buf, size_t bufsiz)
-{
-    errno = ENOSYS;
-    return -1;
-}
+#if defined(OPENSSL_SYS_VXWORKS) || defined(OPENSSL_SYS_WIN32) \
+    || defined(OPENSSL_NO_SYMLINKS)
+# if defined(S_ISLNK)
+#  undef S_ISLNK
+# endif
 #endif
 
 typedef struct hentry_st {
@@ -320,6 +313,55 @@ static int sk_strcmp(const char * const *a, const char * const *b)
     return strcmp(*a, *b);
 }
 
+#ifndef S_ISLNK
+/*
+ * Make a copy of the file, return -1 on error.
+ */
+static int copyfile(const char* source, const char *dest)
+{
+    FILE *in = NULL, *out = NULL;
+    char buff[BUFSIZ];
+    int retval = -1;
+    size_t count;
+
+    if (unlink(dest) < 0 && errno != ENOENT) {
+	BIO_printf(bio_err, "%s: Can't unlink %s, %s\n",
+		opt_getprog(), dest, strerror(errno));
+	goto end;
+    }
+    if ((in = fopen(source, "rb")) == NULL) {
+	BIO_printf(bio_err, "%s: Can't open %s for reading %s\n",
+		   opt_getprog(), source, strerror(errno));
+	goto end;
+    }
+    if ((out = fopen(source, "wb")) == NULL) {
+	BIO_printf(bio_err, "%s: Can't open %s for writing %s\n",
+		   opt_getprog(), dest, strerror(errno));
+	goto end;
+    }
+
+    while ((count = fread(buff, sizeof(buff), 1, in)) != 0) {
+	if (fwrite(buff, count, 1, out) != count) {
+	    BIO_printf(bio_err, "%s: Can't write to %s %s\n",
+		       opt_getprog(), dest, strerror(errno));
+	    goto end;
+	}
+    }
+
+    retval = 0;
+end:
+    if (in != NULL)
+	fclose(in);
+    if (out != NULL && (fflush(out) == EOF || fclose(out) == EOF)) {
+	BIO_printf(bio_err, "%s: Can't close %s %s\n",
+		   opt_getprog(), dest, strerror(errno));
+	retval = -1;
+    }
+
+    return retval;
+}
+#endif
+
 /*
  * Process a directory; return number of errors found.
  */
@@ -425,6 +467,7 @@ static int do_dir(const char *dirname, enum Hash h)
                                    opt_getprog(), buf, strerror(errno));
                         errs++;
                     }
+#ifdef S_ISLNK
                     if (symlink(ep->filename, buf) < 0) {
                         BIO_printf(bio_err,
                                    "%s: Can't symlink(%s,%s), %s\n",
@@ -433,6 +476,10 @@ static int do_dir(const char *dirname, enum Hash h)
                                    strerror(errno));
                         errs++;
                     }
+#else
+                    if (copyfile(ep->filename, buf) < 0)
+			errs++;
+#endif
                     bit_set(idmask, nextid);
                 } else if (remove_links) {
                     /* Link to be deleted */
@@ -471,6 +518,9 @@ typedef enum OPTION_choice {
 
 const OPTIONS rehash_options[] = {
     {OPT_HELP_STR, 1, '-', "Usage: %s [options] [directory...]\n"},
+#ifndef S_ISLNK
+    {OPT_MORE_STR, 1, '-', "(Symlinks not supported, files are copied)\n"},
+#endif
 
     OPT_SECTION("General"),
     {"help", OPT_HELP, '-', "Display this summary"},
