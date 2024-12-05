@@ -3,7 +3,7 @@ SSL tests
 
 SSL testcases are configured in the `ssl-tests` directory.
 
-Each `ssl_*.cnf.in` file contains a number of test configurations. These files
+Each `ssl_*.cnf.dat` file contains a number of test configurations. These files
 are used to generate testcases in the OpenSSL CONF format.
 
 The precise test output can be dependent on the library configuration. The test
@@ -13,7 +13,7 @@ However, for verification, we also include checked-in configuration outputs
 corresponding to the default configuration. These testcases live in
 `test/ssl-tests/*.cnf` files.
 
-For more details, see `ssl-tests/01-simple.cnf.in` for an example.
+For more details, see `ssl-tests/01-simple.cnf.dat` for an example.
 
 Configuring the test
 --------------------
@@ -213,7 +213,7 @@ Adding a test to the test harness
 ---------------------------------
 
 1. Add a new test configuration to `test/ssl-tests`, following the examples of
-   existing `*.cnf.in` files (for example, `01-simple.cnf.in`).
+   existing `*.cnf.dat` files (for example, `01-simple.cnf.dat`).
 
 2. Generate the generated `*.cnf` test input file. You can do so by running
    `generate_ssl_tests.pl`:
@@ -221,15 +221,15 @@ Adding a test to the test harness
     $ ./config
     $ cd test
     $ TOP=.. perl -I ../util/perl/ generate_ssl_tests.pl \
-      ssl-tests/my.cnf.in default > ssl-tests/my.cnf
+      ssl-tests/my.cnf.dat default > ssl-tests/my.cnf
 
-where `my.cnf.in` is your test input file and `default` is the provider to use.
+where `my.cnf.dat` is your test input file and `default` is the provider to use.
 For all the pre-generated test files you should use the default provider.
 
-For example, to generate the test cases in `ssl-tests/01-simple.cnf.in`, do
+For example, to generate the test cases in `ssl-tests/01-simple.cnf.dat`, do
 
     $ TOP=.. perl -I ../util/perl/ generate_ssl_tests.pl \
-      ssl-tests/01-simple.cnf.in default > ssl-tests/01-simple.cnf
+      ssl-tests/01-simple.cnf.dat default > ssl-tests/01-simple.cnf
 
 Alternatively (hackish but simple), you can comment out
 
@@ -282,15 +282,15 @@ However, when running a test manually, keep in mind that the repository version
 of the generated `test/ssl-tests/*.cnf` correspond to expected outputs in with
 the default Configure options. To run `ssl_test` manually from the command line
 in a build with a different configuration, you may need to generate the right
-`*.cnf` file from the `*.cnf.in` input first.
+`*.cnf` file from the `*.cnf.dat` input first.
 
 Running a test manually via make
 --------------------------------
 
 Individual tests may be run by adding the SSL_TESTS variable to the `make`
-command line. The SSL_TESTS variable is set to the list of input (or ".in")
+command line. The SSL_TESTS variable is set to the list of input (or ".dat")
 files. The values in SSL_TESTS are globbed.
 
-    $ make test TESTS=test_ssl_new SSL_TESTS="0*.cnf.in"
+    $ make test TESTS=test_ssl_new SSL_TESTS="0*.cnf.dat"
 
-    $ make test TESTS=test_ssl_new SSL_TESTS="01-simple.cnf.in 05-sni.cnf.in"
+    $ make test TESTS=test_ssl_new SSL_TESTS="01-simple.cnf.dat 05-sni.cnf.dat"
