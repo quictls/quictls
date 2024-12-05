@@ -394,7 +394,7 @@ sub determine_compiler_settings {
                 $CCVER = 0;
 
                 my $v = `cl 2>&1`;
-                if ( $v =~ /Microsoft .* Version ([0-9\.]+) for (x86|x64|ARM|ia64)/ ) {
+                if ( $v =~ /Microsoft .* Version ([0-9\.]+) for (x86|x64|ARM)/ ) {
                     $CCVER = $1;
                     $CL_ARCH = $2;
                 }
@@ -592,7 +592,6 @@ EOF
       [ 'mips-.*-vxworks.*',      { target => "vxworks-mips" } ],
       [ 'e2k-.*-linux.*',         { target => "linux-generic64",
                                     defines => [ 'L_ENDIAN' ] } ],
-      [ 'ia64-.*-linux.',         { target => "linux-ia64" } ],
       [ 'sparc64-.*-linux2',
         sub {
             print <<EOF;
@@ -774,8 +773,6 @@ EOF
       [ 'powerpc64le-.*-.*bsd.*', { target => "BSD-ppc64le" } ],
       [ 'riscv64-.*-.*bsd.*',     { target => "BSD-riscv64" } ],
       [ 'sparc64-.*-.*bsd.*',     { target => "BSD-sparc64" } ],
-      [ 'ia64-.*-openbsd.*',      { target => "BSD-nodef-ia64" } ],
-      [ 'ia64-.*-.*bsd.*',        { target => "BSD-ia64" } ],
       [ 'x86_64-.*-dragonfly.*',  { target => "BSD-x86_64" } ],
       [ 'amd64-.*-openbsd.*',     { target => "BSD-nodef-x86_64" } ],
       [ 'amd64-.*-.*bsd.*',       { target => "BSD-x86_64" } ],
@@ -832,14 +829,6 @@ EOF
             $KERNEL_BITS ||= `getconf KERNEL_BITS 2>/dev/null` // '32';
             # See <sys/unistd.h> for further info on CPU_VERSION.
             my $CPU_VERSION = `getconf CPU_VERSION 2>/dev/null` // 0;
-            if ( $CPU_VERSION >= 768 ) {
-                # IA-64 CPU
-                return { target => "hpux64-ia64",
-                         %common_return }
-                    if $KERNEL_BITS eq '64' && ! $CCVENDOR;
-                return { target => "hpux-ia64",
-                         %common_return };
-            }
             if ( $CPU_VERSION >= 532 ) {
                 # PA-RISC 2.x CPU
                 # PA-RISC 2.0 is no longer supported as separate 32-bit
@@ -905,7 +894,7 @@ EOF
       ],
 
       # Windows values found by looking at Perl 5's win32/win32.c
-      [ '(amd64|ia64|x86|ARM)-.*?-Windows NT',
+      [ '(amd64|x86|ARM)-.*?-Windows NT',
         sub {
             # If we determined the arch by asking cl, take that value,
             # otherwise the SYSTEM we got from from POSIX::uname().
@@ -914,7 +903,6 @@ EOF
 
             if ($arch) {
                 $config = { 'amd64' => { target => 'VC-WIN64A'    },
-                            'ia64'  => { target => 'VC-WIN64I'    },
                             'x86'   => { target => 'VC-WIN32'     },
                             'x64'   => { target => 'VC-WIN64A'    },
                             'ARM'   => { target => 'VC-WIN64-ARM' },
@@ -935,7 +923,6 @@ _____
 
       # VMS values found by observation on existing machinery.
       [ 'VMS_AXP-.*?-OpenVMS',    { target => 'vms-alpha'  } ],
-      [ 'VMS_IA64-.*?-OpenVMS',   { target => 'vms-ia64'   } ],
       [ 'VMS_x86_64-.*?-OpenVMS', { target => 'vms-x86_64' } ],
 
       # TODO: There are a few more choices among OpenSSL config targets, but

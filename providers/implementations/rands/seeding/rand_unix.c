@@ -213,8 +213,6 @@ static ssize_t sysctl_random(char *buf, size_t buflen)
 #    define __NR_getrandom    (__NR_Linux + 339)
 #   elif defined(__sparc__)
 #    define __NR_getrandom    347
-#   elif defined(__ia64__)
-#    define __NR_getrandom    1339
 #   elif defined(__alpha__)
 #    define __NR_getrandom    511
 #   elif defined(__sh__)
