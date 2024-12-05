@@ -45,6 +45,7 @@ made private.
   - Removed DJGPP support.
   - Removed WinCE support.
   - Removed IRIX support.
+  - Removed HP-PARISC support.
   - Removed `I386_only` support.
   - OSF/1, True64, and Ultrix support.
 
