@@ -19,10 +19,6 @@
 # ifdef WIN32
 #  define NO_SYS_UN_H
 # endif
-# ifdef OPENSSL_SYS_VMS
-#  define NO_SYS_PARAM_H
-#  define NO_SYS_UN_H
-# endif
 
 # ifdef OPENSSL_NO_SOCK
 
@@ -80,9 +76,6 @@ struct servent *PASCAL getservbyname(const char *, const char *);
 #  endif
 
 #  include <netdb.h>
-#  if defined(OPENSSL_SYS_VMS)
-typedef size_t socklen_t;        /* Currently appears to be missing on VMS */
-#  endif
 #  if defined(OPENSSL_SYS_VMS_NODECC)
 #   include <socket.h>
 #   include <in.h>
@@ -151,11 +144,6 @@ typedef size_t socklen_t;        /* Currently appears to be missing on VMS */
 #  define get_last_socket_error() WSAGetLastError()
 #  define clear_socket_error()    WSASetLastError(0)
 #  define get_last_socket_error_is_eintr() (get_last_socket_error() == WSAEINTR)
-#  define readsocket(s,b,n)       recv((s),(b),(n),0)
-#  define writesocket(s,b,n)      send((s),(b),(n),0)
-# elif defined(OPENSSL_SYS_VMS)
-#  define ioctlsocket(a,b,c)      ioctl(a,b,c)
-#  define closesocket(s)          close(s)
 #  define readsocket(s,b,n)       recv((s),(b),(n),0)
 #  define writesocket(s,b,n)      send((s),(b),(n),0)
 # elif defined(OPENSSL_SYS_VXWORKS)
