@@ -21,8 +21,8 @@ plan tests => 2;                # The number of tests being performed
 
 ok(run(test(["danetest", "example.com",
              srctop_file("test", "danetest.pem"),
-             srctop_file("test", "danetest.in")])), "dane tests");
+             srctop_file("test", "danetest.dat")])), "dane tests");
 
 ok(run(test(["danetest", "server.example",
              srctop_file("test", "certs", "cross-root.pem"),
-             srctop_file("test", "dane-cross.in")])), "dane cross CA test");
+             srctop_file("test", "dane-cross.dat")])), "dane cross CA test");
