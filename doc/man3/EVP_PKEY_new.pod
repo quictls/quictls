@@ -52,7 +52,7 @@ EVP_PKEY_get_raw_public_key
 
 The following function has been deprecated since OpenSSL 3.0, and can be
 hidden entirely by defining B<OPENSSL_API_COMPAT> with a suitable version value,
-see L<openssl_user_macros(7)>:
+see L<openssl-user-macros(7)>:
 
  EVP_PKEY *EVP_PKEY_new_CMAC_key(ENGINE *e, const unsigned char *priv,
                                  size_t len, const EVP_CIPHER *cipher);

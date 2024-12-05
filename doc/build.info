@@ -4673,12 +4673,10 @@ DEPEND[html/man7/openssl-threads.html]=man7/openssl-threads.pod
 GENERATE[html/man7/openssl-threads.html]=man7/openssl-threads.pod
 DEPEND[man/man7/openssl-threads.7]=man7/openssl-threads.pod
 GENERATE[man/man7/openssl-threads.7]=man7/openssl-threads.pod
-DEPEND[html/man7/openssl_user_macros.html]=man7/openssl_user_macros.pod
-GENERATE[html/man7/openssl_user_macros.html]=man7/openssl_user_macros.pod
-DEPEND[man/man7/openssl_user_macros.7]=man7/openssl_user_macros.pod
-GENERATE[man/man7/openssl_user_macros.7]=man7/openssl_user_macros.pod
-DEPEND[man7/openssl_user_macros.pod]{pod}=man7/openssl_user_macros.pod.in
-GENERATE[man7/openssl_user_macros.pod]=man7/openssl_user_macros.pod.in
+DEPEND[html/man7/openssl-user-macros.html]=man7/openssl-user-macros.pod
+GENERATE[html/man7/openssl-user-macros.html]=man7/openssl-user-macros.pod
+DEPEND[man/man7/openssl-user-macros.7]=man7/openssl-user-macros.pod
+GENERATE[man/man7/openssl-user-macros.7]=man7/openssl-user-macros.pod
 DEPEND[html/man7/ossl-guide-introduction.html]=man7/ossl-guide-introduction.pod
 GENERATE[html/man7/ossl-guide-introduction.html]=man7/ossl-guide-introduction.pod
 DEPEND[man/man7/ossl-guide-introduction.7]=man7/ossl-guide-introduction.pod
@@ -4911,7 +4909,7 @@ html/man7/openssl-core_names.h.html \
 html/man7/openssl-env.html \
 html/man7/openssl-glossary.html \
 html/man7/openssl-threads.html \
-html/man7/openssl_user_macros.html \
+html/man7/openssl-user-macros.html \
 html/man7/ossl-guide-introduction.html \
 html/man7/ossl-guide-libcrypto-introduction.html \
 html/man7/ossl-guide-libraries-introduction.html \
@@ -5048,7 +5046,7 @@ man/man7/openssl-core_names.h.7 \
 man/man7/openssl-env.7 \
 man/man7/openssl-glossary.7 \
 man/man7/openssl-threads.7 \
-man/man7/openssl_user_macros.7 \
+man/man7/openssl-user-macros.7 \
 man/man7/ossl-guide-introduction.7 \
 man/man7/ossl-guide-libcrypto-introduction.7 \
 man/man7/ossl-guide-libraries-introduction.7 \

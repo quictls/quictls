@@ -55,7 +55,7 @@ Functions for creating and destroying EC_GROUP objects
 
 The following functions have been deprecated since OpenSSL 3.0, and can be
 hidden entirely by defining B<OPENSSL_API_COMPAT> with a suitable version value,
-see L<openssl_user_macros(7)>:
+see L<openssl-user-macros(7)>:
 
  EC_GROUP *EC_GROUP_new(const EC_METHOD *meth);
  void EC_GROUP_clear_free(EC_GROUP *group);

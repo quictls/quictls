@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-openssl_user_macros, OPENSSL_API_COMPAT, OPENSSL_NO_DEPRECATED
+openssl-user-macros, OPENSSL_API_COMPAT, OPENSSL_NO_DEPRECATED
 - User defined macros
 
 =head1 DESCRIPTION
@@ -75,11 +75,7 @@ minor and patch components of the version number.  For example:
 =back
 
 If B<OPENSSL_API_COMPAT> is undefined, this default value is used in its
-place:
-C<{- join('', map { my @x = split /=/,$_; $x[1] }
-              grep /^OPENSSL_CONFIGURED_API=/, @{$config{openssl_api_defines} // []})
-     || '0x00000000L'
-  -}>
+place: C<30300>.
 
 =item B<OPENSSL_NO_DEPRECATED>
 

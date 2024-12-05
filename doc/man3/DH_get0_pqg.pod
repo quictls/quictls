@@ -14,7 +14,7 @@ DH_get_length, DH_set_length - Routines for getting and setting data in a DH obj
 
 The following functions have been deprecated since OpenSSL 3.0, and can be
 hidden entirely by defining B<OPENSSL_API_COMPAT> with a suitable version value,
-see L<openssl_user_macros(7)>:
+see L<openssl-user-macros(7)>:
 
  void DH_get0_pqg(const DH *dh,
                   const BIGNUM **p, const BIGNUM **q, const BIGNUM **g);
