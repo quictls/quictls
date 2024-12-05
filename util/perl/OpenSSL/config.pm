@@ -157,8 +157,6 @@ my $guess_patterns = [
     # %Config, which has a trustworthy item 'archname', especially since
     # VMS installation aren't multiarch (yet)
     [ 'OpenVMS:.*',                 "$Config{archname}-whatever-OpenVMS" ],
-
-    [ sub { -d '/usr/apollo' },     'whatever-apollo-whatever' ],
 ];
 
 # Run a command, return true if exit zero else false.
@@ -185,65 +183,11 @@ sub maybe_abort {
     }
 }
 
-# Look for ISC/SCO with its unique uname program
-sub is_sco_uname {
-    return undef unless IPC::Cmd::can_run('uname');
-
-    open UNAME, "uname -X 2>/dev/null|" or return '';
-    my $line = "";
-    my $os = "";
-    while ( <UNAME> ) {
-        chop;
-        $line = $_ if m@^Release@;
-        $os = $_ if m@^System@;
-    }
-    close UNAME;
-
-    return undef if $line eq '' or $os eq 'System = SunOS';
-
-    my @fields = split(/\s+/, $line);
-    return $fields[2];
-}
-
-sub get_sco_type {
-    my $REL = shift;
-
-    if ( -f "/etc/kconfig" ) {
-        return "${MACHINE}-whatever-isc4" if $REL eq '4.0' || $REL eq '4.1';
-    } else {
-        return "whatever-whatever-sco3" if $REL eq '3.2v4.2';
-        return "whatever-whatever-sco5" if $REL =~ m@3\.2v5\.0.*@;
-        if ( $REL eq "4.2MP" ) {
-            return "whatever-whatever-unixware20" if $VERSION =~ m@2\.0.*@;
-            return "whatever-whatever-unixware21" if $VERSION =~ m@2\.1.*@;
-            return "whatever-whatever-unixware2" if $VERSION =~ m@2.*@;
-        }
-        return "whatever-whatever-unixware1" if $REL eq "4.2";
-        if ( $REL =~ m@5.*@ ) {
-            # We hardcode i586 in place of ${MACHINE} for the following
-            # reason: even though Pentium is minimum requirement for
-            # platforms in question, ${MACHINE} gets always assigned to
-            # i386. This means i386 gets passed to Configure, which will
-            # cause bad assembler code to be generated.
-            return "i586-sco-unixware7" if $VERSION =~ m@[678].*@;
-        }
-    }
-}
-
 # Return the cputype-vendor-osversion
 sub guess_system {
     ($SYSTEM, undef, $RELEASE, $VERSION, $MACHINE) = POSIX::uname();
     my $sys = "${SYSTEM}:${RELEASE}:${VERSION}:${MACHINE}";
     
-    # Special-cases for ISC, SCO, Unixware
-    my $REL = is_sco_uname();
-    if ( defined $REL ) {
-        my $result = get_sco_type($REL);
-        return eval "\"$result\"" if $result ne '';
-    }
-
-    # Now pattern-match
-
     # Simple cases
     foreach my $tuple ( @$guess_patterns ) {
         my $pat = @$tuple[0];
