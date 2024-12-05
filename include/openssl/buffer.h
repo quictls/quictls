@@ -30,15 +30,6 @@ extern "C" {
 # include <stddef.h>
 # include <sys/types.h>
 
-# ifndef OPENSSL_NO_DEPRECATED_3_0
-#  define BUF_strdup(s) OPENSSL_strdup(s)
-#  define BUF_strndup(s, size) OPENSSL_strndup(s, size)
-#  define BUF_memdup(data, size) OPENSSL_memdup(data, size)
-#  define BUF_strlcpy(dst, src, size)  OPENSSL_strlcpy(dst, src, size)
-#  define BUF_strlcat(dst, src, size) OPENSSL_strlcat(dst, src, size)
-#  define BUF_strnlen(str, maxlen) OPENSSL_strnlen(str, maxlen)
-# endif
-
 struct buf_mem_st {
     size_t length;              /* current number of bytes */
     char *data;
