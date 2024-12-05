@@ -310,6 +310,19 @@ X509_OBJECT *X509_STORE_CTX_get_obj_by_subject(X509_STORE_CTX *ctx,
     return ret;
 }
 
+static int x509_object_up_ref(X509_OBJECT *a)
+{
+    switch (a->type) {
+    case X509_LU_NONE:
+        break;
+    case X509_LU_X509:
+        return X509_up_ref(a->data.x509);
+    case X509_LU_CRL:
+        return X509_CRL_up_ref(a->data.crl);
+    }
+    return 1;
+}
+
 /*
  * May be called with |ret| == NULL just for the side effect of
  * caching all certs matching the given subject DN in |ctx->store->objs|.
@@ -367,7 +380,7 @@ static int ossl_x509_store_ctx_get_by_subject(const X509_STORE_CTX *ctx,
         if (tmp == NULL)
             return 0;
     }
-    if (!X509_OBJECT_up_ref_count(tmp))
+    if (!x509_object_up_ref(tmp))
         return -1;
 
     ret->type = tmp->type;
@@ -401,7 +414,7 @@ static int x509_store_add(X509_STORE *store, void *x, int crl)
         obj->type = X509_LU_X509;
         obj->data.x509 = (X509 *)x;
     }
-    if (!X509_OBJECT_up_ref_count(obj)) {
+    if (!x509_object_up_ref(obj)) {
         obj->type = X509_LU_NONE;
         X509_OBJECT_free(obj);
         return 0;
@@ -441,19 +454,6 @@ int X509_STORE_add_crl(X509_STORE *xs, X509_CRL *x)
     if (!x509_store_add(xs, x, 1)) {
         ERR_raise(ERR_LIB_X509, ERR_R_X509_LIB);
         return 0;
-    }
-    return 1;
-}
-
-int X509_OBJECT_up_ref_count(X509_OBJECT *a)
-{
-    switch (a->type) {
-    case X509_LU_NONE:
-        break;
-    case X509_LU_X509:
-        return X509_up_ref(a->data.x509);
-    case X509_LU_CRL:
-        return X509_CRL_up_ref(a->data.crl);
     }
     return 1;
 }
@@ -591,7 +591,7 @@ static X509_OBJECT *x509_object_dup(const X509_OBJECT *obj)
 
     ret->type = obj->type;
     ret->data = obj->data;
-    X509_OBJECT_up_ref_count(ret);
+    x509_object_up_ref(ret);
     return ret;
 }
 
