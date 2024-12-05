@@ -309,7 +309,7 @@ static const OSSL_PARAM *dsa_export_types(int selection)
     return dsa_imexport_types(selection);
 }
 
-static ossl_inline int dsa_get_params(void *key, OSSL_PARAM params[])
+static inline int dsa_get_params(void *key, OSSL_PARAM params[])
 {
     DSA *dsa = key;
     OSSL_PARAM *p;

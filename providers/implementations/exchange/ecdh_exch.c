@@ -411,7 +411,7 @@ const OSSL_PARAM *ecdh_gettable_ctx_params(ossl_unused void *vpecdhctx,
     return known_gettable_ctx_params;
 }
 
-static ossl_inline
+static inline
 size_t ecdh_size(const EC_KEY *k)
 {
     size_t degree = 0;
@@ -426,7 +426,7 @@ size_t ecdh_size(const EC_KEY *k)
     return (degree + 7) / 8;
 }
 
-static ossl_inline
+static inline
 int ecdh_plain_derive(void *vpecdhctx, unsigned char *secret,
                       size_t *psecretlen, size_t outlen)
 {
@@ -504,7 +504,7 @@ int ecdh_plain_derive(void *vpecdhctx, unsigned char *secret,
     return ret;
 }
 
-static ossl_inline
+static inline
 int ecdh_X9_63_kdf_derive(void *vpecdhctx, unsigned char *secret,
                           size_t *psecretlen, size_t outlen)
 {

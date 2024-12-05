@@ -75,7 +75,7 @@ void ossl_event_queue_free(OSSL_EVENT_QUEUE *queue)
     }
 }
 
-static ossl_inline
+static inline
 int event_queue_add(OSSL_EVENT_QUEUE *queue, OSSL_EVENT *event)
 {
     PRIORITY_QUEUE_OF(OSSL_EVENT) *pq =
@@ -90,7 +90,7 @@ int event_queue_add(OSSL_EVENT_QUEUE *queue, OSSL_EVENT *event)
     return 0;
 }
 
-static ossl_inline
+static inline
 void ossl_event_set(OSSL_EVENT *event, uint32_t type, uint32_t priority,
                     OSSL_TIME when, void *ctx,
                     void *payload, size_t payload_size)

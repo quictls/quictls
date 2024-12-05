@@ -77,7 +77,7 @@ foreach my $f (($symhacks_file // (), @ARGV)) {
                 && $_->{value} =~ /^\w(?:\w|\d)*/) {
             $ordinals->add_alias($f, $_->{value}, $_->{name}, @{$_->{conds}});
         } else {
-            next if $_->{returntype} =~ /\b(?:ossl_)inline/;
+            next if $_->{returntype} =~ /\b(?:ossl_)?inline/;
             my $type = {
                 F => 'FUNCTION',
                 V => 'VARIABLE',

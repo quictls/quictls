@@ -17,7 +17,7 @@
  * This is a static function, we ensure all callers in this file pass valid
  * arguments: all passed pointers here are non-NULL.
  */
-static ossl_inline
+static inline
 BIGNUM *bn_mod_inverse_no_branch(BIGNUM *in,
                                  const BIGNUM *a, const BIGNUM *n,
                                  BN_CTX *ctx, int *pnoinv)
