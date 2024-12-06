@@ -9,8 +9,7 @@
 
 #ifndef OPENSSL_OPENSSLV_H
 # define OPENSSL_OPENSSLV_H
-# pragma once
 # ifndef OPENSSL_CONFIGURATION_H
-#  include "configuration.h"
+#  include <openssl/configuration.h>
 # endif
 #endif
