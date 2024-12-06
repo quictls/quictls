@@ -16,7 +16,6 @@ our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(generate_stack_macros generate_const_stack_macros
                     generate_stack_string_macros
                     generate_stack_const_string_macros
-                    generate_stack_block_macros
                     generate_lhash_macros);
 
 sub generate_stack_macros_int {
@@ -74,10 +73,6 @@ sub generate_stack_string_macros {
 
 sub generate_stack_const_string_macros {
     return generate_stack_macros_int("OPENSSL_CSTRING", "const char", "char");
-}
-
-sub generate_stack_block_macros {
-    return generate_stack_macros_int("OPENSSL_BLOCK", "void", "void");
 }
 
 sub generate_lhash_macros {

@@ -12,7 +12,7 @@
 {-
 use OpenSSL::stackhash qw(generate_stack_string_macros
                           generate_stack_const_string_macros
-                          generate_stack_block_macros);
+                          );
 -}
 
 #ifndef OPENSSL_SAFESTACK_H
@@ -209,17 +209,6 @@ typedef const char *OPENSSL_CSTRING;
     generate_stack_string_macros()
     .generate_stack_const_string_macros();
 -}
-
-#if !defined(OPENSSL_NO_DEPRECATED_3_0)
-/*
- * This is not used by OpenSSL.  A block of bytes,  NOT nul-terminated.
- * These should also be distinguished from "normal" stacks.
- */
-typedef void *OPENSSL_BLOCK;
-{-
-    generate_stack_block_macros();
--}
-#endif
 
 # ifdef  __cplusplus
 }

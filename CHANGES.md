@@ -32,6 +32,12 @@ Currrent Changes
 - The undocumented function `X509_OBJECT_up_ref_count` has been
 made private.
 
+- The datatype `OPENSSL_BLOCK`, an array of bytes, has been removed.
+
+- The header file `opensslv.h` has been merged into `configuration.h`
+The old file exists for compatibility..
+
+
 - Removed some functions deprecated in the OpenSSL 1.1.0 release:
 `SRP_VBASE_get_by_user`, `ENGINE_setup_bsd_cryptodev`,
 `PKCS12_get_attr`, and `SSL_set_debug`.
