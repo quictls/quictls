@@ -12,4 +12,11 @@
 # ifndef OPENSSL_CONFIGURATION_H
 #  include <openssl/configuration.h>
 # endif
+
+/* These lines are a hack to to make CMake work */
+# undef OPENSSL_VERSION_STR 
+# undef OPENSSL_FULL_VERSION_STR 
+# define OPENSSL_VERSION_STR "3.3.0"
+# define OPENSSL_FULL_VERSION_STR "3.3.0+quic"
+
 #endif
