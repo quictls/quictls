@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -30,11 +29,10 @@ B<openssl> B<dgst>|I<digest>
 [B<-mac> I<alg>]
 [B<-macopt> I<nm>:I<v>]
 [B<-fips-fingerprint>]
-{- $OpenSSL::safe::opt_engine_synopsis -}{- output_off() if $disabled{"deprecated-3.0"}; ""
--}[B<-engine_impl> I<id>]{-
-  output_on() if $disabled{"deprecated-3.0"}; "" -}
-{- $OpenSSL::safe::opt_r_synopsis -}
-{- $OpenSSL::safe::opt_provider_synopsis -}
+[B<-engine> I<id>]
+[B<-engine_impl> I<id>]
+#include r_synopsis
+#include provider_synopsis
 [I<file> ...]
 
 =head1 DESCRIPTION
@@ -192,10 +190,9 @@ option.
 
 Compute HMAC using a specific key for certain OpenSSL-FIPS operations.
 
-{- $OpenSSL::safe::opt_r_item -}
+#include r_item
 
-{- $OpenSSL::safe::opt_engine_item -}
-{- output_off() if $disabled{"deprecated-3.0"}; "" -}
+#include engine_item
 The engine is not used for digests unless the B<-engine_impl> option is
 used or it is configured to do so, see L<config(5)/Engine Configuration Module>.
 
@@ -204,8 +201,7 @@ used or it is configured to do so, see L<config(5)/Engine Configuration Module>.
 When used with the B<-engine> option, it specifies to also use
 engine I<id> for digest operations.
 
-{- output_on() if $disabled{"deprecated-3.0"}; "" -}
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =item I<file> ...
 

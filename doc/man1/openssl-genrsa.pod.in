@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -30,8 +29,9 @@ B<openssl> B<genrsa>
 [B<-verbose>]
 [B<-quiet>]
 [B<-traditional>]
-{- $OpenSSL::safe::opt_r_synopsis -}
-{- $OpenSSL::safe::opt_engine_synopsis -}{- $OpenSSL::safe::opt_provider_synopsis -}
+[B<-engine> I<id>]
+#include r_synopsis
+#include provider_synopsis
 [B<numbits>]
 
 =head1 DESCRIPTION
@@ -88,11 +88,11 @@ be handy during batch scripts and pipelines.
 
 Write the key using the traditional PKCS#1 format instead of the PKCS#8 format.
 
-{- $OpenSSL::safe::opt_r_item -}
+#include r_item
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =item B<numbits>
 

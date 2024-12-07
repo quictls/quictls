@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -16,10 +15,11 @@ B<openssl> B<verify>
 [B<-trusted> I<filename>|I<uri>]
 [B<-untrusted> I<filename>|I<uri>]
 [B<-vfyopt> I<nm>:I<v>]
-{- $OpenSSL::safe::opt_name_synopsis -}
-{- $OpenSSL::safe::opt_trust_synopsis -}
-{- $OpenSSL::safe::opt_engine_synopsis -}{- $OpenSSL::safe::opt_v_synopsis -}
-{- $OpenSSL::safe::opt_provider_synopsis -}
+[B<-engine> I<id>]
+#include name_synopsis
+#include trust_synopsis
+#include v_synopsis
+#include provider_synopsis
 [B<-->]
 [I<certificate> ...]
 
@@ -75,20 +75,18 @@ sources.
 Pass options to the signature algorithm during verify operations.
 Names and values of these options are algorithm-specific.
 
-{- $OpenSSL::safe::opt_name_item -}
+#include name_item
 
-{- $OpenSSL::safe::opt_engine_item -}
-{- output_off() if $disabled{"deprecated-3.0"}; "" -}
+#include engine_item
 To load certificates or CRLs that require engine support, specify the
 B<-engine> option before any of the
 B<-trusted>, B<-untrusted> or B<-CRLfile> options.
-{- output_on() if $disabled{"deprecated-3.0"}; "" -}
 
-{- $OpenSSL::safe::opt_trust_item -}
+#include trust_item
 
-{- $OpenSSL::safe::opt_v_item -}
+#include v_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =item B<-->
 

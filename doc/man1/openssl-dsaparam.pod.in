@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -18,8 +17,9 @@ B<openssl dsaparam>
 [B<-genkey>]
 [B<-verbose>]
 [B<-quiet>]
-{- $OpenSSL::safe::opt_r_synopsis -}
-{- $OpenSSL::safe::opt_engine_synopsis -}{- $OpenSSL::safe::opt_provider_synopsis -}
+[B<-engine> I<id>]
+#include r_synopsis
+#include provider_synopsis
 [I<numbits>]
 [I<numqbits>]
 
@@ -86,9 +86,9 @@ Print extra details about the operations being performed.
 Print fewer details about the operations being performed, which may
 be handy during batch scripts and pipelines.
 
-{- $OpenSSL::safe::opt_r_item -}
+#include r_item
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
 =item I<numbits>
 
@@ -102,7 +102,7 @@ This optional argument specifies that a parameter set should be generated with
 a subprime parameter q of size I<numqbits>. It must be the last argument. If
 this argument is included then the input file (if any) is ignored.
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =back
 

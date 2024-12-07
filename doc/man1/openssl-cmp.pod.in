@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -93,11 +92,12 @@ Credentials format options:
 [B<-certform> I<PEM|DER>]
 [B<-keyform> I<PEM|DER|P12|ENGINE>]
 [B<-otherpass> I<arg>]
-{- $OpenSSL::safe::opt_engine_synopsis -}{- $OpenSSL::safe::opt_provider_synopsis -}
+[B<-engine> I<id>]
+#include provider_synopsis
 
 Random state options:
 
-{- $OpenSSL::safe::opt_r_synopsis -}
+#include r_synopsis
 
 TLS connection options:
 
@@ -155,7 +155,7 @@ Mock server options:
 
 Certificate verification options, for both CMP and TLS:
 
-{- $OpenSSL::safe::opt_v_synopsis -}
+#include v_synopsis
 
 =head1 DESCRIPTION
 
@@ -876,9 +876,8 @@ If not given here, the password will be prompted for if needed.
 For more information about the format of I<arg> see
 L<openssl-passphrase-options(1)>.
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
-{- output_off() if $disabled{"deprecated-3.0"}; "" -}
 As an alternative to using this combination:
 
     -engine {engineid} -key {keyid} -keyform ENGINE
@@ -890,7 +889,6 @@ like this:
 
 This applies to all options specifying keys: B<-key>, B<-newkey>, and
 B<-tls_key>.
-{- output_on() if $disabled{"deprecated-3.0"}; "" -}
 
 =back
 
@@ -898,7 +896,7 @@ B<-tls_key>.
 
 =over 4
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =back
 
@@ -906,7 +904,7 @@ B<-tls_key>.
 
 =over 4
 
-{- $OpenSSL::safe::opt_r_item -}
+#include r_item
 
 =back
 
@@ -1224,7 +1222,7 @@ Accept RAVERIFED as proof of possession (POPO).
 
 =over 4
 
-{- $OpenSSL::safe::opt_v_item -}
+#include v_item
 
 The certificate verification options
 B<-verify_hostname>, B<-verify_ip>, and B<-verify_email>

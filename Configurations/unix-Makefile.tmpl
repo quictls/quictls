@@ -1457,6 +1457,11 @@ $args{src}: $gen0 $deps
 	\$(CC) $incs $cppflags $defs -E $gen0 | \\
 	\$(PERL) -ne '/^#(line)?\\s*[0-9]+/ or print' > \$@
 EOF
+      } elsif ($gen0 =~ m|^.*\.pod.in$|) {
+	return <<"EOF";
+$args{src}: $args{src}.in doc/mkdoc.pl
+\t\$(PERL) "doc/mkdoc.pl" $args{src}.in $args{src}
+EOF
       } elsif ($gen0 =~ m|^.*\.in$|) {
           #
           # "dofile" generator (file.in -> file)

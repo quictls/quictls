@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -16,18 +15,14 @@ B<openssl list>
 [B<-commands>]
 [B<-standard-commands>]
 [B<-digest-algorithms>]
-{- output_off() if $disabled{"deprecated-3.0"}; ""
--}[B<-digest-commands>]
-{- output_on() if $disabled{"deprecated-3.0"}; ""
--}[B<-kdf-algorithms>]
+[B<-digest-commands>]
+[B<-kdf-algorithms>]
 [B<-mac-algorithms>]
 [B<-random-instances>]
 [B<-random-generators>]
 [B<-cipher-algorithms>]
-{- output_off() if $disabled{"deprecated-3.0"}; ""
--}[B<-cipher-commands>]
-{- output_on() if $disabled{"deprecated-3.0"}; ""
--}[B<-encoders>]
+[B<-cipher-commands>]
+[B<-encoders>]
 [B<-decoders>]
 [B<-key-managers>]
 [B<-key-exchange-algorithms>]
@@ -38,13 +33,11 @@ B<openssl list>
 [B<-public-key-methods>]
 [B<-store-loaders>]
 [B<-providers>]
-{- output_off() if $disabled{"deprecated-3.0"}; ""
--}[B<-engines>]
-{- output_on() if $disabled{"deprecated-3.0"}; ""
--}[B<-disabled>]
+[B<-engines>]
+[B<-disabled>]
 [B<-objects>]
 [B<-options> I<command>]
-{- $OpenSSL::safe::opt_provider_synopsis -}
+#include provider_synopsis
 
 =head1 DESCRIPTION
 
@@ -234,7 +227,7 @@ of what type of parameter it takes, if any.
 This is an internal option, used for checking that the documentation
 is complete.
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =back
 

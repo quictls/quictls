@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -70,9 +69,9 @@ B<openssl> B<ocsp>
 [B<-multi> I<process-count>]
 [B<-rcid> I<digest>]
 [B<-I<digest>>]
-{- $OpenSSL::safe::opt_trust_synopsis -}
-{- $OpenSSL::safe::opt_v_synopsis -}
-{- $OpenSSL::safe::opt_provider_synopsis -}
+#include trust_synopsis
+#include v_synopsis
+#include provider_synopsis
 
 =head1 DESCRIPTION
 
@@ -305,11 +304,11 @@ OCSP request. Any digest supported by the OpenSSL B<dgst> command can be used.
 The default is SHA-1. This option may be used multiple times to specify the
 digest used by subsequent certificate identifiers.
 
-{- $OpenSSL::safe::opt_trust_item -}
+#include trust_item
 
-{- $OpenSSL::safe::opt_v_item -}
+#include v_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =back
 

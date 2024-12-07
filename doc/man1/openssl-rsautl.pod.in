@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -27,8 +26,9 @@ B<openssl> B<rsautl>
 [B<-raw>]
 [B<-hexdump>]
 [B<-asn1parse>]
-{- $OpenSSL::safe::opt_engine_synopsis -}{- $OpenSSL::safe::opt_r_synopsis -}
-{- $OpenSSL::safe::opt_provider_synopsis -}
+[B<-engine> I<id>]
+#include r_synopsis
+#include provider_synopsis
 
 =head1 DESCRIPTION
 
@@ -121,11 +121,11 @@ Hex dump the output data.
 Parse the ASN.1 output data, this is useful when combined with the
 B<-verify> option.
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
-{- $OpenSSL::safe::opt_r_item -}
+#include r_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =back
 

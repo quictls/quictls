@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -23,8 +22,9 @@ B<openssl ecparam>
 [B<-param_enc> I<arg>]
 [B<-no_seed>]
 [B<-genkey>]
-{- $OpenSSL::safe::opt_engine_synopsis -}{- $OpenSSL::safe::opt_r_synopsis -}
-{- $OpenSSL::safe::opt_provider_synopsis -}
+[B<-engine> I<id>]
+#include r_synopsis
+#include provider_synopsis
 
 =head1 DESCRIPTION
 
@@ -119,11 +119,11 @@ is included in the ECParameters structure (see RFC 3279).
 
 This option will generate an EC private key using the specified parameters.
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
-{- $OpenSSL::safe::opt_r_item -}
+#include r_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =back
 

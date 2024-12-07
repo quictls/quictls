@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -14,7 +13,7 @@ General options:
 
 [B<-in> I<filename>]
 [B<-out> I<filename>]
-{- $OpenSSL::safe::opt_config_synopsis -}
+#include config_synopsis
 
 Operation options:
 
@@ -57,8 +56,9 @@ Keys and password options:
 [B<-passin> I<arg>]
 [B<-keyopt> I<name>:I<parameter>]
 [B<-keyform> B<DER>|B<PEM>|B<P12>|B<ENGINE>]
-{- $OpenSSL::safe::opt_engine_synopsis -}{- $OpenSSL::safe::opt_provider_synopsis -}
-{- $OpenSSL::safe::opt_r_synopsis -}
+[B<-engine> I<id>]
+#include provider_synopsis
+#include r_synopsis
 
 Encryption options:
 
@@ -99,7 +99,7 @@ Verification options:
 [B<-nointern>]
 [B<-cades>]
 [B<-verify_retcode>]
-{- $OpenSSL::safe::opt_trust_synopsis -}
+#include trust_synopsis
 
 Output options:
 
@@ -120,7 +120,7 @@ Printing options:
 
 Validation options:
 
-{- $OpenSSL::safe::opt_v_synopsis -}
+#include v_synopsis
 
 =head1 DESCRIPTION
 
@@ -158,7 +158,7 @@ or verified.
 The message text that has been decrypted or verified or the output MIME
 format message that has been signed or verified.
 
-{- $OpenSSL::safe::opt_config_item -}
+#include config_item
 
 =back
 
@@ -370,11 +370,11 @@ or to modify default parameters for ECDH.
 The format of the private key file; unspecified by default.
 See L<openssl-format-options(1)> for details.
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
-{- $OpenSSL::safe::opt_r_item -}
+#include r_item
 
 =back
 
@@ -556,7 +556,7 @@ See the NOTES section for more details.
 
 Exit nonzero on verification failure.
 
-{- $OpenSSL::safe::opt_trust_item -}
+#include trust_item
 
 =back
 
@@ -628,7 +628,7 @@ requests.
 
 =over 4
 
-{- $OpenSSL::safe::opt_v_item -}
+#include v_item
 
 Any validation errors cause the command to exit.
 

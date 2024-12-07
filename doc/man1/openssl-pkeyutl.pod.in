@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -34,10 +33,11 @@ B<openssl> B<pkeyutl>
 [B<-pkeyopt_passin> I<opt>[:I<passarg>]]
 [B<-hexdump>]
 [B<-asn1parse>]
-{- $OpenSSL::safe::opt_engine_synopsis -}[B<-engine_impl>]
-{- $OpenSSL::safe::opt_r_synopsis -}
-{- $OpenSSL::safe::opt_provider_synopsis -}
-{- $OpenSSL::safe::opt_config_synopsis -}
+[B<-engine>]
+[B<-engine_impl> I<id>]
+#include r_synopsis
+#include provider_synopsis
+#include config_synopsis
 
 =head1 DESCRIPTION
 
@@ -180,20 +180,18 @@ hex dump the output data.
 Parse the ASN.1 output data, this is useful when combined with the
 B<-verifyrecover> option when an ASN1 structure is signed.
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
-{- output_off() if $disabled{"deprecated-3.0"}; "" -}
 =item B<-engine_impl>
 
 When used with the B<-engine> option, it specifies to also use
 engine I<id> for crypto operations.
-{- output_on() if $disabled{"deprecated-3.0"}; "" -}
 
-{- $OpenSSL::safe::opt_r_item -}
+#include r_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
-{- $OpenSSL::safe::opt_config_item -}
+#include config_item
 
 =back
 

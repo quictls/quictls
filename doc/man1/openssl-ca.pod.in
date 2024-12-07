@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -63,8 +62,9 @@ B<openssl> B<ca>
 [B<-create_serial>]
 [B<-rand_serial>]
 [B<-multivalue-rdn>]
-{- $OpenSSL::safe::opt_r_synopsis -}
-{- $OpenSSL::safe::opt_engine_synopsis -}{- $OpenSSL::safe::opt_provider_synopsis -}
+#include r_synopsis
+[B<-engine> I<id>]
+#include provider_synopsis
 [I<certreq>...]
 
 =head1 DESCRIPTION
@@ -341,11 +341,11 @@ This overrides any option or configuration to use a serial number file.
 
 This option has been deprecated and has no effect.
 
-{- $OpenSSL::safe::opt_r_item -}
+#include r_item
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =back
 

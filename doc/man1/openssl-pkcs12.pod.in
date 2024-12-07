@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -19,8 +18,9 @@ B<openssl> B<pkcs12>
 [B<-nocerts>]
 [B<-noout>]
 [B<-legacy>]
-{- $OpenSSL::safe::opt_engine_synopsis -}{- $OpenSSL::safe::opt_provider_synopsis -}
-{- $OpenSSL::safe::opt_r_synopsis -}
+[B<-engine> I<id>]
+#include provider_synopsis
+#include r_synopsis
 
 PKCS#12 input (parsing) options:
 [B<-info>]
@@ -51,7 +51,7 @@ PKCS#12 output (export) options:
 [B<-passcerts> I<arg>]
 [B<-chain>]
 [B<-untrusted> I<filename>]
-{- $OpenSSL::safe::opt_trust_synopsis -}
+#include trust_synopsis
 [B<-name> I<name>]
 [B<-caname> I<name>]
 [B<-CSP> I<name>]
@@ -149,11 +149,11 @@ If the legacy option is not specified, then the legacy provider is not loaded
 and the default encryption algorithm for both certificates and private keys is
 AES_256_CBC with PBKDF2 for key derivation.
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
-{- $OpenSSL::safe::opt_r_item -}
+#include r_item
 
 =back
 
@@ -286,7 +286,7 @@ for chain building, which is relevant only when a PKCS#12 file is created
 with the B<-export> option and the B<-chain> option is given as well.
 Any certificates that are actually part of the chain are added to the output.
 
-{- $OpenSSL::safe::opt_trust_item -}
+#include trust_item
 
 =item B<-name> I<friendlyname>
 

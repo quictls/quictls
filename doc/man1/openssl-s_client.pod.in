@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -126,17 +125,18 @@ B<openssl> B<s_client>
 [B<-srp_strength> I<number>]
 [B<-ktls>]
 [B<-tfo>]
-{- $OpenSSL::safe::opt_name_synopsis -}
-{- $OpenSSL::safe::opt_version_synopsis -}
-{- $OpenSSL::safe::opt_x_synopsis -}
-{- $OpenSSL::safe::opt_trust_synopsis -}
-{- $OpenSSL::safe::opt_s_synopsis -}
-{- $OpenSSL::safe::opt_r_synopsis -}
-{- $OpenSSL::safe::opt_provider_synopsis -}
-{- $OpenSSL::safe::opt_engine_synopsis -}[B<-ssl_client_engine> I<id>]
-{- $OpenSSL::safe::opt_v_synopsis -}
 [B<-enable_server_rpk>]
 [B<-enable_client_rpk>]
+[B<-engine> I<id>]
+#include name_synopsis
+#include version_synopsis
+#include x_synopsis
+#include trust_synopsis
+#include s_synopsis
+#include r_synopsis
+#include provider_synopsis
+[B<-ssl_client_engine> I<id>]
+#include v_synopsis
 [I<host>:I<port>]
 
 =head1 DESCRIPTION
@@ -816,29 +816,27 @@ Kernel TLS is off by default as of OpenSSL 3.2.0.
 
 Enable creation of connections via TCP fast open (RFC7413).
 
-{- $OpenSSL::safe::opt_version_item -}
+#include version_item
 
-{- $OpenSSL::safe::opt_name_item -}
+#include name_item
 
-{- $OpenSSL::safe::opt_x_item -}
+#include x_item
 
-{- $OpenSSL::safe::opt_trust_item -}
+#include trust_item
 
-{- $OpenSSL::safe::opt_s_item -}
+#include s_item
 
-{- $OpenSSL::safe::opt_r_item -}
+#include r_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
-{- output_off() if $disabled{"deprecated-3.0"}; "" -}
 =item B<-ssl_client_engine> I<id>
 
 Specify engine to be used for client certificate operations.
-{- output_on() if $disabled{"deprecated-3.0"}; "" -}
 
-{- $OpenSSL::safe::opt_v_item -}
+#include v_item
 
 Verification errors are displayed, for debugging, but the command will
 proceed unless the B<-verify_return_error> option is used.

@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -28,8 +27,9 @@ B<openssl> B<pkcs8>
 [B<-scrypt_r> I<r>]
 [B<-scrypt_p> I<p>]
 [B<-saltlen> I<size>]
-{- $OpenSSL::safe::opt_r_synopsis -}
-{- $OpenSSL::safe::opt_engine_synopsis -}{- $OpenSSL::safe::opt_provider_synopsis -}
+[B<-engine> I<id>]
+#include r_synopsis
+#include provider_synopsis
 
 =head1 DESCRIPTION
 
@@ -155,11 +155,11 @@ Sets the length (in bytes) of the salt to use for the PBE algorithm.
 If this value is not specified, the default for PBES2 is 16 (128 bits)
 and 8 (64 bits) for PBES1.
 
-{- $OpenSSL::safe::opt_r_item -}
+#include r_item
 
-{- $OpenSSL::safe::opt_engine_item -}
+#include engine_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =back
 

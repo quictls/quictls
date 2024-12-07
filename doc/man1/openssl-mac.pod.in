@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -15,7 +14,7 @@ B<openssl mac>
 [B<-in> I<filename>]
 [B<-out> I<filename>]
 [B<-binary>]
-{- $OpenSSL::safe::opt_provider_synopsis -}
+#include provider_synopsis
 I<mac_name>
 
 =head1 DESCRIPTION
@@ -109,7 +108,7 @@ This option is identical to the B<-cipher> option.
 
 =back
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =item I<mac_name>
 

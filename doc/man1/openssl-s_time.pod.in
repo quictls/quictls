@@ -1,5 +1,4 @@
 =pod
-{- OpenSSL::safe::output_do_not_edit_headers(); -}
 
 =head1 NAME
 
@@ -25,10 +24,10 @@ B<openssl> B<s_time>
 [B<-bugs>]
 [B<-cipher> I<cipherlist>]
 [B<-ciphersuites> I<val>]
-{- $OpenSSL::safe::opt_name_synopsis -}
+#include name_synopsis
 [B<-cafile> I<file>]
-{- $OpenSSL::safe::opt_trust_synopsis -}
-{- $OpenSSL::safe::opt_provider_synopsis -}
+#include trust_synopsis
+#include provider_synopsis
 
 =head1 DESCRIPTION
 
@@ -117,11 +116,11 @@ and optionally transfer payload data from a server. Server and client
 performance and the link speed determine how many connections it
 can establish.
 
-{- $OpenSSL::safe::opt_name_item -}
+#include name_item
 
-{- $OpenSSL::safe::opt_trust_item -}
+#include trust_item
 
-{- $OpenSSL::safe::opt_provider_item -}
+#include provider_item
 
 =item B<-cafile> I<file>
 
