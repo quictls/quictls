@@ -7,10 +7,6 @@
  * https://www.openssl.org/source/license.html
  */
 
-{-
-use OpenSSL::stackhash qw(generate_lhash_macros);
--}
-
 /*
  * Header for dynamic hash table routines Author - Eric Young
  */
@@ -349,10 +345,8 @@ OSSL_DEPRECATEDIN_3_1 void OPENSSL_LH_node_usage_stats_bio(const OPENSSL_LHASH *
     } \
     LHASH_OF(type)
 
-{-
-    generate_lhash_macros("OPENSSL_STRING")
-    .generate_lhash_macros("OPENSSL_CSTRING");
--}
+#generate lhash OPENSSL_STRING
+#generate lhash OPENSSL_CSTRING
 
 #ifdef  __cplusplus
 }
