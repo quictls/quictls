@@ -13,7 +13,6 @@
 # pragma once
 
 # include <openssl/opensslconf.h>
-# include <openssl/symhacks.h>
 
 
 # define AFALGerr(f, r) ERR_AFALG_error(0, (r), OPENSSL_FILE, OPENSSL_LINE)

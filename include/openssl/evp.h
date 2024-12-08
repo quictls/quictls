@@ -26,7 +26,6 @@
 # include <openssl/types.h>
 # include <openssl/core.h>
 # include <openssl/core_dispatch.h>
-# include <openssl/symhacks.h>
 # include <openssl/bio.h>
 # include <openssl/evperr.h>
 # include <openssl/params.h>

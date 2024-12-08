@@ -31,7 +31,6 @@ use OpenSSL::stackhash qw(generate_stack_macros);
 # include <openssl/bio.h>
 # include <openssl/safestack.h>
 # include <openssl/asn1err.h>
-# include <openssl/symhacks.h>
 
 # include <openssl/types.h>
 # include <openssl/bn.h>

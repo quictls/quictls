@@ -25,7 +25,6 @@ use OpenSSL::stackhash qw(generate_stack_macros);
 
 # include <openssl/e_os2.h>
 # include <openssl/types.h>
-# include <openssl/symhacks.h>
 # include <openssl/buffer.h>
 # include <openssl/evp.h>
 # include <openssl/bio.h>

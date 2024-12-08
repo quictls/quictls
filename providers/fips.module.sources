@@ -438,7 +438,6 @@ include/internal/safe_math.h
 include/internal/sha3.h
 include/internal/sizes.h
 include/internal/ssl3_cbc.h
-include/internal/symhacks.h
 include/internal/thread.h
 include/internal/thread_arch.h
 include/internal/thread_once.h
