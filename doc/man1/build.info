@@ -1,7 +1,4 @@
-# All .pod.in files are detected by build.info in the parent directory, and
-# turned into appropriate DEPEND and GENERATE lines.  All we need here are
-# the additional dependencies on ../mkdoc.pl.
-
+# All we need here are the additional dependencies on ../mkdoc.pl.
 DEPEND[openssl-asn1parse.pod]=../mkdoc.pl
 DEPEND[openssl-ca.pod]=../mkdoc.pl
 DEPEND[openssl-ciphers.pod]=../mkdoc.pl

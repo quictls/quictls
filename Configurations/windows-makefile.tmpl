@@ -742,10 +742,10 @@ $target: "$gen0" $deps
 	\$(CPP) /D__ASSEMBLER__ $incs $cppflags $defs "$gen0" > \$@.i
 	move /Y \$@.i \$@
 EOF
-      } elsif ($gen0 =~ m|^.*\.pod.in$|) {
+      } elsif ($gen0 =~ m|^.*\.podin$|) {
         return <<"EOF";
-$args{src}: "$args{src}.in" doc/mkdoc.pl
-\t\"$(PERL)" "doc/mkdoc.pl" $args{deps} $args{src}
+$args{src}: "$gen0" doc/mkdoc.pl
+\t\"$(PERL)" "doc/mkdoc.pl" $gen0 $args{src}
 EOF
 
       } elsif ($gen0 =~ m|^.*\.in$|) {
