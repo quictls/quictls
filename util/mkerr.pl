@@ -343,7 +343,6 @@ foreach my $lib ( keys %errorfile ) {
 # pragma once
 
 # include <openssl/opensslconf.h>
-# include <openssl/symhacks.h>
 
 # ifdef  __cplusplus
 extern \"C\" {
@@ -434,7 +433,6 @@ EOF
 # pragma once
 
 # include <openssl/opensslconf.h>
-# include <openssl/symhacks.h>
 $extra_include
 
 EOF

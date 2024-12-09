@@ -13,7 +13,6 @@
 # pragma once
 
 # include <openssl/opensslconf.h>
-# include <openssl/symhacks.h>
 
 
 # define DASYNCerr(f, r) ERR_DASYNC_error(0, (r), OPENSSL_FILE, OPENSSL_LINE)

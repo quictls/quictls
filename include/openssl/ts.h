@@ -19,7 +19,6 @@
 # include <openssl/opensslconf.h>
 
 # ifndef OPENSSL_NO_TS
-# include <openssl/symhacks.h>
 # include <openssl/buffer.h>
 # include <openssl/evp.h>
 # include <openssl/bio.h>

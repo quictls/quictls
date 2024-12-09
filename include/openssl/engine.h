@@ -31,7 +31,6 @@
 #   include <openssl/err.h>
 #  endif
 #  include <openssl/types.h>
-#  include <openssl/symhacks.h>
 #  include <openssl/x509.h>
 #  include <openssl/engineerr.h>
 #  ifdef  __cplusplus

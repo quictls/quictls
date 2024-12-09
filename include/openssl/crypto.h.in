@@ -47,7 +47,6 @@ use OpenSSL::stackhash qw(generate_stack_macros);
  * Resolve problems on some operating systems with symbol names that clash
  * one way or another
  */
-# include <openssl/symhacks.h>
 
 # ifndef OPENSSL_NO_DEPRECATED_1_1_0
 #  include <openssl/opensslv.h>

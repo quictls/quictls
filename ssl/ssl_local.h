@@ -25,7 +25,6 @@
 # include <openssl/err.h>
 # include <openssl/ssl.h>
 # include <openssl/async.h>
-# include <openssl/symhacks.h>
 # include <openssl/ct.h>
 # include "internal/recordmethod.h"
 # include "internal/statem.h"

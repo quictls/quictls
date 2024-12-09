@@ -435,7 +435,6 @@ int PEM_def_callback(char *buf, int num, int rwflag, void *userdata);
 void PEM_proc_type(char *buf, int type);
 void PEM_dek_info(char *buf, const char *type, int len, const char *str);
 
-# include <openssl/symhacks.h>
 
 DECLARE_PEM_rw(X509, X509)
 DECLARE_PEM_rw(X509_AUX, X509)
