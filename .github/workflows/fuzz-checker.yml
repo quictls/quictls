@@ -21,7 +21,7 @@ jobs:
           {
             name: AFL,
             config: enable-fuzz-afl no-module,
-            install: afl++-clang,
+            install: afl++,
             cc: afl-clang-fast
           }, {
             name: libFuzzer,
