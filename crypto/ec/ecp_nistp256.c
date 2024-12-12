@@ -1821,7 +1821,6 @@ const EC_METHOD *EC_GFp_nistp256_method(void)
         .field_set_to_one = NULL,
         .priv2oct = ossl_ec_key_simple_priv2oct,
         .oct2priv = ossl_ec_key_simple_oct2priv,
-        .set_private = NULL,
         .keygen = ossl_ec_key_simple_generate_key,
         .keycheck = ossl_ec_key_simple_check_key,
         .keygenpub = ossl_ec_key_simple_generate_public_key,

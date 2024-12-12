@@ -166,7 +166,6 @@ struct ec_method_st {
     /* private key operations */
     size_t (*priv2oct)(const EC_KEY *eckey, unsigned char *buf, size_t len);
     int (*oct2priv)(EC_KEY *eckey, const unsigned char *buf, size_t len);
-    int (*set_private)(EC_KEY *eckey, const BIGNUM *priv_key);
     int (*keygen)(EC_KEY *eckey);
     int (*keycheck)(const EC_KEY *eckey);
     int (*keygenpub)(EC_KEY *eckey);
