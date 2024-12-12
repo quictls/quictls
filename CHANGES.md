@@ -56,3 +56,7 @@ aliases for others: `BUF_strdup`, `BUF_strndup`, `BUF_memdup`,
 
 - Simplified `util/shlib_wrap`; if your shell doesn't do "$@" properly
 when there are no arguments, please look at an earlier version.
+
+- Cherry-picked changes to assembly generation to support running code
+in execute-only mode and with indirect branch tracking on modern intel
+hardware.
