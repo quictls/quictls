@@ -225,19 +225,9 @@ struct ec_group_st {
      * they appear generic
      */
     /*
-     * Field specification. For curves over GF(p), this is the modulus; for
-     * curves over GF(2^m), this is the irreducible polynomial defining the
-     * field.
+     * Field specification. For curves over GF(p), this is the modulus.
      */
     BIGNUM *field;
-    /*
-     * Field specification for curves over GF(2^m). The irreducible f(t) is
-     * then of the form: t^poly[0] + t^poly[1] + ... + t^poly[k] where m =
-     * poly[0] > poly[1] > ... > poly[k] = 0. The array is terminated with
-     * poly[k+1]=-1. All elliptic curve irreducibles have at most 5 non-zero
-     * terms.
-     */
-    int poly[6];
     /*
      * Curve coefficients. (Here the assumption is that BIGNUMs can be used
      * or abused for all kinds of fields, not just GF(p).) For characteristic
