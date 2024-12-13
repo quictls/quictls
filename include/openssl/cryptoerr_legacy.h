@@ -19,7 +19,6 @@
 # pragma once
 
 # include <openssl/macros.h>
-# include <openssl/symhacks.h>
 
 # ifdef  __cplusplus
 extern "C" {

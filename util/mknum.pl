@@ -17,8 +17,8 @@ use lib "$FindBin::Bin/perl";
 use OpenSSL::Ordinals;
 use OpenSSL::ParseC;
 
+my $symhacks_file = undef;
 my $ordinals_file = undef;      # the ordinals file to use
-my $symhacks_file = undef;      # a symbol hacking file (optional)
 my $version = undef;            # the version to use for added symbols
 my $checkexist = 0;             # (unsure yet)
 my $warnings = 1;
@@ -27,7 +27,6 @@ my $verbose = 0;
 my $debug = 0;
 
 GetOptions('ordinals=s' => \$ordinals_file,
-           'symhacks=s' => \$symhacks_file,
            'version=s'  => \$version,
            'exist'      => \$checkexist,
            'renumber'   => \$renumber,
@@ -54,7 +53,7 @@ my %orig_names = ();
 # Invalidate all entries, they get revalidated when we re-check below
 $ordinals->invalidate();
 
-foreach my $f (($symhacks_file // (), @ARGV)) {
+foreach my $f (@ARGV) {
     print STDERR $f," ","-" x (69 - length($f)),"\n" if $verbose;
     open IN, $f or die "Couldn't open $f: $!\n";
     foreach (parse(<IN>, { filename => $f,
