@@ -9,9 +9,6 @@ IF[{- $config{target} =~ /^(?:VC-|mingw|BC-)/ -}]
   # It's called 'init', but doesn't have much 'init' in it...
   $AUXLIBAPPSSRC=../apps/lib/win32_init.c
 ENDIF
-IF[{- $config{target} =~ /^vms-/ -}]
-  $AUXLIBAPPSSRC=../apps/lib/vms_term_sock.c ../apps/lib/vms_decc_argv.c
-ENDIF
 # Program init source, that don't have direct linkage with the rest of the
 # source, and can therefore not be part of a library.
 IF[{- !$disabled{uplink} -}]
@@ -1090,9 +1087,8 @@ ENDIF
    use OpenSSL::Glob;
 
    my @nogo_headers = ( "asn1_mac.h",
-                        "opensslconf.h",
-                        "__decc_include_prologue.h",
-                        "__decc_include_epilogue.h" );
+                        "opensslconf.h"
+                        );
    my @nogo_headers_re = ( qr/.*err\.h/ );
    my @headerfiles = glob catfile($sourcedir,
                                   updir(), "include", "openssl", "*.h");

@@ -5,7 +5,6 @@ After a successful build, and before installing, the libraries should be tested.
 Run:
 
     $ make test                                      # Unix
-    $ mms test                                       ! OpenVMS
     $ nmake test                                     # Windows
 
 **Warning:** you MUST run the tests from an unprivileged account
@@ -24,7 +23,6 @@ Full verbosity, showing full output of all successful and failed test cases
 (`make` macro `VERBOSE` or `V`):
 
     $ make V=1 test                                  # Unix
-    $ mms /macro=(V=1) test                          ! OpenVMS
     $ nmake V=1 test                                 # Windows
 
 Verbosity on failed (sub-)tests only
@@ -41,7 +39,6 @@ If you want to run just one or a few specific tests, you can use
 the make variable TESTS to specify them, like this:
 
     $ make TESTS='test_rsa test_dsa' test            # Unix
-    $ mms/macro="TESTS=test_rsa test_dsa" test       ! OpenVMS
     $ nmake TESTS="test_rsa test_dsa" test           # Windows
 
 And of course, you can combine (Unix examples shown):
@@ -52,7 +49,6 @@ And of course, you can combine (Unix examples shown):
 You can find the list of available tests like this:
 
     $ make list-tests                                # Unix
-    $ mms list-tests                                 ! OpenVMS
     $ nmake list-tests                               # Windows
 
 Have a look at the manual for the perl module Test::Harness to

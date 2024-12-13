@@ -12,7 +12,7 @@
  *
  * BIO_s_log is useful for system daemons (or services under NT). It is
  * one-way BIO, it sends all stuff to syslogd (on system that commonly use
- * that), or event log (on NT), or OPCOM (on OpenVMS).
+ * that), or event log (on NT).
  *
  */
 

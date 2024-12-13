@@ -391,10 +391,7 @@ struct bn_gencb_st {
         uint128_t ret=(uint128_t)(a)*(b);   \
         (high)=ret>>64; (low)=ret;      })
 #  elif defined(__alpha) && (defined(SIXTY_FOUR_BIT_LONG) || defined(SIXTY_FOUR_BIT))
-#   if defined(__DECC)
-#    include <c_asm.h>
-#    define BN_UMULT_HIGH(a,b)   (BN_ULONG)asm("umulh %a0,%a1,%v0",(a),(b))
-#   elif defined(__GNUC__) && __GNUC__>=2
+#   if defined(__GNUC__) && __GNUC__>=2
 #    define BN_UMULT_HIGH(a,b)   ({     \
         register BN_ULONG ret;          \
         asm ("umulh     %1,%2,%0"       \

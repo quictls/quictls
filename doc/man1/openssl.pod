@@ -566,7 +566,7 @@ every use of B<-rand> should be paired with B<-writerand>.
 A file or files containing random data used to seed the random number
 generator.
 Multiple files can be specified separated by an OS-dependent character.
-The separator is C<;> for MS-Windows, C<,> for OpenVMS, and C<:> for
+The separator is C<;> for MS-Windows and C<:> for
 all others. Another way to specify multiple files is to repeat this flag
 with different filenames.
 
