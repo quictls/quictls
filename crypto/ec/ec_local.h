@@ -88,12 +88,6 @@ struct ec_method_st {
     int (*point_set_compressed_coordinates) (const EC_GROUP *, EC_POINT *,
                                              const BIGNUM *x, int y_bit,
                                              BN_CTX *);
-    /* used by EC_POINT_point2oct, EC_POINT_oct2point: */
-    size_t (*point2oct) (const EC_GROUP *, const EC_POINT *,
-                         point_conversion_form_t form, unsigned char *buf,
-                         size_t len, BN_CTX *);
-    int (*oct2point) (const EC_GROUP *, EC_POINT *, const unsigned char *buf,
-                      size_t len, BN_CTX *);
     /* used by EC_POINT_add, EC_POINT_dbl, ECP_POINT_invert: */
     int (*add) (const EC_GROUP *, EC_POINT *r, const EC_POINT *a,
                 const EC_POINT *b, BN_CTX *);
