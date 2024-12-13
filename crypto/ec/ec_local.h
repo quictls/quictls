@@ -169,8 +169,6 @@ struct ec_method_st {
     int (*keygen)(EC_KEY *eckey);
     int (*keycheck)(const EC_KEY *eckey);
     int (*keygenpub)(EC_KEY *eckey);
-    int (*keycopy)(EC_KEY *dst, const EC_KEY *src);
-    void (*keyfinish)(EC_KEY *eckey);
     /* custom ECDH operation */
     int (*ecdh_compute_key)(unsigned char **pout, size_t *poutlen,
                             const EC_POINT *pub_key, const EC_KEY *ecdh);
