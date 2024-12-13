@@ -85,9 +85,6 @@ struct ec_method_st {
                                          BN_CTX *);
     int (*point_get_affine_coordinates) (const EC_GROUP *, const EC_POINT *,
                                          BIGNUM *x, BIGNUM *y, BN_CTX *);
-    int (*point_set_compressed_coordinates) (const EC_GROUP *, EC_POINT *,
-                                             const BIGNUM *x, int y_bit,
-                                             BN_CTX *);
     /* used by EC_POINT_add, EC_POINT_dbl, ECP_POINT_invert: */
     int (*add) (const EC_GROUP *, EC_POINT *r, const EC_POINT *a,
                 const EC_POINT *b, BN_CTX *);

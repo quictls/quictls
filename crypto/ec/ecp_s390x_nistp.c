@@ -345,7 +345,6 @@ const EC_METHOD *EC_GFp_s390x_nistp##bits##_method(void)                \
 	    ossl_ec_GFp_simple_point_set_affine_coordinates,            \
         .point_get_affine_coordinates =                                 \
             ossl_ec_GFp_simple_point_get_affine_coordinates,            \
-        .point_set_compressed_coordinates = NULL,                       \
         .add = ossl_ec_GFp_simple_add,                                  \
         .dbl = ossl_ec_GFp_simple_dbl,                                  \
         .invert = ossl_ec_GFp_simple_invert,                            \

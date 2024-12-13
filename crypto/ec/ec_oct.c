@@ -24,8 +24,7 @@
 int EC_POINT_set_compressed_coordinates(const EC_GROUP *group, EC_POINT *point,
                                         const BIGNUM *x, int y_bit, BN_CTX *ctx)
 {
-    if (group->meth->point_set_compressed_coordinates == NULL
-        && !(group->meth->flags & EC_FLAGS_DEFAULT_OCT)) {
+    if (!(group->meth->flags & EC_FLAGS_DEFAULT_OCT)) {
         ERR_raise(ERR_LIB_EC, ERR_R_SHOULD_NOT_HAVE_BEEN_CALLED);
         return 0;
     }
@@ -33,17 +32,12 @@ int EC_POINT_set_compressed_coordinates(const EC_GROUP *group, EC_POINT *point,
         ERR_raise(ERR_LIB_EC, EC_R_INCOMPATIBLE_OBJECTS);
         return 0;
     }
-    if (group->meth->flags & EC_FLAGS_DEFAULT_OCT) {
-        if (group->meth->field_type == NID_X9_62_prime_field)
-            return ossl_ec_GFp_simple_set_compressed_coordinates(group, point, x,
-                                                                 y_bit, ctx);
-        else {
-            ERR_raise(ERR_LIB_EC, EC_R_GF2M_NOT_SUPPORTED);
-            return 0;
-        }
-    }
-    return group->meth->point_set_compressed_coordinates(group, point, x,
-                                                         y_bit, ctx);
+    if (group->meth->field_type == NID_X9_62_prime_field)
+        return ossl_ec_GFp_simple_set_compressed_coordinates(group, point, x,
+                                                             y_bit, ctx);
+
+    ERR_raise(ERR_LIB_EC, EC_R_GF2M_NOT_SUPPORTED);
+    return 0;
 }
 
 #ifndef OPENSSL_NO_DEPRECATED_3_0
