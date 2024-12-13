@@ -32,6 +32,10 @@ Currrent Changes
 - The undocumented function `X509_OBJECT_up_ref_count` has been
 made private.
 
+- Remove some depecrated (3.0) undocumented functions that were just
+aliases for others: `BUF_strdup`, `BUF_strndup`, `BUF_memdup`,
+`BUF_strlcpy`, `BUF_strlcat`, and `BUF_strnlen`.
+
 - Removed some functions deprecated in the OpenSSL 1.1.0 release:
 `SRP_VBASE_get_by_user`, `ENGINE_setup_bsd_cryptodev`,
 `PKCS12_get_attr`, and `SSL_set_debug`.
