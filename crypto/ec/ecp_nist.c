@@ -23,7 +23,6 @@
 const EC_METHOD *EC_GFp_nist_method(void)
 {
     static const EC_METHOD ret = {
-        .flags = EC_FLAGS_DEFAULT_OCT,
         .field_type = NID_X9_62_prime_field,
         .group_init = ossl_ec_GFp_simple_group_init,
         .group_finish = ossl_ec_GFp_simple_group_finish,

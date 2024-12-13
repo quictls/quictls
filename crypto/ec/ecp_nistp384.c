@@ -1463,7 +1463,6 @@ struct nistp384_pre_comp_st {
 const EC_METHOD *ossl_ec_GFp_nistp384_method(void)
 {
     static const EC_METHOD ret = {
-        .flags = EC_FLAGS_DEFAULT_OCT,
         .field_type = NID_X9_62_prime_field,
         .group_init = ossl_ec_GFp_nistp384_group_init,
         .group_finish = ossl_ec_GFp_simple_group_finish,
