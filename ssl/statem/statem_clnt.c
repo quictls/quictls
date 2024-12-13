@@ -653,22 +653,10 @@ WRITE_TRAN ossl_statem_client_write_transition(SSL_CONNECTION *s)
         } else if (s->early_data_state == SSL_EARLY_DATA_CONNECTING) {
             st->hand_state = TLS_ST_EARLY_DATA;
         } else {
-#if defined(OPENSSL_NO_NEXTPROTONEG)
             st->hand_state = TLS_ST_CW_FINISHED;
-#else
-            if (!SSL_CONNECTION_IS_DTLS(s) && s->s3.npn_seen)
-                st->hand_state = TLS_ST_CW_NEXT_PROTO;
-            else
-                st->hand_state = TLS_ST_CW_FINISHED;
-#endif
         }
         return WRITE_TRAN_CONTINUE;
 
-#if !defined(OPENSSL_NO_NEXTPROTONEG)
-    case TLS_ST_CW_NEXT_PROTO:
-        st->hand_state = TLS_ST_CW_FINISHED;
-        return WRITE_TRAN_CONTINUE;
-#endif
 
     case TLS_ST_CW_FINISHED:
         if (s->hit) {
@@ -997,12 +985,6 @@ int ossl_statem_client_construct_message(SSL_CONNECTION *s,
         *mt = SSL3_MT_CERTIFICATE_VERIFY;
         break;
 
-#if !defined(OPENSSL_NO_NEXTPROTONEG)
-    case TLS_ST_CW_NEXT_PROTO:
-        *confunc = tls_construct_next_proto;
-        *mt = SSL3_MT_NEXT_PROTO;
-        break;
-#endif
     case TLS_ST_CW_FINISHED:
         *confunc = tls_construct_finished;
         *mt = SSL3_MT_FINISHED;
@@ -3969,26 +3951,6 @@ int ssl3_check_cert_and_algorithm(SSL_CONNECTION *s)
     return 1;
 }
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-CON_FUNC_RETURN tls_construct_next_proto(SSL_CONNECTION *s, WPACKET *pkt)
-{
-    size_t len, padding_len;
-    unsigned char *padding = NULL;
-
-    len = s->ext.npn_len;
-    padding_len = 32 - ((len + 2) % 32);
-
-    if (!WPACKET_sub_memcpy_u8(pkt, s->ext.npn, len)
-            || !WPACKET_sub_allocate_bytes_u8(pkt, padding_len, &padding)) {
-        SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
-        return CON_FUNC_ERROR;
-    }
-
-    memset(padding, 0, padding_len);
-
-    return CON_FUNC_SUCCESS;
-}
-#endif
 
 MSG_PROCESS_RETURN tls_process_hello_req(SSL_CONNECTION *s, PACKET *pkt)
 {

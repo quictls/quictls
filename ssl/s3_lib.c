@@ -3419,11 +3419,6 @@ int ssl3_clear(SSL *s)
 
     sc->version = SSL3_VERSION;
 
-#if !defined(OPENSSL_NO_NEXTPROTONEG)
-    OPENSSL_free(sc->ext.npn);
-    sc->ext.npn = NULL;
-    sc->ext.npn_len = 0;
-#endif
 
     return 1;
 }

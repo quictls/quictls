@@ -320,9 +320,6 @@ extern "C" {
 # define SSL3_MT_SUPPLEMENTAL_DATA               23
 # define SSL3_MT_KEY_UPDATE                      24
 # define SSL3_MT_COMPRESSED_CERTIFICATE          25
-# ifndef OPENSSL_NO_NEXTPROTONEG
-#  define SSL3_MT_NEXT_PROTO                     67
-# endif
 # define SSL3_MT_MESSAGE_HASH                    254
 # define DTLS1_MT_HELLO_VERIFY_REQUEST           3
 

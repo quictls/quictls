@@ -1072,22 +1072,6 @@ struct ssl_ctx_st {
         unsigned char *alpn;
         size_t alpn_len;
 
-# ifndef OPENSSL_NO_NEXTPROTONEG
-        /* Next protocol negotiation information */
-
-        /*
-         * For a server, this contains a callback function by which the set of
-         * advertised protocols can be provided.
-         */
-        SSL_CTX_npn_advertised_cb_func npn_advertised_cb;
-        void *npn_advertised_cb_arg;
-        /*
-         * For a client, this contains a callback function that selects the next
-         * protocol from the list provided by the server.
-         */
-        SSL_CTX_npn_select_cb_func npn_select_cb;
-        void *npn_select_cb_arg;
-# endif
 
         unsigned char cookie_hmac_key[SHA256_DIGEST_LENGTH];
     } ext;
@@ -1414,12 +1398,6 @@ struct ssl_connection_st {
         size_t previous_server_finished_len;
         int send_connection_binding;
 
-# ifndef OPENSSL_NO_NEXTPROTONEG
-        /*
-         * Set if we saw the Next Protocol Negotiation extension from our peer.
-         */
-        int npn_seen;
-# endif
 
         /*
          * ALPN information (we are in the process of transitioning from NPN to
@@ -1654,15 +1632,6 @@ struct ssl_connection_st {
          */
         unsigned char *alpn;
         size_t alpn_len;
-        /*
-         * Next protocol negotiation. For the client, this is the protocol that
-         * we sent in NextProtocol and is set when handling ServerHello
-         * extensions. For a server, this is the client's selected_protocol from
-         * NextProtocol and is set when handling the NextProtocol message, before
-         * the Finished message.
-         */
-        unsigned char *npn;
-        size_t npn_len;
 
         /* The available PSK key exchange modes */
         int psk_kex_mode;

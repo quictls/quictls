@@ -866,9 +866,6 @@ SSL *ossl_ssl_connection_new_int(SSL_CTX *ctx, const SSL_METHOD *method)
         s->ext.supportedgroups_len = ctx->ext.supportedgroups_len;
     }
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-    s->ext.npn = NULL;
-#endif
 
     if (ctx->ext.alpn != NULL) {
         s->ext.alpn = OPENSSL_malloc(ctx->ext.alpn_len);
@@ -1499,9 +1496,6 @@ void ossl_ssl_connection_free(SSL *ssl)
 
     ASYNC_WAIT_CTX_free(s->waitctx);
 
-#if !defined(OPENSSL_NO_NEXTPROTONEG)
-    OPENSSL_free(s->ext.npn);
-#endif
 
 #ifndef OPENSSL_NO_SRTP
     sk_SRTP_PROTECTION_PROFILE_free(s->srtp_profiles);
@@ -3518,71 +3512,6 @@ int SSL_select_next_proto(unsigned char **out, unsigned char *outlen,
     return status;
 }
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-/*
- * SSL_get0_next_proto_negotiated sets *data and *len to point to the
- * client's requested protocol for this connection and returns 0. If the
- * client didn't request any protocol, then *data is set to NULL. Note that
- * the client can request any protocol it chooses. The value returned from
- * this function need not be a member of the list of supported protocols
- * provided by the callback.
- */
-void SSL_get0_next_proto_negotiated(const SSL *s, const unsigned char **data,
-                                    unsigned *len)
-{
-    const SSL_CONNECTION *sc = SSL_CONNECTION_FROM_CONST_SSL(s);
-
-    if (sc == NULL) {
-        /* We have no other way to indicate error */
-        *data = NULL;
-        *len = 0;
-        return;
-    }
-
-    *data = sc->ext.npn;
-    if (*data == NULL) {
-        *len = 0;
-    } else {
-        *len = (unsigned int)sc->ext.npn_len;
-    }
-}
-
-/*
- * SSL_CTX_set_npn_advertised_cb sets a callback that is called when
- * a TLS server needs a list of supported protocols for Next Protocol
- * Negotiation. The returned list must be in wire format.  The list is
- * returned by setting |out| to point to it and |outlen| to its length. This
- * memory will not be modified, but one should assume that the SSL* keeps a
- * reference to it. The callback should return SSL_TLSEXT_ERR_OK if it
- * wishes to advertise. Otherwise, no such extension will be included in the
- * ServerHello.
- */
-void SSL_CTX_set_npn_advertised_cb(SSL_CTX *ctx,
-                                   SSL_CTX_npn_advertised_cb_func cb,
-                                   void *arg)
-{
-    ctx->ext.npn_advertised_cb = cb;
-    ctx->ext.npn_advertised_cb_arg = arg;
-}
-
-/*
- * SSL_CTX_set_next_proto_select_cb sets a callback that is called when a
- * client needs to select a protocol from the server's provided list. |out|
- * must be set to point to the selected protocol (which may be within |in|).
- * The length of the protocol name must be written into |outlen|. The
- * server's advertised protocols are provided in |in| and |inlen|. The
- * callback can assume that |in| is syntactically valid. The client must
- * select a protocol. It is fatal to the connection if this callback returns
- * a value other than SSL_TLSEXT_ERR_OK.
- */
-void SSL_CTX_set_npn_select_cb(SSL_CTX *ctx,
-                               SSL_CTX_npn_select_cb_func cb,
-                               void *arg)
-{
-    ctx->ext.npn_select_cb = cb;
-    ctx->ext.npn_select_cb_arg = arg;
-}
-#endif
 
 static int alpn_value_ok(const unsigned char *protos, unsigned int protos_len)
 {

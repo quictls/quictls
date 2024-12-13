@@ -43,7 +43,6 @@ SRP_Calc_A_param                        43	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_
 SSL_SESSION_get_ticket_lifetime_hint    44	3_0_0	EXIST::FUNCTION:
 SSL_SRP_CTX_free                        45	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,SRP
 SSL_CTX_set_client_CA_list              46	3_0_0	EXIST::FUNCTION:
-SSL_CTX_set_next_proto_select_cb        47	3_0_0	EXIST::FUNCTION:NEXTPROTONEG
 BIO_ssl_copy_session_id                 48	3_0_0	EXIST::FUNCTION:
 SSL_CTX_set_security_callback           49	3_0_0	EXIST::FUNCTION:
 SSL_CONF_cmd_value_type                 50	3_0_0	EXIST::FUNCTION:
@@ -100,7 +99,6 @@ SSL_CTX_use_certificate_file            100	3_0_0	EXIST::FUNCTION:
 SSL_set_session_ticket_ext              101	3_0_0	EXIST::FUNCTION:
 SSL_CTX_set_psk_server_callback         102	3_0_0	EXIST::FUNCTION:PSK
 SSL_get_sigalgs                         103	3_0_0	EXIST::FUNCTION:
-SSL_CTX_set_next_protos_advertised_cb   104	3_0_0	EXIST::FUNCTION:NEXTPROTONEG
 SSL_CTX_set_trust                       105	3_0_0	EXIST::FUNCTION:
 SSL_CTX_set_verify                      106	3_0_0	EXIST::FUNCTION:
 SSL_set_rfd                             107	3_0_0	EXIST::FUNCTION:SOCK
@@ -286,7 +284,6 @@ SSL_CTX_use_certificate_chain_file      288	3_0_0	EXIST::FUNCTION:
 SSL_CTX_dane_enable                     289	3_0_0	EXIST::FUNCTION:
 SSL_CONF_CTX_new                        290	3_0_0	EXIST::FUNCTION:
 SSL_get0_alpn_selected                  291	3_0_0	EXIST::FUNCTION:
-SSL_get0_next_proto_negotiated          292	3_0_0	EXIST::FUNCTION:NEXTPROTONEG
 SSL_set0_security_ex_data               293	3_0_0	EXIST::FUNCTION:
 SSL_CTX_set_tlsext_use_srtp             294	3_0_0	EXIST::FUNCTION:SRTP
 SSL_COMP_set0_compression_methods       295	3_0_0	EXIST::FUNCTION:

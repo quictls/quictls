@@ -385,28 +385,6 @@ EXT_RETURN tls_construct_ctos_status_request(SSL_CONNECTION *s, WPACKET *pkt,
 }
 #endif
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-EXT_RETURN tls_construct_ctos_npn(SSL_CONNECTION *s, WPACKET *pkt,
-                                  unsigned int context,
-                                  X509 *x, size_t chainidx)
-{
-    if (SSL_CONNECTION_GET_CTX(s)->ext.npn_select_cb == NULL
-        || !SSL_IS_FIRST_HANDSHAKE(s))
-        return EXT_RETURN_NOT_SENT;
-
-    /*
-     * The client advertises an empty extension to indicate its support
-     * for Next Protocol Negotiation
-     */
-    if (!WPACKET_put_bytes_u16(pkt, TLSEXT_TYPE_next_proto_neg)
-            || !WPACKET_put_bytes_u16(pkt, 0)) {
-        SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
-        return EXT_RETURN_FAIL;
-    }
-
-    return EXT_RETURN_SENT;
-}
-#endif
 
 EXT_RETURN tls_construct_ctos_alpn(SSL_CONNECTION *s, WPACKET *pkt,
                                    unsigned int context,
@@ -1552,79 +1530,6 @@ int tls_parse_stoc_sct(SSL_CONNECTION *s, PACKET *pkt, unsigned int context,
 #endif
 
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-/*
- * ssl_next_proto_validate validates a Next Protocol Negotiation block. No
- * elements of zero length are allowed and the set of elements must exactly
- * fill the length of the block. Returns 1 on success or 0 on failure.
- */
-static int ssl_next_proto_validate(SSL_CONNECTION *s, PACKET *pkt)
-{
-    PACKET tmp_protocol;
-
-    while (PACKET_remaining(pkt)) {
-        if (!PACKET_get_length_prefixed_1(pkt, &tmp_protocol)
-            || PACKET_remaining(&tmp_protocol) == 0) {
-            SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);
-            return 0;
-        }
-    }
-
-    return 1;
-}
-
-int tls_parse_stoc_npn(SSL_CONNECTION *s, PACKET *pkt, unsigned int context,
-                       X509 *x, size_t chainidx)
-{
-    unsigned char *selected;
-    unsigned char selected_len;
-    PACKET tmppkt;
-    SSL_CTX *sctx = SSL_CONNECTION_GET_CTX(s);
-
-    /* Check if we are in a renegotiation. If so ignore this extension */
-    if (!SSL_IS_FIRST_HANDSHAKE(s))
-        return 1;
-
-    /* We must have requested it. */
-    if (sctx->ext.npn_select_cb == NULL) {
-        SSLfatal(s, SSL_AD_UNSUPPORTED_EXTENSION, SSL_R_BAD_EXTENSION);
-        return 0;
-    }
-
-    /* The data must be valid */
-    tmppkt = *pkt;
-    if (!ssl_next_proto_validate(s, &tmppkt)) {
-        /* SSLfatal() already called */
-        return 0;
-    }
-    if (sctx->ext.npn_select_cb(SSL_CONNECTION_GET_SSL(s),
-                                &selected, &selected_len,
-                                PACKET_data(pkt), PACKET_remaining(pkt),
-                                sctx->ext.npn_select_cb_arg) !=
-             SSL_TLSEXT_ERR_OK) {
-        SSLfatal(s, SSL_AD_HANDSHAKE_FAILURE, SSL_R_BAD_EXTENSION);
-        return 0;
-    }
-
-    /*
-     * Could be non-NULL if server has sent multiple NPN extensions in
-     * a single Serverhello
-     */
-    OPENSSL_free(s->ext.npn);
-    s->ext.npn = OPENSSL_malloc(selected_len);
-    if (s->ext.npn == NULL) {
-        s->ext.npn_len = 0;
-        SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
-        return 0;
-    }
-
-    memcpy(s->ext.npn, selected, selected_len);
-    s->ext.npn_len = selected_len;
-    s->s3.npn_seen = 1;
-
-    return 1;
-}
-#endif
 
 int tls_parse_stoc_alpn(SSL_CONNECTION *s, PACKET *pkt, unsigned int context,
                         X509 *x, size_t chainidx)

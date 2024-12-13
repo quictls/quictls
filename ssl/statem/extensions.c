@@ -22,9 +22,6 @@ static int init_session_ticket(SSL_CONNECTION *s, unsigned int context);
 #ifndef OPENSSL_NO_OCSP
 static int init_status_request(SSL_CONNECTION *s, unsigned int context);
 #endif
-#ifndef OPENSSL_NO_NEXTPROTONEG
-static int init_npn(SSL_CONNECTION *s, unsigned int context);
-#endif
 static int init_alpn(SSL_CONNECTION *s, unsigned int context);
 static int final_alpn(SSL_CONNECTION *s, unsigned int context, int sent);
 static int init_sig_algs_cert(SSL_CONNECTION *s, unsigned int context);
@@ -232,17 +229,7 @@ static const EXTENSION_DEFINITION ext_defs[] = {
 #else
     INVALID_EXTENSION,
 #endif
-#ifndef OPENSSL_NO_NEXTPROTONEG
-    {
-        TLSEXT_TYPE_next_proto_neg,
-        SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_2_SERVER_HELLO
-        | SSL_EXT_TLS1_2_AND_BELOW_ONLY,
-        init_npn, tls_parse_ctos_npn, tls_parse_stoc_npn,
-        tls_construct_stoc_next_proto_neg, tls_construct_ctos_npn, NULL
-    },
-#else
     INVALID_EXTENSION,
-#endif
     {
         /*
          * Must appear in this list after server_name so that finalisation
@@ -1173,14 +1160,6 @@ static int init_status_request(SSL_CONNECTION *s, unsigned int context)
 }
 #endif
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-static int init_npn(SSL_CONNECTION *s, unsigned int context)
-{
-    s->s3.npn_seen = 0;
-
-    return 1;
-}
-#endif
 
 static int init_alpn(SSL_CONNECTION *s, unsigned int context)
 {

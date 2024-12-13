@@ -70,7 +70,6 @@ jobs:
           no-mdc2,
           no-msan,
           no-multiblock,
-          no-nextprotoneg,
           no-ocb,
           no-padlockeng,
           no-pic,

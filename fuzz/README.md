@@ -29,7 +29,7 @@ to the `libFuzzer` library file while configuring; this is represented as
             -fsanitize=fuzzer-no-link \
             enable-ec_nistp_64_gcc_128 -fno-sanitize=alignment \
             enable-weak-ssl-ciphers enable-rc5 enable-md2 \
-            enable-ssl3 enable-ssl3-method enable-nextprotoneg \
+            enable-ssl3 enable-ssl3-method \
             --debug
 
 Clang uses the gcc libstdc++ library so this must also be installed. You can
@@ -95,7 +95,7 @@ prebuilt fuzzer library. This is represented as `$PATH_TO_LIBFUZZER_DIR` below.
             -fsanitize=fuzzer-no-link \
             enable-ec_nistp_64_gcc_128 -fno-sanitize=alignment \
             enable-weak-ssl-ciphers enable-rc5 enable-md2 \
-            enable-ssl3 enable-ssl3-method enable-nextprotoneg \
+            enable-ssl3 enable-ssl3-method \
             --debug
 
 AFL
@@ -108,7 +108,7 @@ Configure for fuzzing:
     sudo apt-get install afl-clang
     CC=afl-clang-fast ./config enable-fuzz-afl no-shared no-module \
         -DPEDANTIC enable-tls1_3 enable-weak-ssl-ciphers enable-rc5 \
-        enable-md2 enable-ssl3 enable-ssl3-method enable-nextprotoneg \
+        enable-md2 enable-ssl3 enable-ssl3-method \
         enable-ec_nistp_64_gcc_128 -fno-sanitize=alignment \
         --debug
     make clean

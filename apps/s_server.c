@@ -642,24 +642,6 @@ static int cert_status_cb(SSL *s, void *arg)
 }
 #endif
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-/* This is the context that we pass to next_proto_cb */
-typedef struct tlsextnextprotoctx_st {
-    unsigned char *data;
-    size_t len;
-} tlsextnextprotoctx;
-
-static int next_proto_cb(SSL *s, const unsigned char **data,
-                         unsigned int *len, void *arg)
-{
-    tlsextnextprotoctx *next_proto = arg;
-
-    *data = next_proto->data;
-    *len = next_proto->len;
-
-    return SSL_TLSEXT_ERR_OK;
-}
-#endif                         /* ndef OPENSSL_NO_NEXTPROTONEG */
 
 /* This the context that we pass to alpn_cb */
 typedef struct tlsextalpnctx_st {
@@ -732,7 +714,7 @@ typedef enum OPTION_choice {
     OPT_SSL3, OPT_TLS1_3, OPT_TLS1_2, OPT_TLS1_1, OPT_TLS1, OPT_DTLS, OPT_DTLS1,
     OPT_DTLS1_2, OPT_SCTP, OPT_TIMEOUT, OPT_MTU, OPT_LISTEN, OPT_STATELESS,
     OPT_ID_PREFIX, OPT_SERVERNAME, OPT_SERVERNAME_FATAL,
-    OPT_CERT2, OPT_KEY2, OPT_NEXTPROTONEG, OPT_ALPN, OPT_SENDFILE,
+    OPT_CERT2, OPT_KEY2, OPT_ALPN, OPT_SENDFILE,
     OPT_SRTP_PROFILES, OPT_KEYMATEXPORT, OPT_KEYMATEXPORTLEN,
     OPT_KEYLOG_FILE, OPT_MAX_EARLY, OPT_RECV_MAX_EARLY, OPT_EARLY_DATA,
     OPT_S_NUM_TICKETS, OPT_ANTI_REPLAY, OPT_NO_ANTI_REPLAY, OPT_SCTP_LABEL_BUG,
@@ -981,10 +963,6 @@ const OPTIONS s_server_options[] = {
      "Offer SRTP key management with a colon-separated profile list"},
 #endif
     {"no_dhe", OPT_NO_DHE, '-', "Disable ephemeral DH"},
-#ifndef OPENSSL_NO_NEXTPROTONEG
-    {"nextprotoneg", OPT_NEXTPROTONEG, 's',
-     "Set the advertised protocols for the NPN extension (comma-separated list)"},
-#endif
     {"alpn", OPT_ALPN, 's',
      "Set the advertised protocols for the ALPN extension (comma-separated list)"},
 #ifndef OPENSSL_NO_KTLS
@@ -1047,10 +1025,6 @@ int s_server_main(int argc, char *argv[])
     tlsextctx tlsextcbp = { NULL, NULL, SSL_TLSEXT_ERR_ALERT_WARNING };
     const char *ssl_config = NULL;
     int read_buf_len = 0;
-#ifndef OPENSSL_NO_NEXTPROTONEG
-    const char *next_proto_neg_in = NULL;
-    tlsextnextprotoctx next_proto = { NULL, 0 };
-#endif
     const char *alpn_in = NULL;
     tlsextalpnctx alpn_ctx = { NULL, 0 };
 #ifndef OPENSSL_NO_PSK
@@ -1612,11 +1586,6 @@ int s_server_main(int argc, char *argv[])
         case OPT_KEY2:
             s_key_file2 = opt_arg();
             break;
-        case OPT_NEXTPROTONEG:
-# ifndef OPENSSL_NO_NEXTPROTONEG
-            next_proto_neg_in = opt_arg();
-#endif
-            break;
         case OPT_ALPN:
             alpn_in = opt_arg();
             break;
@@ -1714,12 +1683,6 @@ int s_server_main(int argc, char *argv[])
     if (!app_RAND_load())
         goto end;
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-    if (min_version == TLS1_3_VERSION && next_proto_neg_in != NULL) {
-        BIO_printf(bio_err, "Cannot supply -nextprotoneg with TLSv1.3\n");
-        goto opthelp;
-    }
-#endif
 #ifndef OPENSSL_NO_DTLS
     if (www && socket_type == SOCK_DGRAM) {
         BIO_printf(bio_err, "Can't use -HTTP, -www or -WWW with DTLS\n");
@@ -1832,13 +1795,6 @@ int s_server_main(int argc, char *argv[])
                 goto end;
         }
     }
-#if !defined(OPENSSL_NO_NEXTPROTONEG)
-    if (next_proto_neg_in) {
-        next_proto.data = next_protos_parse(&next_proto.len, next_proto_neg_in);
-        if (next_proto.data == NULL)
-            goto end;
-    }
-#endif
     alpn_ctx.data = NULL;
     if (alpn_in) {
         alpn_ctx.data = next_protos_parse(&alpn_ctx.len, alpn_in);
@@ -2098,11 +2054,6 @@ int s_server_main(int argc, char *argv[])
         if (!config_ctx(cctx, ssl_args, ctx2))
             goto end;
     }
-#ifndef OPENSSL_NO_NEXTPROTONEG
-    if (next_proto.data)
-        SSL_CTX_set_next_protos_advertised_cb(ctx, next_proto_cb,
-                                              &next_proto);
-#endif
     if (alpn_ctx.data)
         SSL_CTX_set_alpn_select_cb(ctx, alpn_cb, &alpn_ctx);
 
@@ -2359,9 +2310,6 @@ int s_server_main(int argc, char *argv[])
     SSL_CTX_free(ctx2);
     X509_free(s_cert2);
     EVP_PKEY_free(s_key2);
-#ifndef OPENSSL_NO_NEXTPROTONEG
-    OPENSSL_free(next_proto.data);
-#endif
     OPENSSL_free(alpn_ctx.data);
     ssl_excert_free(exc);
     sk_OPENSSL_STRING_free(ssl_args);
@@ -3047,10 +2995,6 @@ static void print_connection_info(SSL *con)
     const char *str;
     X509 *peer;
     char buf[BUFSIZ];
-#if !defined(OPENSSL_NO_NEXTPROTONEG)
-    const unsigned char *next_proto_neg;
-    unsigned next_proto_neg_len;
-#endif
     unsigned char *exportedkeymat;
     int i;
 
@@ -3091,14 +3035,6 @@ static void print_connection_info(SSL *con)
     print_ca_names(bio_s_out, con);
     BIO_printf(bio_s_out, "CIPHER is %s\n", (str != NULL) ? str : "(NONE)");
 
-#if !defined(OPENSSL_NO_NEXTPROTONEG)
-    SSL_get0_next_proto_negotiated(con, &next_proto_neg, &next_proto_neg_len);
-    if (next_proto_neg) {
-        BIO_printf(bio_s_out, "NEXTPROTO is ");
-        BIO_write(bio_s_out, next_proto_neg, next_proto_neg_len);
-        BIO_printf(bio_s_out, "\n");
-    }
-#endif
 #ifndef OPENSSL_NO_SRTP
     {
         SRTP_PROTECTION_PROFILE *srtp_profile

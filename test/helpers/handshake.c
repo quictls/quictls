@@ -383,37 +383,6 @@ err:
     return 0;
 }
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-/*
- * The client SHOULD select the first protocol advertised by the server that it
- * also supports.  In the event that the client doesn't support any of server's
- * protocols, or the server doesn't advertise any, it SHOULD select the first
- * protocol that it supports.
- */
-static int client_npn_cb(SSL *s, unsigned char **out, unsigned char *outlen,
-                         const unsigned char *in, unsigned int inlen,
-                         void *arg)
-{
-    CTX_DATA *ctx_data = (CTX_DATA*)(arg);
-    int ret;
-
-    ret = SSL_select_next_proto(out, outlen, in, inlen,
-                                ctx_data->npn_protocols,
-                                ctx_data->npn_protocols_len);
-    /* Accept both OPENSSL_NPN_NEGOTIATED and OPENSSL_NPN_NO_OVERLAP. */
-    return TEST_true(ret == OPENSSL_NPN_NEGOTIATED || ret == OPENSSL_NPN_NO_OVERLAP)
-        ? SSL_TLSEXT_ERR_OK : SSL_TLSEXT_ERR_ALERT_FATAL;
-}
-
-static int server_npn_cb(SSL *s, const unsigned char **data,
-                         unsigned int *len, void *arg)
-{
-    CTX_DATA *ctx_data = (CTX_DATA*)(arg);
-    *data = ctx_data->npn_protocols;
-    *len = ctx_data->npn_protocols_len;
-    return SSL_TLSEXT_ERR_OK;
-}
-#endif
 
 /*
  * The server SHOULD select the most highly preferred protocol that it supports
@@ -581,33 +550,6 @@ static int configure_handshake_ctx(SSL_CTX *server_ctx, SSL_CTX *server2_ctx,
         SSL_CTX_set_tlsext_ticket_key_evp_cb(server_ctx,
                                              broken_session_ticket_cb);
     }
-#ifndef OPENSSL_NO_NEXTPROTONEG
-    if (extra->server.npn_protocols != NULL) {
-        if (!TEST_true(parse_protos(extra->server.npn_protocols,
-                                    &server_ctx_data->npn_protocols,
-                                    &server_ctx_data->npn_protocols_len)))
-            goto err;
-        SSL_CTX_set_npn_advertised_cb(server_ctx, server_npn_cb,
-                                      server_ctx_data);
-    }
-    if (extra->server2.npn_protocols != NULL) {
-        if (!TEST_true(parse_protos(extra->server2.npn_protocols,
-                                    &server2_ctx_data->npn_protocols,
-                                    &server2_ctx_data->npn_protocols_len))
-                || !TEST_ptr(server2_ctx))
-            goto err;
-        SSL_CTX_set_npn_advertised_cb(server2_ctx, server_npn_cb,
-                                      server2_ctx_data);
-    }
-    if (extra->client.npn_protocols != NULL) {
-        if (!TEST_true(parse_protos(extra->client.npn_protocols,
-                                    &client_ctx_data->npn_protocols,
-                                    &client_ctx_data->npn_protocols_len)))
-            goto err;
-        SSL_CTX_set_next_proto_select_cb(client_ctx, client_npn_cb,
-                                         client_ctx_data);
-    }
-#endif
     if (extra->server.alpn_protocols != NULL) {
         if (!TEST_true(parse_protos(extra->server.alpn_protocols,
                                     &server_ctx_data->alpn_protocols,
@@ -1662,13 +1604,6 @@ static HANDSHAKE_RESULT *do_handshake_internal(
             && n_retries != -1)
         ret->result = SSL_TEST_SERVER_FAIL;
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-    SSL_get0_next_proto_negotiated(client.ssl, &proto, &proto_len);
-    ret->client_npn_negotiated = dup_str(proto, proto_len);
-
-    SSL_get0_next_proto_negotiated(server.ssl, &proto, &proto_len);
-    ret->server_npn_negotiated = dup_str(proto, proto_len);
-#endif
 
     SSL_get0_alpn_selected(client.ssl, &proto, &proto_len);
     ret->client_alpn_negotiated = dup_str(proto, proto_len);

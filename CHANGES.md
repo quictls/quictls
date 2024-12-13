@@ -17,13 +17,15 @@ None yet :)
 
 Currrent Changes
 ----------------
-- Based on OpenSSL 3.3
+- Based on OpenSSL 3.3, with some code from OpenSSL 3.4 cherry-picked.
 
 - Remove support for some old configuration options:
   - unit-test as there was only one, so not worth the complication
   - fips, no-fips since we do not build a FIPS-validated container
   - ecdh, it was a no-op
   - no-dgram is now implied by no-sock (no longer can turn off just UDP)
+  - nextprotoneg (disabled by default) has been removed; it was replaced
+by the ALPN extension, IETF RFC 7301, in 2014.
 
 - Remove support for EGD random source.
 

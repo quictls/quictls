@@ -99,9 +99,6 @@ static const ssl_trace_tbl ssl_handshake_tbl[] = {
     {SSL3_MT_SUPPLEMENTAL_DATA, "SupplementalData"},
     {SSL3_MT_KEY_UPDATE, "KeyUpdate"},
     {SSL3_MT_COMPRESSED_CERTIFICATE, "CompressedCertificate"},
-# ifndef OPENSSL_NO_NEXTPROTONEG
-    {SSL3_MT_NEXT_PROTO, "NextProto"},
-# endif
     {SSL3_MT_MESSAGE_HASH, "MessageHash"}
 };
 
@@ -494,9 +491,6 @@ static const ssl_trace_tbl ssl_exts_tbl[] = {
     {TLSEXT_TYPE_signature_algorithms_cert, "signature_algorithms_cert"},
     {TLSEXT_TYPE_key_share, "key_share"},
     {TLSEXT_TYPE_renegotiate, "renegotiate"},
-# ifndef OPENSSL_NO_NEXTPROTONEG
-    {TLSEXT_TYPE_next_proto_neg, "next_proto_neg"},
-# endif
 };
 
 static const ssl_trace_tbl ssl_groups_tbl[] = {

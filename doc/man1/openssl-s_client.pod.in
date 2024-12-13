@@ -111,7 +111,6 @@ B<openssl> B<s_client>
 [B<-serverinfo> I<types>]
 [B<-status>]
 [B<-alpn> I<protocols>]
-[B<-nextprotoneg> I<protocols>]
 [B<-ct>]
 [B<-noct>]
 [B<-ctlogfile>]
@@ -736,7 +735,7 @@ file.
 Sends a certificate status request to the server (OCSP stapling). The server
 response (if any) is printed out.
 
-=item B<-alpn> I<protocols>, B<-nextprotoneg> I<protocols>
+=item B<-alpn> I<protocols>
 
 These flags enable the Enable the Application-Layer Protocol Negotiation
 or Next Protocol Negotiation (NPN) extension, respectively. ALPN is the
@@ -748,7 +747,6 @@ for example "http/1.1" or "spdy/3".
 An empty list of protocols is treated specially and will cause the
 client to advertise support for the TLS extension but disconnect just
 after receiving ServerHello with a list of server supported protocols.
-The flag B<-nextprotoneg> cannot be specified if B<-tls1_3> is used.
 
 =item B<-ct>, B<-noct>
 

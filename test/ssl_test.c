@@ -165,19 +165,6 @@ static int check_compression(HANDSHAKE_RESULT *result, SSL_TEST_CTX *test_ctx)
         return 0;
     return 1;
 }
-#ifndef OPENSSL_NO_NEXTPROTONEG
-static int check_npn(HANDSHAKE_RESULT *result, SSL_TEST_CTX *test_ctx)
-{
-    int ret = 1;
-    if (!TEST_str_eq(result->client_npn_negotiated,
-                     result->server_npn_negotiated))
-        ret = 0;
-    if (!TEST_str_eq(test_ctx->expected_npn_protocol,
-                     result->client_npn_negotiated))
-        ret = 0;
-    return ret;
-}
-#endif
 
 static int check_alpn(HANDSHAKE_RESULT *result, SSL_TEST_CTX *test_ctx)
 {
@@ -371,9 +358,6 @@ static int check_test(HANDSHAKE_RESULT *result, SSL_TEST_CTX *test_ctx)
         ret &= check_compression(result, test_ctx);
         ret &= check_session_id(result, test_ctx);
         ret &= (result->session_ticket_do_not_call == 0);
-#ifndef OPENSSL_NO_NEXTPROTONEG
-        ret &= check_npn(result, test_ctx);
-#endif
         ret &= check_cipher(result, test_ctx);
         ret &= check_alpn(result, test_ctx);
         ret &= check_session_ticket_app_data(result, test_ctx);
