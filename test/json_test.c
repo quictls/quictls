@@ -144,7 +144,6 @@ typedef void (*fp_pz_type)(OSSL_JSON_ENC *, const void *, size_t);
         return &script_info;                                                   \
     }
 
-
 #define END_SCRIPT_EXPECTING_S(s)   END_SCRIPT_EXPECTING(s, SIZE_MAX)
 #define END_SCRIPT_EXPECTING_Q(s)   END_SCRIPT_EXPECTING(#s, sizeof(#s) - 1)
 

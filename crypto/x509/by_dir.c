@@ -297,14 +297,13 @@ static int get_cert_by_subject_ex(X509_LOOKUP *xl, X509_LOOKUP_TYPE type,
             }
 #endif
             /* found one. */
-            if (type == X509_LU_X509) {
-                if ((X509_load_cert_file_ex(xl, b->data, ent->dir_type, libctx,
-                                            propq)) == 0)
+            if (type == X509_LU_X509
+                 && X509_load_cert_file_ex(xl, b->data, ent->dir_type, libctx,
+                                           propq) == 0)
                     break;
-            } else if (type == X509_LU_CRL) {
-                if ((X509_load_crl_file(xl, b->data, ent->dir_type)) == 0)
+	    if (type == X509_LU_CRL
+                && X509_load_crl_file(xl, b->data, ent->dir_type) == 0)
                     break;
-            }
             /* else case will caught higher up */
             k++;
         }

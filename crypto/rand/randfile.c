@@ -48,7 +48,6 @@
 #define RAND_BUF_SIZE 1024
 #define RFILE ".rnd"
 
-
 /*
  * Note that these functions are intended for seed files only. Entropy
  * devices are handled in rand_unix.c  If |bytes| is -1 read the
@@ -96,13 +95,6 @@ int RAND_load_file(const char *file, long bytes)
             bytes = RAND_DRBG_STRENGTH;
     }
 #endif
-    /*
-     * On VMS, setbuf() will only take 32-bit pointers, and a compilation
-     * with /POINTER_SIZE=64 will give off a MAYLOSEDATA2 warning here.
-     * However, we trust that the C RTL will never give us a FILE pointer
-     * above the first 4 GB of memory, so we simply turn off the warning
-     * temporarily.
-     */
     /*
      * Don't buffer, because even if |file| is regular file, we have
      * no control over the buffer, so why would we want a copy of its
@@ -178,7 +170,6 @@ int RAND_write_file(const char *file)
             out = fdopen(fd, "wb");
     }
 #endif
-
 
     if (out == NULL)
         out = openssl_fopen(file, "wb");

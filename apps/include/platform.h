@@ -12,7 +12,6 @@
 
 # include <openssl/e_os2.h>
 
-
 # ifdef _WIN32
 /*
  * Win32-specific argv initialization that splits OS-supplied UNICODE

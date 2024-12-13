@@ -80,11 +80,11 @@ __owur static ossl_inline int ossl_assert_int(int expr, const char *exprstr,
 
 # define OPENSSL_CONF             "openssl.cnf"
 
-#  define X509_CERT_AREA          OPENSSLDIR
-#  define X509_CERT_DIR           OPENSSLDIR "/certs"
-#  define X509_CERT_FILE          OPENSSLDIR "/cert.pem"
-#  define X509_PRIVATE_DIR        OPENSSLDIR "/private"
-#  define CTLOG_FILE              OPENSSLDIR "/ct_log_list.cnf"
+# define X509_CERT_AREA          OPENSSLDIR
+# define X509_CERT_DIR           OPENSSLDIR "/certs"
+# define X509_CERT_FILE          OPENSSLDIR "/cert.pem"
+# define X509_PRIVATE_DIR        OPENSSLDIR "/private"
+# define CTLOG_FILE              OPENSSLDIR "/ct_log_list.cnf"
 
 # define X509_CERT_DIR_EVP        "SSL_CERT_DIR"
 # define X509_CERT_FILE_EVP       "SSL_CERT_FILE"

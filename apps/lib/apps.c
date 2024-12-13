@@ -2983,13 +2983,6 @@ BIO *dup_bio_err(int format)
 
 void unbuffer(FILE *fp)
 {
-/*
- * On VMS, setbuf() will only take 32-bit pointers, and a compilation
- * with /POINTER_SIZE=64 will give off a MAYLOSEDATA2 warning here.
- * However, we trust that the C RTL will never give us a FILE pointer
- * above the first 4 GB of memory, so we simply turn off the warning
- * temporarily.
- */
     setbuf(fp, NULL);
 }
 

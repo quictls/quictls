@@ -96,8 +96,6 @@
 #  undef TCP_FASTOPEN
 # endif
 
-/* NO VMS SUPPORT */
-
 # if defined(OPENSSL_SYS_MACOSX)
 #  define OSSL_TFO_SYSCTL               "net.inet.tcp.fastopen"
 #  define OSSL_TFO_SERVER_SOCKOPT       TCP_FASTOPEN

@@ -169,16 +169,15 @@ FILE *__iob_func(void);
 #   include <sys/time.h>
 #  endif
 
-     /* !defined VMS */
-#   include <unistd.h>
-#   include <sys/types.h>
-#   ifdef OPENSSL_SYS_WIN32_CYGWIN
-#    include <io.h>
-#    include <fcntl.h>
-#   endif
+#  include <unistd.h>
+#  include <sys/types.h>
+#  ifdef OPENSSL_SYS_WIN32_CYGWIN
+#   include <io.h>
+#   include <fcntl.h>
+#  endif
 
-#   define LIST_SEPARATOR_CHAR ':'
-#   define EXIT(n)             exit(n)
+#  define LIST_SEPARATOR_CHAR ':'
+#  define EXIT(n)             exit(n)
 
 # endif
 

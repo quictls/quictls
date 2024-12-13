@@ -536,7 +536,7 @@ int EVP_DecryptInit_ex2(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *cipher,
 #ifdef PTRDIFF_T
 # undef PTRDIFF_T
 #endif
-# define PTRDIFF_T size_t
+#define PTRDIFF_T size_t
 
 int ossl_is_partially_overlapping(const void *ptr1, const void *ptr2, int len)
 {

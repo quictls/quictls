@@ -436,15 +436,14 @@ char *glue_strings(const char *list[], size_t *out_len)
 
 char *test_mk_file_path(const char *dir, const char *file)
 {
-    const char *sep = "/";
     size_t dirlen = dir != NULL ? strlen(dir) : 0;
-    size_t len = dirlen + strlen(sep) + strlen(file) + 1;
+    size_t len = dirlen + 1 + strlen(file) + 1;
     char *full_file = OPENSSL_zalloc(len);
 
     if (full_file != NULL) {
         if (dir != NULL && dirlen > 0) {
             OPENSSL_strlcpy(full_file, dir, len);
-            OPENSSL_strlcat(full_file, sep, len);
+            OPENSSL_strlcat(full_file, "/", len);
         }
         OPENSSL_strlcat(full_file, file, len);
     }

@@ -9,7 +9,6 @@
 
 /* Very basic HTTP server */
 
-
 #include <ctype.h>
 #include "http_server.h"
 #include "internal/sockets.h"

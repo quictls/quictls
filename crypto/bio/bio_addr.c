@@ -857,11 +857,6 @@ int BIO_lookup_ex(const char *host, const char *service, int lookup_type,
         } else {
             char *endp = NULL;
             long portnum = strtol(service, &endp, 10);
-
-/*
- * Because struct servent is defined for 32-bit pointers only with
- * VMS C, we need to make sure that 'proto' is a 32-bit pointer.
- */
             char *proto = NULL;
 
             switch (socktype) {
@@ -895,11 +890,6 @@ int BIO_lookup_ex(const char *host, const char *service, int lookup_type,
         *res = NULL;
 
         {
-/*
- * Because hostent::h_addr_list is an array of 32-bit pointers with VMS C,
- * we must make sure our iterator designates the same element type, hence
- * the pointer size dance.
- */
             char **addrlistp;
             size_t addresses;
             BIO_ADDRINFO *tmp_bai = NULL;
