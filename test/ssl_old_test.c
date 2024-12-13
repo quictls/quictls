@@ -29,12 +29,6 @@
 
 #include "internal/nelem.h"
 
-#ifdef OPENSSL_SYS_VMS
-/*
- * Or isascii won't be declared properly on VMS (at least with DECompHP C).
- */
-# define _XOPEN_SOURCE 500
-#endif
 
 #include <ctype.h>
 

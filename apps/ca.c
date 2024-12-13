@@ -24,9 +24,7 @@
 #include <openssl/pem.h>
 
 #ifndef W_OK
-# ifdef OPENSSL_SYS_VMS
-#  include <unistd.h>
-# elif !defined(OPENSSL_SYS_VXWORKS) && !defined(OPENSSL_SYS_WINDOWS)
+# if   !defined(OPENSSL_SYS_VXWORKS) && !defined(OPENSSL_SYS_WINDOWS)
 #  include <sys/file.h>
 # endif
 #endif
@@ -653,7 +651,6 @@ end_of_options:
                        "there needs to be defined a directory for new certificate to be placed in\n");
             goto end;
         }
-#ifndef OPENSSL_SYS_VMS
         /*
          * outdir is a directory spec, but access() for VMS demands a
          * filename.  We could use the DEC C routine to convert the
@@ -666,7 +663,6 @@ end_of_options:
             perror(outdir);
             goto end;
         }
-#endif
     }
 
     /*****************************************************************/
@@ -1052,9 +1048,7 @@ end_of_options:
         }
 
         outdirlen = OPENSSL_strlcpy(new_cert, outdir, sizeof(new_cert));
-#ifndef OPENSSL_SYS_VMS
         outdirlen = OPENSSL_strlcat(new_cert, "/", sizeof(new_cert));
-#endif
 
         if (verbose)
             BIO_printf(bio_err, "writing new certificates\n");
