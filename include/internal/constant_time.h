@@ -13,7 +13,7 @@
 
 # include <stdlib.h>
 # include <string.h>
-# include <openssl/e_os2.h>              /* For 'inline' */
+# include <openssl/e_os2.h>              /* For 'int64_t' */
 
 /*-
  * The boolean methods return a bitmask of all ones (0xff...f) for true
