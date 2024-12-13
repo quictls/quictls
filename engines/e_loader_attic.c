@@ -1475,15 +1475,6 @@ static int file_name_check(OSSL_STORE_LOADER_CTX *ctx, const char *name)
     while (isdigit((unsigned char)*p))
         p++;
 
-#ifdef __VMS
-    /*
-     * One extra step here, check for a possible generation number.
-     */
-    if (*p == ';')
-        for (p++; *p != '\0'; p++)
-            if (!ossl_isdigit(*p))
-                break;
-#endif
 
     /*
      * If we've reached the end of the string at this point, we've successfully

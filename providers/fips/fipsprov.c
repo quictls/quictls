@@ -569,14 +569,7 @@ static const OSSL_DISPATCH intern_dispatch_table[] = {
  * of libfips, and we build our libraries with mixed case symbol names,
  * we must switch back to this default explicitly here.
  */
-#ifdef __VMS
-# pragma names save
-# pragma names uppercase,truncated
-#endif
 OSSL_provider_init_fn OSSL_provider_init_int;
-#ifdef __VMS
-# pragma names restore
-#endif
 int OSSL_provider_init_int(const OSSL_CORE_HANDLE *handle,
                            const OSSL_DISPATCH *in,
                            const OSSL_DISPATCH **out,

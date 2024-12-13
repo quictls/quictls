@@ -156,9 +156,6 @@
 #else
 #define	ADDP	add
 #endif
-#ifdef __VMS
-.alias abort, "decc$abort"
-#endif
 
 #if 1
 //
