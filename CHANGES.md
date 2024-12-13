@@ -50,6 +50,8 @@ aliases for others: `BUF_strdup`, `BUF_strndup`, `BUF_memdup`,
   - Removed WinCE support.
   - Removed IRIX support.
   - Removed `I386_only` support.
+  - Removed support for SCO platforms.
+  - Removed support for Apollo.
   - OSF/1, True64, and Ultrix support.
 
 - Simplified `util/shlib_wrap`; if your shell doesn't do "$@" properly
