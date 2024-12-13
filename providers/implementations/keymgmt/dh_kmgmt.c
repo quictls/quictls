@@ -312,7 +312,7 @@ static const OSSL_PARAM *dh_export_types(int selection)
     return dh_imexport_types(selection);
 }
 
-static ossl_inline int dh_get_params(void *key, OSSL_PARAM params[])
+static inline int dh_get_params(void *key, OSSL_PARAM params[])
 {
     DH *dh = key;
     OSSL_PARAM *p;

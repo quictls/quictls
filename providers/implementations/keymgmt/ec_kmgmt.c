@@ -107,7 +107,7 @@ const char *sm2_query_operation_name(int operation_id)
  * This function only exports the bare keypair, domain parameters and other
  * parameters are exported separately.
  */
-static ossl_inline
+static inline
 int key_to_params(const EC_KEY *eckey, OSSL_PARAM_BLD *tmpl,
                   OSSL_PARAM params[], int include_private,
                   unsigned char **pub_key)
@@ -235,7 +235,7 @@ int key_to_params(const EC_KEY *eckey, OSSL_PARAM_BLD *tmpl,
     return ret;
 }
 
-static ossl_inline
+static inline
 int otherparams_to_params(const EC_KEY *ec, OSSL_PARAM_BLD *tmpl,
                           OSSL_PARAM params[])
 {
@@ -553,7 +553,7 @@ end:
  */
 #include "ec_kmgmt_imexport.inc"
 
-static ossl_inline
+static inline
 const OSSL_PARAM *ec_imexport_types(int selection)
 {
     int type_select = 0;
