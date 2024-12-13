@@ -323,7 +323,6 @@ static int ecdsa_s390x_nistp##bits##_verify_sig(const                   \
 const EC_METHOD *EC_GFp_s390x_nistp##bits##_method(void)                \
 {                                                                       \
     static const EC_METHOD EC_GFp_s390x_nistp##bits##_meth = {          \
-        .flags = EC_FLAGS_DEFAULT_OCT,                                  \
         .field_type = NID_X9_62_prime_field,                            \
         .group_init = ossl_ec_GFp_simple_group_init,                    \
         .group_finish = ossl_ec_GFp_simple_group_finish,                \

@@ -24,10 +24,6 @@
 int EC_POINT_set_compressed_coordinates(const EC_GROUP *group, EC_POINT *point,
                                         const BIGNUM *x, int y_bit, BN_CTX *ctx)
 {
-    if (!(group->meth->flags & EC_FLAGS_DEFAULT_OCT)) {
-        ERR_raise(ERR_LIB_EC, ERR_R_SHOULD_NOT_HAVE_BEEN_CALLED);
-        return 0;
-    }
     if (!ec_point_is_compat(point, group)) {
         ERR_raise(ERR_LIB_EC, EC_R_INCOMPATIBLE_OBJECTS);
         return 0;
@@ -53,10 +49,6 @@ size_t EC_POINT_point2oct(const EC_GROUP *group, const EC_POINT *point,
                           point_conversion_form_t form, unsigned char *buf,
                           size_t len, BN_CTX *ctx)
 {
-    if (!(group->meth->flags & EC_FLAGS_DEFAULT_OCT)) {
-        ERR_raise(ERR_LIB_EC, ERR_R_SHOULD_NOT_HAVE_BEEN_CALLED);
-        return 0;
-    }
     if (!ec_point_is_compat(point, group)) {
         ERR_raise(ERR_LIB_EC, EC_R_INCOMPATIBLE_OBJECTS);
         return 0;
@@ -71,10 +63,6 @@ size_t EC_POINT_point2oct(const EC_GROUP *group, const EC_POINT *point,
 int EC_POINT_oct2point(const EC_GROUP *group, EC_POINT *point,
                        const unsigned char *buf, size_t len, BN_CTX *ctx)
 {
-    if (!(group->meth->flags & EC_FLAGS_DEFAULT_OCT)) {
-        ERR_raise(ERR_LIB_EC, ERR_R_SHOULD_NOT_HAVE_BEEN_CALLED);
-        return 0;
-    }
     if (!ec_point_is_compat(point, group)) {
         ERR_raise(ERR_LIB_EC, EC_R_INCOMPATIBLE_OBJECTS);
         return 0;

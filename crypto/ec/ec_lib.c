@@ -51,14 +51,12 @@ EC_GROUP *ossl_ec_group_new_ex(OSSL_LIB_CTX *libctx, const char *propq,
             goto err;
     }
     ret->meth = meth;
-    if ((ret->meth->flags & EC_FLAGS_CUSTOM_CURVE) == 0) {
-        ret->order = BN_new();
-        if (ret->order == NULL)
-            goto err;
-        ret->cofactor = BN_new();
-        if (ret->cofactor == NULL)
-            goto err;
-    }
+    ret->order = BN_new();
+    if (ret->order == NULL)
+        goto err;
+    ret->cofactor = BN_new();
+    if (ret->cofactor == NULL)
+        goto err;
     ret->asn1_flag = OPENSSL_EC_EXPLICIT_CURVE;
     ret->asn1_form = POINT_CONVERSION_UNCOMPRESSED;
     if (!meth->group_init(ret))
@@ -238,12 +236,10 @@ int EC_GROUP_copy(EC_GROUP *dest, const EC_GROUP *src)
         dest->generator = NULL;
     }
 
-    if ((src->meth->flags & EC_FLAGS_CUSTOM_CURVE) == 0) {
-        if (!BN_copy(dest->order, src->order))
-            return 0;
-        if (!BN_copy(dest->cofactor, src->cofactor))
-            return 0;
-    }
+    if (!BN_copy(dest->order, src->order))
+        return 0;
+    if (!BN_copy(dest->cofactor, src->cofactor))
+        return 0;
 
     dest->asn1_flag = src->asn1_flag;
     dest->asn1_form = src->asn1_form;
@@ -620,8 +616,6 @@ int EC_GROUP_cmp(const EC_GROUP *a, const EC_GROUP *b, BN_CTX *ctx)
     if (EC_GROUP_get_curve_name(a) && EC_GROUP_get_curve_name(b) &&
         EC_GROUP_get_curve_name(a) != EC_GROUP_get_curve_name(b))
         return 1;
-    if (a->meth->flags & EC_FLAGS_CUSTOM_CURVE)
-        return 0;
 
 #ifndef FIPS_MODULE
     if (ctx == NULL)

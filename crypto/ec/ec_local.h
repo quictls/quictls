@@ -22,15 +22,6 @@
 # endif
 #endif
 
-/* Use default functions for poin2oct, oct2point and compressed coordinates */
-#define EC_FLAGS_DEFAULT_OCT    0x1
-
-/* Use custom formats for EC_GROUP, EC_POINT and EC_KEY */
-#define EC_FLAGS_CUSTOM_CURVE   0x2
-
-/* Curve does not support signing operations */
-#define EC_FLAGS_NO_SIGN        0x4
-
 #ifdef OPENSSL_NO_DEPRECATED_3_0
 typedef struct ec_method_st EC_METHOD;
 #endif
@@ -41,8 +32,6 @@ typedef struct ec_method_st EC_METHOD;
  */
 
 struct ec_method_st {
-    /* Various method flags */
-    int flags;
     /* used by EC_METHOD_get_field_type: */
     int field_type;             /* a NID */
     /*
