@@ -1467,7 +1467,6 @@ const EC_METHOD *EC_GFp_nistz256_method(void)
         .point_set_affine_coordinates =
             ossl_ec_GFp_simple_point_set_affine_coordinates,
         .point_get_affine_coordinates = ecp_nistz256_get_affine,
-        .point_set_compressed_coordinates = NULL,
         .add = ossl_ec_GFp_simple_add,
         .dbl = ossl_ec_GFp_simple_dbl,
         .invert = ossl_ec_GFp_simple_invert,
