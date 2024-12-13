@@ -371,8 +371,6 @@ const EC_METHOD *EC_GFp_s390x_nistp##bits##_method(void)                \
         .keygen = ossl_ec_key_simple_generate_key,                      \
         .keycheck = ossl_ec_key_simple_check_key,                       \
         .keygenpub = ossl_ec_key_simple_generate_public_key,            \
-        .keycopy = NULL,                                                \
-        .keyfinish = NULL,                                              \
         .ecdh_compute_key = ossl_ecdh_simple_compute_key,               \
         .ecdsa_sign_setup = ossl_ecdsa_simple_sign_setup,               \
         .ecdsa_sign_sig = ecdsa_s390x_nistp##bits##_sign_sig,           \

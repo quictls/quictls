@@ -88,9 +88,6 @@ void EC_KEY_free(EC_KEY *r)
     ENGINE_finish(r->engine);
 #endif
 
-    if (r->group && r->group->meth->keyfinish)
-        r->group->meth->keyfinish(r);
-
 #ifndef FIPS_MODULE
     CRYPTO_free_ex_data(CRYPTO_EX_INDEX_EC_KEY, r, &r->ex_data);
 #endif
@@ -112,8 +109,6 @@ EC_KEY *EC_KEY_copy(EC_KEY *dest, const EC_KEY *src)
     if (src->meth != dest->meth) {
         if (dest->meth->finish != NULL)
             dest->meth->finish(dest);
-        if (dest->group && dest->group->meth->keyfinish)
-            dest->group->meth->keyfinish(dest);
 #if !defined(OPENSSL_NO_ENGINE) && !defined(FIPS_MODULE)
         if (ENGINE_finish(dest->engine) == 0)
             return 0;
@@ -149,9 +144,6 @@ EC_KEY *EC_KEY_copy(EC_KEY *dest, const EC_KEY *src)
                     return NULL;
             }
             if (!BN_copy(dest->priv_key, src->priv_key))
-                return NULL;
-            if (src->group->meth->keycopy
-                && src->group->meth->keycopy(dest, src) == 0)
                 return NULL;
         }
     }
