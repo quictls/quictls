@@ -119,16 +119,14 @@ struct ec_method_st {
     int (*have_precompute_mult) (const EC_GROUP *group);
     /* internal functions */
     /*
-     * 'field_mul', 'field_sqr', and 'field_div' can be used by 'add' and
-     * 'dbl' so that the same implementations of point operations can be used
+     * 'field_mul' and 'field_sqr' can be used by 'add' and 'dbl' so
+     * that the same implementations of point operations can be used
      * with different optimized implementations of expensive field
      * operations:
      */
     int (*field_mul) (const EC_GROUP *, BIGNUM *r, const BIGNUM *a,
                       const BIGNUM *b, BN_CTX *);
     int (*field_sqr) (const EC_GROUP *, BIGNUM *r, const BIGNUM *a, BN_CTX *);
-    int (*field_div) (const EC_GROUP *, BIGNUM *r, const BIGNUM *a,
-                      const BIGNUM *b, BN_CTX *);
     /*-
      * 'field_inv' computes the multiplicative inverse of a in the field,
      * storing the result in r.
