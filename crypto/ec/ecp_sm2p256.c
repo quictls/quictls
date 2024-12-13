@@ -761,7 +761,6 @@ const EC_METHOD *EC_GFp_sm2p256_method(void)
         .have_precompute_mult = NULL,
         .field_mul = ecp_sm2p256_field_mul,
         .field_sqr = ecp_sm2p256_field_sqr,
-        .field_div = NULL,
         .field_inv = NULL,
         .field_encode = NULL,
         .field_decode = NULL,

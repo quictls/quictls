@@ -275,7 +275,6 @@ const EC_METHOD *EC_GFp_nistp224_method(void)
         .have_precompute_mult = ossl_ec_GFp_nistp224_have_precompute_mult,
         .field_mul = ossl_ec_GFp_nist_field_mul,
         .field_sqr = ossl_ec_GFp_nist_field_sqr,
-        .field_div = NULL,
         .field_inv = ossl_ec_GFp_simple_field_inv,
         .field_encode = NULL,
         .field_decode = NULL,

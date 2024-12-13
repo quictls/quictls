@@ -1479,7 +1479,6 @@ const EC_METHOD *EC_GFp_nistz256_method(void)
         .have_precompute_mult = ecp_nistz256_window_have_precompute_mult,
         .field_mul = ossl_ec_GFp_mont_field_mul,
         .field_sqr = ossl_ec_GFp_mont_field_sqr,
-        .field_div = NULL,
         .field_inv = ossl_ec_GFp_mont_field_inv,
         .field_encode = ossl_ec_GFp_mont_field_encode,
         .field_decode = ossl_ec_GFp_mont_field_decode,
