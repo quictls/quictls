@@ -121,7 +121,6 @@ static SSL_CIPHER tls13_ciphers[] = {
  *      Always there
  *      EC
  *      PSK
- *      SRP (within that: RSA EC PSK)
  *      Cipher families: Chacha/poly, Camellia, Gost, IDEA, SEED
  *      Weak ciphers
  */
@@ -1886,154 +1885,6 @@ static SSL_CIPHER ssl3_ciphers[] = {
      0,
      0,
      },
-
-# ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
-    {
-     1,
-     TLS1_TXT_SRP_SHA_WITH_3DES_EDE_CBC_SHA,
-     TLS1_RFC_SRP_SHA_WITH_3DES_EDE_CBC_SHA,
-     TLS1_CK_SRP_SHA_WITH_3DES_EDE_CBC_SHA,
-     SSL_kSRP,
-     SSL_aSRP,
-     SSL_3DES,
-     SSL_SHA1,
-     SSL3_VERSION, TLS1_2_VERSION,
-     DTLS1_BAD_VER, DTLS1_2_VERSION,
-     SSL_NOT_DEFAULT | SSL_MEDIUM,
-     SSL_HANDSHAKE_MAC_DEFAULT | TLS1_PRF,
-     112,
-     168,
-     },
-    {
-     1,
-     TLS1_TXT_SRP_SHA_RSA_WITH_3DES_EDE_CBC_SHA,
-     TLS1_RFC_SRP_SHA_RSA_WITH_3DES_EDE_CBC_SHA,
-     TLS1_CK_SRP_SHA_RSA_WITH_3DES_EDE_CBC_SHA,
-     SSL_kSRP,
-     SSL_aRSA,
-     SSL_3DES,
-     SSL_SHA1,
-     SSL3_VERSION, TLS1_2_VERSION,
-     DTLS1_BAD_VER, DTLS1_2_VERSION,
-     SSL_NOT_DEFAULT | SSL_MEDIUM,
-     SSL_HANDSHAKE_MAC_DEFAULT | TLS1_PRF,
-     112,
-     168,
-     },
-    {
-     1,
-     TLS1_TXT_SRP_SHA_DSS_WITH_3DES_EDE_CBC_SHA,
-     TLS1_RFC_SRP_SHA_DSS_WITH_3DES_EDE_CBC_SHA,
-     TLS1_CK_SRP_SHA_DSS_WITH_3DES_EDE_CBC_SHA,
-     SSL_kSRP,
-     SSL_aDSS,
-     SSL_3DES,
-     SSL_SHA1,
-     SSL3_VERSION, TLS1_2_VERSION,
-     DTLS1_BAD_VER, DTLS1_2_VERSION,
-     SSL_NOT_DEFAULT | SSL_MEDIUM,
-     SSL_HANDSHAKE_MAC_DEFAULT | TLS1_PRF,
-     112,
-     168,
-     },
-# endif
-    {
-     1,
-     TLS1_TXT_SRP_SHA_WITH_AES_128_CBC_SHA,
-     TLS1_RFC_SRP_SHA_WITH_AES_128_CBC_SHA,
-     TLS1_CK_SRP_SHA_WITH_AES_128_CBC_SHA,
-     SSL_kSRP,
-     SSL_aSRP,
-     SSL_AES128,
-     SSL_SHA1,
-     SSL3_VERSION, TLS1_2_VERSION,
-     DTLS1_BAD_VER, DTLS1_2_VERSION,
-     SSL_HIGH,
-     SSL_HANDSHAKE_MAC_DEFAULT | TLS1_PRF,
-     128,
-     128,
-     },
-    {
-     1,
-     TLS1_TXT_SRP_SHA_RSA_WITH_AES_128_CBC_SHA,
-     TLS1_RFC_SRP_SHA_RSA_WITH_AES_128_CBC_SHA,
-     TLS1_CK_SRP_SHA_RSA_WITH_AES_128_CBC_SHA,
-     SSL_kSRP,
-     SSL_aRSA,
-     SSL_AES128,
-     SSL_SHA1,
-     SSL3_VERSION, TLS1_2_VERSION,
-     DTLS1_BAD_VER, DTLS1_2_VERSION,
-     SSL_HIGH,
-     SSL_HANDSHAKE_MAC_DEFAULT | TLS1_PRF,
-     128,
-     128,
-     },
-    {
-     1,
-     TLS1_TXT_SRP_SHA_DSS_WITH_AES_128_CBC_SHA,
-     TLS1_RFC_SRP_SHA_DSS_WITH_AES_128_CBC_SHA,
-     TLS1_CK_SRP_SHA_DSS_WITH_AES_128_CBC_SHA,
-     SSL_kSRP,
-     SSL_aDSS,
-     SSL_AES128,
-     SSL_SHA1,
-     SSL3_VERSION, TLS1_2_VERSION,
-     DTLS1_BAD_VER, DTLS1_2_VERSION,
-     SSL_NOT_DEFAULT | SSL_HIGH,
-     SSL_HANDSHAKE_MAC_DEFAULT | TLS1_PRF,
-     128,
-     128,
-     },
-    {
-     1,
-     TLS1_TXT_SRP_SHA_WITH_AES_256_CBC_SHA,
-     TLS1_RFC_SRP_SHA_WITH_AES_256_CBC_SHA,
-     TLS1_CK_SRP_SHA_WITH_AES_256_CBC_SHA,
-     SSL_kSRP,
-     SSL_aSRP,
-     SSL_AES256,
-     SSL_SHA1,
-     SSL3_VERSION, TLS1_2_VERSION,
-     DTLS1_BAD_VER, DTLS1_2_VERSION,
-     SSL_HIGH,
-     SSL_HANDSHAKE_MAC_DEFAULT | TLS1_PRF,
-     256,
-     256,
-     },
-    {
-     1,
-     TLS1_TXT_SRP_SHA_RSA_WITH_AES_256_CBC_SHA,
-     TLS1_RFC_SRP_SHA_RSA_WITH_AES_256_CBC_SHA,
-     TLS1_CK_SRP_SHA_RSA_WITH_AES_256_CBC_SHA,
-     SSL_kSRP,
-     SSL_aRSA,
-     SSL_AES256,
-     SSL_SHA1,
-     SSL3_VERSION, TLS1_2_VERSION,
-     DTLS1_BAD_VER, DTLS1_2_VERSION,
-     SSL_HIGH,
-     SSL_HANDSHAKE_MAC_DEFAULT | TLS1_PRF,
-     256,
-     256,
-     },
-    {
-     1,
-     TLS1_TXT_SRP_SHA_DSS_WITH_AES_256_CBC_SHA,
-     TLS1_RFC_SRP_SHA_DSS_WITH_AES_256_CBC_SHA,
-     TLS1_CK_SRP_SHA_DSS_WITH_AES_256_CBC_SHA,
-     SSL_kSRP,
-     SSL_aDSS,
-     SSL_AES256,
-     SSL_SHA1,
-     SSL3_VERSION, TLS1_2_VERSION,
-     DTLS1_BAD_VER, DTLS1_2_VERSION,
-     SSL_NOT_DEFAULT | SSL_HIGH,
-     SSL_HANDSHAKE_MAC_DEFAULT | TLS1_PRF,
-     256,
-     256,
-     },
-
     {
      1,
      TLS1_TXT_DHE_RSA_WITH_CHACHA20_POLY1305,
@@ -3327,15 +3178,6 @@ int ssl3_handshake_write(SSL_CONNECTION *s)
 
 int ssl3_new(SSL *s)
 {
-#ifndef OPENSSL_NO_SRP
-    SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(s);
-
-    if (sc == NULL)
-        return 0;
-
-    if (!ssl_srp_ctx_init_intern(sc))
-        return 0;
-#endif
 
     if (!s->method->ssl_clear(s))
         return 0;
@@ -3375,9 +3217,6 @@ void ssl3_free(SSL *s)
     OPENSSL_free(sc->s3.tmp.psk);
 #endif
 
-#ifndef OPENSSL_NO_SRP
-    ssl_srp_ctx_free_intern(sc);
-#endif
     memset(&sc->s3, 0, sizeof(sc->s3));
 }
 
@@ -3423,17 +3262,6 @@ int ssl3_clear(SSL *s)
     return 1;
 }
 
-#ifndef OPENSSL_NO_SRP
-static char *srp_password_from_info_cb(SSL *s, void *arg)
-{
-    SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(s);
-
-    if (sc == NULL)
-        return NULL;
-
-    return OPENSSL_strdup(sc->srp_ctx.info);
-}
-#endif
 
 static int ssl3_set_req_cert_type(CERT *c, const unsigned char *p, size_t len);
 
@@ -3611,10 +3439,9 @@ long ssl3_ctrl(SSL *s, int cmd, long larg, void *parg)
             if (cipher == NULL)
                 return 0;
             /*
-             * No certificate for unauthenticated ciphersuites or using SRP
-             * authentication
+             * No certificate for unauthenticated ciphersuites
              */
-            if (cipher->algorithm_auth & (SSL_aNULL | SSL_aSRP))
+            if (cipher->algorithm_auth & SSL_aNULL)
                 return 2;
             if (sc->s3.tmp.cert == NULL)
                 return 0;
@@ -3913,41 +3740,6 @@ long ssl3_ctx_ctrl(SSL_CTX *ctx, int cmd, long larg, void *parg)
         *(int (**)(SSL*, void*))parg = ctx->ext.status_cb;
         break;
 
-#ifndef OPENSSL_NO_SRP
-    case SSL_CTRL_SET_TLS_EXT_SRP_USERNAME:
-        ctx->srp_ctx.srp_Mask |= SSL_kSRP;
-        OPENSSL_free(ctx->srp_ctx.login);
-        ctx->srp_ctx.login = NULL;
-        if (parg == NULL)
-            break;
-        if (strlen((const char *)parg) > 255 || strlen((const char *)parg) < 1) {
-            ERR_raise(ERR_LIB_SSL, SSL_R_INVALID_SRP_USERNAME);
-            return 0;
-        }
-        if ((ctx->srp_ctx.login = OPENSSL_strdup((char *)parg)) == NULL) {
-            ERR_raise(ERR_LIB_SSL, ERR_R_INTERNAL_ERROR);
-            return 0;
-        }
-        break;
-    case SSL_CTRL_SET_TLS_EXT_SRP_PASSWORD:
-        ctx->srp_ctx.SRP_give_srp_client_pwd_callback =
-            srp_password_from_info_cb;
-        if (ctx->srp_ctx.info != NULL)
-            OPENSSL_free(ctx->srp_ctx.info);
-        if ((ctx->srp_ctx.info = OPENSSL_strdup((char *)parg)) == NULL) {
-            ERR_raise(ERR_LIB_SSL, ERR_R_INTERNAL_ERROR);
-            return 0;
-        }
-        break;
-    case SSL_CTRL_SET_SRP_ARG:
-        ctx->srp_ctx.srp_Mask |= SSL_kSRP;
-        ctx->srp_ctx.SRP_cb_arg = parg;
-        break;
-
-    case SSL_CTRL_SET_TLS_EXT_SRP_STRENGTH:
-        ctx->srp_ctx.strength = larg;
-        break;
-#endif
 
     case SSL_CTRL_SET_GROUPS:
         return tls1_set_groups(&ctx->ext.supportedgroups,
@@ -4070,22 +3862,6 @@ long ssl3_ctx_callback_ctrl(SSL_CTX *ctx, int cmd, void (*fp) (void))
         break;
 #endif
 
-#ifndef OPENSSL_NO_SRP
-    case SSL_CTRL_SET_SRP_VERIFY_PARAM_CB:
-        ctx->srp_ctx.srp_Mask |= SSL_kSRP;
-        ctx->srp_ctx.SRP_verify_param_callback = (int (*)(SSL *, void *))fp;
-        break;
-    case SSL_CTRL_SET_TLS_EXT_SRP_USERNAME_CB:
-        ctx->srp_ctx.srp_Mask |= SSL_kSRP;
-        ctx->srp_ctx.TLS_ext_srp_username_callback =
-            (int (*)(SSL *, int *, void *))fp;
-        break;
-    case SSL_CTRL_SET_SRP_GIVE_CLIENT_PWD_CB:
-        ctx->srp_ctx.srp_Mask |= SSL_kSRP;
-        ctx->srp_ctx.SRP_give_srp_client_pwd_callback =
-            (char *(*)(SSL *, void *))fp;
-        break;
-#endif
     case SSL_CTRL_SET_NOT_RESUMABLE_SESS_CB:
         {
             ctx->not_resumable_session_cb = (int (*)(SSL *, int))fp;
@@ -4300,12 +4076,6 @@ const SSL_CIPHER *ssl3_choose_cipher(SSL_CONNECTION *s, STACK_OF(SSL_CIPHER) *cl
         if (!SSL_CONNECTION_IS_TLS13(s)) {
             mask_k = s->s3.tmp.mask_k;
             mask_a = s->s3.tmp.mask_a;
-#ifndef OPENSSL_NO_SRP
-            if (s->srp_ctx.srp_Mask & SSL_kSRP) {
-                mask_k |= SSL_kSRP;
-                mask_a |= SSL_aSRP;
-            }
-#endif
 
             alg_k = c->algorithm_mkey;
             alg_a = c->algorithm_auth;

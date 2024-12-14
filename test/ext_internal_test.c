@@ -28,11 +28,7 @@ static EXT_LIST ext_list[] = {
     EXT_ENTRY(renegotiate),
     EXT_ENTRY(server_name),
     EXT_ENTRY(max_fragment_length),
-#ifndef OPENSSL_NO_SRP
-    EXT_ENTRY(srp),
-#else
     EXT_EXCEPTION(srp),
-#endif
     EXT_ENTRY(ec_point_formats),
     EXT_ENTRY(supported_groups),
     EXT_ENTRY(session_ticket),

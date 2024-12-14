@@ -1330,8 +1330,6 @@ SSL_R_BAD_PSK_IDENTITY:114:bad psk identity
 SSL_R_BAD_RECORD_TYPE:443:bad record type
 SSL_R_BAD_RSA_ENCRYPT:119:bad rsa encrypt
 SSL_R_BAD_SIGNATURE:123:bad signature
-SSL_R_BAD_SRP_A_LENGTH:347:bad srp a length
-SSL_R_BAD_SRP_PARAMETERS:371:bad srp parameters
 SSL_R_BAD_SRTP_MKI_VALUE:352:bad srtp mki value
 SSL_R_BAD_SRTP_PROTECTION_PROFILE_LIST:353:bad srtp protection profile list
 SSL_R_BAD_SSL_FILETYPE:124:bad ssl filetype
@@ -1435,7 +1433,6 @@ SSL_R_INVALID_RECORD:317:invalid record
 SSL_R_INVALID_SEQUENCE_NUMBER:402:invalid sequence number
 SSL_R_INVALID_SERVERINFO_DATA:388:invalid serverinfo data
 SSL_R_INVALID_SESSION_ID:999:invalid session id
-SSL_R_INVALID_SRP_USERNAME:357:invalid srp username
 SSL_R_INVALID_STATUS_RESPONSE:328:invalid status response
 SSL_R_INVALID_TICKET_KEYS_LENGTH:325:invalid ticket keys length
 SSL_R_LEGACY_SIGALG_DISALLOWED_OR_UNSUPPORTED:333:\
@@ -1458,7 +1455,6 @@ SSL_R_MISSING_RSA_ENCRYPTING_CERT:169:missing rsa encrypting cert
 SSL_R_MISSING_RSA_SIGNING_CERT:170:missing rsa signing cert
 SSL_R_MISSING_SIGALGS_EXTENSION:112:missing sigalgs extension
 SSL_R_MISSING_SIGNING_CERT:221:missing signing cert
-SSL_R_MISSING_SRP_PARAM:358:can't find SRP server param
 SSL_R_MISSING_SUPPORTED_GROUPS_EXTENSION:209:missing supported groups extension
 SSL_R_MISSING_TMP_DH_KEY:171:missing tmp dh key
 SSL_R_MISSING_TMP_ECDH_KEY:311:missing tmp ecdh key
@@ -1546,7 +1542,6 @@ SSL_R_SHUTDOWN_WHILE_IN_INIT:407:shutdown while in init
 SSL_R_SIGNATURE_ALGORITHMS_ERROR:360:signature algorithms error
 SSL_R_SIGNATURE_FOR_NON_SIGNING_CERTIFICATE:220:\
 	signature for non signing certificate
-SSL_R_SRP_A_CALC:361:error with the srp params
 SSL_R_SRTP_COULD_NOT_ALLOCATE_PROFILES:362:srtp could not allocate profiles
 SSL_R_SRTP_PROTECTION_PROFILE_LIST_TOO_LONG:363:\
 	srtp protection profile list too long

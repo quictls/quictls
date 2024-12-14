@@ -2046,12 +2046,6 @@ int ssl_set_client_disabled(SSL_CONNECTION *s)
         s->s3.tmp.mask_k |= SSL_PSK;
     }
 #endif                          /* OPENSSL_NO_PSK */
-#ifndef OPENSSL_NO_SRP
-    if (!(s->srp_ctx.srp_Mask & SSL_kSRP)) {
-        s->s3.tmp.mask_a |= SSL_aSRP;
-        s->s3.tmp.mask_k |= SSL_kSRP;
-    }
-#endif
     return 1;
 }
 

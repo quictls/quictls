@@ -38,8 +38,10 @@ made private.
 aliases for others: `BUF_strdup`, `BUF_strndup`, `BUF_memdup`,
 `BUF_strlcpy`, `BUF_strlcat`, and `BUF_strnlen`.
 
+- All support for SRP has been removed.
+
 - Removed some functions deprecated in the OpenSSL 1.1.0 release:
-`SRP_VBASE_get_by_user`, `ENGINE_setup_bsd_cryptodev`,
+`ENGINE_setup_bsd_cryptodev`,
 `PKCS12_get_attr`, and `SSL_set_debug`.
 
 - Removed most of the deprecated functions from OpenSSL 0.9.8, but keep

@@ -55,7 +55,7 @@ static inline int cert_req_allowed(SSL_CONNECTION *s)
     /* TLS does not like anon-DH with client cert */
     if ((s->version > SSL3_VERSION
          && (s->s3.tmp.new_cipher->algorithm_auth & SSL_aNULL))
-        || (s->s3.tmp.new_cipher->algorithm_auth & (SSL_aSRP | SSL_aPSK)))
+        || (s->s3.tmp.new_cipher->algorithm_auth & SSL_aPSK))
         return 0;
 
     return 1;
@@ -74,10 +74,9 @@ static int key_exchange_expected(SSL_CONNECTION *s)
 
     /*
      * Can't skip server key exchange if this is an ephemeral
-     * ciphersuite or for SRP
+     * ciphersuite
      */
-    if (alg_k & (SSL_kDHE | SSL_kECDHE | SSL_kDHEPSK | SSL_kECDHEPSK
-                 | SSL_kSRP)) {
+    if (alg_k & (SSL_kDHE | SSL_kECDHE | SSL_kDHEPSK | SSL_kECDHEPSK)) {
         return 1;
     }
 
@@ -301,7 +300,7 @@ int ossl_statem_client_read_transition(SSL_CONNECTION *s, int mt)
                 st->hand_state = TLS_ST_CR_CHANGE;
                 return 1;
             } else if (!(s->s3.tmp.new_cipher->algorithm_auth
-                         & (SSL_aNULL | SSL_aSRP | SSL_aPSK))) {
+                         & (SSL_aNULL | SSL_aPSK))) {
                 if (mt == SSL3_MT_CERTIFICATE) {
                     st->hand_state = TLS_ST_CR_CERT;
                     return 1;
@@ -2188,51 +2187,6 @@ static int tls_process_ske_psk_preamble(SSL_CONNECTION *s, PACKET *pkt)
 #endif
 }
 
-static int tls_process_ske_srp(SSL_CONNECTION *s, PACKET *pkt, EVP_PKEY **pkey)
-{
-#ifndef OPENSSL_NO_SRP
-    PACKET prime, generator, salt, server_pub;
-
-    if (!PACKET_get_length_prefixed_2(pkt, &prime)
-        || !PACKET_get_length_prefixed_2(pkt, &generator)
-        || !PACKET_get_length_prefixed_1(pkt, &salt)
-        || !PACKET_get_length_prefixed_2(pkt, &server_pub)) {
-        SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);
-        return 0;
-    }
-
-    if ((s->srp_ctx.N =
-         BN_bin2bn(PACKET_data(&prime),
-                   (int)PACKET_remaining(&prime), NULL)) == NULL
-        || (s->srp_ctx.g =
-            BN_bin2bn(PACKET_data(&generator),
-                      (int)PACKET_remaining(&generator), NULL)) == NULL
-        || (s->srp_ctx.s =
-            BN_bin2bn(PACKET_data(&salt),
-                      (int)PACKET_remaining(&salt), NULL)) == NULL
-        || (s->srp_ctx.B =
-            BN_bin2bn(PACKET_data(&server_pub),
-                      (int)PACKET_remaining(&server_pub), NULL)) == NULL) {
-        SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_BN_LIB);
-        return 0;
-    }
-
-    if (!srp_verify_server_param(s)) {
-        /* SSLfatal() already called */
-        return 0;
-    }
-
-    /* We must check if there is a certificate */
-    if (s->s3.tmp.new_cipher->algorithm_auth & (SSL_aRSA | SSL_aDSS))
-        *pkey = tls_get_peer_pkey(s);
-
-    return 1;
-#else
-    SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
-    return 0;
-#endif
-}
-
 static int tls_process_ske_dhe(SSL_CONNECTION *s, PACKET *pkt, EVP_PKEY **pkey)
 {
     PACKET prime, generator, pub_key;
@@ -2413,11 +2367,7 @@ MSG_PROCESS_RETURN tls_process_key_exchange(SSL_CONNECTION *s, PACKET *pkt)
 
     /* Nothing else to do for plain PSK or RSAPSK */
     if (alg_k & (SSL_kPSK | SSL_kRSAPSK)) {
-    } else if (alg_k & SSL_kSRP) {
-        if (!tls_process_ske_srp(s, pkt, &pkey)) {
-            /* SSLfatal() already called */
-            goto err;
-        }
+	;
     } else if (alg_k & (SSL_kDHE | SSL_kDHEPSK)) {
         if (!tls_process_ske_dhe(s, pkt, &pkey)) {
             /* SSLfatal() already called */
@@ -2522,8 +2472,8 @@ MSG_PROCESS_RETURN tls_process_key_exchange(SSL_CONNECTION *s, PACKET *pkt)
         EVP_MD_CTX_free(md_ctx);
         md_ctx = NULL;
     } else {
-        /* aNULL, aSRP or PSK do not need public keys */
-        if (!(s->s3.tmp.new_cipher->algorithm_auth & (SSL_aNULL | SSL_aSRP))
+        /* aNULL or PSK do not need public keys */
+        if (!(s->s3.tmp.new_cipher->algorithm_auth & SSL_aNULL)
             && !(alg_k & SSL_PSK)) {
             /* Might be wrong key type, check it */
             if (ssl3_check_cert_and_algorithm(s)) {
@@ -2953,14 +2903,6 @@ MSG_PROCESS_RETURN tls_process_server_done(SSL_CONNECTION *s, PACKET *pkt)
         SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);
         return MSG_PROCESS_ERROR;
     }
-#ifndef OPENSSL_NO_SRP
-    if (s->s3.tmp.new_cipher->algorithm_mkey & SSL_kSRP) {
-        if (ssl_srp_calc_a_param_intern(s) <= 0) {
-            SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_R_SRP_A_CALC);
-            return MSG_PROCESS_ERROR;
-        }
-    }
-#endif
 
     if (!tls_process_initial_server_flight(s)) {
         /* SSLfatal() already called */
@@ -3485,33 +3427,6 @@ static int tls_construct_cke_gost18(SSL_CONNECTION *s, WPACKET *pkt)
 #endif
 }
 
-static int tls_construct_cke_srp(SSL_CONNECTION *s, WPACKET *pkt)
-{
-#ifndef OPENSSL_NO_SRP
-    unsigned char *abytes = NULL;
-
-    if (s->srp_ctx.A == NULL
-            || !WPACKET_sub_allocate_bytes_u16(pkt, BN_num_bytes(s->srp_ctx.A),
-                                               &abytes)) {
-        SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
-        return 0;
-    }
-    BN_bn2bin(s->srp_ctx.A, abytes);
-
-    OPENSSL_free(s->session->srp_username);
-    s->session->srp_username = OPENSSL_strdup(s->srp_ctx.login);
-    if (s->session->srp_username == NULL) {
-        SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_CRYPTO_LIB);
-        return 0;
-    }
-
-    return 1;
-#else
-    SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
-    return 0;
-#endif
-}
-
 CON_FUNC_RETURN tls_construct_client_key_exchange(SSL_CONNECTION *s,
                                                   WPACKET *pkt)
 {
@@ -3542,9 +3457,6 @@ CON_FUNC_RETURN tls_construct_client_key_exchange(SSL_CONNECTION *s,
     } else if (alg_k & SSL_kGOST18) {
         if (!tls_construct_cke_gost18(s, pkt))
             goto err;
-    } else if (alg_k & SSL_kSRP) {
-        if (!tls_construct_cke_srp(s, pkt))
-            goto err;
     } else if (!(alg_k & SSL_kPSK)) {
         SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
         goto err;
@@ -3571,16 +3483,6 @@ int tls_client_key_exchange_post_work(SSL_CONNECTION *s)
     pms = s->s3.tmp.pms;
     pmslen = s->s3.tmp.pmslen;
 
-#ifndef OPENSSL_NO_SRP
-    /* Check for SRP */
-    if (s->s3.tmp.new_cipher->algorithm_mkey & SSL_kSRP) {
-        if (!srp_generate_client_master_secret(s)) {
-            /* SSLfatal() already called */
-            goto err;
-        }
-        return 1;
-    }
-#endif
 
     if (pms == NULL && !(s->s3.tmp.new_cipher->algorithm_mkey & SSL_kPSK)) {
         SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_PASSED_INVALID_ARGUMENT);

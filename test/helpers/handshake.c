@@ -67,10 +67,6 @@ static void ctx_data_free_data(CTX_DATA *ctx_data)
     ctx_data->npn_protocols = NULL;
     OPENSSL_free(ctx_data->alpn_protocols);
     ctx_data->alpn_protocols = NULL;
-    OPENSSL_free(ctx_data->srp_user);
-    ctx_data->srp_user = NULL;
-    OPENSSL_free(ctx_data->srp_password);
-    ctx_data->srp_password = NULL;
     OPENSSL_free(ctx_data->session_ticket_app_data);
     ctx_data->session_ticket_app_data = NULL;
 }
@@ -631,12 +627,6 @@ static int configure_handshake_ctx(SSL_CTX *server_ctx, SSL_CTX *server2_ctx,
         break;
     }
 #endif
-#ifndef OPENSSL_NO_SRP
-    if (!configure_handshake_ctx_for_srp(server_ctx, server2_ctx, client_ctx,
-                                         extra, server_ctx_data,
-                                         server2_ctx_data, client_ctx_data))
-        goto err;
-#endif  /* !OPENSSL_NO_SRP */
 #ifndef OPENSSL_NO_COMP_ALG
     if (test->compress_certificates) {
         if (!TEST_true(SSL_CTX_compress_certs(server_ctx, 0)))

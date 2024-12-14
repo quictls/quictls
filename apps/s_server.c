@@ -230,9 +230,6 @@ static int psk_find_session_cb(SSL *ssl, const unsigned char *identity,
     return 1;
 }
 
-#ifndef OPENSSL_NO_SRP
-static srpsrvparm srp_callback_parm;
-#endif
 
 static int local_argc = 0;
 static char **local_argv;
@@ -697,7 +694,7 @@ typedef enum OPTION_choice {
     OPT_TRACE, OPT_SECURITY_DEBUG, OPT_SECURITY_DEBUG_VERBOSE, OPT_STATE,
     OPT_CRLF, OPT_QUIET, OPT_BRIEF, OPT_NO_DHE,
     OPT_NO_RESUME_EPHEMERAL, OPT_PSK_IDENTITY, OPT_PSK_HINT, OPT_PSK,
-    OPT_PSK_SESS, OPT_SRPVFILE, OPT_SRPUSERSEED, OPT_REV, OPT_WWW,
+    OPT_PSK_SESS, OPT_REV, OPT_WWW,
     OPT_UPPER_WWW, OPT_HTTP, OPT_ASYNC, OPT_SSL_CONFIG,
     OPT_MAX_SEND_FRAG, OPT_SPLIT_SEND_FRAG, OPT_MAX_PIPELINES, OPT_READ_BUF,
     OPT_SSL3, OPT_TLS1_3, OPT_TLS1_2, OPT_TLS1_1, OPT_TLS1, OPT_DTLS, OPT_DTLS1,
@@ -897,11 +894,6 @@ const OPTIONS s_server_options[] = {
 #endif
     {"psk", OPT_PSK, 's', "PSK in hex (without 0x)"},
     {"psk_session", OPT_PSK_SESS, '<', "File to read PSK SSL session from"},
-#ifndef OPENSSL_NO_SRP
-    {"srpvfile", OPT_SRPVFILE, '<', "(deprecated) The verifier file for SRP"},
-    {"srpuserseed", OPT_SRPUSERSEED, 's',
-     "(deprecated) A seed string for a default user salt"},
-#endif
 
     OPT_SECTION("Protocol and version"),
     {"max_early_data", OPT_MAX_EARLY, 'n',
@@ -1019,10 +1011,6 @@ int s_server_main(int argc, char *argv[])
     char *psk_identity_hint = NULL;
 #endif
     char *p;
-#ifndef OPENSSL_NO_SRP
-    char *srpuserseed = NULL;
-    char *srp_verifier_file = NULL;
-#endif
 #ifndef OPENSSL_NO_SRTP
     char *srtp_profiles = NULL;
 #endif
@@ -1445,20 +1433,6 @@ int s_server_main(int argc, char *argv[])
             break;
         case OPT_PSK_SESS:
             psksessf = opt_arg();
-            break;
-        case OPT_SRPVFILE:
-#ifndef OPENSSL_NO_SRP
-            srp_verifier_file = opt_arg();
-            if (min_version < TLS1_VERSION)
-                min_version = TLS1_VERSION;
-#endif
-            break;
-        case OPT_SRPUSERSEED:
-#ifndef OPENSSL_NO_SRP
-            srpuserseed = opt_arg();
-            if (min_version < TLS1_VERSION)
-                min_version = TLS1_VERSION;
-#endif
             break;
         case OPT_REV:
             rev = 1;
@@ -2208,13 +2182,6 @@ int s_server_main(int argc, char *argv[])
         SSL_CTX_set_tlsext_servername_arg(ctx, &tlsextcbp);
     }
 
-#ifndef OPENSSL_NO_SRP
-    if (srp_verifier_file != NULL) {
-        if (!set_up_srp_verifier_file(ctx, &srp_callback_parm, srpuserseed,
-                                      srp_verifier_file))
-            goto end;
-    } else
-#endif
     if (CAfile != NULL) {
         SSL_CTX_set_client_CA_list(ctx, SSL_load_client_CA_file(CAfile));
 
@@ -2703,15 +2670,6 @@ static int sv_body(int s, int stype, int prot, unsigned char *context)
                 }
 #endif
                 k = SSL_write(con, &(buf[l]), (unsigned int)i);
-#ifndef OPENSSL_NO_SRP
-                while (SSL_get_error(con, k) == SSL_ERROR_WANT_X509_LOOKUP) {
-                    BIO_printf(bio_s_out, "LOOKUP renego during write\n");
-
-                    lookup_srp_user(&srp_callback_parm, bio_s_out);
-
-                    k = SSL_write(con, &(buf[l]), (unsigned int)i);
-                }
-#endif
                 switch (SSL_get_error(con, k)) {
                 case SSL_ERROR_NONE:
                     break;
@@ -2789,15 +2747,6 @@ static int sv_body(int s, int stype, int prot, unsigned char *context)
             } else {
  again:
                 i = SSL_read(con, (char *)buf, bufsize);
-#ifndef OPENSSL_NO_SRP
-                while (SSL_get_error(con, i) == SSL_ERROR_WANT_X509_LOOKUP) {
-                    BIO_printf(bio_s_out, "LOOKUP renego during read\n");
-
-                    lookup_srp_user(&srp_callback_parm, bio_s_out);
-
-                    i = SSL_read(con, (char *)buf, bufsize);
-                }
-#endif
                 switch (SSL_get_error(con, i)) {
                 case SSL_ERROR_NONE:
 #ifdef CHARSET_EBCDIC
@@ -2931,19 +2880,6 @@ static int init_ssl_connection(SSL *con)
             }
 #endif
 
-#ifndef OPENSSL_NO_SRP
-            while (i <= 0
-                   && SSL_get_error(con, i) == SSL_ERROR_WANT_X509_LOOKUP) {
-                BIO_printf(bio_s_out, "LOOKUP during accept %s\n",
-                           srp_callback_parm.login);
-
-                lookup_srp_user(&srp_callback_parm, bio_s_out);
-
-                i = SSL_accept(con);
-                if (i <= 0)
-                    retry = is_retryable(con, i);
-            }
-#endif
         } while (i < 0 && SSL_waiting_for_async(con));
     }
 
@@ -3176,16 +3112,6 @@ static int www_body(int s, int stype, int prot, unsigned char *context)
                 goto err;
             } else {
                 BIO_printf(bio_s_out, "read R BLOCK\n");
-#ifndef OPENSSL_NO_SRP
-                if (BIO_should_io_special(io)
-                    && BIO_get_retry_reason(io) == BIO_RR_SSL_X509_LOOKUP) {
-                    BIO_printf(bio_s_out, "LOOKUP renego during read\n");
-
-                    lookup_srp_user(&srp_callback_parm, bio_s_out);
-
-                    continue;
-                }
-#endif
                 OSSL_sleep(1000);
                 continue;
             }
@@ -3594,16 +3520,6 @@ static int rev_body(int s, int stype, int prot, unsigned char *context)
             ERR_print_errors(bio_err);
             goto end;
         }
-#ifndef OPENSSL_NO_SRP
-        if (BIO_should_io_special(io)
-            && BIO_get_retry_reason(io) == BIO_RR_SSL_X509_LOOKUP) {
-            BIO_printf(bio_s_out, "LOOKUP renego during accept\n");
-
-            lookup_srp_user(&srp_callback_parm, bio_s_out);
-
-            continue;
-        }
-#endif
     }
     BIO_printf(bio_err, "CONNECTION ESTABLISHED\n");
     print_ssl_summary(con);
@@ -3617,16 +3533,6 @@ static int rev_body(int s, int stype, int prot, unsigned char *context)
                 goto err;
             } else {
                 BIO_printf(bio_s_out, "read R BLOCK\n");
-#ifndef OPENSSL_NO_SRP
-                if (BIO_should_io_special(io)
-                    && BIO_get_retry_reason(io) == BIO_RR_SSL_X509_LOOKUP) {
-                    BIO_printf(bio_s_out, "LOOKUP renego during read\n");
-
-                    lookup_srp_user(&srp_callback_parm, bio_s_out);
-
-                    continue;
-                }
-#endif
                 OSSL_sleep(1000);
                 continue;
             }

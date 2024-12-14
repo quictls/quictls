@@ -3878,12 +3878,6 @@ SSL_CTX *SSL_CTX_new_ex(OSSL_LIB_CTX *libctx, const char *propq,
         goto err;
     }
 
-#ifndef OPENSSL_NO_SRP
-    if (!ssl_ctx_srp_ctx_init_intern(ret)) {
-        ERR_raise(ERR_LIB_SSL, ERR_R_SSL_LIB);
-        goto err;
-    }
-#endif
 #ifndef OPENSSL_NO_ENGINE
 # ifdef OPENSSL_SSL_CLIENT_ENGINE_AUTO
 #  define eng_strx(x)     #x
@@ -4030,9 +4024,6 @@ void SSL_CTX_free(SSL_CTX *a)
     a->comp_methods = NULL;
 #ifndef OPENSSL_NO_SRTP
     sk_SRTP_PROTECTION_PROFILE_free(a->srtp_profiles);
-#endif
-#ifndef OPENSSL_NO_SRP
-    ssl_ctx_srp_ctx_free_intern(a);
 #endif
 #ifndef OPENSSL_NO_ENGINE
     tls_engine_finish(a->client_cert_engine);

@@ -492,7 +492,6 @@ my @disablables = (
     "sm3",
     "sm4",
     "sock",
-    "srp",
     "srtp",
     "sse2",
     "ssl",
@@ -585,7 +584,7 @@ my @disable_cascades = (
                              "ocsp", "ocb", "poly1305", "psk",
                              "rc2", "rc4", "rmd160",
                              "seed", "siphash", "siv",
-                             "sm3", "sm4", "srp",
+                             "sm3", "sm4",
                              "srtp", "ssl3-method", "ssl-trace",
                              "tfo",
                              "ts", "ui-console", "whirlpool",
@@ -654,7 +653,7 @@ my @disable_cascades = (
 
     "blake2"            => [ "argon2" ],
 
-    "deprecated-3.0"    => [ "engine", "srp" ],
+    "deprecated-3.0"    => [ "engine" ],
 
     "http"              => [ "ocsp" ]
     );

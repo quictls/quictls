@@ -284,10 +284,6 @@ int tls_parse_ctos_server_name(SSL_CONNECTION *s, PACKET *pkt,
 int tls_parse_ctos_maxfragmentlen(SSL_CONNECTION *s, PACKET *pkt,
                                   unsigned int context,
                                   X509 *x, size_t chainidx);
-#ifndef OPENSSL_NO_SRP
-int tls_parse_ctos_srp(SSL_CONNECTION *s, PACKET *pkt, unsigned int context,
-                       X509 *x, size_t chainidx);
-#endif
 int tls_parse_ctos_early_data(SSL_CONNECTION *s, PACKET *pkt,
                               unsigned int context,
                               X509 *x, size_t chainidx);
@@ -422,11 +418,6 @@ EXT_RETURN tls_construct_ctos_server_name(SSL_CONNECTION *s, WPACKET *pkt,
 EXT_RETURN tls_construct_ctos_maxfragmentlen(SSL_CONNECTION *s, WPACKET *pkt,
                                              unsigned int context,
                                              X509 *x, size_t chainidx);
-#ifndef OPENSSL_NO_SRP
-EXT_RETURN tls_construct_ctos_srp(SSL_CONNECTION *s, WPACKET *pkt,
-                                  unsigned int context, X509 *x,
-                                  size_t chainidx);
-#endif
 EXT_RETURN tls_construct_ctos_ec_pt_formats(SSL_CONNECTION *s, WPACKET *pkt,
                                             unsigned int context, X509 *x,
                                             size_t chainidx);

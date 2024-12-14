@@ -26,7 +26,6 @@ typedef enum OPTION_choice {
     OPT_TLS1_2,
     OPT_TLS1_3,
     OPT_PSK,
-    OPT_SRP,
     OPT_CIPHERSUITES,
     OPT_V, OPT_UPPER_V, OPT_S, OPT_PROV_ENUM
 } OPTION_CHOICE;
@@ -61,9 +60,6 @@ const OPTIONS ciphers_options[] = {
 #ifndef OPENSSL_NO_PSK
     {"psk", OPT_PSK, '-', "Include ciphersuites requiring PSK"},
 #endif
-#ifndef OPENSSL_NO_SRP
-    {"srp", OPT_SRP, '-', "(deprecated) Include ciphersuites requiring SRP"},
-#endif
     {"ciphersuites", OPT_CIPHERSUITES, 's',
      "Configure the TLSv1.3 ciphersuites to use"},
     OPT_PROV_OPTIONS,
@@ -93,9 +89,6 @@ int ciphers_main(int argc, char **argv)
     int stdname = 0;
 #ifndef OPENSSL_NO_PSK
     int psk = 0;
-#endif
-#ifndef OPENSSL_NO_SRP
-    int srp = 0;
 #endif
     const char *p;
     char *ciphers = NULL, *prog, *convert = NULL, *ciphersuites = NULL;
@@ -155,11 +148,6 @@ int ciphers_main(int argc, char **argv)
             psk = 1;
 #endif
             break;
-        case OPT_SRP:
-#ifndef OPENSSL_NO_SRP
-            srp = 1;
-#endif
-            break;
         case OPT_CIPHERSUITES:
             ciphersuites = opt_arg();
             break;
@@ -195,10 +183,6 @@ int ciphers_main(int argc, char **argv)
 #ifndef OPENSSL_NO_PSK
     if (psk)
         SSL_CTX_set_psk_client_callback(ctx, dummy_psk);
-#endif
-#ifndef OPENSSL_NO_SRP
-    if (srp)
-        set_up_dummy_srp(ctx);
 #endif
 
     if (ciphersuites != NULL && !SSL_CTX_set_ciphersuites(ctx, ciphersuites)) {

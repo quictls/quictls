@@ -276,15 +276,6 @@ static const ssl_trace_tbl ssl_ciphers_tbl[] = {
     {0xC017, "TLS_ECDH_anon_WITH_3DES_EDE_CBC_SHA"},
     {0xC018, "TLS_ECDH_anon_WITH_AES_128_CBC_SHA"},
     {0xC019, "TLS_ECDH_anon_WITH_AES_256_CBC_SHA"},
-    {0xC01A, "TLS_SRP_SHA_WITH_3DES_EDE_CBC_SHA"},
-    {0xC01B, "TLS_SRP_SHA_RSA_WITH_3DES_EDE_CBC_SHA"},
-    {0xC01C, "TLS_SRP_SHA_DSS_WITH_3DES_EDE_CBC_SHA"},
-    {0xC01D, "TLS_SRP_SHA_WITH_AES_128_CBC_SHA"},
-    {0xC01E, "TLS_SRP_SHA_RSA_WITH_AES_128_CBC_SHA"},
-    {0xC01F, "TLS_SRP_SHA_DSS_WITH_AES_128_CBC_SHA"},
-    {0xC020, "TLS_SRP_SHA_WITH_AES_256_CBC_SHA"},
-    {0xC021, "TLS_SRP_SHA_RSA_WITH_AES_256_CBC_SHA"},
-    {0xC022, "TLS_SRP_SHA_DSS_WITH_AES_256_CBC_SHA"},
     {0xC023, "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256"},
     {0xC024, "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384"},
     {0xC025, "TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256"},
@@ -468,7 +459,6 @@ static const ssl_trace_tbl ssl_exts_tbl[] = {
     {TLSEXT_TYPE_cert_type, "cert_type"},
     {TLSEXT_TYPE_supported_groups, "supported_groups"},
     {TLSEXT_TYPE_ec_point_formats, "ec_point_formats"},
-    {TLSEXT_TYPE_srp, "srp"},
     {TLSEXT_TYPE_signature_algorithms, "signature_algorithms"},
     {TLSEXT_TYPE_use_srtp, "use_srtp"},
     {TLSEXT_TYPE_application_layer_protocol_negotiation,
@@ -1127,10 +1117,6 @@ static int ssl_get_keyex(const char **pname, const SSL_CONNECTION *sc)
     if (alg_k & SSL_kECDHEPSK) {
         *pname = "ECDHEPSK";
         return SSL_kECDHEPSK;
-    }
-    if (alg_k & SSL_kSRP) {
-        *pname = "SRP";
-        return SSL_kSRP;
     }
     if (alg_k & SSL_kGOST) {
         *pname = "GOST";

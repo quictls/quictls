@@ -17,8 +17,6 @@ typedef struct ctx_data_st {
     size_t npn_protocols_len;
     unsigned char *alpn_protocols;
     size_t alpn_protocols_len;
-    char *srp_user;
-    char *srp_password;
     char *session_ticket_app_data;
 } CTX_DATA;
 

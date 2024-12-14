@@ -108,8 +108,6 @@ typedef struct {
     ssl_ct_validation_t ct_validation;
     /* Ciphersuites to set on a renegotiation */
     char *reneg_ciphers;
-    char *srp_user;
-    char *srp_password;
     /* PHA enabled */
     int enable_pha;
     /* Do not send extms on renegotiation */
@@ -126,9 +124,6 @@ typedef struct {
     int broken_session_ticket;
     /* Should we send a CertStatus message? */
     ssl_cert_status_t cert_status;
-    /* An SRP user known to the server. */
-    char *srp_user;
-    char *srp_password;
     /* Forced PHA */
     int force_pha;
     char *session_ticket_app_data;

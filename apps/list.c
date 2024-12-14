@@ -1410,9 +1410,6 @@ static void list_disabled(void)
 #ifdef OPENSSL_NO_SOCK
     BIO_puts(bio_out, "SOCK\n");
 #endif
-#ifdef OPENSSL_NO_SRP
-    BIO_puts(bio_out, "SRP\n");
-#endif
 #ifdef OPENSSL_NO_SRTP
     BIO_puts(bio_out, "SRTP\n");
 #endif
