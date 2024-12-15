@@ -445,7 +445,6 @@ my @disablables = (
     "dynamic-engine",
     "ec",
     "ec_nistp_64_gcc_128",
-    "ecdsa",
     "engine",
     "err",
     "external-tests",
@@ -598,7 +597,7 @@ my @disable_cascades = (
     "brotli"            => [ "brotli-dynamic" ],
     "zstd"              => [ "zstd-dynamic" ],
     "des"               => [ "mdc2" ],
-    "ec"                => [ "ecdsa", "sm2", "gost", "boring-quic-api" ],
+    "ec"                => [ "sm2", "gost", "boring-quic-api" ],
     "sock"              => [ "dtls", "sctp", "http", "ocsp", "tfo" ],
     "dtls"              => [ @dtls ],
     sub { 0 == scalar grep { !$disabled{$_} } @dtls }
