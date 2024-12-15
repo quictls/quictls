@@ -762,11 +762,6 @@ int BIO_lookup_ex(const char *host, const char *service, int lookup_type,
     } else {
 #endif
         const struct hostent *he;
-/*
- * Because struct hostent is defined for 32-bit pointers only with
- * VMS C, we need to make sure that '&he_fallback_address' and
- * '&he_fallback_addresses' are 32-bit pointers
- */
         /* Windows doesn't seem to have in_addr_t */
 #if defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_MSDOS)
         static uint32_t he_fallback_address;

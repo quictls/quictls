@@ -76,25 +76,19 @@ struct servent *PASCAL getservbyname(const char *, const char *);
 #  endif
 
 #  include <netdb.h>
-#  if defined(OPENSSL_SYS_VMS_NODECC)
-#   include <socket.h>
-#   include <in.h>
-#   include <inet.h>
-#  else
-#   include <sys/socket.h>
-#   if !defined(NO_SYS_UN_H) && defined(AF_UNIX) && !defined(OPENSSL_NO_UNIX_SOCK)
-#    include <sys/un.h>
-#    ifndef UNIX_PATH_MAX
-#     define UNIX_PATH_MAX sizeof(((struct sockaddr_un *)NULL)->sun_path)
-#    endif
+#  include <sys/socket.h>
+#  if !defined(NO_SYS_UN_H) && defined(AF_UNIX) && !defined(OPENSSL_NO_UNIX_SOCK)
+#   include <sys/un.h>
+#   ifndef UNIX_PATH_MAX
+#    define UNIX_PATH_MAX sizeof(((struct sockaddr_un *)NULL)->sun_path)
 #   endif
-#   ifdef FILIO_H
-#    include <sys/filio.h> /* FIONBIO in some SVR4, e.g. solaris */
-#   endif
-#   include <netinet/in.h>
-#   include <arpa/inet.h>
-#   include <netinet/tcp.h>
 #  endif
+#  ifdef FILIO_H
+#   include <sys/filio.h> /* FIONBIO in some SVR4, e.g. solaris */
+#  endif
+#  include <netinet/in.h>
+#  include <arpa/inet.h>
+#  include <netinet/tcp.h>
 
 #  ifdef OPENSSL_SYS_AIX
 #   include <sys/select.h>

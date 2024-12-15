@@ -11,7 +11,7 @@
 # define OSSL_APPS_LOG_H
 
 # include <openssl/bio.h>
-# if !defined(OPENSSL_SYS_VMS) && !defined(OPENSSL_SYS_WINDOWS) \
+# if !defined(OPENSSL_SYS_WINDOWS) \
     && !defined(OPENSSL_NO_SOCK) && !defined(OPENSSL_NO_POSIX_IO)
 #  include <syslog.h>
 # else

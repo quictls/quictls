@@ -156,7 +156,7 @@ int RAND_write_file(const char *file)
         return  -1;
 
 #if defined(O_CREAT) && !defined(OPENSSL_NO_POSIX_IO) && \
-    !defined(OPENSSL_SYS_VMS) && !defined(OPENSSL_SYS_WINDOWS)
+    !defined(OPENSSL_SYS_WINDOWS)
     {
 # ifndef O_BINARY
 #  define O_BINARY 0

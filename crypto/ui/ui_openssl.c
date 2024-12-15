@@ -28,7 +28,7 @@
 # include <string.h>
 # include <errno.h>
 
-# if !defined(OPENSSL_SYS_MSDOS) && !defined(OPENSSL_SYS_VMS)
+# if !defined(OPENSSL_SYS_MSDOS)
 #  include <unistd.h>
 /*
  * If unistd.h defines _POSIX_VERSION, we conclude that we are on a POSIX
@@ -359,7 +359,7 @@ static int open_console(UI *ui)
         tty_out = stderr;
 # endif
 
-# if defined(TTY_get) && !defined(OPENSSL_SYS_VMS)
+# if defined(TTY_get)
     if (TTY_get(fileno(tty_in), &tty_orig) == -1) {
 #  ifdef ENOTTY
         if (errno == ENOTTY)
@@ -429,7 +429,7 @@ static int noecho_console(UI *ui)
     tty_new.TTY_FLAGS &= ~ECHO;
 # endif
 
-# if defined(TTY_set) && !defined(OPENSSL_SYS_VMS)
+# if defined(TTY_set)
     if (is_a_tty && (TTY_set(fileno(tty_in), &tty_new) == -1))
         return 0;
 # endif
@@ -445,7 +445,7 @@ static int noecho_console(UI *ui)
 
 static int echo_console(UI *ui)
 {
-# if defined(TTY_set) && !defined(OPENSSL_SYS_VMS)
+# if defined(TTY_set)
     memcpy(&(tty_new), &(tty_orig), sizeof(tty_orig));
     if (is_a_tty && (TTY_set(fileno(tty_in), &tty_new) == -1))
         return 0;
