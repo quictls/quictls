@@ -1844,11 +1844,7 @@ typedef struct {
 
 /* Must be in order high to low */
 static const version_info tls_version_table[] = {
-#ifndef OPENSSL_NO_TLS1_3
     {TLS1_3_VERSION, tlsv1_3_client_method, tlsv1_3_server_method},
-#else
-    {TLS1_3_VERSION, NULL, NULL},
-#endif
 #ifndef OPENSSL_NO_TLS1_2
     {TLS1_2_VERSION, tlsv1_2_client_method, tlsv1_2_server_method},
 #else

@@ -244,7 +244,7 @@ sub run_tests
         #TLS1.3 specific tests
         SKIP: {
             skip "TLSv1.3 disabled", 9
-                if disabled("tls1_3") || (disabled("ec") && disabled("dh"));
+                if disabled("ec") && disabled("dh");
 
             #Test 13: Sending a different record version in TLS1.3 should fail
             $proxy->clear();

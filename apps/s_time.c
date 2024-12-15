@@ -77,9 +77,7 @@ const OPTIONS s_time_options[] = {
 #ifndef OPENSSL_NO_TLS1_2
     {"tls1_2", OPT_TLS1_2, '-', "Just use TLSv1.2"},
 #endif
-#ifndef OPENSSL_NO_TLS1_3
     {"tls1_3", OPT_TLS1_3, '-', "Just use TLSv1.3"},
-#endif
     {"verify", OPT_VERIFY, 'p',
      "Turn on peer certificate verification, set depth"},
     {"time", OPT_TIME, 'p', "Seconds to collect data, default " SECONDSSTR},

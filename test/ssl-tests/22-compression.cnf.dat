@@ -138,6 +138,6 @@ our @tests_tls1_2 = (
     },
 );
 
-push @tests, @tests_tls1_3 unless disabled("tls1_3");
+push @tests, @tests_tls1_3;
 push @tests, @tests_tls1_2 unless alldisabled(("tls1_2", "tls1_1", "tls1",
                                                "ssl3"));

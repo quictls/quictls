@@ -46,8 +46,7 @@
 #include "filterprov.h"
 
 #undef OSSL_NO_USABLE_TLS1_3
-#if defined(OPENSSL_NO_TLS1_3) \
-    || (defined(OPENSSL_NO_EC) && defined(OPENSSL_NO_DH))
+#if defined(OPENSSL_NO_EC) && defined(OPENSSL_NO_DH)
 /*
  * If we don't have ec or dh then there are no built-in groups that are usable
  * with TLSv1.3
@@ -9818,7 +9817,6 @@ static int test_sigalgs_available(int idx)
         * && (!defined(OSSL_NO_USABLE_TLS1_3) || !defined(OPENSSL_NO_TLS1_2))
         */
 
-#ifndef OPENSSL_NO_TLS1_3
 /* This test can run in TLSv1.3 even if ec and dh are disabled */
 static int test_pluggable_group(int idx)
 {
@@ -9990,7 +9988,6 @@ static int test_pluggable_signature(int idx)
 
     return testresult;
 }
-#endif
 
 #ifndef OPENSSL_NO_TLS1_2
 static int test_ssl_dup(void)
@@ -12423,10 +12420,8 @@ int setup_tests(void)
     && (!defined(OSSL_NO_USABLE_TLS1_3) || !defined(OPENSSL_NO_TLS1_2))
     ADD_ALL_TESTS(test_sigalgs_available, 6);
 #endif
-#ifndef OPENSSL_NO_TLS1_3
     ADD_ALL_TESTS(test_pluggable_group, 2);
     ADD_ALL_TESTS(test_pluggable_signature, 4);
-#endif
 #ifndef OPENSSL_NO_TLS1_2
     ADD_TEST(test_ssl_dup);
 # ifndef OPENSSL_NO_DH

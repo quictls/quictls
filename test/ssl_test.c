@@ -433,9 +433,7 @@ static int test_handshake(int idx)
     }
 #endif
     if (test_ctx->method == SSL_TEST_METHOD_TLS) {
-#if !defined(OPENSSL_NO_TLS1_3) \
-    && defined(OPENSSL_NO_EC) \
-    && defined(OPENSSL_NO_DH)
+#if defined(OPENSSL_NO_EC)  && defined(OPENSSL_NO_DH)
         /* Without ec or dh there are no built-in groups for TLSv1.3 */
         int maxversion = TLS1_2_VERSION;
 #else

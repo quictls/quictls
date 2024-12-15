@@ -170,7 +170,7 @@ unlink $session;
 
 SKIP: {
     skip "TLS 1.3 disabled", 1
-        if disabled("tls1_3") || (disabled("ec") && disabled("dh"));
+        if disabled("ec") && disabled("dh");
 
     #Test 10: In TLS1.3 we should not negotiate extended master secret
     #Expected result: ClientHello extension seen; ServerHello extension not seen

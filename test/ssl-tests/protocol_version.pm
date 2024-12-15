@@ -179,8 +179,7 @@ sub generate_version_tests {
         }
     }
     return @tests
-        if disabled("tls1_3")
-           || disabled("tls1_2")
+        if disabled("tls1_2")
            || (disabled("ec") && disabled("dh"))
            || $dtls;
 
@@ -317,7 +316,7 @@ sub generate_resumption_tests {
         }
     }
 
-    if (!disabled("tls1_3") && (!disabled("ec") || !disabled("dh")) && !$dtls) {
+    if (!disabled("ec") || !disabled("dh") && !$dtls) {
         push @client_tests, {
             "name" => "resumption-with-hrr",
             "client" => {
@@ -361,8 +360,7 @@ sub expected_result {
     if ($c_min > $c_max
             || ($orig_c_max != scalar @$protocols
                 && $prots[$orig_c_max] eq "TLSv1.3"
-                && $c_max != $orig_c_max
-                && !disabled("tls1_3"))) {
+                && $c_max != $orig_c_max)) {
         # Client should fail to even send a hello.
         return ("ClientFail", undef);
     } elsif ($s_min > $s_max) {

@@ -96,5 +96,4 @@ our @tests13 = (
 
 our @tests = ();
 push @tests, @tests12 unless disabled("tls1_2");
-push @tests, @tests13 unless disabled("tls1_3")
-                             || (disabled("ec") && disabled("dh"));
+push @tests, @tests13 unless (disabled("ec") && disabled("dh"));

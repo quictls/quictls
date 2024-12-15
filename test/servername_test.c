@@ -31,8 +31,7 @@ static const char *host = "dummy-host";
 static char *cert = NULL;
 static char *privkey = NULL;
 
-#if defined(OPENSSL_NO_TLS1_3) || \
-    (defined(OPENSSL_NO_EC) && defined(OPENSSL_NO_DH))
+#if defined(OPENSSL_NO_EC) && defined(OPENSSL_NO_DH)
 static int maxversion = TLS1_2_VERSION;
 #else
 static int maxversion = 0;

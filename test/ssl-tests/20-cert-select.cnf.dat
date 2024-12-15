@@ -934,8 +934,8 @@ my @tests_tls_1_3_non_fips = (
     },
 );
 
-push @tests, @tests_tls_1_3 unless disabled("tls1_3");
-push @tests, @tests_tls_1_3_non_fips unless disabled("tls1_3") || $fips_mode;
+push @tests, @tests_tls_1_3;
+push @tests, @tests_tls_1_3_non_fips unless $fips_mode;
 
 my @tests_dsa_tls_1_2 = (
     {
@@ -992,5 +992,5 @@ my @tests_dsa_tls_1_3 = (
 
 if (!disabled("dsa")) {
     push @tests, @tests_dsa_tls_1_2 unless disabled("dh");
-    push @tests, @tests_dsa_tls_1_3 unless disabled("tls1_3");
+    push @tests, @tests_dsa_tls_1_3;
 }

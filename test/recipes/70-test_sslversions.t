@@ -34,10 +34,8 @@ plan skip_all => "$test_name needs the sock feature enabled"
     if disabled("sock");
 
 plan skip_all => "$test_name needs TLS1.3, TLS1.2 and TLS1.1 enabled"
-    if disabled("tls1_3")
-       || (disabled("ec") && disabled("dh"))
-       || disabled("tls1_2")
-       || disabled("tls1_1");
+    if (disabled("ec") && disabled("dh"))
+       || disabled("tls1_2") || disabled("tls1_1");
 
 my $proxy = TLSProxy::Proxy->new(
     undef,

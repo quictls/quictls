@@ -57,9 +57,7 @@ const OPTIONS ciphers_options[] = {
 #ifndef OPENSSL_NO_TLS1_2
     {"tls1_2", OPT_TLS1_2, '-', "Ciphers compatible with TLS1.2"},
 #endif
-#ifndef OPENSSL_NO_TLS1_3
     {"tls1_3", OPT_TLS1_3, '-', "Ciphers compatible with TLS1.3"},
-#endif
 #ifndef OPENSSL_NO_PSK
     {"psk", OPT_PSK, '-', "Include ciphersuites requiring PSK"},
 #endif

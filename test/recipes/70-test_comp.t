@@ -22,7 +22,7 @@ plan skip_all => "$test_name needs the sock feature enabled"
     if disabled("sock");
 
 plan skip_all => "$test_name needs TLSv1.3 or TLSv1.2 enabled"
-    if disabled("tls1_3") && disabled("tls1_2");
+    if disabled("tls1_2");
 
 use constant {
     MULTIPLE_COMPRESSIONS => 0,
@@ -61,7 +61,7 @@ SKIP: {
 
 SKIP: {
     skip "TLSv1.3 disabled", 2
-        if disabled("tls1_3") || (disabled("ec") && disabled("dh"));
+        if disabled("ec") && disabled("dh");
     #Test 3: Check that sending multiple compression methods in a TLSv1.3
     #        ClientHello fails
     $proxy->clear();

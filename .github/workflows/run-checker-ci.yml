@@ -36,7 +36,6 @@ jobs:
           no-default-thread-pool,
           no-tls,
           no-tls1_2,
-          no-tls1_3,
           enable-trace,
           no-ui,
         ]

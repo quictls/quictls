@@ -117,7 +117,6 @@ sub generate_tests() {
                         "ExpectedResult" => "ServerFail",
                         "ExpectedServerAlert" =>
                         ($protocol_name eq "flex"
-                            && !disabled("tls1_3")
                             && (!disabled("ec") || !disabled("dh")))
                         ? "CertificateRequired" : "HandshakeFailure",
                         "Method" => $method,
@@ -207,7 +206,6 @@ sub generate_tests() {
                         "ExpectedResult" => "ServerFail",
                         "ExpectedServerAlert" =>
                         ($protocol_name eq "flex"
-                            && !disabled("tls1_3")
                             && (!disabled("ec") || !disabled("dh")))
                         ? "CertificateRequired" : "HandshakeFailure",
                         "Method" => $method,
