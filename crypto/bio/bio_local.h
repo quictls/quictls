@@ -36,14 +36,6 @@
 
 # ifdef AI_PASSIVE
 
-/*
- * There's a bug in VMS C header file netdb.h, where struct addrinfo
- * always is the P32 variant, but the functions that handle that structure,
- * such as getaddrinfo() and freeaddrinfo() adapt to the initial pointer
- * size.  The easiest workaround is to force struct addrinfo to be the
- * 64-bit variant when compiling in P64 mode.
- */
-
 #  define bio_addrinfo_st addrinfo
 #  define bai_family      ai_family
 #  define bai_socktype    ai_socktype

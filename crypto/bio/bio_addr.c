@@ -256,9 +256,7 @@ static int addr_strings(const BIO_ADDR *ap, int numeric,
             return 0;
         }
 
-        /* VMS getnameinfo() has a bug, it doesn't fill in serv, which
-         * leaves it with whatever garbage that happens to be there.
-         * However, we initialise serv with the empty string (serv[0]
+        /* However, we initialise serv with the empty string (serv[0]
          * is therefore NUL), so it gets real easy to detect when things
          * didn't go the way one might expect.
          */

@@ -54,7 +54,7 @@
 # endif
 
 /*
- * There are 6 types of terminal interface supported, TERMIO, TERMIOS, VMS,
+ * There are five types of terminal interface supported, TERMIO, TERMIOS,
  * MSDOS, WIN32 Console and SGTTY.
  *
  * If someone defines one of the macros TERMIO, TERMIOS or SGTTY, it will
@@ -72,7 +72,7 @@
 #   define TERMIO
 #   undef  SGTTY
 /*
- * We know that VMS, MSDOS, VXWORKS, use entirely other mechanisms.
+ * We know that MSDOS, VXWORKS, use entirely other mechanisms.
  */
 #  elif !defined(OPENSSL_SYS_MSDOS) \
         && !defined(OPENSSL_SYS_VXWORKS)

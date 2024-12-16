@@ -562,9 +562,8 @@ static const OSSL_DISPATCH intern_dispatch_table[] = {
 };
 
 /*
- * On VMS, the provider init function name is expected to be uppercase,
- * see the pragmas in <openssl/core.h>.  Let's do the same with this
- * internal name.  This is how symbol names are treated by default
+ * Make internal names uppercase (VMS history).
+ * This is how symbol names are treated by default
  * by the compiler if nothing else is said, but since this is part
  * of libfips, and we build our libraries with mixed case symbol names,
  * we must switch back to this default explicitly here.

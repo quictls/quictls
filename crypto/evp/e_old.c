@@ -13,8 +13,8 @@
 
 /*
  * Define some deprecated functions, so older programs don't crash and burn
- * too quickly.  On Windows and VMS, these will never be used, since
- * functions and variables in shared libraries are selected by entry point
+ * too quickly.  On Windows, these will never be used, since functions
+ * and variables in shared libraries are selected by entry point
  * location, not by name.
  */
 

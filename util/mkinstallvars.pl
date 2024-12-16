@@ -85,7 +85,7 @@ our \$PKGCONFIGDIR       = '$ENV{PKGCONFIGDIR}';
 our \$PKGCONFIGDIR_REL   = '$ENV{PKGCONFIGDIR_REL}';
 our \$VERSION            = '$ENV{VERSION}';
 our \@LDLIBS             =
-    # Unix and Windows use space separation, VMS uses comma separation
+    # Unix and Windows use space separation
     split(/ +| *, */, '$ENV{LDLIBS}');
 
 1;

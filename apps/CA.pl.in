@@ -211,9 +211,7 @@ if ($WHAT eq '-newcert' ) {
 } elsif ($WHAT eq '-verify' ) {
     my @files = @ARGV ? @ARGV : ( $NEWCERT );
     foreach my $file (@files) {
-        # -CAfile quoted for VMS, since the C RTL downcases all unquoted
-        # arguments to C programs
-        my $status = run("$VERIFY \"-CAfile\" ${CATOP}/$CACERT $file $EXTRA{verify}");
+        my $status = run("$VERIFY -CAfile ${CATOP}/$CACERT $file $EXTRA{verify}");
         $RET = $status if $status != 0;
     }
 } elsif ($WHAT eq '-crl' ) {
