@@ -87,8 +87,6 @@ set of tests" in mind, initially being empty, here are the possible tokens:
                    TESTS="alltests -xxx".
 
 Also, all tokens except for "alltests" may have wildcards, such as *.
-(on Unix and Windows, BSD style wildcards are supported, while on VMS,
-it's VMS style wildcards)
 
 ### Examples
 

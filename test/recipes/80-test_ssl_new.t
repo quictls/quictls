@@ -131,7 +131,7 @@ foreach my $conf (@conf_files) {
     subtest "Test configuration $conf" => sub {
         plan tests => 6 + ($no_fips ? 0 : 3);
         test_conf($conf,
-                  $conf_dependent_tests{$conf} || $^O eq "VMS" ?  0 : 1,
+                  $conf_dependent_tests{$conf} || 0,
                   defined($skip{$conf}) ? $skip{$conf} : $no_tls,
                   "none");
         test_conf($conf,

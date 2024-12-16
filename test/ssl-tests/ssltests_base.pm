@@ -13,8 +13,7 @@ package ssltests;
 sub test_pem
 {
     my ($file) = @_;
-    my $dir_sep = $^O ne "VMS" ? "/" : "";
-    return "\${ENV::TEST_CERTS_DIR}" . $dir_sep . $file,
+    return "\${ENV::TEST_CERTS_DIR}/" . $file;
 }
 
 our $fips_mode = 0;
