@@ -130,7 +130,7 @@ foreach my $conf (@conf_files) {
     subtest "Test configuration $conf" => sub {
         plan tests => 6 + ($no_fips ? 0 : 3);
         test_conf($conf,
-                  0, # was: $conf_dependent_tests{$conf}
+                  0, # WAS: $conf_dependent_tests{$conf}
                   defined($skip{$conf}) ? $skip{$conf} : $no_tls,
                   "none");
         test_conf($conf,
