@@ -40,7 +40,7 @@ GetOptions('name=s'     => \$name,
            'OS=s'       => \$OS,
            'type=s'     => \$type,
            'ctest'      => \$ctest,
-           'verbose'    => \$verbose,
+           'verbose'    => \$verbose)
     or die "Error in command line arguments\n";
 
 die "Please supply arguments\n"
