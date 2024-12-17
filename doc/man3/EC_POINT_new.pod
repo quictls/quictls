@@ -97,7 +97,7 @@ EC_POINT_clear_free() destroys any sensitive data held within the EC_POINT and
 then frees its memory. If B<point> is NULL nothing is done.
 
 EC_POINT_copy() copies the point B<src> into B<dst>. Both B<src> and B<dst>
-must use the same B<EC_METHOD>.
+must be the same type of curve.
 
 EC_POINT_dup() creates a new B<EC_POINT> object and copies the content from
 B<src> to the newly created B<EC_POINT> object.

@@ -103,9 +103,6 @@ const char *OSSL_EC_curve_nid2name(int nid);
 #  endif
 
 #  include <openssl/params.h>
-#  ifndef OPENSSL_NO_DEPRECATED_3_0
-typedef struct ec_method_st EC_METHOD;
-#  endif
 typedef struct ec_group_st EC_GROUP;
 typedef struct ec_point_st EC_POINT;
 typedef struct ecpk_parameters_st ECPKPARAMETERS;
@@ -127,7 +124,7 @@ OSSL_DEPRECATEDIN_3_0 void EC_GROUP_clear_free(EC_GROUP *group);
  */
 void EC_GROUP_free(EC_GROUP *group);
 
-/** Copies EC_GROUP objects. Note: both EC_GROUPs must use the same EC_METHOD.
+/** Copies EC_GROUP objects. Note: both EC_GROUPs must be the same curve type.
  *  \param  dst  destination EC_GROUP object
  *  \param  src  source EC_GROUP object
  *  \return 1 on success and 0 if an error occurred.
@@ -316,7 +313,7 @@ int EC_GROUP_cmp(const EC_GROUP *a, const EC_GROUP *b, BN_CTX *ctx);
 
 /*
  * EC_GROUP_new_GF*() creates a group and calls EC_GROUP_set_GF*() after
- * choosing an appropriate EC_METHOD
+ * choosing an appropriate implementation.
  */
 
 /** Creates a new EC_GROUP object with the specified parameters defined

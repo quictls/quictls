@@ -22,10 +22,6 @@
 # endif
 #endif
 
-#ifdef OPENSSL_NO_DEPRECATED_3_0
-typedef struct ec_method_st EC_METHOD;
-#endif
-
 /*
  * Structure details are not part of the exported interface, so all this may
  * change in future versions.
@@ -171,6 +167,8 @@ struct ec_method_st {
                        EC_POINT *r, EC_POINT *s,
                        EC_POINT *p, BN_CTX *ctx);
 };
+
+typedef struct ec_method_st EC_METHOD;
 
 /*
  * Types and functions to manipulate pre-computed values.
