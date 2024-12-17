@@ -1722,8 +1722,8 @@ static EC_GROUP *ec_group_new_from_data(OSSL_LIB_CTX *libctx,
          * default to `OPENSSL_EC_NAMED_CURVE` encoding of parameters and
          * instead set the ASN1 flag to `OPENSSL_EC_EXPLICIT_CURVE`.
          *
-         * Note that `OPENSSL_EC_NAMED_CURVE` is set as the default ASN1 flag on
-         * `EC_GROUP_new()`, when we don't have enough elements to determine if
+         * Note that `OPENSSL_EC_NAMED_CURVE` is set as the default ASN1 flag
+         * when we don't have enough elements to determine if
          * an OID for the curve name actually exists.
          * We could implement this check on `EC_GROUP_set_curve_name()` but
          * overloading the simple setter with this lookup could have a negative

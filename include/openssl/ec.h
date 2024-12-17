@@ -109,23 +109,12 @@ typedef struct ec_parameters_st ECPARAMETERS;
 /*                   EC_GROUP functions                             */
 /********************************************************************/
 
-/**
- *  Creates a new EC_GROUP object
- *  \param   meth   EC_METHOD to use
- *  \return  newly created EC_GROUP object or NULL in case of an error.
- */
-OSSL_DEPRECATEDIN_3_0 EC_GROUP *EC_GROUP_new(const EC_METHOD *meth);
-
+#  ifndef OPENSSL_NO_DEPRECATED_3_0
 /** Clears and frees a EC_GROUP object
  *  \param  group  EC_GROUP object to be cleared and freed.
  */
 OSSL_DEPRECATEDIN_3_0 void EC_GROUP_clear_free(EC_GROUP *group);
-
-/** Returns the EC_METHOD of the EC_GROUP object.
- *  \param  group  EC_GROUP object
- *  \return EC_METHOD used in this EC_GROUP object.
- */
-OSSL_DEPRECATEDIN_3_0 const EC_METHOD *EC_GROUP_method_of(const EC_GROUP *group);
+#  endif
 
 /** Frees a EC_GROUP object
  *  \param  group  EC_GROUP object to be freed.
@@ -320,7 +309,7 @@ int EC_GROUP_check_discriminant(const EC_GROUP *group, BN_CTX *ctx);
 int EC_GROUP_cmp(const EC_GROUP *a, const EC_GROUP *b, BN_CTX *ctx);
 
 /*
- * EC_GROUP_new_GF*() calls EC_GROUP_new() and EC_GROUP_set_GF*() after
+ * EC_GROUP_new_GF*() creates a group and calls EC_GROUP_set_GF*() after
  * choosing an appropriate EC_METHOD
  */
 
@@ -482,12 +471,6 @@ EC_POINT *EC_POINT_dup(const EC_POINT *src, const EC_GROUP *group);
 int EC_POINT_set_to_infinity(const EC_GROUP *group, EC_POINT *point);
 
 #  ifndef OPENSSL_NO_DEPRECATED_3_0
-/** Returns the EC_METHOD used in EC_POINT object
- *  \param  point  EC_POINT object
- *  \return the EC_METHOD used
- */
-OSSL_DEPRECATEDIN_3_0 const EC_METHOD *EC_POINT_method_of(const EC_POINT *point);
-
 /** Sets the jacobian projective coordinates of a EC_POINT over GFp
  *  \param  group  underlying EC_GROUP object
  *  \param  p      EC_POINT object

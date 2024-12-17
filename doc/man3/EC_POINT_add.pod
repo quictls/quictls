@@ -78,7 +78,7 @@ EC_GROUP_have_precompute_mult return 1 if a precomputation has been done, or 0 i
 
 =head1 SEE ALSO
 
-L<crypto(7)>, L<EC_GROUP_new(3)>, L<EC_GROUP_copy(3)>,
+L<crypto(7)>, L<EC_GROUP_copy(3)>,
 L<EC_POINT_new(3)>, L<EC_KEY_new(3)>,
 L<d2i_ECPKParameters(3)>
 
