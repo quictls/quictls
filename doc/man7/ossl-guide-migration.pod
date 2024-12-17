@@ -1523,16 +1523,6 @@ Applications should use L<EVP_PKEY_get_size(3)>.
 
 =item *
 
-EC_GFp_mont_method(), EC_GFp_nist_method(),
-EC_GFp_nistp224_method(), EC_GFp_nistp256_method(), EC_GFp_nistp521_method(),
-EC_GFp_simple_method()
-
-There are no replacements for these functions. Applications should rely on the
-library automatically assigning a suitable method internally when an EC_GROUP
-is constructed.
-
-=item *
-
 EC_GROUP_clear_free()
 
 Use L<EC_GROUP_free(3)> instead.

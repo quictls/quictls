@@ -112,44 +112,6 @@ typedef struct ecpk_parameters_st ECPKPARAMETERS;
 typedef struct ec_parameters_st ECPARAMETERS;
 
 /********************************************************************/
-/*               EC_METHODs for curves over GF(p)                   */
-/********************************************************************/
-
-#  ifndef OPENSSL_NO_DEPRECATED_3_0
-/** Returns the basic GFp ec methods which provides the basis for the
- *  optimized methods.
- *  \return  EC_METHOD object
- */
-OSSL_DEPRECATEDIN_3_0 const EC_METHOD *EC_GFp_simple_method(void);
-
-/** Returns GFp methods using montgomery multiplication.
- *  \return  EC_METHOD object
- */
-OSSL_DEPRECATEDIN_3_0 const EC_METHOD *EC_GFp_mont_method(void);
-
-/** Returns GFp methods using optimized methods for NIST recommended curves
- *  \return  EC_METHOD object
- */
-OSSL_DEPRECATEDIN_3_0 const EC_METHOD *EC_GFp_nist_method(void);
-
-#   ifndef OPENSSL_NO_EC_NISTP_64_GCC_128
-/** Returns 64-bit optimized methods for nistp224
- *  \return  EC_METHOD object
- */
-OSSL_DEPRECATEDIN_3_0 const EC_METHOD *EC_GFp_nistp224_method(void);
-
-/** Returns 64-bit optimized methods for nistp256
- *  \return  EC_METHOD object
- */
-OSSL_DEPRECATEDIN_3_0 const EC_METHOD *EC_GFp_nistp256_method(void);
-
-/** Returns 64-bit optimized methods for nistp521
- *  \return  EC_METHOD object
- */
-OSSL_DEPRECATEDIN_3_0 const EC_METHOD *EC_GFp_nistp521_method(void);
-#   endif /* OPENSSL_NO_EC_NISTP_64_GCC_128 */
-
-/********************************************************************/
 /*                   EC_GROUP functions                             */
 /********************************************************************/
 
@@ -170,13 +132,6 @@ OSSL_DEPRECATEDIN_3_0 void EC_GROUP_clear_free(EC_GROUP *group);
  *  \return EC_METHOD used in this EC_GROUP object.
  */
 OSSL_DEPRECATEDIN_3_0 const EC_METHOD *EC_GROUP_method_of(const EC_GROUP *group);
-
-/** Returns the field type of the EC_METHOD.
- *  \param  meth  EC_METHOD object
- *  \return NID of the underlying field type OID.
- */
-OSSL_DEPRECATEDIN_3_0 int EC_METHOD_get_field_type(const EC_METHOD *meth);
-#  endif /* OPENSSL_NO_DEPRECATED_3_0 */
 
 /** Frees a EC_GROUP object
  *  \param  group  EC_GROUP object to be freed.

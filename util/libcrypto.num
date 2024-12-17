@@ -1163,7 +1163,6 @@ PKCS7_add_attribute                     1207	3_0_0	EXIST::FUNCTION:
 ENGINE_register_DSA                     1208	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,ENGINE
 OPENSSL_LH_node_stats                   1209	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_1,STDIO
 X509_policy_tree_free                   1210	3_0_0	EXIST::FUNCTION:
-EC_GFp_simple_method                    1211	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
 X509_it                                 1212	3_0_0	EXIST::FUNCTION:
 d2i_PROXY_POLICY                        1213	3_0_0	EXIST::FUNCTION:
 MDC2_Update                             1214	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,MDC2
@@ -2570,7 +2569,6 @@ EVP_PKEY_assign                         2662	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_
 EVP_aes_128_ofb                         2663	3_0_0	EXIST::FUNCTION:
 CMS_data                                2664	3_0_0	EXIST::FUNCTION:CMS
 X509_load_cert_file                     2665	3_0_0	EXIST::FUNCTION:
-EC_GFp_nistp521_method                  2667	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC,EC_NISTP_64_GCC_128
 ECDSA_SIG_free                          2668	3_0_0	EXIST::FUNCTION:EC
 d2i_PKCS12_BAGS                         2669	3_0_0	EXIST::FUNCTION:
 RSA_public_encrypt                      2670	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
@@ -2706,7 +2704,6 @@ CMS_dataFinal                           2802	3_0_0	EXIST::FUNCTION:CMS
 ASN1_TIME_it                            2803	3_0_0	EXIST::FUNCTION:
 ENGINE_get_static_state                 2804	3_0_0	EXIST::FUNCTION:ENGINE
 EC_KEY_set_asn1_flag                    2805	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
-EC_GFp_mont_method                      2806	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
 OPENSSL_asc2uni                         2807	3_0_0	EXIST::FUNCTION:
 TS_REQ_new                              2808	3_0_0	EXIST::FUNCTION:TS
 ENGINE_register_all_DH                  2809	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,ENGINE
@@ -2723,7 +2720,6 @@ CRYPTO_secure_used                      2819	3_0_0	EXIST::FUNCTION:
 d2i_X509_CRL_INFO                       2820	3_0_0	EXIST::FUNCTION:
 X509_CRL_get_issuer                     2821	3_0_0	EXIST::FUNCTION:
 d2i_SCT_LIST                            2822	3_0_0	EXIST::FUNCTION:CT
-EC_GFp_nist_method                      2823	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
 SCT_free                                2824	3_0_0	EXIST::FUNCTION:CT
 TS_TST_INFO_get_msg_imprint             2825	3_0_0	EXIST::FUNCTION:TS
 X509v3_addr_add_range                   2826	3_0_0	EXIST::FUNCTION:RFC3779
@@ -2762,7 +2758,6 @@ X509_EXTENSION_dup                      2861	3_0_0	EXIST::FUNCTION:
 EVP_PKEY_asn1_new                       2862	3_0_0	EXIST::FUNCTION:
 BIO_socket_nbio                         2863	3_0_0	EXIST::FUNCTION:SOCK
 EVP_CIPHER_set_asn1_iv                  2864	3_0_0	EXIST::FUNCTION:
-EC_GFp_nistp224_method                  2865	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC,EC_NISTP_64_GCC_128
 BN_swap                                 2866	3_0_0	EXIST::FUNCTION:
 d2i_ECParameters                        2867	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
 X509_NAME_add_entry_by_OBJ              2868	3_0_0	EXIST::FUNCTION:
@@ -3329,7 +3324,6 @@ ERR_get_next_error_library              3446	3_0_0	EXIST::FUNCTION:
 OCSP_RESPONSE_print                     3447	3_0_0	EXIST::FUNCTION:OCSP
 BN_get_rfc3526_prime_2048               3448	3_0_0	EXIST::FUNCTION:
 BIO_new_bio_pair                        3449	3_0_0	EXIST::FUNCTION:
-EC_GFp_nistp256_method                  3450	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC,EC_NISTP_64_GCC_128
 BIO_method_type                         3451	3_0_0	EXIST::FUNCTION:
 ECPKParameters_print                    3452	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
 EVP_rc4                                 3453	3_0_0	EXIST::FUNCTION:RC4

@@ -223,7 +223,6 @@ L<EVP_PKEY_Q_keygen(3)>
 L<crypto(7)>, L<EC_GROUP_new(3)>,
 L<EC_GROUP_copy(3)>, L<EC_POINT_new(3)>,
 L<EC_POINT_add(3)>,
-L<EC_GFp_simple_method(3)>,
 L<d2i_ECPKParameters(3)>,
 L<OSSL_LIB_CTX(3)>
 
