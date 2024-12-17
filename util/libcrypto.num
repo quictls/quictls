@@ -39,7 +39,6 @@ X509_NAME_delete_entry                  40	3_0_0	EXIST::FUNCTION:
 EVP_PKEY_meth_set_verify_recover        41	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
 UI_set_method                           42	3_0_0	EXIST::FUNCTION:
 PKCS7_ISSUER_AND_SERIAL_it              43	3_0_0	EXIST::FUNCTION:
-EC_GROUP_method_of                      44	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
 RSA_blinding_on                         45	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
 X509_get0_signature                     47	3_0_0	EXIST::FUNCTION:
 X509_REVOKED_get0_extensions            48	3_0_0	EXIST::FUNCTION:
@@ -1178,7 +1177,6 @@ X509_time_adj                           1223	3_0_0	EXIST::FUNCTION:
 EVP_PKEY_asn1_find_str                  1224	3_0_0	EXIST::FUNCTION:
 X509_VERIFY_PARAM_get_flags             1225	3_0_0	EXIST::FUNCTION:
 OPENSSL_DIR_end                         1226	3_0_0	EXIST::FUNCTION:
-EC_GROUP_new                            1227	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
 CMS_SignerInfo_get0_pkey_ctx            1228	3_0_0	EXIST::FUNCTION:CMS
 d2i_ASN1_PRINTABLESTRING                1229	3_0_0	EXIST::FUNCTION:
 CMS_RecipientInfo_ktri_cert_cmp         1230	3_0_0	EXIST::FUNCTION:CMS
@@ -2084,7 +2082,6 @@ BN_CTX_free                             2159	3_0_0	EXIST::FUNCTION:
 EVP_MD_get_flags                        2161	3_0_0	EXIST::FUNCTION:
 OPENSSL_sk_set                          2162	3_0_0	EXIST::FUNCTION:
 OCSP_request_sign                       2163	3_0_0	EXIST::FUNCTION:OCSP
-EC_POINT_method_of                      2165	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
 PKCS7_ENCRYPT_it                        2166	3_0_0	EXIST::FUNCTION:
 AUTHORITY_INFO_ACCESS_it                2167	3_0_0	EXIST::FUNCTION:
 X509_EXTENSION_create_by_NID            2168	3_0_0	EXIST::FUNCTION:
@@ -2150,7 +2147,6 @@ POLICY_CONSTRAINTS_new                  2230	3_0_0	EXIST::FUNCTION:
 OTHERNAME_new                           2231	3_0_0	EXIST::FUNCTION:
 BN_rshift                               2232	3_0_0	EXIST::FUNCTION:
 i2d_GENERAL_NAMES                       2233	3_0_0	EXIST::FUNCTION:
-EC_METHOD_get_field_type                2234	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
 ENGINE_set_name                         2235	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,ENGINE
 TS_TST_INFO_get_policy_id               2236	3_0_0	EXIST::FUNCTION:TS
 PKCS7_SIGNER_INFO_set                   2237	3_0_0	EXIST::FUNCTION:
