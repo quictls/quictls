@@ -62,7 +62,8 @@ EC_GROUP_get_field_type
 
 =head1 DESCRIPTION
 
-EC_GROUP_copy() copies the curve B<src> into B<dst>. Both B<src> and B<dst> must use the same EC_METHOD.
+EC_GROUP_copy() copies the curve B<src> into B<dst>. Both B<src> and B<dst>
+must be the same type of curve.
 
 EC_GROUP_dup() creates a new EC_GROUP object and copies the content from B<src> to the newly created
 EC_GROUP object.

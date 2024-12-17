@@ -21,7 +21,7 @@
 static size_t crv_len = 0;
 static EC_builtin_curve *curves = NULL;
 
-/* sanity checks field_inv function pointer in EC_METHOD */
+/* sanity checks field_inv function pointer in implementation */
 static int group_field_tests(const EC_GROUP *group, BN_CTX *ctx)
 {
     BIGNUM *a = NULL, *b = NULL, *c = NULL;
