@@ -49,6 +49,7 @@ aliases for others: `BUF_strdup`, `BUF_strndup`, `BUF_memdup`,
   - Removed DJGPP support.
   - Removed WinCE support.
   - Removed IRIX support.
+  - Removed HP-PARISC (including MPE/ix) support.
   - Removed `I386_only` support.
   - Removed support for SCO platforms.
   - Removed support for Apollo.
