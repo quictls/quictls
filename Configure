@@ -608,7 +608,7 @@ my @disable_cascades = (
     "zstd"              => [ "zstd-dynamic" ],
     "des"               => [ "mdc2" ],
     "ec"                => [ "ecdsa", "sm2", "gost", "ecx", "boring-quic-api" ],
-    "sock"              => [ "dtls", "sctp", "tfo" ],
+    "sock"              => [ "dtls", "sctp", "http", "ocsp", "tfo" ],
     "dtls"              => [ @dtls ],
     sub { 0 == scalar grep { !$disabled{$_} } @dtls }
                         => [ "dtls" ],
