@@ -284,18 +284,6 @@ EC_GROUP *EC_GROUP_dup(const EC_GROUP *a)
         return t;
 }
 
-#ifndef OPENSSL_NO_DEPRECATED_3_0
-const EC_METHOD *EC_GROUP_method_of(const EC_GROUP *group)
-{
-    return group->meth;
-}
-
-int EC_METHOD_get_field_type(const EC_METHOD *meth)
-{
-    return meth->field_type;
-}
-#endif
-
 static int ec_precompute_mont_data(EC_GROUP *);
 
 /*-
