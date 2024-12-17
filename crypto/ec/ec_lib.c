@@ -71,15 +71,6 @@ EC_GROUP *ossl_ec_group_new_ex(OSSL_LIB_CTX *libctx, const char *propq,
     return NULL;
 }
 
-#ifndef OPENSSL_NO_DEPRECATED_3_0
-# ifndef FIPS_MODULE
-EC_GROUP *EC_GROUP_new(const EC_METHOD *meth)
-{
-    return ossl_ec_group_new_ex(NULL, NULL, meth);
-}
-# endif
-#endif
-
 void EC_pre_comp_free(EC_GROUP *group)
 {
     switch (group->pre_comp_type) {
@@ -283,18 +274,6 @@ EC_GROUP *EC_GROUP_dup(const EC_GROUP *a)
     }
         return t;
 }
-
-#ifndef OPENSSL_NO_DEPRECATED_3_0
-const EC_METHOD *EC_GROUP_method_of(const EC_GROUP *group)
-{
-    return group->meth;
-}
-
-int EC_METHOD_get_field_type(const EC_METHOD *meth)
-{
-    return meth->field_type;
-}
-#endif
 
 static int ec_precompute_mont_data(EC_GROUP *);
 
@@ -764,13 +743,6 @@ EC_POINT *EC_POINT_dup(const EC_POINT *a, const EC_GROUP *group)
     }
     return t;
 }
-
-#ifndef OPENSSL_NO_DEPRECATED_3_0
-const EC_METHOD *EC_POINT_method_of(const EC_POINT *point)
-{
-    return point->meth;
-}
-#endif
 
 int EC_POINT_set_to_infinity(const EC_GROUP *group, EC_POINT *point)
 {

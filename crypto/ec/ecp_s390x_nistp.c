@@ -320,7 +320,7 @@ static int ecdsa_s390x_nistp##bits##_verify_sig(const                   \
                                         S390X_SIZE_P##bits);            \
 }                                                                       \
                                                                         \
-const EC_METHOD *EC_GFp_s390x_nistp##bits##_method(void)                \
+const EC_METHOD *ossl_EC_GFp_s390x_nistp##bits##_method(void)           \
 {                                                                       \
     static const EC_METHOD EC_GFp_s390x_nistp##bits##_meth = {          \
         .field_type = NID_X9_62_prime_field,                            \
@@ -386,7 +386,7 @@ const EC_METHOD *EC_GFp_s390x_nistp##bits##_method(void)                \
             & S390X_CAPBIT(S390X_ECDSA_SIGN_P##bits)))                  \
         ret = &EC_GFp_s390x_nistp##bits##_meth;                         \
     else                                                                \
-        ret = EC_GFp_mont_method();                                     \
+        ret = ossl_EC_GFp_mont_method();                                \
                                                                         \
     return ret;                                                         \
 }

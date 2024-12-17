@@ -23,20 +23,15 @@
 # endif
 #endif
 
-#ifdef OPENSSL_NO_DEPRECATED_3_0
-typedef struct ec_method_st EC_METHOD;
-#endif
-
 /*
  * Structure details are not part of the exported interface, so all this may
  * change in future versions.
  */
 
 struct ec_method_st {
-    /* used by EC_METHOD_get_field_type: */
     int field_type;             /* a NID */
     /*
-     * used by EC_GROUP_new, EC_GROUP_free, EC_GROUP_clear_free,
+     * used by EC_GROUP_free, EC_GROUP_clear_free,
      * EC_GROUP_copy:
      */
     int (*group_init) (EC_GROUP *);
@@ -173,6 +168,8 @@ struct ec_method_st {
                        EC_POINT *r, EC_POINT *s,
                        EC_POINT *p, BN_CTX *ctx);
 };
+
+typedef struct ec_method_st EC_METHOD;
 
 /*
  * Types and functions to manipulate pre-computed values.
@@ -547,17 +544,26 @@ int ossl_ec_group_simple_order_bits(const EC_GROUP *group);
 EC_GROUP *ossl_ec_group_new_ex(OSSL_LIB_CTX *libctx, const char *propq,
                                const EC_METHOD *meth);
 
+
+const EC_METHOD *ossl_EC_GFp_nistp224_method(void);
+const EC_METHOD *ossl_EC_GFp_nistp256_method(void);
+const EC_METHOD *ossl_EC_GFp_nistp384_method(void);
+const EC_METHOD *ossl_EC_GFp_nistp521_method(void);
+const EC_METHOD *ossl_EC_GFp_mont_method(void);
+const EC_METHOD *ossl_EC_GFp_nist_method(void);
+const EC_METHOD *ossl_EC_GFp_simple_method(void);
+
 #ifdef ECP_NISTZ256_ASM
 /** Returns GFp methods using montgomery multiplication, with x86-64 optimized
  * P256. See http://eprint.iacr.org/2013/816.
  *  \return  EC_METHOD object
  */
-const EC_METHOD *EC_GFp_nistz256_method(void);
+const EC_METHOD *ossl_EC_GFp_nistz256_method(void);
 #endif
 #ifdef S390X_EC_ASM
-const EC_METHOD *EC_GFp_s390x_nistp256_method(void);
-const EC_METHOD *EC_GFp_s390x_nistp384_method(void);
-const EC_METHOD *EC_GFp_s390x_nistp521_method(void);
+const EC_METHOD *ossl_EC_GFp_s390x_nistp256_method(void);
+const EC_METHOD *ossl_EC_GFp_s390x_nistp384_method(void);
+const EC_METHOD *ossl_EC_GFp_s390x_nistp521_method(void);
 #endif
 
 size_t ossl_ec_key_simple_priv2oct(const EC_KEY *eckey,
@@ -570,7 +576,7 @@ int ossl_ec_key_simple_check_key(const EC_KEY *eckey);
 
 #ifdef ECP_SM2P256_ASM
 /* Returns optimized methods for SM2 */
-const EC_METHOD *EC_GFp_sm2p256_method(void);
+const EC_METHOD *ossl_EC_GFp_sm2p256_method(void);
 #endif
 
 int ossl_ec_curve_nid_from_params(const EC_GROUP *group, BN_CTX *ctx);
@@ -639,6 +645,7 @@ ECDSA_SIG *ossl_ecdsa_simple_sign_sig(const unsigned char *dgst, int dgst_len,
                                       EC_KEY *eckey);
 int ossl_ecdsa_simple_verify_sig(const unsigned char *dgst, int dgst_len,
                                  const ECDSA_SIG *sig, EC_KEY *eckey);
+
 
 
 /*-
