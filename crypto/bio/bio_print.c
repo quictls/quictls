@@ -71,7 +71,7 @@ int BIO_snprintf(char *buff, size_t n, const char *format, ...)
  */
 int BIO_vsnprintf(char *buff, size_t n, const char *format, va_list args)
 {
-    size_t ret;
+    int ret;
 
     ret = vsnprintf(buff, n, format, args);
     return ret > n ? -1 : (int)ret;
