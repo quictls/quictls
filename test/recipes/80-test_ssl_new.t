@@ -39,13 +39,13 @@ if (defined $ENV{SSL_TESTS}) {
     }
     plan tests => scalar @conf_srcs;
 } else {
-    @conf_srcs = glob(srctop_file("test", "ssl-tests", "*.cnf.in"));
+    @conf_srcs = glob(srctop_file("test", "ssl-tests", "*.cnf.dat"));
     # We hard-code the number of tests to double-check that the globbing above
     # finds all files as expected.
     plan tests => 30;
 }
 map { s/;.*// } @conf_srcs if $^O eq "VMS";
-my @conf_files = map { basename($_, ".in") } @conf_srcs;
+my @conf_files = map { basename($_, ".dat") } @conf_srcs;
 map { s/\^// } @conf_files if $^O eq "VMS";
 
 # Some test results depend on the configuration of enabled protocols. We only
@@ -149,7 +149,7 @@ sub test_conf {
     my ($conf, $check_source, $skip, $provider) = @_;
 
     my $conf_file = srctop_file("test", "ssl-tests", $conf);
-    my $input_file = $conf_file . ".in";
+    my $input_file = $conf_file . ".dat";
     my $output_file = $conf . "." . $provider;
     my $run_test = 1;
 
