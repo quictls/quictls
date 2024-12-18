@@ -34,11 +34,6 @@ IF[{- !$disabled{asm} -}]
   $GHASHDEF_x86_64=GHASH_ASM
   $GHASHDEF_x86_64_sse2=OPENSSL_IA32_SSE2
 
-  # ghash-ia64.s doesn't work on VMS
-  IF[{- $config{target} !~ /^vms-/ -}]
-    $GHASHDEF_ia64=GHASH_ASM
-  ENDIF
-
   $GHASHDEF_sparcv9=GHASH_ASM
 
   $GHASHDEF_alpha=GHASH_ASM

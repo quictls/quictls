@@ -12,9 +12,6 @@ IF[{- !$disabled{asm} -}]
         aesni-sha1-x86_64.s aesni-sha256-x86_64.s aesni-mb-x86_64.s
   $AESDEF_x86_64=AES_ASM VPAES_ASM BSAES_ASM
 
-  $AESASM_ia64=aes_core.c aes_cbc.c aes-ia64.s
-  $AESDEF_ia64=AES_ASM
-
   $AESASM_sparcv9=\
         aes_core.c aes_cbc.c aes-sparcv9.S aest4-sparcv9.S aesfx-sparcv9.S
   $AESDEF_sparcv9=AES_ASM
@@ -85,7 +82,6 @@ IF[{- !$disabled{module} && !$disabled{shared} -}]
   DEFINE[../../providers/liblegacy.a]=$AESDEF
 ENDIF
 
-GENERATE[aes-ia64.s]=asm/aes-ia64.S
 GENERATE[bsaes-armv8.S]=asm/bsaes-armv8.pl
 
 GENERATE[aes-586.S]=asm/aes-586.pl
