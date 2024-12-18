@@ -33,18 +33,18 @@ int BIO_vprintf(BIO *bio, const char *format, va_list args)
     va_copy(copy, args);
     ret = vsnprintf(buff, sizeof(buff), format, args);
     if (ret < (int)sizeof(buff))
-	i = BIO_write(bio, buff, ret);
+        i = BIO_write(bio, buff, ret);
     else {
-	/* Allocate enough space and try again. */
-	int size = ret + 1;
-	char *p = OPENSSL_malloc(size);
+        /* Allocate enough space and try again. */
+        int size = ret + 1;
+        char *p = OPENSSL_malloc(size);
 
-	if (p != NULL) {
-	    ret = vsnprintf(p, size, format, copy);
-	    if (ret < size)
-		i = BIO_write(bio, p, ret);
-	    OPENSSL_free(p);
-	}
+        if (p != NULL) {
+            ret = vsnprintf(p, size, format, copy);
+            if (ret < size)
+                i = BIO_write(bio, p, ret);
+            OPENSSL_free(p);
+        }
     }
     va_end(copy);
     return i;
@@ -62,7 +62,7 @@ int BIO_snprintf(char *buff, size_t n, const char *format, ...)
     va_start(args, format);
     ret = vsnprintf(buff, n, format, args);
     va_end(args);
-    return ret > n ? -1 : (int)ret;
+    return (size_t)ret > n ? -1 : ret;
 }
 
 /*
@@ -74,5 +74,5 @@ int BIO_vsnprintf(char *buff, size_t n, const char *format, va_list args)
     int ret;
 
     ret = vsnprintf(buff, n, format, args);
-    return ret > n ? -1 : (int)ret;
+    return (size_t)ret > n ? -1 : ret;
 }
