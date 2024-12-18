@@ -1,6 +1,4 @@
 /*
- * {- join("\n * ", @autowarntext) -}
- *
  * Copyright 2020-2021 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
@@ -9,12 +7,21 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "prov/der_rsa.h"
+#include "prov/der_sm2.h"
 
 /* Well known OIDs precompiled */
-{-
-    $OUT = oids_to_c::process_leaves('providers/common/der/NIST.asn1',
-                                     'providers/common/der/RSA.asn1',
-                                     { dir => $config{sourcedir},
-                                       filter => \&oids_to_c::filter_to_C });
--}
+
+/*
+ * sm2-with-SM3 OBJECT IDENTIFIER ::= { sm-scheme 501 }
+ */
+const unsigned char ossl_der_oid_sm2_with_SM3[DER_OID_SZ_sm2_with_SM3] = {
+    DER_OID_V_sm2_with_SM3
+};
+
+/*
+ * curveSM2 OBJECT IDENTIFIER ::= { sm-scheme 301 }
+ */
+const unsigned char ossl_der_oid_curveSM2[DER_OID_SZ_curveSM2] = {
+    DER_OID_V_curveSM2
+};
+
