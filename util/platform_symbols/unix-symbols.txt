@@ -127,6 +127,7 @@ sigaction
 sleep
 socket
 sprintf
+snprintf
 stderr
 stdin
 stdout
@@ -153,4 +154,5 @@ __timezone
 uname
 usleep
 vfprintf
+vsnprintf
 __xpg_strerror_r
