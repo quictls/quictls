@@ -25,25 +25,26 @@ int BIO_printf(BIO *bio, const char *format, ...)
 
 int BIO_vprintf(BIO *bio, const char *format, va_list args)
 {
-    size_t ret;
-    int i = -1;
+    int ret, i = -1;
     char buff[1024];
     va_list copy;
 
     /* Does it fit in the fixed buffer? */
     va_copy(copy, args);
     ret = vsnprintf(buff, sizeof(buff), format, args);
-    if (ret < sizeof(buff))
+    if (ret < (int)sizeof(buff))
 	i = BIO_write(bio, buff, ret);
     else {
 	/* Allocate enough space and try again. */
-	size_t size = ret + 1;
+	int size = ret + 1;
 	char *p = OPENSSL_malloc(size);
 
-	ret = vsnprintf(p, size, format, copy);
-	if (ret < size)
-	    i = BIO_write(bio, p, ret);
-	OPENSSL_free(p);
+	if (p != NULL) {
+	    ret = vsnprintf(p, size, format, copy);
+	    if (ret < size)
+		i = BIO_write(bio, p, ret);
+	    OPENSSL_free(p);
+	}
     }
     va_end(copy);
     return i;
