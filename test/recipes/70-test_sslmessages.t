@@ -174,7 +174,7 @@ my $proxy = TLSProxy::Proxy->new(
 $proxy->serverconnects(2);
 $proxy->clientflags("-no_tls1_3 -sess_out ".$session);
 $proxy->start() or plan skip_all => "Unable to start up Proxy for tests";
-plan tests => 21;
+plan tests => 18;
 checkhandshake($proxy, checkhandshake::DEFAULT_HANDSHAKE,
                checkhandshake::DEFAULT_EXTENSIONS,
                "Default handshake test");
@@ -358,41 +358,6 @@ SKIP: {
                    | checkhandshake::STATUS_REQUEST_CLI_EXTENSION
                    | checkhandshake::STATUS_REQUEST_SRV_EXTENSION,
                    "SCT handshake test");
-}
-
-
-SKIP: {
-    skip "No NPN support in this OpenSSL build", 3
-        if disabled("nextprotoneg");
-
-    #Test 17: NPN handshake (client request only)
-    $proxy->clear();
-    $proxy->clientflags("-no_tls1_3 -nextprotoneg test");
-    $proxy->start();
-    checkhandshake($proxy, checkhandshake::DEFAULT_HANDSHAKE,
-                   checkhandshake::DEFAULT_EXTENSIONS
-                   | checkhandshake::NPN_CLI_EXTENSION,
-                   "NPN handshake test (client)");
-
-    #Test 18: NPN handshake (server support only)
-    $proxy->clear();
-    $proxy->clientflags("-no_tls1_3");
-    $proxy->serverflags("-nextprotoneg test");
-    $proxy->start();
-    checkhandshake($proxy, checkhandshake::DEFAULT_HANDSHAKE,
-                   checkhandshake::DEFAULT_EXTENSIONS,
-                   "NPN handshake test (server)");
-
-    #Test 19: NPN handshake (client and server)
-    $proxy->clear();
-    $proxy->clientflags("-no_tls1_3 -nextprotoneg test");
-    $proxy->serverflags("-nextprotoneg test");
-    $proxy->start();
-    checkhandshake($proxy, checkhandshake::NPN_HANDSHAKE,
-                   checkhandshake::DEFAULT_EXTENSIONS
-                   | checkhandshake::NPN_CLI_EXTENSION
-                   | checkhandshake::NPN_SRV_EXTENSION,
-                   "NPN handshake test");
 }
 
 SKIP: {

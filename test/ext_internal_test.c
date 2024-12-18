@@ -41,11 +41,7 @@ static EXT_LIST ext_list[] = {
 #else
     EXT_EXCEPTION(status_request),
 #endif
-#ifndef OPENSSL_NO_NEXTPROTONEG
-    EXT_ENTRY(next_proto_neg),
-#else
     EXT_EXCEPTION(next_proto_neg),
-#endif
     EXT_ENTRY(application_layer_protocol_negotiation),
 #ifndef OPENSSL_NO_SRTP
     EXT_ENTRY(use_srtp),

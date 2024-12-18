@@ -129,7 +129,6 @@ B<openssl> B<s_server>
 [B<-sctp_label_bug>]
 [B<-use_srtp> I<val>]
 [B<-no_dhe>]
-[B<-nextprotoneg> I<val>]
 [B<-alpn> I<val>]
 [B<-ktls>]
 [B<-sendfile>]
@@ -780,7 +779,7 @@ Offer SRTP key management with a colon-separated profile list.
 If this option is set then no DH parameters will be loaded effectively
 disabling the ephemeral DH cipher suites.
 
-=item B<-alpn> I<val>, B<-nextprotoneg> I<val>
+=item B<-alpn> I<val>
 
 These flags enable the Application-Layer Protocol Negotiation
 or Next Protocol Negotiation (NPN) extension, respectively. ALPN is the
@@ -789,7 +788,6 @@ The I<val> list is a comma-separated list of supported protocol
 names.  The list should contain the most desirable protocols first.
 Protocol names are printable ASCII strings, for example "http/1.1" or
 "spdy/3".
-The flag B<-nextprotoneg> cannot be specified if B<-tls1_3> is used.
 
 =item B<-ktls>
 

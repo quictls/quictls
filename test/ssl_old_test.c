@@ -99,86 +99,6 @@ static unsigned int psk_server_callback(SSL *ssl, const char *identity,
 
 static BIO *bio_stdout = NULL;
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-/* Note that this code assumes that this is only a one element list: */
-static const char NEXT_PROTO_STRING[] = "\x09testproto";
-static int npn_client = 0;
-static int npn_server = 0;
-static int npn_server_reject = 0;
-
-static int cb_client_npn(SSL *s, unsigned char **out, unsigned char *outlen,
-                         const unsigned char *in, unsigned int inlen,
-                         void *arg)
-{
-    /*
-     * This callback only returns the protocol string, rather than a length
-     * prefixed set. We assume that NEXT_PROTO_STRING is a one element list
-     * and remove the first byte to chop off the length prefix.
-     */
-    *out = (unsigned char *)NEXT_PROTO_STRING + 1;
-    *outlen = sizeof(NEXT_PROTO_STRING) - 2;
-    return SSL_TLSEXT_ERR_OK;
-}
-
-static int cb_server_npn(SSL *s, const unsigned char **data,
-                         unsigned int *len, void *arg)
-{
-    *data = (const unsigned char *)NEXT_PROTO_STRING;
-    *len = sizeof(NEXT_PROTO_STRING) - 1;
-    return SSL_TLSEXT_ERR_OK;
-}
-
-static int cb_server_rejects_npn(SSL *s, const unsigned char **data,
-                                 unsigned int *len, void *arg)
-{
-    return SSL_TLSEXT_ERR_NOACK;
-}
-
-static int verify_npn(SSL *client, SSL *server)
-{
-    const unsigned char *client_s;
-    unsigned client_len;
-    const unsigned char *server_s;
-    unsigned server_len;
-
-    SSL_get0_next_proto_negotiated(client, &client_s, &client_len);
-    SSL_get0_next_proto_negotiated(server, &server_s, &server_len);
-
-    if (client_len) {
-        BIO_printf(bio_stdout, "Client NPN: ");
-        BIO_write(bio_stdout, client_s, client_len);
-        BIO_printf(bio_stdout, "\n");
-    }
-
-    if (server_len) {
-        BIO_printf(bio_stdout, "Server NPN: ");
-        BIO_write(bio_stdout, server_s, server_len);
-        BIO_printf(bio_stdout, "\n");
-    }
-
-    /*
-     * If an NPN string was returned, it must be the protocol that we
-     * expected to negotiate.
-     */
-    if (client_len && (client_len != sizeof(NEXT_PROTO_STRING) - 2 ||
-                       memcmp(client_s, NEXT_PROTO_STRING + 1, client_len)))
-        return -1;
-    if (server_len && (server_len != sizeof(NEXT_PROTO_STRING) - 2 ||
-                       memcmp(server_s, NEXT_PROTO_STRING + 1, server_len)))
-        return -1;
-
-    if (!npn_client && client_len)
-        return -1;
-    if (!npn_server && server_len)
-        return -1;
-    if (npn_server_reject && server_len)
-        return -1;
-    if (npn_client && npn_server && (!client_len || !server_len))
-        return -1;
-
-    return 0;
-}
-#endif
 
 static const char *alpn_client;
 static char *alpn_server;
@@ -693,11 +613,6 @@ static void sv_usage(void)
     fprintf(stderr,
             " -time         - measure processor time used by client and server\n");
     fprintf(stderr, " -zlib         - use zlib compression\n");
-#ifndef OPENSSL_NO_NEXTPROTONEG
-    fprintf(stderr, " -npn_client - have client side offer NPN\n");
-    fprintf(stderr, " -npn_server - have server side offer NPN\n");
-    fprintf(stderr, " -npn_server_reject - have server reject NPN\n");
-#endif
     fprintf(stderr, " -serverinfo_file file - have server use this file\n");
     fprintf(stderr, " -serverinfo_sct  - have client offer and expect SCT\n");
     fprintf(stderr,
@@ -1103,15 +1018,6 @@ int main(int argc, char *argv[])
         else if (strcmp(*argv, "-app_verify") == 0) {
             app_verify_arg.app_verify = 1;
         }
-#ifndef OPENSSL_NO_NEXTPROTONEG
-          else if (strcmp(*argv, "-npn_client") == 0) {
-            npn_client = 1;
-        } else if (strcmp(*argv, "-npn_server") == 0) {
-            npn_server = 1;
-        } else if (strcmp(*argv, "-npn_server_reject") == 0) {
-            npn_server_reject = 1;
-        }
-#endif
         else if (strcmp(*argv, "-serverinfo_sct") == 0) {
             serverinfo_sct = 1;
         } else if (strcmp(*argv, "-serverinfo_tack") == 0) {
@@ -1619,24 +1525,6 @@ int main(int argc, char *argv[])
 #endif
     }
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-    if (npn_client) {
-        SSL_CTX_set_next_proto_select_cb(c_ctx, cb_client_npn, NULL);
-    }
-    if (npn_server) {
-        if (npn_server_reject) {
-            BIO_printf(bio_err,
-                       "Can't have both -npn_server and -npn_server_reject\n");
-            goto end;
-        }
-        SSL_CTX_set_npn_advertised_cb(s_ctx, cb_server_npn, NULL);
-        SSL_CTX_set_npn_advertised_cb(s_ctx2, cb_server_npn, NULL);
-    }
-    if (npn_server_reject) {
-        SSL_CTX_set_npn_advertised_cb(s_ctx, cb_server_rejects_npn, NULL);
-        SSL_CTX_set_npn_advertised_cb(s_ctx2, cb_server_rejects_npn, NULL);
-    }
-#endif
 
     if (serverinfo_sct) {
         if (!SSL_CTX_add_client_custom_ext(c_ctx,
@@ -2182,10 +2070,6 @@ int doit_localhost(SSL *s_ssl, SSL *c_ssl, int family, long count,
         else if (BIO_get_ktls_recv(SSL_get_rbio(c_ssl)))
             BIO_printf(bio_stdout, "Client using Kernel TLS for receiving\n");
     }
-# ifndef OPENSSL_NO_NEXTPROTONEG
-    if (verify_npn(c_ssl, s_ssl) < 0)
-        goto end;
-# endif
     if (verify_serverinfo() < 0) {
         fprintf(stderr, "Server info verify error\n");
         goto err;
@@ -2199,9 +2083,6 @@ int doit_localhost(SSL *s_ssl, SSL *c_ssl, int family, long count,
         goto err;
     }
 
-# ifndef OPENSSL_NO_NEXTPROTONEG
- end:
-# endif
     ret = EXIT_SUCCESS;
 
  err:
@@ -2556,10 +2437,6 @@ int doit_biopair(SSL *s_ssl, SSL *c_ssl, long count,
 
     if (verbose)
         print_details(c_ssl, "DONE via BIO pair: ");
-#ifndef OPENSSL_NO_NEXTPROTONEG
-    if (verify_npn(c_ssl, s_ssl) < 0)
-        goto end;
-#endif
     if (verify_serverinfo() < 0) {
         fprintf(stderr, "Server info verify error\n");
         goto err;
@@ -2573,9 +2450,6 @@ int doit_biopair(SSL *s_ssl, SSL *c_ssl, long count,
         goto err;
     }
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
- end:
-#endif
     ret = EXIT_SUCCESS;
 
  err:
@@ -2854,10 +2728,6 @@ int doit(SSL *s_ssl, SSL *c_ssl, long count)
 
     if (verbose)
         print_details(c_ssl, "DONE: ");
-#ifndef OPENSSL_NO_NEXTPROTONEG
-    if (verify_npn(c_ssl, s_ssl) < 0)
-        goto err;
-#endif
     if (verify_serverinfo() < 0) {
         fprintf(stderr, "Server info verify error\n");
         goto err;

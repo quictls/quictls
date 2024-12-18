@@ -415,20 +415,6 @@ int tls_parse_ctos_status_request(SSL_CONNECTION *s, PACKET *pkt,
 }
 #endif
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-int tls_parse_ctos_npn(SSL_CONNECTION *s, PACKET *pkt, unsigned int context,
-                       X509 *x, size_t chainidx)
-{
-    /*
-     * We shouldn't accept this extension on a
-     * renegotiation.
-     */
-    if (SSL_IS_FIRST_HANDSHAKE(s))
-        s->s3.npn_seen = 1;
-
-    return 1;
-}
-#endif
 
 /*
  * Save the ALPN extension in a ClientHello.|pkt| holds the contents of the ALPN
@@ -1521,35 +1507,6 @@ EXT_RETURN tls_construct_stoc_status_request(SSL_CONNECTION *s, WPACKET *pkt,
 }
 #endif
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-EXT_RETURN tls_construct_stoc_next_proto_neg(SSL_CONNECTION *s, WPACKET *pkt,
-                                             unsigned int context, X509 *x,
-                                             size_t chainidx)
-{
-    const unsigned char *npa;
-    unsigned int npalen;
-    int ret;
-    int npn_seen = s->s3.npn_seen;
-    SSL_CTX *sctx = SSL_CONNECTION_GET_CTX(s);
-
-    s->s3.npn_seen = 0;
-    if (!npn_seen || sctx->ext.npn_advertised_cb == NULL)
-        return EXT_RETURN_NOT_SENT;
-
-    ret = sctx->ext.npn_advertised_cb(SSL_CONNECTION_GET_SSL(s), &npa, &npalen,
-                                      sctx->ext.npn_advertised_cb_arg);
-    if (ret == SSL_TLSEXT_ERR_OK) {
-        if (!WPACKET_put_bytes_u16(pkt, TLSEXT_TYPE_next_proto_neg)
-                || !WPACKET_sub_memcpy_u16(pkt, npa, npalen)) {
-            SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
-            return EXT_RETURN_FAIL;
-        }
-        s->s3.npn_seen = 1;
-    }
-
-    return EXT_RETURN_SENT;
-}
-#endif
 
 EXT_RETURN tls_construct_stoc_alpn(SSL_CONNECTION *s, WPACKET *pkt, unsigned int context,
                                    X509 *x, size_t chainidx)

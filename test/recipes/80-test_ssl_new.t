@@ -42,7 +42,7 @@ if (defined $ENV{SSL_TESTS}) {
     @conf_srcs = glob(srctop_file("test", "ssl-tests", "*.cnf.in"));
     # We hard-code the number of tests to double-check that the globbing above
     # finds all files as expected.
-    plan tests => 31;
+    plan tests => 30;
 }
 map { s/;.*// } @conf_srcs if $^O eq "VMS";
 my @conf_files = map { basename($_, ".in") } @conf_srcs;
@@ -64,7 +64,6 @@ if (!$no_tls && $no_tls_below1_3 && disabled("ec") && disabled("dh")) {
 }
 my $no_pre_tls1_3 = alldisabled(@all_pre_tls1_3);
 my $no_dtls = alldisabled(available_protocols("dtls"));
-my $no_npn = disabled("nextprotoneg");
 my $no_ct = disabled("ct");
 my $no_ec = disabled("ec");
 my $no_ecx = disabled("ecx");
@@ -101,8 +100,6 @@ my %conf_dependent_tests = (
 my %skip = (
   "06-sni-ticket.cnf" => $no_tls_below1_3,
   "07-dtls-protocol-version.cnf" => $no_dtls,
-  "08-npn.cnf" => (disabled("tls1") && disabled("tls1_1")
-                    && disabled("tls1_2")) || $no_npn,
   "10-resumption.cnf" => disabled("tls1_1") || disabled("tls1_2"),
   "11-dtls_resumption.cnf" => disabled("dtls1") || disabled("dtls1_2"),
   "12-ct.cnf" => $no_tls || $no_ct || $no_ec,

@@ -283,31 +283,12 @@ int ossl_statem_server_read_transition(SSL_CONNECTION *s, int mt)
         break;
 
     case TLS_ST_SR_CHANGE:
-#ifndef OPENSSL_NO_NEXTPROTONEG
-        if (s->s3.npn_seen) {
-            if (mt == SSL3_MT_NEXT_PROTO) {
-                st->hand_state = TLS_ST_SR_NEXT_PROTO;
-                return 1;
-            }
-        } else {
-#endif
             if (mt == SSL3_MT_FINISHED) {
                 st->hand_state = TLS_ST_SR_FINISHED;
                 return 1;
             }
-#ifndef OPENSSL_NO_NEXTPROTONEG
-        }
-#endif
         break;
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-    case TLS_ST_SR_NEXT_PROTO:
-        if (mt == SSL3_MT_FINISHED) {
-            st->hand_state = TLS_ST_SR_FINISHED;
-            return 1;
-        }
-        break;
-#endif
 
     case TLS_ST_SW_FINISHED:
         if (mt == SSL3_MT_CHANGE_CIPHER_SPEC) {
@@ -1249,10 +1230,6 @@ size_t ossl_statem_server_max_message_size(SSL_CONNECTION *s)
     case TLS_ST_SR_CERT_VRFY:
         return CERTIFICATE_VERIFY_MAX_LENGTH;
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-    case TLS_ST_SR_NEXT_PROTO:
-        return NEXT_PROTO_MAX_LENGTH;
-#endif
 
     case TLS_ST_SR_CHANGE:
         return CCS_MAX_LENGTH;
@@ -1299,10 +1276,6 @@ MSG_PROCESS_RETURN ossl_statem_server_process_message(SSL_CONNECTION *s,
     case TLS_ST_SR_CERT_VRFY:
         return tls_process_cert_verify(s, pkt);
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-    case TLS_ST_SR_NEXT_PROTO:
-        return tls_process_next_proto(s, pkt);
-#endif
 
     case TLS_ST_SR_CHANGE:
         return tls_process_change_cipher_spec(s, pkt);
@@ -2229,10 +2202,6 @@ int tls_handle_alpn(SSL_CONNECTION *s)
                 return 0;
             }
             s->s3.alpn_selected_len = selected_len;
-#ifndef OPENSSL_NO_NEXTPROTONEG
-            /* ALPN takes precedence over NPN. */
-            s->s3.npn_seen = 0;
-#endif
 
             /* Check ALPN is consistent with session */
             if (s->session->ext.alpn_selected == NULL
@@ -4339,41 +4308,6 @@ CON_FUNC_RETURN tls_construct_cert_status(SSL_CONNECTION *s, WPACKET *pkt)
     return CON_FUNC_SUCCESS;
 }
 
-#ifndef OPENSSL_NO_NEXTPROTONEG
-/*
- * tls_process_next_proto reads a Next Protocol Negotiation handshake message.
- * It sets the next_proto member in s if found
- */
-MSG_PROCESS_RETURN tls_process_next_proto(SSL_CONNECTION *s, PACKET *pkt)
-{
-    PACKET next_proto, padding;
-    size_t next_proto_len;
-
-    /*-
-     * The payload looks like:
-     *   uint8 proto_len;
-     *   uint8 proto[proto_len];
-     *   uint8 padding_len;
-     *   uint8 padding[padding_len];
-     */
-    if (!PACKET_get_length_prefixed_1(pkt, &next_proto)
-        || !PACKET_get_length_prefixed_1(pkt, &padding)
-        || PACKET_remaining(pkt) > 0) {
-        SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);
-        return MSG_PROCESS_ERROR;
-    }
-
-    if (!PACKET_memdup(&next_proto, &s->ext.npn, &next_proto_len)) {
-        s->ext.npn_len = 0;
-        SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
-        return MSG_PROCESS_ERROR;
-    }
-
-    s->ext.npn_len = (unsigned char)next_proto_len;
-
-    return MSG_PROCESS_CONTINUE_READING;
-}
-#endif
 
 static CON_FUNC_RETURN tls_construct_encrypted_extensions(SSL_CONNECTION *s,
                                                           WPACKET *pkt)

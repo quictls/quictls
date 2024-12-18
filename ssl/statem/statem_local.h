@@ -193,9 +193,6 @@ __owur MSG_PROCESS_RETURN tls_process_server_compressed_certificate(SSL_CONNECTI
                                                                     PACKET *pkt);
 #endif
 __owur int ssl3_check_cert_and_algorithm(SSL_CONNECTION *s);
-#ifndef OPENSSL_NO_NEXTPROTONEG
-__owur CON_FUNC_RETURN tls_construct_next_proto(SSL_CONNECTION *s, WPACKET *pkt);
-#endif
 __owur MSG_PROCESS_RETURN tls_process_hello_req(SSL_CONNECTION *s, PACKET *pkt);
 __owur MSG_PROCESS_RETURN dtls_process_hello_verify(SSL_CONNECTION *s, PACKET *pkt);
 __owur CON_FUNC_RETURN tls_construct_end_of_early_data(SSL_CONNECTION *s,
@@ -234,10 +231,6 @@ __owur WORK_STATE tls_post_process_client_key_exchange(SSL_CONNECTION *s,
                                                        WORK_STATE wst);
 __owur MSG_PROCESS_RETURN tls_process_cert_verify(SSL_CONNECTION *s,
                                                   PACKET *pkt);
-#ifndef OPENSSL_NO_NEXTPROTONEG
-__owur MSG_PROCESS_RETURN tls_process_next_proto(SSL_CONNECTION *s,
-                                                 PACKET *pkt);
-#endif
 __owur CON_FUNC_RETURN tls_construct_new_session_ticket(SSL_CONNECTION *s,
                                                         WPACKET *pkt);
 MSG_PROCESS_RETURN tls_process_end_of_early_data(SSL_CONNECTION *s,
@@ -317,10 +310,6 @@ int tls_parse_ctos_status_request(SSL_CONNECTION *s, PACKET *pkt,
                                   unsigned int context,
                                   X509 *x, size_t chainidx);
 #endif
-#ifndef OPENSSL_NO_NEXTPROTONEG
-int tls_parse_ctos_npn(SSL_CONNECTION *s, PACKET *pkt, unsigned int context,
-                       X509 *x, size_t chainidx);
-#endif
 int tls_parse_ctos_alpn(SSL_CONNECTION *s, PACKET *pkt, unsigned int context,
                         X509 *x, size_t chainidx);
 #ifndef OPENSSL_NO_SRTP
@@ -375,11 +364,6 @@ EXT_RETURN tls_construct_stoc_session_ticket(SSL_CONNECTION *s, WPACKET *pkt,
                                              size_t chainidx);
 #ifndef OPENSSL_NO_OCSP
 EXT_RETURN tls_construct_stoc_status_request(SSL_CONNECTION *s, WPACKET *pkt,
-                                             unsigned int context, X509 *x,
-                                             size_t chainidx);
-#endif
-#ifndef OPENSSL_NO_NEXTPROTONEG
-EXT_RETURN tls_construct_stoc_next_proto_neg(SSL_CONNECTION *s, WPACKET *pkt,
                                              unsigned int context, X509 *x,
                                              size_t chainidx);
 #endif
@@ -464,11 +448,6 @@ EXT_RETURN tls_construct_ctos_status_request(SSL_CONNECTION *s, WPACKET *pkt,
                                              unsigned int context, X509 *x,
                                              size_t chainidx);
 #endif
-#ifndef OPENSSL_NO_NEXTPROTONEG
-EXT_RETURN tls_construct_ctos_npn(SSL_CONNECTION *s, WPACKET *pkt,
-                                  unsigned int context,
-                                  X509 *x, size_t chainidx);
-#endif
 EXT_RETURN tls_construct_ctos_alpn(SSL_CONNECTION *s, WPACKET *pkt,
                                    unsigned int context,
                                    X509 *x, size_t chainidx);
@@ -544,10 +523,6 @@ int tls_parse_stoc_status_request(SSL_CONNECTION *s, PACKET *pkt,
 #endif
 #ifndef OPENSSL_NO_CT
 int tls_parse_stoc_sct(SSL_CONNECTION *s, PACKET *pkt, unsigned int context,
-                       X509 *x, size_t chainidx);
-#endif
-#ifndef OPENSSL_NO_NEXTPROTONEG
-int tls_parse_stoc_npn(SSL_CONNECTION *s, PACKET *pkt, unsigned int context,
                        X509 *x, size_t chainidx);
 #endif
 int tls_parse_stoc_alpn(SSL_CONNECTION *s, PACKET *pkt, unsigned int context,

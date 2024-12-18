@@ -166,10 +166,6 @@ extern "C" {
     /* ExtensionType value from RFC9001 */
 # define TLSEXT_TYPE_quic_transport_parameters_draft   0xffa5
 
-# ifndef OPENSSL_NO_NEXTPROTONEG
-/* This is not an IANA defined extension number */
-#  define TLSEXT_TYPE_next_proto_neg              13172
-# endif
 
 /* NameType value from RFC3546 */
 # define TLSEXT_NAMETYPE_host_name 0
