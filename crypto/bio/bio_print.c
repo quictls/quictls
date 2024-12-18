@@ -57,7 +57,7 @@ int BIO_vprintf(BIO *bio, const char *format, va_list args)
 int BIO_snprintf(char *buff, size_t n, const char *format, ...)
 {
     va_list args;
-    size_t ret;
+    int ret;
 
     va_start(args, format);
     ret = vsnprintf(buff, n, format, args);
