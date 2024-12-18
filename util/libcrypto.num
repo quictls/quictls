@@ -450,7 +450,6 @@ X509v3_asid_add_id_or_range             462	3_0_0	EXIST::FUNCTION:RFC3779
 X509_NAME_ENTRY_create_by_NID           463	3_0_0	EXIST::FUNCTION:
 EC_KEY_METHOD_get_init                  464	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
 ASN1_INTEGER_to_BN                      465	3_0_0	EXIST::FUNCTION:
-OPENSSL_memcmp                          466	3_0_0	NOEXIST::FUNCTION:
 BUF_MEM_new                             467	3_0_0	EXIST::FUNCTION:
 DSO_set_filename                        468	3_0_0	EXIST::FUNCTION:
 DH_new                                  469	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,DH
@@ -983,7 +982,6 @@ OPENSSL_LH_get_down_load                1023	3_0_0	EXIST::FUNCTION:
 EVP_md4                                 1024	3_0_0	EXIST::FUNCTION:MD4
 X509_set_subject_name                   1025	3_0_0	EXIST::FUNCTION:
 i2d_PKCS8PrivateKey_nid_bio             1026	3_0_0	EXIST::FUNCTION:
-ERR_put_error                           1027	3_0_0	NOEXIST::FUNCTION:
 ERR_add_error_data                      1028	3_0_0	EXIST::FUNCTION:
 X509_ALGORS_it                          1029	3_0_0	EXIST::FUNCTION:
 MD5_Update                              1030	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,MD5
@@ -2794,7 +2792,6 @@ CMS_add_simple_smimecap                 2893	3_0_0	EXIST::FUNCTION:CMS
 IPAddressChoice_free                    2894	3_0_0	EXIST::FUNCTION:RFC3779
 d2i_X509_AUX                            2895	3_0_0	EXIST::FUNCTION:
 X509_get_default_cert_area              2896	3_0_0	EXIST::FUNCTION:
-ERR_load_DSO_strings                    2897	3_0_0	NOEXIST::FUNCTION:
 ASIdentifiers_it                        2898	3_0_0	EXIST::FUNCTION:RFC3779
 BN_mod_lshift                           2899	3_0_0	EXIST::FUNCTION:
 ENGINE_get_last                         2900	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,ENGINE
@@ -3992,8 +3989,6 @@ X509_STORE_lock                         4134	3_0_0	EXIST::FUNCTION:
 X509_set_proxy_pathlen                  4135	3_0_0	EXIST::FUNCTION:
 X509_get_proxy_pathlen                  4136	3_0_0	EXIST::FUNCTION:
 DSA_bits                                4137	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,DSA
-EVP_PKEY_set1_tls_encodedpoint          4138	3_0_0	NOEXIST::FUNCTION:
-EVP_PKEY_get1_tls_encodedpoint          4139	3_0_0	NOEXIST::FUNCTION:
 ASN1_STRING_get0_data                   4140	3_0_0	EXIST::FUNCTION:
 X509_SIG_getm                           4141	3_0_0	EXIST::FUNCTION:
 X509_get0_serialNumber                  4142	3_0_0	EXIST::FUNCTION:
