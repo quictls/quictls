@@ -105,8 +105,7 @@ would look like this:
     PROGRAM=foo
 
 However, the program filename may end up being just C<foo> (typical
-for Unix), or C<foo.exe> (typical for Windows), or even C<BLAH$FOO.EXE>
-(possible on VMS, depending on policy).
+for Unix), or C<foo.exe> (typical for Windows).
 
 These platform specific decorations are not the concern of
 F<build.info> files.  The build file generators are responsible for
@@ -629,7 +628,7 @@ therefore depending on either of them, but not both at the same time:
 
 This is any platform specific file that describes the complete build,
 with platform specific commands.  On Unix, this is typically
-F<Makefile>; on VMS, this is typically F<descrip.mms>.
+F<Makefile>.
 
 =item "build file generator"
 

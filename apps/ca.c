@@ -651,13 +651,6 @@ end_of_options:
                        "there needs to be defined a directory for new certificate to be placed in\n");
             goto end;
         }
-        /*
-         * outdir is a directory spec, but access() for VMS demands a
-         * filename.  We could use the DEC C routine to convert the
-         * directory syntax to Unix, and give that to app_isdir,
-         * but for now the fopen will catch the error if it's not a
-         * directory
-         */
         if (app_isdir(outdir) <= 0) {
             BIO_printf(bio_err, "%s: %s is not a directory\n", prog, outdir);
             perror(outdir);

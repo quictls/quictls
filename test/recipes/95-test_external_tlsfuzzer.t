@@ -16,8 +16,8 @@ setup("test_external_tlsfuzzer");
 
 plan skip_all => "No external tests in this configuration"
     if disabled("external-tests");
-plan skip_all => "TLSFuzzer tests not available on Windows or VMS"
-    if $^O =~ /^(VMS|MSWin32)$/;
+plan skip_all => "TLSFuzzer tests not available on Windows"
+    if $^O =~ /^MSWin32$/;
 plan skip_all => "TLSFuzzer is not properly checked out"
     unless (-d srctop_dir("tlsfuzzer") && -d srctop_dir("tlsfuzzer", "tests"));
 

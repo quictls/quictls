@@ -13,24 +13,7 @@
      my $path = shift;
 
      # Make the path absolute at all times
-     $path = abs_path($path);
-
-     if ($^O eq 'VMS') {
-         # Convert any path of the VMS form VOLUME:[DIR1.DIR2]FILE to the
-         # Unix form /VOLUME/DIR1/DIR2/FILE, which is what VMS perl supports
-         # for 'use lib'.
-
-         # Start with splitting the native path
-         (my $vol, my $dirs, my $file) = File::Spec->splitpath($path);
-         my @dirs = File::Spec->splitdir($dirs);
-
-         # Reassemble it as a Unix path
-         $vol =~ s|:$||;
-         $dirs = File::Spec::Unix->catdir('', $vol, @dirs);
-         $path = File::Spec::Unix->catpath('', $dirs, $file);
-     }
-
-     return $path;
+     return abs_path($path);
  }
  sub sourcedir {
      return _fixup_path(File::Spec->catdir($config{sourcedir}, @_))

@@ -256,9 +256,7 @@ static int addr_strings(const BIO_ADDR *ap, int numeric,
             return 0;
         }
 
-        /* VMS getnameinfo() has a bug, it doesn't fill in serv, which
-         * leaves it with whatever garbage that happens to be there.
-         * However, we initialise serv with the empty string (serv[0]
+        /* However, we initialise serv with the empty string (serv[0]
          * is therefore NUL), so it gets real easy to detect when things
          * didn't go the way one might expect.
          */
@@ -762,11 +760,6 @@ int BIO_lookup_ex(const char *host, const char *service, int lookup_type,
     } else {
 #endif
         const struct hostent *he;
-/*
- * Because struct hostent is defined for 32-bit pointers only with
- * VMS C, we need to make sure that '&he_fallback_address' and
- * '&he_fallback_addresses' are 32-bit pointers
- */
         /* Windows doesn't seem to have in_addr_t */
 #if defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_MSDOS)
         static uint32_t he_fallback_address;

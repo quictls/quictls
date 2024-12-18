@@ -19,8 +19,8 @@ plan skip_all => "test_tfo_cli needs tfo enabled" if disabled("tfo");
 plan skip_all => "test_tfo_cli needs sock enabled" if disabled("sock");
 plan skip_all => "test_tfo_cli needs tls < 1.3 enabled"
     if disabled("tls1") && disabled("tls1_1") && disabled("tls1_2");
-plan skip_all => "test_tfo_cli does not run on Windows nor VMS"
-    if $^O =~ /^(VMS|MSWin32|msys)$/;
+plan skip_all => "test_tfo_cli does not run on Windows"
+    if $^O =~ /^(MSWin32|msys)$/;
 
 plan tests => 8;
 

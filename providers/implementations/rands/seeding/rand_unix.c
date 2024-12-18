@@ -104,7 +104,7 @@ static uint64_t get_time_stamp(void);
 #endif
 
 #if !(defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_WIN32) \
-    || defined(OPENSSL_SYS_VMS) || defined(OPENSSL_SYS_VXWORKS) \
+    || defined(OPENSSL_SYS_VXWORKS) \
     || defined(OPENSSL_SYS_UEFI))
 
 # if defined(OPENSSL_RAND_SEED_DEVRANDOM) && !defined(DEVRANDOM)

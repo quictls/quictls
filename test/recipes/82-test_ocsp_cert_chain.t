@@ -25,8 +25,8 @@ plan skip_all => "$test_name requires sock enabled"
     if disabled("sock");
 plan skip_all => "$test_name requires TLS enabled"
     if alldisabled(available_protocols("tls"));
-plan skip_all => "$test_name is not available Windows or VMS"
-    if $^O =~ /^(VMS|MSWin32|msys)$/;
+plan skip_all => "$test_name is not available Windows"
+    if $^O =~ /^(MSWin32|msys)$/;
 
 plan tests => 3;
 

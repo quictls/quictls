@@ -180,18 +180,9 @@ sub check_file {
 
 sub compute_hash {
     my $fh;
-    if ( $^O eq "VMS" ) {
-        # VMS uses the open through shell
-        # The file names are safe there and list form is unsupported
-        if (!open($fh, "-|", join(' ', @_))) {
-            print STDERR "Cannot compute hash on '$fname'\n";
-            return;
-        }
-    } else {
-        if (!open($fh, "-|", @_)) {
-            print STDERR "Cannot compute hash on '$fname'\n";
-            return;
-        }
+    if (!open($fh, "-|", @_)) {
+	print STDERR "Cannot compute hash on '$fname'\n";
+	return;
     }
     return (<$fh>, <$fh>);
 }
