@@ -1343,7 +1343,6 @@ static void list_disabled(void)
 #endif
 #ifdef OPENSSL_NO_EC
     BIO_puts(bio_out, "EC\n");
-    BIO_puts(bio_out, "ECX\n");
 #endif
 #if defined(OPENSSL_NO_ENGINE) && !defined(OPENSSL_NO_DEPRECATED_3_0)
     BIO_puts(bio_out, "ENGINE\n");

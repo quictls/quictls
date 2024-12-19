@@ -13,9 +13,7 @@ ENDIF
 
 IF[{- !$disabled{ec} -}]
   SOURCE[$EC_GOAL]=ecdsa_sig.c
-  IF[{- !$disabled{ecx} -}]
-    SOURCE[$EC_GOAL]=eddsa_sig.c
-  ENDIF
+  SOURCE[$EC_GOAL]=eddsa_sig.c
 ENDIF
 
 IF[{- !$disabled{sm2} -}]
