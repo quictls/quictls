@@ -1083,17 +1083,12 @@ uninstall_image_docs:
 # Developer targets (note: these are only available on Unix) #########
 ##@ Code maintenance
 
-# It's important that generate_buildinfo comes after ordinals, as ordinals
-# is sensitive to build.info changes.
-update: generate errors ordinals generate_buildinfo ## Update errors, ordinals and build info
+update: generate errors ordinals ## Update errors, ordinals and build info
 
 .PHONY: generate generate_apps generate_crypto_objects \
           generate_crypto_conf generate_crypto_asn1 generate_fuzz_oids
 generate: generate_apps generate_crypto_objects \
           generate_crypto_conf generate_crypto_asn1 generate_fuzz_oids
-
-.PHONY: generate_buildinfo generate_doc_buildinfo
-generate_buildinfo: generate_doc_buildinfo
 
 .PHONY: doc-nits md-nits
 doc-nits: build_generated_pods ## Evaluate OpenSSL documentation
@@ -1156,20 +1151,6 @@ generate_fuzz_oids:
 	( cd $(SRCDIR); $(PERL) fuzz/mkfuzzoids.pl \
 				crypto/objects/obj_dat.h \
 				> fuzz/oids.txt )
-
-generate_doc_buildinfo:
-	( $(PERL) -I$(BLDDIR) -Mconfigdata \
-                $(SRCDIR)/util/dofile.pl -o Makefile \
-                        $(SRCDIR)/doc/build.info.in \
-                        > $(SRCDIR)/doc/build.info.new; \
-          if ( test -e $(SRCDIR)/doc/build.info \
-               && cmp $(SRCDIR)/doc/build.info.new $(SRCDIR)/doc/build.info \
-                  > /dev/null ); \
-          then \
-                rm $(SRCDIR)/doc/build.info.new; \
-          else \
-                mv $(SRCDIR)/doc/build.info.new $(SRCDIR)/doc/build.info; \
-          fi )
 
 # Set to -force to force a rebuild
 ERROR_REBUILD=
@@ -1452,6 +1433,11 @@ EOF
 $args{src}: $gen0 $deps
 	\$(CC) $incs $cppflags $defs -E $gen0 | \\
 	\$(PERL) -ne '/^#(line)?\\s*[0-9]+/ or print' > \$@
+EOF
+      } elsif ($gen0 =~ m|^.*\.podin$|) {
+	return <<"EOF";
+$args{src}: $gen0  doc/mkdoc.pl
+\t\$(PERL) "doc/mkdoc.pl" $gen0 $args{src}
 EOF
       } elsif ($gen0 =~ m|^.*\.in$|) {
           #
