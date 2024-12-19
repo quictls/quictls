@@ -34,10 +34,7 @@ IF[{- !$disabled{ec} -}]
 
   DEPEND[${DER_EC_AUX/.c/.o}]=$DER_EC_H $DER_DIGESTS_H
   DEPEND[${DER_EC_GEN/.c/.o}]=$DER_EC_H
-ENDIF
 
-#----- ECX
-IF[{- !$disabled{ecx} -}]
   $DER_ECX_H=$INCDIR/der_ecx.h
   $DER_ECX_GEN=der_ecx_gen.c
   $DER_ECX_AUX=der_ecx_key.c
@@ -72,9 +69,7 @@ ENDIF
 
 IF[{- !$disabled{ec} -}]
   $COMMON = $COMMON $DER_EC_GEN $DER_EC_AUX
-  IF[{- !$disabled{ecx} -}]
-    $COMMON = $COMMON $DER_ECX_GEN $DER_ECX_AUX
-  ENDIF
+  $COMMON = $COMMON $DER_ECX_GEN $DER_ECX_AUX
 ENDIF
 
 IF[{- !$disabled{sm2} -}]
