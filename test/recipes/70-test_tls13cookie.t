@@ -45,7 +45,7 @@ $proxy->serverflags("-curves X25519") if !disabled("ec");
 $proxy->start() or plan skip_all => "Unable to start up Proxy for tests";
 plan tests => 2;
 SKIP: {
-    skip "ECX disabled", 1, if (disabled("ec"));
+    skip "EC disabled", 1, if (disabled("ec"));
     ok(TLSProxy::Message->success() && $cookieseen == 1, "Cookie seen");
 }
 
