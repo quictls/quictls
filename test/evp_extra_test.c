@@ -4989,7 +4989,7 @@ static int test_signatures_with_engine(int tst)
         return 1;
 #  endif
 #  ifdef OPENSSL_NO_EC
-    /* Skip ECX tests in a no-ecx build */
+    /* Skip ECX tests in a no-ec build */
     if (tst == 2)
         return 1;
 #  endif
