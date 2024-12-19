@@ -41,7 +41,7 @@ DEPEND[]=include/openssl/asn1.h \
          include/openssl/x509.h \
          include/openssl/x509v3.h \
          include/openssl/x509_vfy.h \
-         include/crypto/bn_conf.h include/crypto/dso_conf.h \
+         include/crypto/dso_conf.h \
          include/internal/param_names.h crypto/params_idx.c
 
 GENERATE[include/openssl/asn1.h]=include/openssl/asn1.h.in
@@ -62,7 +62,6 @@ GENERATE[include/openssl/ess.h]=include/openssl/ess.h.in
 GENERATE[include/openssl/fipskey.h]=include/openssl/fipskey.h.in
 GENERATE[include/openssl/lhash.h]=include/openssl/lhash.h.in
 GENERATE[include/openssl/ocsp.h]=include/openssl/ocsp.h.in
-GENERATE[include/openssl/opensslv.h]=include/openssl/opensslv.h.in
 GENERATE[include/openssl/pkcs12.h]=include/openssl/pkcs12.h.in
 GENERATE[include/openssl/pkcs7.h]=include/openssl/pkcs7.h.in
 GENERATE[include/openssl/safestack.h]=include/openssl/safestack.h.in
@@ -71,7 +70,6 @@ GENERATE[include/openssl/ui.h]=include/openssl/ui.h.in
 GENERATE[include/openssl/x509.h]=include/openssl/x509.h.in
 GENERATE[include/openssl/x509v3.h]=include/openssl/x509v3.h.in
 GENERATE[include/openssl/x509_vfy.h]=include/openssl/x509_vfy.h.in
-GENERATE[include/crypto/bn_conf.h]=include/crypto/bn_conf.h.in
 GENERATE[include/crypto/dso_conf.h]=include/crypto/dso_conf.h.in
 
 DEPEND[crypto/params_idx.c \
