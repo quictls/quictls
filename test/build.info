@@ -41,7 +41,7 @@ IF[{- !$disabled{tests} -}]
           crltest danetest bad_dtls_test lhash_test sparse_array_test \
           conf_include_test params_api_test params_conversion_test \
           constant_time_test safe_math_test verify_extra_test clienthellotest \
-          packettest asynctest secmemtest srptest memleaktest stack_test \
+          packettest asynctest secmemtest memleaktest stack_test \
           dtlsv1listentest ct_test threadstest afalgtest d2i_test \
           ssl_test_ctx_test ssl_test x509aux cipherlist_test asynciotest \
           bio_callback_test bio_memleak_test bio_core_test bio_dgram_test param_build_test \
@@ -312,10 +312,6 @@ IF[{- !$disabled{tests} -}]
   INCLUDE[secmemtest]=../include ../apps/include
   DEPEND[secmemtest]=../libcrypto libtestutil.a
 
-  SOURCE[srptest]=srptest.c
-  INCLUDE[srptest]=../include ../apps/include
-  DEPEND[srptest]=../libcrypto libtestutil.a
-
   SOURCE[memleaktest]=memleaktest.c
   INCLUDE[memleaktest]=../include ../apps/include
   DEPEND[memleaktest]=../libcrypto libtestutil.a
@@ -377,9 +373,6 @@ IF[{- !$disabled{tests} -}]
   DEPEND[ssl_test_ctx_test]=../libcrypto ../libssl libtestutil.a
 
   SOURCE[ssl_test]=ssl_test.c helpers/ssl_test_ctx.c helpers/handshake.c
-  IF[{- !$disabled{'srp'} -}]
-    SOURCE[ssl_test]=helpers/handshake_srp.c
-  ENDIF
   INCLUDE[ssl_test]=../include ../apps/include
   DEPEND[ssl_test]=../libcrypto ../libssl libtestutil.a
 

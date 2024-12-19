@@ -98,7 +98,6 @@ extern "C" {
 # define SSL_TXT_kDHEPSK         "kDHEPSK"
 # define SSL_TXT_kGOST           "kGOST"
 # define SSL_TXT_kGOST18         "kGOST18"
-# define SSL_TXT_kSRP            "kSRP"
 
 # define SSL_TXT_aRSA            "aRSA"
 # define SSL_TXT_aDSS            "aDSS"
@@ -110,7 +109,6 @@ extern "C" {
 # define SSL_TXT_aGOST01         "aGOST01"
 # define SSL_TXT_aGOST12         "aGOST12"
 # define SSL_TXT_aGOST           "aGOST"
-# define SSL_TXT_aSRP            "aSRP"
 
 # define SSL_TXT_DSS             "DSS"
 # define SSL_TXT_DH              "DH"
@@ -124,7 +122,6 @@ extern "C" {
 # define SSL_TXT_AECDH           "AECDH"
 # define SSL_TXT_ECDSA           "ECDSA"
 # define SSL_TXT_PSK             "PSK"
-# define SSL_TXT_SRP             "SRP"
 
 # define SSL_TXT_DES             "DES"
 # define SSL_TXT_3DES            "3DES"
@@ -648,18 +645,6 @@ void SSL_set_msg_callback(SSL *ssl,
 # define SSL_get_extms_support(s) \
         SSL_ctrl((s),SSL_CTRL_GET_EXTMS_SUPPORT,0,NULL)
 
-# ifndef OPENSSL_NO_SRP
-/* see tls_srp.c */
-#  ifndef OPENSSL_NO_DEPRECATED_3_0
-OSSL_DEPRECATEDIN_3_0 __owur int SSL_SRP_CTX_init(SSL *s);
-OSSL_DEPRECATEDIN_3_0 __owur int SSL_CTX_SRP_CTX_init(SSL_CTX *ctx);
-OSSL_DEPRECATEDIN_3_0 int SSL_SRP_CTX_free(SSL *ctx);
-OSSL_DEPRECATEDIN_3_0 int SSL_CTX_SRP_CTX_free(SSL_CTX *ctx);
-OSSL_DEPRECATEDIN_3_0 __owur int SSL_srp_server_param_with_username(SSL *s,
-                                                                    int *ad);
-OSSL_DEPRECATEDIN_3_0 __owur int SRP_Calc_A_param(SSL *s);
-#  endif
-# endif
 
 /* 100k max cert list */
 # define SSL_MAX_CERT_LIST_DEFAULT (1024*100)
@@ -1251,13 +1236,6 @@ DECLARE_PEM_rw(SSL_SESSION, SSL_SESSION)
 # ifndef OPENSSL_NO_DEPRECATED_3_0
 #  define SSL_CTRL_SET_TLSEXT_TICKET_KEY_CB      72
 # endif
-# define SSL_CTRL_SET_TLS_EXT_SRP_USERNAME_CB    75
-# define SSL_CTRL_SET_SRP_VERIFY_PARAM_CB                76
-# define SSL_CTRL_SET_SRP_GIVE_CLIENT_PWD_CB             77
-# define SSL_CTRL_SET_SRP_ARG            78
-# define SSL_CTRL_SET_TLS_EXT_SRP_USERNAME               79
-# define SSL_CTRL_SET_TLS_EXT_SRP_STRENGTH               80
-# define SSL_CTRL_SET_TLS_EXT_SRP_PASSWORD               81
 # define DTLS_CTRL_GET_TIMEOUT           73
 # define DTLS_CTRL_HANDLE_TIMEOUT        74
 # define SSL_CTRL_GET_RI_SUPPORT                 76
@@ -1819,36 +1797,6 @@ __owur int SSL_set1_param(SSL *ssl, X509_VERIFY_PARAM *vpm);
 __owur X509_VERIFY_PARAM *SSL_CTX_get0_param(SSL_CTX *ctx);
 __owur X509_VERIFY_PARAM *SSL_get0_param(SSL *ssl);
 
-# ifndef OPENSSL_NO_SRP
-#  ifndef OPENSSL_NO_DEPRECATED_3_0
-OSSL_DEPRECATEDIN_3_0 int SSL_CTX_set_srp_username(SSL_CTX *ctx, char *name);
-OSSL_DEPRECATEDIN_3_0 int SSL_CTX_set_srp_password(SSL_CTX *ctx, char *password);
-OSSL_DEPRECATEDIN_3_0 int SSL_CTX_set_srp_strength(SSL_CTX *ctx, int strength);
-OSSL_DEPRECATEDIN_3_0
-int SSL_CTX_set_srp_client_pwd_callback(SSL_CTX *ctx,
-                                        char *(*cb) (SSL *, void *));
-OSSL_DEPRECATEDIN_3_0
-int SSL_CTX_set_srp_verify_param_callback(SSL_CTX *ctx,
-                                          int (*cb) (SSL *, void *));
-OSSL_DEPRECATEDIN_3_0
-int SSL_CTX_set_srp_username_callback(SSL_CTX *ctx,
-                                      int (*cb) (SSL *, int *, void *));
-OSSL_DEPRECATEDIN_3_0 int SSL_CTX_set_srp_cb_arg(SSL_CTX *ctx, void *arg);
-
-OSSL_DEPRECATEDIN_3_0
-int SSL_set_srp_server_param(SSL *s, const BIGNUM *N, const BIGNUM *g,
-                             BIGNUM *sa, BIGNUM *v, char *info);
-OSSL_DEPRECATEDIN_3_0
-int SSL_set_srp_server_param_pw(SSL *s, const char *user, const char *pass,
-                                const char *grp);
-
-OSSL_DEPRECATEDIN_3_0 __owur BIGNUM *SSL_get_srp_g(SSL *s);
-OSSL_DEPRECATEDIN_3_0 __owur BIGNUM *SSL_get_srp_N(SSL *s);
-
-OSSL_DEPRECATEDIN_3_0 __owur char *SSL_get_srp_username(SSL *s);
-OSSL_DEPRECATEDIN_3_0 __owur char *SSL_get_srp_userinfo(SSL *s);
-#  endif
-# endif
 
 /*
  * ClientHello callback and helpers.

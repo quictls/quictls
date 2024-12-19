@@ -94,7 +94,6 @@ static const ssl_cipher_table ssl_cipher_table_kx[] = {
     {SSL_kDHEPSK,   NID_kx_dhe_psk},
     {SSL_kRSAPSK,   NID_kx_rsa_psk},
     {SSL_kPSK,      NID_kx_psk},
-    {SSL_kSRP,      NID_kx_srp},
     {SSL_kGOST,     NID_kx_gost},
     {SSL_kGOST18,   NID_kx_gost18},
     {SSL_kANY,      NID_kx_any}
@@ -107,7 +106,6 @@ static const ssl_cipher_table ssl_cipher_table_auth[] = {
     {SSL_aDSS,    NID_auth_dss},
     {SSL_aGOST01, NID_auth_gost01},
     {SSL_aGOST12, NID_auth_gost12},
-    {SSL_aSRP,    NID_auth_srp},
     {SSL_aNULL,   NID_auth_null},
     {SSL_aANY,    NID_auth_any}
 };
@@ -193,7 +191,6 @@ static const SSL_CIPHER cipher_aliases[] = {
     {0, SSL_TXT_kRSAPSK, NULL, 0, SSL_kRSAPSK},
     {0, SSL_TXT_kECDHEPSK, NULL, 0, SSL_kECDHEPSK},
     {0, SSL_TXT_kDHEPSK, NULL, 0, SSL_kDHEPSK},
-    {0, SSL_TXT_kSRP, NULL, 0, SSL_kSRP},
     {0, SSL_TXT_kGOST, NULL, 0, SSL_kGOST},
     {0, SSL_TXT_kGOST18, NULL, 0, SSL_kGOST18},
 
@@ -208,7 +205,6 @@ static const SSL_CIPHER cipher_aliases[] = {
     {0, SSL_TXT_aGOST01, NULL, 0, 0, SSL_aGOST01},
     {0, SSL_TXT_aGOST12, NULL, 0, 0, SSL_aGOST12},
     {0, SSL_TXT_aGOST, NULL, 0, 0, SSL_aGOST01 | SSL_aGOST12},
-    {0, SSL_TXT_aSRP, NULL, 0, 0, SSL_aSRP},
 
     /* aliases combining key exchange and server authentication */
     {0, SSL_TXT_EDH, NULL, 0, SSL_kDHE, ~SSL_aNULL},
@@ -220,7 +216,6 @@ static const SSL_CIPHER cipher_aliases[] = {
     {0, SSL_TXT_ADH, NULL, 0, SSL_kDHE, SSL_aNULL},
     {0, SSL_TXT_AECDH, NULL, 0, SSL_kECDHE, SSL_aNULL},
     {0, SSL_TXT_PSK, NULL, 0, SSL_PSK},
-    {0, SSL_TXT_SRP, NULL, 0, SSL_kSRP},
 
     /* symmetric encryption aliases */
     {0, SSL_TXT_3DES, NULL, 0, 0, 0, SSL_3DES},
@@ -386,9 +381,6 @@ int ssl_load_ciphers(SSL_CTX *ctx)
 #ifdef OPENSSL_NO_PSK
     ctx->disabled_mkey_mask |= SSL_PSK;
     ctx->disabled_auth_mask |= SSL_aPSK;
-#endif
-#ifdef OPENSSL_NO_SRP
-    ctx->disabled_mkey_mask |= SSL_kSRP;
 #endif
 
     /*
@@ -1747,9 +1739,6 @@ char *SSL_CIPHER_description(const SSL_CIPHER *cipher, char *buf, int len)
     case SSL_kDHEPSK:
         kx = "DHEPSK";
         break;
-    case SSL_kSRP:
-        kx = "SRP";
-        break;
     case SSL_kGOST:
         kx = "GOST";
         break;
@@ -1778,9 +1767,6 @@ char *SSL_CIPHER_description(const SSL_CIPHER *cipher, char *buf, int len)
         break;
     case SSL_aPSK:
         au = "PSK";
-        break;
-    case SSL_aSRP:
-        au = "SRP";
         break;
     case SSL_aGOST01:
         au = "GOST01";

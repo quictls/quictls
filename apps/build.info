@@ -22,9 +22,6 @@ ENDIF
 IF[{- !$disabled{'ocsp'} -}]
   $OPENSSLSRC=$OPENSSLSRC ocsp.c
 ENDIF
-IF[{- !$disabled{'srp'} -}]
-  $OPENSSLSRC=$OPENSSLSRC srp.c
-ENDIF
 IF[{- !$disabled{'ts'} -}]
   $OPENSSLSRC=$OPENSSLSRC ts.c
 ENDIF

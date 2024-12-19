@@ -118,11 +118,6 @@ B<openssl> B<s_client>
 [B<-early_data> I<file>]
 [B<-enable_pha>]
 [B<-use_srtp> I<value>]
-[B<-srpuser> I<value>]
-[B<-srppass> I<value>]
-[B<-srp_lateuser>]
-[B<-srp_moregroups>]
-[B<-srp_strength> I<number>]
 [B<-ktls>]
 [B<-tfo>]
 {- $OpenSSL::safe::opt_name_synopsis -}
@@ -782,27 +777,6 @@ happen whether or not a certificate has been provided via B<-cert>.
 =item B<-use_srtp> I<value>
 
 Offer SRTP key management, where B<value> is a colon-separated profile list.
-
-=item B<-srpuser> I<value>
-
-Set the SRP username to the specified value. This option is deprecated.
-
-=item B<-srppass> I<value>
-
-Set the SRP password to the specified value. This option is deprecated.
-
-=item B<-srp_lateuser>
-
-SRP username for the second ClientHello message. This option is deprecated.
-
-=item B<-srp_moregroups>  This option is deprecated.
-
-Tolerate other than the known B<g> and B<N> values.
-
-=item B<-srp_strength> I<number>
-
-Set the minimal acceptable length, in bits, for B<N>.  This option is
-deprecated.
 
 =item B<-ktls>
 

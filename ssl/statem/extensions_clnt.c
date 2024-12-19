@@ -82,32 +82,6 @@ EXT_RETURN tls_construct_ctos_maxfragmentlen(SSL_CONNECTION *s, WPACKET *pkt,
     return EXT_RETURN_SENT;
 }
 
-#ifndef OPENSSL_NO_SRP
-EXT_RETURN tls_construct_ctos_srp(SSL_CONNECTION *s, WPACKET *pkt,
-                                  unsigned int context,
-                                  X509 *x, size_t chainidx)
-{
-    /* Add SRP username if there is one */
-    if (s->srp_ctx.login == NULL)
-        return EXT_RETURN_NOT_SENT;
-
-    if (!WPACKET_put_bytes_u16(pkt, TLSEXT_TYPE_srp)
-               /* Sub-packet for SRP extension */
-            || !WPACKET_start_sub_packet_u16(pkt)
-            || !WPACKET_start_sub_packet_u8(pkt)
-               /* login must not be zero...internal error if so */
-            || !WPACKET_set_flags(pkt, WPACKET_FLAGS_NON_ZERO_LENGTH)
-            || !WPACKET_memcpy(pkt, s->srp_ctx.login,
-                               strlen(s->srp_ctx.login))
-            || !WPACKET_close(pkt)
-            || !WPACKET_close(pkt)) {
-        SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
-        return EXT_RETURN_FAIL;
-    }
-
-    return EXT_RETURN_SENT;
-}
-#endif
 
 static int use_ecc(SSL_CONNECTION *s, int min_version, int max_version)
 {

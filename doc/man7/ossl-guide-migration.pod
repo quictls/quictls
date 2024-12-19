@@ -2194,17 +2194,6 @@ See L</Deprecated low-level digest functions>.
 
 =item *
 
-SRP_Calc_A(), SRP_Calc_B(), SRP_Calc_client_key(), SRP_Calc_server_key(),
-SRP_Calc_u(), SRP_Calc_x(), SRP_check_known_gN_param(), SRP_create_verifier(),
-SRP_create_verifier_BN(), SRP_get_default_gN(), SRP_user_pwd_free(), SRP_user_pwd_new(),
-SRP_user_pwd_set0_sv(), SRP_user_pwd_set1_ids(), SRP_user_pwd_set_gN(),
-SRP_VBASE_add0_user(), SRP_VBASE_free(), SRP_VBASE_get1_by_user(), SRP_VBASE_init(),
-SRP_VBASE_new(), SRP_Verify_A_mod_N(), SRP_Verify_B_mod_N()
-
-There are no replacements for the SRP functions.
-
-=item *
-
 SSL_CTX_set_tmp_dh_callback(), SSL_set_tmp_dh_callback(),
 SSL_CTX_set_tmp_dh(), SSL_set_tmp_dh()
 

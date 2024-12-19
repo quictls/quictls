@@ -87,8 +87,6 @@
 # define SSL_kPSK                0x00000008U
 /* GOST key exchange */
 # define SSL_kGOST               0x00000010U
-/* SRP */
-# define SSL_kSRP                0x00000020U
 
 # define SSL_kRSAPSK             0x00000040U
 # define SSL_kECDHEPSK           0x00000080U
@@ -116,8 +114,6 @@
 # define SSL_aPSK                0x00000010U
 /* GOST R 34.10-2001 signature auth */
 # define SSL_aGOST01             0x00000020U
-/* SRP auth */
-# define SSL_aSRP                0x00000040U
 /* GOST R 34.10-2012 signature auth */
 # define SSL_aGOST12             0x00000080U
 /* Any appropriate signature auth (for TLS 1.3 ciphersuites) */
@@ -489,7 +485,6 @@ struct ssl_method_st {
  *      Ticket_lifetime_hint [9] EXPLICIT INTEGER, -- server's lifetime hint for session ticket
  *      Ticket [10]             EXPLICIT OCTET STRING, -- session ticket (clients only)
  *      Compression_meth [11]   EXPLICIT OCTET STRING, -- optional compression method
- *      SRP_username [ 12 ] EXPLICIT OCTET STRING -- optional SRP username
  *      flags [ 13 ] EXPLICIT INTEGER -- optional flags
  *      }
  * Look in ssl/ssl_asn1.c for more details
@@ -575,9 +570,6 @@ struct ssl_session_st {
          */
         uint8_t max_fragment_len_mode;
     } ext;
-# ifndef OPENSSL_NO_SRP
-    char *srp_username;
-# endif
     unsigned char *ticket_appdata;
     size_t ticket_appdata_len;
     uint32_t flags;
@@ -587,26 +579,6 @@ struct ssl_session_st {
 /* Extended master secret support */
 # define SSL_SESS_FLAG_EXTMS             0x1
 
-# ifndef OPENSSL_NO_SRP
-
-typedef struct srp_ctx_st {
-    /* param for all the callbacks */
-    void *SRP_cb_arg;
-    /* set client Hello login callback */
-    int (*TLS_ext_srp_username_callback) (SSL *, int *, void *);
-    /* set SRP N/g param callback for verification */
-    int (*SRP_verify_param_callback) (SSL *, void *);
-    /* set SRP client passwd callback */
-    char *(*SRP_give_srp_client_pwd_callback) (SSL *, void *);
-    char *login;
-    BIGNUM *N, *g, *s, *B, *A;
-    BIGNUM *a, *b, *v;
-    char *info;
-    int strength;
-    unsigned long srp_Mask;
-} SRP_CTX;
-
-# endif
 
 typedef enum {
     SSL_EARLY_DATA_NONE = 0,
@@ -1083,9 +1055,6 @@ struct ssl_ctx_st {
     SSL_psk_find_session_cb_func psk_find_session_cb;
     SSL_psk_use_session_cb_func psk_use_session_cb;
 
-# ifndef OPENSSL_NO_SRP
-    SRP_CTX srp_ctx;            /* ctx for SRP authentication */
-# endif
 
     /* Shared DANE context */
     struct dane_ctx_st dane;
@@ -1757,10 +1726,6 @@ struct ssl_connection_st {
     int certreqs_sent;
     EVP_MD_CTX *pha_dgst; /* this is just the digest through ClientFinished */
 
-# ifndef OPENSSL_NO_SRP
-    /* ctx for SRP authentication */
-    SRP_CTX srp_ctx;
-# endif
     /*
      * Callback for disabling session caching and ticket support on a session
      * basis, depending on the chosen cipher.
@@ -2881,10 +2846,6 @@ __owur int ssl_log_secret(SSL_CONNECTION *s, const char *label,
 #define EARLY_EXPORTER_SECRET_LABEL "EARLY_EXPORTER_SECRET"
 #define EXPORTER_SECRET_LABEL "EXPORTER_SECRET"
 
-__owur int srp_generate_server_master_secret(SSL_CONNECTION *s);
-__owur int srp_generate_client_master_secret(SSL_CONNECTION *s);
-__owur int srp_verify_server_param(SSL_CONNECTION *s);
-
 /* statem/statem_srvr.c */
 
 __owur int send_certificate_request(SSL_CONNECTION *s);
@@ -2950,14 +2911,6 @@ int ssl_hmac_old_init(SSL_HMAC *ctx, void *key, size_t len, char *md);
 int ssl_hmac_old_update(SSL_HMAC *ctx, const unsigned char *data, size_t len);
 int ssl_hmac_old_final(SSL_HMAC *ctx, unsigned char *md, size_t *len);
 size_t ssl_hmac_old_size(const SSL_HMAC *ctx);
-
-int ssl_ctx_srp_ctx_free_intern(SSL_CTX *ctx);
-int ssl_ctx_srp_ctx_init_intern(SSL_CTX *ctx);
-int ssl_srp_ctx_free_intern(SSL_CONNECTION *s);
-int ssl_srp_ctx_init_intern(SSL_CONNECTION *s);
-
-int ssl_srp_calc_a_param_intern(SSL_CONNECTION *s);
-int ssl_srp_server_param_with_username_intern(SSL_CONNECTION *s, int *ad);
 
 void ssl_session_calculate_timeout(SSL_SESSION *ss);
 

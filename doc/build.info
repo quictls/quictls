@@ -298,12 +298,6 @@ DEPEND[man/man1/openssl-spkac.1]=man1/openssl-spkac.pod
 GENERATE[man/man1/openssl-spkac.1]=man1/openssl-spkac.pod
 DEPEND[man1/openssl-spkac.pod]{pod}=man1/openssl-spkac.pod.in
 GENERATE[man1/openssl-spkac.pod]=man1/openssl-spkac.pod.in
-DEPEND[html/man1/openssl-srp.html]=man1/openssl-srp.pod
-GENERATE[html/man1/openssl-srp.html]=man1/openssl-srp.pod
-DEPEND[man/man1/openssl-srp.1]=man1/openssl-srp.pod
-GENERATE[man/man1/openssl-srp.1]=man1/openssl-srp.pod
-DEPEND[man1/openssl-srp.pod]{pod}=man1/openssl-srp.pod.in
-GENERATE[man1/openssl-srp.pod]=man1/openssl-srp.pod.in
 DEPEND[html/man1/openssl-storeutl.html]=man1/openssl-storeutl.pod
 GENERATE[html/man1/openssl-storeutl.html]=man1/openssl-storeutl.pod
 DEPEND[man/man1/openssl-storeutl.1]=man1/openssl-storeutl.pod
@@ -398,7 +392,6 @@ html/man1/openssl-sess_id.html \
 html/man1/openssl-smime.html \
 html/man1/openssl-speed.html \
 html/man1/openssl-spkac.html \
-html/man1/openssl-srp.html \
 html/man1/openssl-storeutl.html \
 html/man1/openssl-ts.html \
 html/man1/openssl-verification-options.html \
@@ -458,7 +451,6 @@ man/man1/openssl-sess_id.1 \
 man/man1/openssl-smime.1 \
 man/man1/openssl-speed.1 \
 man/man1/openssl-spkac.1 \
-man/man1/openssl-srp.1 \
 man/man1/openssl-storeutl.1 \
 man/man1/openssl-ts.1 \
 man/man1/openssl-verification-options.1 \
@@ -2095,22 +2087,6 @@ DEPEND[html/man3/SMIME_write_PKCS7.html]=man3/SMIME_write_PKCS7.pod
 GENERATE[html/man3/SMIME_write_PKCS7.html]=man3/SMIME_write_PKCS7.pod
 DEPEND[man/man3/SMIME_write_PKCS7.3]=man3/SMIME_write_PKCS7.pod
 GENERATE[man/man3/SMIME_write_PKCS7.3]=man3/SMIME_write_PKCS7.pod
-DEPEND[html/man3/SRP_Calc_B.html]=man3/SRP_Calc_B.pod
-GENERATE[html/man3/SRP_Calc_B.html]=man3/SRP_Calc_B.pod
-DEPEND[man/man3/SRP_Calc_B.3]=man3/SRP_Calc_B.pod
-GENERATE[man/man3/SRP_Calc_B.3]=man3/SRP_Calc_B.pod
-DEPEND[html/man3/SRP_VBASE_new.html]=man3/SRP_VBASE_new.pod
-GENERATE[html/man3/SRP_VBASE_new.html]=man3/SRP_VBASE_new.pod
-DEPEND[man/man3/SRP_VBASE_new.3]=man3/SRP_VBASE_new.pod
-GENERATE[man/man3/SRP_VBASE_new.3]=man3/SRP_VBASE_new.pod
-DEPEND[html/man3/SRP_create_verifier.html]=man3/SRP_create_verifier.pod
-GENERATE[html/man3/SRP_create_verifier.html]=man3/SRP_create_verifier.pod
-DEPEND[man/man3/SRP_create_verifier.3]=man3/SRP_create_verifier.pod
-GENERATE[man/man3/SRP_create_verifier.3]=man3/SRP_create_verifier.pod
-DEPEND[html/man3/SRP_user_pwd_new.html]=man3/SRP_user_pwd_new.pod
-GENERATE[html/man3/SRP_user_pwd_new.html]=man3/SRP_user_pwd_new.pod
-DEPEND[man/man3/SRP_user_pwd_new.3]=man3/SRP_user_pwd_new.pod
-GENERATE[man/man3/SRP_user_pwd_new.3]=man3/SRP_user_pwd_new.pod
 DEPEND[html/man3/SSL_CIPHER_get_name.html]=man3/SSL_CIPHER_get_name.pod
 GENERATE[html/man3/SSL_CIPHER_get_name.html]=man3/SSL_CIPHER_get_name.pod
 DEPEND[man/man3/SSL_CIPHER_get_name.3]=man3/SSL_CIPHER_get_name.pod
@@ -2347,10 +2323,6 @@ DEPEND[html/man3/SSL_CTX_set_split_send_fragment.html]=man3/SSL_CTX_set_split_se
 GENERATE[html/man3/SSL_CTX_set_split_send_fragment.html]=man3/SSL_CTX_set_split_send_fragment.pod
 DEPEND[man/man3/SSL_CTX_set_split_send_fragment.3]=man3/SSL_CTX_set_split_send_fragment.pod
 GENERATE[man/man3/SSL_CTX_set_split_send_fragment.3]=man3/SSL_CTX_set_split_send_fragment.pod
-DEPEND[html/man3/SSL_CTX_set_srp_password.html]=man3/SSL_CTX_set_srp_password.pod
-GENERATE[html/man3/SSL_CTX_set_srp_password.html]=man3/SSL_CTX_set_srp_password.pod
-DEPEND[man/man3/SSL_CTX_set_srp_password.3]=man3/SSL_CTX_set_srp_password.pod
-GENERATE[man/man3/SSL_CTX_set_srp_password.3]=man3/SSL_CTX_set_srp_password.pod
 DEPEND[html/man3/SSL_CTX_set_ssl_version.html]=man3/SSL_CTX_set_ssl_version.pod
 GENERATE[html/man3/SSL_CTX_set_ssl_version.html]=man3/SSL_CTX_set_ssl_version.pod
 DEPEND[man/man3/SSL_CTX_set_ssl_version.3]=man3/SSL_CTX_set_ssl_version.pod
@@ -3383,10 +3355,6 @@ html/man3/SMIME_read_PKCS7.html \
 html/man3/SMIME_write_ASN1.html \
 html/man3/SMIME_write_CMS.html \
 html/man3/SMIME_write_PKCS7.html \
-html/man3/SRP_Calc_B.html \
-html/man3/SRP_VBASE_new.html \
-html/man3/SRP_create_verifier.html \
-html/man3/SRP_user_pwd_new.html \
 html/man3/SSL_CIPHER_get_name.html \
 html/man3/SSL_COMP_add_compression_method.html \
 html/man3/SSL_CONF_CTX_new.html \
@@ -3446,7 +3414,6 @@ html/man3/SSL_CTX_set_session_cache_mode.html \
 html/man3/SSL_CTX_set_session_id_context.html \
 html/man3/SSL_CTX_set_session_ticket_cb.html \
 html/man3/SSL_CTX_set_split_send_fragment.html \
-html/man3/SSL_CTX_set_srp_password.html \
 html/man3/SSL_CTX_set_ssl_version.html \
 html/man3/SSL_CTX_set_stateless_cookie_generate_cb.html \
 html/man3/SSL_CTX_set_timeout.html \
@@ -4010,10 +3977,6 @@ man/man3/SMIME_read_PKCS7.3 \
 man/man3/SMIME_write_ASN1.3 \
 man/man3/SMIME_write_CMS.3 \
 man/man3/SMIME_write_PKCS7.3 \
-man/man3/SRP_Calc_B.3 \
-man/man3/SRP_VBASE_new.3 \
-man/man3/SRP_create_verifier.3 \
-man/man3/SRP_user_pwd_new.3 \
 man/man3/SSL_CIPHER_get_name.3 \
 man/man3/SSL_COMP_add_compression_method.3 \
 man/man3/SSL_CONF_CTX_new.3 \
@@ -4073,7 +4036,6 @@ man/man3/SSL_CTX_set_session_cache_mode.3 \
 man/man3/SSL_CTX_set_session_id_context.3 \
 man/man3/SSL_CTX_set_session_ticket_cb.3 \
 man/man3/SSL_CTX_set_split_send_fragment.3 \
-man/man3/SSL_CTX_set_srp_password.3 \
 man/man3/SSL_CTX_set_ssl_version.3 \
 man/man3/SSL_CTX_set_stateless_cookie_generate_cb.3 \
 man/man3/SSL_CTX_set_timeout.3 \

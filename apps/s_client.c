@@ -439,10 +439,6 @@ typedef enum OPTION_choice {
     OPT_MSG, OPT_MSGFILE, OPT_ENGINE, OPT_TRACE, OPT_SECURITY_DEBUG,
     OPT_SECURITY_DEBUG_VERBOSE, OPT_SHOWCERTS, OPT_NBIO_TEST, OPT_STATE,
     OPT_PSK_IDENTITY, OPT_PSK, OPT_PSK_SESS,
-#ifndef OPENSSL_NO_SRP
-    OPT_SRPUSER, OPT_SRPPASS, OPT_SRP_STRENGTH, OPT_SRP_LATEUSER,
-    OPT_SRP_MOREGROUPS,
-#endif
     OPT_SSL3, OPT_SSL_CONFIG,
     OPT_TLS1_3, OPT_TLS1_2, OPT_TLS1_1, OPT_TLS1, OPT_DTLS, OPT_DTLS1,
     OPT_DTLS1_2, OPT_QUIC, OPT_SCTP, OPT_TIMEOUT, OPT_MTU, OPT_KEYFORM,
@@ -452,7 +448,7 @@ typedef enum OPTION_choice {
     OPT_CAFILE, OPT_NOCAFILE, OPT_CHAINCAFILE, OPT_VERIFYCAFILE,
     OPT_CASTORE, OPT_NOCASTORE, OPT_CHAINCASTORE, OPT_VERIFYCASTORE,
     OPT_SERVERINFO, OPT_STARTTLS, OPT_SERVERNAME, OPT_NOSERVERNAME, OPT_ASYNC,
-    OPT_USE_SRTP, OPT_KEYMATEXPORT, OPT_KEYMATEXPORTLEN, OPT_PROTOHOST,
+    OPT_KEYMATEXPORT, OPT_KEYMATEXPORTLEN, OPT_PROTOHOST,
     OPT_MAXFRAGLEN, OPT_MAX_SEND_FRAG, OPT_SPLIT_SEND_FRAG, OPT_MAX_PIPELINES,
     OPT_READ_BUF, OPT_KEYLOG_FILE, OPT_EARLY_DATA, OPT_REQCAFILE,
     OPT_TFO,
@@ -656,20 +652,6 @@ const OPTIONS s_client_options[] = {
     {"enable_pha", OPT_ENABLE_PHA, '-', "Enable post-handshake-authentication"},
     {"enable_server_rpk", OPT_ENABLE_SERVER_RPK, '-', "Enable raw public keys (RFC7250) from the server"},
     {"enable_client_rpk", OPT_ENABLE_CLIENT_RPK, '-', "Enable raw public keys (RFC7250) from the client"},
-#ifndef OPENSSL_NO_SRTP
-    {"use_srtp", OPT_USE_SRTP, 's',
-     "Offer SRTP key management with a colon-separated profile list"},
-#endif
-#ifndef OPENSSL_NO_SRP
-    {"srpuser", OPT_SRPUSER, 's', "(deprecated) SRP authentication for 'user'"},
-    {"srppass", OPT_SRPPASS, 's', "(deprecated) Password for 'user'"},
-    {"srp_lateuser", OPT_SRP_LATEUSER, '-',
-     "(deprecated) SRP username into second ClientHello message"},
-    {"srp_moregroups", OPT_SRP_MOREGROUPS, '-',
-     "(deprecated) Tolerate other than the known g N values."},
-    {"srp_strength", OPT_SRP_STRENGTH, 'p',
-     "(deprecated) Minimal length in bits for N"},
-#endif
 #ifndef OPENSSL_NO_KTLS
     {"ktls", OPT_KTLS, '-', "Enable Kernel TLS for sending and receiving"},
 #endif
@@ -862,14 +844,6 @@ int s_client_main(int argc, char **argv)
 #define MAX_SI_TYPES 100
     unsigned short serverinfo_types[MAX_SI_TYPES];
     int serverinfo_count = 0, start = 0, len;
-#ifndef OPENSSL_NO_SRP
-    char *srppass = NULL;
-    int srp_lateuser = 0;
-    SRP_ARG srp_arg = { NULL, NULL, 0, 0, 0, 1024 };
-#endif
-#ifndef OPENSSL_NO_SRTP
-    char *srtp_profiles = NULL;
-#endif
 #ifndef OPENSSL_NO_CT
     char *ctlog_file = NULL;
     int ct_validation = 0;
@@ -1191,35 +1165,6 @@ int s_client_main(int argc, char **argv)
         case OPT_PSK_SESS:
             psksessf = opt_arg();
             break;
-#ifndef OPENSSL_NO_SRP
-        case OPT_SRPUSER:
-            srp_arg.srplogin = opt_arg();
-            if (min_version < TLS1_VERSION)
-                min_version = TLS1_VERSION;
-            break;
-        case OPT_SRPPASS:
-            srppass = opt_arg();
-            if (min_version < TLS1_VERSION)
-                min_version = TLS1_VERSION;
-            break;
-        case OPT_SRP_STRENGTH:
-            srp_arg.strength = atoi(opt_arg());
-            BIO_printf(bio_err, "SRP minimal length for N is %d\n",
-                       srp_arg.strength);
-            if (min_version < TLS1_VERSION)
-                min_version = TLS1_VERSION;
-            break;
-        case OPT_SRP_LATEUSER:
-            srp_lateuser = 1;
-            if (min_version < TLS1_VERSION)
-                min_version = TLS1_VERSION;
-            break;
-        case OPT_SRP_MOREGROUPS:
-            srp_arg.amp = 1;
-            if (min_version < TLS1_VERSION)
-                min_version = TLS1_VERSION;
-            break;
-#endif
         case OPT_SSL_CONFIG:
             ssl_config = opt_arg();
             break;
@@ -1433,11 +1378,6 @@ int s_client_main(int argc, char **argv)
             break;
         case OPT_NOSERVERNAME:
             noservername = 1;
-            break;
-        case OPT_USE_SRTP:
-#ifndef OPENSSL_NO_SRTP
-            srtp_profiles = opt_arg();
-#endif
             break;
         case OPT_KEYMATEXPORT:
             keymatexportlabel = opt_arg();
@@ -1711,12 +1651,6 @@ int s_client_main(int argc, char **argv)
             goto end;
         }
     }
-#ifndef OPENSSL_NO_SRP
-    if (!app_passwd(srppass, NULL, &srp_arg.srppassin, NULL)) {
-        BIO_printf(bio_err, "Error getting password\n");
-        goto end;
-    }
-#endif
 
     ctx = SSL_CTX_new_ex(app_get0_libctx(), app_get0_propq(), meth);
     if (ctx == NULL) {
@@ -1860,17 +1794,6 @@ int s_client_main(int argc, char **argv)
     if (psk_key != NULL || psksess != NULL)
         SSL_CTX_set_psk_use_session_callback(ctx, psk_use_session_cb);
 
-#ifndef OPENSSL_NO_SRTP
-    if (srtp_profiles != NULL) {
-        /* Returns 0 on success! */
-        if (SSL_CTX_set_tlsext_use_srtp(ctx, srtp_profiles) != 0) {
-            BIO_printf(bio_err, "Error setting SRTP profile\n");
-            ERR_print_errors(bio_err);
-            goto end;
-        }
-    }
-#endif
-
     if (exc != NULL)
         ssl_ctx_set_excert(ctx, exc);
 
@@ -1946,11 +1869,6 @@ int s_client_main(int argc, char **argv)
         SSL_CTX_set_tlsext_servername_callback(ctx, ssl_servername_cb);
         SSL_CTX_set_tlsext_servername_arg(ctx, &tlsextcbp);
     }
-#ifndef OPENSSL_NO_SRP
-    if (srp_arg.srplogin != NULL
-            && !set_up_srp_arg(ctx, &srp_arg, srp_lateuser, c_msg, c_debug))
-        goto end;
-# endif
 
     if (dane_tlsa_domain != NULL) {
         if (SSL_CTX_dane_enable(ctx) <= 0) {
@@ -3189,9 +3107,6 @@ int s_client_main(int argc, char **argv)
     EVP_PKEY_free(key);
     OSSL_STACK_OF_X509_free(chain);
     OPENSSL_free(pass);
-#ifndef OPENSSL_NO_SRP
-    OPENSSL_free(srp_arg.srppassin);
-#endif
     OPENSSL_free(sname_alloc);
     BIO_ADDR_free(peer_addr);
     OPENSSL_free(connectstr);
@@ -3396,17 +3311,6 @@ static void print_stuff(BIO *bio, SSL *s, int full)
         } else
             BIO_printf(bio, "No ALPN negotiated\n");
     }
-
-#ifndef OPENSSL_NO_SRTP
-    {
-        SRTP_PROTECTION_PROFILE *srtp_profile =
-            SSL_get_selected_srtp_profile(s);
-
-        if (srtp_profile)
-            BIO_printf(bio, "SRTP Extension negotiated, profile=%s\n",
-                       srtp_profile->name);
-    }
-#endif
 
     if (istls13) {
         switch (SSL_get_early_data_status(s)) {

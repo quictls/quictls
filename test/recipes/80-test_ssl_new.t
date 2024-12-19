@@ -42,7 +42,7 @@ if (defined $ENV{SSL_TESTS}) {
     @conf_srcs = glob(srctop_file("test", "ssl-tests", "*.cnf.dat"));
     # We hard-code the number of tests to double-check that the globbing above
     # finds all files as expected.
-    plan tests => 30;
+    plan tests => 29;
 }
 my @conf_files = map { basename($_, ".dat") } @conf_srcs;
 
@@ -117,8 +117,6 @@ my %skip = (
   "20-cert-select.cnf" => disabled("tls1_2") || $no_ecx,
   "21-key-update.cnf" => ($no_ec && $no_dh),
   "22-compression.cnf" => disabled("zlib") || $no_tls,
-  "23-srp.cnf" => (disabled("tls1") && disabled ("tls1_1")
-                    && disabled("tls1_2")) || disabled("srp"),
   "24-padding.cnf" => ($no_ec && $no_dh),
   "25-cipher.cnf" => disabled("ec") || disabled("tls1_2"),
   "26-tls13_client_auth.cnf" => ($no_ec && $no_dh),

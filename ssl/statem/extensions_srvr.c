@@ -210,26 +210,6 @@ int tls_parse_ctos_maxfragmentlen(SSL_CONNECTION *s, PACKET *pkt,
     return 1;
 }
 
-#ifndef OPENSSL_NO_SRP
-int tls_parse_ctos_srp(SSL_CONNECTION *s, PACKET *pkt, unsigned int context,
-                       X509 *x, size_t chainidx)
-{
-    PACKET srp_I;
-
-    if (!PACKET_as_length_prefixed_1(pkt, &srp_I)
-            || PACKET_contains_zero_byte(&srp_I)) {
-        SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);
-        return 0;
-    }
-
-    if (!PACKET_strndup(&srp_I, &s->srp_ctx.login)) {
-        SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
-        return 0;
-    }
-
-    return 1;
-}
-#endif
 
 int tls_parse_ctos_ec_pt_formats(SSL_CONNECTION *s, PACKET *pkt,
                                  unsigned int context,

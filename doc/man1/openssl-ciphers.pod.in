@@ -19,7 +19,6 @@ B<openssl> B<ciphers>
 [B<-tls1_3>]
 [B<-s>]
 [B<-psk>]
-[B<-srp>]
 [B<-stdname>]
 [B<-convert> I<name>]
 [B<-ciphersuites> I<val>]
@@ -48,7 +47,7 @@ Only list supported ciphers: those consistent with the security level, and
 minimum and maximum protocol version.  This is closer to the actual cipher list
 an application will support.
 
-PSK and SRP ciphers are not enabled by default: they require B<-psk> or B<-srp>
+PSK ciphers are not enabled by default: they require B<-psk>
 to enable them.
 
 It also does not change the default list of supported signature algorithms.
@@ -62,11 +61,6 @@ listed.
 =item B<-psk>
 
 When combined with B<-s> includes cipher suites which require PSK.
-
-=item B<-srp>
-
-When combined with B<-s> includes cipher suites which require SRP. This option
-is deprecated.
 
 =item B<-v>
 

@@ -36,9 +36,6 @@ typedef struct {
     ASN1_OCTET_STRING *psk_identity_hint;
     ASN1_OCTET_STRING *psk_identity;
 #endif
-#ifndef OPENSSL_NO_SRP
-    ASN1_OCTET_STRING *srp_username;
-#endif
     uint64_t flags;
     uint32_t max_early_data;
     ASN1_OCTET_STRING *alpn_selected;
@@ -68,9 +65,6 @@ ASN1_SEQUENCE(SSL_SESSION_ASN1) = {
     ASN1_EXP_OPT_EMBED(SSL_SESSION_ASN1, tlsext_tick_lifetime_hint, ZUINT64, 9),
     ASN1_EXP_OPT(SSL_SESSION_ASN1, tlsext_tick, ASN1_OCTET_STRING, 10),
     ASN1_EXP_OPT(SSL_SESSION_ASN1, comp_id, ASN1_OCTET_STRING, 11),
-#ifndef OPENSSL_NO_SRP
-    ASN1_EXP_OPT(SSL_SESSION_ASN1, srp_username, ASN1_OCTET_STRING, 12),
-#endif
     ASN1_EXP_OPT_EMBED(SSL_SESSION_ASN1, flags, ZUINT64, 13),
     ASN1_EXP_OPT_EMBED(SSL_SESSION_ASN1, tlsext_tick_age_add, ZUINT32, 14),
     ASN1_EXP_OPT_EMBED(SSL_SESSION_ASN1, max_early_data, ZUINT32, 15),
@@ -120,9 +114,6 @@ int i2d_SSL_SESSION(const SSL_SESSION *in, unsigned char **pp)
     unsigned char comp_id_data;
 #endif
     ASN1_OCTET_STRING tlsext_hostname, tlsext_tick;
-#ifndef OPENSSL_NO_SRP
-    ASN1_OCTET_STRING srp_username;
-#endif
 #ifndef OPENSSL_NO_PSK
     ASN1_OCTET_STRING psk_identity, psk_identity_hint;
 #endif
@@ -196,9 +187,6 @@ int i2d_SSL_SESSION(const SSL_SESSION *in, unsigned char **pp)
                       in->psk_identity_hint);
     ssl_session_sinit(&as.psk_identity, &psk_identity, in->psk_identity);
 #endif                          /* OPENSSL_NO_PSK */
-#ifndef OPENSSL_NO_SRP
-    ssl_session_sinit(&as.srp_username, &srp_username, in->srp_username);
-#endif                          /* OPENSSL_NO_SRP */
 
     as.flags = in->flags;
     as.max_early_data = in->ext.max_early_data;
@@ -388,10 +376,6 @@ SSL_SESSION *d2i_SSL_SESSION_ex(SSL_SESSION **a, const unsigned char **pp,
     }
 #endif
 
-#ifndef OPENSSL_NO_SRP
-    if (!ssl_session_strndup(&ret->srp_username, as->srp_username))
-        goto err;
-#endif                          /* OPENSSL_NO_SRP */
     /* Flags defaults to zero which is fine */
     ret->flags = (int32_t)as->flags;
     ret->ext.max_early_data = as->max_early_data;

@@ -518,9 +518,6 @@ int SSL_extension_supported(unsigned int ext_type)
     case TLSEXT_TYPE_server_name:
     case TLSEXT_TYPE_session_ticket:
     case TLSEXT_TYPE_signature_algorithms:
-#ifndef OPENSSL_NO_SRP
-    case TLSEXT_TYPE_srp:
-#endif
 #ifndef OPENSSL_NO_OCSP
     case TLSEXT_TYPE_status_request:
 #endif
