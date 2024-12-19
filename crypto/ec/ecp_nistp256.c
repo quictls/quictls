@@ -1775,7 +1775,7 @@ struct nistp256_pre_comp_st {
     CRYPTO_REF_COUNT references;
 };
 
-const EC_METHOD *EC_GFp_nistp256_method(void)
+const EC_METHOD *ossl_EC_GFp_nistp256_method(void)
 {
     static const EC_METHOD ret = {
         .field_type = NID_X9_62_prime_field,

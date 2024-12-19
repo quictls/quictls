@@ -1087,7 +1087,7 @@ static int check_named_curve_test(int id)
      * check that changing any curve parameter fails
      *
      * Setting arbitrary p, a or b might fail for some EC_GROUPs
-     * depending on the internal EC_METHOD implementation, hence run
+     * depending on the internal implementation, hence run
      * these tests conditionally to the success of EC_GROUP_set_curve().
      */
     ERR_set_mark();
@@ -1175,8 +1175,7 @@ static int check_named_curve_lookup_test(int id)
          *
          * The comparison here is done by comparing two explicit
          * parameter EC_GROUPs with EC_GROUP_cmp(), to ensure the
-         * comparison happens with unnamed EC_GROUPs using the same
-         * EC_METHODs.
+         * comparison happens with unnamed EC_GROUPs of the same type.
          */
         if (!TEST_ptr(ga = EC_GROUP_new_by_curve_name(rv))
                 || !TEST_ptr(pa = EC_GROUP_get_ecparameters(ga, NULL)))
@@ -1803,7 +1802,7 @@ static int check_ec_key_field_public_range_test(int id)
             goto err;
     } else {
         /* this should never happen */
-        TEST_error("Unsupported EC_METHOD field_type");
+        TEST_error("Unsupported field_type, internal error");
         goto err;
     }
     if (!TEST_int_le(EC_KEY_set_public_key_affine_coordinates(key, x, y), 0))
@@ -2077,7 +2076,7 @@ err:
 }
 
 /*
- * check the EC_METHOD respects the supplied EC_GROUP_set_generator G
+ * check the curve type respects the supplied EC_GROUP_set_generator G
  */
 static int custom_generator_test(int id)
 {
