@@ -34,8 +34,6 @@ IF[{- !$disabled{ec} -}]
 
   DEPEND[${DER_EC_AUX/.c/.o}]=$DER_EC_H $DER_DIGESTS_H
   DEPEND[${DER_EC_GEN/.c/.o}]=$DER_EC_H
-  GENERATE[$DER_EC_H]=$INCDIR/der_ec.h.in
-  DEPEND[$DER_EC_H]=oids_to_c.pm EC.asn1
 
   $DER_ECX_H=$INCDIR/der_ecx.h
   $DER_ECX_GEN=der_ecx_gen.c
