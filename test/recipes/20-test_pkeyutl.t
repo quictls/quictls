@@ -54,7 +54,7 @@ SKIP: {
 }
 
 SKIP: {
-    skip "Skipping tests that require ECX", 4
+    skip "Skipping tests that require EC", 4
         if disabled("ec");
 
     # Ed25519
