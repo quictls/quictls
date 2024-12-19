@@ -554,7 +554,6 @@ EXT_RETURN tls_construct_ctos_psk_kex_modes(SSL_CONNECTION *s, WPACKET *pkt,
                                             unsigned int context, X509 *x,
                                             size_t chainidx)
 {
-#ifndef OPENSSL_NO_TLS1_3
     int nodhe = s->options & SSL_OP_ALLOW_NO_DHE_KEX;
 
     if (!WPACKET_put_bytes_u16(pkt, TLSEXT_TYPE_psk_kex_modes)
@@ -571,12 +570,10 @@ EXT_RETURN tls_construct_ctos_psk_kex_modes(SSL_CONNECTION *s, WPACKET *pkt,
     s->ext.psk_kex_mode = TLSEXT_KEX_MODE_FLAG_KE_DHE;
     if (nodhe)
         s->ext.psk_kex_mode |= TLSEXT_KEX_MODE_FLAG_KE;
-#endif
 
     return EXT_RETURN_SENT;
 }
 
-#ifndef OPENSSL_NO_TLS1_3
 static int add_key_share(SSL_CONNECTION *s, WPACKET *pkt, unsigned int curve_id)
 {
     unsigned char *encoded_point = NULL;
@@ -631,13 +628,11 @@ static int add_key_share(SSL_CONNECTION *s, WPACKET *pkt, unsigned int curve_id)
     OPENSSL_free(encoded_point);
     return 0;
 }
-#endif
 
 EXT_RETURN tls_construct_ctos_key_share(SSL_CONNECTION *s, WPACKET *pkt,
                                         unsigned int context, X509 *x,
                                         size_t chainidx)
 {
-#ifndef OPENSSL_NO_TLS1_3
     size_t i, num_groups = 0;
     const uint16_t *pgroups = NULL;
     uint16_t curve_id = 0;
@@ -689,9 +684,6 @@ EXT_RETURN tls_construct_ctos_key_share(SSL_CONNECTION *s, WPACKET *pkt,
         return EXT_RETURN_FAIL;
     }
     return EXT_RETURN_SENT;
-#else
-    return EXT_RETURN_NOT_SENT;
-#endif
 }
 
 EXT_RETURN tls_construct_ctos_cookie(SSL_CONNECTION *s, WPACKET *pkt,
@@ -968,7 +960,6 @@ EXT_RETURN tls_construct_ctos_psk(SSL_CONNECTION *s, WPACKET *pkt,
                                   unsigned int context,
                                   X509 *x, size_t chainidx)
 {
-#ifndef OPENSSL_NO_TLS1_3
     uint32_t agesec, agems = 0;
     size_t reshashsize = 0, pskhashsize = 0, binderoffset, msglen;
     unsigned char *resbinder = NULL, *pskbinder = NULL, *msgstart = NULL;
@@ -1160,9 +1151,6 @@ EXT_RETURN tls_construct_ctos_psk(SSL_CONNECTION *s, WPACKET *pkt,
     }
 
     return EXT_RETURN_SENT;
-#else
-    return EXT_RETURN_NOT_SENT;
-#endif
 }
 
 EXT_RETURN tls_construct_ctos_post_handshake_auth(SSL_CONNECTION *s, WPACKET *pkt,
@@ -1170,7 +1158,6 @@ EXT_RETURN tls_construct_ctos_post_handshake_auth(SSL_CONNECTION *s, WPACKET *pk
                                                   ossl_unused X509 *x,
                                                   ossl_unused size_t chainidx)
 {
-#ifndef OPENSSL_NO_TLS1_3
     if (!s->pha_enabled)
         return EXT_RETURN_NOT_SENT;
 
@@ -1185,9 +1172,6 @@ EXT_RETURN tls_construct_ctos_post_handshake_auth(SSL_CONNECTION *s, WPACKET *pk
     s->post_handshake_auth = SSL_PHA_EXT_SENT;
 
     return EXT_RETURN_SENT;
-#else
-    return EXT_RETURN_NOT_SENT;
-#endif
 }
 
 #ifndef OPENSSL_NO_BORING_QUIC_API
@@ -1713,7 +1697,6 @@ int tls_parse_stoc_key_share(SSL_CONNECTION *s, PACKET *pkt,
                              unsigned int context, X509 *x,
                              size_t chainidx)
 {
-#ifndef OPENSSL_NO_TLS1_3
     unsigned int group_id;
     PACKET encoded_pt;
     EVP_PKEY *ckey = s->s3.tmp.pkey, *skey = NULL;
@@ -1844,7 +1827,6 @@ int tls_parse_stoc_key_share(SSL_CONNECTION *s, PACKET *pkt,
         }
     }
     s->s3.did_kex = 1;
-#endif
 
     return 1;
 }
@@ -1918,7 +1900,6 @@ int tls_parse_stoc_psk(SSL_CONNECTION *s, PACKET *pkt,
                        unsigned int context, X509 *x,
                        size_t chainidx)
 {
-#ifndef OPENSSL_NO_TLS1_3
     unsigned int identity;
 
     if (!PACKET_get_net_2(pkt, &identity) || PACKET_remaining(pkt) != 0) {
@@ -1967,7 +1948,6 @@ int tls_parse_stoc_psk(SSL_CONNECTION *s, PACKET *pkt,
     /* Early data is only allowed if we used the first ticket */
     if (identity != 0)
         s->ext.early_data_ok = 0;
-#endif
 
     return 1;
 }

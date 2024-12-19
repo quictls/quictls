@@ -48,7 +48,7 @@ ok(TLSProxy::Message->success, "No corruption");
 
 SKIP: {
     skip "TLSv1.3 disabled", 1
-        if disabled("tls1_3") || (disabled("ec") && disabled("dh"));
+        if disabled("ec") && disabled("dh");
 
     #Test 2: Corrupting a server CertVerify signature in TLSv1.3 should fail
     $proxy->clear();
@@ -114,7 +114,7 @@ sub signature_filter
 
     if ($testtype == CORRUPT_SERVER_CERT_VERIFY
             || $testtype == CORRUPT_TLS1_2_SERVER_KEY_EXCHANGE
-            || (!disabled("tls1_3") && $testtype == NO_CORRUPTION)) {
+            || $testtype == NO_CORRUPTION) {
         $flight = 1;
     } else {
         $flight = 2;

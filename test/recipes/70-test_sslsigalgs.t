@@ -20,9 +20,6 @@ plan skip_all => "$test_name needs the dynamic engine feature enabled"
 plan skip_all => "$test_name needs the sock feature enabled"
     if disabled("sock");
 
-plan skip_all => "$test_name needs TLS1.2 or TLS1.3 enabled"
-    if disabled("tls1_2") && disabled("tls1_3");
-
 my $proxy = TLSProxy::Proxy->new(
     undef,
     cmdstr(app(["openssl"]), display => 1),
@@ -58,7 +55,7 @@ my $testtype;
 
 SKIP: {
     skip "TLSv1.3 disabled", 6
-        if disabled("tls1_3") || (disabled("ec") && disabled("dh"));
+        if disabled("ec") && disabled("dh");
 
     $proxy->filter(\&sigalgs_filter);
 
@@ -106,8 +103,8 @@ SKIP: {
 }
 
 SKIP: {
-    skip "EC or TLSv1.3 disabled", 1
-        if disabled("tls1_3") || disabled("ec");
+    skip "EC or disabled", 1
+        if disabled("ec");
     #Test 8: Sending a valid sig algs list but not including a sig type that
     #        matches the certificate should fail in TLSv1.3.
     $proxy->clear();
@@ -119,7 +116,7 @@ SKIP: {
 
 SKIP: {
     skip "EC, TLSv1.3 or TLSv1.2 disabled", 1
-        if disabled("tls1_2") || disabled("tls1_3") || disabled("ec");
+        if disabled("tls1_2") || disabled("ec");
 
     #Test 9: Sending a full list of TLSv1.3 sig algs but negotiating TLSv1.2
     #        should succeed
@@ -236,8 +233,7 @@ SKIP: {
 my ($dsa_status, $sha1_status, $sha224_status);
 SKIP: {
     skip "TLSv1.3 disabled", 2
-        if disabled("tls1_3")
-           || disabled("dsa")
+        if  disabled("dsa")
            || (disabled("ec") && disabled("dh"));
     #Test 20: signature_algorithms with 1.3-only ClientHello
     $testtype = PURE_SIGALGS;
@@ -265,7 +261,7 @@ SKIP: {
 
 SKIP: {
     skip "TLSv1.3 disabled", 5
-        if disabled("tls1_3") || (disabled("ec") && disabled("dh"));
+        if disabled("ec") && disabled("dh");
     #Test 22: Insert signature_algorithms_cert that match normal sigalgs
     $testtype = SIGALGS_CERT_ALL;
     $proxy->clear();

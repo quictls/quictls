@@ -929,9 +929,7 @@ const OPTIONS s_server_options[] = {
 #ifndef OPENSSL_NO_TLS1_2
     {"tls1_2", OPT_TLS1_2, '-', "just talk TLSv1.2"},
 #endif
-#ifndef OPENSSL_NO_TLS1_3
     {"tls1_3", OPT_TLS1_3, '-', "just talk TLSv1.3"},
-#endif
 #ifndef OPENSSL_NO_DTLS
     {"dtls", OPT_DTLS, '-', "Use any DTLS version"},
     {"listen", OPT_LISTEN, '-',

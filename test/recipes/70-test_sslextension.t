@@ -26,7 +26,7 @@ plan skip_all => "$test_name needs TLS enabled"
     if alldisabled(available_protocols("tls"));
 
 my $no_below_tls13 = alldisabled(("tls1", "tls1_1", "tls1_2"))
-                     || (!disabled("tls1_3") && disabled("tls1_2"));
+                     || disabled("tls1_2");
 
 use constant {
     UNSOLICITED_SERVER_NAME => 0,
@@ -254,7 +254,7 @@ SKIP: {
 
 SKIP: {
     skip "TLS 1.3 disabled", 1
-        if disabled("tls1_3") || (disabled("ec") && disabled("dh"));
+        if disabled("ec") && disabled("dh");
     #Test 8: Inject an unsolicited extension (TLSv1.3)
     $fatal_alert = 0;
     $proxy->clear();

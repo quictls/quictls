@@ -924,9 +924,7 @@ int create_ssl_ctx_pair(OSSL_LIB_CTX *libctx, const SSL_METHOD *sm,
             goto err;
     }
 
-#if !defined(OPENSSL_NO_TLS1_3) \
-    && defined(OPENSSL_NO_EC) \
-    && defined(OPENSSL_NO_DH)
+#if defined(OPENSSL_NO_EC) && defined(OPENSSL_NO_DH)
     /*
      * There are no usable built-in TLSv1.3 groups if ec and dh are both
      * disabled

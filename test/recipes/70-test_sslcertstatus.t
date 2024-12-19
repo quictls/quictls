@@ -25,7 +25,7 @@ plan skip_all => "$test_name needs the ocsp feature enabled"
 
 plan skip_all => "$test_name needs TLS enabled"
     if alldisabled(available_protocols("tls"))
-       || (!disabled("tls1_3") && disabled("tls1_2"));
+       || disabled("tls1_2");
 
 my $proxy = TLSProxy::Proxy->new(
     \&certstatus_filter,

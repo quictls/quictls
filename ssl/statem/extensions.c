@@ -1350,7 +1350,6 @@ static int final_sig_algs(SSL_CONNECTION *s, unsigned int context, int sent)
 
 static int final_key_share(SSL_CONNECTION *s, unsigned int context, int sent)
 {
-#if !defined(OPENSSL_NO_TLS1_3)
     if (!SSL_CONNECTION_IS_TLS13(s))
         return 1;
 
@@ -1508,7 +1507,6 @@ static int final_key_share(SSL_CONNECTION *s, unsigned int context, int sent)
             return 0;
         }
     }
-#endif /* !defined(OPENSSL_NO_TLS1_3) */
     return 1;
 }
 

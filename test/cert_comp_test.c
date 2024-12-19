@@ -22,8 +22,7 @@
 #include "../ssl/ssl_local.h"
 
 #undef OSSL_NO_USABLE_TLS1_3
-#if defined(OPENSSL_NO_TLS1_3) \
-    || (defined(OPENSSL_NO_EC) && defined(OPENSSL_NO_DH))
+#if defined(OPENSSL_NO_EC) && defined(OPENSSL_NO_DH)
 /*
  * If we don't have ec or dh then there are no built-in groups that are usable
  * with TLSv1.3

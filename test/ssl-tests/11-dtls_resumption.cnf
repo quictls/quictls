@@ -1,6 +1,6 @@
 # Generated with generate_ssl_tests.pl
 
-num_tests = 16
+num_tests = 17
 
 test-0 = 0-resumption
 test-1 = 1-resumption
@@ -18,6 +18,7 @@ test-12 = 12-resumption
 test-13 = 13-resumption
 test-14 = 14-resumption
 test-15 = 15-resumption
+test-16 = 16-resumption-with-hrr
 # ===========================================================
 
 [0-resumption]
@@ -615,6 +616,40 @@ VerifyMode = Peer
 ExpectedProtocol = DTLSv1.2
 HandshakeMode = Resume
 Method = DTLS
+ResumptionExpected = Yes
+
+
+# ===========================================================
+
+[16-resumption-with-hrr]
+ssl_conf = 16-resumption-with-hrr-ssl
+
+[16-resumption-with-hrr-ssl]
+server = 16-resumption-with-hrr-server
+client = 16-resumption-with-hrr-client
+resume-server = 16-resumption-with-hrr-server
+resume-client = 16-resumption-with-hrr-resume-client
+
+[16-resumption-with-hrr-server]
+Certificate = ${ENV::TEST_CERTS_DIR}/servercert.pem
+CipherString = DEFAULT
+Curves = P-256
+PrivateKey = ${ENV::TEST_CERTS_DIR}/serverkey.pem
+
+[16-resumption-with-hrr-client]
+CipherString = DEFAULT
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/rootcert.pem
+VerifyMode = Peer
+
+[16-resumption-with-hrr-resume-client]
+CipherString = DEFAULT
+VerifyCAFile = ${ENV::TEST_CERTS_DIR}/rootcert.pem
+VerifyMode = Peer
+
+[test-16]
+ExpectedProtocol = TLSv1.3
+HandshakeMode = Resume
+Method = TLS
 ResumptionExpected = Yes
 
 

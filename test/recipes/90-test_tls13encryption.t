@@ -13,7 +13,7 @@ my $test_name = "test_tls13encryption";
 setup($test_name);
 
 plan skip_all => "$test_name is not supported in this build"
-    if disabled("tls1_3") || (disabled("ec") && disabled("dh"));
+    if disabled("ec") && disabled("dh");
 
 plan tests => 1;
 

@@ -21,7 +21,7 @@ plan skip_all => "$test_name needs the sock feature enabled"
     if disabled("sock");
 
 plan skip_all => "$test_name needs TLS1.3 enabled"
-    if disabled("tls1_3") || (disabled("ec") && disabled("dh"));
+    if disabled("ec") && disabled("dh");
 
 use constant {
     COOKIE_ONLY => 0,

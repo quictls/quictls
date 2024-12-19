@@ -490,10 +490,6 @@ static int ssl_check_allowed_versions(int min_version, int max_version)
             min_version = SSL3_VERSION;
         if (max_version == 0)
             max_version = TLS1_3_VERSION;
-#ifdef OPENSSL_NO_TLS1_3
-        if (max_version == TLS1_3_VERSION)
-            max_version = TLS1_2_VERSION;
-#endif
 #ifdef OPENSSL_NO_TLS1_2
         if (max_version == TLS1_2_VERSION)
             max_version = TLS1_1_VERSION;
@@ -535,9 +531,6 @@ static int ssl_check_allowed_versions(int min_version, int max_version)
 #endif
 #ifdef OPENSSL_NO_TLS1_2
             || (min_version <= TLS1_2_VERSION && TLS1_2_VERSION <= max_version)
-#endif
-#ifdef OPENSSL_NO_TLS1_3
-            || (min_version <= TLS1_3_VERSION && TLS1_3_VERSION <= max_version)
 #endif
             )
             return 0;

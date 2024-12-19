@@ -51,13 +51,13 @@ my @conf_files = map { basename($_, ".dat") } @conf_srcs;
 # verify generated sources in the default configuration.
 my $is_default_tls = (disabled("ssl3") && !disabled("tls1") &&
                       !disabled("tls1_1") && !disabled("tls1_2") &&
-                      !disabled("tls1_3") && (!disabled("ec") || !disabled("dh")));
+                      (!disabled("ec") || !disabled("dh")));
 
 my $is_default_dtls = (!disabled("dtls1") && !disabled("dtls1_2"));
 
 my @all_pre_tls1_3 = ("ssl3", "tls1", "tls1_1", "tls1_2");
 my $no_tls = alldisabled(available_protocols("tls"));
-my $no_tls_below1_3 = $no_tls || (disabled("tls1_2") && !disabled("tls1_3"));
+my $no_tls_below1_3 = $no_tls || disabled("tls1_2");
 if (!$no_tls && $no_tls_below1_3 && disabled("ec") && disabled("dh")) {
   $no_tls = 1;
 }
@@ -90,7 +90,7 @@ my %conf_dependent_tests = (
   "27-ticket-appdata.cnf" => !$is_default_tls,
   "28-seclevel.cnf" => disabled("tls1_2") || $no_ecx,
   "30-extended-master-secret.cnf" => disabled("tls1_2"),
-  "32-compressed-certificate.cnf" => disabled("comp") || disabled("tls1_3"),
+  "32-compressed-certificate.cnf" => disabled("comp")
 );
 
 # Add your test here if it should be skipped for some compile-time
@@ -107,7 +107,7 @@ my %skip = (
   # special-casing for.
   # TODO(TLS 1.3): We should review this once we have TLS 1.3.
   "13-fragmentation.cnf" => disabled("tls1_2"),
-  "14-curves.cnf" => disabled("tls1_2") || disabled("tls1_3")
+  "14-curves.cnf" => disabled("tls1_2")
                      || $no_ecx || $no_dh,
   "15-certstatus.cnf" => $no_tls || $no_ocsp,
   "16-dtls-certstatus.cnf" => $no_dtls || $no_ocsp,
@@ -115,22 +115,22 @@ my %skip = (
   "18-dtls-renegotiate.cnf" => $no_dtls,
   "19-mac-then-encrypt.cnf" => $no_pre_tls1_3,
   "20-cert-select.cnf" => disabled("tls1_2") || $no_ecx,
-  "21-key-update.cnf" => disabled("tls1_3") || ($no_ec && $no_dh),
+  "21-key-update.cnf" => ($no_ec && $no_dh),
   "22-compression.cnf" => disabled("zlib") || $no_tls,
   "23-srp.cnf" => (disabled("tls1") && disabled ("tls1_1")
                     && disabled("tls1_2")) || disabled("srp"),
-  "24-padding.cnf" => disabled("tls1_3") || ($no_ec && $no_dh),
+  "24-padding.cnf" => ($no_ec && $no_dh),
   "25-cipher.cnf" => disabled("ec") || disabled("tls1_2"),
-  "26-tls13_client_auth.cnf" => disabled("tls1_3") || ($no_ec && $no_dh),
+  "26-tls13_client_auth.cnf" => ($no_ec && $no_dh),
   "29-dtls-sctp-label-bug.cnf" => disabled("sctp") || disabled("sock"),
-  "32-compressed-certificate.cnf" => disabled("comp") || disabled("tls1_3"),
+  "32-compressed-certificate.cnf" => disabled("comp"),
 );
 
 foreach my $conf (@conf_files) {
     subtest "Test configuration $conf" => sub {
         plan tests => 6 + ($no_fips ? 0 : 3);
         test_conf($conf,
-                  0, # was: $conf_dependent_tests{$conf}
+                  0, # WAS: $conf_dependent_tests{$conf}
                   defined($skip{$conf}) ? $skip{$conf} : $no_tls,
                   "none");
         test_conf($conf,
