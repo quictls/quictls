@@ -114,7 +114,6 @@ doc/man1/openssl-*.pod
 /tools/c_rehash
 /tools/c_rehash.pl
 /util/shlib_wrap.sh
-/util/wrap.pl
 /util/quicserver
 /tags
 /TAGS

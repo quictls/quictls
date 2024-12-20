@@ -1,22 +1,10 @@
-#! {- $config{HASHBANGPERL} -}
+#! /usr/bin/env perl
 
 use strict;
 use warnings;
 
 use File::Basename;
 use File::Spec::Functions;
-
-BEGIN {
-    # This method corresponds exactly to 'use OpenSSL::Util',
-    # but allows us to use a platform specific file spec.
-    require {-
-         use Cwd qw(abs_path);
-
-         "'" . abs_path(catfile($config{sourcedir},
-                                'util', 'perl', 'OpenSSL', 'Util.pm')) . "'";
-         -};
-    OpenSSL::Util->import();
-}
 
 my $there = canonpath(catdir(dirname($0), updir()));
 my $std_engines = catdir($there, 'engines');
@@ -26,11 +14,7 @@ my $unix_shlib_wrap = catfile($there, 'util/shlib_wrap.sh');
 my $std_openssl_conf_include;
 
 if ($ARGV[0] eq '-fips') {
-    $std_openssl_conf = {-
-         use Cwd qw(abs_path);
-
-         "'" . abs_path(catfile($config{sourcedir}, 'test/fips-and-base.cnf')) . "'";
-         -};
+    $std_openssl_conf = "'" . abs_path('test/fips-and-base.cnf') . "'";
     shift;
 
     $std_openssl_conf_include = catdir($there, 'providers');
@@ -46,12 +30,8 @@ local $ENV{OPENSSL_MODULES} = $std_providers
     if ($ENV{OPENSSL_MODULES} // '') eq '' && -d $std_providers;
 local $ENV{OPENSSL_CONF} = $std_openssl_conf
     if ($ENV{OPENSSL_CONF} // '') eq '' && -f $std_openssl_conf;
-{-
-     use File::Spec::Functions qw(rel2abs);
--}
-my $use_system = 0;
-my @cmd;
 
+my @cmd;
 if (-x $unix_shlib_wrap) {
     @cmd = ( $unix_shlib_wrap, @ARGV );
 } else {
@@ -82,3 +62,4 @@ exit(($? & 255) | 128) if ($? & 255) != 0;
 my $exitcode = $? >> 8;
 
 exit($exitcode);
+
