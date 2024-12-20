@@ -30,6 +30,9 @@ by the ALPN extension, IETF RFC 7301, in 2014.
 - Move the two apps, CA.pl and tsget, that were written in Perl, to a
 separate directory. Perl is optional on intalled systems.
 
+- Remove the old ERRxxx() macros; engines still use them since their
+library number is dynamic not static.
+
 - Remove support for EGD random source.
 
 - Made the `ERR_STACK` datatype opaque.
