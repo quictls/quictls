@@ -470,14 +470,14 @@ static int ecp_sm2p256_get_affine(const EC_GROUP *group,
     ALIGN32 BN_ULONG point_z[P256_LIMBS] = {0};
 
     if (EC_POINT_is_at_infinity(group, point)) {
-        ECerr(ERR_LIB_EC, EC_R_POINT_AT_INFINITY);
+        ERR_raise(ERR_LIB_EC, EC_R_POINT_AT_INFINITY);
         return 0;
     }
 
     if (ecp_sm2p256_bignum_field_elem(point_x, point->X) <= 0
         || ecp_sm2p256_bignum_field_elem(point_y, point->Y) <= 0
         || ecp_sm2p256_bignum_field_elem(point_z, point->Z) <= 0) {
-        ECerr(ERR_LIB_EC, EC_R_COORDINATES_OUT_OF_RANGE);
+        ERR_raise(ERR_LIB_EC, EC_R_COORDINATES_OUT_OF_RANGE);
         return 0;
     }
 
@@ -519,7 +519,7 @@ static int ecp_sm2p256_windowed_mul(const EC_GROUP *group,
 
     if (num > OPENSSL_MALLOC_MAX_NELEMS(P256_POINT)
         || (scalars = OPENSSL_malloc(num * sizeof(BIGNUM *))) == NULL) {
-        ECerr(ERR_LIB_EC, ERR_R_MALLOC_FAILURE);
+        ERR_raise(ERR_LIB_EC, ERR_R_MALLOC_FAILURE);
         goto err;
     }
 
@@ -535,7 +535,7 @@ static int ecp_sm2p256_windowed_mul(const EC_GROUP *group,
             if ((tmp = BN_CTX_get(ctx)) == NULL)
                 goto err;
             if (!BN_nnmod(tmp, scalar[i], group->order, ctx)) {
-                ECerr(ERR_LIB_EC, ERR_R_BN_LIB);
+                ERR_raise(ERR_LIB_EC, ERR_R_BN_LIB);
                 goto err;
             }
             scalars[i] = tmp;
@@ -547,7 +547,7 @@ static int ecp_sm2p256_windowed_mul(const EC_GROUP *group,
             || ecp_sm2p256_bignum_field_elem(p.p.X, point[i]->X) <= 0
             || ecp_sm2p256_bignum_field_elem(p.p.Y, point[i]->Y) <= 0
             || ecp_sm2p256_bignum_field_elem(p.p.Z, point[i]->Z) <= 0) {
-            ECerr(ERR_LIB_EC, EC_R_COORDINATES_OUT_OF_RANGE);
+            ERR_raise(ERR_LIB_EC, EC_R_COORDINATES_OUT_OF_RANGE);
             goto err;
         }
 
@@ -579,7 +579,7 @@ static int ecp_sm2p256_points_mul(const EC_GROUP *group,
     } t, p;
 
     if ((num + 1) == 0 || (num + 1) > OPENSSL_MALLOC_MAX_NELEMS(void *)) {
-        ECerr(ERR_LIB_EC, ERR_R_MALLOC_FAILURE);
+        ERR_raise(ERR_LIB_EC, ERR_R_MALLOC_FAILURE);
         goto err;
     }
 
@@ -588,12 +588,12 @@ static int ecp_sm2p256_points_mul(const EC_GROUP *group,
     if (scalar) {
         generator = EC_GROUP_get0_generator(group);
         if (generator == NULL) {
-            ECerr(ERR_LIB_EC, EC_R_UNDEFINED_GENERATOR);
+            ERR_raise(ERR_LIB_EC, EC_R_UNDEFINED_GENERATOR);
             goto err;
         }
 
         if (!ecp_sm2p256_bignum_field_elem(k, scalar)) {
-            ECerr(ERR_LIB_EC, EC_R_COORDINATES_OUT_OF_RANGE);
+            ERR_raise(ERR_LIB_EC, EC_R_COORDINATES_OUT_OF_RANGE);
             goto err;
         }
 #if !defined(OPENSSL_NO_SM2_PRECOMP)
@@ -655,7 +655,7 @@ static int ecp_sm2p256_field_mul(const EC_GROUP *group, BIGNUM *r,
 
     if (!ecp_sm2p256_bignum_field_elem(a_fe, a)
         || !ecp_sm2p256_bignum_field_elem(b_fe, b)) {
-        ECerr(ERR_LIB_EC, EC_R_COORDINATES_OUT_OF_RANGE);
+        ERR_raise(ERR_LIB_EC, EC_R_COORDINATES_OUT_OF_RANGE);
         return 0;
     }
 
@@ -677,7 +677,7 @@ static int ecp_sm2p256_field_sqr(const EC_GROUP *group, BIGNUM *r,
         return 0;
 
     if (!ecp_sm2p256_bignum_field_elem(a_fe, a)) {
-        ECerr(ERR_LIB_EC, EC_R_COORDINATES_OUT_OF_RANGE);
+        ERR_raise(ERR_LIB_EC, EC_R_COORDINATES_OUT_OF_RANGE);
         return 0;
     }
 
@@ -697,7 +697,7 @@ static int ecp_sm2p256_inv_mod_ord(const EC_GROUP *group, BIGNUM *r,
     ALIGN32 BN_ULONG out[P256_LIMBS] = {0};
 
     if (bn_wexpand(r, P256_LIMBS) == NULL) {
-        ECerr(ERR_LIB_EC, ERR_R_BN_LIB);
+        ERR_raise(ERR_LIB_EC, ERR_R_BN_LIB);
         goto err;
     }
 
@@ -706,14 +706,14 @@ static int ecp_sm2p256_inv_mod_ord(const EC_GROUP *group, BIGNUM *r,
 
         if ((tmp = BN_CTX_get(ctx)) == NULL
             || !BN_nnmod(tmp, x, group->order, ctx)) {
-            ECerr(ERR_LIB_EC, ERR_R_BN_LIB);
+            ERR_raise(ERR_LIB_EC, ERR_R_BN_LIB);
             goto err;
         }
         x = tmp;
     }
 
     if (!ecp_sm2p256_bignum_field_elem(t, x)) {
-        ECerr(ERR_LIB_EC, EC_R_COORDINATES_OUT_OF_RANGE);
+        ERR_raise(ERR_LIB_EC, EC_R_COORDINATES_OUT_OF_RANGE);
         goto err;
     }
 

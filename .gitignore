@@ -13,13 +13,13 @@
 /tmp.*
 /configdata.pm
 /builddata.pm
-/installdata.pm
 
 # Exporters
 /*.pc
 /OpenSSLConfig*.cmake
 /exporters/*.pc
 /exporters/OpenSSLConfig*.cmake
+/exporters/installdata.pm
 
 # Links under apps
 /apps/CA.pl
