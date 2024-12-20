@@ -20,7 +20,6 @@ jobs:
       fail-fast: false
       matrix:
         opt: [
-          386,
           no-afalgeng,
           no-apps,
           no-aria,
@@ -51,7 +50,6 @@ jobs:
           no-dtls1_2,
           no-dtls1_2-method,
           no-dtls1-method,
-          no-ecdsa,
           enable-ec_nistp_64_gcc_128,
           no-ec_nistp_64_gcc_128,
           no-engine,
