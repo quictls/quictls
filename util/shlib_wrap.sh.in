@@ -1,10 +1,13 @@
 #!/bin/sh
 {-
     use lib '.';
+    use lib './Configurations';
     use configdata;
-    use lib catdir($config{sourcedir}, 'Configurations');
     use platform;
+
+if ( grep (/-rpath\b/, @{$config{LDFLAGS}}) ) { "RPATH=yes" } else { "" };
 -}
+
 # To test this OpenSSL version's applications against another version's
 # shared libraries, simply set
 #
@@ -75,8 +78,7 @@ SunOS)
 	;;
 esac
 
-{- output_off() unless grep (/-rpath\b/, @{$config{LDFLAGS}}); ""; -}
-if [ -f "$LIBCRYPTOSO" -a -z "$preload_var" ]; then
+if [ -n "$RPATH" -a -f "$LIBCRYPTOSO" -a -z "$preload_var" ]; then
 	# Following three lines are major excuse for isolating them into
 	# this wrapper script. Original reason for setting LD_PRELOAD
 	# was to make it possible to pass 'make test' when user linked
@@ -90,7 +92,6 @@ if [ -f "$LIBCRYPTOSO" -a -z "$preload_var" ]; then
 	DYLD_INSERT_LIBRARIES="$LIBCRYPTOSO:$LIBSSLSO"	# MacOS X
 	export LD_PRELOAD DYLD_INSERT_LIBRARIES
 fi
-{- output_on() unless grep (/-rpath\b/, @{$config{LDFLAGS}}); ""; -}
 
 cmd="$1"; [ -x "$cmd" ] || cmd="$cmd${EXE_EXT}"
 shift
