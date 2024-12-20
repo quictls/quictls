@@ -1083,12 +1083,18 @@ uninstall_image_docs:
 # Developer targets (note: these are only available on Unix) #########
 ##@ Code maintenance
 
-update: generate errors ordinals ## Update errors, ordinals and build info
+update: generate errors ordinals  generate_paramtables
 
 .PHONY: generate generate_apps generate_crypto_objects \
           generate_crypto_conf generate_crypto_asn1 generate_fuzz_oids
 generate: generate_apps generate_crypto_objects \
           generate_crypto_conf generate_crypto_asn1 generate_fuzz_oids
+
+.PHONY: generate_paramtables
+generate_paramtables:
+	$(PERL) $(SRCDIR)/util/mkparams -d $(SRCDIR)/include/internal/params_idx.inc
+	$(PERL) $(SRCDIR)/util/mkparams -i $(SRCDIR)/include/internal/param_names.inc
+	$(PERL) $(SRCDIR)/util/mkparams -p $(SRCDIR)/include/openssl/core_names.inc
 
 .PHONY: doc-nits md-nits
 doc-nits: build_generated_pods ## Evaluate OpenSSL documentation

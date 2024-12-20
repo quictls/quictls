@@ -40,6 +40,9 @@ aliases for others: `BUF_strdup`, `BUF_strndup`, `BUF_memdup`,
 
 - All support for SRP has been removed.
 
+- The header file `opensslv.h` has been merged into `configuration.h`
+The old file temporarily exists for compatibility, with cmake.
+
 - Removed some functions deprecated in the OpenSSL 1.1.0 release:
 `ENGINE_setup_bsd_cryptodev`,
 `PKCS12_get_attr`, and `SSL_set_debug`.

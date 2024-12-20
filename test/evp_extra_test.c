@@ -402,7 +402,7 @@ static const unsigned char pExampleECParamDER[] = {
     0x06, 0x08, 0x2a, 0x86, 0x48, 0xce, 0x3d, 0x03, 0x01, 0x07
 };
 
-# ifndef OPENSSL_NO_ECX
+# ifndef OPENSSL_NO_EC
 static const unsigned char kExampleED25519KeyDER[] = {
     0x30, 0x2e, 0x02, 0x01, 0x00, 0x30, 0x05, 0x06, 0x03, 0x2b, 0x65, 0x70,
     0x04, 0x22, 0x04, 0x20, 0xba, 0x7b, 0xba, 0x20, 0x1b, 0x02, 0x75, 0x3a,
@@ -597,12 +597,10 @@ static APK_DATA keycheckdata[] = {
      1, 1},
     {pExampleECParamDER, sizeof(pExampleECParamDER), "EC", EVP_PKEY_EC, 0, 0, 1,
      2},
-# ifndef OPENSSL_NO_ECX
     {kExampleED25519KeyDER, sizeof(kExampleED25519KeyDER), "ED25519",
      EVP_PKEY_ED25519, 1, 1, 1, 0},
     {kExampleED25519PubKeyDER, sizeof(kExampleED25519PubKeyDER), "ED25519",
      EVP_PKEY_ED25519, 0, 1, 1, 1},
-# endif
 #endif
 };
 
@@ -652,7 +650,7 @@ static EVP_PKEY *load_example_dh_key(void)
 }
 # endif
 
-# ifndef OPENSSL_NO_ECX
+# ifndef OPENSSL_NO_EC
 static EVP_PKEY *load_example_ed25519_key(void)
 {
     return load_example_key("ED25519", kExampleED25519KeyDER,
@@ -2314,7 +2312,7 @@ static struct keys_st {
         EVP_PKEY_SIPHASH, "0123456789012345", NULL
 #endif
     },
-#ifndef OPENSSL_NO_ECX
+#ifndef OPENSSL_NO_EC
     {
         EVP_PKEY_X25519, "01234567890123456789012345678901",
         "abcdefghijklmnopqrstuvwxyzabcdef"
@@ -4646,7 +4644,7 @@ static int test_custom_pmeth(int idx)
 # endif
     case 3:
     case 9:
-# ifndef OPENSSL_NO_ECX
+# ifndef OPENSSL_NO_EC
         id = EVP_PKEY_ED25519;
         md = NULL;
         pkey = load_example_ed25519_key();
@@ -4666,7 +4664,7 @@ static int test_custom_pmeth(int idx)
 # endif
     case 5:
     case 11:
-# ifndef OPENSSL_NO_ECX
+# ifndef OPENSSL_NO_EC
         id = EVP_PKEY_X25519;
         doderive = 1;
         pkey = load_example_x25519_key();
@@ -4990,8 +4988,8 @@ static int test_signatures_with_engine(int tst)
     if (tst <= 1)
         return 1;
 #  endif
-#  ifdef OPENSSL_NO_ECX
-    /* Skip ECX tests in a no-ecx build */
+#  ifdef OPENSSL_NO_EC
+    /* Skip ECX tests in a no-ec build */
     if (tst == 2)
         return 1;
 #  endif
@@ -5108,7 +5106,7 @@ static int test_cipher_with_engine(void)
 # endif /* OPENSSL_NO_DYNAMIC_ENGINE */
 #endif /* OPENSSL_NO_DEPRECATED_3_0 */
 
-#ifndef OPENSSL_NO_ECX
+#ifndef OPENSSL_NO_EC
 static int ecxnids[] = {
     NID_X25519,
     NID_X448,
@@ -5151,7 +5149,7 @@ const OPTIONS *test_get_options(void)
     return options;
 }
 
-#ifndef OPENSSL_NO_ECX
+#ifndef OPENSSL_NO_EC
 /* Test that trying to sign with a public key errors out gracefully */
 static int test_ecx_not_private_key(int tst)
 {
@@ -5216,7 +5214,7 @@ static int test_ecx_not_private_key(int tst)
 
     return testresult;
 }
-#endif /* OPENSSL_NO_ECX */
+#endif /* OPENSSL_NO_EC */
 
 static int test_sign_continuation(void)
 {
@@ -5677,7 +5675,7 @@ int setup_tests(void)
 # endif
 #endif
 
-#ifndef OPENSSL_NO_ECX
+#ifndef OPENSSL_NO_EC
     ADD_ALL_TESTS(test_ecx_short_keys, OSSL_NELEM(ecxnids));
     ADD_ALL_TESTS(test_ecx_not_private_key, OSSL_NELEM(keys));
 #endif

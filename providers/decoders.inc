@@ -58,7 +58,7 @@ DECODER_w_structure("EC", der, PrivateKeyInfo, ec, yes),
 DECODER_w_structure("EC", der, SubjectPublicKeyInfo, ec, yes),
 DECODER_w_structure("EC", der, type_specific_no_pub, ec, yes),
 DECODER_w_structure("EC", der, EC, ec, yes),
-# ifndef OPENSSL_NO_ECX
+# ifndef OPENSSL_NO_EC
 DECODER_w_structure("ED25519", der, PrivateKeyInfo, ed25519, yes),
 DECODER_w_structure("ED25519", der, SubjectPublicKeyInfo, ed25519, yes),
 DECODER_w_structure("ED448", der, PrivateKeyInfo, ed448, yes),

@@ -5,7 +5,7 @@ IF[{- !$disabled{asm} -}]
 
   $ECASM_x86_64=ecp_nistz256.c ecp_nistz256-x86_64.s
   $ECDEF_x86_64=ECP_NISTZ256_ASM
-  IF[{- !$disabled{'ecx'} -}]
+  IF[{- !$disabled{'ec'} -}]
     $ECASM_x86_64=$ECASM_x86_64 x25519-x86_64.s
     $ECDEF_x86_64=$ECDEF_x86_64 X25519_ASM
   ENDIF
@@ -21,7 +21,7 @@ IF[{- !$disabled{asm} -}]
   $ECASM_mips64=
 
   $ECASM_s390x=ecp_s390x_nistp.c
-  IF[{- !$disabled{'ecx'} -}]
+  IF[{- !$disabled{'ec'} -}]
     $ECASM_s390x=$ECASM_s390x ecx_s390x.c
   ENDIF
   $ECDEF_s390x=S390X_EC_ASM
@@ -47,7 +47,7 @@ IF[{- !$disabled{asm} -}]
     INCLUDE[ecp_nistp384.o]=..
     INCLUDE[ecp_nistp521.o]=..
   ENDIF
-  IF[{- !$disabled{'ecx'} -}]
+  IF[{- !$disabled{'ec'} -}]
     $ECASM_ppc64=$ECASM_ppc64 x25519-ppc64.s
     $ECDEF_ppc64=$ECDEF_ppc64 X25519_ASM
     INCLUDE[ecx_s390x.o]=..
@@ -69,7 +69,7 @@ $COMMON=ec_lib.c ecp_smpl.c ecp_mont.c ecp_nist.c ec_cvt.c ec_mult.c \
         ecdsa_ossl.c ecdsa_sign.c ecdsa_vrf.c \
         $ECASM ec_backend.c ecdh_kdf.c
 
-IF[{- !$disabled{'ecx'} -}]
+IF[{- !$disabled{'ec'} -}]
   $COMMON=$COMMON curve25519.c curve448/f_generic.c curve448/scalar.c \
   curve448/arch_64/f_impl64.c ecx_backend.c curve448/arch_32/f_impl32.c \
   curve448/curve448_tables.c curve448/eddsa.c curve448/curve448.c \
@@ -83,7 +83,7 @@ ENDIF
 SOURCE[../../libcrypto]=$COMMON ec_ameth.c ec_pmeth.c \
                         ec_err.c eck_prn.c \
                         ec_deprecated.c ec_print.c
-IF[{- !$disabled{'ecx'} -}]
+IF[{- !$disabled{'ec'} -}]
   SOURCE[../../libcrypto]=ecx_meth.c
 ENDIF
 SOURCE[../../providers/libfips.a]=$COMMON
@@ -111,7 +111,7 @@ GENERATE[ecp_nistz256-sparcv9.S]=asm/ecp_nistz256-sparcv9.pl
 INCLUDE[ecp_nistz256-sparcv9.o]=..
 
 INCLUDE[ecp_s390x_nistp.o]=..
-IF[{- !$disabled{'ecx'} -}]
+IF[{- !$disabled{'ec'} -}]
   INCLUDE[ecx_meth.o]=..
   INCLUDE[ecx_key.o]=..
 ENDIF
@@ -125,7 +125,7 @@ GENERATE[ecp_nistz256-ppc64.s]=asm/ecp_nistz256-ppc64.pl
 GENERATE[ecp_nistp384-ppc64.s]=asm/ecp_nistp384-ppc64.pl
 GENERATE[ecp_nistp521-ppc64.s]=asm/ecp_nistp521-ppc64.pl
 
-IF[{- !$disabled{'ecx'} -}]
+IF[{- !$disabled{'ec'} -}]
 GENERATE[x25519-x86_64.s]=asm/x25519-x86_64.pl
 GENERATE[x25519-ppc64.s]=asm/x25519-ppc64.pl
 ENDIF

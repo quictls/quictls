@@ -45,7 +45,6 @@
 /include/openssl/fipskey.h
 /include/openssl/lhash.h
 /include/openssl/ocsp.h
-/include/openssl/opensslv.h
 /include/openssl/pkcs12.h
 /include/openssl/pkcs7.h
 /include/openssl/safestack.h
@@ -54,11 +53,6 @@
 /include/openssl/x509.h
 /include/openssl/x509v3.h
 /include/openssl/x509_vfy.h
-/include/openssl/core_names.h
-/include/internal/param_names.h
-
-# Auto generated parameter name files
-/crypto/params_idx.c
 
 # Auto generated doc files
 doc/man1/openssl-*.pod
