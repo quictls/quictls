@@ -14,7 +14,7 @@ X509_NAME_oneline - X509_NAME printing routines
  int X509_NAME_print_ex_fp(FILE *fp, const X509_NAME *nm,
                            int indent, unsigned long flags);
  char *X509_NAME_oneline(const X509_NAME *a, char *buf, int size);
- int X509_NAME_print(BIO *bp, const X509_NAME *name, int obase);
+ int X509_NAME_print(BIO *bp, const X509_NAME *name, int dummy);
 
 =head1 DESCRIPTION
 
@@ -32,9 +32,9 @@ I<size> is ignored.
 Otherwise, at most I<size> bytes will be written, including the ending '\0',
 and I<buf> is returned.
 
-X509_NAME_print() prints out I<name> to I<bp> indenting each line by I<obase>
-characters. Multiple lines are used if the output (including indent) exceeds
-80 characters.
+X509_NAME_print() prints out I<name> to I<bp> with a limited attempt
+to make the output more readable.
+The I<dummy> parameter is an historical artificate and not used.
 
 =head1 NOTES
 

@@ -789,7 +789,7 @@ int X509_NAME_print_ex_fp(FILE *fp, const X509_NAME *nm, int indent,
                           unsigned long flags);
 # endif
 
-int X509_NAME_print(BIO *bp, const X509_NAME *name, int obase);
+int X509_NAME_print(BIO *bp, const X509_NAME *name, int dummy);
 int X509_NAME_print_ex(BIO *out, const X509_NAME *nm, int indent,
                        unsigned long flags);
 int X509_print_ex(BIO *bp, X509 *x, unsigned long nmflag,
