@@ -10,6 +10,8 @@
 #ifndef OSSL_INTERNAL_SSLCONF_H
 # define OSSL_INTERNAL_SSLCONF_H
 
+char *ossl_safe_getenv(const char *);
+
 typedef struct ssl_conf_cmd_st SSL_CONF_CMD;
 
 const SSL_CONF_CMD *conf_ssl_get(size_t idx, const char **name, size_t *cnt);

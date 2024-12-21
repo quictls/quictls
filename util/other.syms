@@ -4,8 +4,6 @@
 #
 OPENSSL_ia32cap                         environment
 OPENSSL_s390xcap                        environment
-OPENSSL_MALLOC_FD                       environment
-OPENSSL_MALLOC_FAILURES                 environment
 OPENSSL_instrument_bus                  assembler
 OPENSSL_instrument_bus2                 assembler
 #

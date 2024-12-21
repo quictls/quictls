@@ -8,4 +8,5 @@
  */
 
 #include <openssl/conftypes.h>
+#include <internal/sslconf.h>
 void ossl_config_add_ssl_module(void);

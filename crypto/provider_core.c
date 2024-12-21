@@ -26,6 +26,7 @@
 #include <internal/thread_once.h>
 #include <internal/provider.h>
 #include <internal/refcount.h>
+#include <internal/sslconf.h>
 #include <internal/bio.h>
 #include <internal/core.h>
 #include "provider_local.h"

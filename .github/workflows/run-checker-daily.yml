@@ -97,6 +97,7 @@ jobs:
           no-ssl3,
           no-ssl3-method,
           no-ssl-trace,
+          enable-sslkeylog enable-sslkeylog-cb,
           no-static-engine no-shared,
           no-tests,
           enable-tfo,

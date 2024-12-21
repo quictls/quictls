@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <internal/cryptlib.h>
 #include <internal/e_os.h>
+#include <internal/sslconf.h>
 
 char *ossl_safe_getenv(const char *name)
 {

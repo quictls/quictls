@@ -9,6 +9,7 @@
 
 #include <internal/e_os.h>
 #include <internal/cryptlib.h>
+#include <internal/sslconf.h>
 #include <stdio.h>
 #include <time.h>
 #include <errno.h>

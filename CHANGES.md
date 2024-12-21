@@ -69,6 +69,13 @@ in `test` were moved to a new `include/test` directory, and the two
   - The header file `opensslv.h` has been merged into `configuration.h`
 The old file currently exists for compatibility with cmake.
 
+- Imported the sslkeylog build-time configuration option from OpenSSL. If
+enabled, all secrets are logged to the file specified in the `SSLKEYLOGFILE`
+environment variable. *Do not enable or use this in production.*
+Added an additional `sslkeylog-cb` configuration option that makes
+the application-specified logging callback work.
+Ported from OpenSSL PR#25297.
+
 - Remove support for some old configuration options, `configuration.h`
 has hardwired `#define` values as appropriate.
   - no-unit-test as there was only one, so not worth the complication

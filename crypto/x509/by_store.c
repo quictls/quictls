@@ -9,6 +9,7 @@
 
 #include <openssl/store.h>
 #include <internal/cryptlib.h>
+#include <internal/sslconf.h>
 #include <crypto/x509.h>
 #include "x509_local.h"
 
