@@ -70,6 +70,21 @@ See L<RAND_load_file(3)>.
 Specify the default directory or file containing CA certificates.
 See L<SSL_CTX_load_verify_locations(3)>.
 
+=item B<SSLKEYLOGFILE>
+
+Used to produce the standard format output file for SSL key logging.
+If this variable is set, then the library will record all secrets produced
+by SSL/TLS connections into that file.
+
+This feature only works if the library is compiled with the B<enable-keylog>
+flag; it is disabled by default.  Note that support for this feature, and
+its use, pose a security risk.  By recording the keys exchanged during
+an SSL/TLS session any party with access to the file can decrypt all of
+the traffic sent during that session.
+
+I<Enabling and using this feature should be limited to test and debug
+environments only.>
+
 =item B<TSGET>
 
 Additional arguments for the L<tsget(1)> command.

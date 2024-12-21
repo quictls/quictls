@@ -3694,6 +3694,62 @@ static int ssl_session_cmp(const SSL_SESSION *a, const SSL_SESSION *b)
     return memcmp(a->session_id, b->session_id, a->session_id_length);
 }
 
+#ifndef OPENSSL_NO_SSLKEYLOG
+/*
+ * Static initialization for a one-time action to initialize the SSL key log.
+ */
+static CRYPTO_ONCE ssl_keylog_once = CRYPTO_ONCE_STATIC_INIT;
+
+/*
+ * Pointer to a read-write lock used to protect access to the key log.
+ */
+static CRYPTO_RWLOCK *keylog_lock;
+
+/*
+ * Pointer to a BIO structure used for writing the key log information.
+ */
+static BIO *keylog_bio;
+
+/*
+ * Initializes the SSLKEYLOGFILE lock.
+ */
+DEFINE_RUN_ONCE_STATIC(ssl_keylog_init)
+{
+    keylog_lock = CRYPTO_THREAD_lock_new();
+    return keylog_lock == NULL ? 0 : 1;
+}
+
+/*
+ * If freeing the BIO, clear our local pointer to it.
+ */
+static long check_keylog_bio_free(BIO *b, int oper, const char *argp,
+                                  size_t len, int argi, long argl, int ret,
+                                  size_t *processed)
+{
+
+    /* Note we _dont_ take the keylog_lock here This is intentional,
+     * because we only free the keylog lock During SSL_CTX_free, in which
+     * we already posess the lock, so Theres no need to grab it again. */
+    if (oper == BIO_CB_FREE)
+        keylog_bio = NULL;
+    return ret;
+}
+
+/*
+ * Write ssl secrets to a file
+ */
+static void do_sslkeylog(const SSL *ssl, const char *line)
+{
+    if (keylog_lock == NULL || !CRYPTO_THREAD_write_lock(keylog_lock))
+        return;
+    if (keylog_bio != NULL) {
+        BIO_printf(keylog_bio, "%s\n", line);
+        (void)BIO_flush(keylog_bio);
+    }
+    CRYPTO_THREAD_unlock(keylog_lock);
+}
+#endif
+
 /*
  * These wrapper functions should remain rather than redeclaring
  * SSL_SESSION_hash and SSL_SESSION_cmp for void* types and casting each
@@ -3705,6 +3761,9 @@ SSL_CTX *SSL_CTX_new_ex(OSSL_LIB_CTX *libctx, const char *propq,
                         const SSL_METHOD *meth)
 {
     SSL_CTX *ret = NULL;
+#ifndef OPENSSL_NO_SSLKEYLOG
+    const char *keylogfile = ossl_safe_getenv("SSLKEYLOGFILE");
+#endif
 #ifndef OPENSSL_NO_COMP_ALG
     int i;
 #endif
@@ -3956,9 +4015,47 @@ SSL_CTX *SSL_CTX_new_ex(OSSL_LIB_CTX *libctx, const char *propq,
 
     ssl_ctx_system_config(ret);
 
+#ifndef OPENSSL_NO_SSLKEYLOG
+    if (keylogfile == NULL || *keylogfile == '\0')
+        return ret;
+
+    /* Make sure we have a global lock allocated */
+    if (!RUN_ONCE(&ssl_keylog_once, ssl_keylog_init)) {
+        /* use a trace message as a warning */
+        OSSL_TRACE(TLS, "Unable to initalize keylog data\n");
+        goto out;
+    }
+
+    /* Grab our global lock */
+    if (!CRYPTO_THREAD_write_lock(keylog_lock)) {
+        OSSL_TRACE(TLS, "Unable to acquire keylog write lock\n");
+        goto out;
+    }
+    /*
+     * If the bio for the requested keylog file hasn't been
+     * created yet, go ahead and create it, and set it to append
+     * if its already there.
+     */
+    if (keylog_bio == NULL) {
+        keylog_bio = BIO_new_file(keylogfile, "a");
+        if (keylog_bio == NULL) {
+            OSSL_TRACE(TLS, "Unable to create keylog bio\n");
+            goto out;
+        }
+        BIO_set_callback_ex(keylog_bio, check_keylog_bio_free);
+    } else {
+        BIO_up_ref(keylog_bio);
+    }
+    ret->do_sslkeylog = 1;
+    CRYPTO_THREAD_unlock(keylog_lock);
+out:
+#endif
     return ret;
  err:
     SSL_CTX_free(ret);
+#ifndef OPENSSL_NO_SSLKEYLOG
+    BIO_free(keylog_bio);
+#endif
     return NULL;
 }
 
@@ -3992,6 +4089,15 @@ void SSL_CTX_free(SSL_CTX *a)
     if (i > 0)
         return;
     REF_ASSERT_ISNT(i < 0);
+
+#ifndef OPENSSL_NO_SSLKEYLOG
+    if (keylog_lock != NULL && CRYPTO_THREAD_write_lock(keylog_lock)) {
+        if (a->do_sslkeylog == 1)
+            BIO_free(keylog_bio);
+        a->do_sslkeylog = 0;
+        CRYPTO_THREAD_unlock(keylog_lock);
+    }
+#endif
 
     X509_VERIFY_PARAM_free(a->param);
     dane_ctx_final(&a->dane);
@@ -6469,14 +6575,24 @@ int SSL_alloc_buffers(SSL *ssl)
 
 void SSL_CTX_set_keylog_callback(SSL_CTX *ctx, SSL_CTX_keylog_cb_func cb)
 {
+#ifndef OPENSSL_NO_SSLKEYLOG_CB
     ctx->keylog_callback = cb;
+#else
+    ERR_raise_data(ERR_LIB_SSL, ERR_R_INTERNAL_ERROR,
+                   "Keylogging not supported");
+#endif
 }
 
 SSL_CTX_keylog_cb_func SSL_CTX_get_keylog_callback(const SSL_CTX *ctx)
 {
+#ifndef OPENSSL_NO_SSLKEYLOG_CB
     return ctx->keylog_callback;
+#else
+    return NULL;
+#endif
 }
 
+#if !defined(OPENSSL_NO_SSLKEYLOG_CB) && !defined(OPENSSL_NO_SSLKEYLOG)
 static int nss_keylog_int(const char *prefix,
                           SSL_CONNECTION *sc,
                           const uint8_t *parameter_1,
@@ -6491,7 +6607,7 @@ static int nss_keylog_int(const char *prefix,
     size_t prefix_len;
     SSL_CTX *sctx = SSL_CONNECTION_GET_CTX(sc);
 
-    if (sctx->keylog_callback == NULL)
+    if (sctx->keylog_callback == NULL && sctx->do_sslkeylog == 0)
         return 1;
 
     /*
@@ -6523,11 +6639,15 @@ static int nss_keylog_int(const char *prefix,
     }
     *cursor = '\0';
 
-    sctx->keylog_callback(SSL_CONNECTION_GET_SSL(sc), (const char *)out);
+    if (sctx->do_sslkeylog)
+        do_sslkeylog(SSL_CONNECTION_GET_SSL(sc), (const char *)out);
+    if (sctx->keylog_callback != NULL)
+        sctx->keylog_callback(SSL_CONNECTION_GET_SSL(sc), (const char *)out);
     OPENSSL_clear_free(out, out_len);
     return 1;
 
 }
+#endif
 
 int ssl_log_rsa_client_key_exchange(SSL_CONNECTION *sc,
                                     const uint8_t *encrypted_premaster,
@@ -6540,6 +6660,7 @@ int ssl_log_rsa_client_key_exchange(SSL_CONNECTION *sc,
         return 0;
     }
 
+#ifndef OPENSSL_NO_SSLKEYLOG
     /* We only want the first 8 bytes of the encrypted premaster as a tag. */
     return nss_keylog_int("RSA",
                           sc,
@@ -6547,6 +6668,9 @@ int ssl_log_rsa_client_key_exchange(SSL_CONNECTION *sc,
                           8,
                           premaster,
                           premaster_len);
+#else
+    return 0;
+#endif
 }
 
 int ssl_log_secret(SSL_CONNECTION *sc,
@@ -6554,12 +6678,16 @@ int ssl_log_secret(SSL_CONNECTION *sc,
                    const uint8_t *secret,
                    size_t secret_len)
 {
+#ifndef OPENSSL_NO_SSLKEYLOG
     return nss_keylog_int(label,
                           sc,
                           sc->s3.client_random,
                           SSL3_RANDOM_SIZE,
                           secret,
                           secret_len);
+#else
+    return 0;
+#endif
 }
 
 #define SSLV2_CIPHER_LEN    3
