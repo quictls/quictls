@@ -620,10 +620,8 @@
 -T OPENSSL_INIT_SETTINGS
 -T OSSL_HANDSHAKE_STATE
 -T OSSL_STATEM
--T ossl_intmax_t
--T ossl_intmax_t
--T ossl_uintmax_t
--T ossl_uintmax_t
+-T intmax_t
+-T uintmax_t
 -T CT_POLICY_EVAL_CTX
 -T RAND_DRBG
 -T RAND_DRBG_CTR

@@ -34,8 +34,8 @@ typedef struct {
          * These fields are never directly addressed, but their sizes are
          * important so that all native types can be copied here without overrun.
          */
-        ossl_intmax_t i;
-        ossl_uintmax_t u;
+        intmax_t i;
+        uintmax_t u;
         double d;
     } num;
 } OSSL_PARAM_BLD_DEF;

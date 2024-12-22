@@ -12,9 +12,6 @@
 #include <openssl/params.h>
 #include "testutil.h"
 
-/* On machines that dont support <inttypes.h> just disable the tests */
-#if !defined(OPENSSL_NO_INTTYPES_H)
-
 typedef struct {
     OSSL_PARAM *param;
     int32_t i32;
@@ -343,8 +340,6 @@ end:
     return res;
 }
 
-#endif /* OPENSSL_NO_INTTYPES_H */
-
 OPT_TEST_DECLARE_USAGE("file...\n")
 
 int setup_tests(void)
@@ -359,10 +354,7 @@ int setup_tests(void)
     n = test_get_argument_count();
     if (n == 0)
         return 0;
-
-#if !defined(OPENSSL_NO_INTTYPES_H)
-    ADD_ALL_TESTS(run_param_file_tests, n);
-#endif /* OPENSSL_NO_INTTYPES_H */
+     ADD_ALL_TESTS(run_param_file_tests, n);
 
     return 1;
 }

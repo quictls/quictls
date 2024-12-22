@@ -167,9 +167,8 @@ extern "C" {
 #  define __owur
 # endif
 
-/* Standard integer types */
-# define OPENSSL_NO_INTTYPES_H
-# define OPENSSL_NO_STDINT_H
+# include <inttypes.h>
+
 # if defined(OPENSSL_SYS_UEFI)
 typedef INT8 int8_t;
 typedef UINT8 uint8_t;
@@ -179,48 +178,12 @@ typedef INT32 int32_t;
 typedef UINT32 uint32_t;
 typedef INT64 int64_t;
 typedef UINT64 uint64_t;
-# elif (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L) || \
-     defined(__osf__) || defined(__sgi) || defined(__hpux) || \
-     defined (__OpenBSD__)
-#  include <inttypes.h>
-#  undef OPENSSL_NO_INTTYPES_H
-/* Because the specs say that inttypes.h includes stdint.h if present */
-#  undef OPENSSL_NO_STDINT_H
-# elif defined(_MSC_VER) && _MSC_VER<1600
-/*
- * minimally required typdefs for systems not supporting inttypes.h or
- * stdint.h: currently just older VC++
- */
-typedef signed char int8_t;
-typedef unsigned char uint8_t;
-typedef short int16_t;
-typedef unsigned short uint16_t;
-typedef int int32_t;
-typedef unsigned int uint32_t;
-typedef __int64 int64_t;
-typedef unsigned __int64 uint64_t;
-# else
-#  include <sys/types.h>
-#  include <stdint.h>
-#  undef OPENSSL_NO_STDINT_H
-# endif
-# if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L && \
-    defined(INTMAX_MAX) && defined(UINTMAX_MAX)
-typedef intmax_t ossl_intmax_t;
-typedef uintmax_t ossl_uintmax_t;
-# else
-/* Fall back to the largest we know we require and can handle */
-typedef int64_t ossl_intmax_t;
-typedef uint64_t ossl_uintmax_t;
 # endif
 
-# if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L && \
-     !defined(__cplusplus) 
-#  define ossl_noreturn _Noreturn
-# elif defined(__GNUC__) && __GNUC__ >= 2
+# define ossl_noreturn nooreturn
+# if defined(__GNUC__) && __GNUC__ >= 2
+#  undef ossl_noreturn
 #  define ossl_noreturn __attribute__((noreturn))
-# else
-#  define ossl_noreturn
 # endif
 
 /* ossl_unused: portable unused attribute for use in public headers */
