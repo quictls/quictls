@@ -48,7 +48,6 @@ extern "C" {
 #  undef OPENSSL_SYS_UNIX
 # elif defined(OPENSSL_SYS_UWIN)
 #  undef OPENSSL_SYS_UNIX
-#  define OPENSSL_SYS_WIN32_UWIN
 # else
 #  if defined(__CYGWIN__) || defined(OPENSSL_SYS_CYGWIN)
 #   define OPENSSL_SYS_WIN32_CYGWIN
@@ -77,20 +76,6 @@ extern "C" {
 #  define OPENSSL_SYS_WINDOWS
 #  ifndef OPENSSL_SYS_MSDOS
 #   define OPENSSL_SYS_MSDOS
-#  endif
-# endif
-
-/*
- * DLL settings.  This part is a bit tough, because it's up to the
- * application implementer how he or she will link the application, so it
- * requires some macro to be used.
- */
-# ifdef OPENSSL_SYS_WINDOWS
-#  ifndef OPENSSL_OPT_WINDLL
-#   if defined(_WINDLL)         /* This is used when building OpenSSL to
-                                 * indicate that DLL linkage should be used */
-#    define OPENSSL_OPT_WINDLL
-#   endif
 #  endif
 # endif
 
@@ -127,7 +112,7 @@ extern "C" {
  * have some generally sensible values.
  */
 
-# if defined(OPENSSL_SYS_WINDOWS) && defined(OPENSSL_OPT_WINDLL)
+# if defined(OPENSSL_SYS_WINDOWS) && defined(_WINDLL)
 #  define OPENSSL_EXPORT extern __declspec(dllexport)
 #  define OPENSSL_EXTERN extern __declspec(dllimport)
 # else
