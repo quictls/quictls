@@ -180,10 +180,10 @@ typedef INT64 int64_t;
 typedef UINT64 uint64_t;
 # endif
 
-# define ossl_noreturn nooreturn
 # if defined(__GNUC__) && __GNUC__ >= 2
-#  undef ossl_noreturn
 #  define ossl_noreturn __attribute__((noreturn))
+# else
+#  define ossl_noreturn noreturn
 # endif
 
 /* ossl_unused: portable unused attribute for use in public headers */
