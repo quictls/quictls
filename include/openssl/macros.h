@@ -270,7 +270,6 @@
 /*
  * Make our own variants of __FILE__ and __LINE__, depending on configuration
  */
-
 # ifndef OPENSSL_FILE
 #  ifdef OPENSSL_NO_FILENAMES
 #   define OPENSSL_FILE ""
@@ -285,32 +284,9 @@
  * __func__ was standardized in C99, so for any compiler that claims
  * to implement that language level or newer, we assume we can safely
  * use that symbol.
- *
- * GNU C also provides __FUNCTION__ since version 2, which predates
- * C99.  We can, however, only use this if __STDC_VERSION__ exists,
- * as it's otherwise not allowed according to ISO C standards (C90).
- * (compiling with GNU C's -pedantic tells us so)
- *
- * If none of the above applies, we check if the compiler is MSVC,
- * and use __FUNCTION__ if that's the case.
  */
 # ifndef OPENSSL_FUNC
-#  if defined(__STDC_VERSION__)
-#   if __STDC_VERSION__ >= 199901L
-#    define OPENSSL_FUNC __func__
-#   elif defined(__GNUC__) && __GNUC__ >= 2
-#    define OPENSSL_FUNC __FUNCTION__
-#   endif
-#  elif defined(_MSC_VER)
-#    define OPENSSL_FUNC __FUNCTION__
-#  endif
-/*
- * If all these possibilities are exhausted, we give up and use a
- * static string.
- */
-#  ifndef OPENSSL_FUNC
-#   define OPENSSL_FUNC "(unknown function)"
-#  endif
+#  define OPENSSL_FUNC __func__
 # endif
 
 # ifndef OSSL_CRYPTO_ALLOC
