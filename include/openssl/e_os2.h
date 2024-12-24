@@ -165,17 +165,20 @@ typedef INT64 int64_t;
 typedef UINT64 uint64_t;
 # endif
 
-# if defined(__GNUC__) && __GNUC__ >= 2
+# if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L \
+        && !defined(__cplusplus)
+#  define ossl_noreturn _Noreturn
+# elif defined(__GNUC__) && __GNUC__ >= 2
 #  define ossl_noreturn __attribute__((noreturn))
 # else
-#  define ossl_noreturn noreturn
+#  define ossl_noreturn /* unsupported */
 # endif
 
 /* ossl_unused: portable unused attribute for use in public headers */
 # if defined(__GNUC__)
 #  define ossl_unused __attribute__((unused))
 # else
-#  define ossl_unused
+#  define ossl_unused /* unsupported */
 # endif
 
 #ifdef  __cplusplus
