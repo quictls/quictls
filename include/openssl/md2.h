@@ -12,12 +12,7 @@
 # pragma once
 
 # include <openssl/macros.h>
-# ifndef OPENSSL_NO_DEPRECATED_3_0
-#  define HEADER_MD2_H
-# endif
-
 # include <openssl/opensslconf.h>
-
 # ifndef OPENSSL_NO_MD2
 #  include <stddef.h>
 #  ifdef  __cplusplus

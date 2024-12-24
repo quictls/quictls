@@ -18,14 +18,9 @@ use OpenSSL::stackhash qw(generate_stack_macros);
 # pragma once
 
 # include <openssl/macros.h>
-# ifndef OPENSSL_NO_DEPRECATED_3_0
-#  define HEADER_PKCS7_H
-# endif
-
 # include <openssl/asn1.h>
 # include <openssl/bio.h>
 # include <openssl/e_os2.h>
-
 # include <openssl/types.h>
 # include <openssl/pkcs7err.h>
 # ifndef OPENSSL_NO_STDIO

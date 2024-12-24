@@ -12,10 +12,6 @@
 # pragma once
 
 # include <openssl/macros.h>
-# ifndef OPENSSL_NO_DEPRECATED_3_0
-#  define HEADER_TXT_DB_H
-# endif
-
 # include <openssl/opensslconf.h>
 # include <openssl/bio.h>
 # include <openssl/safestack.h>

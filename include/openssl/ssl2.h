@@ -12,9 +12,6 @@
 # pragma once
 
 # include <openssl/macros.h>
-# ifndef OPENSSL_NO_DEPRECATED_3_0
-#  define HEADER_SSL2_H
-# endif
 
 #ifdef  __cplusplus
 extern "C" {

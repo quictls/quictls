@@ -13,13 +13,8 @@
 # pragma once
 
 # include <openssl/macros.h>
-# ifndef OPENSSL_NO_DEPRECATED_3_0
-#  define HEADER_EC_H
-# endif
-
 # include <openssl/opensslconf.h>
 # include <openssl/types.h>
-
 # include <string.h>
 
 # ifdef  __cplusplus
