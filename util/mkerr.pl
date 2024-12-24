@@ -340,7 +340,6 @@ foreach my $lib ( keys %errorfile ) {
 
 #ifndef $guard
 # define $guard
-# pragma once
 
 # include <openssl/opensslconf.h>
 
@@ -430,7 +429,6 @@ EOF
 
 #ifndef $guard
 # define $guard
-# pragma once
 
 # include <openssl/opensslconf.h>
 $extra_include
