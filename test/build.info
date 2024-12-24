@@ -58,7 +58,7 @@ IF[{- !$disabled{tests} -}]
           keymgmt_internal_test hexstr_test provider_status_test defltfips_test \
           bio_readbuffer_test user_property_test pkcs7_test upcallstest \
           provfetchtest prov_config_test rand_test \
-          ca_internals_test bio_tfo_test membio_test bio_dgram_test list_test \
+          ca_internals_test bio_tfo_test membio_test bio_dgram_test \
           fips_version_test x509_test hpke_test pairwise_fail_test \
           nodefltctxtest evp_xof_test x509_load_cert_file_test bio_meth_test
 
@@ -782,10 +782,6 @@ IF[{- !$disabled{tests} -}]
     SOURCE[dhtest]=dhtest.c
     INCLUDE[dhtest]=../include ../apps/include
     DEPEND[dhtest]=../libcrypto.a libtestutil.a
-
-    SOURCE[list_test]=list_test.c
-    INCLUDE[list_test]=../include ../apps/include
-    DEPEND[list_test]=libtestutil.a
 
     SOURCE[hmactest]=hmactest.c
     INCLUDE[hmactest]=../include ../apps/include
