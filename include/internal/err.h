@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_ERR_H
 # define OSSL_INTERNAL_ERR_H
-# pragma once
 
 void err_free_strings_int(void);
 

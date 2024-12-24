@@ -18,7 +18,6 @@
 
 #ifndef OSSL_INTERNAL_DEPRECATED_H
 # define OSSL_INTERNAL_DEPRECATED_H
-# pragma once
 
 # include <openssl/configuration.h>
 

@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_CMAC_H
 # define OPENSSL_CMAC_H
-# pragma once
 
 # include <openssl/macros.h>
 # ifndef OPENSSL_NO_CMAC

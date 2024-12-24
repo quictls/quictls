@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_OBJECTS_H
 # define OPENSSL_OBJECTS_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/obj_mac.h>

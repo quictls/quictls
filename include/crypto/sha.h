@@ -10,7 +10,6 @@
 
 #ifndef OSSL_CRYPTO_SHA_H
 # define OSSL_CRYPTO_SHA_H
-# pragma once
 
 # include <openssl/sha.h>
 

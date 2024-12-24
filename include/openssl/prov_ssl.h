@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_PROV_SSL_H
 # define OPENSSL_PROV_SSL_H
-# pragma once
 
 # ifdef __cplusplus
 extern "C" {

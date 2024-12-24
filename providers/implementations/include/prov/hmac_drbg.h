@@ -9,7 +9,6 @@
 
 #ifndef OSSL_PROV_HMAC_DRBG_H
 # define OSSL_PROV_HMAC_DRBG_H
-# pragma once
 
 #include <openssl/evp.h>
 #include "prov/provider_util.h"

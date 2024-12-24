@@ -9,7 +9,6 @@
 
 #ifndef OSSL_CRYPTO_BN_CONF_H
 # define OSSL_CRYPTO_BN_CONF_H
-# pragma once
 
 /* Should we define BN_DIV2W here? */
 

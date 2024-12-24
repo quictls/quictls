@@ -10,7 +10,6 @@
 
 #ifndef OSSL_PROV_CIPHERCOMMON_GCM_H
 # define OSSL_PROV_CIPHERCOMMON_GCM_H
-# pragma once
 
 # include <openssl/aes.h>
 # include "ciphercommon_aead.h"

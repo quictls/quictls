@@ -10,7 +10,6 @@
 
 #ifndef OSSL_INTERNAL_PROPERTYERR_H
 # define OSSL_INTERNAL_PROPERTYERR_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 

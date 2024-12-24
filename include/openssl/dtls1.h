@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_DTLS1_H
 # define OPENSSL_DTLS1_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/prov_ssl.h>

@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_HPKE_UTIL_H
 # define OSSL_INTERNAL_HPKE_UTIL_H
-# pragma once
 
 /* Constants from RFC 9180 Section 7.1 and 7.3 */
 # define OSSL_HPKE_MAX_SECRET 64

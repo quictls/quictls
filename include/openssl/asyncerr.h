@@ -10,7 +10,6 @@
 
 #ifndef OPENSSL_ASYNCERR_H
 # define OPENSSL_ASYNCERR_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 # include <openssl/cryptoerr_legacy.h>

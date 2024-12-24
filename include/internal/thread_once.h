@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_THREAD_ONCE_H
 # define OSSL_INTERNAL_THREAD_ONCE_H
-# pragma once
 
 # include <openssl/crypto.h>
 

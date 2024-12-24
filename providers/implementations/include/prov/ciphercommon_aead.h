@@ -9,7 +9,6 @@
 
 #ifndef OSSL_PROV_CIPHERCOMMON_AEAD_H
 # define OSSL_PROV_CIPHERCOMMON_AEAD_H
-# pragma once
 
 # define UNINITIALISED_SIZET ((size_t)-1)
 

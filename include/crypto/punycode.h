@@ -9,7 +9,6 @@
 
 #ifndef OSSL_CRYPTO_PUNYCODE_H
 # define OSSL_CRYPTO_PUNYCODE_H
-# pragma once
 
 # include <stddef.h>     /* for size_t */
 

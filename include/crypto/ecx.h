@@ -11,7 +11,6 @@
 
 #ifndef OSSL_CRYPTO_ECX_H
 # define OSSL_CRYPTO_ECX_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 

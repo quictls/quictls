@@ -9,7 +9,6 @@
 
 #ifndef OSSL_CRYPTO_DH_H
 # define OSSL_CRYPTO_DH_H
-# pragma once
 
 # include <openssl/core.h>
 # include <openssl/params.h>

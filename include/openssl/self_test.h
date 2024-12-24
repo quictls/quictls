@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_SELF_TEST_H
 # define OPENSSL_SELF_TEST_H
-# pragma once
 
 # include <openssl/core.h> /* OSSL_CALLBACK */
 

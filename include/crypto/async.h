@@ -9,7 +9,6 @@
 
 #ifndef OSSL_CRYPTO_ASYNC_H
 # define OSSL_CRYPTO_ASYNC_H
-# pragma once
 
 # include <openssl/async.h>
 

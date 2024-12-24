@@ -14,7 +14,6 @@ use OpenSSL::stackhash qw(generate_stack_macros);
 
 #ifndef OPENSSL_BIO_H
 # define OPENSSL_BIO_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/e_os2.h>

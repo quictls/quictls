@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_MACROS_H
 # define OPENSSL_MACROS_H
-# pragma once
 
 #include <openssl/opensslconf.h>
 #include <openssl/opensslv.h>

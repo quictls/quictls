@@ -10,7 +10,6 @@
 /* APIs and data structures for HPKE (RFC9180)  */
 #ifndef OSSL_HPKE_H
 # define OSSL_HPKE_H
-# pragma once
 
 # include <openssl/types.h>
 

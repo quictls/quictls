@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_E_OSTIME_H
 # define OPENSSL_E_OSTIME_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/opensslconf.h>

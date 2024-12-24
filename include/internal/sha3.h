@@ -10,7 +10,6 @@
 /* This header can move into provider when legacy support is removed */
 #ifndef OSSL_INTERNAL_SHA3_H
 # define OSSL_INTERNAL_SHA3_H
-# pragma once
 
 # include <openssl/e_os2.h>
 # include <stddef.h>

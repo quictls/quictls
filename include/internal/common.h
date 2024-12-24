@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_COMMON_H
 # define OSSL_INTERNAL_COMMON_H
-# pragma once
 
 # include <stdlib.h>
 # include <string.h>

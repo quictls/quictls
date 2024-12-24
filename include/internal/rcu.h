@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_RCU_H
 # define OPENSSL_RCU_H
-# pragma once
 
 typedef void (*rcu_cb_fn)(void *data);
 

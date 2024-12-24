@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_NELEM_H
 # define OSSL_INTERNAL_NELEM_H
-# pragma once
 
 # define OSSL_NELEM(x)    (sizeof(x)/sizeof((x)[0]))
 #endif

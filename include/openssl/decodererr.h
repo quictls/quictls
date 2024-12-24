@@ -10,7 +10,6 @@
 
 #ifndef OPENSSL_DECODERERR_H
 # define OPENSSL_DECODERERR_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 # include <openssl/cryptoerr_legacy.h>

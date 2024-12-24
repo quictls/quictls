@@ -10,7 +10,6 @@
 
 #ifndef OPENSSL_SSL3_H
 # define OPENSSL_SSL3_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/comp.h>

@@ -10,7 +10,6 @@
 
 #ifndef OPENSSL_STOREERR_H
 # define OPENSSL_STOREERR_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 # include <openssl/cryptoerr_legacy.h>

@@ -10,7 +10,6 @@
 
 #ifndef OPENSSL_PARAMS_H
 # define OPENSSL_PARAMS_H
-# pragma once
 
 # include <openssl/core.h>
 # include <openssl/bn.h>

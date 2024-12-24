@@ -17,7 +17,6 @@ use OpenSSL::stackhash qw(generate_stack_string_macros
 
 #ifndef OPENSSL_SAFESTACK_H
 # define OPENSSL_SAFESTACK_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/stack.h>

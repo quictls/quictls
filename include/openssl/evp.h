@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_EVP_H
 # define OPENSSL_EVP_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <stdarg.h>

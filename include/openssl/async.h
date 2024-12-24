@@ -11,7 +11,6 @@
 
 #ifndef OPENSSL_ASYNC_H
 # define OPENSSL_ASYNC_H
-# pragma once
 
 # include <openssl/macros.h>
 

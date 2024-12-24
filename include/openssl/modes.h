@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_MODES_H
 # define OPENSSL_MODES_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <stddef.h>

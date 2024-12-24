@@ -9,7 +9,6 @@
 
 #ifndef OSSL_CRYPTO_X509_H
 # define OSSL_CRYPTO_X509_H
-# pragma once
 
 # include "internal/refcount.h"
 # include <openssl/asn1.h>

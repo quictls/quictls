@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_PARAM_NAMES_H
 # define OSSL_INTERNAL_PARAM_NAMES_H
-# pragma once
 # include <internal/param_names.inc>
 
 # ifdef  __cplusplus

@@ -20,7 +20,6 @@
  */
 #ifndef OSSL_CRYPTO_CTYPE_H
 # define OSSL_CRYPTO_CTYPE_H
-# pragma once
 
 # include <openssl/e_os2.h>
 

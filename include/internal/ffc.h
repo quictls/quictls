@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_FFC_H
 # define OSSL_INTERNAL_FFC_H
-# pragma once
 
 # include <openssl/core.h>
 # include <openssl/bn.h>

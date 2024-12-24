@@ -10,7 +10,6 @@
 
 #ifndef OSSL_CRYPTO_HTTPERR_H
 # define OSSL_CRYPTO_HTTPERR_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 

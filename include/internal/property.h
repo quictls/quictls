@@ -10,7 +10,6 @@
 
 #ifndef OSSL_INTERNAL_PROPERTY_H
 # define OSSL_INTERNAL_PROPERTY_H
-# pragma once
 
 # include "internal/cryptlib.h"
 

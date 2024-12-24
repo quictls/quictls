@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_DECODER_H
 # define OPENSSL_DECODER_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 

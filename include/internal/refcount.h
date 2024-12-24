@@ -8,7 +8,6 @@
  */
 #ifndef OSSL_INTERNAL_REFCOUNT_H
 # define OSSL_INTERNAL_REFCOUNT_H
-# pragma once
 
 # include <openssl/e_os2.h>
 # include <openssl/trace.h>

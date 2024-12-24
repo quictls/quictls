@@ -10,7 +10,6 @@
 
 #ifndef OPENSSL_X509V3ERR_H
 # define OPENSSL_X509V3ERR_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 # include <openssl/cryptoerr_legacy.h>

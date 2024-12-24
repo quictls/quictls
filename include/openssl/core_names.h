@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_CORE_NAMES_H
 # define OPENSSL_CORE_NAMES_H
-# pragma once
 
 /* OSSL_CIPHER_PARAM_CTS_MODE Values */
 # define OSSL_CIPHER_CTS_MODE_CS1 "CS1"
