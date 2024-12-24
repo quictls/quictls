@@ -31,10 +31,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include "apps.h"
-#include "progs.h"
-#include "internal/nelem.h"
-#include "internal/numbers.h"
+#include <apps/apps.h>
+#include <apps/progs.h>
+#include <internal/nelem.h>
+#include <internal/numbers.h>
 #include <openssl/crypto.h>
 #include <openssl/rand.h>
 #include <openssl/err.h>
@@ -68,13 +68,13 @@ VirtualLock(
 
 #include <openssl/bn.h>
 #include <openssl/rsa.h>
-#include "./testrsa.h"
+#include <apps/testrsa.h>
 #ifndef OPENSSL_NO_DH
 # include <openssl/dh.h>
 #endif
 #include <openssl/x509.h>
 #include <openssl/dsa.h>
-#include "./testdsa.h"
+#include <apps/testdsa.h>
 #include <openssl/modes.h>
 
 #ifndef HAVE_FORK

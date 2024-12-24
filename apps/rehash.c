@@ -8,8 +8,8 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "apps.h"
-#include "progs.h"
+#include <apps/apps.h>
+#include <apps/progs.h>
 
 #if defined(OPENSSL_SYS_UNIX) || defined(__APPLE__)
 # include <unistd.h>
@@ -20,7 +20,7 @@
 # include <ctype.h>
 # include <sys/stat.h>
 
-# include "internal/o_dir.h"
+# include <internal/o_dir.h>
 
 # include <openssl/evp.h>
 # include <openssl/pem.h>

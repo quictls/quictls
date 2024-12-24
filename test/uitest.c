@@ -11,7 +11,7 @@
 #include <string.h>
 #include <openssl/opensslconf.h>
 #include <openssl/err.h>
-#include "apps_ui.h"
+#include <apps/apps_ui.h>
 #include "testutil.h"
 
 

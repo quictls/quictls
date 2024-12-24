@@ -8,7 +8,7 @@
  */
 
 #include <string.h>
-#include "apps.h"
+#include <apps/apps.h>
 #include "testutil.h"
 #include "crypto/asn1.h"
 

@@ -7,9 +7,9 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "opt.h"
+#include <apps/opt.h>
 #include <openssl/ui.h>
-#include "apps_ui.h"
+#include <apps/apps_ui.h>
 
 /* This function is defined here due to visibility of bio_err */
 int opt_printf_stderr(const char *fmt, ...)

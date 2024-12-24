@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h> /* for memcpy() and strcmp() */
-#include "apps.h"
+#include <apps/apps.h>
 #include <openssl/core_names.h>
 #include <openssl/params.h>
 #include <openssl/err.h>
@@ -25,7 +25,7 @@
 #ifndef OPENSSL_NO_DH
 # include <openssl/dh.h>
 #endif
-#include "s_apps.h"
+#include <apps/s_apps.h>
 
 #define COOKIE_SECRET_LENGTH    16
 

@@ -8,19 +8,19 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
 #include <openssl/e_os2.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 #ifndef OPENSSL_NO_SOCK
 
-#include "apps.h"
-#include "progs.h"
+#include <apps/apps.h>
+#include <apps/progs.h>
 #include <openssl/x509.h>
 #include <openssl/ssl.h>
 #include <openssl/err.h>
@@ -33,9 +33,9 @@
 #ifndef OPENSSL_NO_CT
 # include <openssl/ct.h>
 #endif
-#include "s_apps.h"
-#include "timeouts.h"
-#include "internal/sockets.h"
+#include <apps/s_apps.h>
+#include <apps/timeouts.h>
+#include <internal/sockets.h>
 
 #if defined(__has_feature)
 # if __has_feature(memory_sanitizer)

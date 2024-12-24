@@ -29,8 +29,8 @@
 # endif
 #endif
 
-#include "apps.h"
-#include "progs.h"
+#include <apps/apps.h>
+#include <apps/progs.h>
 
 #ifndef W_OK
 # define F_OK 0

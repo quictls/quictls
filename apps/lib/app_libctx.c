@@ -6,8 +6,8 @@
  * in the file LICENSE in the source distribution or at
  * https://www.openssl.org/source/license.html
  */
-#include "app_libctx.h"
-#include "apps.h"
+#include <apps/app_libctx.h>
+#include <apps/apps.h>
 
 static OSSL_LIB_CTX *app_libctx = NULL;
 static const char *app_propq = NULL;

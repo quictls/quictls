@@ -9,8 +9,8 @@
 
 #include <openssl/opensslconf.h>
 
-#include "apps.h"
-#include "progs.h"
+#include <apps/apps.h>
+#include <apps/progs.h>
 #include <string.h>
 #include <openssl/err.h>
 #include <openssl/pem.h>

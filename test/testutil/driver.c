@@ -17,7 +17,7 @@
 #include "internal/nelem.h"
 #include <openssl/bio.h>
 
-#include "platform.h"            /* From libapps */
+#include <apps/platform.h>
 
 #if defined(_WIN32) && !defined(__BORLANDC__)
 # define strdup _strdup

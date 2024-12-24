@@ -38,8 +38,8 @@
 #include <openssl/bn.h>
 #include <openssl/ssl.h>
 #include <openssl/core_names.h>
-#include "s_apps.h"
-#include "apps.h"
+#include <apps/s_apps.h>
+#include <apps/apps.h>
 
 #ifdef _WIN32
 static int WIN32_rename(const char *from, const char *to);

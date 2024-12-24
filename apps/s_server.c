@@ -26,8 +26,8 @@
 #ifndef OPENSSL_NO_SOCK
 
 #include <openssl/bn.h>
-#include "apps.h"
-#include "progs.h"
+#include <apps/apps.h>
+#include <apps/progs.h>
 #include <openssl/err.h>
 #include <openssl/pem.h>
 #include <openssl/x509.h>
@@ -37,12 +37,12 @@
 # include <openssl/dh.h>
 #endif
 #include <openssl/rsa.h>
-#include "s_apps.h"
-#include "timeouts.h"
+#include <apps/s_apps.h>
+#include <apps/timeouts.h>
 #ifdef CHARSET_EBCDIC
 #include <openssl/ebcdic.h>
 #endif
-#include "internal/sockets.h"
+#include <internal/sockets.h>
 
 static int not_resumable_sess_cb(SSL *s, int is_forward_secure);
 static int sv_body(int s, int stype, int prot, unsigned char *context);

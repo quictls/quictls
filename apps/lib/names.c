@@ -10,8 +10,8 @@
 #include <string.h>
 #include <openssl/bio.h>
 #include <openssl/safestack.h>
-#include "names.h"
-#include "internal/e_os.h"
+#include <apps/names.h>
+#include <internal/e_os.h>
 
 int name_cmp(const char * const *a, const char * const *b)
 {

@@ -16,10 +16,10 @@
 #include <ctype.h>
 
 /* Needs to be included before the openssl headers */
-#include "apps.h"
-#include "http_server.h"
-#include "progs.h"
-#include "internal/sockets.h"
+#include <apps/apps.h>
+#include <apps/http_server.h>
+#include <apps/progs.h>
+#include <internal/sockets.h>
 #include <openssl/e_os2.h>
 #include <openssl/crypto.h>
 #include <openssl/err.h>

@@ -8,8 +8,8 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "apps.h"
-#include "cmp_mock_srv.h"
+#include <apps/apps.h>
+#include <apps/cmp_mock_srv.h>
 
 #include <openssl/cmp.h>
 #include <openssl/err.h>

@@ -17,9 +17,9 @@
 #include <openssl/core_dispatch.h>
 #include <openssl/params.h>
 #include <openssl/err.h>
-#include "apps.h"
-#include "progs.h"
-#include "ec_common.h"
+#include <apps/apps.h>
+#include <apps/progs.h>
+#include <apps/ec_common.h>
 
 typedef enum OPTION_choice {
     OPT_COMMON,

@@ -26,9 +26,9 @@
 
 #ifndef OPENSSL_NO_SOCK
 
-# include "apps.h"
-# include "s_apps.h"
-# include "internal/sockets.h"
+# include <apps/apps.h>
+# include <apps/s_apps.h>
+# include <internal/sockets.h>
 
 # include <openssl/bio.h>
 # include <openssl/err.h>
