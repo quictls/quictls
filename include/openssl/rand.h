@@ -12,10 +12,6 @@
 # pragma once
 
 # include <openssl/macros.h>
-# ifndef OPENSSL_NO_DEPRECATED_3_0
-#  define HEADER_RAND_H
-# endif
-
 # include <stdlib.h>
 # include <openssl/types.h>
 # include <openssl/e_os2.h>

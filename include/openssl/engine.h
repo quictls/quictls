@@ -13,12 +13,7 @@
 # pragma once
 
 # include <openssl/macros.h>
-# ifndef OPENSSL_NO_DEPRECATED_3_0
-#  define HEADER_ENGINE_H
-# endif
-
 # include <openssl/opensslconf.h>
-
 # ifndef OPENSSL_NO_ENGINE
 #  ifndef OPENSSL_NO_DEPRECATED_1_1_0
 #   include <openssl/bn.h>

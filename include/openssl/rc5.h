@@ -12,10 +12,6 @@
 # pragma once
 
 # include <openssl/macros.h>
-# ifndef OPENSSL_NO_DEPRECATED_3_0
-#  define HEADER_RC5_H
-# endif
-
 # include <openssl/opensslconf.h>
 
 # ifndef OPENSSL_NO_RC5

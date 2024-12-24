@@ -6,8 +6,9 @@
  * in the file LICENSE in the source distribution or at
  * https://www.openssl.org/source/license.html
  */
-#ifndef HEADER_ENGINE_LOADER_H
-# define HEADER_ENGINE_LOADER_H
+#ifndef OPENSSL_ENGINE_LOADER_H
+# define OPENSSL_ENGINE_LOADER_H
+# pragma once
 
 # include <openssl/store.h>
 

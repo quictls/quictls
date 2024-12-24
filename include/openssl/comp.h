@@ -12,12 +12,7 @@
 # pragma once
 
 # include <openssl/macros.h>
-# ifndef OPENSSL_NO_DEPRECATED_3_0
-#  define HEADER_COMP_H
-# endif
-
 # include <openssl/opensslconf.h>
-
 # ifndef OPENSSL_NO_COMP
 # include <openssl/crypto.h>
 # include <openssl/comperr.h>
