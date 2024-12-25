@@ -118,6 +118,7 @@ jobs:
           -DSSL3_ALIGN_PAYLOAD=4
         ]
     runs-on: ubuntu-latest
+    if: ${{ github.repository_owner == 'quictls' || github.event_name != 'schedule' }}
     steps:
     - uses: actions/checkout@v4
     - name: checkout fuzz/corpora submodule

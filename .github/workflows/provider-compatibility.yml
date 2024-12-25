@@ -55,6 +55,7 @@ jobs:
         ]
 
     runs-on: ubuntu-latest
+    if: ${{ github.repository_owner == 'quictls' || github.event_name != 'schedule' }}
     steps:
       - name: create download directory
         run: mkdir downloads

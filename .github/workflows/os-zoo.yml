@@ -23,6 +23,7 @@ jobs:
         cc: [gcc, clang]
         branch: [openssl-3.0, openssl-3.1, master]
     runs-on: ubuntu-latest
+    if: ${{ github.repository_owner == 'quictls' || github.event_name != 'schedule' }}
     container:
       image: docker.io/library/alpine:${{ matrix.tag }}
     env:
