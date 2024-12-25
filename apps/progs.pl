@@ -57,6 +57,8 @@ if ($opt eq '-H') {
  * in the file LICENSE in the source distribution or at
  * https://www.openssl.org/source/license.html
  */
+ #ifndef OPENSSL_PROGS_H
+ # define OPENSSL_PROGS_H
 
 #include <apps/function.h>
 
@@ -72,6 +74,7 @@ EOF
     }
     print "\n";
     print "extern FUNCTION functions[];\n";
+    print "#endif\n"
 }
 
 if ($opt eq '-C') {
