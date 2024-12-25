@@ -441,7 +441,7 @@ typedef enum OPTION_choice {
     OPT_PSK_IDENTITY, OPT_PSK, OPT_PSK_SESS,
     OPT_SSL3, OPT_SSL_CONFIG,
     OPT_TLS1_3, OPT_TLS1_2, OPT_TLS1_1, OPT_TLS1, OPT_DTLS, OPT_DTLS1,
-    OPT_DTLS1_2, OPT_QUIC, OPT_SCTP, OPT_TIMEOUT, OPT_MTU, OPT_KEYFORM,
+    OPT_DTLS1_2, OPT_SCTP, OPT_TIMEOUT, OPT_MTU, OPT_KEYFORM,
     OPT_PASS, OPT_CERT_CHAIN, OPT_KEY, OPT_RECONNECT, OPT_BUILD_CHAIN,
     OPT_ALPN,
     OPT_CAPATH, OPT_NOCAPATH, OPT_CHAINCAPATH, OPT_VERIFYCAPATH,
@@ -633,7 +633,6 @@ const OPTIONS s_client_options[] = {
     {"tls1_3", OPT_TLS1_3, '-', "Just use TLSv1.3"},
 #ifndef OPENSSL_NO_DTLS
     {"dtls", OPT_DTLS, '-', "Use any version of DTLS"},
-    {"quic", OPT_QUIC, '-', "Use QUIC"},
     {"timeout", OPT_TIMEOUT, '-',
      "Enable send/receive timeout on DTLS connections"},
     {"mtu", OPT_MTU, 'p', "Set the link layer MTU"},
@@ -727,8 +726,7 @@ static const OPT_PAIR services[] = {
 
 #define IS_PROT_FLAG(o) \
  (o == OPT_SSL3 || o == OPT_TLS1 || o == OPT_TLS1_1 || o == OPT_TLS1_2 \
-  || o == OPT_TLS1_3 || o == OPT_DTLS || o == OPT_DTLS1 || o == OPT_DTLS1_2 \
-  || o == OPT_QUIC)
+  || o == OPT_TLS1_3 || o == OPT_DTLS || o == OPT_DTLS1 || o == OPT_DTLS1_2)
 
 /* Free |*dest| and optionally set it to a copy of |source|. */
 static void freeandcopy(char **dest, const char *source)
@@ -1231,17 +1229,6 @@ int s_client_main(int argc, char **argv)
             max_version = DTLS1_2_VERSION;
             socket_type = SOCK_DGRAM;
             isdtls = 1;
-#endif
-            break;
-        case OPT_QUIC:
-#ifndef OPENSSL_NO_QUIC
-            meth = OSSL_QUIC_client_method();
-            min_version = 0;
-            max_version = 0;
-            socket_type = SOCK_DGRAM;
-# ifndef OPENSSL_NO_DTLS
-            isdtls = 0;
-# endif
 #endif
             break;
         case OPT_SCTP:
