@@ -571,17 +571,10 @@ int opt_intmax(const char *value, intmax_t *result)
     m = strtoimax(value, &endp, 0);
     if (*endp
             || endp == value
-            || ((m == INTMAX_MAX || m == INTMAX_MIN)
-                && errno == ERANGE)
+            || ((m == INTMAX_MAX || m == INTMAX_MIN) && errno == ERANGE)
             || (m == 0 && errno != 0)) {
         opt_number_error(value);
         errno = oerrno;
-        return 0;
-    }
-    /* Ensure that the value in |m| is never too big for |*result| */
-    if (sizeof(m) > sizeof(*result)
-        && (m < INTMAX_MIN || m > INTMAX_MAX)) {
-        opt_number_error(value);
         return 0;
     }
     *result = (intmax_t)m;
@@ -604,12 +597,6 @@ int opt_uintmax(const char *value, uintmax_t *result)
             || (m == 0 && errno != 0)) {
         opt_number_error(value);
         errno = oerrno;
-        return 0;
-    }
-    /* Ensure that the value in |m| is never too big for |*result| */
-    if (sizeof(m) > sizeof(*result)
-        && m > UINTMAX_MAX) {
-        opt_number_error(value);
         return 0;
     }
     *result = (intmax_t)m;
