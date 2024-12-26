@@ -206,28 +206,27 @@ static int ec_asn1_group2fieldid(const EC_GROUP *group, X9_62_FIELDID *field)
         goto err;
     }
 
-    if (nid == NID_X9_62_prime_field) {
-        if ((tmp = BN_new()) == NULL) {
-            ERR_raise(ERR_LIB_EC, ERR_R_BN_LIB);
-            goto err;
-        }
-        /* the parameters are specified by the prime number p */
-        if (!EC_GROUP_get_curve(group, tmp, NULL, NULL, NULL)) {
-            ERR_raise(ERR_LIB_EC, ERR_R_EC_LIB);
-            goto err;
-        }
-        /* set the prime number */
-        field->p.prime = BN_to_ASN1_INTEGER(tmp, NULL);
-        if (field->p.prime == NULL) {
-            ERR_raise(ERR_LIB_EC, ERR_R_ASN1_LIB);
-            goto err;
-        }
-    } else if (nid == NID_X9_62_characteristic_two_field) {
+    if (nid == NID_X9_62_characteristic_two_field) {
         ERR_raise(ERR_LIB_EC, EC_R_GF2M_NOT_SUPPORTED);
         goto err;
     }
-    else {
+    if (nid != NID_X9_62_prime_field) {
         ERR_raise(ERR_LIB_EC, EC_R_UNSUPPORTED_FIELD);
+        goto err;
+    }
+    if ((tmp = BN_new()) == NULL) {
+        ERR_raise(ERR_LIB_EC, ERR_R_BN_LIB);
+        goto err;
+    }
+    /* the parameters are specified by the prime number p */
+    if (!EC_GROUP_get_curve(group, tmp, NULL, NULL, NULL)) {
+        ERR_raise(ERR_LIB_EC, ERR_R_EC_LIB);
+        goto err;
+    }
+    /* set the prime number */
+    field->p.prime = BN_to_ASN1_INTEGER(tmp, NULL);
+    if (field->p.prime == NULL) {
+        ERR_raise(ERR_LIB_EC, ERR_R_ASN1_LIB);
         goto err;
     }
 
@@ -450,7 +449,7 @@ ECPKPARAMETERS *EC_GROUP_get_ecpkparameters(const EC_GROUP *group,
 
 EC_GROUP *EC_GROUP_new_from_ecparameters(const ECPARAMETERS *params)
 {
-    int ok = 0, tmp;
+    int ok = 0, nid;
     EC_GROUP *ret = NULL, *dup = NULL;
     BIGNUM *p = NULL, *a = NULL, *b = NULL;
     EC_POINT *point = NULL;
@@ -489,41 +488,40 @@ EC_GROUP *EC_GROUP_new_from_ecparameters(const ECPARAMETERS *params)
     }
 
     /* get the field parameters */
-    tmp = OBJ_obj2nid(params->fieldID->fieldType);
-    if (tmp == NID_X9_62_characteristic_two_field) {
+    nid = OBJ_obj2nid(params->fieldID->fieldType);
+    if (nid == NID_X9_62_characteristic_two_field) {
         ERR_raise(ERR_LIB_EC, EC_R_GF2M_NOT_SUPPORTED);
         goto err;
-    } else if (tmp == NID_X9_62_prime_field) {
-        /* we have a curve over a prime field */
-        /* extract the prime number */
-        if (params->fieldID->p.prime == NULL) {
-            ERR_raise(ERR_LIB_EC, EC_R_ASN1_ERROR);
-            goto err;
-        }
-        p = ASN1_INTEGER_to_BN(params->fieldID->p.prime, NULL);
-        if (p == NULL) {
-            ERR_raise(ERR_LIB_EC, ERR_R_ASN1_LIB);
-            goto err;
-        }
-
-        if (BN_is_negative(p) || BN_is_zero(p)) {
-            ERR_raise(ERR_LIB_EC, EC_R_INVALID_FIELD);
-            goto err;
-        }
-
-        field_bits = BN_num_bits(p);
-        if (field_bits > OPENSSL_ECC_MAX_FIELD_BITS) {
-            ERR_raise(ERR_LIB_EC, EC_R_FIELD_TOO_LARGE);
-            goto err;
-        }
-
-        /* create the EC_GROUP structure */
-        ret = EC_GROUP_new_curve_GFp(p, a, b, NULL);
-    } else {
+    }
+    if (nid != NID_X9_62_prime_field) {
         ERR_raise(ERR_LIB_EC, EC_R_INVALID_FIELD);
         goto err;
     }
 
+    /* we have a curve over a prime field */
+    if (params->fieldID->p.prime == NULL) {
+        ERR_raise(ERR_LIB_EC, EC_R_ASN1_ERROR);
+        goto err;
+    }
+    p = ASN1_INTEGER_to_BN(params->fieldID->p.prime, NULL);
+    if (p == NULL) {
+        ERR_raise(ERR_LIB_EC, ERR_R_ASN1_LIB);
+        goto err;
+    }
+
+    if (BN_is_negative(p) || BN_is_zero(p)) {
+        ERR_raise(ERR_LIB_EC, EC_R_INVALID_FIELD);
+        goto err;
+    }
+
+    field_bits = BN_num_bits(p);
+    if (field_bits > OPENSSL_ECC_MAX_FIELD_BITS) {
+        ERR_raise(ERR_LIB_EC, EC_R_FIELD_TOO_LARGE);
+        goto err;
+    }
+
+    /* create the EC_GROUP structure */
+    ret = EC_GROUP_new_curve_GFp(p, a, b, NULL);
     if (ret == NULL) {
         ERR_raise(ERR_LIB_EC, ERR_R_EC_LIB);
         goto err;
