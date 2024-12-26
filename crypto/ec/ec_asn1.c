@@ -195,7 +195,9 @@ static int ec_asn1_group2fieldid(const EC_GROUP *group, X9_62_FIELDID *field)
 
     /* clear the old values (if necessary) */
     ASN1_OBJECT_free(field->fieldType);
+    field->fieldType = NULL;
     ASN1_TYPE_free(field->p.other);
+    field->p.other = NULL;
 
     nid = EC_GROUP_get_field_type(group);
     /* set OID for the field */
