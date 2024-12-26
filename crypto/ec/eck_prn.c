@@ -116,15 +116,11 @@ int ECPKParameters_print(BIO *bp, const EC_GROUP *x, int off)
                 goto err;
         }
     } else {
-        const char *form_str;
         /* explicit parameters */
-        int is_char_two = 0;
+        const char *form_str;
         point_conversion_form_t form;
-        int tmp_nid = EC_GROUP_get_field_type(x);
 
-        if (tmp_nid == NID_X9_62_characteristic_two_field)
-            is_char_two = 1;
-
+        /* XXX - this should really use the BN_CTX. */
         if ((p = BN_new()) == NULL || (a = BN_new()) == NULL ||
             (b = BN_new()) == NULL) {
             reason = ERR_R_BN_LIB;
@@ -155,41 +151,17 @@ int ECPKParameters_print(BIO *bp, const EC_GROUP *x, int off)
             goto err;
         }
 
-        if ((seed = EC_GROUP_get0_seed(x)) != NULL)
-            seed_len = EC_GROUP_get_seed_len(x);
-
         if (!BIO_indent(bp, off, 128))
             goto err;
 
-        /* print the 'short name' of the field type */
-        if (BIO_printf(bp, "Field Type: %s\n", OBJ_nid2sn(tmp_nid))
-            <= 0)
+        if (BIO_printf(bp, "Field Type: %s\n", SN_X9_62_prime_field) <= 0)
             goto err;
 
-        if (is_char_two) {
-            /* print the 'short name' of the base type OID */
-            int basis_type = EC_GROUP_get_basis_type(x);
-            if (basis_type == 0)
-                goto err;
-
-            if (!BIO_indent(bp, off, 128))
-                goto err;
-
-            if (BIO_printf(bp, "Basis Type: %s\n",
-                           OBJ_nid2sn(basis_type)) <= 0)
-                goto err;
-
-            /* print the polynomial */
-            if ((p != NULL) && !ASN1_bn_print(bp, "Polynomial:", p, NULL,
-                                              off))
-                goto err;
-        } else {
-            if ((p != NULL) && !ASN1_bn_print(bp, "Prime:", p, NULL, off))
-                goto err;
-        }
-        if ((a != NULL) && !ASN1_bn_print(bp, "A:   ", a, NULL, off))
+        if (!ASN1_bn_print(bp, "Prime:", p, NULL, off))
             goto err;
-        if ((b != NULL) && !ASN1_bn_print(bp, "B:   ", b, NULL, off))
+        if (!ASN1_bn_print(bp, "A:   ", a, NULL, off))
+            goto err;
+        if (!ASN1_bn_print(bp, "B:   ", b, NULL, off))
             goto err;
 
         if (form == POINT_CONVERSION_COMPRESSED)
@@ -198,17 +170,19 @@ int ECPKParameters_print(BIO *bp, const EC_GROUP *x, int off)
             form_str = gen_uncompressed;
         else
             form_str = gen_hybrid;
-        if (gen_buf != NULL
-            && !print_bin(bp, form_str, gen_buf, gen_buf_len, off))
+        if (!print_bin(bp, form_str, gen_buf, gen_buf_len, off))
             goto err;
 
-        if ((order != NULL) && !ASN1_bn_print(bp, "Order: ", order, NULL, off))
+        if (!ASN1_bn_print(bp, "Order: ", order, NULL, off))
             goto err;
         if ((cofactor != NULL) && !ASN1_bn_print(bp, "Cofactor: ", cofactor,
                                                  NULL, off))
             goto err;
-        if (seed && !print_bin(bp, "Seed:", seed, seed_len, off))
-            goto err;
+        if ((seed = EC_GROUP_get0_seed(x)) != NULL) {
+            seed_len = EC_GROUP_get_seed_len(x);
+            if (!print_bin(bp, "Seed:", seed, seed_len, off))
+                goto err;
+        }
     }
     ret = 1;
  err:
