@@ -1432,7 +1432,6 @@ EC_GROUP *EC_GROUP_new_from_params(const OSSL_PARAM params[],
     BIGNUM *p = NULL, *a = NULL, *b = NULL, *order = NULL, *cofactor = NULL;
     EC_POINT *point = NULL;
     int field_bits = 0;
-    int is_prime_field = 1;
     BN_CTX *bnctx = NULL;
     const unsigned char *buf = NULL;
     int encoding_flag = -1;
@@ -1486,13 +1485,12 @@ EC_GROUP *EC_GROUP_new_from_params(const OSSL_PARAM params[],
         ERR_raise(ERR_LIB_EC, EC_R_INVALID_FIELD);
         goto err;
     }
-    if (OPENSSL_strcasecmp(ptmp->data, SN_X9_62_prime_field) == 0) {
-        is_prime_field = 1;
-    } else if (OPENSSL_strcasecmp(ptmp->data,
-                                  SN_X9_62_characteristic_two_field) == 0) {
-        is_prime_field = 0;
-    } else {
-        /* Invalid field */
+    if (OPENSSL_strcasecmp(ptmp->data,
+                           SN_X9_62_characteristic_two_field) == 0) {
+        ERR_raise(ERR_LIB_EC, EC_R_GF2M_NOT_SUPPORTED);
+        goto err;
+    }
+    if (OPENSSL_strcasecmp(ptmp->data, SN_X9_62_prime_field) != 0) {
         ERR_raise(ERR_LIB_EC, EC_R_UNSUPPORTED_FIELD);
         goto err;
     }
@@ -1515,24 +1513,17 @@ EC_GROUP *EC_GROUP_new_from_params(const OSSL_PARAM params[],
         goto err;
     }
 
-    if (is_prime_field) {
-        if (BN_is_negative(p) || BN_is_zero(p)) {
-            ERR_raise(ERR_LIB_EC, EC_R_INVALID_P);
-            goto err;
-        }
-        field_bits = BN_num_bits(p);
-        if (field_bits > OPENSSL_ECC_MAX_FIELD_BITS) {
-            ERR_raise(ERR_LIB_EC, EC_R_FIELD_TOO_LARGE);
-            goto err;
-        }
-
-        /* create the EC_GROUP structure */
-        group = EC_GROUP_new_curve_GFp(p, a, b, bnctx);
-    } else {
-        ERR_raise(ERR_LIB_EC, EC_R_GF2M_NOT_SUPPORTED);
+    if (BN_is_negative(p) || BN_is_zero(p)) {
+        ERR_raise(ERR_LIB_EC, EC_R_INVALID_P);
+        goto err;
+    }
+    field_bits = BN_num_bits(p);
+    if (field_bits > OPENSSL_ECC_MAX_FIELD_BITS) {
+        ERR_raise(ERR_LIB_EC, EC_R_FIELD_TOO_LARGE);
         goto err;
     }
 
+    group = EC_GROUP_new_curve_GFp(p, a, b, bnctx);
     if (group == NULL) {
         ERR_raise(ERR_LIB_EC, ERR_R_EC_LIB);
         goto err;
