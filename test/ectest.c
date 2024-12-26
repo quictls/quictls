@@ -953,7 +953,7 @@ static const unsigned char p521_explicit[] = {
  */
 static int check_named_curve_test(int id)
 {
-    int ret = 0, nid, field_nid, has_seed;
+    int ret = 0, nid, has_seed;
     EC_GROUP *group = NULL, *gtest = NULL;
     const EC_POINT *group_gen = NULL;
     EC_POINT *other_gen = NULL;
@@ -993,25 +993,18 @@ static int check_named_curve_test(int id)
 
     /* Determine if the built-in curve has a seed field set */
     has_seed = (EC_GROUP_get_seed_len(group) > 0);
-    field_nid = EC_GROUP_get_field_type(group);
-    if (field_nid == NID_X9_62_characteristic_two_field) {
-        if (!TEST_ptr(other_p = BN_dup(group_p))
-            || !TEST_true(BN_lshift1(other_p, other_p)))
-            goto err;
-    } else {
-        if (!TEST_ptr(other_p = BN_dup(group_p)))
-            goto err;
-        /*
-         * Just choosing any arbitrary prime does not work..
-         * Setting p via ec_GFp_nist_group_set_curve() needs the prime to be a
-         * nist prime. So only select one of these as an alternate prime.
-         */
-        if (!TEST_ptr(BN_copy(other_p,
-                              BN_ucmp(BN_get0_nist_prime_192(), other_p) == 0 ?
-                                      BN_get0_nist_prime_256() :
-                                      BN_get0_nist_prime_192())))
-            goto err;
-    }
+    if (!TEST_ptr(other_p = BN_dup(group_p)))
+        goto err;
+    /*
+     * Just choosing any arbitrary prime does not work..
+     * Setting p via ec_GFp_nist_group_set_curve() needs the prime to be a
+     * nist prime. So only select one of these as an alternate prime.
+     */
+    if (!TEST_ptr(BN_copy(other_p,
+                          BN_ucmp(BN_get0_nist_prime_192(), other_p) == 0 ?
+                                  BN_get0_nist_prime_256() :
+                                  BN_get0_nist_prime_192())))
+        goto err;
 
     /* Passes because this is a valid curve */
     if (!TEST_int_eq(EC_GROUP_check_named_curve(group, 0, NULL), nid)
