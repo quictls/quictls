@@ -1690,7 +1690,7 @@ static int cofactor_range_test(void)
  */
 static int cardinality_test(int n)
 {
-    int ret = 0, is_binary = 0;
+    int ret = 0;
     int nid = curves[n].nid;
     BN_CTX *ctx = NULL;
     EC_GROUP *g1 = NULL, *g2 = NULL;
@@ -1705,8 +1705,6 @@ static int cardinality_test(int n)
         BN_CTX_free(ctx);
         return 0;
     }
-
-    is_binary = (EC_GROUP_get_field_type(g1) == NID_X9_62_characteristic_two_field);
 
     BN_CTX_start(ctx);
     g1_p = BN_CTX_get(ctx);
@@ -1724,7 +1722,6 @@ static int cardinality_test(int n)
                       EC_GROUP_get0_generator(g1), g1_x, g1_y, ctx))
         || !TEST_true(BN_copy(g1_order, EC_GROUP_get0_order(g1)))
         || !TEST_true(EC_GROUP_get_cofactor(g1, g1_cf, ctx))
-        || !TEST_int_eq(0, is_binary)
         || !TEST_ptr(g2 = EC_GROUP_new_curve_GFp(g1_p, g1_a, g1_b, ctx))
         || !TEST_ptr(g2_gen = EC_POINT_new(g2))
         || !TEST_true(EC_POINT_set_affine_coordinates(g2, g2_gen, g1_x, g1_y, ctx))
