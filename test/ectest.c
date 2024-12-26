@@ -2160,7 +2160,6 @@ static int custom_params_test(int id)
     unsigned char *buf1 = NULL, *buf2 = NULL;
     const BIGNUM *z = NULL, *cof = NULL, *priv1 = NULL;
     BIGNUM *p = NULL, *a = NULL, *b = NULL;
-    int is_prime = 0;
     EC_KEY *eckey1 = NULL, *eckey2 = NULL;
     EVP_PKEY *pkey1 = NULL, *pkey2 = NULL;
     EVP_PKEY_CTX *pctx1 = NULL, *pctx2 = NULL;
@@ -2190,12 +2189,6 @@ static int custom_params_test(int id)
     if (!TEST_ptr(group = EC_GROUP_new_by_curve_name(nid)))
         goto err;
 
-    is_prime = EC_GROUP_get_field_type(group) == NID_X9_62_prime_field;
-    if (!is_prime) {
-        ret = TEST_skip("binary curves not supported in this build");
-        goto err;
-    }
-
     /* expected byte length of encoded points */
     bsize = (EC_GROUP_get_degree(group) + 7) / 8;
     bsize = 1 + 2 * bsize; /* UNCOMPRESSED_POINT format */
@@ -2220,10 +2213,8 @@ static int custom_params_test(int id)
         goto err;
 
     /* create a new group using same params (but different generator) */
-    if (is_prime) {
-        if (!TEST_ptr(altgroup = EC_GROUP_new_curve_GFp(p, a, b, ctx)))
-            goto err;
-    }
+    if (!TEST_ptr(altgroup = EC_GROUP_new_curve_GFp(p, a, b, ctx)))
+        goto err;
 
     /* set 2*G as the generator of altgroup */
     EC_POINT_free(G2); /* discard G2 as it refers to the original group */
