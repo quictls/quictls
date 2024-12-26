@@ -158,21 +158,18 @@ static int ec_group_explicit_todata(const EC_GROUP *group, OSSL_PARAM_BLD *tmpl,
                                     OSSL_PARAM params[], BN_CTX *bnctx,
                                     unsigned char **genbuf)
 {
-    int ret = 0, fid;
-    const char *field_type;
+    int ret = 0, nid;
     const OSSL_PARAM *param = NULL;
     const OSSL_PARAM *param_p = NULL;
     const OSSL_PARAM *param_a = NULL;
     const OSSL_PARAM *param_b = NULL;
 
-    fid = EC_GROUP_get_field_type(group);
-
-    if (fid == NID_X9_62_prime_field) {
-        field_type = SN_X9_62_prime_field;
-    } else if (fid == NID_X9_62_characteristic_two_field) {
+    nid = EC_GROUP_get_field_type(group);
+    if (nid == NID_X9_62_characteristic_two_field) {
         ERR_raise(ERR_LIB_EC, EC_R_GF2M_NOT_SUPPORTED);
         goto err;
-    } else {
+    }
+    if (nid != NID_X9_62_prime_field) {
         ERR_raise(ERR_LIB_EC, EC_R_INVALID_FIELD);
         return 0;
     }
@@ -222,7 +219,7 @@ static int ec_group_explicit_todata(const EC_GROUP *group, OSSL_PARAM_BLD *tmpl,
     if (tmpl != NULL || param != NULL) {
         if (!ossl_param_build_set_utf8_string(tmpl, params,
                                               OSSL_PKEY_PARAM_EC_FIELD_TYPE,
-                                              field_type)) {
+                                              SN_X9_62_prime_field)) {
             ERR_raise(ERR_LIB_EC, ERR_R_CRYPTO_LIB);
             goto err;
         }
