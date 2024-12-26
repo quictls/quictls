@@ -15,10 +15,9 @@ or point conversion form of a key
 =head1 DESCRIPTION
 
 EVP_PKEY_get_field_type() returns the field type NID of the I<pkey>, if
-I<pkey>'s key type supports it. The types currently supported
-by the built-in OpenSSL providers are either B<NID_X9_62_prime_field>
-for prime curves or B<NID_X9_62_characteristic_two_field> for binary curves;
-these values are defined in the F<< <openssl/obj_mac.h> >> header file.
+I<pkey>'s key type supports it. The only type currently supported
+by the built-in OpenSSL providers is B<NID_X9_62_prime_field>,
+defined in the F<< <openssl/obj_mac.h> >> header file.
 
 EVP_PKEY_get_ec_point_conv_form() returns the point conversion format
 of the I<pkey>, if I<pkey>'s key type supports it.
