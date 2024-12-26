@@ -1913,7 +1913,7 @@ static int do_test_custom_explicit_fromdata(EC_GROUP *group, BN_CTX *ctx,
     EVP_PKEY_CTX *pctx = NULL;
     EVP_PKEY *pkeyparam = NULL;
     OSSL_PARAM_BLD *bld = NULL;
-    const char *field_name;
+    const char *field_name = SN_X9_62_prime_field;
     OSSL_PARAM *params = NULL;
     const OSSL_PARAM *gettable;
     BIGNUM *p, *a, *b;
@@ -1931,11 +1931,6 @@ static int do_test_custom_explicit_fromdata(EC_GROUP *group, BN_CTX *ctx,
         || !TEST_ptr(bld = OSSL_PARAM_BLD_new()))
         goto err;
 
-    if (EC_GROUP_get_field_type(group) == NID_X9_62_prime_field) {
-        field_name = SN_X9_62_prime_field;
-    } else {
-        field_name = SN_X9_62_characteristic_two_field;
-    }
     if (!TEST_true(EC_GROUP_get_curve(group, p, a, b, ctx))
         || !TEST_true(OSSL_PARAM_BLD_push_utf8_string(bld,
                           OSSL_PKEY_PARAM_EC_FIELD_TYPE, field_name, 0))
