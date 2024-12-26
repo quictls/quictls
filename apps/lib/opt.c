@@ -577,7 +577,7 @@ int opt_intmax(const char *value, intmax_t *result)
         errno = oerrno;
         return 0;
     }
-    *result = (intmax_t)m;
+    *result = m;
     errno = oerrno;
     return 1;
 }
@@ -599,7 +599,7 @@ int opt_uintmax(const char *value, uintmax_t *result)
         errno = oerrno;
         return 0;
     }
-    *result = (intmax_t)m;
+    *result = m;
     errno = oerrno;
     return 1;
 }
