@@ -361,7 +361,6 @@ static int dsa_to_text(BIO *out, const void *key, int selection)
 static int ec_param_explicit_curve_to_text(BIO *out, const EC_GROUP *group,
                                            BN_CTX *ctx)
 {
-    const char *plabel = "Prime:";
     BIGNUM *p = NULL, *a = NULL, *b = NULL;
 
     p = BN_CTX_get(ctx);
@@ -371,16 +370,7 @@ static int ec_param_explicit_curve_to_text(BIO *out, const EC_GROUP *group,
         || !EC_GROUP_get_curve(group, p, a, b, ctx))
         return 0;
 
-    if (EC_GROUP_get_field_type(group) == NID_X9_62_characteristic_two_field) {
-        int basis_type = EC_GROUP_get_basis_type(group);
-
-        /* print the 'short name' of the base type OID */
-        if (basis_type == NID_undef
-            || BIO_printf(out, "Basis Type: %s\n", OBJ_nid2sn(basis_type)) <= 0)
-            return 0;
-        plabel = "Polynomial:";
-    }
-    return print_labeled_bignum(out, plabel, p)
+    return print_labeled_bignum(out, "Prime:", p)
         && print_labeled_bignum(out, "A:   ", a)
         && print_labeled_bignum(out, "B:   ", b);
 }
