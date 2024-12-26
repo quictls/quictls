@@ -9,7 +9,6 @@
 
 #ifndef OSSL_AES_PLATFORM_H
 # define OSSL_AES_PLATFORM_H
-# pragma once
 
 # include <openssl/aes.h>
 

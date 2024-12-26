@@ -10,7 +10,6 @@
 
 #ifndef OSSL_CRYPTO_SM4_H
 # define OSSL_CRYPTO_SM4_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 # include <openssl/e_os2.h>

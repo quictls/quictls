@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_PARAM_BUILD_SET_H
 # define OSSL_INTERNAL_PARAM_BUILD_SET_H
-# pragma once
 
 # include <openssl/safestack.h>
 # include <openssl/param_build.h>

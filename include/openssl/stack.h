@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_STACK_H
 # define OPENSSL_STACK_H
-# pragma once
 
 # include <openssl/macros.h>
 

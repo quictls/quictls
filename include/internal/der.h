@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_DER_H
 # define OSSL_INTERNAL_DER_H
-# pragma once
 
 # include <openssl/bn.h>
 # include "internal/packet.h"

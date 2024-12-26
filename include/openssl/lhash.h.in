@@ -17,7 +17,6 @@ use OpenSSL::stackhash qw(generate_lhash_macros);
 
 #ifndef OPENSSL_LHASH_H
 # define OPENSSL_LHASH_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/e_os2.h>

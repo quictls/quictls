@@ -11,7 +11,6 @@
 
 #ifndef OSSL_CRYPTO_TYPES_H
 # define OSSL_CRYPTO_TYPES_H
-# pragma once
 
 # ifdef OPENSSL_NO_DEPRECATED_3_0
 typedef struct rsa_st RSA;

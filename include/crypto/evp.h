@@ -9,7 +9,6 @@
 
 #ifndef OSSL_CRYPTO_EVP_H
 # define OSSL_CRYPTO_EVP_H
-# pragma once
 
 # include <openssl/evp.h>
 # include <openssl/core_dispatch.h>

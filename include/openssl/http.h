@@ -10,7 +10,6 @@
 
 #ifndef OPENSSL_HTTP_H
 # define OPENSSL_HTTP_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 

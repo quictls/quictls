@@ -9,7 +9,6 @@
 
 #ifndef OSSL_CRYPTO_POLY1305_H
 # define OSSL_CRYPTO_POLY1305_H
-# pragma once
 
 #include <stddef.h>
 

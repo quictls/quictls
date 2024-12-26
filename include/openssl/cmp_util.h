@@ -11,7 +11,6 @@
 
 #ifndef OPENSSL_CMP_UTIL_H
 # define OPENSSL_CMP_UTIL_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 # ifndef OPENSSL_NO_CMP

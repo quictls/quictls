@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_DETERMINISTIC_NONCE_H
 # define OSSL_INTERNAL_DETERMINISTIC_NONCE_H
-# pragma once
 
 # include <openssl/bn.h>
 

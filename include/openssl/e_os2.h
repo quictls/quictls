@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_E_OS2_H
 # define OPENSSL_E_OS2_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/opensslconf.h>

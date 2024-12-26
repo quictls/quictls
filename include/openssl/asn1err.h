@@ -10,7 +10,6 @@
 
 #ifndef OPENSSL_ASN1ERR_H
 # define OPENSSL_ASN1ERR_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 # include <openssl/cryptoerr_legacy.h>

@@ -9,7 +9,6 @@
 
 #ifndef OSSL_PROV_CIPHERCOMMON_H
 # define OSSL_PROV_CIPHERCOMMON_H
-# pragma once
 
 # include <openssl/params.h>
 # include <openssl/core_dispatch.h>

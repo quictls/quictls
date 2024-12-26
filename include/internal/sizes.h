@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_SIZES_H
 # define OSSL_INTERNAL_SIZES_H
-# pragma once
 
 /*
  * Max sizes used to allocate buffers with a fixed sizes, for example for

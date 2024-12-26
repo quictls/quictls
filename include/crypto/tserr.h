@@ -10,7 +10,6 @@
 
 #ifndef OSSL_CRYPTO_TSERR_H
 # define OSSL_CRYPTO_TSERR_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 

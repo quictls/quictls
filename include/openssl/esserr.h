@@ -10,7 +10,6 @@
 
 #ifndef OPENSSL_ESSERR_H
 # define OPENSSL_ESSERR_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 # include <openssl/cryptoerr_legacy.h>

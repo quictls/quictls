@@ -10,7 +10,6 @@
 
 #ifndef OPENSSL_OBJECTSERR_H
 # define OPENSSL_OBJECTSERR_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 # include <openssl/cryptoerr_legacy.h>

@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_CAST_H
 # define OPENSSL_CAST_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/opensslconf.h>

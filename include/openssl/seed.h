@@ -34,7 +34,6 @@
 
 #ifndef OPENSSL_SEED_H
 # define OPENSSL_SEED_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/opensslconf.h>

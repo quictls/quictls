@@ -9,7 +9,6 @@
 
 #ifndef  OPENSSL_CONF_API_H
 # define OPENSSL_CONF_API_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/lhash.h>

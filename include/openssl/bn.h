@@ -10,7 +10,6 @@
 
 #ifndef OPENSSL_BN_H
 # define OPENSSL_BN_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/e_os2.h>

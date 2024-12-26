@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_ASN1_H
 # define OSSL_INTERNAL_ASN1_H
-# pragma once
 
 # include <openssl/bio.h>
 

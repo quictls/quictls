@@ -15,7 +15,6 @@ use OpenSSL::stackhash qw(generate_stack_macros);
 
 #ifndef OPENSSL_ESS_H
 # define OPENSSL_ESS_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 

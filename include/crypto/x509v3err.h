@@ -10,7 +10,6 @@
 
 #ifndef OSSL_CRYPTO_X509V3ERR_H
 # define OSSL_CRYPTO_X509V3ERR_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 

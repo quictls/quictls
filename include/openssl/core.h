@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_CORE_H
 # define OPENSSL_CORE_H
-# pragma once
 
 # include <stddef.h>
 # include <openssl/types.h>

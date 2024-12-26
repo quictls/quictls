@@ -149,7 +149,6 @@ print <<"EOF";
 
 #ifndef OPENSSL_OBJ_MAC_H
 # define OPENSSL_OBJ_MAC_H
-# pragma once
 
 #define SN_undef                        "UNDEF"
 #define LN_undef                        "undefined"

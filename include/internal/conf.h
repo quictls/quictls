@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_CONF_H
 # define OSSL_INTERNAL_CONF_H
-# pragma once
 
 # include <openssl/conf.h>
 

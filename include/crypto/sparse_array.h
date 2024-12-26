@@ -10,7 +10,6 @@
 
 #ifndef OSSL_CRYPTO_SPARSE_ARRAY_H
 # define OSSL_CRYPTO_SPARSE_ARRAY_H
-# pragma once
 
 # include <openssl/e_os2.h>
 

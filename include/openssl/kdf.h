@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_KDF_H
 # define OPENSSL_KDF_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <stdarg.h>

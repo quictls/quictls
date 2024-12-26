@@ -12,7 +12,6 @@
 
 #ifndef OSSL_CRYPTO_ARIA_H
 # define OSSL_CRYPTO_ARIA_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 

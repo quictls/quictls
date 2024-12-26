@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_STORE_H
 # define OPENSSL_STORE_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <stdarg.h>

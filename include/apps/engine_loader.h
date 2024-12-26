@@ -8,7 +8,6 @@
  */
 #ifndef OPENSSL_ENGINE_LOADER_H
 # define OPENSSL_ENGINE_LOADER_H
-# pragma once
 
 # include <openssl/store.h>
 

@@ -11,7 +11,6 @@
 
 #ifndef OPENSSL_TLS1_H
 # define OPENSSL_TLS1_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/buffer.h>

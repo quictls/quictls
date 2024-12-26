@@ -11,7 +11,6 @@
 
 #ifndef OSSL_CRYPTO_EC_H
 # define OSSL_CRYPTO_EC_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 # include <openssl/evp.h>

@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_RECORDMETHOD_H
 # define OSSL_INTERNAL_RECORDMETHOD_H
-# pragma once
 
 # include <openssl/ssl.h>
 

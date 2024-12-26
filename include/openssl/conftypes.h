@@ -9,7 +9,6 @@
 
 #ifndef  OPENSSL_CONFTYPES_H
 # define OPENSSL_CONFTYPES_H
-# pragma once
 
 #ifndef  OPENSSL_CONF_H
 # include <openssl/conf.h>

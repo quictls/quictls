@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_RAND_H
 # define OPENSSL_RAND_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <stdlib.h>

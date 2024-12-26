@@ -16,7 +16,6 @@
 
 #ifndef OPENSSL_CRYPTOERR_LEGACY_H
 # define OPENSSL_CRYPTOERR_LEGACY_H
-# pragma once
 
 # include <openssl/macros.h>
 

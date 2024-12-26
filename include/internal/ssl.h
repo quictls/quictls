@@ -11,7 +11,6 @@
 
 #ifndef OSSL_INTERNAL_SSL_H
 # define OSSL_INTERNAL_SSL_H
-# pragma once
 
 typedef void (*ossl_msg_cb)(int write_p, int version, int content_type,
                             const void *buf, size_t len, SSL *ssl, void *arg);

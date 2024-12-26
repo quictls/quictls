@@ -9,7 +9,6 @@
 
 #ifndef OSSL_CRYPTO_SIPHASH_H
 # define OSSL_CRYPTO_SIPHASH_H
-# pragma once
 
 # include <stddef.h>
 

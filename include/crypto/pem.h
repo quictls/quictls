@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_PEM_H
 # define OSSL_INTERNAL_PEM_H
-# pragma once
 
 # include <openssl/pem.h>
 # include "crypto/types.h"

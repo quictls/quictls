@@ -10,7 +10,6 @@
 
 #ifndef OSSL_E_DASYNC_ERR_H
 # define OSSL_E_DASYNC_ERR_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 

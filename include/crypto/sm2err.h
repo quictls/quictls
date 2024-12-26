@@ -10,7 +10,6 @@
 
 #ifndef OSSL_CRYPTO_SM2ERR_H
 # define OSSL_CRYPTO_SM2ERR_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 

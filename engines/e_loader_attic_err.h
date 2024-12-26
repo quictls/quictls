@@ -10,7 +10,6 @@
 
 #ifndef OSSL_E_LOADER_ATTIC_ERR_H
 # define OSSL_E_LOADER_ATTIC_ERR_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 

@@ -16,7 +16,6 @@ use OpenSSL::stackhash qw(generate_stack_macros);
 
 #ifndef OPENSSL_X509_H
 # define OPENSSL_X509_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/e_os2.h>

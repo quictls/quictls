@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_SOCKETS_H
 # define OSSL_INTERNAL_SOCKETS_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 

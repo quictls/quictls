@@ -10,7 +10,6 @@
 
 #ifndef OSSL_CRYPTO_PEMERR_H
 # define OSSL_CRYPTO_PEMERR_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 

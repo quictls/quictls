@@ -11,7 +11,6 @@
 /* This header can move into provider when legacy support is removed */
 #ifndef OSSL_INTERNAL_SM3_H
 # define OSSL_INTERNAL_SM3_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 

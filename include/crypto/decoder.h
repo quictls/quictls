@@ -9,7 +9,6 @@
 
 #ifndef OSSL_CRYPTO_DECODER_H
 # define OSSL_CRYPTO_DECODER_H
-# pragma once
 
 # include <openssl/decoder.h>
 

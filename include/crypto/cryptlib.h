@@ -9,7 +9,6 @@
 
 #ifndef OSSL_CRYPTO_CRYPTLIB_H
 # define OSSL_CRYPTO_CRYPTLIB_H
-# pragma once
 
 # include <openssl/core.h>
 # include "internal/cryptlib.h"

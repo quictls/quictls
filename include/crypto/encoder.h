@@ -9,7 +9,6 @@
 
 #ifndef OSSL_CRYPTO_ENCODER_H
 # define OSSL_CRYPTO_ENCODER_H
-# pragma once
 
 # include <openssl/types.h>
 

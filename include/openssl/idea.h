@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_IDEA_H
 # define OPENSSL_IDEA_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/opensslconf.h>

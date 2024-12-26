@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_SAFE_MATH_H
 # define OSSL_INTERNAL_SAFE_MATH_H
-# pragma once
 
 # include <openssl/e_os2.h>              /* For 'inline' */
 

@@ -65,7 +65,6 @@
 
 #ifndef OSSL_CRYPTO_MD32_COMMON_H
 # define OSSL_CRYPTO_MD32_COMMON_H
-# pragma once
 
 # include <openssl/crypto.h>
 

@@ -15,7 +15,6 @@
 
 #ifndef OPENSSL_SRTP_H
 # define OPENSSL_SRTP_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/ssl.h>

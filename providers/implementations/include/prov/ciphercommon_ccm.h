@@ -9,7 +9,6 @@
 
 #ifndef OSSL_PROV_CIPHERCOMMON_CCM_H
 # define OSSL_PROV_CIPHERCOMMON_CCM_H
-# pragma once
 
 # include "ciphercommon_aead.h"
 

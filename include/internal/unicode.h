@@ -9,7 +9,6 @@
 
 #ifndef OSSL_INTERNAL_UNICODE_H
 # define OSSL_INTERNAL_UNICODE_H
-# pragma once
 
 typedef enum {
     SURROGATE_MIN = 0xd800UL,

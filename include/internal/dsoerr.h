@@ -10,7 +10,6 @@
 
 #ifndef OSSL_INTERNAL_DSOERR_H
 # define OSSL_INTERNAL_DSOERR_H
-# pragma once
 
 # include <openssl/opensslconf.h>
 

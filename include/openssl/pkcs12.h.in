@@ -15,7 +15,6 @@ use OpenSSL::stackhash qw(generate_stack_macros);
 
 #ifndef OPENSSL_PKCS12_H
 # define OPENSSL_PKCS12_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/bio.h>

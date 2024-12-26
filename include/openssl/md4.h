@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_MD4_H
 # define OPENSSL_MD4_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/opensslconf.h>

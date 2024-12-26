@@ -9,7 +9,6 @@
 
 #ifndef OPENSSL_WHRLPOOL_H
 # define OPENSSL_WHRLPOOL_H
-# pragma once
 
 # include <openssl/macros.h>
 # include <openssl/opensslconf.h>
