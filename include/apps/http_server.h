@@ -10,8 +10,8 @@
 #ifndef OSSL_HTTP_SERVER_H
 # define OSSL_HTTP_SERVER_H
 
-# include "apps.h"
-# include "log.h"
+# include <apps/apps.h>
+# include <apps/log.h>
 
 # ifndef HAVE_FORK
 #  if defined(OPENSSL_SYS_WINDOWS)

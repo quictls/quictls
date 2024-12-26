@@ -8,8 +8,8 @@
  */
 
 #include <openssl/crypto.h>
-#include "apps.h"
-#include "progs.h"
+#include <apps/apps.h>
+#include <apps/progs.h>
 #include <openssl/quic.h>
 
 typedef enum OPTION_choice {

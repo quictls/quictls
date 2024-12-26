@@ -8,13 +8,13 @@
  */
 
 /*
- * This file is also used by the test suite. Do not #include "apps.h".
+ * This file is also used by the test suite. Do not #include <apps/apps.h>.
  */
-#include "opt.h"
-#include "fmt.h"
-#include "app_libctx.h"
-#include "internal/nelem.h"
-#include "internal/numbers.h"
+#include <apps/opt.h>
+#include <apps/fmt.h>
+#include <apps/app_libctx.h>
+#include <internal/nelem.h>
+#include <internal/numbers.h>
 #include <string.h>
 #if !defined(OPENSSL_SYS_MSDOS)
 # include <unistd.h>

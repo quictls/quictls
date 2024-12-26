@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "fmt.h"
+#include <apps/fmt.h>
 
 int FMT_istext(int format)
 {

@@ -52,7 +52,7 @@ ENDIF
 IF[{- !$disabled{apps} -}]
   PROGRAMS=openssl
   SOURCE[openssl]=$INITSRC $OPENSSLSRC
-  INCLUDE[openssl]=.. ../include include
+  INCLUDE[openssl]=.. ../include
   DEPEND[openssl]=libapps.a ../libssl
 
   # The nocheck attribute is picked up by progs.pl as a signal not to look
@@ -60,12 +60,12 @@ IF[{- !$disabled{apps} -}]
   # therefore don't allow it to be read at the same time, making progs.pl
   # fail.
   SOURCE[openssl]{nocheck}=progs.c
-  DEPEND[${OPENSSLSRC/.c/.o} progs.o]=progs.h
+  DEPEND[${OPENSSLSRC/.c/.o} progs.o]=../include/apps/progs.h
   GENERATE[progs.c]=progs.pl "-C" $(APPS_OPENSSL)
-  GENERATE[progs.h]=progs.pl "-H" $(APPS_OPENSSL)
+  GENERATE[../include/apps/progs.h]=progs.pl "-H" $(APPS_OPENSSL)
   # progs.pl tries to read all 'openssl' sources, including progs.c, so we make
   # sure things are generated in the correct order.
-  DEPEND[progs.h]=progs.c
+  DEPEND[../include/apps/progs.h]=progs.c
   # Because the files to look through may change (depends on $OPENSSLSRC),
   # always depend on a changed configuration.
   DEPEND[progs.c]=../configdata.pm

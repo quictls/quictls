@@ -7,8 +7,8 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "apps.h"
-#include "app_params.h"
+#include <apps/apps.h>
+#include <apps/app_params.h>
 
 static int describe_param_type(char *buf, size_t bufsz, const OSSL_PARAM *param)
 {

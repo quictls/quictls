@@ -12,8 +12,8 @@
 #include <time.h>
 #include <string.h>
 #include <ctype.h>
-#include "apps.h"
-#include "progs.h"
+#include <apps/apps.h>
+#include <apps/progs.h>
 #include <openssl/core_names.h>
 #include <openssl/bio.h>
 #include <openssl/evp.h>

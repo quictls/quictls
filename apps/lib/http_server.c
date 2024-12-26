@@ -10,13 +10,13 @@
 /* Very basic HTTP server */
 
 #include <ctype.h>
-#include "http_server.h"
-#include "internal/sockets.h"
+#include <apps/http_server.h>
+#include <internal/sockets.h>
 #include <openssl/err.h>
 #include <openssl/trace.h>
 #include <openssl/rand.h>
-#include "s_apps.h"
-#include "log.h"
+#include <apps/s_apps.h>
+#include <apps/log.h>
 
 #define HTTP_PREFIX "HTTP/"
 #define HTTP_VERSION_PATT "1." /* allow 1.x */

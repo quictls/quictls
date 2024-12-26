@@ -15,8 +15,8 @@
 #include <openssl/core_names.h>
 #include <openssl/self_test.h>
 #include <openssl/fipskey.h>
-#include "apps.h"
-#include "progs.h"
+#include <apps/apps.h>
+#include <apps/progs.h>
 
 #define BUFSIZE 4096
 

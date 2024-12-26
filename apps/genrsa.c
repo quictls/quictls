@@ -13,8 +13,8 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include "apps.h"
-#include "progs.h"
+#include <apps/apps.h>
+#include <apps/progs.h>
 #include <openssl/bio.h>
 #include <openssl/err.h>
 #include <openssl/bn.h>

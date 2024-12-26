@@ -21,7 +21,7 @@
 #ifndef OPENSSL_NO_ENGINE
 # include <openssl/engine.h>
 #endif
-#include "apps.h"
+#include <apps/apps.h>
 
 #ifndef OPENSSL_NO_ENGINE
 /* Try to load an engine in a shareable library */

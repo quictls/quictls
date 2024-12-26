@@ -21,11 +21,11 @@
 #include <openssl/store.h>
 #include <openssl/core_names.h>
 #include <openssl/rand.h>
-#include "apps.h"
-#include "app_params.h"
-#include "progs.h"
-#include "opt.h"
-#include "names.h"
+#include <apps/apps.h>
+#include <apps/app_params.h>
+#include <apps/progs.h>
+#include <apps/opt.h>
+#include <apps/names.h>
 
 static int verbose = 0;
 static const char *select_name = NULL;

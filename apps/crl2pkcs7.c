@@ -10,8 +10,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/types.h>
-#include "apps.h"
-#include "progs.h"
+#include <apps/apps.h>
+#include <apps/progs.h>
 #include <openssl/err.h>
 #include <openssl/evp.h>
 #include <openssl/x509.h>

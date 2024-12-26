@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "internal/common.h"
+#include <internal/common.h>
 #include <openssl/bio.h>
 #include <openssl/crypto.h>
 #include <openssl/trace.h>
@@ -23,8 +23,8 @@
 #endif
 #include <openssl/err.h>
 /* Needed to get the other O_xxx flags. */
-#include "apps.h"
-#include "progs.h"
+#include <apps/apps.h>
+#include <apps/progs.h>
 
 /*
  * The LHASH callbacks ("hash" & "cmp") have been replaced by functions with

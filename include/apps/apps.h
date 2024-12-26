@@ -33,12 +33,12 @@
 # include <openssl/ocsp.h>
 # include <openssl/http.h>
 # include <signal.h>
-# include "apps_ui.h"
-# include "opt.h"
-# include "fmt.h"
-# include "platform.h"
-# include "engine_loader.h"
-# include "app_libctx.h"
+# include <apps/apps_ui.h>
+# include <apps/opt.h>
+# include <apps/fmt.h>
+# include <apps/platform.h>
+# include <apps/engine_loader.h>
+# include <apps/app_libctx.h>
 
 /*
  * quick macro when you need to pass an unsigned char instead of a char.

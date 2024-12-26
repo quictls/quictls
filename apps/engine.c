@@ -12,8 +12,8 @@
 
 #include <openssl/opensslconf.h>
 
-#include "apps.h"
-#include "progs.h"
+#include <apps/apps.h>
+#include <apps/progs.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

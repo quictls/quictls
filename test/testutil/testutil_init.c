@@ -10,7 +10,7 @@
 #include <string.h>
 #include <openssl/opensslconf.h>
 #include <openssl/trace.h>
-#include "apps.h"
+#include <apps/apps.h>
 #include "../testutil.h"
 
 #ifndef OPENSSL_NO_TRACE

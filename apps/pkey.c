@@ -9,9 +9,9 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "apps.h"
-#include "progs.h"
-#include "ec_common.h"
+#include <apps/apps.h>
+#include <apps/progs.h>
+#include <apps/ec_common.h>
 #include <openssl/pem.h>
 #include <openssl/err.h>
 #include <openssl/evp.h>

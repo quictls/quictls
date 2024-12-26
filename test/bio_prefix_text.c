@@ -11,7 +11,7 @@
 #include <stdarg.h>
 #include <openssl/bio.h>
 #include <openssl/safestack.h>
-#include "opt.h"
+#include <apps/opt.h>
 
 static BIO *bio_in = NULL;
 static BIO *bio_out = NULL;

@@ -9,8 +9,8 @@
 
 #include <string.h>
 
-#include "apps.h"
-#include "progs.h"
+#include <apps/apps.h>
+#include <apps/progs.h>
 
 #include <openssl/bio.h>
 #include <openssl/err.h>

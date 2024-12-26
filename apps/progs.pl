@@ -33,6 +33,7 @@ my @openssl_source =
         @{$unified_info{sources}->{$apps_openssl}};
 
 foreach my $filename (@openssl_source) {
+    next if $filename =~ /progs\.c/;
     open F, $filename or die "Couldn't open $filename: $!\n";
     foreach ( grep /$cmdre/, <F> ) {
         my @foo = /$cmdre/;
@@ -57,7 +58,7 @@ if ($opt eq '-H') {
  * https://www.openssl.org/source/license.html
  */
 
-#include "function.h"
+#include <apps/function.h>
 
 EOF
 
@@ -87,7 +88,7 @@ if ($opt eq '-C') {
  * https://www.openssl.org/source/license.html
  */
 
-#include "progs.h"
+#include <apps/progs.h>
 
 EOF
 

@@ -7,8 +7,8 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "apps.h"
-#include "progs.h"
+#include <apps/apps.h>
+#include <apps/progs.h>
 
 #include <ctype.h>
 #include <stdio.h>

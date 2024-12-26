@@ -14,12 +14,12 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "apps.h"
-#include "http_server.h"
-#include "s_apps.h"
-#include "progs.h"
+#include <apps/apps.h>
+#include <apps/http_server.h>
+#include <apps/s_apps.h>
+#include <apps/progs.h>
 
-#include "cmp_mock_srv.h"
+#include <apps/cmp_mock_srv.h>
 
 /* tweaks needed due to missing unistd.h on Windows */
 #if defined(_WIN32) && !defined(__BORLANDC__)

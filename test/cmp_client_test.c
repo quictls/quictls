@@ -11,7 +11,7 @@
 
 #include "helpers/cmp_testlib.h"
 
-#include "cmp_mock_srv.h"
+#include <apps/cmp_mock_srv.h>
 
 static const char *server_key_f;
 static const char *server_cert_f;

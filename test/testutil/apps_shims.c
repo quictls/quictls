@@ -8,7 +8,7 @@
  */
 
 #include <stdlib.h>
-#include "apps.h"
+#include <apps/apps.h>
 #include "../testutil.h"
 
 /* shim that avoids sucking in too much from apps/apps.c */

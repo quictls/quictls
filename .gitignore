@@ -121,7 +121,7 @@ doc/man1/openssl-*.pod
 *.map
 *.ld
 /apps/progs.c
-/apps/progs.h
+/include/apps/progs.h
 
 # Windows (legacy)
 /tmp32
