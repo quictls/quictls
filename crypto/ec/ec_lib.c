@@ -314,7 +314,7 @@ static int ec_precompute_mont_data(EC_GROUP *);
 static int ec_guess_cofactor(EC_GROUP *group) {
     int ret = 0;
     BN_CTX *ctx = NULL;
-    BIGNUM *q = NULL;
+    const BIGNUM *q = group->field;
 
     /*-
      * If the cofactor is too large, we cannot guess it.
@@ -330,20 +330,6 @@ static int ec_guess_cofactor(EC_GROUP *group) {
     if ((ctx = BN_CTX_new_ex(group->libctx)) == NULL)
         return 0;
 
-    BN_CTX_start(ctx);
-    if ((q = BN_CTX_get(ctx)) == NULL)
-        goto err;
-
-    /* set q = 2**m for binary fields; q = p otherwise */
-    if (group->meth->field_type == NID_X9_62_characteristic_two_field) {
-        BN_zero(q);
-        if (!BN_set_bit(q, BN_num_bits(group->field) - 1))
-            goto err;
-    } else {
-        if (!BN_copy(q, group->field))
-            goto err;
-    }
-
     /* compute h = \lfloor (q + 1)/n \rceil = \lfloor (q + 1 + n/2)/n \rfloor */
     if (!BN_rshift1(group->cofactor, group->order) /* n/2 */
         || !BN_add(group->cofactor, group->cofactor, q) /* q + n/2 */
@@ -354,7 +340,6 @@ static int ec_guess_cofactor(EC_GROUP *group) {
         goto err;
     ret = 1;
  err:
-    BN_CTX_end(ctx);
     BN_CTX_free(ctx);
     return ret;
 }
