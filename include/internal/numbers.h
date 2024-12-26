@@ -14,8 +14,9 @@
 # include <limits.h>
 
 /*
- * These macros are used to get the equivalent of the standard {type}_MAX,
- * etc., macros defined in the C standard. For two's-complement machines.
+ * These macros are used to get the standard C {type}_MAX if the
+ * platform doesn't have 128-bit integers. For two's-complement
+ * machines.
  */
 # define OSSL_MAXUINT__(T) ((T) -1)
 # define OSSL_MAXINT__(T) ((T) ((((T) 1) << ((sizeof(T) * CHAR_BIT) - 1)) ^ __MAXUINT__(T)))
