@@ -16,7 +16,7 @@
 #include <openssl/params.h>
 #include "internal/nelem.h"
 #include "internal/tlsgroups.h"
-#include "prov/providercommon.h"
+#include <providers/providercommon.h>
 #include "internal/e_os.h"
 
 /* If neither ec or dh is available then we have no TLS-GROUP capabilities */

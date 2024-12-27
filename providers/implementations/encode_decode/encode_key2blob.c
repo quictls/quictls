@@ -21,9 +21,9 @@
 #include <openssl/ec.h>
 #include "internal/passphrase.h"
 #include "internal/nelem.h"
-#include "prov/implementations.h"
-#include "prov/bio.h"
-#include "prov/provider_ctx.h"
+#include <providers/implementations.h>
+#include <providers/bio.h>
+#include <providers/provider_ctx.h>
 #include "endecoder_local.h"
 
 static int write_blob(void *provctx, OSSL_CORE_BIO *cout,

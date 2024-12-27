@@ -17,12 +17,12 @@
 #include <openssl/core_dispatch.h>
 #include <openssl/params.h>
 #include <openssl/self_test.h>
-#include "prov/providercommon.h"
-#include "prov/provider_ctx.h"
+#include <providers/providercommon.h>
+#include <providers/provider_ctx.h>
 #include "internal/cryptlib.h"
 #include "crypto/rand_pool.h"
 #include "drbg_local.h"
-#include "prov/seeding.h"
+#include <providers/seeding.h>
 #include "crypto/context.h"
 
 typedef struct crng_test_global_st {

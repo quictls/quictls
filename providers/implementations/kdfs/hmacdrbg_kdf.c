@@ -14,10 +14,10 @@
 #include <openssl/kdf.h>
 #include <openssl/proverr.h>
 #include <openssl/core_names.h>
-#include "prov/providercommon.h"
-#include "prov/implementations.h"
-#include "prov/hmac_drbg.h"
-#include "prov/provider_ctx.h"
+#include <providers/providercommon.h>
+#include <providers/implementations.h>
+#include <providers/hmac_drbg.h>
+#include <providers/provider_ctx.h>
 
 static OSSL_FUNC_kdf_newctx_fn hmac_drbg_kdf_new;
 static OSSL_FUNC_kdf_dupctx_fn hmac_drbg_kdf_dup;

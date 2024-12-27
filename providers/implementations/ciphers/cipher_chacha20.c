@@ -11,8 +11,8 @@
 
 #include <openssl/proverr.h>
 #include "cipher_chacha20.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
 
 #define CHACHA20_KEYLEN (CHACHA_KEY_SIZE)
 #define CHACHA20_BLKLEN (1)

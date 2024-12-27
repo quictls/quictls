@@ -10,7 +10,7 @@
 #include <openssl/core.h>
 #include <openssl/buffer.h>
 #include "internal/asn1.h"
-#include "prov/bio.h"
+#include <providers/bio.h>
 #include "endecoder_local.h"
 
 OSSL_FUNC_keymgmt_new_fn *

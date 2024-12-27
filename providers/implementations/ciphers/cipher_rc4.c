@@ -16,8 +16,8 @@
 #include "internal/deprecated.h"
 
 #include "cipher_rc4.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
 
 #define RC4_FLAGS PROV_CIPHER_FLAG_VARIABLE_LENGTH
 

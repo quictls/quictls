@@ -17,8 +17,8 @@
 #include <openssl/proverr.h>
 #include <openssl/core_names.h>
 #include <openssl/obj_mac.h>
-#include "prov/securitycheck.h"
-#include "prov/fipscommon.h"
+#include <providers/securitycheck.h>
+#include <providers/fipscommon.h>
 
 int ossl_securitycheck_enabled(OSSL_LIB_CTX *libctx)
 {

@@ -17,9 +17,9 @@
 #include <openssl/err.h>
 #include <openssl/proverr.h>
 #include "crypto/sm2.h"
-#include "prov/provider_ctx.h"
-#include "prov/implementations.h"
-#include "prov/provider_util.h"
+#include <providers/provider_ctx.h>
+#include <providers/implementations.h>
+#include <providers/provider_util.h>
 
 static OSSL_FUNC_asym_cipher_newctx_fn sm2_newctx;
 static OSSL_FUNC_asym_cipher_encrypt_init_fn sm2_init;

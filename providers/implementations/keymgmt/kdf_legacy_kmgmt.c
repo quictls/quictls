@@ -17,10 +17,10 @@
 #include <openssl/core_dispatch.h>
 #include <openssl/core_names.h>
 #include <openssl/err.h>
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
-#include "prov/provider_ctx.h"
-#include "prov/kdfexchange.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
+#include <providers/provider_ctx.h>
+#include <providers/kdfexchange.h>
 
 static OSSL_FUNC_keymgmt_new_fn kdf_newdata;
 static OSSL_FUNC_keymgmt_free_fn kdf_freedata;

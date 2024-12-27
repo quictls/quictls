@@ -10,9 +10,9 @@
 /* Dispatch functions for ccm mode */
 
 #include <openssl/proverr.h>
-#include "prov/ciphercommon.h"
-#include "prov/ciphercommon_ccm.h"
-#include "prov/providercommon.h"
+#include <providers/ciphercommon.h>
+#include <providers/ciphercommon_ccm.h>
+#include <providers/providercommon.h>
 
 static int ccm_cipher_internal(PROV_CCM_CTX *ctx, unsigned char *out,
                                size_t *padlen, const unsigned char *in,

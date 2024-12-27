@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "prov/der_wrap.h"
+#include <providers/der_wrap.h>
 
 /* Well known OIDs precompiled */
 

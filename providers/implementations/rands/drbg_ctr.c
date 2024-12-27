@@ -16,9 +16,9 @@
 #include <openssl/proverr.h>
 #include "crypto/modes.h"
 #include "internal/thread_once.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
-#include "prov/provider_ctx.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
+#include <providers/provider_ctx.h>
 #include "drbg_local.h"
 
 static OSSL_FUNC_rand_newctx_fn drbg_ctr_new_wrapper;

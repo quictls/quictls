@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "prov/ciphercommon.h"
+#include <providers/ciphercommon.h>
 
 void ossl_cipher_padblock(unsigned char *buf, size_t *buflen, size_t blocksize);
 int ossl_cipher_unpadblock(unsigned char *buf, size_t *buflen, size_t blocksize);

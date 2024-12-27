@@ -15,10 +15,10 @@
 
 #include <openssl/rand.h>
 #include <openssl/proverr.h>
-#include "prov/ciphercommon.h"
+#include <providers/ciphercommon.h>
 #include "cipher_tdes.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
 
 void *ossl_tdes_newctx(void *provctx, int mode, size_t kbits, size_t blkbits,
                        size_t ivbits, uint64_t flags, const PROV_CIPHER_HW *hw)

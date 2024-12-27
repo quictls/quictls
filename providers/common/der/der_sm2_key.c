@@ -9,8 +9,8 @@
 
 #include <openssl/obj_mac.h>
 #include "internal/packet.h"
-#include "prov/der_ec.h"
-#include "prov/der_sm2.h"
+#include <providers/der_ec.h>
+#include <providers/der_sm2.h>
 
 int ossl_DER_w_algorithmIdentifier_SM2(WPACKET *pkt, int cont, EC_KEY *ec)
 {

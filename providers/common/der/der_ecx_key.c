@@ -9,7 +9,7 @@
 
 #include <openssl/obj_mac.h>
 #include "internal/packet.h"
-#include "prov/der_ecx.h"
+#include <providers/der_ecx.h>
 
 int ossl_DER_w_algorithmIdentifier_X25519(WPACKET *pkt, int cont, ECX_KEY *ec)
 {

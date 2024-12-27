@@ -30,10 +30,10 @@
 #include "internal/cryptlib.h"
 #include "crypto/ecx.h"
 #include "crypto/rsa.h"
-#include "prov/implementations.h"
-#include "prov/bio.h"
-#include "prov/provider_ctx.h"
-#include "prov/der_rsa.h"
+#include <providers/implementations.h>
+#include <providers/bio.h>
+#include <providers/provider_ctx.h>
+#include <providers/der_rsa.h>
 #include "endecoder_local.h"
 
 #if defined(OPENSSL_NO_DH) && defined(OPENSSL_NO_DSA) && defined(OPENSSL_NO_EC)

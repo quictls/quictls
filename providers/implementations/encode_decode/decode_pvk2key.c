@@ -27,8 +27,8 @@
 #include "internal/sizes.h"
 #include "crypto/pem.h"          /* For internal PVK and "blob" headers */
 #include "crypto/rsa.h"
-#include "prov/bio.h"
-#include "prov/implementations.h"
+#include <providers/bio.h>
+#include <providers/implementations.h>
 #include "endecoder_local.h"
 
 struct pvk2key_ctx_st;            /* Forward declaration */

@@ -15,8 +15,8 @@
 
 #include <openssl/crypto.h>
 #include <openssl/md5.h>
-#include "prov/digestcommon.h"
-#include "prov/implementations.h"
+#include <providers/digestcommon.h>
+#include <providers/implementations.h>
 
 /* ossl_md5_functions */
 IMPLEMENT_digest_functions(md5, MD5_CTX,

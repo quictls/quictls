@@ -15,8 +15,8 @@
 
 #include <openssl/proverr.h>
 #include "cipher_aes.h"
-#include "prov/providercommon.h"
-#include "prov/implementations.h"
+#include <providers/providercommon.h>
+#include <providers/implementations.h>
 
 /* AES wrap with padding has IV length of 4, without padding 8 */
 #define AES_WRAP_PAD_IVLEN   4

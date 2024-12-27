@@ -16,7 +16,7 @@
 
 #include <openssl/evp.h>
 #include <internal/endian.h>
-#include <prov/implementations.h>
+#include <providers/implementations.h>
 #include "cipher_aes_gcm_siv.h"
 
 static inline void mulx_ghash(uint64_t *a)

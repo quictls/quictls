@@ -11,9 +11,9 @@
 #include <openssl/core_names.h>
 #include <openssl/proverr.h>
 #include <openssl/err.h>
-#include "prov/blake2.h"
-#include "prov/digestcommon.h"
-#include "prov/implementations.h"
+#include <providers/blake2.h>
+#include <providers/digestcommon.h>
+#include <providers/implementations.h>
 
 #define IMPLEMENT_BLAKE_functions(variant, VARIANT, variantsize) \
 static const OSSL_PARAM known_blake##variant##_ctx_params[] = { \

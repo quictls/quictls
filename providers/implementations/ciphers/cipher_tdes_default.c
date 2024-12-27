@@ -14,7 +14,7 @@
 #include "internal/deprecated.h"
 
 #include "cipher_tdes_default.h"
-#include "prov/implementations.h"
+#include <providers/implementations.h>
 
 /* ossl_tdes_ede3_ofb_functions */
 IMPLEMENT_tdes_cipher(ede3, EDE3,  ofb, OFB, TDES_FLAGS, 64*3,  8, 64, stream);

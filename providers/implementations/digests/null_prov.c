@@ -8,8 +8,8 @@
  */
 
 #include <openssl/crypto.h>
-#include "prov/digestcommon.h"
-#include "prov/implementations.h"
+#include <providers/digestcommon.h>
+#include <providers/implementations.h>
 
 typedef struct {
     unsigned char nothing;

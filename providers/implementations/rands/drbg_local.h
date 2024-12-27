@@ -17,7 +17,7 @@
 # include "internal/tsan_assist.h"
 # include "internal/nelem.h"
 # include "internal/numbers.h"
-# include "prov/provider_ctx.h"
+# include <providers/provider_ctx.h>
 
 /* How many times to read the TSC as a randomness source. */
 # define TSC_READ_COUNT                 4

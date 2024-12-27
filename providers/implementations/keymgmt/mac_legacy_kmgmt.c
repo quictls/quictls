@@ -22,10 +22,10 @@
 # include <openssl/engine.h>
 #endif
 #include "internal/param_build_set.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
-#include "prov/provider_ctx.h"
-#include "prov/macsignature.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
+#include <providers/provider_ctx.h>
+#include <providers/macsignature.h>
 
 static OSSL_FUNC_keymgmt_new_fn mac_new;
 static OSSL_FUNC_keymgmt_free_fn mac_free;

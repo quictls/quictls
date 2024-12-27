@@ -8,7 +8,7 @@
  */
 
 #include <crypto/sm4.h>
-#include "prov/ciphercommon.h"
+#include <providers/ciphercommon.h>
 #include "crypto/sm4_platform.h"
 
 PROV_CIPHER_FUNC(void, xts_stream,

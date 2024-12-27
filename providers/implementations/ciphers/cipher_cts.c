@@ -47,7 +47,7 @@
  */
 
 #include <openssl/core_names.h>
-#include "prov/ciphercommon.h"
+#include <providers/ciphercommon.h>
 #include "internal/nelem.h"
 #include "cipher_cts.h"
 

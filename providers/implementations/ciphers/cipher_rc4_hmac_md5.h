@@ -9,7 +9,7 @@
 
 #include <openssl/rc4.h>
 #include <openssl/md5.h>
-#include "prov/ciphercommon.h"
+#include <providers/ciphercommon.h>
 
 typedef struct prov_rc4_hmac_md5_ctx_st {
     PROV_CIPHER_CTX base;      /* Must be first */

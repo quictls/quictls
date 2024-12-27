@@ -15,8 +15,8 @@
 
 #include <openssl/obj_mac.h>
 #include "internal/cryptlib.h"
-#include "prov/der_rsa.h"
-#include "prov/der_digests.h"
+#include <providers/der_rsa.h>
+#include <providers/der_digests.h>
 
 /* More complex pre-compiled sequences. */
 

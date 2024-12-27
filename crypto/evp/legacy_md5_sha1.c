@@ -15,7 +15,7 @@
 #include "internal/deprecated.h"
 
 #include "crypto/evp.h"
-#include "prov/md5_sha1.h"   /* diverse MD5_SHA1 macros */
+#include <providers/md5_sha1.h>   /* diverse MD5_SHA1 macros */
 #include "legacy_meth.h"
 
 IMPLEMENT_LEGACY_EVP_MD_METH_LC(md5_sha1_int, ossl_md5_sha1)

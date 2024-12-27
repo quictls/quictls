@@ -16,9 +16,9 @@
 
 #include <openssl/proverr.h>
 #include "cipher_aes_ocb.h"
-#include "prov/providercommon.h"
-#include "prov/ciphercommon_aead.h"
-#include "prov/implementations.h"
+#include <providers/providercommon.h>
+#include <providers/ciphercommon_aead.h>
+#include <providers/implementations.h>
 
 #define AES_OCB_FLAGS AEAD_FLAGS
 

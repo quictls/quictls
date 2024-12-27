@@ -17,8 +17,8 @@
 
 #include "crypto/siphash.h"
 
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
 
 /*
  * Forward declaration of everything implemented here.  This is not strictly

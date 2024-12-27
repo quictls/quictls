@@ -18,7 +18,7 @@
 # include <openssl/engine.h>
 # include "crypto/evp.h"
 #endif
-#include "prov/provider_util.h"
+#include <providers/provider_util.h>
 
 void ossl_prov_cipher_reset(PROV_CIPHER *pc)
 {

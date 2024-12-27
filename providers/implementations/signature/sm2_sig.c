@@ -26,12 +26,12 @@
 #include "internal/sizes.h"
 #include "internal/cryptlib.h"
 #include "internal/sm3.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
-#include "prov/provider_ctx.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
+#include <providers/provider_ctx.h>
 #include "crypto/ec.h"
 #include "crypto/sm2.h"
-#include "prov/der_sm2.h"
+#include <providers/der_sm2.h>
 
 static OSSL_FUNC_signature_newctx_fn sm2sig_newctx;
 static OSSL_FUNC_signature_sign_init_fn sm2sig_signature_init;

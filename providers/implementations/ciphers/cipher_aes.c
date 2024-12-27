@@ -17,8 +17,8 @@
 /* Dispatch functions for AES cipher modes ecb, cbc, ofb, cfb, ctr */
 
 #include "cipher_aes.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
 
 static OSSL_FUNC_cipher_freectx_fn aes_freectx;
 static OSSL_FUNC_cipher_dupctx_fn aes_dupctx;

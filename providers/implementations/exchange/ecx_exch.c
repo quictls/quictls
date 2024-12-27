@@ -15,8 +15,8 @@
 #include <openssl/proverr.h>
 #include "internal/cryptlib.h"
 #include "crypto/ecx.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
 
 static OSSL_FUNC_keyexch_newctx_fn x25519_newctx;
 static OSSL_FUNC_keyexch_newctx_fn x448_newctx;

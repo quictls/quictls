@@ -26,12 +26,12 @@
 #include "internal/nelem.h"
 #include "internal/sizes.h"
 #include "internal/cryptlib.h"
-#include "prov/providercommon.h"
-#include "prov/implementations.h"
-#include "prov/provider_ctx.h"
-#include "prov/securitycheck.h"
+#include <providers/providercommon.h>
+#include <providers/implementations.h>
+#include <providers/provider_ctx.h>
+#include <providers/securitycheck.h>
 #include "crypto/dsa.h"
-#include "prov/der_dsa.h"
+#include <providers/der_dsa.h>
 
 static OSSL_FUNC_signature_newctx_fn dsa_newctx;
 static OSSL_FUNC_signature_sign_init_fn dsa_sign_init;

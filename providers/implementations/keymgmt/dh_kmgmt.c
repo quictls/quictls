@@ -19,9 +19,9 @@
 #include <openssl/core_names.h>
 #include <openssl/bn.h>
 #include <openssl/err.h>
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
-#include "prov/provider_ctx.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
+#include <providers/provider_ctx.h>
 #include "crypto/dh.h"
 #include "internal/sizes.h"
 

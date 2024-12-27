@@ -33,7 +33,7 @@
 #include <openssl/params.h>
 #include "internal/asn1.h"
 #include "crypto/pem.h"          /* For internal PVK and "blob" headers */
-#include "prov/bio.h"
+#include <providers/bio.h>
 #include "file_store_local.h"
 
 /*

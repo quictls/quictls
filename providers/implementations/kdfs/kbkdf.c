@@ -39,10 +39,10 @@
 #include "crypto/evp.h"
 #include "internal/numbers.h"
 #include "internal/endian.h"
-#include "prov/implementations.h"
-#include "prov/provider_ctx.h"
-#include "prov/provider_util.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/provider_ctx.h>
+#include <providers/provider_util.h>
+#include <providers/providercommon.h>
 
 #include "internal/e_os.h"
 #include "internal/params.h"

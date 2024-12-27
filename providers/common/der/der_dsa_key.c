@@ -15,7 +15,7 @@
 
 #include <openssl/obj_mac.h>
 #include "internal/packet.h"
-#include "prov/der_dsa.h"
+#include <providers/der_dsa.h>
 
 int ossl_DER_w_algorithmIdentifier_DSA(WPACKET *pkt, int tag, DSA *dsa)
 {

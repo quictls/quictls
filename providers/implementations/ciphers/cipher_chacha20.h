@@ -8,7 +8,7 @@
  */
 
 #include "include/crypto/chacha.h"
-#include "prov/ciphercommon.h"
+#include <providers/ciphercommon.h>
 
 typedef struct {
     PROV_CIPHER_CTX base;     /* must be first */

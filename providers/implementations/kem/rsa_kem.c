@@ -24,9 +24,9 @@
 #include "crypto/rsa.h"
 #include <openssl/proverr.h>
 #include "internal/nelem.h"
-#include "prov/provider_ctx.h"
-#include "prov/implementations.h"
-#include "prov/securitycheck.h"
+#include <providers/provider_ctx.h>
+#include <providers/implementations.h>
+#include <providers/securitycheck.h>
 
 static OSSL_FUNC_kem_newctx_fn rsakem_newctx;
 static OSSL_FUNC_kem_encapsulate_init_fn rsakem_encapsulate_init;

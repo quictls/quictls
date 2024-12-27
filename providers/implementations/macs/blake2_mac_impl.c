@@ -12,10 +12,10 @@
 #include <openssl/params.h>
 #include <openssl/proverr.h>
 
-#include "prov/blake2.h"
+#include <providers/blake2.h>
 #include "internal/cryptlib.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
 
 /*
  * Forward declaration of everything implemented here.  This is not strictly

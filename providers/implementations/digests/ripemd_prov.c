@@ -15,8 +15,8 @@
 
 #include <openssl/crypto.h>
 #include <openssl/ripemd.h>
-#include "prov/digestcommon.h"
-#include "prov/implementations.h"
+#include <providers/digestcommon.h>
+#include <providers/implementations.h>
 
 /* ossl_ripemd160_functions */
 IMPLEMENT_digest_functions(ripemd160, RIPEMD160_CTX,

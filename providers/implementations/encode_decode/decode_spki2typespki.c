@@ -16,8 +16,8 @@
 #include "internal/sizes.h"
 #include "crypto/x509.h"
 #include "crypto/ec.h"
-#include "prov/bio.h"
-#include "prov/implementations.h"
+#include <providers/bio.h>
+#include <providers/implementations.h>
 #include "endecoder_local.h"
 
 static OSSL_FUNC_decoder_newctx_fn spki2typespki_newctx;

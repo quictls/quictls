@@ -12,10 +12,10 @@
 #include <openssl/proverr.h>
 #include <openssl/err.h>
 #include "internal/numbers.h"    /* SIZE_MAX */
-#include "prov/provider_ctx.h"
-#include "prov/providercommon.h"
-#include "prov/implementations.h"
-#include "prov/provider_util.h"
+#include <providers/provider_ctx.h>
+#include <providers/providercommon.h>
+#include <providers/implementations.h>
+#include <providers/provider_util.h>
 
 static OSSL_FUNC_kdf_newctx_fn kdf_pvk_new;
 static OSSL_FUNC_kdf_dupctx_fn kdf_pvk_dup;

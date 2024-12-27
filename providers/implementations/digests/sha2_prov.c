@@ -19,8 +19,8 @@
 #include <openssl/sha.h>
 #include <openssl/params.h>
 #include <openssl/core_names.h>
-#include "prov/digestcommon.h"
-#include "prov/implementations.h"
+#include <providers/digestcommon.h>
+#include <providers/implementations.h>
 #include "crypto/sha.h"
 
 #define SHA2_FLAGS PROV_DIGEST_FLAG_ALGID_ABSENT

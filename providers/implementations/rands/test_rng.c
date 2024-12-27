@@ -16,10 +16,10 @@
 #include <openssl/evp.h>
 #include <openssl/err.h>
 #include <openssl/randerr.h>
-#include "prov/providercommon.h"
-#include "prov/provider_ctx.h"
-#include "prov/provider_util.h"
-#include "prov/implementations.h"
+#include <providers/providercommon.h>
+#include <providers/provider_ctx.h>
+#include <providers/provider_util.h>
+#include <providers/implementations.h>
 
 static OSSL_FUNC_rand_newctx_fn test_rng_new;
 static OSSL_FUNC_rand_freectx_fn test_rng_free;

@@ -8,8 +8,8 @@
  */
 
 #include <openssl/core_dispatch.h>
-#include "prov/seeding.h"
-#include "prov/providercommon.h"
+#include <providers/seeding.h>
+#include <providers/providercommon.h>
 
 static OSSL_FUNC_get_entropy_fn *c_get_entropy = NULL;
 static OSSL_FUNC_get_user_entropy_fn *c_get_user_entropy = NULL;

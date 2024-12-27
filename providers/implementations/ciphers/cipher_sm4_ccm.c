@@ -10,8 +10,8 @@
 /* Dispatch functions for SM4 CCM mode */
 
 #include "cipher_sm4_ccm.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
 
 static OSSL_FUNC_cipher_freectx_fn sm4_ccm_freectx;
 

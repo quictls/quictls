@@ -15,8 +15,8 @@
 
 #include <openssl/crypto.h>
 #include <openssl/md4.h>
-#include "prov/digestcommon.h"
-#include "prov/implementations.h"
+#include <providers/digestcommon.h>
+#include <providers/implementations.h>
 
 /* ossl_md4_functions */
 IMPLEMENT_digest_functions(md4, MD4_CTX,

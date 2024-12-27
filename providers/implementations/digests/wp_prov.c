@@ -15,8 +15,8 @@
 
 #include <openssl/crypto.h>
 #include <openssl/whrlpool.h>
-#include "prov/digestcommon.h"
-#include "prov/implementations.h"
+#include <providers/digestcommon.h>
+#include <providers/implementations.h>
 
 /* ossl_wp_functions */
 IMPLEMENT_digest_functions(wp, WHIRLPOOL_CTX,
