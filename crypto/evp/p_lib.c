@@ -2490,8 +2490,6 @@ int EVP_PKEY_get_field_type(const EVP_PKEY *pkey)
 
     if (strcmp(fstr, SN_X9_62_prime_field) == 0)
         return NID_X9_62_prime_field;
-    else if (strcmp(fstr, SN_X9_62_characteristic_two_field))
-        return NID_X9_62_characteristic_two_field;
 
     return 0;
 }
