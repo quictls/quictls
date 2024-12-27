@@ -1850,15 +1850,8 @@ static int tls_early_post_process_client_hello(SSL_CONNECTION *s)
         j = 0;
         id = s->session->cipher->id;
 
-        OSSL_TRACE_BEGIN(TLS_CIPHER) {
-            BIO_printf(trc_out, "client sent %d ciphers\n",
-                       sk_SSL_CIPHER_num(ciphers));
-        }
         for (i = 0; i < sk_SSL_CIPHER_num(ciphers); i++) {
             c = sk_SSL_CIPHER_value(ciphers, i);
-            if (trc_out != NULL)
-                BIO_printf(trc_out, "client [%2d of %2d]:%s\n", i,
-                           sk_SSL_CIPHER_num(ciphers), SSL_CIPHER_get_name(c));
             if (c->id == id) {
                 j = 1;
                 break;
@@ -1874,7 +1867,6 @@ static int tls_early_post_process_client_hello(SSL_CONNECTION *s)
             OSSL_TRACE_CANCEL(TLS_CIPHER);
             goto err;
         }
-        OSSL_TRACE_END(TLS_CIPHER);
     }
 
     for (loop = 0; loop < clienthello->compressions_len; loop++) {

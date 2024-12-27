@@ -425,9 +425,6 @@ OSSL_STORE_INFO *OSSL_STORE_load(OSSL_STORE_CTX *ctx)
     if (OSSL_STORE_eof(ctx))
         return NULL;
 
-    if (ctx->loader != NULL)
-        OSSL_TRACE(STORE, "Loading next object\n");
-
     if (ctx->cached_info != NULL
         && sk_OSSL_STORE_INFO_num(ctx->cached_info) == 0) {
         sk_OSSL_STORE_INFO_free(ctx->cached_info);

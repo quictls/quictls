@@ -530,22 +530,11 @@ static int tls1_mac(OSSL_RECORD_LAYER *rl, TLS_RL_RECORD *rec, unsigned char *md
         || EVP_DigestSignFinal(mac_ctx, md, &md_size) <= 0)
         goto end;
 
-    OSSL_TRACE_BEGIN(TLS) {
-        BIO_printf(trc_out, "seq:\n");
-        BIO_dump_indent(trc_out, seq, 8, 4);
-        BIO_printf(trc_out, "rec:\n");
-        BIO_dump_indent(trc_out, rec->data, rec->length, 4);
-    } OSSL_TRACE_END(TLS);
-
     if (!rl->isdtls && !tls_increment_sequence_ctr(rl)) {
         /* RLAYERfatal already called */
         goto end;
     }
 
-    OSSL_TRACE_BEGIN(TLS) {
-        BIO_printf(trc_out, "md:\n");
-        BIO_dump_indent(trc_out, md, md_size, 4);
-    } OSSL_TRACE_END(TLS);
     ret = 1;
  end:
     EVP_MD_CTX_free(hmac);

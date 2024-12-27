@@ -50,7 +50,6 @@ void ossl_prov_conf_ctx_free(void *vpcgbl)
     sk_OSSL_PROVIDER_pop_free(pcgbl->activated_providers,
                               ossl_provider_free);
 
-    OSSL_TRACE(CONF, "Cleaned up providers\n");
     CRYPTO_THREAD_lock_free(pcgbl->lock);
     OPENSSL_free(pcgbl);
 }
@@ -425,6 +424,5 @@ static int provider_conf_init(CONF_IMODULE *md, const CONF *cnf)
 
 void ossl_provider_add_conf_module(void)
 {
-    OSSL_TRACE(CONF, "Adding config module 'providers'\n");
     CONF_module_add("providers", provider_conf_init, NULL);
 }

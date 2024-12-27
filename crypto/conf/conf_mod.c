@@ -611,8 +611,7 @@ int CONF_module_add(const char *name, conf_init_func *ifunc,
 {
     if (module_add(NULL, name, ifunc, ffunc))
         return 1;
-    else
-        return 0;
+    return 0;
 }
 
 void ossl_config_modules_free(void)
