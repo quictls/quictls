@@ -11,7 +11,7 @@
 # define OSSL_PROV_HMAC_DRBG_H
 
 #include <openssl/evp.h>
-#include "prov/provider_util.h"
+#include <providers/provider_util.h>
 
 typedef struct drbg_hmac_st {
     EVP_MAC_CTX *ctx;            /* H(x) = HMAC_hash OR H(x) = KMAC */

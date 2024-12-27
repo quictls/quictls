@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "prov/provider_ctx.h"
+#include <providers/provider_ctx.h>
 #include "crypto/rand_pool.h"
 
 /* Hardware-based seeding functions. */
