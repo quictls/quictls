@@ -277,8 +277,6 @@ static int execute_cmp_ctx_log_cb_test(OSSL_CMP_CTX_TEST_FIXTURE *fixture)
     int res = 1;
     OSSL_CMP_CTX *ctx = fixture->ctx;
 
-    OSSL_TRACE(ALL, "this general trace message is not shown by default\n");
-
     OSSL_CMP_log_open();
     OSSL_CMP_log_open(); /* multiple calls should be harmless */
 
