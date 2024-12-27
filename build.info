@@ -23,7 +23,6 @@ DEPEND[]=include/openssl/asn1.h \
          include/openssl/cmp.h \
          include/openssl/cms.h \
          include/openssl/conf.h \
-         include/openssl/core_names.h \
          include/openssl/crmf.h \
          include/openssl/crypto.h \
          include/openssl/ct.h \
@@ -31,7 +30,6 @@ DEPEND[]=include/openssl/asn1.h \
          include/openssl/ess.h \
          include/openssl/fipskey.h \
          include/openssl/lhash.h \
-         include/openssl/opensslv.h \
          include/openssl/ocsp.h \
          include/openssl/pkcs12.h \
          include/openssl/pkcs7.h \
@@ -41,8 +39,7 @@ DEPEND[]=include/openssl/asn1.h \
          include/openssl/x509.h \
          include/openssl/x509v3.h \
          include/openssl/x509_vfy.h \
-         include/crypto/dso_conf.h \
-         include/internal/param_names.h crypto/params_idx.c
+         include/crypto/dso_conf.h
 
 GENERATE[include/openssl/asn1.h]=include/openssl/asn1.h.in
 GENERATE[include/openssl/asn1t.h]=include/openssl/asn1t.h.in
