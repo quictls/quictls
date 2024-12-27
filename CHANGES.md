@@ -91,6 +91,9 @@ replaced by the ALPN extension, IETF RFC 7301, in 2014.
   - no-srp (the default) code has been removed
   - no-crypto-mdebug and the code has been removed; better tools exist.
   - Remove support for EGD random source.
+  - no-trace (the default) code has been removed. This was not uniformly
+used. It was also a security concern as it was not documented that it would
+log key material.
 
 - Removed support for some old platforms:
   - Removed support for old HPE platforms: NonStop and Tandem
