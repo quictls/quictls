@@ -13,7 +13,7 @@
  */
 #include "internal/deprecated.h"
 
-#include "prov/ciphercommon.h"
+#include <providers/ciphercommon.h>
 #include "cipher_tdes.h"
 
 #define ks1 tks.ks[0]

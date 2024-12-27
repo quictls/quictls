@@ -19,8 +19,8 @@
 #include "cipher_tdes_default.h"
 #include "crypto/evp.h"
 #include "crypto/sha.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
 
 #define TDES_WRAP_FLAGS PROV_CIPHER_FLAG_CUSTOM_IV | PROV_CIPHER_FLAG_RAND_KEY
 

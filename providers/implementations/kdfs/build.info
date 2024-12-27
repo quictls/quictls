@@ -40,7 +40,7 @@ SOURCE[$SSKDF_GOAL]=sskdf.c
 SOURCE[$SCRYPT_GOAL]=scrypt.c
 SOURCE[$SSHKDF_GOAL]=sshkdf.c
 SOURCE[$X942KDF_GOAL]=x942kdf.c
-DEPEND[x942kdf.o]=../../common/include/prov/der_wrap.h
+DEPEND[x942kdf.o]=../../../include/providers/der_wrap.h
 
 SOURCE[$HMAC_DRBG_KDF_GOAL]=hmacdrbg_kdf.c
 SOURCE[$ARGON2_GOAL]=argon2.c

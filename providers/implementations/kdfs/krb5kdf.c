@@ -26,10 +26,10 @@
 #include "internal/cryptlib.h"
 #include "crypto/evp.h"
 #include "internal/numbers.h"
-#include "prov/implementations.h"
-#include "prov/provider_ctx.h"
-#include "prov/provider_util.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/provider_ctx.h>
+#include <providers/provider_util.h>
+#include <providers/providercommon.h>
 
 /* KRB5 KDF defined in RFC 3961, Section 5.1 */
 

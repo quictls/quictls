@@ -11,7 +11,7 @@
 #include <openssl/rand.h>
 #include "crypto/rand_pool.h"
 #include "crypto/rand.h"
-#include "prov/seeding.h"
+#include <providers/seeding.h>
 
 #if defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_WIN32)
 

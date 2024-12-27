@@ -13,7 +13,7 @@
 #include "crypto/rand_pool.h"
 #include "crypto/rand.h"
 #include "internal/cryptlib.h"
-#include "prov/seeding.h"
+#include <providers/seeding.h>
 #include <version.h>
 #include <taskLib.h>
 

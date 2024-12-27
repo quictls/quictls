@@ -8,8 +8,8 @@
  */
 
 #include <stdlib.h>
-#include "prov/provider_ctx.h"
-#include "prov/bio.h"
+#include <providers/provider_ctx.h>
+#include <providers/bio.h>
 
 PROV_CTX *ossl_prov_ctx_new(void)
 {

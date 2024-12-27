@@ -24,7 +24,7 @@
 #include "internal/cryptlib.h"
 #include <openssl/bn.h>
 #include <openssl/self_test.h>
-#include "prov/providercommon.h"
+#include <providers/providercommon.h>
 #include "rsa_local.h"
 
 static int rsa_keygen_pairwise_test(RSA *rsa, OSSL_CALLBACK *cb, void *cbarg);

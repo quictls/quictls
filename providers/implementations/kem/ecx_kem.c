@@ -26,11 +26,11 @@
 #include <openssl/sha.h>
 #include <openssl/rand.h>
 #include <openssl/proverr.h>
-#include "prov/provider_ctx.h"
-#include "prov/implementations.h"
-#include "prov/securitycheck.h"
-#include "prov/providercommon.h"
-#include "prov/ecx.h"
+#include <providers/provider_ctx.h>
+#include <providers/implementations.h>
+#include <providers/securitycheck.h>
+#include <providers/providercommon.h>
+#include <providers/ecx.h>
 #include "crypto/ecx.h"
 #include <openssl/hpke.h>
 #include "internal/hpke_util.h"

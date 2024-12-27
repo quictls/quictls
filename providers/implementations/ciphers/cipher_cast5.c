@@ -17,8 +17,8 @@
 
 #include <openssl/proverr.h>
 #include "cipher_cast.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
 
 #define CAST5_FLAGS PROV_CIPHER_FLAG_VARIABLE_LENGTH
 

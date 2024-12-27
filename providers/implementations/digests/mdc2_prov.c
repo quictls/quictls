@@ -19,8 +19,8 @@
 #include <openssl/core_names.h>
 #include <openssl/err.h>
 #include <openssl/proverr.h>
-#include "prov/digestcommon.h"
-#include "prov/implementations.h"
+#include <providers/digestcommon.h>
+#include <providers/implementations.h>
 
 static OSSL_FUNC_digest_set_ctx_params_fn mdc2_set_ctx_params;
 static OSSL_FUNC_digest_settable_ctx_params_fn mdc2_settable_ctx_params;

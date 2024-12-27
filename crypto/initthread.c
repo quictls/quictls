@@ -10,12 +10,12 @@
 #include <openssl/crypto.h>
 #include <openssl/core_dispatch.h>
 #include "crypto/cryptlib.h"
-#include "prov/providercommon.h"
+#include <providers/providercommon.h>
 #include "internal/thread_once.h"
 #include "crypto/context.h"
 
 #ifdef FIPS_MODULE
-#include "prov/provider_ctx.h"
+#include <providers/provider_ctx.h>
 
 /*
  * Thread aware code may want to be told about thread stop events. We register

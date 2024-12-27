@@ -15,9 +15,9 @@
 
 #include <openssl/rand.h>
 #include <openssl/proverr.h>
-#include "prov/ciphercommon.h"
+#include <providers/ciphercommon.h>
 #include "cipher_tdes.h"
-#include "prov/implementations.h"
+#include <providers/implementations.h>
 
 /* ossl_tdes_ede3_ecb_functions */
 IMPLEMENT_tdes_cipher(ede3, EDE3, ecb, ECB, TDES_FLAGS, 64*3, 64, 0, block);

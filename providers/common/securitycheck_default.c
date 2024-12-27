@@ -13,7 +13,7 @@
 #include <openssl/core.h>
 #include <openssl/core_names.h>
 #include <openssl/obj_mac.h>
-#include "prov/securitycheck.h"
+#include <providers/securitycheck.h>
 #include "internal/nelem.h"
 
 /* Disable the security checks in the default provider */

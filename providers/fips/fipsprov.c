@@ -15,13 +15,13 @@
 #include <openssl/rand.h> /* RAND_get0_public() */
 #include <openssl/proverr.h>
 #include "internal/cryptlib.h"
-#include "prov/implementations.h"
-#include "prov/names.h"
-#include "prov/provider_ctx.h"
-#include "prov/providercommon.h"
-#include "prov/provider_util.h"
-#include "prov/seeding.h"
-#include "prov/fipscommon.h"
+#include <providers/implementations.h>
+#include <providers/names.h>
+#include <providers/provider_ctx.h>
+#include <providers/providercommon.h>
+#include <providers/provider_util.h>
+#include <providers/seeding.h>
+#include <providers/fipscommon.h>
 #include "internal/nelem.h"
 #include "self_test.h"
 #include "crypto/context.h"

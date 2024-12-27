@@ -8,8 +8,8 @@
  */
 
 #include "crypto/aria.h"
-#include "prov/ciphercommon.h"
-#include "prov/ciphercommon_ccm.h"
+#include <providers/ciphercommon.h>
+#include <providers/ciphercommon_ccm.h>
 
 typedef struct prov_aria_ccm_ctx_st {
     PROV_CCM_CTX base; /* Must be first */

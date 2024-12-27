@@ -27,8 +27,8 @@
 #include "internal/o_dir.h"
 #include "crypto/decoder.h"
 #include "crypto/ctype.h"        /* ossl_isdigit() */
-#include "prov/implementations.h"
-#include "prov/bio.h"
+#include <providers/implementations.h>
+#include <providers/bio.h>
 #include "file_store_local.h"
 
 DEFINE_STACK_OF(OSSL_STORE_INFO)

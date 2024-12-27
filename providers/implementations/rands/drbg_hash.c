@@ -17,10 +17,10 @@
 #include <openssl/core_dispatch.h>
 #include <openssl/proverr.h>
 #include "internal/thread_once.h"
-#include "prov/providercommon.h"
-#include "prov/provider_ctx.h"
-#include "prov/provider_util.h"
-#include "prov/implementations.h"
+#include <providers/providercommon.h>
+#include <providers/provider_ctx.h>
+#include <providers/provider_util.h>
+#include <providers/implementations.h>
 #include "drbg_local.h"
 
 static OSSL_FUNC_rand_newctx_fn drbg_hash_new_wrapper;

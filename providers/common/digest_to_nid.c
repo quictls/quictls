@@ -13,7 +13,7 @@
 #include <openssl/core_names.h>
 #include <openssl/evp.h>
 #include <openssl/core.h>
-#include "prov/securitycheck.h"
+#include <providers/securitycheck.h>
 #include "internal/nelem.h"
 
 /*

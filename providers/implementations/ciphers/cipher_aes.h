@@ -8,7 +8,7 @@
  */
 
 #include <openssl/aes.h>
-#include "prov/ciphercommon.h"
+#include <providers/ciphercommon.h>
 #include "crypto/aes_platform.h"
 
 typedef struct prov_aes_ctx_st {

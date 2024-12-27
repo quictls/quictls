@@ -14,13 +14,13 @@
 #include <openssl/core_dispatch.h>
 #include <openssl/core_names.h>
 #include <openssl/params.h>
-#include "prov/bio.h"
-#include "prov/provider_ctx.h"
-#include "prov/providercommon.h"
-#include "prov/implementations.h"
-#include "prov/names.h"
-#include "prov/provider_util.h"
-#include "prov/seeding.h"
+#include <providers/bio.h>
+#include <providers/provider_ctx.h>
+#include <providers/providercommon.h>
+#include <providers/implementations.h>
+#include <providers/names.h>
+#include <providers/provider_util.h>
+#include <providers/seeding.h>
 #include "internal/nelem.h"
 
 /*

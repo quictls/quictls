@@ -28,7 +28,7 @@
 # include <openssl/trace.h>
 # include <openssl/engine.h>
 # include "crypto/rand_pool.h"
-# include "prov/seeding.h"
+# include <providers/seeding.h>
 # include "internal/e_os.h"
 # include "internal/property.h"
 

@@ -26,11 +26,11 @@
 #include "internal/nelem.h"
 #include "internal/sizes.h"
 #include "crypto/rsa.h"
-#include "prov/providercommon.h"
-#include "prov/implementations.h"
-#include "prov/provider_ctx.h"
-#include "prov/der_rsa.h"
-#include "prov/securitycheck.h"
+#include <providers/providercommon.h>
+#include <providers/implementations.h>
+#include <providers/provider_ctx.h>
+#include <providers/der_rsa.h>
+#include <providers/securitycheck.h>
 
 #define RSA_DEFAULT_DIGEST_NAME OSSL_DIGEST_NAME_SHA1
 

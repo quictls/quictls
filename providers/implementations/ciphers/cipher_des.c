@@ -15,10 +15,10 @@
 
 #include <openssl/rand.h>
 #include <openssl/proverr.h>
-#include "prov/ciphercommon.h"
+#include <providers/ciphercommon.h>
 #include "cipher_des.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
 
 #define DES_FLAGS PROV_CIPHER_FLAG_RAND_KEY
 

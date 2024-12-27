@@ -20,10 +20,10 @@
 #ifndef FIPS_MODULE
 # include <openssl/engine.h>
 #endif
-#include "prov/implementations.h"
-#include "prov/provider_ctx.h"
-#include "prov/macsignature.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/provider_ctx.h>
+#include <providers/macsignature.h>
+#include <providers/providercommon.h>
 
 static OSSL_FUNC_signature_newctx_fn mac_hmac_newctx;
 static OSSL_FUNC_signature_newctx_fn mac_siphash_newctx;

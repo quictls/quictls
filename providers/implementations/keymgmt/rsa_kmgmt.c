@@ -20,9 +20,9 @@
 #include <openssl/rsa.h>
 #include <openssl/evp.h>
 #include <openssl/proverr.h>
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
-#include "prov/provider_ctx.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
+#include <providers/provider_ctx.h>
 #include "crypto/rsa.h"
 #include "crypto/cryptlib.h"
 #include "internal/param_build_set.h"

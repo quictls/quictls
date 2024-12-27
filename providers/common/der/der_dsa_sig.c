@@ -15,7 +15,7 @@
 
 #include <openssl/obj_mac.h>
 #include "internal/packet.h"
-#include "prov/der_dsa.h"
+#include <providers/der_dsa.h>
 
 #define MD_CASE(name)                                                   \
     case NID_##name:                                                    \

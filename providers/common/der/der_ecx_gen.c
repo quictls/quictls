@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "prov/der_ecx.h"
+#include <providers/der_ecx.h>
 
 /* Well known OIDs precompiled */
 

@@ -16,10 +16,10 @@
 #include "internal/deprecated.h"
 
 #include <openssl/proverr.h>
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
-#include "prov/ciphercommon_aead.h"
-#include "prov/provider_ctx.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
+#include <providers/ciphercommon_aead.h>
+#include <providers/provider_ctx.h>
 #include "cipher_aes_gcm_siv.h"
 
 static int ossl_aes_gcm_siv_set_ctx_params(void *vctx, const OSSL_PARAM params[]);

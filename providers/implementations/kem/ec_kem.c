@@ -25,15 +25,15 @@
 #include <openssl/proverr.h>
 #include <openssl/kdf.h>
 #include <openssl/rand.h>
-#include "prov/provider_ctx.h"
-#include "prov/implementations.h"
-#include "prov/securitycheck.h"
-#include "prov/providercommon.h"
+#include <providers/provider_ctx.h>
+#include <providers/implementations.h>
+#include <providers/securitycheck.h>
+#include <providers/providercommon.h>
 
 #include <openssl/hpke.h>
 #include "internal/hpke_util.h"
 #include "crypto/ec.h"
-#include "prov/ecx.h"
+#include <providers/ecx.h>
 #include "eckem.h"
 
 typedef struct {

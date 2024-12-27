@@ -9,7 +9,7 @@
 
 #include <openssl/obj_mac.h>
 #include "internal/packet.h"
-#include "prov/der_ec.h"
+#include <providers/der_ec.h>
 
 /* Aliases so we can have a uniform MD_CASE */
 #define ossl_der_oid_id_ecdsa_with_sha1   ossl_der_oid_ecdsa_with_SHA1

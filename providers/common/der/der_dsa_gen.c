@@ -13,7 +13,7 @@
  */
 #include "internal/deprecated.h"
 
-#include "prov/der_dsa.h"
+#include <providers/der_dsa.h>
 
 /* Well known OIDs precompiled */
 

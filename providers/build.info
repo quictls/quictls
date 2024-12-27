@@ -33,7 +33,6 @@
 
 SUBDIRS=common implementations
 
-INCLUDE[../libcrypto]=common/include
 
 # Libraries we're dealing with
 $LIBCOMMON=libcommon.a
@@ -46,7 +45,7 @@ LIBS{noinst}=$LIBDEFAULT $LIBCOMMON
 # providers/implementations/include), which includes crypto/*_platform.h
 # (present in include), which in turn may include very internal header
 # files in crypto/, so let's have a common include list for them all.
-$COMMON_INCLUDES=../crypto ../include implementations/include common/include
+$COMMON_INCLUDES=../crypto ../include
 
 INCLUDE[$LIBCOMMON]=$COMMON_INCLUDES
 INCLUDE[$LIBFIPS]=.. $COMMON_INCLUDES

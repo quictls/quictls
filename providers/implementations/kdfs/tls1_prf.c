@@ -63,11 +63,11 @@
 #include "internal/cryptlib.h"
 #include "internal/numbers.h"
 #include "crypto/evp.h"
-#include "prov/provider_ctx.h"
-#include "prov/providercommon.h"
-#include "prov/implementations.h"
-#include "prov/provider_util.h"
-#include "prov/securitycheck.h"
+#include <providers/provider_ctx.h>
+#include <providers/providercommon.h>
+#include <providers/implementations.h>
+#include <providers/provider_util.h>
+#include <providers/securitycheck.h>
 #include "internal/e_os.h"
 #include "internal/safe_math.h"
 

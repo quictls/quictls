@@ -21,10 +21,10 @@
 #include <openssl/err.h>
 #include <openssl/proverr.h>
 #include <openssl/params.h>
-#include "prov/providercommon.h"
-#include "prov/implementations.h"
-#include "prov/provider_ctx.h"
-#include "prov/securitycheck.h"
+#include <providers/providercommon.h>
+#include <providers/implementations.h>
+#include <providers/provider_ctx.h>
+#include <providers/securitycheck.h>
 #include "crypto/dh.h"
 
 static OSSL_FUNC_keyexch_newctx_fn dh_newctx;

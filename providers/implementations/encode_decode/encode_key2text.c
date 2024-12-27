@@ -28,8 +28,8 @@
 #include "crypto/ec.h"           /* ossl_ec_key_get_libctx */
 #include "crypto/ecx.h"          /* ECX_KEY, etc... */
 #include "crypto/rsa.h"          /* RSA_PSS_PARAMS_30, etc... */
-#include "prov/bio.h"
-#include "prov/implementations.h"
+#include <providers/bio.h>
+#include <providers/implementations.h>
 #include "endecoder_local.h"
 
 DEFINE_SPECIAL_STACK_OF_CONST(BIGNUM_const, BIGNUM)

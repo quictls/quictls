@@ -8,7 +8,7 @@
  */
 
 #include "crypto/evp.h"
-#include "prov/blake2.h"        /* diverse BLAKE2 macros */
+#include <providers/blake2.h>        /* diverse BLAKE2 macros */
 #include "legacy_meth.h"
 
 /*

@@ -18,11 +18,11 @@
 #include "internal/packet.h"
 #include "internal/der.h"
 #include "internal/nelem.h"
-#include "prov/provider_ctx.h"
-#include "prov/providercommon.h"
-#include "prov/implementations.h"
-#include "prov/provider_util.h"
-#include "prov/der_wrap.h"
+#include <providers/provider_ctx.h>
+#include <providers/providercommon.h>
+#include <providers/implementations.h>
+#include <providers/provider_util.h>
+#include <providers/der_wrap.h>
 
 #define X942KDF_MAX_INLEN (1 << 30)
 

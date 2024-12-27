@@ -15,8 +15,8 @@
 #include <openssl/prov_ssl.h>
 #include <openssl/proverr.h>
 #include "ciphercommon_local.h"
-#include "prov/provider_ctx.h"
-#include "prov/providercommon.h"
+#include <providers/provider_ctx.h>
+#include <providers/providercommon.h>
 
 /*-
  * Generic cipher functions for OSSL_PARAM gettables and settables

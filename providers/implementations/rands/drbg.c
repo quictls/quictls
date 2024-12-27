@@ -17,11 +17,11 @@
 #include "drbg_local.h"
 #include "internal/thread_once.h"
 #include "crypto/cryptlib.h"
-#include "prov/seeding.h"
+#include <providers/seeding.h>
 #include "crypto/rand_pool.h"
-#include "prov/provider_ctx.h"
-#include "prov/providercommon.h"
-#include "prov/fipscommon.h"
+#include <providers/provider_ctx.h>
+#include <providers/providercommon.h>
+#include <providers/fipscommon.h>
 #include "crypto/context.h"
 
 /*

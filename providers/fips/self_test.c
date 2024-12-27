@@ -18,7 +18,7 @@
 #include <openssl/rand.h>
 #include "internal/e_os.h"
 #include "internal/tsan_assist.h"
-#include "prov/providercommon.h"
+#include <providers/providercommon.h>
 #include "crypto/rand.h"
 
 /*

@@ -1,4 +1,4 @@
-$INCDIR=../include/prov
+$INCDIR=../../../include/providers
 
 #----- Digests
 $DER_DIGESTS_H=$INCDIR/der_digests.h

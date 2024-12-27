@@ -8,7 +8,7 @@
  */
 
 #include <openssl/camellia.h>
-#include "prov/ciphercommon.h"
+#include <providers/ciphercommon.h>
 #include "crypto/cmll_platform.h"
 
 typedef struct prov_camellia_ctx_st {

@@ -17,8 +17,8 @@
 
 #include <openssl/proverr.h>
 #include "cipher_rc2.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
 
 #define RC2_40_MAGIC    0xa0
 #define RC2_64_MAGIC    0x78

@@ -26,10 +26,10 @@
 #include "internal/constant_time.h"
 #include "internal/sizes.h"
 #include "crypto/rsa.h"
-#include "prov/provider_ctx.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
-#include "prov/securitycheck.h"
+#include <providers/provider_ctx.h>
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
+#include <providers/securitycheck.h>
 
 #include <stdlib.h>
 

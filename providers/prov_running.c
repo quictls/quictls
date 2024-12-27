@@ -8,7 +8,7 @@
  */
 
 #include <openssl/e_os2.h>
-#include "prov/providercommon.h"
+#include <providers/providercommon.h>
 
 /* By default, our providers don't have an error state */
 void ossl_set_error_state(const char *type)

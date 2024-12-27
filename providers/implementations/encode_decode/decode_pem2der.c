@@ -24,8 +24,8 @@
 #include <openssl/pem.h>
 #include <openssl/proverr.h>
 #include "internal/nelem.h"
-#include "prov/bio.h"
-#include "prov/implementations.h"
+#include <providers/bio.h>
+#include <providers/implementations.h>
 #include "endecoder_local.h"
 
 static int read_pem(PROV_CTX *provctx, OSSL_CORE_BIO *cin,

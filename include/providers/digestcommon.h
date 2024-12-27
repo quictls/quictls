@@ -13,7 +13,7 @@
 # include <openssl/core_dispatch.h>
 # include <openssl/core_names.h>
 # include <openssl/params.h>
-# include "prov/providercommon.h"
+# include <providers/providercommon.h>
 
 /* Internal flags that can be queried */
 #define PROV_DIGEST_FLAG_XOF             0x0001

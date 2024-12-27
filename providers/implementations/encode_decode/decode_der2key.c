@@ -32,8 +32,8 @@
 #include "crypto/ecx.h"
 #include "crypto/rsa.h"
 #include "crypto/x509.h"
-#include "prov/bio.h"
-#include "prov/implementations.h"
+#include <providers/bio.h>
+#include <providers/implementations.h>
 #include "endecoder_local.h"
 #include "internal/nelem.h"
 

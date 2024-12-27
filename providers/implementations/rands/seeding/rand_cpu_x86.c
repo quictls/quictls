@@ -10,7 +10,7 @@
 #include "internal/cryptlib.h"
 #include <openssl/opensslconf.h>
 #include "crypto/rand_pool.h"
-#include "prov/seeding.h"
+#include <providers/seeding.h>
 
 #ifdef OPENSSL_RAND_SEED_RDCPU
 size_t OPENSSL_ia32_rdseed_bytes(unsigned char *buf, size_t len);

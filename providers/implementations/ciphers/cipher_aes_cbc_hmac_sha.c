@@ -20,8 +20,8 @@
 #include <openssl/prov_ssl.h>
 #include <openssl/proverr.h>
 #include "cipher_aes_cbc_hmac_sha.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
 
 #ifndef AES_CBC_HMAC_SHA_CAPABLE
 # define IMPLEMENT_CIPHER(nm, sub, kbits, blkbits, ivbits, flags)              \

@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "prov/ciphercommon.h"
+#include <providers/ciphercommon.h>
 #include "crypto/sm4.h"
 #include "crypto/sm4_platform.h"
 

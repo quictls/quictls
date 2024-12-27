@@ -20,10 +20,10 @@
 #include "internal/param_build_set.h"
 #include <openssl/param_build.h>
 #include "crypto/ecx.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
-#include "prov/provider_ctx.h"
-#include "prov/ecx.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
+#include <providers/provider_ctx.h>
+#include <providers/ecx.h>
 #ifdef S390X_EC_ASM
 # include "s390x_arch.h"
 # include <openssl/sha.h>   /* For SHA512_DIGEST_LENGTH */

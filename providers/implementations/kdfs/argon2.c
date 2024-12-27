@@ -28,10 +28,10 @@
 #include "internal/numbers.h"
 #include "internal/endian.h"
 #include "crypto/evp.h"
-#include "prov/implementations.h"
-#include "prov/provider_ctx.h"
-#include "prov/providercommon.h"
-#include "prov/blake2.h"
+#include <providers/implementations.h>
+#include <providers/provider_ctx.h>
+#include <providers/providercommon.h>
+#include <providers/blake2.h>
 
 #if defined(OPENSSL_NO_DEFAULT_THREAD_POOL) && defined(OPENSSL_NO_THREAD_POOL)
 # define ARGON2_NO_THREADS

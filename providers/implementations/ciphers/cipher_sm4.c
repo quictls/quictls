@@ -10,8 +10,8 @@
 /* Dispatch functions for cast cipher modes ecb, cbc, ofb, cfb */
 
 #include "cipher_sm4.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
 
 static OSSL_FUNC_cipher_freectx_fn sm4_freectx;
 static OSSL_FUNC_cipher_dupctx_fn sm4_dupctx;

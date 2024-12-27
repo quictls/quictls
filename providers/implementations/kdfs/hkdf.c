@@ -25,10 +25,10 @@
 #include "internal/numbers.h"
 #include "internal/packet.h"
 #include "crypto/evp.h"
-#include "prov/provider_ctx.h"
-#include "prov/providercommon.h"
-#include "prov/implementations.h"
-#include "prov/provider_util.h"
+#include <providers/provider_ctx.h>
+#include <providers/providercommon.h>
+#include <providers/implementations.h>
+#include <providers/provider_util.h>
 #include "internal/e_os.h"
 #include "internal/params.h"
 

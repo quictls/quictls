@@ -17,8 +17,8 @@
 /* Dispatch functions for Idea cipher modes ecb, cbc, ofb, cfb */
 
 #include "cipher_idea.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
 
 static OSSL_FUNC_cipher_freectx_fn idea_freectx;
 static OSSL_FUNC_cipher_dupctx_fn idea_dupctx;

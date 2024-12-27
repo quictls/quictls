@@ -17,10 +17,10 @@
 
 #include <openssl/proverr.h>
 #include "cipher_aes_siv.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
-#include "prov/ciphercommon_aead.h"
-#include "prov/provider_ctx.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
+#include <providers/ciphercommon_aead.h>
+#include <providers/provider_ctx.h>
 
 #define siv_stream_update siv_cipher
 #define SIV_FLAGS AEAD_FLAGS

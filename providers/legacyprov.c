@@ -14,10 +14,10 @@
 #include <openssl/core_names.h>
 #include <openssl/err.h>
 #include <openssl/params.h>
-#include "prov/provider_ctx.h"
-#include "prov/implementations.h"
-#include "prov/names.h"
-#include "prov/providercommon.h"
+#include <providers/provider_ctx.h>
+#include <providers/implementations.h>
+#include <providers/names.h>
+#include <providers/providercommon.h>
 
 /*
  * Forward declarations to ensure that interface functions are correctly

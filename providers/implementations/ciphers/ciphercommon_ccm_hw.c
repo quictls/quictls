@@ -7,8 +7,8 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "prov/ciphercommon.h"
-#include "prov/ciphercommon_ccm.h"
+#include <providers/ciphercommon.h>
+#include <providers/ciphercommon_ccm.h>
 
 int ossl_ccm_generic_setiv(PROV_CCM_CTX *ctx, const unsigned char *nonce,
                            size_t nlen, size_t mlen)

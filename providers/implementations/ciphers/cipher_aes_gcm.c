@@ -17,8 +17,8 @@
 /* Dispatch functions for AES GCM mode */
 
 #include "cipher_aes_gcm.h"
-#include "prov/implementations.h"
-#include "prov/providercommon.h"
+#include <providers/implementations.h>
+#include <providers/providercommon.h>
 
 static void *aes_gcm_newctx(void *provctx, size_t keybits)
 {

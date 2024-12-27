@@ -14,10 +14,10 @@
 #include <openssl/rand.h>
 #include <openssl/proverr.h>
 #include "internal/thread_once.h"
-#include "prov/providercommon.h"
-#include "prov/implementations.h"
-#include "prov/provider_ctx.h"
-#include "prov/hmac_drbg.h"
+#include <providers/providercommon.h>
+#include <providers/implementations.h>
+#include <providers/provider_ctx.h>
+#include <providers/hmac_drbg.h>
 #include "drbg_local.h"
 
 static OSSL_FUNC_rand_newctx_fn drbg_hmac_new_wrapper;
