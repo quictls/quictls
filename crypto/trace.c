@@ -31,10 +31,6 @@ int OSSL_trace_get_category_num(const char *name)
     return -1; /* not found */
 }
 
-void ossl_trace_cleanup(void)
-{
-}
-
 int OSSL_trace_set_channel(int category, BIO *channel)
 {
     return 0;
