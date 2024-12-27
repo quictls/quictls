@@ -416,7 +416,6 @@ void OPENSSL_cleanup(void)
     OSSL_CMP_log_close();
 #endif
 
-
     base_inited = 0;
 }
 
