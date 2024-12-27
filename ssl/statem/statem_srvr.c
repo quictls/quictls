@@ -1864,7 +1864,6 @@ static int tls_early_post_process_client_hello(SSL_CONNECTION *s)
              */
             SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,
                      SSL_R_REQUIRED_CIPHER_MISSING);
-            OSSL_TRACE_CANCEL(TLS_CIPHER);
             goto err;
         }
     }

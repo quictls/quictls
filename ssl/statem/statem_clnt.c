@@ -2424,9 +2424,6 @@ MSG_PROCESS_RETURN tls_process_key_exchange(SSL_CONNECTION *s, PACKET *pkt)
                      SSL_R_NO_SUITABLE_DIGEST_ALGORITHM);
             goto err;
         }
-        if (SSL_USE_SIGALGS(s))
-            OSSL_TRACE1(TLS, "USING TLSv1.2 HASH %s\n",
-                        md == NULL ? "n/a" : EVP_MD_get0_name(md));
 
         if (!PACKET_get_length_prefixed_2(pkt, &signature)
             || PACKET_remaining(pkt) != 0) {

@@ -133,10 +133,6 @@ DEFINE_RUN_ONCE_STATIC(ossl_init_load_crypto_nodelete)
                                 | GET_MODULE_HANDLE_EX_FLAG_PIN,
                                 (void *)&base_inited, &handle);
 
-        OSSL_TRACE1(INIT,
-                    "ossl_init_load_crypto_nodelete: "
-                    "obtained DSO reference? %s\n",
-                    (ret == TRUE ? "No!" : "Yes."));
         return (ret == TRUE) ? 1 : 0;
     }
 # elif !defined(DSO_NONE)
@@ -157,8 +153,6 @@ DEFINE_RUN_ONCE_STATIC(ossl_init_load_crypto_nodelete)
          * called. After dlclose() the whole library might have been unloaded
          * already.
          */
-        OSSL_TRACE1(INIT, "obtained DSO reference? %s\n",
-                    (dso == NULL ? "No!" : "Yes."));
         DSO_free(dso);
         err_unshelve_state(err);
     }
@@ -422,7 +416,6 @@ void OPENSSL_cleanup(void)
     OSSL_CMP_log_close();
 #endif
 
-    ossl_trace_cleanup();
 
     base_inited = 0;
 }
@@ -670,9 +663,6 @@ int OPENSSL_atexit(void (*handler)(void))
         ERR_set_mark();
         dso = DSO_dsobyaddr(handlersym.sym, DSO_FLAG_NO_UNLOAD_ON_FREE);
         /* See same code above in ossl_init_base() for an explanation. */
-        OSSL_TRACE1(INIT,
-                   "atexit: obtained DSO reference? %s\n",
-                   (dso == NULL ? "No!" : "Yes."));
         DSO_free(dso);
         ERR_pop_to_mark();
 # endif

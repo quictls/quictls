@@ -54,7 +54,6 @@ int DSO_free(DSO *dso)
     if (CRYPTO_DOWN_REF(&dso->references, &i) <= 0)
         return 0;
 
-    REF_PRINT_COUNT("DSO", dso);
     if (i > 0)
         return 1;
     REF_ASSERT_ISNT(i < 0);
@@ -96,7 +95,6 @@ int DSO_up_ref(DSO *dso)
     if (CRYPTO_UP_REF(&dso->references, &i) <= 0)
         return 0;
 
-    REF_PRINT_COUNT("DSO", dso);
     REF_ASSERT_ISNT(i < 2);
     return ((i > 1) ? 1 : 0);
 }

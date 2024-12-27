@@ -4072,9 +4072,6 @@ const SSL_CIPHER *ssl3_choose_cipher(SSL_CONNECTION *s, STACK_OF(SSL_CIPHER) *cl
 #endif                          /* OPENSSL_NO_PSK */
 
             ok = (alg_k & mask_k) && (alg_a & mask_a);
-            OSSL_TRACE7(TLS_CIPHER,
-                        "%d:[%08lX:%08lX:%08lX:%08lX]%p:%s\n",
-                        ok, alg_k, alg_a, mask_k, mask_a, (void *)c, c->name);
 
             /*
              * if we are considering an ECC cipher suite that uses an ephemeral
