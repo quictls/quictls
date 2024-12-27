@@ -10,7 +10,7 @@
 #ifndef OSSL_TEST_HANDSHAKE_HELPER_H
 #define OSSL_TEST_HANDSHAKE_HELPER_H
 
-#include "ssl_test_ctx.h"
+#include <test/ssl_test_ctx.h>
 
 typedef struct ctx_data_st {
     unsigned char *npn_protocols;

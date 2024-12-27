@@ -12,7 +12,7 @@
 #endif
 
 #include <string.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 #if !defined(OPENSSL_THREADS) || defined(CRYPTO_TDEBUG)
 
