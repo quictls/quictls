@@ -105,9 +105,9 @@ static int test_sanity_range(void)
      * Some platforms defined intmax_t to be 64 bits but still support
      * an int128_t, so this check is for at least 64 bits.
      */
-    if (!TEST_size_t_ge(sizeof(ossl_intmax_t), 8)
-            || !TEST_size_t_ge(sizeof(ossl_uintmax_t), 8)
-            || !TEST_size_t_ge(sizeof(ossl_uintmax_t), sizeof(size_t)))
+    if (!TEST_size_t_ge(sizeof(intmax_t), 8)
+            || !TEST_size_t_ge(sizeof(uintmax_t), 8)
+            || !TEST_size_t_ge(sizeof(uintmax_t), sizeof(size_t)))
         return 0;
 
     /* This isn't possible to check using the framework functions */

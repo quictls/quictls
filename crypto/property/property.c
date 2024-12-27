@@ -213,13 +213,13 @@ static void impl_cache_free(QUERY *elem)
     }
 }
 
-static void impl_cache_flush_alg(ossl_uintmax_t idx, ALGORITHM *alg)
+static void impl_cache_flush_alg(uintmax_t idx, ALGORITHM *alg)
 {
     lh_QUERY_doall(alg->cache, &impl_cache_free);
     lh_QUERY_flush(alg->cache);
 }
 
-static void alg_cleanup(ossl_uintmax_t idx, ALGORITHM *a, void *arg)
+static void alg_cleanup(uintmax_t idx, ALGORITHM *a, void *arg)
 {
     OSSL_METHOD_STORE *store = arg;
 
@@ -411,7 +411,7 @@ struct alg_cleanup_by_provider_data_st {
 };
 
 static void
-alg_cleanup_by_provider(ossl_uintmax_t idx, ALGORITHM *alg, void *arg)
+alg_cleanup_by_provider(uintmax_t idx, ALGORITHM *alg, void *arg)
 {
     struct alg_cleanup_by_provider_data_st *data = arg;
     int i, count;
@@ -466,7 +466,7 @@ struct alg_do_each_data_st {
     void *fnarg;
 };
 
-static void alg_do_each(ossl_uintmax_t idx, ALGORITHM *alg, void *arg)
+static void alg_do_each(uintmax_t idx, ALGORITHM *alg, void *arg)
 {
     struct alg_do_each_data_st *data = arg;
     int i, end = sk_IMPLEMENTATION_num(alg->impls);
@@ -639,7 +639,7 @@ static void impl_cache_flush_cache(QUERY *c, IMPL_CACHE_FLUSH *state)
         state->nelem++;
 }
 
-static void impl_cache_flush_one_alg(ossl_uintmax_t idx, ALGORITHM *alg,
+static void impl_cache_flush_one_alg(uintmax_t idx, ALGORITHM *alg,
                                      void *v)
 {
     IMPL_CACHE_FLUSH *state = (IMPL_CACHE_FLUSH *)v;

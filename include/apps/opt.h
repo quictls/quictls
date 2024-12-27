@@ -415,8 +415,8 @@ void opt_set_unknown_name(const char *name);
 int opt_int_arg(void);
 int opt_long(const char *arg, long *result);
 int opt_ulong(const char *arg, unsigned long *result);
-int opt_intmax(const char *arg, ossl_intmax_t *result);
-int opt_uintmax(const char *arg, ossl_uintmax_t *result);
+int opt_intmax(const char *arg, intmax_t *result);
+int opt_uintmax(const char *arg, uintmax_t *result);
 
 int opt_isdir(const char *name);
 int opt_format(const char *s, unsigned long flags, int *result);

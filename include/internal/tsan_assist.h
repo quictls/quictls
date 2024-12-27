@@ -50,8 +50,7 @@
 #ifndef OSSL_INTERNAL_TSAN_ASSIST_H
 # define OSSL_INTERNAL_TSAN_ASSIST_H
 
-# if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L \
-    && !defined(__STDC_NO_ATOMICS__)
+# if __STDC_VERSION__ >= 201112L && !defined(__STDC_NO_ATOMICS__)
 #  include <stdatomic.h>
 
 #  if defined(ATOMIC_POINTER_LOCK_FREE) \

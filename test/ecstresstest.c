@@ -18,7 +18,7 @@
 
 #define NUM_REPEATS "1000000"
 
-static ossl_intmax_t num_repeats;
+static intmax_t num_repeats;
 static int print_mode = 0;
 
 #ifndef OPENSSL_NO_EC
@@ -40,10 +40,10 @@ static const char *kP256DefaultResult =
  * Returns the X-coordinate of the end result or NULL on error.
  */
 static BIGNUM *walk_curve(const EC_GROUP *group, EC_POINT *point,
-                          ossl_intmax_t num)
+                          intmax_t num)
 {
     BIGNUM *scalar = NULL;
-    ossl_intmax_t i;
+    intmax_t i;
 
     if (!TEST_ptr(scalar = BN_new())
             || !TEST_true(EC_POINT_get_affine_coordinates(group, point, scalar,
