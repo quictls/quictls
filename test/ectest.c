@@ -1763,7 +1763,7 @@ static int cardinality_test(int n)
 
 static int check_ec_key_field_public_range_test(int id)
 {
-    int ret = 0, type = 0;
+    int ret = 0;
     const EC_POINT *pub = NULL;
     const EC_GROUP *group = NULL;
     const BIGNUM *field = NULL;
@@ -1784,18 +1784,10 @@ static int check_ec_key_field_public_range_test(int id)
 
     /*
      * Make the public point out of range by adding the field (which will still
-     * be the same point on the curve). The add is different for char2 fields.
+     * be the same point on the curve).
      */
-    type = EC_GROUP_get_field_type(group);
-    if (type == NID_X9_62_prime_field) {
-        /* test for prime curves */
-        if (!TEST_true(BN_add(x, x, field)))
-            goto err;
-    } else {
-        /* this should never happen */
-        TEST_error("Unsupported EC_METHOD field_type");
+    if (!TEST_true(BN_add(x, x, field)))
         goto err;
-    }
     if (!TEST_int_le(EC_KEY_set_public_key_affine_coordinates(key, x, y), 0))
         goto err;
 
@@ -2017,23 +2009,22 @@ static int do_test_custom_explicit_fromdata(EC_GROUP *group, BN_CTX *ctx,
             goto err;
     }
 
-    if (EC_GROUP_get_field_type(group) == NID_X9_62_prime_field) {
-        /* No extra fields should be set for a prime field */
-        if (!TEST_false(EVP_PKEY_get_int_param(pkeyparam,
-                            OSSL_PKEY_PARAM_EC_CHAR2_M, &i_out))
-            || !TEST_false(EVP_PKEY_get_int_param(pkeyparam,
-                               OSSL_PKEY_PARAM_EC_CHAR2_TP_BASIS, &i_out))
-            || !TEST_false(EVP_PKEY_get_int_param(pkeyparam,
-                               OSSL_PKEY_PARAM_EC_CHAR2_PP_K1, &i_out))
-            || !TEST_false(EVP_PKEY_get_int_param(pkeyparam,
-                               OSSL_PKEY_PARAM_EC_CHAR2_PP_K2, &i_out))
-            || !TEST_false(EVP_PKEY_get_int_param(pkeyparam,
-                               OSSL_PKEY_PARAM_EC_CHAR2_PP_K3, &i_out))
-            || !TEST_false(EVP_PKEY_get_utf8_string_param(pkeyparam,
-                               OSSL_PKEY_PARAM_EC_CHAR2_TYPE, name, sizeof(name),
-                               &name_len)))
-            goto err;
-    }
+    /* No extra fields should be set for a prime field */
+    if (!TEST_false(EVP_PKEY_get_int_param(pkeyparam,
+                        OSSL_PKEY_PARAM_EC_CHAR2_M, &i_out))
+        || !TEST_false(EVP_PKEY_get_int_param(pkeyparam,
+                           OSSL_PKEY_PARAM_EC_CHAR2_TP_BASIS, &i_out))
+        || !TEST_false(EVP_PKEY_get_int_param(pkeyparam,
+                           OSSL_PKEY_PARAM_EC_CHAR2_PP_K1, &i_out))
+        || !TEST_false(EVP_PKEY_get_int_param(pkeyparam,
+                           OSSL_PKEY_PARAM_EC_CHAR2_PP_K2, &i_out))
+        || !TEST_false(EVP_PKEY_get_int_param(pkeyparam,
+                           OSSL_PKEY_PARAM_EC_CHAR2_PP_K3, &i_out))
+        || !TEST_false(EVP_PKEY_get_utf8_string_param(pkeyparam,
+                           OSSL_PKEY_PARAM_EC_CHAR2_TYPE, name, sizeof(name),
+                           &name_len)))
+        goto err;
+
     if (!TEST_ptr(gettable = EVP_PKEY_gettable_params(pkeyparam))
         || !TEST_ptr(OSSL_PARAM_locate_const(gettable, OSSL_PKEY_PARAM_GROUP_NAME))
         || !TEST_ptr(OSSL_PARAM_locate_const(gettable, OSSL_PKEY_PARAM_EC_ENCODING))
