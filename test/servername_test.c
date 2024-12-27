@@ -20,9 +20,9 @@
 
 #include "internal/packet.h"
 
-#include "testutil.h"
+#include <test/testutil.h>
 #include "internal/nelem.h"
-#include "helpers/ssltestlib.h"
+#include <test/ssltestlib.h>
 
 #define CLIENT_VERSION_LEN      2
 

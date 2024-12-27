@@ -49,8 +49,8 @@
 # include <openssl/ct.h>
 #endif
 #include <openssl/provider.h>
-#include "testutil.h"
-#include "testutil/output.h"
+#include <test/testutil.h>
+#include <test/output.h>
 
 /*
  * Or gethostname won't be declared properly
@@ -66,7 +66,7 @@
 # include <unistd.h>
 #endif
 
-#include "helpers/predefined_dhparams.h"
+#include <test/predefined_dhparams.h>
 
 static SSL_CTX *s_ctx = NULL;
 static SSL_CTX *s_ctx2 = NULL;

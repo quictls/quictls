@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "../testutil.h"
+#include <test/testutil.h>
 
 /*
  * This is an implementation of the algorithm used by the GNU C library's

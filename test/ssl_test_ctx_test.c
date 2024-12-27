@@ -16,8 +16,8 @@
 #include <string.h>
 
 #include "internal/nelem.h"
-#include "helpers/ssl_test_ctx.h"
-#include "testutil.h"
+#include <test/ssl_test_ctx.h>
+#include <test/testutil.h>
 #include <openssl/e_os2.h>
 #include <openssl/err.h>
 #include <openssl/conf.h>

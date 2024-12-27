@@ -9,7 +9,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "cmp_testlib.h"
+#include <test/cmp_testlib.h>
 #include <openssl/rsa.h> /* needed in case config no-deprecated */
 
 OSSL_CMP_MSG *load_pkimsg(const char *file, OSSL_LIB_CTX *libctx)

@@ -8,7 +8,7 @@
  */
 
 #include <openssl/bio.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 #ifndef OPENSSL_NO_SOCK
 static int test_dgram(void)

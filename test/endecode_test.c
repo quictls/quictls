@@ -23,8 +23,8 @@
 #include "crypto/pem.h"          /* For PVK and "blob" PEM headers */
 #include "crypto/evp.h"          /* For evp_pkey_is_provided() */
 
-#include "helpers/predefined_dhparams.h"
-#include "testutil.h"
+#include <test/predefined_dhparams.h>
+#include <test/testutil.h>
 
 #ifdef STATIC_LEGACY
 OSSL_provider_init_fn ossl_legacy_provider_init;

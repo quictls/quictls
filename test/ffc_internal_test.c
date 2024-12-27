@@ -24,7 +24,7 @@
 #include <openssl/bn.h>
 #include <openssl/rand.h>
 #include <openssl/err.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 #include "internal/ffc.h"
 #include "crypto/security_bits.h"

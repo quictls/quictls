@@ -12,7 +12,7 @@
 #include <openssl/param_build.h>
 #include <openssl/proverr.h>
 #include "internal/nelem.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 #define TEST_KEM_ENCAP       0
 #define TEST_KEM_DECAP       1

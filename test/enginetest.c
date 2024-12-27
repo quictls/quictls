@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <openssl/e_os2.h>
 
-# include "testutil.h"
+# include <test/testutil.h>
 
 #ifndef OPENSSL_NO_ENGINE
 # include <openssl/buffer.h>

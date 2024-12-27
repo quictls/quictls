@@ -11,7 +11,7 @@
 #include <openssl/buffer.h>
 #include <openssl/bio.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 static int test_bio_memleak(void)
 {

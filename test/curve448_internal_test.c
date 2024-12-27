@@ -12,7 +12,7 @@
 #include <openssl/evp.h>
 #include "crypto/ecx.h"
 #include "curve448_local.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 static unsigned int max = 1000;
 static unsigned int verbose = 0;

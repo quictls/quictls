@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 #include <openssl/evp.h>
 #include <openssl/err.h>

@@ -9,7 +9,7 @@
 
 #include <stdlib.h>
 #include <apps/apps.h>
-#include "../testutil.h"
+#include <test/testutil.h>
 
 /* shim that avoids sucking in too much from apps/apps.c */
 

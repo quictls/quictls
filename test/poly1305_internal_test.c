@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 #include "crypto/poly1305.h"
 #include "internal/nelem.h"
 

@@ -13,7 +13,7 @@
 #include <string.h>
 
 #include <openssl/ssl.h>
-#include "testutil.h"
+#include <test/testutil.h>
 #include "internal/nelem.h"
 #include "../ssl/ssl_local.h"
 #include "../ssl/ssl_cert_table.h"

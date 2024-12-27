@@ -19,7 +19,7 @@
 #include <openssl/tls1.h>
 
 #include "internal/nelem.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 typedef struct cipherlist_test_fixture {
     const char *test_case_name;

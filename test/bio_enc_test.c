@@ -12,7 +12,7 @@
 #include <openssl/bio.h>
 #include <openssl/rand.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 #define ENCRYPT  1
 #define DECRYPT  0

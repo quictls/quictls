@@ -11,7 +11,7 @@
 #include <string.h>
 #include <openssl/bio.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 #define MAXCOUNT 5
 static int         my_param_count;

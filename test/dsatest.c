@@ -26,7 +26,7 @@
 #include <openssl/evp.h>
 #include <openssl/core_names.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 #include "internal/nelem.h"
 
 #ifndef OPENSSL_NO_DSA

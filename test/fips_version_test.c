@@ -9,7 +9,7 @@
 
 #include <openssl/evp.h>
 #include <openssl/provider.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 static OSSL_LIB_CTX *libctx = NULL;
 static OSSL_PROVIDER *libprov = NULL;

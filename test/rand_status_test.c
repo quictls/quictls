@@ -8,7 +8,7 @@
  */
 
 #include <openssl/rand.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 /*
  * This needs to be in a test executable all by itself so that it can be

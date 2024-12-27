@@ -29,7 +29,7 @@
 #  include <openssl/ebcdic.h>
 # endif
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 # ifndef OPENSSL_NO_MD5
 static struct test_st {

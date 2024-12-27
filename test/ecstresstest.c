@@ -9,7 +9,7 @@
  */
 
 #include "internal/nelem.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 #include <stdio.h>
 #include <stdlib.h>

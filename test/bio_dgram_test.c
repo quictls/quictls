@@ -10,7 +10,7 @@
 #include <string.h>
 #include <openssl/bio.h>
 #include <openssl/rand.h>
-#include "testutil.h"
+#include <test/testutil.h>
 #include "internal/sockets.h"
 #include "internal/bio_addr.h"
 

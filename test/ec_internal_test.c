@@ -13,7 +13,7 @@
 #include "internal/deprecated.h"
 
 #include "internal/nelem.h"
-#include "testutil.h"
+#include <test/testutil.h>
 #include <openssl/ec.h>
 #include "ec_local.h"
 #include <openssl/objects.h>

@@ -8,7 +8,7 @@
  */
 
 #include "internal/nelem.h"
-#include "testutil.h"
+#include <test/testutil.h>
 #include "../ssl/ssl_local.h"
 
 static int cipher_enabled(const SSL_CIPHER *ciph)

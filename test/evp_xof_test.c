@@ -10,7 +10,7 @@
 #include <openssl/evp.h>
 #include <openssl/rand.h>
 #include <openssl/core_names.h>
-#include "testutil.h"
+#include <test/testutil.h>
 #include "internal/nelem.h"
 
 static const unsigned char shake256_input[] = {

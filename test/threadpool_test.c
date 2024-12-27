@@ -12,7 +12,7 @@
 #include <internal/thread_arch.h>
 #include <internal/thread.h>
 #include <openssl/thread.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 static int test_thread_reported_flags(void)
 {

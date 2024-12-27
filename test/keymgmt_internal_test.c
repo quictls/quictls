@@ -25,7 +25,7 @@
 #include "internal/core.h"
 #include "internal/nelem.h"
 #include "crypto/evp.h"          /* For the internal API */
-#include "testutil.h"
+#include <test/testutil.h>
 
 typedef struct {
     OSSL_LIB_CTX *ctx1;

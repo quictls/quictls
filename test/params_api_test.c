@@ -9,7 +9,7 @@
  */
 
 #include <string.h>
-#include "testutil.h"
+#include <test/testutil.h>
 #include "internal/nelem.h"
 #include "internal/endian.h"
 #include <openssl/params.h>

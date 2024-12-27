@@ -19,7 +19,7 @@
 
 #include "internal/packet.h"
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 #define CLIENT_VERSION_LEN      2
 

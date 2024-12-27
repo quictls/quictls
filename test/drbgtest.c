@@ -34,7 +34,7 @@
 # include <unistd.h>
 #endif
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 /*
  * DRBG generate wrappers

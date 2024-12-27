@@ -9,7 +9,7 @@
 
 #include <string.h>
 #include <openssl/bio.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 struct ossl_core_bio_st {
     int dummy;

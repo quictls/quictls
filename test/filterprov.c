@@ -16,8 +16,8 @@
 #include <openssl/core.h>
 #include <openssl/provider.h>
 #include <openssl/crypto.h>
-#include "testutil.h"
-#include "filterprov.h"
+#include <test/testutil.h>
+#include <test/filterprov.h>
 
 #define MAX_FILTERS     10
 #define MAX_ALG_FILTERS 5

@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 #include "internal/json_enc.h"
 
 struct helper {

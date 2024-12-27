@@ -11,7 +11,7 @@
 #include <openssl/opensslconf.h>
 #include <openssl/trace.h>
 #include <apps/apps.h>
-#include "../testutil.h"
+#include <test/testutil.h>
 
 #ifndef OPENSSL_NO_TRACE
 typedef struct tracedata_st {

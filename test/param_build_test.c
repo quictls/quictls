@@ -12,7 +12,7 @@
 #include <openssl/params.h>
 #include <openssl/param_build.h>
 #include "internal/nelem.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 static const OSSL_PARAM params_empty[] = { OSSL_PARAM_END };
 

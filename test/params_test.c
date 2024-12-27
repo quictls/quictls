@@ -19,7 +19,7 @@
 #include <openssl/params.h>
 #include "internal/numbers.h"
 #include "internal/nelem.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 /*-
  * PROVIDER SECTION

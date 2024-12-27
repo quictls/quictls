@@ -11,7 +11,7 @@
 #include <openssl/evp.h>
 
 #include "../ssl/ssl_local.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 #define IVLEN   12
 #define KEYLEN  16

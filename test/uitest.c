@@ -12,7 +12,7 @@
 #include <openssl/opensslconf.h>
 #include <openssl/err.h>
 #include <apps/apps_ui.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 
 #include <openssl/ui.h>

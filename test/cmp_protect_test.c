@@ -9,7 +9,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "helpers/cmp_testlib.h"
+#include <test/cmp_testlib.h>
 
 static const char *ir_protected_f;
 static const char *genm_prot_Ed_f;

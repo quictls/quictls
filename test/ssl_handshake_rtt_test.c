@@ -24,9 +24,9 @@
 #include <openssl/ssl.h>
 #include <openssl/engine.h>
 
-#include "helpers/ssltestlib.h"
-#include "testutil.h"
-#include "testutil/output.h"
+#include <test/ssltestlib.h>
+#include <test/testutil.h>
+#include <test/output.h>
 #include "internal/ktls.h"
 #include "../ssl/ssl_local.h"
 #include "../ssl/statem/statem_local.h"

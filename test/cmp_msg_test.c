@@ -9,7 +9,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "helpers/cmp_testlib.h"
+#include <test/cmp_testlib.h>
 
 static const char *newkey_f;
 static const char *server_cert_f;

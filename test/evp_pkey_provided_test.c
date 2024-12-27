@@ -19,7 +19,7 @@
 #include "crypto/evp.h"          /* For the internal API */
 #include "crypto/bn_dh.h"        /* _bignum_ffdhe2048_p */
 #include "internal/nelem.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 static char *datadir = NULL;
 

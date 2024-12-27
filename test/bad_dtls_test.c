@@ -41,7 +41,7 @@
 #include <openssl/kdf.h>
 #include "internal/packet.h"
 #include "internal/nelem.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 /* For DTLS1_BAD_VER packets the MAC doesn't include the handshake header */
 #define MAC_OFFSET (DTLS1_RT_HEADER_LENGTH + DTLS1_HM_HEADER_LENGTH)

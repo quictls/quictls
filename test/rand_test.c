@@ -12,7 +12,7 @@
 #include <openssl/bio.h>
 #include <openssl/core_names.h>
 #include "crypto/rand.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 static int test_rand(void)
 {

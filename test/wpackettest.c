@@ -11,7 +11,7 @@
 #include <openssl/buffer.h>
 #include <openssl/rand.h>
 #include "internal/packet.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 static const unsigned char simple1[] = { 0xff };
 static const unsigned char simple2[] = { 0x01, 0xff };

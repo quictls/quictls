@@ -10,7 +10,7 @@
 #include <stddef.h>
 #include <openssl/provider.h>
 #include <openssl/param_build.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 extern OSSL_provider_init_fn PROVIDER_INIT_FUNCTION_NAME;
 

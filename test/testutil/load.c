@@ -13,7 +13,7 @@
 #include <openssl/x509.h>
 #include <openssl/pem.h>
 
-#include "../testutil.h"
+#include <test/testutil.h>
 
 X509 *load_cert_pem(const char *file, OSSL_LIB_CTX *libctx)
 {

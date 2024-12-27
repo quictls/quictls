@@ -10,7 +10,7 @@
 #include "internal/nelem.h"
 #include "../ssl/ssl_local.h"
 #include "../ssl/statem/statem_local.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 #define EXT_ENTRY(name) { TLSEXT_IDX_##name, TLSEXT_TYPE_##name, #name }
 #define EXT_EXCEPTION(name) { TLSEXT_IDX_##name, TLSEXT_TYPE_invalid, #name }

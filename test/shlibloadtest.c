@@ -13,7 +13,7 @@
 #include <openssl/opensslv.h>
 #include <openssl/ssl.h>
 #include <openssl/types.h>
-#include "simpledynamic.h"
+#include <test/simpledynamic.h>
 
 typedef void DSO;
 

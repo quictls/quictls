@@ -13,7 +13,7 @@
 #include <string.h>
 
 #include <openssl/bio.h>
-#include "testutil.h"
+#include <test/testutil.h>
 #include "crypto/siphash.h"
 #include "internal/nelem.h"
 

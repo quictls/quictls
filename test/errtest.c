@@ -12,7 +12,7 @@
 #include <openssl/err.h>
 #include <openssl/macros.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 #if defined(OPENSSL_SYS_WINDOWS)
 # include <windows.h>

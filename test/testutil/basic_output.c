@@ -7,9 +7,9 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "../testutil.h"
-#include "output.h"
-#include "tu_local.h"
+#include <test/testutil.h>
+#include <test/output.h>
+#include <test/tu_local.h>
 
 #include <openssl/crypto.h>
 #include <openssl/bio.h>

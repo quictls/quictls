@@ -15,7 +15,7 @@
 #include <openssl/pem.h>
 #include "../crypto/cms/cms_local.h" /* for d.signedData and d.envelopedData */
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 static X509 *cert = NULL;
 static EVP_PKEY *privkey = NULL;

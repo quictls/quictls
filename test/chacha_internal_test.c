@@ -14,7 +14,7 @@
 
 #include <string.h>
 #include <openssl/opensslconf.h>
-#include "testutil.h"
+#include <test/testutil.h>
 #include "crypto/chacha.h"
 
 static const unsigned int key[] = {

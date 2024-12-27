@@ -31,8 +31,8 @@
 #include "internal/nelem.h"
 #include "internal/time.h"
 #include "internal/rcu.h"
-#include "testutil.h"
-#include "threadstest.h"
+#include <test/testutil.h>
+#include <test/threadstest.h>
 
 #ifdef __SANITIZE_THREAD__
 #include <sanitizer/tsan_interface.h>

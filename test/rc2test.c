@@ -14,7 +14,7 @@
 #include "internal/deprecated.h"
 
 #include "internal/nelem.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 #ifndef OPENSSL_NO_RC2
 # include <openssl/rc2.h>

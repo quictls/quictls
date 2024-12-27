@@ -10,7 +10,7 @@
 
 #include <string.h>
 #include <openssl/params.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 typedef struct {
     OSSL_PARAM *param;

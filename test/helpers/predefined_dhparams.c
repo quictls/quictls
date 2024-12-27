@@ -11,7 +11,7 @@
 #include <openssl/core_names.h>
 #include <openssl/param_build.h>
 
-#include "predefined_dhparams.h"
+#include <test/predefined_dhparams.h>
 
 #ifndef OPENSSL_NO_DH
 

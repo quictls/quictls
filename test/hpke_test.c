@@ -11,7 +11,7 @@
 #include <openssl/core_names.h>
 #include <openssl/rand.h>
 #include <openssl/hpke.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 /* a size to use for stack buffers */
 #define OSSL_HPKE_TSTSIZE 512

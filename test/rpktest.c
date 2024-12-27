@@ -8,9 +8,9 @@
  */
 #include <openssl/ssl.h>
 
-#include "helpers/ssltestlib.h"
+#include <test/ssltestlib.h>
 #include "internal/dane.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 #undef OSSL_NO_USABLE_TLS1_3
 #if defined(OPENSSL_NO_EC) && defined(OPENSSL_NO_DH)

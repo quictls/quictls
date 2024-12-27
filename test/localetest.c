@@ -12,8 +12,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <openssl/x509.h>
-#include "testutil.h"
-#include "testutil/output.h"
+#include <test/testutil.h>
+#include <test/output.h>
 
 #ifndef OPENSSL_NO_LOCALE
 # include <locale.h>

@@ -20,7 +20,7 @@
 
 #include <openssl/aes.h>
 #include <openssl/modes.h>
-#include "testutil.h"
+#include <test/testutil.h>
 #include "crypto/modes.h"
 #include "internal/nelem.h"
 

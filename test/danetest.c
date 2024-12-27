@@ -22,7 +22,7 @@
 #ifndef OPENSSL_NO_ENGINE
 # include <openssl/engine.h>
 #endif
-#include "testutil.h"
+#include <test/testutil.h>
 
 #include "internal/nelem.h"
 

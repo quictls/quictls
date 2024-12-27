@@ -25,8 +25,8 @@
 #include <openssl/param_build.h>
 #include <openssl/provider.h>
 #include <openssl/self_test.h>
-#include "testutil.h"
-#include "testutil/output.h"
+#include <test/testutil.h>
+#include <test/output.h>
 #include "acvp_test.inc"
 #include "internal/nelem.h"
 

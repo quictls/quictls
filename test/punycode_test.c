@@ -13,7 +13,7 @@
 #include "crypto/punycode.h"
 #include "internal/nelem.h"
 #include "internal/packet.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 
 static const struct puny_test {

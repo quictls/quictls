@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "../testutil.h"
+#include <test/testutil.h>
 #include <ctype.h>
 #include <openssl/provider.h>
 #include <openssl/core_names.h>

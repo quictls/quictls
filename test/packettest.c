@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "testutil.h"
+#include <test/testutil.h>
 #include "internal/packet.h"
 
 #define BUF_LEN 255

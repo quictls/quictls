@@ -13,7 +13,7 @@
 #include <openssl/x509v3.h>
 #include <openssl/pem.h>
 #include "internal/nelem.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 #ifndef OPENSSL_NO_EC
 static const unsigned char cert_der[] = {

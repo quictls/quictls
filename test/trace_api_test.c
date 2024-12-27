@@ -9,7 +9,7 @@
 
 #include <openssl/trace.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 static int test_trace_categories(void)
 {

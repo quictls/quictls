@@ -10,7 +10,7 @@
 #include <stddef.h>
 #include <openssl/provider.h>
 #include <openssl/evp.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 static int test_provider(OSSL_LIB_CTX *ctx)
 {

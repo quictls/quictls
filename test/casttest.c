@@ -19,7 +19,7 @@
 
 #include <openssl/opensslconf.h> /* To see if OPENSSL_NO_CAST is defined */
 #include "internal/nelem.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 #ifndef OPENSSL_NO_CAST
 # include <openssl/cast.h>
