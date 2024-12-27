@@ -861,10 +861,6 @@ int tls_get_more_records(OSSL_RECORD_LAYER *rl)
     } else {
         ERR_clear_last_mark();
     }
-    OSSL_TRACE_BEGIN(TLS) {
-        BIO_printf(trc_out, "dec %lu\n", (unsigned long)rr[0].length);
-        BIO_dump_indent(trc_out, rr[0].data, rr[0].length, 4);
-    } OSSL_TRACE_END(TLS);
 
     /* r->length is now the compressed data plus mac */
     if (rl->enc_ctx != NULL

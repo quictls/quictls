@@ -78,20 +78,6 @@ void trace_log_message(int category,
     if (verbosity >= level)
         category = -1; /* disabling trace output in addition to logging */
 #endif
-    if (category >= 0 && OSSL_trace_enabled(category)) {
-        BIO *out = OSSL_trace_begin(category);
-#ifndef OSSL_NO_C99
-        va_list ap_copy;
-
-        va_copy(ap_copy, ap);
-        (void)BIO_vprintf(out, fmt, ap_copy);
-        va_end(ap_copy);
-#else
-        (void)BIO_vprintf(out, fmt, ap);
-#endif
-        (void)BIO_printf(out, "\n");
-        OSSL_trace_end(category, out);
-    }
     if (verbosity < level) {
         va_end(ap);
         return;

@@ -368,14 +368,6 @@ OSSL_ENCODER_CTX *OSSL_ENCODER_CTX_new_for_pkey(const EVP_PKEY *pkey,
         libctx = ossl_provider_libctx(prov);
     }
 
-    OSSL_TRACE_BEGIN(ENCODER) {
-        BIO_printf(trc_out,
-                   "(ctx %p) Looking for %s encoders with selection %d\n",
-                   (void *)ctx, EVP_PKEY_get0_type_name(pkey), selection);
-        BIO_printf(trc_out, "    output type: %s, output structure: %s\n",
-                   output_type, output_struct);
-    } OSSL_TRACE_END(ENCODER);
-
     if (OSSL_ENCODER_CTX_set_output_type(ctx, output_type)
         && (output_struct == NULL
             || OSSL_ENCODER_CTX_set_output_structure(ctx, output_struct))
@@ -389,11 +381,6 @@ OSSL_ENCODER_CTX *OSSL_ENCODER_CTX_new_for_pkey(const EVP_PKEY *pkey,
                                              &save_parameters);
         /* ignoring error as this is only auxiliary parameter */
         (void)OSSL_ENCODER_CTX_set_params(ctx, params);
-
-        OSSL_TRACE_BEGIN(ENCODER) {
-            BIO_printf(trc_out, "(ctx %p) Got %d encoders\n",
-                       (void *)ctx, OSSL_ENCODER_CTX_get_num_encoders(ctx));
-        } OSSL_TRACE_END(ENCODER);
         return ctx;
     }
 

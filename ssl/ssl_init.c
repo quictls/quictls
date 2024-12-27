@@ -26,8 +26,6 @@ static int ssl_base_inited = 0;
 DEFINE_RUN_ONCE_STATIC(ossl_init_ssl_base)
 {
 #ifndef OPENSSL_NO_COMP
-    OSSL_TRACE(INIT, "ossl_init_ssl_base: "
-               "SSL_COMP_get_compression_methods()\n");
     /*
      * This will initialise the built-in compression algorithms. The value
      * returned is a STACK_OF(SSL_COMP), but that can be discarded safely
@@ -35,7 +33,6 @@ DEFINE_RUN_ONCE_STATIC(ossl_init_ssl_base)
     SSL_COMP_get_compression_methods();
 #endif
     ssl_sort_cipher_list();
-    OSSL_TRACE(INIT, "ossl_init_ssl_base: SSL_add_ssl_module()\n");
     /*
      * We ignore an error return here. Not much we can do - but not that bad
      * either. We can still safely continue.
@@ -54,7 +51,6 @@ DEFINE_RUN_ONCE_STATIC(ossl_init_load_ssl_strings)
      * pulling in all the error strings during static linking
      */
 #if !defined(OPENSSL_NO_ERR) && !defined(OPENSSL_NO_AUTOERRINIT)
-    OSSL_TRACE(INIT, "ossl_init_load_ssl_strings: ossl_err_load_SSL_strings()\n");
     ossl_err_load_SSL_strings();
 #endif
     return 1;
@@ -76,8 +72,6 @@ static void ssl_library_stop(void)
 
     if (ssl_base_inited) {
 #ifndef OPENSSL_NO_COMP
-        OSSL_TRACE(INIT, "ssl_library_stop: "
-                   "ssl_comp_free_compression_methods_int()\n");
         ssl_comp_free_compression_methods_int();
 #endif
     }

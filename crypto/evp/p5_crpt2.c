@@ -62,21 +62,6 @@ int ossl_pkcs5_pbkdf2_hmac_ex(const char *pass, int passlen,
 
     EVP_KDF_CTX_free(kctx);
 
-    OSSL_TRACE_BEGIN(PKCS5V2) {
-        BIO_printf(trc_out, "Password:\n");
-        BIO_hex_string(trc_out,
-                       0, passlen, pass, passlen);
-        BIO_printf(trc_out, "\n");
-        BIO_printf(trc_out, "Salt:\n");
-        BIO_hex_string(trc_out,
-                       0, saltlen, salt, saltlen);
-        BIO_printf(trc_out, "\n");
-        BIO_printf(trc_out, "Iteration count %d\n", iter);
-        BIO_printf(trc_out, "Key:\n");
-        BIO_hex_string(trc_out,
-                       0, keylen, out, keylen);
-        BIO_printf(trc_out, "\n");
-    } OSSL_TRACE_END(PKCS5V2);
     return rv;
 }
 

@@ -147,11 +147,6 @@ void *PKCS12_item_decrypt_d2i_ex(const X509_ALGOR *algor, const ASN1_ITEM *it,
                              &out, &outlen, 0, libctx, propq))
         return NULL;
     p = out;
-    OSSL_TRACE_BEGIN(PKCS12_DECRYPT) {
-        BIO_printf(trc_out, "\n");
-        BIO_dump(trc_out, out, outlen);
-        BIO_printf(trc_out, "\n");
-    } OSSL_TRACE_END(PKCS12_DECRYPT);
     ret = ASN1_item_d2i(NULL, &p, outlen, it);
     if (zbuf)
         OPENSSL_cleanse(out, outlen);
