@@ -81,7 +81,7 @@ extern "C" {
 #  define OPENSSL_NO_SRP
 # endif
 # ifdef OPENSSL_NO_TRACE
-#  undef OPENSSL_NO_TRACE
+#  define OPENSSL_NO_TRACE
 # endif
 # ifdef OPENSSL_NO_TLS1_3
 #  undef OPENSSL_NO_TLS1_3
