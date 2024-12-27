@@ -23,7 +23,7 @@
 # include <openssl/engine.h>
 #endif
 #include <openssl/self_test.h>
-#include <providers//providercommon.h>
+#include <providers/providercommon.h>
 #include <providers/ecx.h>
 #include "crypto/bn.h"
 
