@@ -1647,7 +1647,6 @@ STACK_OF(SSL_CIPHER) *ssl_create_cipher_list(SSL_CTX *ctx,
             if (!sk_SSL_CIPHER_push(cipherstack, curr->cipher)) {
                 OPENSSL_free(co_list);
                 sk_SSL_CIPHER_free(cipherstack);
-                OSSL_TRACE_CANCEL(TLS_CIPHER);
                 return NULL;
             }
         }

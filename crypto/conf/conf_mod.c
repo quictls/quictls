@@ -144,9 +144,7 @@ int CONF_modules_load(const CONF *cnf, const char *appname,
         return 1;
     }
 
-    OSSL_TRACE1(CONF, "Configuration in section %s\n", vsection);
     values = NCONF_get_section(cnf, vsection);
-
     if (values == NULL) {
         if (!(flags & CONF_MFLAGS_SILENT)) {
             ERR_clear_last_mark();
@@ -164,8 +162,6 @@ int CONF_modules_load(const CONF *cnf, const char *appname,
         vl = sk_CONF_VALUE_value(values, i);
         ERR_set_mark();
         ret = module_run(cnf, vl->name, vl->value, flags);
-        OSSL_TRACE3(CONF, "Running module %s (%s) returned %d\n",
-                    vl->name, vl->value, ret);
         if (ret <= 0)
             if (!(flags & CONF_MFLAGS_IGNORE_ERRORS)) {
                 ERR_clear_last_mark();

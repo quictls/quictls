@@ -86,7 +86,6 @@ static int provider_conf_params_internal(OSSL_PROVIDER *prov,
         char buffer[512];
         size_t buffer_len = 0;
 
-        OSSL_TRACE1(CONF, "Provider params: start section %s\n", value);
 
         /*
          * Check to see if the provided section value has already
@@ -131,9 +130,7 @@ static int provider_conf_params_internal(OSSL_PROVIDER *prov,
         }
         sk_OPENSSL_CSTRING_pop(visited);
 
-        OSSL_TRACE1(CONF, "Provider params: finish section %s\n", value);
     } else {
-        OSSL_TRACE2(CONF, "Provider params: %s = %s\n", name, value);
         if (prov != NULL)
             ok = ossl_provider_add_parameter(prov, name, value);
         else
@@ -319,7 +316,6 @@ static int provider_conf_load(OSSL_LIB_CTX *libctx, const char *name,
     int added = 0;
 
     name = skip_dot(name);
-    OSSL_TRACE1(CONF, "Configuring provider %s\n", name);
     /* Value is a section containing PROVIDER commands */
     ecmds = NCONF_get_section(cnf, value);
 
@@ -334,9 +330,6 @@ static int provider_conf_load(OSSL_LIB_CTX *libctx, const char *name,
         CONF_VALUE *ecmd = sk_CONF_VALUE_value(ecmds, i);
         const char *confname = skip_dot(ecmd->name);
         const char *confvalue = ecmd->value;
-
-        OSSL_TRACE2(CONF, "Provider command: %s = %s\n",
-                    confname, confvalue);
 
         /* First handle some special pseudo confs */
 
@@ -400,9 +393,6 @@ static int provider_conf_init(CONF_IMODULE *md, const CONF *cnf)
     STACK_OF(CONF_VALUE) *elist;
     CONF_VALUE *cval;
     int i;
-
-    OSSL_TRACE1(CONF, "Loading providers module: section %s\n",
-                CONF_imodule_get_value(md));
 
     /* Value is a section containing PROVIDERs to configure */
     elist = NCONF_get_section(cnf, CONF_imodule_get_value(md));

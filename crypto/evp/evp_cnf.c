@@ -25,9 +25,6 @@ static int alg_module_init(CONF_IMODULE *md, const CONF *cnf)
     STACK_OF(CONF_VALUE) *sktmp;
     CONF_VALUE *oval;
 
-    OSSL_TRACE2(CONF, "Loading EVP module: name %s, value %s\n",
-                CONF_imodule_get_name(md), CONF_imodule_get_value(md));
-
     oid_section = CONF_imodule_get_value(md);
     if ((sktmp = NCONF_get_section(cnf, oid_section)) == NULL) {
         ERR_raise(ERR_LIB_EVP, EVP_R_ERROR_LOADING_SECTION);

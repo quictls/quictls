@@ -281,9 +281,4 @@ static ossl_unused inline void CRYPTO_FREE_REF(CRYPTO_REF_COUNT *refcnt)        
 #  define REF_ASSERT_ISNT(i)
 # endif
 
-# define REF_PRINT_EX(text, count, object) \
-    OSSL_TRACE3(REF_COUNT, "%p:%4d:%s\n", (object), (count), (text));
-# define REF_PRINT_COUNT(text, object) \
-    REF_PRINT_EX(text, object->references.val, (void *)object)
-
 #endif

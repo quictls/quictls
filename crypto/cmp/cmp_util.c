@@ -27,7 +27,6 @@ int OSSL_CMP_log_open(void) /* is designed to be idempotent */
 
 void OSSL_CMP_log_close(void) /* is designed to be idempotent */
 {
-    (void)OSSL_trace_set_channel(OSSL_TRACE_CATEGORY_CMP, NULL);
 }
 
 /* return >= 0 if level contains logging level, possibly preceded by "CMP " */
