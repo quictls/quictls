@@ -21,7 +21,7 @@ Currrent Changes
 
 - The source now requires C99, and various simplifications were made
 as a result, such as using the standard sized types, the `inline`
-keyword, named initializers,etc.
+keyword, named initializers, etc.
 
 - Cherry-picked changes to assembly generation to support running code
 in execute-only mode and with indirect branch tracking on modern Intel
