@@ -12,8 +12,8 @@
 
 #include <openssl/crypto.h>
 #include <crypto/cryptlib.h>
-#include "internal/cryptlib.h"
-#include "internal/rcu.h"
+#include <internal/cryptlib.h>
+#include <internal/rcu.h>
 #include "rcu_internal.h"
 
 #if defined(__sun)

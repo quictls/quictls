@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 #include <string.h>
 
 #include <openssl/core.h>
@@ -18,8 +18,8 @@
 #include <openssl/provider.h>
 #include <openssl/decoder.h>
 #include <openssl/store.h>
-#include "internal/provider.h"
-#include "internal/passphrase.h"
+#include <internal/provider.h>
+#include <internal/passphrase.h>
 #include <crypto/evp.h>
 #include <crypto/x509.h>
 #include "store_local.h"

@@ -16,7 +16,7 @@
  * #defines and structures can be accessed, in this case SHA_CBLOCK and
  * sizeof(SHA_CTX).
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/opensslconf.h>
 #if defined(_WIN32)

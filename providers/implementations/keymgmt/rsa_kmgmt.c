@@ -11,7 +11,7 @@
  * RSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/core_dispatch.h>
 #include <openssl/core_names.h>
@@ -25,7 +25,7 @@
 #include <providers/provider_ctx.h>
 #include <crypto/rsa.h>
 #include <crypto/cryptlib.h>
-#include "internal/param_build_set.h"
+#include <internal/param_build_set.h>
 
 static OSSL_FUNC_keymgmt_new_fn rsa_newdata;
 static OSSL_FUNC_keymgmt_new_fn rsapss_newdata;

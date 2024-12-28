@@ -10,9 +10,9 @@
 #include <stdio.h>
 #include <crypto/ctype.h>
 #include <limits.h>
-#include "internal/cryptlib.h"
-#include "internal/thread_once.h"
-#include "internal/tsan_assist.h"
+#include <internal/cryptlib.h>
+#include <internal/thread_once.h>
+#include <internal/tsan_assist.h>
 #include <openssl/lhash.h>
 #include <openssl/asn1.h>
 #include <crypto/objects.h>

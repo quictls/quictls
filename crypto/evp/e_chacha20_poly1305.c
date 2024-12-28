@@ -8,8 +8,8 @@
  */
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
-#include "internal/endian.h"
+#include <internal/cryptlib.h>
+#include <internal/endian.h>
 
 #ifndef OPENSSL_NO_CHACHA
 

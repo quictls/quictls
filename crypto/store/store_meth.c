@@ -9,10 +9,10 @@
 
 #include <openssl/crypto.h>
 #include <crypto/store.h>
-#include "internal/core.h"
-#include "internal/namemap.h"
-#include "internal/property.h"
-#include "internal/provider.h"
+#include <internal/core.h>
+#include <internal/namemap.h>
+#include <internal/property.h>
+#include <internal/provider.h>
 #include "store_local.h"
 #include <crypto/context.h>
 

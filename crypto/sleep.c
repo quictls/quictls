@@ -8,7 +8,7 @@
  */
 
 #include <openssl/crypto.h>
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 
 /* system-specific variants defining OSSL_sleep() */
 #if defined(OPENSSL_SYS_UNIX)
@@ -49,7 +49,7 @@ void OSSL_sleep(uint64_t millis)
 
 #else
 /* Fallback to a busy wait */
-# include "internal/time.h"
+# include <internal/time.h>
 
 static void ossl_sleep_secs(uint64_t secs)
 {

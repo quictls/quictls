@@ -17,7 +17,7 @@
 #include <openssl/evp.h>
 #include <openssl/rand.h>
 #include <openssl/self_test.h>
-#include "internal/param_build_set.h"
+#include <internal/param_build_set.h>
 #include <openssl/param_build.h>
 #include <crypto/ecx.h>
 #include <providers/implementations.h>

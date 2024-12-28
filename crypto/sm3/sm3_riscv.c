@@ -11,7 +11,7 @@
 #include <string.h>
 
 #include <openssl/opensslconf.h>
-#include "internal/sm3.h"
+#include <internal/sm3.h>
 #include <crypto/riscv_arch.h>
 #include <stdio.h>
 

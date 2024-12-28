@@ -14,8 +14,8 @@
 #include <openssl/params.h>
 #include <openssl/evp.h>
 #include <openssl/proverr.h>
-#include "internal/nelem.h"
-#include "internal/sizes.h"
+#include <internal/nelem.h>
+#include <internal/sizes.h>
 #include <providers/providercommon.h>
 #include <providers/implementations.h>
 #include <providers/provider_ctx.h>

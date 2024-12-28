@@ -13,7 +13,7 @@
 #include <openssl/core_object.h>
 #include <openssl/params.h>
 #include <openssl/x509.h>
-#include "internal/sizes.h"
+#include <internal/sizes.h>
 #include <crypto/x509.h>
 #include <crypto/ec.h>
 #include <providers/bio.h>

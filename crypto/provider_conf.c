@@ -13,8 +13,8 @@
 #include <openssl/conf.h>
 #include <openssl/safestack.h>
 #include <openssl/provider.h>
-#include "internal/provider.h"
-#include "internal/cryptlib.h"
+#include <internal/provider.h>
+#include <internal/cryptlib.h>
 #include "provider_local.h"
 #include <crypto/context.h>
 

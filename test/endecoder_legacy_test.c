@@ -53,7 +53,7 @@
 #ifndef OPENSSL_NO_DEPRECATED_3_0
 # include <openssl/rsa.h>
 #endif
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <crypto/evp.h>
 
 #include <test/testutil.h>

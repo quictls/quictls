@@ -11,9 +11,9 @@
 #include <string.h>
 #include <openssl/err.h>
 #include <openssl/lhash.h>
-#include "internal/propertyerr.h"
-#include "internal/property.h"
-#include "internal/core.h"
+#include <internal/propertyerr.h>
+#include <internal/property.h>
+#include <internal/core.h>
 #include "property_local.h"
 #include <crypto/context.h>
 

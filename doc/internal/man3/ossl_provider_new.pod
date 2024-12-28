@@ -24,7 +24,7 @@ ossl_provider_get_capabilities
 
 =head1 SYNOPSIS
 
- #include "internal/provider.h"
+ #include <internal/provider.h>
 
  OSSL_PROVIDER *ossl_provider_find(OSSL_LIB_CTX *libctx, const char *name,
                                    int noconfig);

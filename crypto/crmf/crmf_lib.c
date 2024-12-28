@@ -29,7 +29,7 @@
 #include <openssl/asn1t.h>
 
 #include "crmf_local.h"
-#include "internal/sizes.h"
+#include <internal/sizes.h>
 #include <crypto/evp.h>
 #include <crypto/x509.h>
 

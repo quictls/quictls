@@ -17,11 +17,11 @@
  * RSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <time.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/bn.h>
 #include <openssl/self_test.h>
 #include <providers/providercommon.h>

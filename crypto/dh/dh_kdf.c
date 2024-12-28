@@ -11,16 +11,16 @@
  * DH low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 #include <string.h>
 #include <openssl/core_names.h>
 #include <openssl/dh.h>
 #include <openssl/evp.h>
 #include <openssl/asn1.h>
 #include <openssl/kdf.h>
-#include "internal/provider.h"
+#include <internal/provider.h>
 #include <crypto/dh.h>
 
 /* Key derivation function from X9.63/SECG */

@@ -14,7 +14,7 @@
 /* We need to use some engine deprecated APIs */
 #define OPENSSL_SUPPRESS_DEPRECATED
 
-#include "internal/e_os.h" /* for stat */
+#include <internal/e_os.h> /* for stat */
 #include <string.h>
 #include <sys/stat.h>
 #include <ctype.h>
@@ -32,9 +32,9 @@
 #include <openssl/ui.h>
 #include <openssl/engine.h>
 #include <openssl/x509.h>        /* For the PKCS8 stuff o.O */
-#include "internal/asn1.h"       /* For asn1_d2i_read_bio */
-#include "internal/o_dir.h"
-#include "internal/cryptlib.h"
+#include <internal/asn1.h>       /* For asn1_d2i_read_bio */
+#include <internal/o_dir.h>
+#include <internal/cryptlib.h>
 #include <crypto/ctype.h>        /* For ossl_isdigit */
 #include <crypto/pem.h>          /* For PVK and "blob" PEM headers */
 

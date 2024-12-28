@@ -50,7 +50,7 @@
  * Low level APIs (such as DH) are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -60,16 +60,16 @@
 #include <openssl/core_names.h>
 #include <openssl/params.h>
 #include <openssl/proverr.h>
-#include "internal/cryptlib.h"
-#include "internal/numbers.h"
+#include <internal/cryptlib.h>
+#include <internal/numbers.h>
 #include <crypto/evp.h>
 #include <providers/provider_ctx.h>
 #include <providers/providercommon.h>
 #include <providers/implementations.h>
 #include <providers/provider_util.h>
 #include <providers/securitycheck.h>
-#include "internal/e_os.h"
-#include "internal/safe_math.h"
+#include <internal/e_os.h>
+#include <internal/safe_math.h>
 
 OSSL_SAFE_MATH_UNSIGNED(size_t, size_t)
 

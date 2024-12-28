@@ -8,7 +8,7 @@
  */
 
 #include <crypto/rsa.h>
-#include "internal/der.h"
+#include <internal/der.h>
 
 /* Well known OIDs precompiled */
 

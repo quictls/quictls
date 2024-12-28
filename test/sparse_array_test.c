@@ -13,7 +13,7 @@
 #include <limits.h>
 
 #include <openssl/crypto.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <crypto/sparse_array.h>
 #include <test/testutil.h>
 

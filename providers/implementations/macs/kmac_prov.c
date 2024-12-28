@@ -59,7 +59,7 @@
 #include <providers/provider_ctx.h>
 #include <providers/provider_util.h>
 #include <providers/providercommon.h>
-#include "internal/cryptlib.h" /* ossl_assert */
+#include <internal/cryptlib.h> /* ossl_assert */
 
 /*
  * Forward declaration of everything implemented here.  This is not strictly

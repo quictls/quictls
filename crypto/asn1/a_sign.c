@@ -11,7 +11,7 @@
 #include <time.h>
 #include <sys/types.h>
 
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 
 #include <openssl/bn.h>
 #include <openssl/evp.h>

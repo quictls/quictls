@@ -11,7 +11,7 @@
 #include <openssl/core_dispatch.h>
 #include <crypto/cryptlib.h>
 #include <providers/providercommon.h>
-#include "internal/thread_once.h"
+#include <internal/thread_once.h>
 #include <crypto/context.h>
 
 #ifdef FIPS_MODULE

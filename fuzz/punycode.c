@@ -8,7 +8,7 @@
  */
 
 #include <crypto/punycode.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <openssl/crypto.h>
 #include "fuzzer.h"
 

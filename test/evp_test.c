@@ -23,8 +23,8 @@
 #include <openssl/core_names.h>
 #include <openssl/fips_names.h>
 #include <openssl/thread.h>
-#include "internal/numbers.h"
-#include "internal/nelem.h"
+#include <internal/numbers.h>
+#include <internal/nelem.h>
 #include <crypto/evp.h>
 #include <test/testutil.h>
 

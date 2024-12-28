@@ -13,8 +13,8 @@
 #include <openssl/core_names.h>
 #include <openssl/provider.h>
 #include <openssl/evp.h>
-#include "internal/provider.h"
-#include "internal/cryptlib.h"
+#include <internal/provider.h>
+#include <internal/cryptlib.h>
 #include <crypto/evp.h>
 #include <crypto/context.h>
 

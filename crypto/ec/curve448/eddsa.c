@@ -16,7 +16,7 @@
 #include "curve448_local.h"
 #include "word.h"
 #include "ed448.h"
-#include "internal/numbers.h"
+#include <internal/numbers.h>
 
 #define COFACTOR 4
 

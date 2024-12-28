@@ -20,11 +20,11 @@
  * DES low level APIs are deprecated for public use, but still ok for internal
  * use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/crypto.h>
-#include "internal/constant_time.h"
-#include "internal/nelem.h"
+#include <internal/constant_time.h>
+#include <internal/nelem.h>
 #include "des_local.h"
 
 static const unsigned char odd_parity[256] = {

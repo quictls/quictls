@@ -11,8 +11,8 @@
 #include <openssl/evp.h>
 #include <openssl/kdf.h>
 #include <openssl/x509.h>
-#include "internal/cryptlib.h"
-#include "internal/namemap.h"
+#include <internal/cryptlib.h>
+#include <internal/namemap.h>
 #include <crypto/objects.h>
 #include <crypto/evp.h>
 

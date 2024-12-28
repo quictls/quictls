@@ -12,15 +12,15 @@
  * ECDSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h>
 #include <openssl/err.h>
 
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <crypto/bn.h>
 #include "ec_local.h"
-#include "internal/refcount.h"
+#include <internal/refcount.h>
 
 /*
  * This file implements the wNAF-based interleaving multi-exponentiation method

@@ -8,7 +8,7 @@
  */
 
 #include "bn_local.h"
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 # include <openssl/dh.h>
 # include <crypto/bn_dh.h>

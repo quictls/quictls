@@ -18,8 +18,8 @@
 # include <openssl/opensslconf.h>
 
 # include <crypto/bn.h>
-# include "internal/cryptlib.h"
-# include "internal/numbers.h"
+# include <internal/cryptlib.h>
+# include <internal/numbers.h>
 
 /*
  * These preprocessor symbols control various aspects of the bignum headers

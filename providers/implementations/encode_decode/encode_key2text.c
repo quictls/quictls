@@ -10,7 +10,7 @@
 /*
  * Low level APIs are deprecated for public use, but still ok for internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <ctype.h>
 
@@ -21,7 +21,7 @@
 #include <openssl/err.h>
 #include <openssl/safestack.h>
 #include <openssl/proverr.h>
-#include "internal/ffc.h"
+#include <internal/ffc.h>
 #include <crypto/bn.h>           /* bn_get_words() */
 #include <crypto/dh.h>           /* ossl_dh_get0_params() */
 #include <crypto/dsa.h>          /* ossl_dsa_get0_params() */

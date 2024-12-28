@@ -10,15 +10,15 @@
 #ifndef _GNU_SOURCE
 # define _GNU_SOURCE
 #endif
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/rand.h>
 #include <openssl/crypto.h>
 #include <crypto/rand_pool.h>
 #include <crypto/rand.h>
-#include "internal/dso.h"
-#include "internal/nelem.h"
+#include <internal/dso.h>
+#include <internal/nelem.h>
 #include <providers/seeding.h>
 
 #ifdef __linux

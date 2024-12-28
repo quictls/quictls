@@ -11,14 +11,14 @@
  * ECDSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h>
 #include "ec_local.h"
 #include <openssl/err.h>
 #include <openssl/asn1t.h>
 #include <openssl/objects.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <crypto/asn1.h>
 #include <crypto/asn1_dsa.h>
 

@@ -12,7 +12,7 @@
 #include <openssl/dh.h>
 #include <openssl/err.h>
 #include <openssl/core_names.h>
-#include "internal/sizes.h"
+#include <internal/sizes.h>
 #include <crypto/asn1.h>
 #include <crypto/evp.h>
 #include "cms_local.h"

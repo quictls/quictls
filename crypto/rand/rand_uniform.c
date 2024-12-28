@@ -8,7 +8,7 @@
  */
 
 #include <crypto/rand.h>
-#include "internal/common.h"
+#include <internal/common.h>
 
 /*
  * Implementation an optimal random integer in a range function.

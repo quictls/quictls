@@ -10,15 +10,15 @@
 /* We need to use some engine deprecated APIs */
 #define OPENSSL_SUPPRESS_DEPRECATED
 
-#include "internal/cryptlib.h"
-#include "internal/rcu.h"
+#include <internal/cryptlib.h>
+#include <internal/rcu.h>
 #include <stdio.h>
 #include <ctype.h>
 #include <openssl/crypto.h>
-#include "internal/conf.h"
+#include <internal/conf.h>
 #include <openssl/conf_api.h>
-#include "internal/dso.h"
-#include "internal/thread_once.h"
+#include <internal/dso.h>
+#include <internal/thread_once.h>
 #include <openssl/x509.h>
 #include <openssl/trace.h>
 #include <openssl/engine.h>

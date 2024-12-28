@@ -27,7 +27,7 @@
 # include <sys/sysctl.h>
 #endif
 #include <openssl/crypto.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <crypto/ppc_arch.h>
 
 unsigned int OPENSSL_ppccap_P = 0;

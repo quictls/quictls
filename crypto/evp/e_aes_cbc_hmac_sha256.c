@@ -12,7 +12,7 @@
  * use where we're using them to implement the higher level EVP interface, as is
  * the case here.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <string.h>
@@ -22,9 +22,9 @@
 #include <openssl/aes.h>
 #include <openssl/sha.h>
 #include <openssl/rand.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <crypto/modes.h>
-#include "internal/constant_time.h"
+#include <internal/constant_time.h>
 #include <crypto/evp.h>
 #include "evp_local.h"
 

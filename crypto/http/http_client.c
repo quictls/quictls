@@ -8,7 +8,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <crypto/ctype.h>
@@ -21,8 +21,8 @@
 #include <openssl/buffer.h>
 #include <openssl/http.h>
 #include <openssl/trace.h>
-#include "internal/sockets.h"
-#include "internal/common.h" /* for ossl_assert() */
+#include <internal/sockets.h>
+#include <internal/common.h> /* for ossl_assert() */
 
 #define HTTP_PREFIX "HTTP/"
 #define HTTP_VERSION_PATT "1." /* allow 1.x */

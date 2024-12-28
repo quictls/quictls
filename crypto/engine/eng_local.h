@@ -12,10 +12,10 @@
 # define OSSL_CRYPTO_ENGINE_ENG_LOCAL_H
 
 # include <openssl/trace.h>
-# include "internal/cryptlib.h"
+# include <internal/cryptlib.h>
 # include <crypto/engine.h>
-# include "internal/thread_once.h"
-# include "internal/refcount.h"
+# include <internal/thread_once.h>
+# include <internal/refcount.h>
 
 extern CRYPTO_RWLOCK *global_engine_lock;
 

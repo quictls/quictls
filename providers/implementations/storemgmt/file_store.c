@@ -23,8 +23,8 @@
 #include <openssl/decoder.h>
 #include <openssl/proverr.h>
 #include <openssl/store.h>       /* The OSSL_STORE_INFO type numbers */
-#include "internal/cryptlib.h"
-#include "internal/o_dir.h"
+#include <internal/cryptlib.h>
+#include <internal/o_dir.h>
 #include <crypto/decoder.h>
 #include <crypto/ctype.h>        /* ossl_isdigit() */
 #include <providers/implementations.h>

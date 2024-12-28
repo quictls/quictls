@@ -16,7 +16,7 @@
 #include <openssl/core_names.h>
 #include <openssl/proverr.h>
 #include <crypto/evp.h>
-#include "internal/numbers.h"
+#include <internal/numbers.h>
 #include <providers/implementations.h>
 #include <providers/provider_ctx.h>
 #include <providers/providercommon.h>

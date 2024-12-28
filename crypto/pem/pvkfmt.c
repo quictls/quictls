@@ -16,7 +16,7 @@
  * RSA and DSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/pem.h>
 #include <openssl/rand.h>
@@ -25,7 +25,7 @@
 #include <openssl/rsa.h>
 #include <openssl/kdf.h>
 #include <openssl/core_names.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <crypto/pem.h>
 #include <crypto/evp.h>
 

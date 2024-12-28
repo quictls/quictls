@@ -7,15 +7,15 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 
 #include <openssl/objects.h>
 #include <openssl/ts.h>
 #include <openssl/pkcs7.h>
 #include <openssl/crypto.h>
-#include "internal/cryptlib.h"
-#include "internal/sizes.h"
-#include "internal/time.h"
+#include <internal/cryptlib.h>
+#include <internal/sizes.h>
+#include <internal/time.h>
 #include <crypto/ess.h>
 #include "ts_local.h"
 

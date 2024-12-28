@@ -11,7 +11,7 @@
  * SHA512 low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <openssl/opensslconf.h>
@@ -56,7 +56,7 @@
 #include <openssl/sha.h>
 #include <openssl/opensslv.h>
 
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <crypto/sha.h>
 
 #if defined(__i386) || defined(__i386__) || defined(_M_IX86) || \

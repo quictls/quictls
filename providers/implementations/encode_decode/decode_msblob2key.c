@@ -11,7 +11,7 @@
  * low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h>
 
@@ -23,7 +23,7 @@
 #include <openssl/pem.h>         /* For public PVK functions */
 #include <openssl/x509.h>
 #include <openssl/err.h>
-#include "internal/passphrase.h"
+#include <internal/passphrase.h>
 #include <crypto/pem.h>          /* For internal PVK and "blob" headers */
 #include <crypto/rsa.h>
 #include <providers/bio.h>

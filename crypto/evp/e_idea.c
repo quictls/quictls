@@ -12,10 +12,10 @@
  * use where we're using them to implement the higher level EVP interface, as is
  * the case here.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 
 #ifndef OPENSSL_NO_IDEA
 # include <openssl/evp.h>

@@ -10,7 +10,7 @@
  */
 
 #include <string.h>
-#include "internal/sm3.h"
+#include <internal/sm3.h>
 
 #define DATA_ORDER_IS_BIG_ENDIAN
 

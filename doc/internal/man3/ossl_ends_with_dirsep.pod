@@ -7,7 +7,7 @@ ossl_ends_with_dirsep, ossl_is_absolute_path
 
 =head1 SYNOPSIS
 
-  #include "internal/cryptlib.h"
+  #include <internal/cryptlib.h>
 
   int ossl_ends_with_dirsep(const char *path);
 

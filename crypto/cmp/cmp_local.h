@@ -12,7 +12,7 @@
 #ifndef OSSL_CRYPTO_CMP_LOCAL_H
 # define OSSL_CRYPTO_CMP_LOCAL_H
 
-# include "internal/cryptlib.h"
+# include <internal/cryptlib.h>
 
 # include <openssl/cmp.h>
 # include <openssl/err.h>

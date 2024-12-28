@@ -11,10 +11,10 @@
  * DSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/asn1t.h>
 #include <openssl/x509.h>
 #include <openssl/engine.h>
@@ -25,8 +25,8 @@
 #include <openssl/dsa.h>
 #include <openssl/decoder.h>
 #include <openssl/encoder.h>
-#include "internal/provider.h"
-#include "internal/sizes.h"
+#include <internal/provider.h>
+#include <internal/sizes.h>
 
 struct X509_pubkey_st {
     X509_ALGOR *algor;

@@ -11,8 +11,8 @@
  * RSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
-#include "internal/nelem.h"
+#include <internal/deprecated.h>
+#include <internal/nelem.h>
 
 #include <openssl/crypto.h>
 #include <openssl/evp.h>
@@ -23,7 +23,7 @@
 #include <openssl/err.h>
 #include <crypto/rsa.h>
 #include <openssl/proverr.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <providers/provider_ctx.h>
 #include <providers/implementations.h>
 #include <providers/securitycheck.h>

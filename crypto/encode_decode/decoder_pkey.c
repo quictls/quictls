@@ -20,8 +20,8 @@
 #include "crypto/evp/evp_local.h"
 #include <crypto/lhash.h>
 #include "encoder_local.h"
-#include "internal/namemap.h"
-#include "internal/sizes.h"
+#include <internal/namemap.h>
+#include <internal/sizes.h>
 
 int OSSL_DECODER_CTX_set_passphrase(OSSL_DECODER_CTX *ctx,
                                     const unsigned char *kstr,

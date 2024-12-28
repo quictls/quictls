@@ -12,7 +12,7 @@
 #include <openssl/x509v3.h>
 #include <openssl/err.h>
 #include <openssl/cms.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <crypto/x509.h>
 #include "cms_local.h"
 

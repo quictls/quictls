@@ -19,7 +19,7 @@
 #include <openssl/self_test.h>
 #include <providers/providercommon.h>
 #include <providers/provider_ctx.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <crypto/rand_pool.h>
 #include "drbg_local.h"
 #include <providers/seeding.h>

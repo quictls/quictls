@@ -12,7 +12,7 @@
  * internal use.  The prov/md5_sha1.h include requires this, but this must
  * be the first include loaded.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <crypto/evp.h>
 #include <providers/md5_sha1.h>   /* diverse MD5_SHA1 macros */

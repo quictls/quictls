@@ -11,8 +11,8 @@
 #include <stdlib.h>
 #include <openssl/core.h>
 #include <openssl/core_names.h>
-#include "internal/cryptlib.h"
-#include "internal/core.h"
+#include <internal/cryptlib.h>
+#include <internal/core.h>
 #include <openssl/objects.h>
 #include <openssl/evp.h>
 #include <crypto/bn.h>

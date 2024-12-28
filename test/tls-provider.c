@@ -20,11 +20,11 @@
 #include <openssl/asn1.h>
 #include <openssl/asn1t.h>
 #include <openssl/core_object.h>
-#include "internal/asn1.h"
+#include <internal/asn1.h>
 /* For TLS1_3_VERSION */
 #include <openssl/ssl.h>
-#include "internal/nelem.h"
-#include "internal/refcount.h"
+#include <internal/nelem.h>
+#include <internal/refcount.h>
 
 /* error codes */
 

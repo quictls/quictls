@@ -7,8 +7,8 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/cryptlib.h"
-#include "internal/constant_time.h"
+#include <internal/cryptlib.h>
+#include <internal/constant_time.h>
 #include "bn_local.h"
 
 #include <stdlib.h>

@@ -7,8 +7,8 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/ffc.h"
-#include "internal/nelem.h"
+#include <internal/ffc.h>
+#include <internal/nelem.h>
 #include <crypto/bn_dh.h>
 
 #ifndef OPENSSL_NO_DH

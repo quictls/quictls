@@ -29,7 +29,7 @@
 #include <crypto/conferr.h>
 #include <crypto/pkcs12err.h>
 #include <crypto/randerr.h>
-#include "internal/dsoerr.h"
+#include <internal/dsoerr.h>
 #include <crypto/engineerr.h>
 #include <crypto/uierr.h>
 #include <crypto/httperr.h>
@@ -42,7 +42,7 @@
 #include <crypto/asyncerr.h>
 #include <crypto/storeerr.h>
 #include <crypto/esserr.h>
-#include "internal/propertyerr.h"
+#include <internal/propertyerr.h>
 #include <providers/proverr.h>
 
 int ossl_err_load_crypto_strings(void)

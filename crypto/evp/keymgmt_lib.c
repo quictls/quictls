@@ -8,11 +8,11 @@
  */
 
 #include <openssl/core_names.h>
-#include "internal/cryptlib.h"
-#include "internal/nelem.h"
+#include <internal/cryptlib.h>
+#include <internal/nelem.h>
 #include <crypto/evp.h>
-#include "internal/core.h"
-#include "internal/provider.h"
+#include <internal/core.h>
+#include <internal/provider.h>
 #include "evp_local.h"
 
 /*

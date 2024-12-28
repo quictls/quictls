@@ -15,9 +15,9 @@
 #include <openssl/provider.h>
 #include <openssl/safestack.h>
 #include <openssl/trace.h>
-#include "internal/provider.h"
-#include "internal/property.h"
-#include "internal/namemap.h"
+#include <internal/provider.h>
+#include <internal/property.h>
+#include <internal/namemap.h>
 #include <crypto/evp.h>
 #include "encoder_local.h"
 

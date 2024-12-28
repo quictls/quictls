@@ -12,7 +12,7 @@
 
 # include <openssl/evp.h>
 # include <openssl/core_dispatch.h>
-# include "internal/refcount.h"
+# include <internal/refcount.h>
 # include <crypto/ecx.h>
 
 /*

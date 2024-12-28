@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/ffc.h"
+#include <internal/ffc.h>
 
 /*
  * SP800-56Ar3 5.6.1.1.4 Key pair generation by testing candidates.

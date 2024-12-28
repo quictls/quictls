@@ -11,9 +11,9 @@
  * AES_encrypt/AES_decrypt are deprecated - but we need to use them to implement
  * these functions
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 
 #include <openssl/aes.h>
 #include "aes_local.h"

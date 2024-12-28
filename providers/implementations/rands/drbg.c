@@ -15,7 +15,7 @@
 #include <crypto/rand.h>
 #include <openssl/proverr.h>
 #include "drbg_local.h"
-#include "internal/thread_once.h"
+#include <internal/thread_once.h>
 #include <crypto/cryptlib.h>
 #include <providers/seeding.h>
 #include <crypto/rand_pool.h>

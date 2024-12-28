@@ -10,7 +10,7 @@
 /*
  * Low level APIs are deprecated for public use, but still ok for internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/core.h>
 #include <openssl/core_dispatch.h>
@@ -26,8 +26,8 @@
 #include <openssl/dsa.h>
 #include <openssl/ec.h>
 #include <openssl/proverr.h>
-#include "internal/passphrase.h"
-#include "internal/cryptlib.h"
+#include <internal/passphrase.h>
+#include <internal/cryptlib.h>
 #include <crypto/ecx.h>
 #include <crypto/rsa.h>
 #include <providers/implementations.h>

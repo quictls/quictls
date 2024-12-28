@@ -9,11 +9,11 @@
 
 #include <crypto/cryptlib.h>
 #include <openssl/conf.h>
-#include "internal/thread_once.h"
-#include "internal/property.h"
-#include "internal/core.h"
-#include "internal/bio.h"
-#include "internal/provider.h"
+#include <internal/thread_once.h>
+#include <internal/property.h>
+#include <internal/core.h>
+#include <internal/bio.h>
+#include <internal/provider.h>
 #include <crypto/decoder.h>
 #include <crypto/context.h>
 

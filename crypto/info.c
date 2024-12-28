@@ -10,9 +10,9 @@
 #include <openssl/crypto.h>
 #include <crypto/rand.h>
 #include <crypto/dso_conf.h>
-#include "internal/thread_once.h"
-#include "internal/cryptlib.h"
-#include "internal/e_os.h"
+#include <internal/thread_once.h>
+#include <internal/cryptlib.h>
+#include <internal/e_os.h>
 #include "buildinf.h"
 #include <openssl/quic.h>
 

@@ -19,7 +19,7 @@
 #include <openssl/encoder.h>
 #include <openssl/decoder.h>
 
-#include "internal/cryptlib.h"   /* ossl_assert */
+#include <internal/cryptlib.h>   /* ossl_assert */
 #include <crypto/pem.h>          /* For PVK and "blob" PEM headers */
 #include <crypto/evp.h>          /* For evp_pkey_is_provided() */
 

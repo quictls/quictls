@@ -24,7 +24,7 @@
 #include <openssl/crypto.h>
 #include <openssl/bn.h>
 #include <crypto/asn1_dsa.h>
-#include "internal/packet.h"
+#include <internal/packet.h>
 
 #define ID_SEQUENCE 0x30
 #define ID_INTEGER 0x02

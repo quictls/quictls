@@ -12,7 +12,7 @@
 #include <string.h>
 #include <setjmp.h>
 #include <signal.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <crypto/ctype.h>
 #include "s390x_arch.h"
 

@@ -15,7 +15,7 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include <openssl/bn.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <crypto/sparc_arch.h>
 
 #if defined(__GNUC__) && defined(__linux)

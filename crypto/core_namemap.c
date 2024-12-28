@@ -7,11 +7,11 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/namemap.h"
+#include <internal/namemap.h>
 #include <openssl/lhash.h>
 #include <crypto/lhash.h>      /* ossl_lh_strcasehash */
-#include "internal/tsan_assist.h"
-#include "internal/sizes.h"
+#include <internal/tsan_assist.h>
+#include <internal/sizes.h>
 #include <crypto/context.h>
 
 /*-

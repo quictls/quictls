@@ -16,10 +16,10 @@
 #include <openssl/objects.h>
 #include <openssl/safestack.h>
 #include <openssl/e_os2.h>
-#include "internal/thread_once.h"
+#include <internal/thread_once.h>
 #include <crypto/lhash.h>
 #include "obj_local.h"
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 
 /*
  * I use the ex_data stuff to manage the identifiers for the obj_name_types

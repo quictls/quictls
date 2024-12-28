@@ -7,8 +7,8 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/cryptlib.h"
-#include "internal/packet.h"
+#include <internal/cryptlib.h>
+#include <internal/packet.h>
 #include <openssl/err.h>
 
 #define DEFAULT_BUF_SIZE    256

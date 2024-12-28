@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <crypto/engine.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/rand.h>
 #include <openssl/err.h>
 #include <openssl/crypto.h>

@@ -11,8 +11,8 @@
 #include <openssl/objects.h>
 #include <openssl/ts.h>
 #include <openssl/pkcs7.h>
-#include "internal/cryptlib.h"
-#include "internal/sizes.h"
+#include <internal/cryptlib.h>
+#include <internal/sizes.h>
 #include <crypto/ess.h>
 #include "ts_local.h"
 

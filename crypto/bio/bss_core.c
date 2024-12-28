@@ -9,7 +9,7 @@
 
 #include <openssl/core_dispatch.h>
 #include "bio_local.h"
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <crypto/context.h>
 
 typedef struct {

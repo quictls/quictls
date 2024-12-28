@@ -15,7 +15,7 @@
  */
 
 #include <openssl/core_names.h>
-#include "internal/param_build_set.h"
+#include <internal/param_build_set.h>
 
 DEFINE_SPECIAL_STACK_OF_CONST(BIGNUM_const, BIGNUM)
 

@@ -11,7 +11,7 @@
  * RC2 low level APIs are deprecated for public use, but still ok for internal
  * use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/rc2.h>
 #include "rc2_local.h"

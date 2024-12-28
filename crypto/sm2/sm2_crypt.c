@@ -13,7 +13,7 @@
  * ECDSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <crypto/sm2.h>
 #include <crypto/sm2err.h>

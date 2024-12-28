@@ -11,13 +11,13 @@
  * EVP _meth_ APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h>
 
 #include <openssl/evp.h>
 #include <crypto/evp.h>
-#include "internal/provider.h"
+#include <internal/provider.h>
 #include "evp_local.h"
 
 EVP_CIPHER *EVP_CIPHER_meth_new(int cipher_type, int block_size, int key_len)

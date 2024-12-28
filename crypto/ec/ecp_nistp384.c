@@ -35,7 +35,7 @@
 #include <openssl/err.h>
 #include "ec_local.h"
 
-#include "internal/numbers.h"
+#include <internal/numbers.h>
 
 #ifndef INT128_MAX
 # error "Your compiler doesn't appear to support 128-bit integer types"

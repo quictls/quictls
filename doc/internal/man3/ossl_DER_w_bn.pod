@@ -8,7 +8,7 @@ ossl_DER_w_octet_string, ossl_DER_w_octet_string_uint32
 
 =head1 SYNOPSIS
 
- #include "internal/der.h"
+ #include <internal/der.h>
 
  int ossl_DER_w_boolean(WPACKET *pkt, int tag, int b);
  int ossl_DER_w_uint32(WPACKET *pkt, int tag, uint32_t v);

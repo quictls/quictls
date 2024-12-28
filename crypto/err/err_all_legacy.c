@@ -25,7 +25,7 @@
 # include <crypto/cterr.h>
 # include <crypto/dherr.h>
 # include <crypto/dsaerr.h>
-# include "internal/dsoerr.h"
+# include <internal/dsoerr.h>
 # include <crypto/ecerr.h>
 # include <crypto/engineerr.h>
 # include <crypto/evperr.h>

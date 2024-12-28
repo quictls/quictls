@@ -11,10 +11,10 @@
 #include <openssl/core_dispatch.h>
 #include <openssl/encoder.h>
 #include <openssl/ui.h>
-#include "internal/core.h"
-#include "internal/namemap.h"
-#include "internal/property.h"
-#include "internal/provider.h"
+#include <internal/core.h>
+#include <internal/namemap.h>
+#include <internal/property.h>
+#include <internal/provider.h>
 #include <crypto/encoder.h>
 #include "encoder_local.h"
 #include <crypto/context.h>

@@ -11,8 +11,8 @@
 #include <stdarg.h>
 #include <openssl/evp.h>
 #include <test/testutil.h>
-#include "internal/nelem.h"
-#include "internal/property.h"
+#include <internal/nelem.h>
+#include <internal/property.h>
 #include "../crypto/property/property_local.h"
 
 /*

@@ -11,7 +11,7 @@
  * RSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h>
 #include <openssl/core_names.h>
@@ -22,8 +22,8 @@
 # include <openssl/x509.h>
 # include <crypto/asn1.h>
 #endif
-#include "internal/sizes.h"
-#include "internal/param_build_set.h"
+#include <internal/sizes.h>
+#include <internal/param_build_set.h>
 #include <crypto/rsa.h>
 #include "rsa_local.h"
 

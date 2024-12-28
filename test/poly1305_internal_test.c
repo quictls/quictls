@@ -14,7 +14,7 @@
 
 #include <test/testutil.h>
 #include <crypto/poly1305.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 typedef struct {
     size_t size;

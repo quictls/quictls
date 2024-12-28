@@ -21,8 +21,8 @@
 #include <openssl/dh.h>
 #include <openssl/decoder.h>
 #include <openssl/ui.h>
-#include "internal/cryptlib.h"
-#include "internal/passphrase.h"
+#include <internal/cryptlib.h>
+#include <internal/passphrase.h>
 #include <crypto/asn1.h>
 #include <crypto/x509.h>
 #include <crypto/evp.h>

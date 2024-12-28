@@ -14,7 +14,7 @@
 /* We need to use some STORE deprecated APIs */
 #define OPENSSL_SUPPRESS_DEPRECATED
 
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 
 #include <openssl/crypto.h>
 #include <openssl/err.h>
@@ -23,10 +23,10 @@
 #include <openssl/provider.h>
 #include <openssl/param_build.h>
 #include <openssl/store.h>
-#include "internal/thread_once.h"
-#include "internal/cryptlib.h"
-#include "internal/provider.h"
-#include "internal/bio.h"
+#include <internal/thread_once.h>
+#include <internal/cryptlib.h>
+#include <internal/provider.h>
+#include <internal/bio.h>
 #include <crypto/store.h>
 #include "store_local.h"
 

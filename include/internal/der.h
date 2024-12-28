@@ -11,7 +11,7 @@
 # define OSSL_INTERNAL_DER_H
 
 # include <openssl/bn.h>
-# include "internal/packet.h"
+# include <internal/packet.h>
 
 /*
  * NOTE: X.690 numbers the identifier octet bits 1 to 8.

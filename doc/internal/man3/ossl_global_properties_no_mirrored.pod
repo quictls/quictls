@@ -7,7 +7,7 @@ ossl_property_list_to_string, ossl_global_properties_no_mirrored
 
 =head1 SYNOPSIS
 
- #include "internal/property.h"
+ #include <internal/property.h>
 
  size_t ossl_property_list_to_string(OSSL_LIB_CTX *ctx,
                                      const OSSL_PROPERTY_LIST *list, char *buf,

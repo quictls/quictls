@@ -8,8 +8,8 @@
  */
 
 #include <openssl/core_names.h>
-#include "internal/ffc.h"
-#include "internal/sizes.h"
+#include <internal/ffc.h>
+#include <internal/sizes.h>
 
 /*
  * The intention with the "backend" source file is to offer backend support

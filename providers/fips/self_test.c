@@ -11,13 +11,13 @@
 #include <openssl/evp.h>
 #include <openssl/params.h>
 #include <openssl/crypto.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/fipskey.h>
 #include <openssl/err.h>
 #include <openssl/proverr.h>
 #include <openssl/rand.h>
-#include "internal/e_os.h"
-#include "internal/tsan_assist.h"
+#include <internal/e_os.h>
+#include <internal/tsan_assist.h>
 #include <providers/providercommon.h>
 #include <crypto/rand.h>
 
@@ -28,7 +28,7 @@
  * it should be run once regardless of the number of OSSL_LIB_CTXs we have.
  */
 #define ALLOW_RUN_ONCE_IN_FIPS
-#include "internal/thread_once.h"
+#include <internal/thread_once.h>
 #include "self_test.h"
 
 #define FIPS_STATE_INIT     0

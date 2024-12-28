@@ -12,11 +12,11 @@
 #ifndef OSSL_SSL_LOCAL_H
 # define OSSL_SSL_LOCAL_H
 
-# include "internal/e_os.h"              /* struct timeval for DTLS */
+# include <internal/e_os.h>              /* struct timeval for DTLS */
 # include <stdlib.h>
 # include <time.h>
 # include <errno.h>
-# include "internal/common.h" /* for HAS_PREFIX */
+# include <internal/common.h> /* for HAS_PREFIX */
 
 # include <openssl/buffer.h>
 # include <openssl/bio.h>
@@ -26,16 +26,16 @@
 # include <openssl/ssl.h>
 # include <openssl/async.h>
 # include <openssl/ct.h>
-# include "internal/recordmethod.h"
-# include "internal/statem.h"
-# include "internal/packet.h"
-# include "internal/dane.h"
-# include "internal/refcount.h"
-# include "internal/tsan_assist.h"
-# include "internal/bio.h"
-# include "internal/ktls.h"
-# include "internal/time.h"
-# include "internal/ssl.h"
+# include <internal/recordmethod.h>
+# include <internal/statem.h>
+# include <internal/packet.h>
+# include <internal/dane.h>
+# include <internal/refcount.h>
+# include <internal/tsan_assist.h>
+# include <internal/bio.h>
+# include <internal/ktls.h>
+# include <internal/time.h>
+# include <internal/ssl.h>
 # include "record/record.h"
 
 # ifdef OPENSSL_BUILD_SHLIBSSL

@@ -16,8 +16,8 @@
 #include <openssl/crypto.h>
 #include <openssl/err.h>
 #include <openssl/rand.h>
-#include "internal/nelem.h"
-#include "internal/numbers.h"
+#include <internal/nelem.h>
+#include <internal/numbers.h>
 #include <test/testutil.h>
 #include "bn_prime.h"
 #include <crypto/bn.h>

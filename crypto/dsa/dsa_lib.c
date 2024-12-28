@@ -11,14 +11,14 @@
  * DSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/bn.h>
 #ifndef FIPS_MODULE
 # include <openssl/engine.h>
 #endif
-#include "internal/cryptlib.h"
-#include "internal/refcount.h"
+#include <internal/cryptlib.h>
+#include <internal/refcount.h>
 #include <crypto/dsa.h>
 #include <crypto/dh.h> /* required by DSA_dup_DH() */
 #include "dsa_local.h"

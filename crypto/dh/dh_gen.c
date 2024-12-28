@@ -21,10 +21,10 @@
  * specified in SP800-56A) when generating keys. Hence DH pairwise tests are
  * omitted here.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/bn.h>
 #include <openssl/sha.h>
 #include <crypto/dh.h>

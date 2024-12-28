@@ -8,8 +8,8 @@
  */
 
 #include <string.h>
-#include "internal/nelem.h"
-#include "internal/cryptlib.h"
+#include <internal/nelem.h>
+#include <internal/cryptlib.h>
 #include "../ssl_local.h"
 #include "statem_local.h"
 

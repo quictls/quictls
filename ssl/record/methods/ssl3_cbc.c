@@ -20,7 +20,7 @@
  * MD5 and SHA-1 low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/evp.h>
 #ifndef FIPS_MODULE
@@ -28,9 +28,9 @@
 #endif
 #include <openssl/sha.h>
 
-#include "internal/ssl3_cbc.h"
-#include "internal/constant_time.h"
-#include "internal/cryptlib.h"
+#include <internal/ssl3_cbc.h>
+#include <internal/constant_time.h>
+#include <internal/cryptlib.h>
 
 /*
  * MAX_HASH_BIT_COUNT_BYTES is the maximum number of bytes in the hash's

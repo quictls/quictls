@@ -12,7 +12,7 @@
  * EC_GROUP low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h>
 #include <openssl/params.h>
@@ -21,7 +21,7 @@
 #include <openssl/opensslv.h>
 #include <openssl/param_build.h>
 #include <crypto/ec.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include "ec_local.h"
 
 /* functions for EC_GROUP objects */

@@ -20,9 +20,9 @@
 #include <openssl/bn.h>
 #include <openssl/provider.h>
 #include <openssl/param_build.h>
-#include "internal/nelem.h"
-#include "internal/sizes.h"
-#include "internal/tlsgroups.h"
+#include <internal/nelem.h>
+#include <internal/sizes.h>
+#include <internal/tlsgroups.h>
 #include "ssl_local.h"
 #include <openssl/ct.h>
 
