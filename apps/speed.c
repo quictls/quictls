@@ -68,14 +68,14 @@ VirtualLock(
 
 #include <openssl/bn.h>
 #include <openssl/rsa.h>
-#include <apps/testrsa.h>
+#include <apps/testkeys.h>
 #ifndef OPENSSL_NO_DH
 # include <openssl/dh.h>
 #endif
 #include <openssl/x509.h>
 #include <openssl/dsa.h>
-#include <apps/testdsa.h>
 #include <openssl/modes.h>
+#include <openssl/param_build.h>
 
 #ifndef HAVE_FORK
 # if defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_VXWORKS)
@@ -129,6 +129,7 @@ static void print_result(int alg, int run_no, int count, double time_used);
 static int do_multi(int multi, int size_num);
 #endif
 
+
 static int domlock = 0;
 
 static const int lengths_list[] = {
@@ -143,6 +144,98 @@ static const int aead_lengths_list[] = {
 
 #define START   0
 #define STOP    1
+
+typedef struct testdsa_st {
+    unsigned char *priv;
+    unsigned char *pub;
+    unsigned char *p;
+    unsigned char *g;
+    unsigned char *q;
+    int priv_l;
+    int pub_l;
+    int p_l;
+    int g_l;
+    int q_l;
+} testdsa;
+
+#define set_dsa_ptr(st, bits) \
+    do { \
+        st.priv = dsa##bits##_priv; \
+        st.pub = dsa##bits##_pub; \
+        st.p = dsa##bits##_p; \
+        st.g = dsa##bits##_g; \
+        st.q = dsa##bits##_q; \
+        st.priv_l = sizeof(dsa##bits##_priv); \
+        st.pub_l = sizeof(dsa##bits##_pub); \
+        st.p_l = sizeof(dsa##bits##_p); \
+        st.g_l = sizeof(dsa##bits##_g); \
+        st.q_l = sizeof(dsa##bits##_q); \
+    } while (0)
+
+static EVP_PKEY *get_dsa(int dsa_bits)
+{
+    EVP_PKEY *pkey = NULL;
+    BIGNUM *priv_key, *pub_key, *p, *q, *g;
+    EVP_PKEY_CTX *pctx;
+    testdsa dsa_t;
+    OSSL_PARAM_BLD *tmpl = NULL;
+    OSSL_PARAM *params = NULL;
+
+    switch (dsa_bits) {
+    case 512:
+        set_dsa_ptr(dsa_t, 512);
+        break;
+    case 1024:
+        set_dsa_ptr(dsa_t, 1024);
+        break;
+    case 2048:
+        set_dsa_ptr(dsa_t, 2048);
+        break;
+    default:
+        return NULL;
+    }
+
+    if ((pctx = EVP_PKEY_CTX_new_from_name(NULL, "DSA", NULL)) == NULL)
+        return NULL;
+
+    priv_key = BN_bin2bn(dsa_t.priv, dsa_t.priv_l, NULL);
+    pub_key = BN_bin2bn(dsa_t.pub, dsa_t.pub_l, NULL);
+    p = BN_bin2bn(dsa_t.p, dsa_t.p_l, NULL);
+    q = BN_bin2bn(dsa_t.q, dsa_t.q_l, NULL);
+    g = BN_bin2bn(dsa_t.g, dsa_t.g_l, NULL);
+    if (priv_key == NULL || pub_key == NULL || p == NULL || q == NULL
+        || g == NULL) {
+        goto err;
+    }
+    if ((tmpl = OSSL_PARAM_BLD_new()) == NULL
+        || !OSSL_PARAM_BLD_push_BN(tmpl, OSSL_PKEY_PARAM_FFC_P,
+                                   p)
+        || !OSSL_PARAM_BLD_push_BN(tmpl, OSSL_PKEY_PARAM_FFC_Q,
+                                   q)
+        || !OSSL_PARAM_BLD_push_BN(tmpl, OSSL_PKEY_PARAM_FFC_G,
+                                   g)
+        || !OSSL_PARAM_BLD_push_BN(tmpl, OSSL_PKEY_PARAM_PRIV_KEY,
+                                   priv_key)
+        || !OSSL_PARAM_BLD_push_BN(tmpl, OSSL_PKEY_PARAM_PUB_KEY,
+                                   pub_key)
+        || (params = OSSL_PARAM_BLD_to_param(tmpl)) == NULL)
+        goto err;
+
+    if (EVP_PKEY_fromdata_init(pctx) <= 0
+        || EVP_PKEY_fromdata(pctx, &pkey, EVP_PKEY_KEYPAIR,
+                             params) <= 0)
+        pkey = NULL;
+err:
+    OSSL_PARAM_free(params);
+    OSSL_PARAM_BLD_free(tmpl);
+    BN_free(priv_key);
+    BN_free(pub_key);
+    BN_free(p);
+    BN_free(q);
+    BN_free(g);
+    EVP_PKEY_CTX_free(pctx);
+    return pkey;
+}
 
 #ifdef SIGALRM
 
