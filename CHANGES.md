@@ -28,7 +28,8 @@ in execute-only mode and with indirect branch tracking on modern Intel
 hardware.
 
 - Simplified `util/shlib_wrap`; if your shell doesn't do "$@" properly
-when there are no arguments, please look at an earlier version.
+when there are no arguments, please look at an earlier version of
+this script.
 
 - Move the two apps, CA.pl and tsget, that were written in Perl, to a
 separate directory. Perl is optional on intalled systems.
