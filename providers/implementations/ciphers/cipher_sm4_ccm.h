@@ -7,10 +7,10 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "crypto/sm4.h"
+#include <crypto/sm4.h>
 #include <providers/ciphercommon.h>
 #include <providers/ciphercommon_ccm.h>
-#include "crypto/sm4_platform.h"
+#include <crypto/sm4_platform.h>
 
 typedef struct prov_sm4_ccm_ctx_st {
     PROV_CCM_CTX base; /* Must be first */

@@ -15,8 +15,8 @@
 #include <openssl/evp.h>
 #include "internal/provider.h"
 #include "internal/cryptlib.h"
-#include "crypto/evp.h"
-#include "crypto/context.h"
+#include <crypto/evp.h>
+#include <crypto/context.h>
 
 DEFINE_STACK_OF(OSSL_PROVIDER)
 

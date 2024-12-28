@@ -54,7 +54,7 @@
 # include <openssl/rsa.h>
 #endif
 #include "internal/nelem.h"
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 
 #include <test/testutil.h>
 

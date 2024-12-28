@@ -20,8 +20,8 @@
 #include <openssl/decoder.h>
 
 #include "internal/cryptlib.h"   /* ossl_assert */
-#include "crypto/pem.h"          /* For PVK and "blob" PEM headers */
-#include "crypto/evp.h"          /* For evp_pkey_is_provided() */
+#include <crypto/pem.h>          /* For PVK and "blob" PEM headers */
+#include <crypto/evp.h>          /* For evp_pkey_is_provided() */
 
 #include <test/predefined_dhparams.h>
 #include <test/testutil.h>

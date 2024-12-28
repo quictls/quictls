@@ -18,7 +18,7 @@
 #include <openssl/asn1.h>
 #include <openssl/engine.h>
 #include "internal/provider.h"
-#include "crypto/rand.h"
+#include <crypto/rand.h>
 #include "conf_local.h"
 
 /* Load all OpenSSL builtin modules */

@@ -23,7 +23,7 @@
 # include <openssl/safestack.h>
 # include <openssl/x509.h>
 # include <openssl/x509v3.h>
-# include "crypto/x509.h"
+# include <crypto/x509.h>
 
 # define IS_NULL_DN(name) (X509_NAME_get_entry(name, 0) == NULL)
 

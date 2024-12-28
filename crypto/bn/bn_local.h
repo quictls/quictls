@@ -17,7 +17,7 @@
  */
 # include <openssl/opensslconf.h>
 
-# include "crypto/bn.h"
+# include <crypto/bn.h>
 # include "internal/cryptlib.h"
 # include "internal/numbers.h"
 

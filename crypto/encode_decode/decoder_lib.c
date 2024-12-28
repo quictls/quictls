@@ -19,7 +19,7 @@
 #include "internal/bio.h"
 #include "internal/provider.h"
 #include "internal/namemap.h"
-#include "crypto/decoder.h"
+#include <crypto/decoder.h>
 #include "encoder_local.h"
 #include "internal/e_os.h"
 

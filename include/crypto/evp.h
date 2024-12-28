@@ -13,7 +13,7 @@
 # include <openssl/evp.h>
 # include <openssl/core_dispatch.h>
 # include "internal/refcount.h"
-# include "crypto/ecx.h"
+# include <crypto/ecx.h>
 
 /*
  * Default PKCS5 PBE KDF salt lengths

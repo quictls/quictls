@@ -24,7 +24,7 @@
 #include <providers/fipscommon.h>
 #include "internal/nelem.h"
 #include "self_test.h"
-#include "crypto/context.h"
+#include <crypto/context.h>
 #include "internal/core.h"
 
 static const char FIPS_DEFAULT_PROPERTIES[] = "provider=fips,fips=yes";

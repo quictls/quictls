@@ -13,7 +13,7 @@
 #include <string.h>
 
 #include <test/testutil.h>
-#include "crypto/poly1305.h"
+#include <crypto/poly1305.h>
 #include "internal/nelem.h"
 
 typedef struct {

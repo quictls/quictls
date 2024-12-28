@@ -20,7 +20,7 @@
 #  include <openssl/e_os2.h>
 #  include <openssl/crypto.h>
 #  include "internal/refcount.h"
-#  include "crypto/types.h"
+#  include <crypto/types.h>
 
 #  define X25519_KEYLEN         32
 #  define X448_KEYLEN           56

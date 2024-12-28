@@ -22,7 +22,7 @@
 #include <openssl/bn.h>
 #include <openssl/objects.h>
 #include "internal/nelem.h"
-#include "crypto/dh.h"
+#include <crypto/dh.h>
 
 static DH *dh_param_init(OSSL_LIB_CTX *libctx, const DH_NAMED_GROUP *group)
 {

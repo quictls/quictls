@@ -18,8 +18,8 @@
 #include <openssl/err.h>
 #include <openssl/rsa.h>
 #include <openssl/ec.h>
-#include "crypto/types.h"
-#include "crypto/evp.h"
+#include <crypto/types.h>
+#include <crypto/evp.h>
 #include "evp_local.h"
 
 int EVP_PKEY_set1_RSA(EVP_PKEY *pkey, RSA *key)

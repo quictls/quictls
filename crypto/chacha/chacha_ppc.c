@@ -11,8 +11,8 @@
 #include <string.h>
 
 #include <openssl/opensslconf.h>
-#include "crypto/chacha.h"
-#include "crypto/ppc_arch.h"
+#include <crypto/chacha.h>
+#include <crypto/ppc_arch.h>
 
 void ChaCha20_ctr32_int(unsigned char *out, const unsigned char *inp,
                         size_t len, const unsigned int key[8],

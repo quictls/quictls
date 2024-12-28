@@ -10,7 +10,7 @@
 #include <string.h>
 #include <apps/apps.h>
 #include <test/testutil.h>
-#include "crypto/asn1.h"
+#include <crypto/asn1.h>
 
 #define binname "ca_internals_test"
 

@@ -25,7 +25,7 @@
 #include <openssl/prov_ssl.h>
 #include "internal/constant_time.h"
 #include "internal/sizes.h"
-#include "crypto/rsa.h"
+#include <crypto/rsa.h>
 #include <providers/provider_ctx.h>
 #include <providers/implementations.h>
 #include <providers/providercommon.h>

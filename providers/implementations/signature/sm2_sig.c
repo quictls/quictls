@@ -29,8 +29,8 @@
 #include <providers/implementations.h>
 #include <providers/providercommon.h>
 #include <providers/provider_ctx.h>
-#include "crypto/ec.h"
-#include "crypto/sm2.h"
+#include <crypto/ec.h>
+#include <crypto/sm2.h>
 #include <providers/der_sm2.h>
 
 static OSSL_FUNC_signature_newctx_fn sm2sig_newctx;

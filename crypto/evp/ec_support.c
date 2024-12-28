@@ -9,7 +9,7 @@
 
 #include <string.h>
 #include <openssl/ec.h>
-#include "crypto/ec.h"
+#include <crypto/ec.h>
 #include "internal/nelem.h"
 
 typedef struct ec_name2nid_st {

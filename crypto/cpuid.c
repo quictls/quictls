@@ -8,7 +8,7 @@
  */
 
 #include "internal/e_os.h"
-#include "crypto/cryptlib.h"
+#include <crypto/cryptlib.h>
 
 #if     defined(__i386)   || defined(__i386__)   || defined(_M_IX86) || \
         defined(__x86_64) || defined(__x86_64__) || \
@@ -47,7 +47,7 @@ typedef char variant_char;
 #   define ossl_getenv getenv
 #  endif
 
-#  include "crypto/ctype.h"
+#  include <crypto/ctype.h>
 
 static int todigit(variant_char c)
 {

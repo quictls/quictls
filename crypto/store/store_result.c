@@ -20,8 +20,8 @@
 #include <openssl/store.h>
 #include "internal/provider.h"
 #include "internal/passphrase.h"
-#include "crypto/evp.h"
-#include "crypto/x509.h"
+#include <crypto/evp.h>
+#include <crypto/x509.h>
 #include "store_local.h"
 
 #ifndef OSSL_OBJECT_PKCS12

@@ -16,8 +16,8 @@
 #include <openssl/hpke.h>
 #include <openssl/sha.h>
 #include <openssl/rand.h>
-#include "crypto/ecx.h"
-#include "crypto/rand.h"
+#include <crypto/ecx.h>
+#include <crypto/rand.h>
 #include "internal/hpke_util.h"
 #include "internal/packet.h"
 #include "internal/nelem.h"

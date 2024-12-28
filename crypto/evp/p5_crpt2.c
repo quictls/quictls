@@ -16,7 +16,7 @@
 #include <openssl/hmac.h>
 #include <openssl/trace.h>
 #include <openssl/core_names.h>
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 #include "evp_local.h"
 
 int ossl_pkcs5_pbkdf2_hmac_ex(const char *pass, int passlen,

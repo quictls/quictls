@@ -16,9 +16,9 @@
 #include <stdio.h>
 #include "internal/cryptlib.h"
 #include "dh_local.h"
-#include "crypto/bn.h"
-#include "crypto/dh.h"
-#include "crypto/security_bits.h"
+#include <crypto/bn.h>
+#include <crypto/dh.h>
+#include <crypto/security_bits.h>
 
 #ifdef FIPS_MODULE
 # define MIN_STRENGTH 112

@@ -29,8 +29,8 @@
 
 #ifndef OPENSSL_NO_DH
 # include <openssl/dh.h>
-# include "crypto/bn_dh.h"
-# include "crypto/dh.h"
+# include <crypto/bn_dh.h>
+# include <crypto/dh.h>
 
 static int cb(int p, int n, BN_GENCB *arg);
 

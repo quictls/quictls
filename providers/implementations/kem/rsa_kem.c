@@ -21,7 +21,7 @@
 #include <openssl/rsa.h>
 #include <openssl/params.h>
 #include <openssl/err.h>
-#include "crypto/rsa.h"
+#include <crypto/rsa.h>
 #include <openssl/proverr.h>
 #include "internal/nelem.h"
 #include <providers/provider_ctx.h>

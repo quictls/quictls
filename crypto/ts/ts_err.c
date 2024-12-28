@@ -10,7 +10,7 @@
 
 #include <openssl/err.h>
 #include <openssl/tserr.h>
-#include "crypto/tserr.h"
+#include <crypto/tserr.h>
 
 #ifndef OPENSSL_NO_TS
 

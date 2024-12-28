@@ -12,7 +12,7 @@
 #include "internal/numbers.h"
 #include <openssl/x509v3.h>
 #include <openssl/x509_vfy.h>
-#include "crypto/x509.h"
+#include <crypto/x509.h>
 #include "internal/tsan_assist.h"
 #include "x509_local.h"
 

@@ -13,8 +13,8 @@
 #include <openssl/params.h>
 #include <openssl/err.h>
 #include <openssl/dh.h>
-#include "crypto/dh.h"
-#include "crypto/evp.h"
+#include <crypto/dh.h>
+#include <crypto/evp.h>
 
 static int dh_paramgen_check(EVP_PKEY_CTX *ctx)
 {

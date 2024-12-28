@@ -29,7 +29,7 @@ const PROV_CIPHER_HW_AES_HMAC_SHA *ossl_prov_cipher_hw_aes_cbc_hmac_sha1(void)
 #else
 
 # include <openssl/rand.h>
-# include "crypto/evp.h"
+# include <crypto/evp.h>
 # include "internal/constant_time.h"
 
 void sha1_block_data_order(void *c, const void *p, size_t len);

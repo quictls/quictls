@@ -20,7 +20,7 @@
 #include <openssl/bn.h>
 #include <openssl/rand.h>
 #include <openssl/sha.h>
-#include "crypto/dsa.h"
+#include <crypto/dsa.h>
 #include "dsa_local.h"
 
 int ossl_dsa_generate_ffc_parameters(DSA *dsa, int type, int pbits, int qbits,

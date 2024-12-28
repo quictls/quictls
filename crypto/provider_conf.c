@@ -16,7 +16,7 @@
 #include "internal/provider.h"
 #include "internal/cryptlib.h"
 #include "provider_local.h"
-#include "crypto/context.h"
+#include <crypto/context.h>
 
 DEFINE_STACK_OF(OSSL_PROVIDER)
 

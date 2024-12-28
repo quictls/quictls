@@ -14,7 +14,7 @@
 #include <openssl/x509.h>
 #include <openssl/x509v3.h>
 #include <openssl/trace.h>
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 
 /* Algorithm configuration module. */
 

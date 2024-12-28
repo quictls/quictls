@@ -16,7 +16,7 @@
 #include <openssl/rand.h>
 #include <openssl/aes.h>
 #include "internal/sizes.h"
-#include "crypto/asn1.h"
+#include <crypto/asn1.h>
 #include "cms_local.h"
 
 int CMS_RecipientInfo_set0_password(CMS_RecipientInfo *ri,

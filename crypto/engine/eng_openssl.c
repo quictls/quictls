@@ -20,7 +20,7 @@
 #include <stdio.h>
 #include <openssl/crypto.h>
 #include "internal/cryptlib.h"
-#include "crypto/engine.h"
+#include <crypto/engine.h>
 #include <openssl/pem.h>
 #include <openssl/evp.h>
 #include <openssl/rand.h>

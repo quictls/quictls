@@ -15,9 +15,9 @@
  */
 #include "internal/deprecated.h"
 
-#include "crypto/sm2.h"
-#include "crypto/sm2err.h"
-#include "crypto/ec.h" /* ossl_ecdh_kdf_X9_63() */
+#include <crypto/sm2.h>
+#include <crypto/sm2err.h>
+#include <crypto/ec.h> /* ossl_ecdh_kdf_X9_63() */
 #include <openssl/err.h>
 #include <openssl/evp.h>
 #include <openssl/bn.h>

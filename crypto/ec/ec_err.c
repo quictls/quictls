@@ -10,7 +10,7 @@
 
 #include <openssl/err.h>
 #include <openssl/ecerr.h>
-#include "crypto/ecerr.h"
+#include <crypto/ecerr.h>
 
 #ifndef OPENSSL_NO_EC
 

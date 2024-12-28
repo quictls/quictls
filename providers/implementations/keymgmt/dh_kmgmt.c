@@ -22,7 +22,7 @@
 #include <providers/implementations.h>
 #include <providers/providercommon.h>
 #include <providers/provider_ctx.h>
-#include "crypto/dh.h"
+#include <crypto/dh.h>
 #include "internal/sizes.h"
 
 static OSSL_FUNC_keymgmt_new_fn dh_newdata;

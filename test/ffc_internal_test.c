@@ -27,7 +27,7 @@
 #include <test/testutil.h>
 
 #include "internal/ffc.h"
-#include "crypto/security_bits.h"
+#include <crypto/security_bits.h>
 
 #ifndef OPENSSL_NO_DSA
 static const unsigned char dsa_2048_224_sha224_p[] = {

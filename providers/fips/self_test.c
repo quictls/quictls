@@ -19,7 +19,7 @@
 #include "internal/e_os.h"
 #include "internal/tsan_assist.h"
 #include <providers/providercommon.h>
-#include "crypto/rand.h"
+#include <crypto/rand.h>
 
 /*
  * We're cheating here. Normally we don't allow RUN_ONCE usage inside the FIPS

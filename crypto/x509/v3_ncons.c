@@ -11,14 +11,14 @@
 #include "internal/numbers.h"
 #include "internal/safe_math.h"
 #include <stdio.h>
-#include "crypto/asn1.h"
+#include <crypto/asn1.h>
 #include <openssl/asn1t.h>
 #include <openssl/conf.h>
 #include <openssl/x509v3.h>
 #include <openssl/bn.h>
 
-#include "crypto/x509.h"
-#include "crypto/punycode.h"
+#include <crypto/x509.h>
+#include <crypto/punycode.h>
 #include "ext_dat.h"
 
 OSSL_SAFE_MATH_SIGNED(int, int)

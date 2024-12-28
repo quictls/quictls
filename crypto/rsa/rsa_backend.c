@@ -20,11 +20,11 @@
 #include <openssl/evp.h>
 #ifndef FIPS_MODULE
 # include <openssl/x509.h>
-# include "crypto/asn1.h"
+# include <crypto/asn1.h>
 #endif
 #include "internal/sizes.h"
 #include "internal/param_build_set.h"
-#include "crypto/rsa.h"
+#include <crypto/rsa.h>
 #include "rsa_local.h"
 
 /*

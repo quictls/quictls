@@ -14,7 +14,7 @@
 #include "internal/deprecated.h"
 
 #include <openssl/ripemd.h>
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 #include "legacy_meth.h"
 
 IMPLEMENT_LEGACY_EVP_MD_METH(ripe, RIPEMD160)

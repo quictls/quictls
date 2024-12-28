@@ -19,7 +19,7 @@
 #ifndef OPENSSL_NO_RC5
 
 # include <openssl/evp.h>
-# include "crypto/evp.h"
+# include <crypto/evp.h>
 # include <openssl/objects.h>
 # include "evp_local.h"
 # include <openssl/rc5.h>

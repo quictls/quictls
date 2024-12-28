@@ -22,11 +22,11 @@
 #include <openssl/aes.h>
 #include <openssl/rand.h>
 #include <openssl/cmac.h>
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 #include "internal/cryptlib.h"
-#include "crypto/modes.h"
-#include "crypto/siv.h"
-#include "crypto/aes_platform.h"
+#include <crypto/modes.h>
+#include <crypto/siv.h>
+#include <crypto/aes_platform.h>
 #include "evp_local.h"
 
 typedef struct {

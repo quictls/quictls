@@ -27,7 +27,7 @@
 #include <test/testutil.h>
 
 #include <openssl/rsa.h>
-#include "crypto/rsa.h"
+#include <crypto/rsa.h>
 
 #define NUM_EXTRA_PRIMES 1
 

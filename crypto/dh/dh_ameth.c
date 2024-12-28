@@ -21,9 +21,9 @@
 #include <openssl/param_build.h>
 #include "internal/ffc.h"
 #include "internal/cryptlib.h"
-#include "crypto/asn1.h"
-#include "crypto/dh.h"
-#include "crypto/evp.h"
+#include <crypto/asn1.h>
+#include <crypto/dh.h>
+#include <crypto/evp.h>
 #include "dh_local.h"
 
 /*

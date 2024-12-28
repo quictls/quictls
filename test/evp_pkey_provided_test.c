@@ -15,9 +15,9 @@
 #include <openssl/param_build.h>
 #include <openssl/core_names.h>
 #include <openssl/sha.h>
-#include "crypto/ecx.h"
-#include "crypto/evp.h"          /* For the internal API */
-#include "crypto/bn_dh.h"        /* _bignum_ffdhe2048_p */
+#include <crypto/ecx.h>
+#include <crypto/evp.h>          /* For the internal API */
+#include <crypto/bn_dh.h>        /* _bignum_ffdhe2048_p */
 #include "internal/nelem.h"
 #include <test/testutil.h>
 

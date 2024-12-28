@@ -32,7 +32,7 @@
 #include <openssl/encoder.h>
 #include <test/testutil.h>
 #include "internal/nelem.h"
-#include "crypto/bn_dh.h"   /* _bignum_ffdhe2048_p */
+#include <crypto/bn_dh.h>   /* _bignum_ffdhe2048_p */
 
 static OSSL_LIB_CTX *libctx = NULL;
 static OSSL_PROVIDER *nullprov = NULL;

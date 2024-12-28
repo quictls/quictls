@@ -31,7 +31,7 @@
 #include <providers/securitycheck.h>
 #include <providers/providercommon.h>
 #include <providers/ecx.h>
-#include "crypto/ecx.h"
+#include <crypto/ecx.h>
 #include <openssl/hpke.h>
 #include "internal/hpke_util.h"
 #include "eckem.h"

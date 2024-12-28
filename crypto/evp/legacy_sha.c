@@ -15,9 +15,9 @@
 
 #include <openssl/sha.h>         /* diverse SHA macros */
 #include "internal/sha3.h"       /* KECCAK1600_WIDTH */
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 /* Used by legacy methods */
-#include "crypto/sha.h"
+#include <crypto/sha.h>
 #include "legacy_meth.h"
 #include "evp_local.h"
 

@@ -28,8 +28,8 @@
 #include <openssl/proverr.h>
 #include "internal/passphrase.h"
 #include "internal/cryptlib.h"
-#include "crypto/ecx.h"
-#include "crypto/rsa.h"
+#include <crypto/ecx.h>
+#include <crypto/rsa.h>
 #include <providers/implementations.h>
 #include <providers/bio.h>
 #include <providers/provider_ctx.h>

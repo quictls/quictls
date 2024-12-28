@@ -27,8 +27,8 @@
 #include "internal/cryptlib.h"
 #include <openssl/bn.h>
 #include <openssl/sha.h>
-#include "crypto/dh.h"
-#include "crypto/security_bits.h"
+#include <crypto/dh.h>
+#include <crypto/security_bits.h>
 #include "dh_local.h"
 
 #ifndef FIPS_MODULE

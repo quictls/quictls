@@ -32,7 +32,7 @@
 
 #include <openssl/hpke.h>
 #include "internal/hpke_util.h"
-#include "crypto/ec.h"
+#include <crypto/ec.h>
 #include <providers/ecx.h>
 #include "eckem.h"
 

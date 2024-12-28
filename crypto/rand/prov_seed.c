@@ -8,9 +8,9 @@
  */
 
 #include "rand_local.h"
-#include "crypto/evp.h"
-#include "crypto/rand.h"
-#include "crypto/rand_pool.h"
+#include <crypto/evp.h>
+#include <crypto/rand.h>
+#include <crypto/rand_pool.h>
 #include "internal/core.h"
 #include <openssl/core_dispatch.h>
 #include <openssl/err.h>

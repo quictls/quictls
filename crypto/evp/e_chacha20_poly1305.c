@@ -15,9 +15,9 @@
 
 # include <openssl/evp.h>
 # include <openssl/objects.h>
-# include "crypto/evp.h"
+# include <crypto/evp.h>
 # include "evp_local.h"
-# include "crypto/chacha.h"
+# include <crypto/chacha.h>
 
 typedef struct {
     union {
@@ -148,7 +148,7 @@ const EVP_CIPHER *EVP_chacha20(void)
 }
 
 # ifndef OPENSSL_NO_POLY1305
-#  include "crypto/poly1305.h"
+#  include <crypto/poly1305.h>
 
 typedef struct {
     EVP_CHACHA_KEY key;

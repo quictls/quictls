@@ -15,7 +15,7 @@
 #include "internal/provider.h"
 #include "internal/core.h"
 #include "internal/numbers.h"   /* includes SIZE_MAX */
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 #include "evp_local.h"
 
 static EVP_KEYEXCH *evp_keyexch_new(OSSL_PROVIDER *prov)

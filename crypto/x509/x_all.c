@@ -24,9 +24,9 @@
 #include <openssl/dsa.h>
 #include <openssl/x509v3.h>
 #include "internal/asn1.h"
-#include "crypto/pkcs7.h"
-#include "crypto/x509.h"
-#include "crypto/rsa.h"
+#include <crypto/pkcs7.h>
+#include <crypto/x509.h>
+#include <crypto/rsa.h>
 
 int X509_verify(X509 *a, EVP_PKEY *r)
 {

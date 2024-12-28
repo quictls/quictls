@@ -19,7 +19,7 @@
 #endif
 
 #include <openssl/x509.h>
-#include "crypto/x509.h"
+#include <crypto/x509.h>
 #include "x509_local.h"
 
 struct lookup_dir_hashes_st {

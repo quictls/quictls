@@ -23,7 +23,7 @@
 /* The implementation is in crypto/md32_common.h */
 
 #include "sha_local.h"
-#include "crypto/sha.h"
+#include <crypto/sha.h>
 
 int ossl_sha1_ctrl(SHA_CTX *sha1, int cmd, int mslen, void *ms)
 {

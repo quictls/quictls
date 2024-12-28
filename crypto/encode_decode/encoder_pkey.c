@@ -18,7 +18,7 @@
 #include "internal/provider.h"
 #include "internal/property.h"
 #include "internal/namemap.h"
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 #include "encoder_local.h"
 
 DEFINE_STACK_OF(OSSL_ENCODER)

@@ -22,7 +22,7 @@
 #include <openssl/pem.h>
 #include <openssl/rsa.h>
 #include <openssl/dsa.h>
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 
 #ifndef OPENSSL_NO_STDIO
 STACK_OF(X509_INFO)

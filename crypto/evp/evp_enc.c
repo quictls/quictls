@@ -25,7 +25,7 @@
 #include "internal/provider.h"
 #include "internal/core.h"
 #include "internal/safe_math.h"
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 #include "evp_local.h"
 
 OSSL_SAFE_MATH_SIGNED(int, int)

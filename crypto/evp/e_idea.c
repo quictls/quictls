@@ -20,7 +20,7 @@
 #ifndef OPENSSL_NO_IDEA
 # include <openssl/evp.h>
 # include <openssl/objects.h>
-# include "crypto/evp.h"
+# include <crypto/evp.h>
 # include <openssl/idea.h>
 # include "evp_local.h"
 

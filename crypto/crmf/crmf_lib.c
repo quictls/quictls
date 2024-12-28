@@ -30,8 +30,8 @@
 
 #include "crmf_local.h"
 #include "internal/sizes.h"
-#include "crypto/evp.h"
-#include "crypto/x509.h"
+#include <crypto/evp.h>
+#include <crypto/x509.h>
 
 /* explicit #includes not strictly needed since implied by the above: */
 #include <openssl/crmf.h>

@@ -25,7 +25,7 @@
 #include <openssl/thread.h>
 #include "internal/numbers.h"
 #include "internal/nelem.h"
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 #include <test/testutil.h>
 
 typedef struct evp_test_buffer_st EVP_TEST_BUFFER;

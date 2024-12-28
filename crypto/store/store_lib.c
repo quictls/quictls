@@ -27,7 +27,7 @@
 #include "internal/cryptlib.h"
 #include "internal/provider.h"
 #include "internal/bio.h"
-#include "crypto/store.h"
+#include <crypto/store.h>
 #include "store_local.h"
 
 static int ossl_store_close_it(OSSL_STORE_CTX *ctx);

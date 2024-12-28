@@ -19,7 +19,7 @@
 # define OSSL_CRYPTO_RAND_H
 
 # include <openssl/rand.h>
-# include "crypto/rand_pool.h"
+# include <crypto/rand_pool.h>
 
 # if defined(__APPLE__) && !defined(OPENSSL_NO_APPLE_CRYPTO_RANDOM)
 #  include <Availability.h>

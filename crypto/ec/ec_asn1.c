@@ -19,8 +19,8 @@
 #include <openssl/asn1t.h>
 #include <openssl/objects.h>
 #include "internal/nelem.h"
-#include "crypto/asn1.h"
-#include "crypto/asn1_dsa.h"
+#include <crypto/asn1.h>
+#include <crypto/asn1_dsa.h>
 
 #ifndef FIPS_MODULE
 

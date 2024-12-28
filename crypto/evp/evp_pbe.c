@@ -14,7 +14,7 @@
 #include <openssl/core_names.h>
 #include <openssl/pkcs12.h>
 #include <openssl/x509.h>
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 #include "evp_local.h"
 
 /* Password based encryption (PBE) functions */

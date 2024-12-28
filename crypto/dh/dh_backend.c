@@ -19,7 +19,7 @@
 # include <openssl/x509.h>
 #endif
 #include "internal/param_build_set.h"
-#include "crypto/dh.h"
+#include <crypto/dh.h>
 #include "dh_local.h"
 
 /*

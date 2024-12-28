@@ -26,7 +26,7 @@
 #include <providers/providercommon.h>
 #include <providers/implementations.h>
 #include <providers/securitycheck.h>
-#include "crypto/ec.h" /* ossl_ecdh_kdf_X9_63() */
+#include <crypto/ec.h> /* ossl_ecdh_kdf_X9_63() */
 
 static OSSL_FUNC_keyexch_newctx_fn ecdh_newctx;
 static OSSL_FUNC_keyexch_init_fn ecdh_init;

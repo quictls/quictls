@@ -18,8 +18,8 @@
 #include <openssl/store.h>       /* The OSSL_STORE_INFO type numbers */
 #include "internal/cryptlib.h"
 #include "internal/o_dir.h"
-#include "crypto/decoder.h"
-#include "crypto/ctype.h"        /* ossl_isdigit() */
+#include <crypto/decoder.h>
+#include <crypto/ctype.h>        /* ossl_isdigit() */
 #include <providers/implementations.h>
 #include <providers/bio.h>
 #include "file_store_local.h"

@@ -14,7 +14,7 @@
 # include <openssl/asn1.h>
 # include <openssl/x509.h>
 # include <openssl/conf.h>
-# include "crypto/types.h"
+# include <crypto/types.h>
 
 /* Internal X509 structures and functions: not for application use */
 

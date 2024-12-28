@@ -25,7 +25,7 @@
 #include <providers/implementations.h>
 #include <providers/provider_ctx.h>
 #include <providers/securitycheck.h>
-#include "crypto/dh.h"
+#include <crypto/dh.h>
 
 static OSSL_FUNC_keyexch_newctx_fn dh_newctx;
 static OSSL_FUNC_keyexch_init_fn dh_init;

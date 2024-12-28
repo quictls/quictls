@@ -14,7 +14,7 @@
 #include "internal/cryptlib.h"
 #include "internal/provider.h"
 #include "internal/core.h"
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 #include "evp_local.h"
 
 static int evp_kem_init(EVP_PKEY_CTX *ctx, int operation,

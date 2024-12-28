@@ -26,7 +26,7 @@
 
 #ifndef OPENSSL_NO_SM2
 
-# include "crypto/sm2.h"
+# include <crypto/sm2.h>
 
 static fake_random_generate_cb get_faked_bytes;
 

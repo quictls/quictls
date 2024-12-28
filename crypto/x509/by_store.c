@@ -9,7 +9,7 @@
 
 #include <openssl/store.h>
 #include "internal/cryptlib.h"
-#include "crypto/x509.h"
+#include <crypto/x509.h>
 #include "x509_local.h"
 
 /* Generic object loader, given expected type and criterion */

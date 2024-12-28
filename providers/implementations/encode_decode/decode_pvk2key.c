@@ -25,8 +25,8 @@
 #include <openssl/x509.h>
 #include "internal/passphrase.h"
 #include "internal/sizes.h"
-#include "crypto/pem.h"          /* For internal PVK and "blob" headers */
-#include "crypto/rsa.h"
+#include <crypto/pem.h>          /* For internal PVK and "blob" headers */
+#include <crypto/rsa.h>
 #include <providers/bio.h>
 #include <providers/implementations.h>
 #include "endecoder_local.h"

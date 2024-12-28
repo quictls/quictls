@@ -20,8 +20,8 @@
 #include <openssl/err.h>
 #include <openssl/objects.h>
 #include <openssl/proverr.h>
-#include "crypto/bn.h"
-#include "crypto/ec.h"
+#include <crypto/bn.h>
+#include <crypto/ec.h>
 #include <providers/implementations.h>
 #include <providers/providercommon.h>
 #include <providers/provider_ctx.h>
@@ -29,7 +29,7 @@
 
 #ifndef FIPS_MODULE
 # ifndef OPENSSL_NO_SM2
-#  include "crypto/sm2.h"
+#  include <crypto/sm2.h>
 # endif
 #endif
 

@@ -25,7 +25,7 @@
 #include <openssl/sha.h>
 #include <openssl/hmac.h>
 #include "internal/cryptlib.h"
-#include "crypto/rsa.h"
+#include <crypto/rsa.h>
 #include "rsa_local.h"
 
 

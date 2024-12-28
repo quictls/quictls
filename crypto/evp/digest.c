@@ -22,7 +22,7 @@
 #include "internal/cryptlib.h"
 #include "internal/provider.h"
 #include "internal/core.h"
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 #include "evp_local.h"
 
 static void cleanup_old_md_data(EVP_MD_CTX *ctx, int force)

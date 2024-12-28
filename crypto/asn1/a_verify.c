@@ -18,9 +18,9 @@
 #include <openssl/objects.h>
 #include <openssl/buffer.h>
 #include <openssl/evp.h>
-#include "crypto/asn1.h"
-#include "crypto/evp.h"
-#include "crypto/rsa.h"
+#include <crypto/asn1.h>
+#include <crypto/evp.h>
+#include <crypto/rsa.h>
 
 #ifndef OPENSSL_NO_DEPRECATED_3_0
 

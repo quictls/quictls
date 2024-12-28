@@ -9,10 +9,10 @@
 
 #include "internal/namemap.h"
 #include <openssl/lhash.h>
-#include "crypto/lhash.h"      /* ossl_lh_strcasehash */
+#include <crypto/lhash.h>      /* ossl_lh_strcasehash */
 #include "internal/tsan_assist.h"
 #include "internal/sizes.h"
-#include "crypto/context.h"
+#include <crypto/context.h>
 
 /*-
  * The namenum entry

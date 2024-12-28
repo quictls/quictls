@@ -30,7 +30,7 @@
 #include <providers/implementations.h>
 #include <providers/provider_ctx.h>
 #include <providers/securitycheck.h>
-#include "crypto/ec.h"
+#include <crypto/ec.h>
 #include <providers/der_ec.h>
 
 static OSSL_FUNC_signature_newctx_fn ecdsa_newctx;

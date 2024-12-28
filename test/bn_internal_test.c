@@ -20,7 +20,7 @@
 #include "internal/numbers.h"
 #include <test/testutil.h>
 #include "bn_prime.h"
-#include "crypto/bn.h"
+#include <crypto/bn.h>
 
 static BN_CTX *ctx;
 

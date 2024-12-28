@@ -10,7 +10,7 @@
 #include <openssl/core_dispatch.h>
 #include "bio_local.h"
 #include "internal/cryptlib.h"
-#include "crypto/context.h"
+#include <crypto/context.h>
 
 typedef struct {
     OSSL_FUNC_BIO_read_ex_fn *c_bio_read_ex;

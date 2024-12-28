@@ -18,7 +18,7 @@
 #ifndef FIPS_MODULE
 # include <openssl/x509.h>
 #endif
-#include "crypto/dsa.h"
+#include <crypto/dsa.h>
 #include "dsa_local.h"
 
 /*

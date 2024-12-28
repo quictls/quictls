@@ -20,9 +20,9 @@
 #include <openssl/core_names.h>
 #include <openssl/param_build.h>
 #include "internal/cryptlib.h"
-#include "crypto/asn1.h"
-#include "crypto/dsa.h"
-#include "crypto/evp.h"
+#include <crypto/asn1.h>
+#include <crypto/dsa.h>
+#include <crypto/evp.h>
 #include "internal/ffc.h"
 #include "dsa_local.h"
 

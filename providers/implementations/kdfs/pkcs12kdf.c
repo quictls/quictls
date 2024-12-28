@@ -17,7 +17,7 @@
 #include <openssl/proverr.h>
 #include "internal/cryptlib.h"
 #include "internal/numbers.h"
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 #include <providers/provider_ctx.h>
 #include <providers/providercommon.h>
 #include <providers/implementations.h>

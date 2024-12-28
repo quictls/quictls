@@ -12,8 +12,8 @@
 #include <string.h>
 
 #include "internal/endian.h"
-#include "crypto/chacha.h"
-#include "crypto/ctype.h"
+#include <crypto/chacha.h>
+#include <crypto/ctype.h>
 
 typedef unsigned int u32;
 typedef unsigned char u8;

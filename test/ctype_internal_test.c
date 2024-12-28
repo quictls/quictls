@@ -8,7 +8,7 @@
  */
 
 #include <test/testutil.h>
-#include "crypto/ctype.h"
+#include <crypto/ctype.h>
 #include "internal/nelem.h"
 #include <ctype.h>
 #include <stdio.h>

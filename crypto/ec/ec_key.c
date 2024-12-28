@@ -25,7 +25,7 @@
 #include <openssl/self_test.h>
 #include <providers/providercommon.h>
 #include <providers/ecx.h>
-#include "crypto/bn.h"
+#include <crypto/bn.h>
 
 static int ecdsa_keygen_pairwise_test(EC_KEY *eckey, OSSL_CALLBACK *cb,
                                       void *cbarg);

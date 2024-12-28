@@ -25,7 +25,7 @@
 #include "internal/cryptlib.h"
 #include "internal/nelem.h"
 #include "internal/sizes.h"
-#include "crypto/rsa.h"
+#include <crypto/rsa.h>
 #include <providers/providercommon.h>
 #include <providers/implementations.h>
 #include <providers/provider_ctx.h>

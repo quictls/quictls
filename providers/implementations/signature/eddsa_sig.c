@@ -20,7 +20,7 @@
 #include <providers/implementations.h>
 #include <providers/provider_ctx.h>
 #include <providers/der_ecx.h>
-#include "crypto/ecx.h"
+#include <crypto/ecx.h>
 
 #ifdef S390X_EC_ASM
 # include "s390x_arch.h"

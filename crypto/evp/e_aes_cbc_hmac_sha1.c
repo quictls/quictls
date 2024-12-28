@@ -23,8 +23,8 @@
 #include <openssl/sha.h>
 #include <openssl/rand.h>
 #include "internal/cryptlib.h"
-#include "crypto/modes.h"
-#include "crypto/evp.h"
+#include <crypto/modes.h>
+#include <crypto/evp.h>
 #include "internal/constant_time.h"
 #include "evp_local.h"
 

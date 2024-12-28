@@ -18,7 +18,7 @@
 #include <openssl/crypto.h>
 #include <openssl/sha.h>
 #include <openssl/evp.h>
-#include "crypto/sha.h"
+#include <crypto/sha.h>
 
 unsigned char *ossl_sha1(const unsigned char *d, size_t n, unsigned char *md)
 {

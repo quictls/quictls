@@ -21,7 +21,7 @@
 #include <openssl/aes.h>
 #include <openssl/modes.h>
 #include <test/testutil.h>
-#include "crypto/modes.h"
+#include <crypto/modes.h>
 #include "internal/nelem.h"
 
 typedef struct {

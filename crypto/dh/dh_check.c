@@ -17,7 +17,7 @@
 #include "internal/cryptlib.h"
 #include <openssl/bn.h>
 #include "dh_local.h"
-#include "crypto/dh.h"
+#include <crypto/dh.h>
 
 /*-
  * Check that p and g are suitable enough

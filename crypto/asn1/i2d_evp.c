@@ -22,8 +22,8 @@
 #include <openssl/rsa.h>         /* For i2d_RSAPublicKey */
 #include <openssl/dsa.h>         /* For i2d_DSAPublicKey */
 #include <openssl/ec.h>          /* For i2o_ECPublicKey */
-#include "crypto/asn1.h"
-#include "crypto/evp.h"
+#include <crypto/asn1.h>
+#include <crypto/evp.h>
 
 struct type_and_structure_st {
     const char *output_type;

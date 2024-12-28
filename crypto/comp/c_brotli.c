@@ -15,7 +15,7 @@
 #include <openssl/objects.h>
 #include "internal/comp.h"
 #include <openssl/err.h>
-#include "crypto/cryptlib.h"
+#include <crypto/cryptlib.h>
 #include "internal/bio.h"
 #include "internal/thread_once.h"
 #include "comp_local.h"

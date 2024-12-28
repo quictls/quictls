@@ -36,7 +36,7 @@
 # endif
 #endif
 #include <openssl/sha.h> /* uses SHA???_DIGEST_LENGTH */
-#include "crypto/rsa.h"
+#include <crypto/rsa.h>
 #include "rsa_local.h"
 
 /*

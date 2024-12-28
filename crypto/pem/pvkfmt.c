@@ -26,8 +26,8 @@
 #include <openssl/kdf.h>
 #include <openssl/core_names.h>
 #include "internal/cryptlib.h"
-#include "crypto/pem.h"
-#include "crypto/evp.h"
+#include <crypto/pem.h>
+#include <crypto/evp.h>
 
 /*
  * Utility function: read a DWORD (4 byte unsigned integer) in little endian

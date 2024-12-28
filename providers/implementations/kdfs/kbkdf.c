@@ -36,7 +36,7 @@
 #include <openssl/proverr.h>
 
 #include "internal/cryptlib.h"
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 #include "internal/numbers.h"
 #include "internal/endian.h"
 #include <providers/implementations.h>

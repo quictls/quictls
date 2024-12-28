@@ -13,7 +13,7 @@
 #include <openssl/err.h>
 #include <openssl/cms.h>
 #include "internal/nelem.h"
-#include "crypto/x509.h"
+#include <crypto/x509.h>
 #include "cms_local.h"
 
 /*-

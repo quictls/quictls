@@ -8,7 +8,7 @@
  */
 
 #include <openssl/des.h>
-#include "crypto/des_platform.h"
+#include <crypto/des_platform.h>
 
 #define TDES_FLAGS 0
 

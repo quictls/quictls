@@ -16,7 +16,7 @@
 
 #include <string.h>
 #include <openssl/err.h>
-#include "crypto/bn.h"
+#include <crypto/bn.h>
 #include "ec_local.h"
 #include "internal/common.h"
 #include "internal/constant_time.h"

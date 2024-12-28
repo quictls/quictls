@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "crypto/rand.h"
+#include <crypto/rand.h>
 #include "internal/common.h"
 
 /*

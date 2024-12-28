@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include "internal/cryptlib.h"
 #include "internal/dso.h"
-#include "crypto/dso_conf.h"
+#include <crypto/dso_conf.h>
 #include "internal/refcount.h"
 
 /**********************************************************************/

@@ -14,7 +14,7 @@
 #include <errno.h>
 #include <limits.h>
 
-#include "crypto/ctype.h"
+#include <crypto/ctype.h>
 #include "internal/cryptlib.h"
 #include <openssl/crypto.h>
 #include <openssl/buffer.h>
@@ -25,7 +25,7 @@
 #include <openssl/objects.h>
 #include <openssl/core_names.h>
 #include "internal/dane.h"
-#include "crypto/x509.h"
+#include <crypto/x509.h>
 #include "x509_local.h"
 
 /* CRL score values */

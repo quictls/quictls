@@ -8,7 +8,7 @@
  */
 
 #include "internal/der.h"
-#include "crypto/ecx.h"
+#include <crypto/ecx.h>
 
 /* Well known OIDs precompiled */
 

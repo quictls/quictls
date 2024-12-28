@@ -21,9 +21,9 @@
 #include <openssl/rand.h>
 #include "internal/cryptlib.h"
 #include "internal/provider.h"
-#include "crypto/asn1.h"
-#include "crypto/evp.h"
-#include "crypto/ecx.h"
+#include <crypto/asn1.h>
+#include <crypto/evp.h>
+#include <crypto/ecx.h>
 #include "ec_local.h"
 #include "curve448/curve448_local.h"
 #include "ecx_backend.h"

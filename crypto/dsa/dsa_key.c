@@ -19,7 +19,7 @@
 #include <openssl/bn.h>
 #include <openssl/self_test.h>
 #include <providers/providercommon.h>
-#include "crypto/dsa.h"
+#include <crypto/dsa.h>
 #include "dsa_local.h"
 
 #ifdef FIPS_MODULE

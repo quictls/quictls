@@ -10,7 +10,7 @@
 #include <openssl/asn1.h>
 #include <openssl/x509v3.h>
 #include "internal/cryptlib.h"
-#include "crypto/asn1.h"
+#include <crypto/asn1.h>
 
 #define ASN1_GEN_FLAG           0x10000
 #define ASN1_GEN_FLAG_IMP       (ASN1_GEN_FLAG|1)

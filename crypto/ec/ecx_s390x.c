@@ -11,7 +11,7 @@
 #include "internal/cryptlib.h"
 #include <openssl/ec.h>
 #include <openssl/rand.h>
-#include "crypto/ecx.h"
+#include <crypto/ecx.h>
 #include "ec_local.h"
 #include "curve448/curve448_local.h"
 #include "ecx_backend.h"

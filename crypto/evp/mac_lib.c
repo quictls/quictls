@@ -15,7 +15,7 @@
 #include <openssl/core_names.h>
 #include <openssl/types.h>
 #include "internal/nelem.h"
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 #include "internal/provider.h"
 #include "evp_local.h"
 

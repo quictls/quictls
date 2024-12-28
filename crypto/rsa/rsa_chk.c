@@ -15,7 +15,7 @@
 
 #include <openssl/bn.h>
 #include <openssl/err.h>
-#include "crypto/rsa.h"
+#include <crypto/rsa.h>
 #include "rsa_local.h"
 
 #ifndef FIPS_MODULE

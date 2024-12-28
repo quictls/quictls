@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "crypto/punycode.h"
+#include <crypto/punycode.h>
 #include "internal/nelem.h"
 #include <openssl/crypto.h>
 #include "fuzzer.h"

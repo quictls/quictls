@@ -21,7 +21,7 @@
 #include <openssl/pem.h>         /* Functions for writing MSBLOB and PVK */
 #include <openssl/dsa.h>
 #include "internal/passphrase.h"
-#include "crypto/rsa.h"
+#include <crypto/rsa.h>
 #include <providers/implementations.h>
 #include <providers/bio.h>
 #include <providers/provider_ctx.h>

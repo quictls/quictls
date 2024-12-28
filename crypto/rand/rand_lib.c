@@ -15,10 +15,10 @@
 #include <openssl/core_names.h>
 #include "internal/cryptlib.h"
 #include "internal/thread_once.h"
-#include "crypto/rand.h"
-#include "crypto/cryptlib.h"
+#include <crypto/rand.h>
+#include <crypto/cryptlib.h>
 #include "rand_local.h"
-#include "crypto/context.h"
+#include <crypto/context.h>
 
 #ifndef FIPS_MODULE
 # include <stdio.h>
@@ -27,7 +27,7 @@
 # include <openssl/conf.h>
 # include <openssl/trace.h>
 # include <openssl/engine.h>
-# include "crypto/rand_pool.h"
+# include <crypto/rand_pool.h>
 # include <providers/seeding.h>
 # include "internal/e_os.h"
 # include "internal/property.h"

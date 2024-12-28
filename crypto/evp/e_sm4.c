@@ -15,9 +15,9 @@
 #ifndef OPENSSL_NO_SM4
 # include <openssl/evp.h>
 # include <openssl/modes.h>
-# include "crypto/sm4.h"
-# include "crypto/evp.h"
-# include "crypto/sm4_platform.h"
+# include <crypto/sm4.h>
+# include <crypto/evp.h>
+# include <crypto/sm4_platform.h>
 # include "evp_local.h"
 
 typedef struct {

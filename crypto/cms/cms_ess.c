@@ -15,8 +15,8 @@
 #include <openssl/err.h>
 #include <openssl/cms.h>
 #include <openssl/ess.h>
-#include "crypto/ess.h"
-#include "crypto/x509.h"
+#include <crypto/ess.h>
+#include <crypto/x509.h>
 #include "cms_local.h"
 
 IMPLEMENT_ASN1_FUNCTIONS(CMS_ReceiptRequest)

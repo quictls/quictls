@@ -10,8 +10,8 @@
 #include <openssl/opensslconf.h>
 
 #include <openssl/rand.h>
-#include "crypto/rand_pool.h"
-#include "crypto/rand.h"
+#include <crypto/rand_pool.h>
+#include <crypto/rand.h>
 #include "internal/cryptlib.h"
 #include <providers/seeding.h>
 #include <version.h>

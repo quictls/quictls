@@ -6,7 +6,7 @@ ossl_random_add_conf_module - internal random configuration module
 
 =head1 SYNOPSIS
 
- #include "crypto/rand.h"
+ #include <crypto/rand.h>
 
  /* Configuration */
  void ossl_random_add_conf_module(void);

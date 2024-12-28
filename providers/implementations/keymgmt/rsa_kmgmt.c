@@ -23,8 +23,8 @@
 #include <providers/implementations.h>
 #include <providers/providercommon.h>
 #include <providers/provider_ctx.h>
-#include "crypto/rsa.h"
-#include "crypto/cryptlib.h"
+#include <crypto/rsa.h>
+#include <crypto/cryptlib.h>
 #include "internal/param_build_set.h"
 
 static OSSL_FUNC_keymgmt_new_fn rsa_newdata;

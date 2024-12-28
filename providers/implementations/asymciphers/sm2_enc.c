@@ -16,7 +16,7 @@
 #include <openssl/params.h>
 #include <openssl/err.h>
 #include <openssl/proverr.h>
-#include "crypto/sm2.h"
+#include <crypto/sm2.h>
 #include <providers/provider_ctx.h>
 #include <providers/implementations.h>
 #include <providers/provider_util.h>

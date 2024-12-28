@@ -30,7 +30,7 @@
 #include <openssl/err.h>
 #include <openssl/dherr.h>
 #include <openssl/dsaerr.h>
-#include "crypto/bn.h"
+#include <crypto/bn.h>
 #include "internal/ffc.h"
 
 /*

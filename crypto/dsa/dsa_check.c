@@ -17,7 +17,7 @@
 #include "internal/cryptlib.h"
 #include <openssl/bn.h>
 #include "dsa_local.h"
-#include "crypto/dsa.h"
+#include <crypto/dsa.h>
 
 int ossl_dsa_check_params(const DSA *dsa, int checktype, int *ret)
 {

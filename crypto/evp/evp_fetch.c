@@ -17,8 +17,8 @@
 #include "internal/core.h"
 #include "internal/provider.h"
 #include "internal/namemap.h"
-#include "crypto/decoder.h"
-#include "crypto/evp.h"    /* evp_local.h needs it */
+#include <crypto/decoder.h>
+#include <crypto/evp.h>    /* evp_local.h needs it */
 #include "evp_local.h"
 
 #define NAME_SEPARATOR ':'

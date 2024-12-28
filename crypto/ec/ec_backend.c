@@ -21,8 +21,8 @@
 # include <openssl/engine.h>
 # include <openssl/x509.h>
 #endif
-#include "crypto/bn.h"
-#include "crypto/ec.h"
+#include <crypto/bn.h>
+#include <crypto/ec.h>
 #include "ec_local.h"
 #include "internal/e_os.h"
 #include "internal/nelem.h"

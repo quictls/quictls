@@ -11,7 +11,7 @@
 #include "internal/e_os.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "crypto/ctype.h"
+#include <crypto/ctype.h>
 #include <string.h>
 #include <openssl/asn1.h>
 #include <openssl/evp.h>

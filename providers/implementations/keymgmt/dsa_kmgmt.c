@@ -20,7 +20,7 @@
 #include <providers/providercommon.h>
 #include <providers/implementations.h>
 #include <providers/provider_ctx.h>
-#include "crypto/dsa.h"
+#include <crypto/dsa.h>
 #include "internal/sizes.h"
 #include "internal/nelem.h"
 #include "internal/param_build_set.h"

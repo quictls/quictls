@@ -15,9 +15,9 @@
 #include "internal/namemap.h"
 #include "internal/property.h"
 #include "internal/provider.h"
-#include "crypto/decoder.h"
+#include <crypto/decoder.h>
 #include "encoder_local.h"
-#include "crypto/context.h"
+#include <crypto/context.h>
 
 /*
  * Decoder can have multiple names, separated with colons in a name string

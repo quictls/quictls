@@ -11,7 +11,7 @@
 #include <string.h>
 #include <limits.h>
 #include <openssl/crypto.h>
-#include "crypto/ctype.h"
+#include <crypto/ctype.h>
 #include "internal/cryptlib.h"
 #include "internal/thread_once.h"
 

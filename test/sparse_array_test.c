@@ -14,7 +14,7 @@
 
 #include <openssl/crypto.h>
 #include "internal/nelem.h"
-#include "crypto/sparse_array.h"
+#include <crypto/sparse_array.h>
 #include <test/testutil.h>
 
 /* The macros below generate unused functions which error out one of the clang

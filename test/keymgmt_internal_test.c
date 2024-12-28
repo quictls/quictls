@@ -24,7 +24,7 @@
 #include <openssl/core_names.h>
 #include "internal/core.h"
 #include "internal/nelem.h"
-#include "crypto/evp.h"          /* For the internal API */
+#include <crypto/evp.h>          /* For the internal API */
 #include <test/testutil.h>
 
 typedef struct {

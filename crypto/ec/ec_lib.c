@@ -20,7 +20,7 @@
 #include <openssl/err.h>
 #include <openssl/opensslv.h>
 #include <openssl/param_build.h>
-#include "crypto/ec.h"
+#include <crypto/ec.h>
 #include "internal/nelem.h"
 #include "ec_local.h"
 
