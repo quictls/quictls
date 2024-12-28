@@ -9,7 +9,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "helpers/cmp_testlib.h"
+#include <test/cmp_testlib.h>
 
 #include <apps/cmp_mock_srv.h>
 

@@ -18,7 +18,7 @@
 #include <openssl/x509v3.h>
 #include <openssl/pem.h>
 
-#include "../testutil.h"
+#include <test/testutil.h>
 
 
 /* -------------------------------------------------------------------------

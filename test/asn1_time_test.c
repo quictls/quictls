@@ -17,7 +17,7 @@
 #include <openssl/asn1.h>
 #include <openssl/evp.h>
 #include <openssl/objects.h>
-#include "testutil.h"
+#include <test/testutil.h>
 #include "internal/nelem.h"
 
 struct testdata {

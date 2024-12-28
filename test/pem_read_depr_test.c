@@ -19,7 +19,7 @@
 #include <openssl/dsa.h>
 #include <openssl/rsa.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 static const char *datadir;
 

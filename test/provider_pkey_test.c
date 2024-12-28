@@ -15,8 +15,8 @@
 #include <openssl/evp.h>
 #include <openssl/store.h>
 #include <openssl/ui.h>
-#include "testutil.h"
-#include "fake_rsaprov.h"
+#include <test/testutil.h>
+#include <test/fake_rsaprov.h>
 
 static OSSL_LIB_CTX *libctx = NULL;
 extern int key_deleted; /* From fake_rsaprov.c */

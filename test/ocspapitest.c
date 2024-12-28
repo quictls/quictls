@@ -16,7 +16,7 @@
 #include <openssl/asn1.h>
 #include <openssl/pem.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 static const char *certstr;
 static const char *privkeystr;

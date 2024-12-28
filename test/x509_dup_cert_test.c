@@ -12,7 +12,7 @@
 #include <openssl/err.h>
 #include <openssl/x509_vfy.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 static int test_509_dup_cert(int n)
 {

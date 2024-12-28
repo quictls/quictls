@@ -17,7 +17,7 @@
 #include <openssl/bn.h>
 
 #include "internal/nelem.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 #define TEST(expected, test) test_case((expected), #test, (test))
 

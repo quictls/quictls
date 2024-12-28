@@ -16,7 +16,7 @@
 #include <string.h>
 
 #include "internal/nelem.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 #ifndef OPENSSL_NO_RC5
 # include <openssl/rc5.h>

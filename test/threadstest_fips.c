@@ -11,8 +11,8 @@
 # include <windows.h>
 #endif
 
-#include "testutil.h"
-#include "threadstest.h"
+#include <test/testutil.h>
+#include <test/threadstest.h>
 
 static int success;
 

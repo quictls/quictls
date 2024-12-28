@@ -30,7 +30,7 @@
 #include <openssl/core_names.h>
 #include <openssl/x509.h>
 #include <openssl/encoder.h>
-#include "testutil.h"
+#include <test/testutil.h>
 #include "internal/nelem.h"
 #include "crypto/bn_dh.h"   /* _bignum_ffdhe2048_p */
 

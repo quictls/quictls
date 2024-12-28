@@ -11,8 +11,8 @@
 
 #include "internal/e_os.h"
 #include "internal/nelem.h"
-#include "ssltestlib.h"
-#include "../testutil.h"
+#include <test/ssltestlib.h>
+#include <test/testutil.h>
 
 #if !defined(OPENSSL_NO_KTLS) && !defined(OPENSSL_NO_POSIX_IO) && !defined(OPENSSL_NO_SOCK)
 # define OSSL_USE_SOCKETS 1

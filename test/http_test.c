@@ -13,7 +13,7 @@
 #include <openssl/x509v3.h>
 #include <string.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 static const ASN1_ITEM *x509_it = NULL;
 static X509 *x509 = NULL;

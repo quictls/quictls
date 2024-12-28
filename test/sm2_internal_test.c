@@ -22,7 +22,7 @@
 #include <openssl/crypto.h>
 #include <openssl/err.h>
 #include <openssl/rand.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 #ifndef OPENSSL_NO_SM2
 

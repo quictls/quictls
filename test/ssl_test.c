@@ -15,9 +15,9 @@
 #include <openssl/ssl.h>
 #include <openssl/provider.h>
 
-#include "helpers/handshake.h"
-#include "helpers/ssl_test_ctx.h"
-#include "testutil.h"
+#include <test/handshake.h>
+#include <test/ssl_test_ctx.h>
+#include <test/testutil.h>
 
 static CONF *conf = NULL;
 static OSSL_PROVIDER *defctxnull = NULL, *thisprov = NULL;

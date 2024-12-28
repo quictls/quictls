@@ -15,7 +15,7 @@
 #include <openssl/x509v3.h>
 #include <openssl/pem.h>
 #include <openssl/err.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 static const char *certs_dir;
 static char *root_f = NULL;

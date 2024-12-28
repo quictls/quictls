@@ -14,7 +14,7 @@
 #include "internal/recordmethod.h"
 #include "../ssl/record/methods/recmethod_local.h"
 #include "internal/nelem.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 /*
  * Based on the test vectors provided in:

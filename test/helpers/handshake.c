@@ -17,8 +17,8 @@
 #include "../../ssl/ssl_local.h"
 #include "internal/sockets.h"
 #include "internal/nelem.h"
-#include "handshake.h"
-#include "../testutil.h"
+#include <test/handshake.h>
+#include <test/testutil.h>
 
 #if !defined(OPENSSL_NO_SCTP) && !defined(OPENSSL_NO_SOCK)
 #include <netinet/sctp.h>

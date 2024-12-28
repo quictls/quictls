@@ -17,7 +17,7 @@
 #include <openssl/engine.h>
 #include <openssl/evp.h>
 #include <openssl/rand.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 /* Use a buffer size which is not aligned to block size */
 #define BUFFER_SIZE     17

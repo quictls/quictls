@@ -12,7 +12,7 @@
 
 #include <openssl/bn.h>
 #include "crypto/asn1_dsa.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 static unsigned char t_dsa_sig[] = {
     0x30, 0x06,                  /* SEQUENCE tag + length */

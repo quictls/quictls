@@ -13,8 +13,8 @@
 #include <openssl/core_object.h>
 #include <openssl/rand.h>
 #include <openssl/provider.h>
-#include "testutil.h"
-#include "fake_rsaprov.h"
+#include <test/testutil.h>
+#include <test/fake_rsaprov.h>
 
 static OSSL_FUNC_keymgmt_new_fn fake_rsa_keymgmt_new;
 static OSSL_FUNC_keymgmt_free_fn fake_rsa_keymgmt_free;

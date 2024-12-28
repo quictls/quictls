@@ -18,8 +18,8 @@
 #include <openssl/x509v3.h>
 #include <openssl/pem.h>
 
-#include "testutil.h"
-#include "helpers/pkcs12.h"
+#include <test/testutil.h>
+#include <test/pkcs12.h>
 
 static OSSL_LIB_CTX *testctx = NULL;
 static OSSL_PROVIDER *nullprov = NULL;

@@ -14,7 +14,7 @@
 #include <openssl/evp.h>
 #include <openssl/ssl.h>
 #include <openssl/tls1.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 static SSL_CTX *ctx;
 

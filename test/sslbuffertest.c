@@ -21,8 +21,8 @@
 
 #include "internal/packet.h"
 
-#include "helpers/ssltestlib.h"
-#include "testutil.h"
+#include <test/ssltestlib.h>
+#include <test/testutil.h>
 
 struct async_ctrs {
     unsigned int rctr;

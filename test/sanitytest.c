@@ -9,7 +9,7 @@
 
 #include <string.h>
 #include <openssl/types.h>
-#include "testutil.h"
+#include <test/testutil.h>
 #include "internal/numbers.h"
 #include "internal/time.h"
 

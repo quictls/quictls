@@ -11,7 +11,7 @@
 #include <openssl/pem.h>
 #include "internal/sizes.h"
 #include "crypto/evp.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 /* Collected arguments */
 static const char *eecert_filename = NULL;  /* For test_x509_file() */

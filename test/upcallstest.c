@@ -10,7 +10,7 @@
 #include <openssl/objects.h>
 #include <openssl/crypto.h>
 #include <openssl/provider.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 static const OSSL_ALGORITHM *obj_query(void *provctx, int operation_id,
                                        int *no_cache)

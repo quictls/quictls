@@ -11,7 +11,7 @@
 #include <limits.h>
 #include <openssl/store.h>
 #include <openssl/ui.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 #ifndef PATH_MAX
 # if defined(_WIN32) && defined(_MAX_PATH)

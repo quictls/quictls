@@ -9,8 +9,8 @@
 
 #include <string.h>
 
-#include "helpers/ssltestlib.h"
-#include "testutil.h"
+#include <test/ssltestlib.h>
+#include <test/testutil.h>
 
 static char *cert = NULL;
 static char *privkey = NULL;

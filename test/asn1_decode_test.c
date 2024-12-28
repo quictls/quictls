@@ -15,7 +15,7 @@
 #include <openssl/asn1t.h>
 #include <openssl/obj_mac.h>
 #include "internal/numbers.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 #ifdef __GNUC__
 # pragma GCC diagnostic ignored "-Wunused-function"

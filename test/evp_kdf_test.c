@@ -17,7 +17,7 @@
 #include <openssl/kdf.h>
 #include <openssl/core_names.h>
 #include "internal/numbers.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 
 static EVP_KDF_CTX *get_kdfbyname_libctx(OSSL_LIB_CTX *libctx, const char *name)

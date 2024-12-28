@@ -10,7 +10,7 @@
 #include <openssl/bio.h>
 #include "internal/e_os.h"
 #include "internal/sockets.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 static int families[] = {
     AF_INET,

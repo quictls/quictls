@@ -16,8 +16,8 @@
 #include <openssl/x509v3.h>
 #include <openssl/pem.h>
 
-#include "testutil.h"
-#include "helpers/pkcs12.h"
+#include <test/testutil.h>
+#include <test/pkcs12.h>
 
 static int default_libctx = 1;
 

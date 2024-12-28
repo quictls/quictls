@@ -19,7 +19,7 @@
 #include <openssl/evp.h>
 #include <openssl/provider.h>
 #include "internal/sizes.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 static char *config_file = NULL;
 static char *alg = "digest";

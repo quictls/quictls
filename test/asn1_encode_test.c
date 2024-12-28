@@ -13,7 +13,7 @@
 #include <openssl/rand.h>
 #include <openssl/asn1t.h>
 #include "internal/numbers.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 #ifdef __GNUC__
 # pragma GCC diagnostic ignored "-Wunused-function"

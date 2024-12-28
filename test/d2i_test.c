@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 #include <openssl/asn1.h>
 #include <openssl/asn1t.h>

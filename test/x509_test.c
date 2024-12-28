@@ -8,7 +8,7 @@
  */
 
 #include <openssl/x509.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 static EVP_PKEY *pubkey = NULL;
 static EVP_PKEY *privkey = NULL;

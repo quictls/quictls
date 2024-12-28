@@ -9,7 +9,7 @@
 
 #include <openssl/evp.h>
 #include <openssl/conf.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 static char *configfile = NULL;
 static char *recurseconfigfile = NULL;

@@ -18,7 +18,7 @@
 #include <openssl/rand.h>
 #include "internal/nelem.h"
 #include "internal/numbers.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 /*
  * Things in boring, not in openssl.
@@ -1928,7 +1928,7 @@ struct rand_range_case {
     double critical;
 };
 
-#include "bn_rand_range.h"
+#include <test/bn_rand_range.h>
 
 static int test_rand_range_single(size_t n)
 {

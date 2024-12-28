@@ -13,8 +13,8 @@
 #include <ctype.h>
 
 #include "internal/nelem.h"
-#include "../testutil.h"
-#include "tu_local.h"
+#include <test/testutil.h>
+#include <test/tu_local.h>
 
 int test_start_file(STANZA *s, const char *testfile)
 {

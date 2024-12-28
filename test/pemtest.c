@@ -11,7 +11,7 @@
 #include <openssl/bio.h>
 #include <openssl/pem.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 #include "internal/nelem.h"
 
 typedef struct {

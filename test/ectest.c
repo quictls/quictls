@@ -16,7 +16,7 @@
 
 #include <string.h>
 #include "internal/nelem.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 #include <openssl/ec.h>
 #ifndef OPENSSL_NO_ENGINE

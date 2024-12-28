@@ -17,7 +17,7 @@
 #include <string.h>
 
 #include "internal/nelem.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 #ifndef OPENSSL_NO_IDEA
 # include <openssl/idea.h>

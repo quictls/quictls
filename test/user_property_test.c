@@ -13,7 +13,7 @@
 #include <openssl/provider.h>
 #include <openssl/crypto.h>
 #include <openssl/evp.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 #define MYPROPERTIES "foo.bar=yes"
 

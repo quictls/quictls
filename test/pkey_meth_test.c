@@ -16,7 +16,7 @@
 #include <string.h>
 
 #include <openssl/evp.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 /* Test of EVP_PKEY_ASN1_METHOD ordering */
 static int test_asn1_meths(void)

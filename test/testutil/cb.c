@@ -7,8 +7,8 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "output.h"
-#include "tu_local.h"
+#include <test/output.h>
+#include <test/tu_local.h>
 
 int openssl_error_cb(const char *str, size_t len, void *u)
 {

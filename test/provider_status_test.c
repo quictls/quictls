@@ -14,7 +14,7 @@
 #include <openssl/core_names.h>
 #include <openssl/self_test.h>
 #include <openssl/evp.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 typedef enum OPTION_choice {
     OPT_ERR = -1,

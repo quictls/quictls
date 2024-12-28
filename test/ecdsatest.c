@@ -14,7 +14,7 @@
 #include "internal/deprecated.h"
 
 #include <openssl/opensslconf.h> /* To see if OPENSSL_NO_EC is defined */
-#include "testutil.h"
+#include <test/testutil.h>
 
 #ifndef OPENSSL_NO_EC
 
@@ -23,7 +23,7 @@
 # include <openssl/ec.h>
 # include <openssl/rand.h>
 # include "internal/nelem.h"
-# include "ecdsatest.h"
+# include <test/ecdsatest.h>
 
 static fake_random_generate_cb fbytes;
 

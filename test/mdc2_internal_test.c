@@ -19,7 +19,7 @@
 #include <string.h>
 
 #include <openssl/mdc2.h>
-#include "testutil.h"
+#include <test/testutil.h>
 #include "internal/nelem.h"
 
 typedef struct {

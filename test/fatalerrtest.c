@@ -9,8 +9,8 @@
 
 #include <openssl/ssl.h>
 #include <openssl/err.h>
-#include "helpers/ssltestlib.h"
-#include "testutil.h"
+#include <test/ssltestlib.h>
+#include <test/testutil.h>
 #include <string.h>
 
 static char *cert = NULL;

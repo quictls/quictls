@@ -32,11 +32,11 @@
 #include <openssl/rsa.h>
 #include <openssl/engine.h>
 #include <openssl/proverr.h>
-#include "testutil.h"
+#include <test/testutil.h>
 #include "internal/nelem.h"
 #include "internal/sizes.h"
 #include "crypto/evp.h"
-#include "fake_rsaprov.h"
+#include <test/fake_rsaprov.h>
 
 #ifdef STATIC_LEGACY
 OSSL_provider_init_fn ossl_legacy_provider_init;

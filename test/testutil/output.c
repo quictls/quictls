@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "output.h"
+#include <test/output.h>
 
 int test_printf_stdout(const char *fmt, ...)
 {

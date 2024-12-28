@@ -10,7 +10,7 @@
 #include <string.h>
 #include <openssl/evp.h>
 #include <openssl/provider.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 static int is_fips;
 static int bad_fips;

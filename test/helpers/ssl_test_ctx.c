@@ -13,8 +13,8 @@
 #include <openssl/crypto.h>
 
 #include "internal/nelem.h"
-#include "ssl_test_ctx.h"
-#include "../testutil.h"
+#include <test/ssl_test_ctx.h>
+#include <test/testutil.h>
 
 static const int default_app_data_size = 256;
 /* Default set to be as small as possible to exercise fragmentation. */

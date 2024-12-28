@@ -14,7 +14,7 @@
 #include <openssl/store.h>
 #include <openssl/rand.h>
 #include <openssl/core_names.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 static int dummy_decoder_decode(void *ctx, OSSL_CORE_BIO *cin, int selection,
                                 OSSL_CALLBACK *object_cb, void *object_cbarg,

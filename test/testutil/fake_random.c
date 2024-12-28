@@ -14,7 +14,7 @@
 #include <openssl/provider.h>
 #include "../include/crypto/evp.h"
 #include "../../crypto/evp/evp_local.h"
-#include "../testutil.h"
+#include <test/testutil.h>
 
 typedef struct {
     fake_random_generate_cb *cb;

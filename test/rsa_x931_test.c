@@ -12,7 +12,7 @@
 #include <openssl/rsa.h>
 #include <openssl/bn.h>
 #include "crypto/rsa.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 static OSSL_PROVIDER *prov_null = NULL;
 static OSSL_LIB_CTX *libctx = NULL;

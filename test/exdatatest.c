@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <openssl/crypto.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 static long saved_argl;
 static void *saved_argp;

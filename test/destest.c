@@ -16,7 +16,7 @@
 #include <openssl/e_os2.h>
 #include <string.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 #include "internal/nelem.h"
 
 #ifndef OPENSSL_NO_DES

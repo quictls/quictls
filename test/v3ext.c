@@ -15,7 +15,7 @@
 #include <openssl/err.h>
 #include "internal/nelem.h"
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 static const char *infile;
 

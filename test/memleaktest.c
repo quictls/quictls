@@ -11,7 +11,7 @@
 #include <openssl/bio.h>
 #include <openssl/crypto.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 /* __has_feature is a clang-ism, while __SANITIZE_ADDRESS__ is a gcc-ism */
 #if defined(__has_feature)

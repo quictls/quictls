@@ -12,7 +12,7 @@
 
 #include "internal/nelem.h"
 #include "internal/constant_time.h"
-#include "testutil.h"
+#include <test/testutil.h>
 #include "internal/numbers.h"
 
 static const unsigned int CONSTTIME_TRUE = (unsigned)(~0);

@@ -9,7 +9,7 @@
 
 #include <stddef.h>
 #include <openssl/provider.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 static int test_default_libctx(void)
 {

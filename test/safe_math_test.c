@@ -18,7 +18,7 @@
 
 #include "internal/nelem.h"
 #include "internal/safe_math.h"
-#include "testutil.h"
+#include <test/testutil.h>
 
 /* Create the safe math instances we're interested in */
 OSSL_SAFE_MATH_SIGNED(int, int)

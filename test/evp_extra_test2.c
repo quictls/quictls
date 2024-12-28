@@ -25,7 +25,7 @@
 #include <openssl/core_names.h>
 #include <openssl/ui.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 #include "internal/nelem.h"
 
 static OSSL_LIB_CTX *mainctx = NULL;

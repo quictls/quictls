@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <openssl/core.h>
-#include "simpledynamic.h"
+#include <test/simpledynamic.h>
 
 static int test_load(const char *path, const char *symbol)
 {

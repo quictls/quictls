@@ -17,8 +17,8 @@
 
 #include <openssl/ssl.h>
 #include "internal/nelem.h"
-#include "helpers/ssltestlib.h"
-#include "testutil.h"
+#include <test/ssltestlib.h>
+#include <test/testutil.h>
 #include "../ssl/ssl_local.h"
 
 #undef OSSL_NO_USABLE_TLS1_3

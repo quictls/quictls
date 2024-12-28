@@ -110,7 +110,7 @@ test):
 Generic form of C test executables
 ----------------------------------
 
-    #include "testutil.h"
+    #include <tests/testutil.h>
 
     static int my_test(void)
     {

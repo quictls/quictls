@@ -23,7 +23,7 @@
 #include <openssl/rand.h>
 #include <openssl/bn.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 #include "rsa_local.h"
 #include <openssl/rsa.h>

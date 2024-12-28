@@ -12,7 +12,7 @@
 
 #include <openssl/pem.h>
 #include <openssl/x509.h>
-#include "testutil.h"
+#include <test/testutil.h>
 
 /*
  * c: path of a cert in PEM format

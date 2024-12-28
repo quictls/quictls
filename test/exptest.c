@@ -18,7 +18,7 @@
 #include <openssl/rand.h>
 #include <openssl/err.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 #define NUM_BITS        (BN_BITS2 * 4)
 

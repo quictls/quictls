@@ -56,7 +56,7 @@
 #include "internal/nelem.h"
 #include "crypto/evp.h"
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 typedef int PEM_write_bio_of_void_protected(BIO *out, const void *obj,
                                             const EVP_CIPHER *enc,

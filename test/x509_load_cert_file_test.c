@@ -9,7 +9,7 @@
 #include <openssl/err.h>
 #include <openssl/x509_vfy.h>
 
-#include "testutil.h"
+#include <test/testutil.h>
 
 static const char *chain;
 static const char *crl;
