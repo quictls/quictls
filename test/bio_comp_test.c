@@ -14,8 +14,8 @@
 #include <openssl/comp.h>
 
 #include <test/testutil.h>
-#include <test/testutil.h>output.h"
-#include <test/testutil.h>tu_local.h"
+#include <test/output.h>
+#include <test/tu_local.h>
 
 #define COMPRESS  1
 #define EXPAND    0
