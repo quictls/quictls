@@ -561,7 +561,7 @@ int X509_NAME_print_ex(BIO *out, const X509_NAME *nm, int indent,
                        unsigned long flags)
 {
     if (flags == XN_FLAG_COMPAT)
-        return X509_NAME_print(out, nm, indent);
+        return X509_NAME_print(out, nm, 0);
     return do_name_ex(send_bio_chars, out, nm, indent, flags);
 }
 
@@ -572,10 +572,11 @@ int X509_NAME_print_ex_fp(FILE *fp, const X509_NAME *nm, int indent,
     if (flags == XN_FLAG_COMPAT) {
         BIO *btmp;
         int ret;
+
         btmp = BIO_new_fp(fp, BIO_NOCLOSE);
-        if (!btmp)
+        if (btmp == NULL)
             return -1;
-        ret = X509_NAME_print(btmp, nm, indent);
+        ret = X509_NAME_print(btmp, nm, 0);
         BIO_free(btmp);
         return ret;
     }
