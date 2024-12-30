@@ -18,12 +18,6 @@ the executable is set-user-ID or set-group-ID.
 Specifies the path to a certificate transparency log list.
 See L<CTLOG_STORE_new(3)>.
 
-=item B<OPENSSL>
-
-Specifies the path to the B<openssl> executable. Used by
-the B<rehash> script (see L<openssl-rehash(1)/Script Configuration>)
-and by the B<CA.pl> script (see L<CA.pl(1)/NOTES>
-
 =item B<OPENSSL_CONF>, B<OPENSSL_CONF_INCLUDE>
 
 Specifies the path to a configuration file and the directory for
@@ -40,11 +34,6 @@ See L<CA.pl(1)>.
 
 Specifies the directory from which dynamic engines are loaded.
 See L<openssl-engine(1)>.
-
-=item B<OPENSSL_MALLOC_FD>, B<OPENSSL_MALLOC_FAILURES>
-
-If built with debugging, this allows memory allocation to fail.
-See L<OPENSSL_malloc(3)>.
 
 =item B<OPENSSL_MODULES>
 
@@ -70,19 +59,15 @@ See L<RAND_load_file(3)>.
 Specify the default directory or file containing CA certificates.
 See L<SSL_CTX_load_verify_locations(3)>.
 
-=item B<TSGET>
-
-Additional arguments for the L<tsget(1)> command.
-
 =item B<OPENSSL_ia32cap>, B<OPENSSL_sparcv9cap>, B<OPENSSL_ppccap>, B<OPENSSL_armcap>, B<OPENSSL_s390xcap>, B<OPENSSL_riscvcap>
 
 OpenSSL supports a number of different algorithm implementations for
 various machines and, by default, it determines which to use based on the
-processor capabilities and run time feature enquiry.  These environment
+processor capabilities and run-time feature enquiry.  These environment
 variables can be used to exert more control over this selection process.
 See L<OPENSSL_ia32cap(3)>, L<OPENSSL_s390xcap(3)>.
 
-=item B<NO_PROXY>, B<HTTPS_PROXY>, B<HTTP_PROXY>
+=item B<HTTPS_PROXY>, B<HTTP_PROXY>, B<NO_PROXY>
 
 Specify a proxy hostname.
 See L<OSSL_HTTP_parse_url(3)>.

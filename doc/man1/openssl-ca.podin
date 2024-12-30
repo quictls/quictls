@@ -766,8 +766,7 @@ the database has to be kept in memory.
 
 This command really needs rewriting or the required functionality
 exposed at either a command or interface level so that a more user-friendly
-replacement could handle things properly. The script
-B<CA.pl> helps a little but not very much.
+replacement could handle things properly.
 
 Any fields in a request that are not present in a policy are silently
 deleted. This does not happen if the B<-preserveDN> option is used. To
@@ -846,7 +845,6 @@ L<openssl(1)>,
 L<openssl-req(1)>,
 L<openssl-spkac(1)>,
 L<openssl-x509(1)>,
-L<CA.pl(1)>,
 L<config(5)>,
 L<x509v3_config(5)>
 
