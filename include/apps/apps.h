@@ -309,8 +309,6 @@ ASN1_VALUE *app_http_post_asn1(const char *host, const char *port,
 # define EXT_COPY_ADD    1
 # define EXT_COPY_ALL    2
 
-# define NETSCAPE_CERT_HDR "certificate"
-
 # define APP_PASS_LEN 1024
 
 /*

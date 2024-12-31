@@ -1,6 +1,5 @@
 d2i_EC_PUBKEY                           1	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
 b2i_PVK_bio                             2	3_0_0	EXIST::FUNCTION:
-PEM_read_bio_NETSCAPE_CERT_SEQUENCE     3	3_0_0	EXIST::FUNCTION:
 X509_STORE_CTX_get0_chain               4	3_0_0	EXIST::FUNCTION:
 COMP_expand_block                       5	3_0_0	EXIST::FUNCTION:COMP
 X509V3_get_string                       6	3_0_0	EXIST::FUNCTION:
@@ -1190,7 +1189,6 @@ PEM_read_bio_DSAparams                  1242	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_
 X509_CRL_cmp                            1243	3_0_0	EXIST::FUNCTION:
 DSO_METHOD_openssl                      1244	3_0_0	EXIST::FUNCTION:
 d2i_PrivateKey_fp                       1245	3_0_0	EXIST::FUNCTION:STDIO
-i2d_NETSCAPE_CERT_SEQUENCE              1246	3_0_0	EXIST::FUNCTION:
 EC_POINT_oct2point                      1248	3_0_0	EXIST::FUNCTION:EC
 EVP_CIPHER_CTX_buf_noconst              1249	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
 OPENSSL_DIR_read                        1250	3_0_0	EXIST::FUNCTION:
@@ -1237,7 +1235,6 @@ X509_VERIFY_PARAM_move_peername         1291	3_0_0	EXIST::FUNCTION:
 OCSP_SINGLERESP_it                      1292	3_0_0	EXIST::FUNCTION:OCSP
 BN_num_bits                             1293	3_0_0	EXIST::FUNCTION:
 X509_CRL_METHOD_free                    1294	3_0_0	EXIST::FUNCTION:
-PEM_read_NETSCAPE_CERT_SEQUENCE         1295	3_0_0	EXIST::FUNCTION:STDIO
 OPENSSL_load_builtin_modules            1296	3_0_0	EXIST::FUNCTION:
 X509_set_version                        1297	3_0_0	EXIST::FUNCTION:
 i2d_EC_PUBKEY_bio                       1298	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
@@ -1579,7 +1576,6 @@ X509_get_ex_data                        1653	3_0_0	EXIST::FUNCTION:
 RSA_set_method                          1654	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
 X509_REVOKED_dup                        1655	3_0_0	EXIST::FUNCTION:
 ASN1_TIME_new                           1656	3_0_0	EXIST::FUNCTION:
-PEM_write_NETSCAPE_CERT_SEQUENCE        1657	3_0_0	EXIST::FUNCTION:STDIO
 PEM_read_X509_REQ                       1658	3_0_0	EXIST::FUNCTION:STDIO
 EC_GROUP_free                           1659	3_0_0	EXIST::FUNCTION:EC
 X509_CRL_get_meth_data                  1660	3_0_0	EXIST::FUNCTION:
@@ -1696,7 +1692,6 @@ ASN1_tag2bit                            1772	3_0_0	EXIST::FUNCTION:
 TS_REQ_add_ext                          1773	3_0_0	EXIST::FUNCTION:TS
 X509_digest                             1776	3_0_0	EXIST::FUNCTION:
 CRYPTO_THREAD_cleanup_local             1777	3_0_0	EXIST::FUNCTION:
-NETSCAPE_CERT_SEQUENCE_it               1778	3_0_0	EXIST::FUNCTION:
 EVP_aes_128_wrap                        1779	3_0_0	EXIST::FUNCTION:
 X509V3_conf_free                        1780	3_0_0	EXIST::FUNCTION:
 TS_TST_INFO_get_ext_by_NID              1781	3_0_0	EXIST::FUNCTION:TS
@@ -2081,7 +2076,6 @@ ECDSA_do_sign_ex                        2176	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_
 OCSP_ONEREQ_get_ext                     2177	3_0_0	EXIST::FUNCTION:OCSP
 BN_get_rfc3526_prime_4096               2179	3_0_0	EXIST::FUNCTION:
 d2i_PKCS7_fp                            2180	3_0_0	EXIST::FUNCTION:STDIO
-PEM_write_bio_NETSCAPE_CERT_SEQUENCE    2181	3_0_0	EXIST::FUNCTION:
 PKCS12_AUTHSAFES_it                     2182	3_0_0	EXIST::FUNCTION:
 EVP_MD_CTX_free                         2183	3_0_0	EXIST::FUNCTION:
 CMS_RecipientInfo_kari_orig_id_cmp      2184	3_0_0	EXIST::FUNCTION:CMS
@@ -2341,7 +2335,6 @@ EVP_CIPHER_meth_set_set_asn1_params     2446	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_
 EC_KEY_get_enc_flags                    2447	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,EC
 X509_OBJECT_idx_by_subject              2448	3_0_0	EXIST::FUNCTION:
 EVP_PKEY_meth_copy                      2449	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
-NETSCAPE_CERT_SEQUENCE_new              2450	3_0_0	EXIST::FUNCTION:
 CRYPTO_ocb128_decrypt                   2451	3_0_0	EXIST::FUNCTION:OCB
 ASYNC_WAIT_CTX_free                     2452	3_0_0	EXIST::FUNCTION:
 d2i_PKCS7_DIGEST                        2453	3_0_0	EXIST::FUNCTION:
@@ -2434,7 +2427,6 @@ EVP_chacha20                            2546	3_0_0	EXIST::FUNCTION:CHACHA
 BN_bn2dec                               2547	3_0_0	EXIST::FUNCTION:
 X509_REQ_print_ex                       2548	3_0_0	EXIST::FUNCTION:
 PEM_read_CMS                            2549	3_0_0	EXIST::FUNCTION:CMS,STDIO
-d2i_NETSCAPE_CERT_SEQUENCE              2550	3_0_0	EXIST::FUNCTION:
 X509_CRL_set_version                    2551	3_0_0	EXIST::FUNCTION:
 ASN1_PCTX_set_cert_flags                2552	3_0_0	EXIST::FUNCTION:
 PKCS8_PRIV_KEY_INFO_free                2553	3_0_0	EXIST::FUNCTION:
@@ -3575,7 +3567,6 @@ i2d_PKCS8PrivateKey_bio                 3739	3_0_0	EXIST::FUNCTION:
 X509_get_extension_flags                3740	3_0_0	EXIST::FUNCTION:
 X509V3_EXT_val_prn                      3741	3_0_0	EXIST::FUNCTION:
 SCT_get_validation_status               3742	3_0_0	EXIST::FUNCTION:CT
-NETSCAPE_CERT_SEQUENCE_free             3743	3_0_0	EXIST::FUNCTION:
 EVP_PBE_scrypt                          3744	3_0_0	EXIST::FUNCTION:SCRYPT
 d2i_TS_REQ_bio                          3745	3_0_0	EXIST::FUNCTION:TS
 ENGINE_set_default_ciphers              3746	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,ENGINE
