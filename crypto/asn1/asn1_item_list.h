@@ -146,8 +146,6 @@ static ASN1_ITEM_EXP *asn1_item_list[] = {
 #ifndef OPENSSL_NO_SCRYPT
     ASN1_ITEM_ref(SCRYPT_PARAMS),
 #endif
-    ASN1_ITEM_ref(SXNETID),
-    ASN1_ITEM_ref(SXNET),
     ASN1_ITEM_ref(ISSUER_SIGN_TOOL),
     ASN1_ITEM_ref(USERNOTICE),
     ASN1_ITEM_ref(X509_ALGORS),

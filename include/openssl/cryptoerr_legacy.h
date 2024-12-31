@@ -1414,11 +1414,6 @@ OSSL_DEPRECATEDIN_3_0 int ERR_load_X509V3_strings(void);
 #  define X509V3_F_S2I_ASN1_OCTET_STRING                   0
 #  define X509V3_F_S2I_SKEY_ID                             0
 #  define X509V3_F_SET_DIST_POINT_NAME                     0
-#  define X509V3_F_SXNET_ADD_ID_ASC                        0
-#  define X509V3_F_SXNET_ADD_ID_INTEGER                    0
-#  define X509V3_F_SXNET_ADD_ID_ULONG                      0
-#  define X509V3_F_SXNET_GET_ID_ASC                        0
-#  define X509V3_F_SXNET_GET_ID_ULONG                      0
 #  define X509V3_F_TREE_INIT                               0
 #  define X509V3_F_V2I_ASIDENTIFIERS                       0
 #  define X509V3_F_V2I_ASN1_BIT_STRING                     0

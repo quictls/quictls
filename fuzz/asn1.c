@@ -172,8 +172,6 @@ static ASN1_ITEM_EXP *item_type[] = {
     ASN1_ITEM_ref(RSAPrivateKey),
     ASN1_ITEM_ref(RSAPublicKey),
 #endif
-    ASN1_ITEM_ref(SXNET),
-    ASN1_ITEM_ref(SXNETID),
     ASN1_ITEM_ref(USERNOTICE),
     ASN1_ITEM_ref(X509),
     ASN1_ITEM_ref(X509_ALGOR),
