@@ -33,7 +33,7 @@ By default no parameter restrictions are placed on the generated key.
 The public key format is documented in RFC 8017, which differs from
 RFC 5280, by including two extra NULL values (for optional
 parameters). OpenSSL release 1.1 and earlier used RFC 5280 style,
-while 3.0 and later used RFC 8017.
+while 3.0 and later use RFC 8017.
 
 The PKCS#8 private key format used for RSA-PSS keys is similar to the RSA
 format except it uses the B<id-RSASSA-PSS> OID and the parameters field, if
