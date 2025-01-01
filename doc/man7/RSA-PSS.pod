@@ -30,11 +30,12 @@ By default no parameter restrictions are placed on the generated key.
 
 =head1 NOTES
 
-The public key format is documented in RFC 8017, which differs from RFC 4055
+The public key format is documented in RFC 8017.
+OpenSSL release 1.1 and earlier claimed to confirm to
 L<section 3.1|https://www.rfc-editor.org/rfc/rfc4055.html#section-3.1>
-by outputting two extra NULL values (for optional
-parameters). OpenSSL release 1.1 and earlier used RFC 4055 style,
-while 3.0 and later use RFC 8017.
+of RFC 4055, but that was not correct and did not include the
+required NULL values.
+Starting with OpenSSL releaes 3.0 the output was conformant with RFC 8017.
 
 The PKCS#8 private key format used for RSA-PSS keys is similar to the RSA
 format except it uses the B<id-RSASSA-PSS> OID and the parameters field, if
