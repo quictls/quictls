@@ -10,7 +10,7 @@
 int ossl_v3_name_cmp(const char *name, const char *cmp);
 
 extern const X509V3_EXT_METHOD ossl_v3_bcons, ossl_v3_nscert, ossl_v3_key_usage, ossl_v3_ext_ku;
-extern const X509V3_EXT_METHOD ossl_v3_pkey_usage_period, ossl_v3_sxnet, ossl_v3_info, ossl_v3_sinfo;
+extern const X509V3_EXT_METHOD ossl_v3_pkey_usage_period, ossl_v3_info, ossl_v3_sinfo;
 extern const X509V3_EXT_METHOD ossl_v3_ns_ia5_list[8], ossl_v3_alt[3], ossl_v3_skey_id, ossl_v3_akey_id;
 extern const X509V3_EXT_METHOD ossl_v3_crl_num, ossl_v3_crl_reason, ossl_v3_crl_invdate;
 extern const X509V3_EXT_METHOD ossl_v3_delta_crl, ossl_v3_cpols, ossl_v3_crld, ossl_v3_freshest_crl;

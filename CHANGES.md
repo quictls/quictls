@@ -50,6 +50,9 @@ aliases for others: `BUF_strdup`, `BUF_strndup`, `BUF_memdup`,
 `BN_is_prime_fasttest`, `CRYPTO_mem_ctrl`, `DH_generate_parameters`, and
 `RSA_generate_key` for compatibility with outside applications.
   - Made the `ERR_STACK` datatype opaque.
+  - Support for the undocumented and outdated "Strong Extranet ID"
+certificate extension and the "Netscape Certificate Sequence"
+data format have been removed.
 
 - Header files were reorganized:
   - The redundant `#pragma once` and old-style header guards were removed.

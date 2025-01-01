@@ -162,7 +162,6 @@ The following are (largely obsolete) Netscape certificate extensions.
 
 =head2 Miscellaneous Certificate Extensions
 
- Strong Extranet ID                 NID_sxnet
  Proxy Certificate Information      NID_proxyCertInfo
 
 =head2 PKIX CRL Extensions
