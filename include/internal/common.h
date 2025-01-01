@@ -170,8 +170,8 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
 
 # define c2ln(c, l1, l2, n) \
     { \
-        c += n; \
-        l1 = l2 = 0; \
+        (c) += (n); \
+        (l1) = (l2) = 0; \
         switch (n) { \
         case 8: l2  = ((unsigned long)(*(--(c)))) << 24; \
                 /* fallthrough */ \
@@ -215,8 +215,8 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
 
 # define n2ln(c, l1, l2, n) \
     { \
-        c += n; \
-        l1 = l2 = 0; \
+        (c) += (n); \
+        (l1) = (l2) = 0; \
         switch (n) { \
         case 8: l2  = ((unsigned long)(*(--(c))))      ; \
                 /* fallthrough */ \
