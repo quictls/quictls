@@ -99,7 +99,7 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
                          l|=(((unsigned long)(*((c)++)))<<24))
 
 /*
- * CipherpPack/unpack unrolling.
+ * Loop unrolling, use by some cipher implementations.
  */
 
 /* NOTE - c is not incremented as per c2l */
