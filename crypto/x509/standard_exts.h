@@ -37,7 +37,6 @@ static const X509V3_EXT_METHOD *standard_exts[] = {
 #ifndef OPENSSL_NO_OCSP
     &ossl_v3_crl_invdate,
 #endif
-    &ossl_v3_sxnet,
     &ossl_v3_info,
 #ifndef OPENSSL_NO_RFC3779
     &ossl_v3_addr,
