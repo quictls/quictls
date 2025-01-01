@@ -98,7 +98,7 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
  * Note that all of these evaluate their parameters multiple
  * times. We could remove the parens around some of them,
  * like "(c)" etc., but don't. Many of the macros use the comma
- * to get a "sequence point" to insure that the right bytes
+ * to get a "sequence point" to ensure that the right bytes
  * are shifted with the right amounts.
  */
 
@@ -174,12 +174,19 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
         l1 = l2 = 0; \
         switch (n) { \
         case 8: l2  = ((unsigned long)(*(--(c)))) << 24; \
+                /* fallthrough */ \
         case 7: l2 |= ((unsigned long)(*(--(c)))) << 16; \
+                /* fallthrough */ \
         case 6: l2 |= ((unsigned long)(*(--(c)))) <<  8; \
+                /* fallthrough */ \
         case 5: l2 |= ((unsigned long)(*(--(c))))      ; \
+                /* fallthrough */ \
         case 4: l1  = ((unsigned long)(*(--(c)))) << 24; \
+                /* fallthrough */ \
         case 3: l1 |= ((unsigned long)(*(--(c)))) << 16; \
+                /* fallthrough */ \
         case 2: l1 |= ((unsigned long)(*(--(c)))) <<  8; \
+                /* fallthrough */ \
         case 1: l1 |= ((unsigned long)(*(--(c))))      ; \
         } \
     }
@@ -189,12 +196,19 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
         c += n; \
         switch (n) { \
         case 8: *(--(c)) = (unsigned char)(((l2) >> 24) & 0xff); \
+                /* fallthrough */ \
         case 7: *(--(c)) = (unsigned char)(((l2) >> 16) & 0xff); \
+                /* fallthrough */ \
         case 6: *(--(c)) = (unsigned char)(((l2) >>  8) & 0xff); \
+                /* fallthrough */ \
         case 5: *(--(c)) = (unsigned char)(((l2)      ) & 0xff); \
+                /* fallthrough */ \
         case 4: *(--(c)) = (unsigned char)(((l1) >> 24) & 0xff); \
+                /* fallthrough */ \
         case 3: *(--(c)) = (unsigned char)(((l1) >> 16) & 0xff); \
+                /* fallthrough */ \
         case 2: *(--(c)) = (unsigned char)(((l1) >>  8) & 0xff); \
+                /* fallthrough */ \
         case 1: *(--(c)) = (unsigned char)(((l1)      ) & 0xff); \
         } \
     }
@@ -205,12 +219,19 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
         l1 = l2 = 0; \
         switch (n) { \
         case 8: l2  = ((unsigned long)(*(--(c))))      ; \
+                /* fallthrough */ \
         case 7: l2 |= ((unsigned long)(*(--(c)))) <<  8; \
+                /* fallthrough */ \
         case 6: l2 |= ((unsigned long)(*(--(c)))) << 16; \
+                /* fallthrough */ \
         case 5: l2 |= ((unsigned long)(*(--(c)))) << 24; \
+                /* fallthrough */ \
         case 4: l1  = ((unsigned long)(*(--(c))))      ; \
+                /* fallthrough */ \
         case 3: l1 |= ((unsigned long)(*(--(c)))) <<  8; \
+                /* fallthrough */ \
         case 2: l1 |= ((unsigned long)(*(--(c)))) << 16; \
+                /* fallthrough */ \
         case 1: l1 |= ((unsigned long)(*(--(c)))) << 24; \
         } \
     }
@@ -220,12 +241,19 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
         c += n; \
         switch (n) { \
         case 8: *(--(c)) = (unsigned char)(((l2)      ) & 0xff); \
+                /* fallthrough */ \
         case 7: *(--(c)) = (unsigned char)(((l2) >>  8) & 0xff); \
+                /* fallthrough */ \
         case 6: *(--(c)) = (unsigned char)(((l2) >> 16) & 0xff); \
+                /* fallthrough */ \
         case 5: *(--(c)) = (unsigned char)(((l2) >> 24) & 0xff); \
+                /* fallthrough */ \
         case 4: *(--(c)) = (unsigned char)(((l1)      ) & 0xff); \
+                /* fallthrough */ \
         case 3: *(--(c)) = (unsigned char)(((l1) >>  8) & 0xff); \
+                /* fallthrough */ \
         case 2: *(--(c)) = (unsigned char)(((l1) >> 16) & 0xff); \
+                /* fallthrough */ \
         case 1: *(--(c)) = (unsigned char)(((l1) >> 24) & 0xff); \
         } \
     }
@@ -244,8 +272,8 @@ static inline int ossl_ends_with_dirsep(const char *path)
 static inline int ossl_is_absolute_path(const char *path)
 {
 # if   defined _WIN32
-    if (path[0] == '\\'
-            || (path[0] != '\0' && path[1] == ':'))
+    /* Not worth checking for uppercase letter before the colon */
+    if (path[0] == '\\' || (path[0] != '\0' && path[1] == ':'))
         return 1;
 # endif
     return path[0] == '/';
