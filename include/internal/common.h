@@ -194,7 +194,7 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
 # define l2cn(l1, l2, c, n) \
     { \
         (c) += (n); \
-        switch (n) { \
+        switch ((n)) { \
         case 8: *(--(c)) = (unsigned char)(((l2) >> 24) & 0xff); \
                 /* fallthrough */ \
         case 7: *(--(c)) = (unsigned char)(((l2) >> 16) & 0xff); \
