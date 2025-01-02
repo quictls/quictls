@@ -111,9 +111,9 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
      *((c)++) = (unsigned char)(((s)     ) & 0xff))
 
 # define n2l3(c, l) \
-    (l  = ((unsigned long)(*((c)++)) << 16), \
-     l |= ((unsigned long)(*((c)++)) <<  8), \
-     l |= ((unsigned long)(*((c)++))      ))
+    ((l)  = ((unsigned long)(*((c)++)) << 16), \
+     (l) |= ((unsigned long)(*((c)++)) <<  8), \
+     (l) |= ((unsigned long)(*((c)++))      ))
 
 # define l2n3(l, c) \
     (*((c)++) = (unsigned char)(((l) >> 16) & 0xff), \
@@ -121,10 +121,10 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
      *((c)++) = (unsigned char)(((l)      ) & 0xff))
 
 # define c2lXXX(c, l, T) \
-    (l  =  ((T)(*((c)++))       ), \
-     l |= (((T)(*((c)++))) <<  8), \
-     l |= (((T)(*((c)++))) << 16), \
-     l |= (((T)(*((c)++))) << 24))
+    ((l)  =  ((T)(*((c)++))       ), \
+     (l) |= (((T)(*((c)++))) <<  8), \
+     (l) |= (((T)(*((c)++))) << 16), \
+     (l) |= (((T)(*((c)++))) << 24))
 
 # define c2l(c, l) c2lXXX(c, l, unsigned long)
 
@@ -135,10 +135,10 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
      *((c)++) = (unsigned char)(((l) >> 24) & 0xff))
 
 # define n2l(c, l) \
-    (l  = ((unsigned long)(*((c)++))) << 24, \
-     l |= ((unsigned long)(*((c)++))) << 16, \
-     l |= ((unsigned long)(*((c)++))) <<  8, \
-     l |= ((unsigned long)(*((c)++)))      )
+    ((l)  = ((unsigned long)(*((c)++))) << 24, \
+     (l) |= ((unsigned long)(*((c)++))) << 16, \
+     (l) |= ((unsigned long)(*((c)++))) <<  8, \
+     (l) |= ((unsigned long)(*((c)++)))      )
 
 # define l2n(l, c) \
     (*((c)++) = (unsigned char)(((l) >> 24) & 0xff), \
@@ -147,14 +147,14 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
      *((c)++) = (unsigned char)(((l)      ) & 0xff))
 
 # define n2l8(c, l) \
-    (l  = ((uint64_t)(*((c)++))) << 56, \
-     l |= ((uint64_t)(*((c)++))) << 48, \
-     l |= ((uint64_t)(*((c)++))) << 40, \
-     l |= ((uint64_t)(*((c)++))) << 32, \
-     l |= ((uint64_t)(*((c)++))) << 24, \
-     l |= ((uint64_t)(*((c)++))) << 16, \
-     l |= ((uint64_t)(*((c)++))) <<  8, \
-     l |= ((uint64_t)(*((c)++)))      )
+    ((l)  = ((uint64_t)(*((c)++))) << 56, \
+     (l) |= ((uint64_t)(*((c)++))) << 48, \
+     (l) |= ((uint64_t)(*((c)++))) << 40, \
+     (l) |= ((uint64_t)(*((c)++))) << 32, \
+     (l) |= ((uint64_t)(*((c)++))) << 24, \
+     (l) |= ((uint64_t)(*((c)++))) << 16, \
+     (l) |= ((uint64_t)(*((c)++))) <<  8, \
+     (l) |= ((uint64_t)(*((c)++)))      )
 
 # define l2n8(l, c) \
     (*((c)++) = (unsigned char)(((l) >> 56) & 0xff), \
