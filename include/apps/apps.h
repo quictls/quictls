@@ -10,10 +10,10 @@
 #ifndef OSSL_APPS_H
 # define OSSL_APPS_H
 
-# include "internal/e_os.h" /* struct timeval for DTLS */
-# include "internal/common.h" /* for HAS_PREFIX */
-# include "internal/nelem.h"
-# include "internal/sockets.h" /* for openssl_fdset() */
+# include <internal/e_os.h> /* struct timeval for DTLS */
+# include <internal/common.h> /* for HAS_PREFIX */
+# include <internal/nelem.h>
+# include <internal/sockets.h> /* for openssl_fdset() */
 # include <assert.h>
 
 # include <stdarg.h>
@@ -37,8 +37,11 @@
 # include <apps/opt.h>
 # include <apps/fmt.h>
 # include <apps/platform.h>
-# include <apps/engine_loader.h>
 # include <apps/app_libctx.h>
+
+/* this is a private URI scheme */
+# define ENGINE_SCHEME          "org.openssl.engine"
+# define ENGINE_SCHEME_COLON    ENGINE_SCHEME ":"
 
 /*
  * quick macro when you need to pass an unsigned char instead of a char.
@@ -50,6 +53,9 @@
 void app_RAND_load_conf(CONF *c, const char *section);
 int app_RAND_write(void);
 int app_RAND_load(void);
+
+int setup_engine_loader(void);
+void destroy_engine_loader(void);
 
 extern char *default_config_file; /* may be "" */
 extern BIO *bio_in;
@@ -278,6 +284,8 @@ int check_cert_attributes(BIO *bio, X509 *x,
                           const char *checkip, int print);
 
 void store_setup_crl_download(X509_STORE *st);
+int print_param_types(const char *thing, const OSSL_PARAM *pdefs, int indent);
+void print_param_value(const OSSL_PARAM *p, int indent);
 
 typedef struct app_http_tls_info_st {
     const char *server;

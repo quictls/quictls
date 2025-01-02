@@ -7,4 +7,5 @@
  * https://www.openssl.org/source/license.html
  */
 
+/* Kept for compatibility with downstream applications. */
 #include <openssl/ec.h>

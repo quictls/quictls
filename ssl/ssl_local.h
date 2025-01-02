@@ -35,7 +35,6 @@
 # include "internal/bio.h"
 # include "internal/ktls.h"
 # include "internal/time.h"
-# include "internal/ssl.h"
 # include "record/record.h"
 
 # ifdef OPENSSL_BUILD_SHLIBSSL
@@ -57,6 +56,14 @@
 # define DTLS_VERSION_LE(v1, v2) (dtls_ver_ordinal(v1) >= dtls_ver_ordinal(v2))
 
 # define SSL_AD_NO_ALERT    -1
+
+typedef void (*ossl_msg_cb)(int write_p, int version, int content_type,
+                            const void *buf, size_t len, SSL *ssl, void *arg);
+
+int ossl_ssl_get_error(const SSL *s, int i, int check_err);
+
+/* Set if this is the QUIC handshake layer */
+# define TLS1_FLAGS_QUIC                         0x2000
 
 /*
  * Define the Bitmasks for SSL_CIPHER.algorithms.

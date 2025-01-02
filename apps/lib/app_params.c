@@ -8,7 +8,6 @@
  */
 
 #include <apps/apps.h>
-#include <apps/app_params.h>
 
 static int describe_param_type(char *buf, size_t bufsz, const OSSL_PARAM *param)
 {

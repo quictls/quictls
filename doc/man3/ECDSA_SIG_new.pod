@@ -8,7 +8,7 @@ ECDSA_SIG_get0, ECDSA_SIG_get0_r, ECDSA_SIG_get0_s, ECDSA_SIG_set0
 
 =head1 SYNOPSIS
 
- #include <openssl/ecdsa.h>
+ #include <openssl/ec.h>
 
  ECDSA_SIG *ECDSA_SIG_new(void);
  void ECDSA_SIG_free(ECDSA_SIG *sig);
