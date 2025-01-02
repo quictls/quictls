@@ -171,21 +171,21 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
         (c) += (n); \
         (l1) = (l2) = 0; \
         switch ((n)) { \
-        case 8: l2  = ((T)(*(--(c)))) << 24; \
+        case 8: (l2)  = ((T)(*(--(c)))) << 24; \
                 /* fallthrough */ \
-        case 7: l2 |= ((T)(*(--(c)))) << 16; \
+        case 7: (l2) |= ((T)(*(--(c)))) << 16; \
                 /* fallthrough */ \
-        case 6: l2 |= ((T)(*(--(c)))) <<  8; \
+        case 6: (l2) |= ((T)(*(--(c)))) <<  8; \
                 /* fallthrough */ \
-        case 5: l2 |= ((T)(*(--(c))))      ; \
+        case 5: (l2) |= ((T)(*(--(c))))      ; \
                 /* fallthrough */ \
-        case 4: l1  = ((T)(*(--(c)))) << 24; \
+        case 4: (l1)  = ((T)(*(--(c)))) << 24; \
                 /* fallthrough */ \
-        case 3: l1 |= ((T)(*(--(c)))) << 16; \
+        case 3: (l1) |= ((T)(*(--(c)))) << 16; \
                 /* fallthrough */ \
-        case 2: l1 |= ((T)(*(--(c)))) <<  8; \
+        case 2: (l1) |= ((T)(*(--(c)))) <<  8; \
                 /* fallthrough */ \
-        case 1: l1 |= ((T)(*(--(c))))      ; \
+        case 1: (l1) |= ((T)(*(--(c))))      ; \
         } \
     }
 # define c2ln(c, l1, l2, n) c2lnXXX(c, l1, l2, n, unsigned long)
@@ -217,21 +217,21 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
         (c) += (n); \
         (l1) = (l2) = 0; \
         switch ((n)) { \
-        case 8: l2  = ((unsigned long)(*(--(c))))      ; \
+        case 8: (l2)  = ((unsigned long)(*(--(c))))      ; \
                 /* fallthrough */ \
-        case 7: l2 |= ((unsigned long)(*(--(c)))) <<  8; \
+        case 7: (l2) |= ((unsigned long)(*(--(c)))) <<  8; \
                 /* fallthrough */ \
-        case 6: l2 |= ((unsigned long)(*(--(c)))) << 16; \
+        case 6: (l2) |= ((unsigned long)(*(--(c)))) << 16; \
                 /* fallthrough */ \
-        case 5: l2 |= ((unsigned long)(*(--(c)))) << 24; \
+        case 5: (l2) |= ((unsigned long)(*(--(c)))) << 24; \
                 /* fallthrough */ \
-        case 4: l1  = ((unsigned long)(*(--(c))))      ; \
+        case 4: (l1)  = ((unsigned long)(*(--(c))))      ; \
                 /* fallthrough */ \
-        case 3: l1 |= ((unsigned long)(*(--(c)))) <<  8; \
+        case 3: (l1) |= ((unsigned long)(*(--(c)))) <<  8; \
                 /* fallthrough */ \
-        case 2: l1 |= ((unsigned long)(*(--(c)))) << 16; \
+        case 2: (l1) |= ((unsigned long)(*(--(c)))) << 16; \
                 /* fallthrough */ \
-        case 1: l1 |= ((unsigned long)(*(--(c)))) << 24; \
+        case 1: (l1) |= ((unsigned long)(*(--(c)))) << 24; \
         } \
     }
 
