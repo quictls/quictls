@@ -35,7 +35,6 @@
 # include <internal/bio.h>
 # include <internal/ktls.h>
 # include <internal/time.h>
-# include <internal/ssl.h>
 # include "record/record.h"
 
 # ifdef OPENSSL_BUILD_SHLIBSSL
