@@ -21,6 +21,9 @@
 #include <openssl/mdc2.h>
 #include <internal/common.h>
 
+#undef c2l
+#define c2l(c, l) c2lXXX(c, l, DES_LONG)
+
 static void mdc2_body(MDC2_CTX *c, const unsigned char *in, size_t len);
 int MDC2_Init(MDC2_CTX *c)
 {

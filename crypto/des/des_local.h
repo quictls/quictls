@@ -19,6 +19,16 @@
 # include <openssl/des.h>
 # include <internal/common.h>
 
+/*
+ * Replace c2l/c2ln with DES_LONG equivalents. This hacky, but less
+ * invasive than replacing all the calls, and similar to how it used
+ * to be done.
+ */
+# undef c2l
+# define c2l(c, l) c2lXXX(c, l, DES_LONG)
+# undef c2ln
+# define c2ln(c, l1, l2, n) c2lnXXX(c, l1, l2, n, DES_LONG)
+
 # ifdef OPENSSL_BUILD_SHLIBCRYPTO
 #  undef OPENSSL_EXTERN
 #  define OPENSSL_EXTERN OPENSSL_EXPORT

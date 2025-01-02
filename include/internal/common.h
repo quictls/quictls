@@ -103,32 +103,30 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
  */
 
 # define n2s(c, s) \
-    ((s = (((unsigned int)((c)[0])) << 8) | \
-          (((unsigned int)((c)[1]))     )), \
-          (c) += 2)
+    ((s)  = ((unsigned int)(*((c)++))) << 8, \
+     (s) |= ((unsigned int)(*((c)++)))     )
 
 # define s2n(s, c) \
-    (((c)[0] = (unsigned char)(((s) >> 8) & 0xff), \
-      (c)[1] = (unsigned char)(((s)     ) & 0xff)), \
-      (c) += 2)
+    (*((c)++) = (unsigned char)(((s) >> 8) & 0xff), \
+     *((c)++) = (unsigned char)(((s)     ) & 0xff))
 
 # define n2l3(c, l) \
-    ((l = (((unsigned long)((c)[0])) <<16) | \
-          (((unsigned long)((c)[1])) << 8) | \
-          (((unsigned long)((c)[2]))    )), \
-      (c) += 3)
+    (l  = ((unsigned long)(*((c)++)) << 16), \
+     l |= ((unsigned long)(*((c)++)) <<  8), \
+     l |= ((unsigned long)(*((c)++))      ))
 
 # define l2n3(l, c) \
-    (((c)[0] = (unsigned char)(((l) >> 16) & 0xff), \
-      (c)[1] = (unsigned char)(((l) >>  8) & 0xff), \
-      (c)[2] = (unsigned char)(((l)      ) & 0xff)), \
-      (c) += 3)
+    (*((c)++) = (unsigned char)(((l) >> 16) & 0xff), \
+     *((c)++) = (unsigned char)(((l) >>  8) & 0xff), \
+     *((c)++) = (unsigned char)(((l)      ) & 0xff))
 
-# define c2l(c, l) \
-    (l  =  ((unsigned long)(*((c)++))       ), \
-     l |= (((unsigned long)(*((c)++))) <<  8), \
-     l |= (((unsigned long)(*((c)++))) << 16), \
-     l |= (((unsigned long)(*((c)++))) << 24))
+# define c2lXXX(c, l, T) \
+    (l  =  ((T)(*((c)++))       ), \
+     l |= (((T)(*((c)++))) <<  8), \
+     l |= (((T)(*((c)++))) << 16), \
+     l |= (((T)(*((c)++))) << 24))
+
+# define c2l(c, l) c2lXXX(c, l, unsigned long)
 
 # define l2c(l, c) \
     (*((c)++) = (unsigned char)(((l)      ) & 0xff), \
@@ -140,7 +138,7 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
     (l  = ((unsigned long)(*((c)++))) << 24, \
      l |= ((unsigned long)(*((c)++))) << 16, \
      l |= ((unsigned long)(*((c)++))) <<  8, \
-     l |= ((unsigned long)(*((c)++)))       )
+     l |= ((unsigned long)(*((c)++)))      )
 
 # define l2n(l, c) \
     (*((c)++) = (unsigned char)(((l) >> 24) & 0xff), \
@@ -166,30 +164,31 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
      *((c)++) = (unsigned char)(((l) >> 24) & 0xff), \
      *((c)++) = (unsigned char)(((l) >> 16) & 0xff), \
      *((c)++) = (unsigned char)(((l) >>  8) & 0xff), \
-     *((c)++) = (unsigned char)(((l)      ) & 0xff) )
+     *((c)++) = (unsigned char)(((l)      ) & 0xff))
 
-# define c2ln(c, l1, l2, n) \
+# define c2lnXXX(c, l1, l2, n, T) \
     { \
         (c) += (n); \
         (l1) = (l2) = 0; \
-        switch (n) { \
-        case 8: l2  = ((unsigned long)(*(--(c)))) << 24; \
+        switch ((n)) { \
+        case 8: l2  = ((T)(*(--(c)))) << 24; \
                 /* fallthrough */ \
-        case 7: l2 |= ((unsigned long)(*(--(c)))) << 16; \
+        case 7: l2 |= ((T)(*(--(c)))) << 16; \
                 /* fallthrough */ \
-        case 6: l2 |= ((unsigned long)(*(--(c)))) <<  8; \
+        case 6: l2 |= ((T)(*(--(c)))) <<  8; \
                 /* fallthrough */ \
-        case 5: l2 |= ((unsigned long)(*(--(c))))      ; \
+        case 5: l2 |= ((T)(*(--(c))))      ; \
                 /* fallthrough */ \
-        case 4: l1  = ((unsigned long)(*(--(c)))) << 24; \
+        case 4: l1  = ((T)(*(--(c)))) << 24; \
                 /* fallthrough */ \
-        case 3: l1 |= ((unsigned long)(*(--(c)))) << 16; \
+        case 3: l1 |= ((T)(*(--(c)))) << 16; \
                 /* fallthrough */ \
-        case 2: l1 |= ((unsigned long)(*(--(c)))) <<  8; \
+        case 2: l1 |= ((T)(*(--(c)))) <<  8; \
                 /* fallthrough */ \
-        case 1: l1 |= ((unsigned long)(*(--(c))))      ; \
+        case 1: l1 |= ((T)(*(--(c))))      ; \
         } \
     }
+# define c2ln(c, l1, l2, n) c2lnXXX(c, l1, l2, n, unsigned long)
 
 # define l2cn(l1, l2, c, n) \
     { \
@@ -217,7 +216,7 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
     { \
         (c) += (n); \
         (l1) = (l2) = 0; \
-        switch (n) { \
+        switch ((n)) { \
         case 8: l2  = ((unsigned long)(*(--(c))))      ; \
                 /* fallthrough */ \
         case 7: l2 |= ((unsigned long)(*(--(c)))) <<  8; \
@@ -239,7 +238,7 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
 # define l2nn(l1, l2, c, n) \
     { \
         (c) += (n); \
-        switch (n) { \
+        switch ((n)) { \
         case 8: *(--(c)) = (unsigned char)(((l2)      ) & 0xff); \
                 /* fallthrough */ \
         case 7: *(--(c)) = (unsigned char)(((l2) >>  8) & 0xff); \
