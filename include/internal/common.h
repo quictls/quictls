@@ -94,7 +94,7 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
 # define HEX_SIZE(type)          (sizeof(type)*2)
 
 /*
- * Loop rolling/unrolling, use by some cipher implementations.
+ * Loop rolling/unrolling, used by some cipher implementations.
  * Note that all of these evaluate their parameters multiple
  * times. We could remove the parens around some of them,
  * like "(c)" etc., but don't. Many of the macros use the comma
