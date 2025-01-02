@@ -11,10 +11,10 @@
  * Low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/buffer.h>
 #include <openssl/asn1.h>
 #include <openssl/evp.h>
@@ -23,10 +23,10 @@
 #include <openssl/rsa.h>
 #include <openssl/dsa.h>
 #include <openssl/x509v3.h>
-#include "internal/asn1.h"
-#include "crypto/pkcs7.h"
-#include "crypto/x509.h"
-#include "crypto/rsa.h"
+#include <internal/asn1.h>
+#include <crypto/pkcs7.h>
+#include <crypto/x509.h>
+#include <crypto/rsa.h>
 
 int X509_verify(X509 *a, EVP_PKEY *r)
 {

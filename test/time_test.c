@@ -8,7 +8,7 @@
  */
 
 #include <test/testutil.h>
-#include "internal/time.h"
+#include <internal/time.h>
 
 static int test_time_to_timeval(void)
 {

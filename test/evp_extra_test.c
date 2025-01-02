@@ -33,9 +33,9 @@
 #include <openssl/engine.h>
 #include <openssl/proverr.h>
 #include <test/testutil.h>
-#include "internal/nelem.h"
-#include "internal/sizes.h"
-#include "crypto/evp.h"
+#include <internal/nelem.h>
+#include <internal/sizes.h>
+#include <crypto/evp.h>
 #include <test/fake_rsaprov.h>
 
 #ifdef STATIC_LEGACY

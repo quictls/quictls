@@ -9,7 +9,7 @@
 
 #include <openssl/core.h>
 #include <openssl/buffer.h>
-#include "internal/asn1.h"
+#include <internal/asn1.h>
 #include <providers/bio.h>
 #include "endecoder_local.h"
 

@@ -8,8 +8,8 @@
  */
 
 #include <providers/ciphercommon.h>
-#include "crypto/sm4.h"
-#include "crypto/sm4_platform.h"
+#include <crypto/sm4.h>
+#include <crypto/sm4_platform.h>
 
 typedef struct prov_cast_ctx_st {
     PROV_CIPHER_CTX base;      /* Must be first */

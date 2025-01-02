@@ -17,10 +17,10 @@
 #include <openssl/crypto.h>
 #include <openssl/conf.h>
 #include <openssl/trace.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include "ssl_local.h"
-#include "internal/thread_once.h"
-#include "internal/cryptlib.h"
+#include <internal/thread_once.h>
+#include <internal/cryptlib.h>
 
 /* NB: make sure indices in these tables match values above */
 

@@ -9,7 +9,7 @@
 
 /* Internal tests for the OpenSSL library context */
 
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <test/testutil.h>
 
 static int test_set0_default(void)

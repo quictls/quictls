@@ -12,7 +12,7 @@
 #include <string.h>
 #include <errno.h>
 #include <openssl/crypto.h>
-#include "internal/bio.h"
+#include <internal/bio.h>
 #include <openssl/err.h>
 #include "ssl_local.h"
 

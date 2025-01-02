@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include "../ssl_local.h"
 #include "statem_local.h"
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/buffer.h>
 #include <openssl/objects.h>
 #include <openssl/evp.h>

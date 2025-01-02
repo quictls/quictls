@@ -11,10 +11,10 @@
  * Whirlpool low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/whrlpool.h>
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 #include "legacy_meth.h"
 
 IMPLEMENT_LEGACY_EVP_MD_METH(wp, WHIRLPOOL)

@@ -13,7 +13,7 @@
  * References to Sections in the comments below refer to RFC 9180.
  */
 
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/crypto.h>
 #include <openssl/evp.h>
@@ -31,8 +31,8 @@
 #include <providers/providercommon.h>
 
 #include <openssl/hpke.h>
-#include "internal/hpke_util.h"
-#include "crypto/ec.h"
+#include <internal/hpke_util.h>
+#include <crypto/ec.h>
 #include <providers/ecx.h>
 #include "eckem.h"
 

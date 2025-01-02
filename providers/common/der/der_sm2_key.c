@@ -8,7 +8,7 @@
  */
 
 #include <openssl/obj_mac.h>
-#include "internal/packet.h"
+#include <internal/packet.h>
 #include <providers/der_ec.h>
 #include <providers/der_sm2.h>
 

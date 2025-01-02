@@ -9,11 +9,11 @@
 
 #define _XOPEN_SOURCE_EXTENDED   /* To get a definition of strdup() */
 
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 #include <stdio.h>
 #include <string.h>
-#include "internal/conf.h"
-#include "crypto/ctype.h"
+#include <internal/conf.h>
+#include <crypto/ctype.h>
 #include <openssl/crypto.h>
 #include <openssl/err.h>
 #include <openssl/conf.h>

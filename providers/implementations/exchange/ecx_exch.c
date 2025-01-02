@@ -13,8 +13,8 @@
 #include <openssl/params.h>
 #include <openssl/err.h>
 #include <openssl/proverr.h>
-#include "internal/cryptlib.h"
-#include "crypto/ecx.h"
+#include <internal/cryptlib.h>
+#include <crypto/ecx.h>
 #include <providers/implementations.h>
 #include <providers/providercommon.h>
 

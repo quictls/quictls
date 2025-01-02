@@ -13,7 +13,7 @@
  * This file uses the low level AES functions (which are deprecated for
  * non-internal use) in order to test the modes code
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <string.h>
@@ -21,8 +21,8 @@
 #include <openssl/aes.h>
 #include <openssl/modes.h>
 #include <test/testutil.h>
-#include "crypto/modes.h"
-#include "internal/nelem.h"
+#include <crypto/modes.h>
+#include <internal/nelem.h>
 
 typedef struct {
     size_t size;

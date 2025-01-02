@@ -8,7 +8,7 @@
  */
 
 #include <openssl/core_names.h>
-#include "crypto/rsa.h"
+#include <crypto/rsa.h>
 
 /*
  * The following tables are constants used during RSA parameter building

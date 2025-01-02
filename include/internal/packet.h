@@ -16,7 +16,7 @@
 # include <openssl/crypto.h>
 # include <openssl/e_os2.h>
 
-# include "internal/numbers.h"
+# include <internal/numbers.h>
 
 typedef struct {
     /* Pointer to where we are currently reading from */

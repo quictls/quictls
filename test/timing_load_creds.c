@@ -19,7 +19,7 @@
 # include <openssl/x509.h>
 # include <openssl/err.h>
 # include <openssl/bio.h>
-# include "internal/e_os.h"
+# include <internal/e_os.h>
 # if defined(_POSIX_VERSION) && _POSIX_VERSION >= 200112L
 
 # ifndef timersub

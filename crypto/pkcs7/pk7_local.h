@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "crypto/pkcs7.h"
+#include <crypto/pkcs7.h>
 
 const PKCS7_CTX *ossl_pkcs7_get0_ctx(const PKCS7 *p7);
 OSSL_LIB_CTX *ossl_pkcs7_ctx_get0_libctx(const PKCS7_CTX *ctx);

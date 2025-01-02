@@ -12,7 +12,7 @@
 #include <stdint.h>
 
 #include "cmp_local.h"
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 
 /* explicit #includes not strictly needed since implied by the above: */
 #include <openssl/bio.h>

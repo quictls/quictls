@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <test/testutil.h>
 #include "../ssl/ssl_local.h"
 

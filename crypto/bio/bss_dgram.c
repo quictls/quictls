@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <errno.h>
 
-#include "internal/time.h"
+#include <internal/time.h>
 #include "bio_local.h"
 #ifndef OPENSSL_NO_SOCK
 

@@ -11,7 +11,7 @@
  * RSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/crypto.h>
 #include <openssl/evp.h>
@@ -23,9 +23,9 @@
 #include <openssl/proverr.h>
 /* Just for SSL_MAX_MASTER_KEY_LENGTH */
 #include <openssl/prov_ssl.h>
-#include "internal/constant_time.h"
-#include "internal/sizes.h"
-#include "crypto/rsa.h"
+#include <internal/constant_time.h>
+#include <internal/sizes.h>
+#include <crypto/rsa.h>
 #include <providers/provider_ctx.h>
 #include <providers/implementations.h>
 #include <providers/providercommon.h>

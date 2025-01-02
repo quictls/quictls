@@ -12,7 +12,7 @@
 
 # include <openssl/core.h>
 # include <openssl/core_dispatch.h>
-# include "internal/dso.h"
+# include <internal/dso.h>
 
 # ifdef __cplusplus
 extern "C" {

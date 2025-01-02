@@ -15,7 +15,7 @@
  * For details on that implementation, see below (look for uppercase
  * "SECURE HEAP IMPLEMENTATION").
  */
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 #include <openssl/crypto.h>
 #include <openssl/err.h>
 

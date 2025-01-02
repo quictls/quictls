@@ -24,7 +24,7 @@
 #include <openssl/params.h>
 #include <openssl/core_names.h>
 
-#include "internal/sizes.h"
+#include <internal/sizes.h>
 
 #include "crmf_local.h"
 

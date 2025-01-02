@@ -35,7 +35,7 @@
 #include <openssl/err.h>
 #include "ec_local.h"
 
-#include "internal/numbers.h"
+#include <internal/numbers.h>
 
 #ifndef INT128_MAX
 # error "Your compiler doesn't appear to support 128-bit integer types"
@@ -686,7 +686,7 @@ void p384_felem_square(widefelem out, const felem in);
 void p384_felem_mul(widefelem out, const felem in1, const felem in2);
 
 # if defined(_ARCH_PPC64)
-#  include "crypto/ppc_arch.h"
+#  include <crypto/ppc_arch.h>
 # endif
 
 static void felem_select(void)

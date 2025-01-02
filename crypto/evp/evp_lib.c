@@ -11,11 +11,11 @@
  * EVP _meth_ APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <string.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/evp.h>
 #include <openssl/objects.h>
 #include <openssl/params.h>
@@ -23,13 +23,13 @@
 #include <openssl/rsa.h>
 #include <openssl/dh.h>
 #include <openssl/ec.h>
-#include "crypto/evp.h"
-#include "crypto/cryptlib.h"
-#include "internal/provider.h"
+#include <crypto/evp.h>
+#include <crypto/cryptlib.h>
+#include <internal/provider.h>
 #include "evp_local.h"
 
 #if !defined(FIPS_MODULE)
-# include "crypto/asn1.h"
+# include <crypto/asn1.h>
 
 int EVP_CIPHER_param_to_asn1(EVP_CIPHER_CTX *c, ASN1_TYPE *type)
 {

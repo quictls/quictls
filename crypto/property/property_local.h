@@ -9,7 +9,7 @@
  */
 
 #include <openssl/crypto.h>
-#include "internal/property.h"
+#include <internal/property.h>
 
 typedef int OSSL_PROPERTY_IDX;
 

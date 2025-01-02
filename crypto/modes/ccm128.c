@@ -9,7 +9,7 @@
 
 #include <string.h>
 #include <openssl/crypto.h>
-#include "crypto/modes.h"
+#include <crypto/modes.h>
 
 #ifndef STRICT_ALIGNMENT
 # ifdef __GNUC__

@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include "ssl_local.h"
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 #include <openssl/objects.h>
 #include <openssl/x509v3.h>
 #include <openssl/rand.h>
@@ -22,10 +22,10 @@
 #include <openssl/ct.h>
 #include <openssl/trace.h>
 #include <openssl/core_names.h>
-#include "internal/cryptlib.h"
-#include "internal/nelem.h"
-#include "internal/refcount.h"
-#include "internal/ktls.h"
+#include <internal/cryptlib.h>
+#include <internal/nelem.h>
+#include <internal/refcount.h>
+#include <internal/ktls.h>
 
 static int ssl_undefined_function_3(SSL_CONNECTION *sc, unsigned char *r,
                                     unsigned char *s, size_t t, size_t *u)

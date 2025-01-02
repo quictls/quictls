@@ -8,15 +8,15 @@
  */
 
 #include <openssl/core_dispatch.h>
-#include "internal/thread_once.h"
-#include "internal/refcount.h"
+#include <internal/thread_once.h>
+#include <internal/refcount.h>
 #include <openssl/dsa.h>
 #include <openssl/engine.h>
 #include <openssl/evp.h>
 #include <openssl/lhash.h>
 #include <openssl/x509.h>
 #include <openssl/store.h>
-#include "internal/passphrase.h"
+#include <internal/passphrase.h>
 
 /*-
  *  OSSL_STORE_INFO stuff

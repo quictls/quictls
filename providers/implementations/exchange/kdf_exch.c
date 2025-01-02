@@ -14,7 +14,7 @@
 #include <openssl/err.h>
 #include <openssl/proverr.h>
 #include <openssl/params.h>
-#include "internal/numbers.h"
+#include <internal/numbers.h>
 #include <providers/implementations.h>
 #include <providers/provider_ctx.h>
 #include <providers/kdfexchange.h>

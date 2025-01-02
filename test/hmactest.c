@@ -11,13 +11,13 @@
  * HMAC low level APIs are deprecated for public use, but still ok for internal
  * use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 # include <openssl/hmac.h>
 # include <openssl/sha.h>

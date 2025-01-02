@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 #include <errno.h>
 
 /*
@@ -20,7 +20,7 @@
 #define LP_find_file OPENSSL_DIR_read
 #define LP_find_file_end OPENSSL_DIR_end
 
-#include "internal/o_dir.h"
+#include <internal/o_dir.h>
 
 #define LPDIR_H
 #if defined OPENSSL_SYS_UNIX

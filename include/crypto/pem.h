@@ -11,7 +11,7 @@
 # define OSSL_INTERNAL_PEM_H
 
 # include <openssl/pem.h>
-# include "crypto/types.h"
+# include <crypto/types.h>
 
 /* Found in crypto/pem/pvkfmt.c */
 

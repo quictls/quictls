@@ -17,7 +17,7 @@
 #include <openssl/err.h>
 #include <time.h>
 
-#include "internal/packet.h"
+#include <internal/packet.h>
 
 #include <test/testutil.h>
 

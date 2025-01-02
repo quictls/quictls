@@ -8,7 +8,7 @@
  */
 
 #include <openssl/evp.h>
-#include "internal/namemap.h"
+#include <internal/namemap.h>
 #include <test/testutil.h>
 
 #define NAME1 "name1"

@@ -11,7 +11,7 @@
 # define OSSL_INTERNAL_DSO_H
 
 # include <openssl/crypto.h>
-# include "internal/dsoerr.h"
+# include <internal/dsoerr.h>
 
 /* These values are used as commands to DSO_ctrl() */
 # define DSO_CTRL_GET_FLAGS      1

@@ -11,14 +11,14 @@
  * SHA-1 low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <string.h>
 #include <openssl/crypto.h>
 #include <openssl/sha.h>
 #include <openssl/evp.h>
-#include "crypto/sha.h"
+#include <crypto/sha.h>
 
 unsigned char *ossl_sha1(const unsigned char *d, size_t n, unsigned char *md)
 {

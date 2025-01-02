@@ -11,7 +11,7 @@
 
 #include <openssl/ct.h>
 #include "../ssl_local.h"
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include "statem_local.h"
 
 typedef struct {

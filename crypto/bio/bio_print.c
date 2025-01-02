@@ -8,7 +8,7 @@
  */
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/bio.h>
 #include <openssl/configuration.h>
 

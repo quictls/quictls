@@ -19,8 +19,8 @@
 #include <openssl/proverr.h>
 #include <providers/implementations.h>
 #include <providers/provider_ctx.h>
-#include "crypto/rand.h"
-#include "crypto/rand_pool.h"
+#include <crypto/rand.h>
+#include <crypto/rand_pool.h>
 
 static OSSL_FUNC_rand_newctx_fn seed_src_new;
 static OSSL_FUNC_rand_freectx_fn seed_src_free;

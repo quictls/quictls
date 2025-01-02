@@ -11,10 +11,10 @@
  * RSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/bn.h>
 #include <openssl/rsa.h>
 #include <openssl/objects.h>
@@ -36,7 +36,7 @@
 # endif
 #endif
 #include <openssl/sha.h> /* uses SHA???_DIGEST_LENGTH */
-#include "crypto/rsa.h"
+#include <crypto/rsa.h>
 #include "rsa_local.h"
 
 /*

@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "crypto/store.h"
+#include <crypto/store.h>
 #include "store_local.h"
 
 void ossl_store_cleanup_int(void)

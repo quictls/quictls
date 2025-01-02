@@ -10,8 +10,8 @@
 #include <stdio.h>
 #include <errno.h>
 #include "bio_local.h"
-#include "internal/cryptlib.h"
-#include "internal/safe_math.h"
+#include <internal/cryptlib.h>
+#include <internal/safe_math.h>
 
 #if !defined(OPENSSL_NO_SOCK)
 

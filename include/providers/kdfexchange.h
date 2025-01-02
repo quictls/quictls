@@ -9,7 +9,7 @@
 
 #include <stdlib.h>
 #include <openssl/crypto.h>
-#include "internal/refcount.h"
+#include <internal/refcount.h>
 
 struct kdf_data_st {
     OSSL_LIB_CTX *libctx;

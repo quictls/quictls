@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include "bn_local.h"
 
 void BN_RECP_CTX_init(BN_RECP_CTX *recp)

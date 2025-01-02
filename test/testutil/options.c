@@ -8,7 +8,7 @@
  */
 
 #include <test/testutil.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <test/tu_local.h>
 #include <test/output.h>
 

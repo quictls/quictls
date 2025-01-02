@@ -8,7 +8,7 @@
  */
 
 #include <providers/ciphercommon.h>
-#include "crypto/aes_platform.h"
+#include <crypto/aes_platform.h>
 
 int ossl_cipher_capable_aes_cbc_hmac_sha1(void);
 int ossl_cipher_capable_aes_cbc_hmac_sha256(void);

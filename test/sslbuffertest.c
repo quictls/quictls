@@ -16,10 +16,10 @@
 /* We include internal headers so we can check if the buffers are allocated */
 #include "../ssl/ssl_local.h"
 #include "../ssl/record/record_local.h"
-#include "internal/recordmethod.h"
+#include <internal/recordmethod.h>
 #include "../ssl/record/methods/recmethod_local.h"
 
-#include "internal/packet.h"
+#include <internal/packet.h>
 
 #include <test/ssltestlib.h>
 #include <test/testutil.h>

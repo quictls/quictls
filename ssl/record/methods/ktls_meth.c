@@ -13,7 +13,7 @@
 #include "../../ssl_local.h"
 #include "../record_local.h"
 #include "recmethod_local.h"
-#include "internal/ktls.h"
+#include <internal/ktls.h>
 
 static struct record_functions_st ossl_ktls_funcs;
 

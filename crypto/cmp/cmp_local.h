@@ -12,7 +12,7 @@
 #ifndef OSSL_CRYPTO_CMP_LOCAL_H
 # define OSSL_CRYPTO_CMP_LOCAL_H
 
-# include "internal/cryptlib.h"
+# include <internal/cryptlib.h>
 
 # include <openssl/cmp.h>
 # include <openssl/err.h>
@@ -23,7 +23,7 @@
 # include <openssl/safestack.h>
 # include <openssl/x509.h>
 # include <openssl/x509v3.h>
-# include "crypto/x509.h"
+# include <crypto/x509.h>
 
 # define IS_NULL_DN(name) (X509_NAME_get_entry(name, 0) == NULL)
 

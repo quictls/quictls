@@ -7,7 +7,7 @@ ossl_punycode_decode, ossl_a2ulabel
 
 =head1 SYNOPSIS
 
-  #include "crypto/punycode.h"
+  #include <crypto/punycode.h>
 
   int ossl_punycode_decode(const char *pEncoded, const size_t enc_len,
                            unsigned int *pDecoded, unsigned int *pout_length);

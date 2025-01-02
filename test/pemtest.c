@@ -12,7 +12,7 @@
 #include <openssl/pem.h>
 
 #include <test/testutil.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 typedef struct {
     const char *raw;

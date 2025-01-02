@@ -21,7 +21,7 @@
 #include <providers/names.h>
 #include <providers/provider_util.h>
 #include <providers/seeding.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 /*
  * Forward declarations to ensure that interface functions are correctly

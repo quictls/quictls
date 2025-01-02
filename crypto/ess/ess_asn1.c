@@ -12,7 +12,7 @@
 #include <openssl/cms.h>
 #include <openssl/ess.h>
 #include <openssl/x509v3.h>
-#include "crypto/ess.h"
+#include <crypto/ess.h>
 
 /* ASN1 stuff for ESS Structure */
 

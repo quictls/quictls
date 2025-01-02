@@ -13,7 +13,7 @@
  * MD5 and RC4 low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/proverr.h>
 #include "cipher_rc4_hmac_md5.h"

@@ -8,7 +8,7 @@
  */
 
 #include <test/testutil.h>
-#include "internal/packet.h"
+#include <internal/packet.h>
 
 #define BUF_LEN 255
 

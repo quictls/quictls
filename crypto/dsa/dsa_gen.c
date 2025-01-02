@@ -11,16 +11,16 @@
  * DSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/opensslconf.h>
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/evp.h>
 #include <openssl/bn.h>
 #include <openssl/rand.h>
 #include <openssl/sha.h>
-#include "crypto/dsa.h"
+#include <crypto/dsa.h>
 #include "dsa_local.h"
 
 int ossl_dsa_generate_ffc_parameters(DSA *dsa, int type, int pbits, int qbits,

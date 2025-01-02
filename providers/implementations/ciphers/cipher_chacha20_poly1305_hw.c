@@ -9,7 +9,7 @@
 
 /* chacha20_poly1305 cipher implementation */
 
-#include "internal/endian.h"
+#include <internal/endian.h>
 #include "cipher_chacha20_poly1305.h"
 
 static int chacha_poly1305_tls_init(PROV_CIPHER_CTX *bctx,

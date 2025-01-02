@@ -12,10 +12,10 @@
  * EC_KEY low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <test/testutil.h>
 
 #include <openssl/ec.h>

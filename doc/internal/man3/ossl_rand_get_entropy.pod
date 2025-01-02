@@ -10,7 +10,7 @@ ossl_rand_cleanup_nonce, ossl_rand_cleanup_user_nonce
 
 =head1 SYNOPSIS
 
- #include "crypto/rand.h"
+ #include <crypto/rand.h>
 
  size_t ossl_rand_get_entropy(OSSL_CORE_HANDLE *handle,
                               unsigned char **pout, int entropy,

@@ -9,7 +9,7 @@
 
 #include <openssl/aes.h>
 #include <providers/ciphercommon.h>
-#include "crypto/aes_platform.h"
+#include <crypto/aes_platform.h>
 
 typedef struct prov_aes_ctx_st {
     PROV_CIPHER_CTX base;      /* Must be first */

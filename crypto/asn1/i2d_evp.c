@@ -11,10 +11,10 @@
  * Low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/evp.h>
 #include <openssl/encoder.h>
 #include <openssl/buffer.h>
@@ -22,8 +22,8 @@
 #include <openssl/rsa.h>         /* For i2d_RSAPublicKey */
 #include <openssl/dsa.h>         /* For i2d_DSAPublicKey */
 #include <openssl/ec.h>          /* For i2o_ECPublicKey */
-#include "crypto/asn1.h"
-#include "crypto/evp.h"
+#include <crypto/asn1.h>
+#include <crypto/evp.h>
 
 struct type_and_structure_st {
     const char *output_type;

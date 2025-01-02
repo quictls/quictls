@@ -11,7 +11,7 @@
 #define OPENSSL_SUPPRESS_DEPRECATED
 
 #include "eng_local.h"
-#include "internal/dso.h"
+#include <internal/dso.h>
 #include <openssl/crypto.h>
 
 /*

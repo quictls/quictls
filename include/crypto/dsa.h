@@ -12,7 +12,7 @@
 
 # include <openssl/core.h>
 # include <openssl/dsa.h>
-# include "internal/ffc.h"
+# include <internal/ffc.h>
 
 /*
  * DSA Paramgen types

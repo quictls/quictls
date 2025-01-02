@@ -11,7 +11,7 @@
  * RSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h>
 
@@ -22,9 +22,9 @@
 #include <openssl/pem.h>
 #include <openssl/provider.h>
 #include <openssl/core_names.h>
-#include "internal/core.h"
-#include "internal/nelem.h"
-#include "crypto/evp.h"          /* For the internal API */
+#include <internal/core.h>
+#include <internal/nelem.h>
+#include <crypto/evp.h>          /* For the internal API */
 #include <test/testutil.h>
 
 typedef struct {

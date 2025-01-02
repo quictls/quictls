@@ -28,7 +28,7 @@
 #include <test/testutil.h>
 #include <test/output.h>
 #include "acvp_test.inc"
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 typedef enum OPTION_choice {
     OPT_ERR = -1,

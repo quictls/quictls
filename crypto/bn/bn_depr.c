@@ -16,7 +16,7 @@
 
 #include <stdio.h>
 #include <time.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include "bn_local.h"
 
 int BN_is_prime_fasttest(const BIGNUM *a, int checks,

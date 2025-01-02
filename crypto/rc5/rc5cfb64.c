@@ -11,7 +11,7 @@
  * RC5 low level APIs are deprecated for public use, but still ok for internal
  * use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/rc5.h>
 #include "rc5_local.h"

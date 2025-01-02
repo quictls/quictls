@@ -12,10 +12,10 @@
 #include <openssl/safestack.h>
 #include <openssl/encoder.h>
 #include <openssl/decoder.h>
-#include "internal/cryptlib.h"
-#include "internal/passphrase.h"
-#include "internal/property.h"
-#include "internal/refcount.h"
+#include <internal/cryptlib.h>
+#include <internal/passphrase.h>
+#include <internal/property.h>
+#include <internal/refcount.h>
 
 struct ossl_endecode_base_st {
     OSSL_PROVIDER *prov;

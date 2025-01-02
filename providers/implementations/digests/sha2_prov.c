@@ -11,7 +11,7 @@
  * SHA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/crypto.h>
 #include <openssl/core_dispatch.h>
@@ -21,7 +21,7 @@
 #include <openssl/core_names.h>
 #include <providers/digestcommon.h>
 #include <providers/implementations.h>
-#include "crypto/sha.h"
+#include <crypto/sha.h>
 
 #define SHA2_FLAGS PROV_DIGEST_FLAG_ALGID_ABSENT
 

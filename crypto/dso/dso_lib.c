@@ -8,7 +8,7 @@
  */
 
 #include "dso_local.h"
-#include "internal/refcount.h"
+#include <internal/refcount.h>
 
 static DSO *DSO_new_method(DSO_METHOD *meth)
 {

@@ -13,7 +13,7 @@
 #include <openssl/evp.h>
 #include <openssl/md5.h>
 #include <openssl/core_names.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 
 static int ssl3_generate_key_block(SSL_CONNECTION *s, unsigned char *km, int num)
 {

@@ -16,11 +16,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <openssl/objects.h>
-#include "internal/comp.h"
+#include <internal/comp.h>
 #include <openssl/err.h>
-#include "crypto/cryptlib.h"
-#include "internal/bio.h"
-#include "internal/thread_once.h"
+#include <crypto/cryptlib.h>
+#include <internal/bio.h>
+#include <internal/thread_once.h>
 #include "comp_local.h"
 
 COMP_METHOD *COMP_zstd(void);
@@ -73,7 +73,7 @@ static ZSTD_customMem zstd_mem_funcs = {
 # endif
 
 # ifdef ZSTD_SHARED
-#  include "internal/dso.h"
+#  include <internal/dso.h>
 
 /* Function pointers */
 typedef ZSTD_CStream* (*createCStream_ft)(void);

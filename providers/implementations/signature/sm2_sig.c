@@ -11,7 +11,7 @@
  * ECDSA low level APIs are deprecated for public use, but still ok for
  * internal use - SM2 implementation uses ECDSA_size() function.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h> /* memcpy */
 #include <openssl/crypto.h>
@@ -22,15 +22,15 @@
 #include <openssl/evp.h>
 #include <openssl/err.h>
 #include <openssl/proverr.h>
-#include "internal/nelem.h"
-#include "internal/sizes.h"
-#include "internal/cryptlib.h"
-#include "internal/sm3.h"
+#include <internal/nelem.h>
+#include <internal/sizes.h>
+#include <internal/cryptlib.h>
+#include <internal/sm3.h>
 #include <providers/implementations.h>
 #include <providers/providercommon.h>
 #include <providers/provider_ctx.h>
-#include "crypto/ec.h"
-#include "crypto/sm2.h"
+#include <crypto/ec.h>
+#include <crypto/sm2.h>
 #include <providers/der_sm2.h>
 
 static OSSL_FUNC_signature_newctx_fn sm2sig_newctx;

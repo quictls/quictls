@@ -14,10 +14,10 @@
 /* For TLS1_VERSION etc */
 #include <openssl/prov_ssl.h>
 #include <openssl/params.h>
-#include "internal/nelem.h"
-#include "internal/tlsgroups.h"
+#include <internal/nelem.h>
+#include <internal/tlsgroups.h>
 #include <providers/providercommon.h>
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 
 /* If neither ec or dh is available then we have no TLS-GROUP capabilities */
 #if !defined(OPENSSL_NO_EC) || !defined(OPENSSL_NO_DH)

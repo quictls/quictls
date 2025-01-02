@@ -9,7 +9,7 @@
 
 #include <stddef.h>
 #include <openssl/crypto.h>
-#include "internal/provider.h"
+#include <internal/provider.h>
 #include <test/testutil.h>
 
 extern OSSL_provider_init_fn PROVIDER_INIT_FUNCTION_NAME;

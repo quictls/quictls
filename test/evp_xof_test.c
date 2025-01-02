@@ -11,7 +11,7 @@
 #include <openssl/rand.h>
 #include <openssl/core_names.h>
 #include <test/testutil.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 static const unsigned char shake256_input[] = {
     0x8d, 0x80, 0x01, 0xe2, 0xc0, 0x96, 0xf1, 0xb8,

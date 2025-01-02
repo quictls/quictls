@@ -12,7 +12,7 @@
  */
 
 #include "cipher_sm4_ccm.h"
-#include "crypto/sm4_platform.h"
+#include <crypto/sm4_platform.h>
 
 #define SM4_HW_CCM_SET_KEY_FN(fn_set_enc_key, fn_blk, fn_ccm_enc, fn_ccm_dec)  \
     fn_set_enc_key(key, &actx->ks.ks);                                         \

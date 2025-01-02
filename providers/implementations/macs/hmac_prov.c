@@ -11,7 +11,7 @@
  * HMAC low level APIs are deprecated for public use, but still ok for internal
  * use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h>
 
@@ -21,7 +21,7 @@
 #include <openssl/evp.h>
 #include <openssl/hmac.h>
 
-#include "internal/ssl3_cbc.h"
+#include <internal/ssl3_cbc.h>
 
 #include <providers/implementations.h>
 #include <providers/provider_ctx.h>

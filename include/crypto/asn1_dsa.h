@@ -10,7 +10,7 @@
 #ifndef OSSL_CRYPTO_ASN1_DSA_H
 # define OSSL_CRYPTO_ASN1_DSA_H
 
-#include "internal/packet.h"
+#include <internal/packet.h>
 
 int ossl_encode_der_length(WPACKET *pkt, size_t cont_len);
 int ossl_encode_der_integer(WPACKET *pkt, const BIGNUM *n);

@@ -10,7 +10,7 @@
 
 #include <openssl/err.h>
 #include <openssl/crmferr.h>
-#include "crypto/crmferr.h"
+#include <crypto/crmferr.h>
 
 #ifndef OPENSSL_NO_CRMF
 

@@ -11,13 +11,13 @@
  * DES low level APIs are deprecated for public use, but still ok for internal
  * use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/e_os2.h>
 #include <string.h>
 
 #include <test/testutil.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 #ifndef OPENSSL_NO_DES
 # include <openssl/des.h>

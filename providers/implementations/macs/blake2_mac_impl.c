@@ -13,7 +13,7 @@
 #include <openssl/proverr.h>
 
 #include <providers/blake2.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <providers/implementations.h>
 #include <providers/providercommon.h>
 

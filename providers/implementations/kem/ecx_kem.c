@@ -13,7 +13,7 @@
  * References to Sections in the comments below refer to RFC 9180.
  */
 
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h>
 #include <openssl/crypto.h>
@@ -31,9 +31,9 @@
 #include <providers/securitycheck.h>
 #include <providers/providercommon.h>
 #include <providers/ecx.h>
-#include "crypto/ecx.h"
+#include <crypto/ecx.h>
 #include <openssl/hpke.h>
-#include "internal/hpke_util.h"
+#include <internal/hpke_util.h>
 #include "eckem.h"
 
 #define MAX_ECX_KEYLEN X448_KEYLEN

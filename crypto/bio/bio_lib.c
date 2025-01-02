@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include <openssl/crypto.h>
-#include "internal/numbers.h"
+#include <internal/numbers.h>
 #include "bio_local.h"
 
 /*

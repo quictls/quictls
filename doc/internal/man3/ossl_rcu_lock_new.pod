@@ -138,7 +138,7 @@ You can find out if OpenSSL was configured with thread support:
 
 This example safely initializes and uses a lock.
 
- #include "internal/rcu.h"
+ #include <internal/rcu.h>
 
  struct foo {
     int aval;

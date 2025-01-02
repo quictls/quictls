@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include <openssl/objects.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include "ssl_local.h"
 #include <openssl/md5.h>
 #include <openssl/dh.h>
@@ -19,7 +19,7 @@
 #include <openssl/trace.h>
 #include <openssl/x509v3.h>
 #include <openssl/core_names.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 
 #define TLS13_NUM_CIPHERS       OSSL_NELEM(tls13_ciphers)
 #define SSL3_NUM_CIPHERS        OSSL_NELEM(ssl3_ciphers)

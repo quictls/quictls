@@ -16,7 +16,7 @@ ossl_time_min - times and durations
 
 =head1 SYNOPSIS
 
- #include "internal/time.h"
+ #include <internal/time.h>
 
  typedef struct OSSL_TIME;
 

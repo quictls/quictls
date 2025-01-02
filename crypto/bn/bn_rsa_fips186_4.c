@@ -25,8 +25,8 @@
 #include <stdio.h>
 #include <openssl/bn.h>
 #include "bn_local.h"
-#include "crypto/bn.h"
-#include "internal/nelem.h"
+#include <crypto/bn.h>
+#include <internal/nelem.h>
 
 #if BN_BITS2 == 64
 # define BN_DEF(lo, hi) (BN_ULONG)hi<<32|lo

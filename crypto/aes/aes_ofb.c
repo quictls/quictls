@@ -11,7 +11,7 @@
  * AES_encrypt is deprecated - but we need to use it to implement
  * AES_ofb128_encrypt
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/aes.h>
 #include <openssl/modes.h>

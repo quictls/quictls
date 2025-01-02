@@ -14,8 +14,8 @@
 #include <openssl/rand.h>
 #include <openssl/aes.h>
 #include <openssl/proverr.h>
-#include "crypto/modes.h"
-#include "internal/thread_once.h"
+#include <crypto/modes.h>
+#include <internal/thread_once.h>
 #include <providers/implementations.h>
 #include <providers/providercommon.h>
 #include <providers/provider_ctx.h>

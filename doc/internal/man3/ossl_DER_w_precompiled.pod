@@ -7,7 +7,7 @@ ossl_DER_w_precompiled
 
 =head1 SYNOPSIS
 
- #include "internal/der.h"
+ #include <internal/der.h>
 
  int ossl_DER_w_precompiled(WPACKET *pkt, int tag,
                             const unsigned char *precompiled,

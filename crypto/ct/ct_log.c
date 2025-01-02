@@ -16,7 +16,7 @@
 #include <openssl/evp.h>
 #include <openssl/safestack.h>
 
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 
 /*
  * Information about a CT log server.

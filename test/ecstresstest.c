@@ -8,7 +8,7 @@
  * or in the file LICENSE in the source distribution.
  */
 
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <test/testutil.h>
 
 #include <stdio.h>

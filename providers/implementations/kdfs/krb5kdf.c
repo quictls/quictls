@@ -11,7 +11,7 @@
  * DES low level APIs are deprecated for public use, but still ok for internal
  * use.  We access the DES_set_odd_parity(3) function here.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdlib.h>
 #include <stdarg.h>
@@ -23,9 +23,9 @@
 #include <openssl/kdf.h>
 #include <openssl/proverr.h>
 
-#include "internal/cryptlib.h"
-#include "crypto/evp.h"
-#include "internal/numbers.h"
+#include <internal/cryptlib.h>
+#include <crypto/evp.h>
+#include <internal/numbers.h>
 #include <providers/implementations.h>
 #include <providers/provider_ctx.h>
 #include <providers/provider_util.h>

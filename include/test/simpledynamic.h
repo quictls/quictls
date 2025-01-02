@@ -10,7 +10,7 @@
 #ifndef OSSL_TEST_SIMPLEDYNAMIC_H
 # define OSSL_TEST_SIMPLEDYNAMIC_H
 
-# include "crypto/dso_conf.h"
+# include <crypto/dso_conf.h>
 
 # if defined(DSO_DLFCN)
 

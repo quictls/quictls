@@ -11,7 +11,7 @@
 #include <openssl/e_os2.h>
 #include <openssl/x509.h>
 #include <openssl/x509v3.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include "fuzzer.h"
 
 int FuzzerInitialize(int *argc, char ***argv)

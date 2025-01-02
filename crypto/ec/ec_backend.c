@@ -11,7 +11,7 @@
  * Low level APIs related to EC_KEY are deprecated for public use,
  * but still ok for internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/core_names.h>
 #include <openssl/objects.h>
@@ -21,12 +21,12 @@
 # include <openssl/engine.h>
 # include <openssl/x509.h>
 #endif
-#include "crypto/bn.h"
-#include "crypto/ec.h"
+#include <crypto/bn.h>
+#include <crypto/ec.h>
 #include "ec_local.h"
-#include "internal/e_os.h"
-#include "internal/nelem.h"
-#include "internal/param_build_set.h"
+#include <internal/e_os.h>
+#include <internal/nelem.h>
+#include <internal/param_build_set.h>
 
 /* Mapping between a flag and a name */
 static const OSSL_ITEM encoding_nameid_map[] = {

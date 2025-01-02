@@ -16,7 +16,7 @@
 #ifndef FIPS_MODULE
 # include <openssl/x509.h>
 #endif
-#include "crypto/ecx.h"
+#include <crypto/ecx.h>
 #include "ecx_backend.h"
 
 /*

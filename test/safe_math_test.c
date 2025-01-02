@@ -16,8 +16,8 @@
  */
 /*#define OPENSSL_NO_BUILTIN_OVERFLOW_CHECKING*/
 
-#include "internal/nelem.h"
-#include "internal/safe_math.h"
+#include <internal/nelem.h>
+#include <internal/safe_math.h>
 #include <test/testutil.h>
 
 /* Create the safe math instances we're interested in */

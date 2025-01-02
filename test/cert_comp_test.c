@@ -16,7 +16,7 @@
 #endif
 
 #include <openssl/ssl.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <test/ssltestlib.h>
 #include <test/testutil.h>
 #include "../ssl/ssl_local.h"

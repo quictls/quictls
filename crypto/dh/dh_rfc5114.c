@@ -11,13 +11,13 @@
  * DH low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include "dh_local.h"
 #include <openssl/bn.h>
-#include "crypto/bn_dh.h"
+#include <crypto/bn_dh.h>
 
 /*
  * Macro to make a DH structure from BIGNUM data. NB: although just copying

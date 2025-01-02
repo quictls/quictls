@@ -11,7 +11,7 @@
  * DH low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <openssl/bn.h>
@@ -20,10 +20,10 @@
 #endif
 #include <openssl/obj_mac.h>
 #include <openssl/core_names.h>
-#include "internal/cryptlib.h"
-#include "internal/refcount.h"
-#include "crypto/evp.h"
-#include "crypto/dh.h"
+#include <internal/cryptlib.h>
+#include <internal/refcount.h>
+#include <crypto/evp.h>
+#include <crypto/dh.h>
 #include "dh_local.h"
 
 static DH *dh_new_intern(ENGINE *engine, OSSL_LIB_CTX *libctx);

@@ -11,7 +11,7 @@
  * ECDSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h> /* memcpy */
 #include <openssl/crypto.h>
@@ -22,15 +22,15 @@
 #include <openssl/evp.h>
 #include <openssl/err.h>
 #include <openssl/proverr.h>
-#include "internal/nelem.h"
-#include "internal/sizes.h"
-#include "internal/cryptlib.h"
-#include "internal/deterministic_nonce.h"
+#include <internal/nelem.h>
+#include <internal/sizes.h>
+#include <internal/cryptlib.h>
+#include <internal/deterministic_nonce.h>
 #include <providers/providercommon.h>
 #include <providers/implementations.h>
 #include <providers/provider_ctx.h>
 #include <providers/securitycheck.h>
-#include "crypto/ec.h"
+#include <crypto/ec.h>
 #include <providers/der_ec.h>
 
 static OSSL_FUNC_signature_newctx_fn ecdsa_newctx;

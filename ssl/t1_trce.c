@@ -12,7 +12,7 @@
 #ifndef OPENSSL_NO_SSL_TRACE
 
 /* Packet trace support for OpenSSL */
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 typedef struct {
     int num;

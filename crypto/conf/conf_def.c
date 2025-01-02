@@ -11,9 +11,9 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "internal/e_os.h" /* struct stat */
-#include "internal/cryptlib.h"
-#include "internal/o_dir.h"
+#include <internal/e_os.h> /* struct stat */
+#include <internal/cryptlib.h>
+#include <internal/o_dir.h>
 #include <openssl/lhash.h>
 #include <openssl/conf.h>
 #include <openssl/conf_api.h>

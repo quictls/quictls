@@ -6,7 +6,7 @@ ossl_provider_add_conf_module - internal standard configuration module
 
 =head1 SYNOPSIS
 
- #include "internal/provider.h"
+ #include <internal/provider.h>
 
  /* Configuration */
  void ossl_provider_add_conf_module(void);

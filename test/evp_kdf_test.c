@@ -16,7 +16,7 @@
 #include <openssl/evp.h>
 #include <openssl/kdf.h>
 #include <openssl/core_names.h>
-#include "internal/numbers.h"
+#include <internal/numbers.h>
 #include <test/testutil.h>
 
 

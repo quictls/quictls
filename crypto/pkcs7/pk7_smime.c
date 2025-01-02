@@ -10,7 +10,7 @@
 /* Simple PKCS#7 processing functions */
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/x509.h>
 #include <openssl/x509v3.h>
 #include "pk7_local.h"

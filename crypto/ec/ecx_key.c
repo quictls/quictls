@@ -10,8 +10,8 @@
 #include <string.h>
 #include <openssl/err.h>
 #include <openssl/proverr.h>
-#include "crypto/ecx.h"
-#include "internal/common.h" /* for ossl_assert() */
+#include <crypto/ecx.h>
+#include <internal/common.h> /* for ossl_assert() */
 
 #ifdef S390X_EC_ASM
 # include "s390x_arch.h"

@@ -7,14 +7,14 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/rsa.h>
 #include <openssl/core.h>
 #include <openssl/core_names.h>
 #include <openssl/obj_mac.h>
 #include <providers/securitycheck.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 /* Disable the security checks in the default provider */
 int ossl_securitycheck_enabled(OSSL_LIB_CTX *libctx)

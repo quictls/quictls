@@ -11,7 +11,7 @@
 /*
  * Low level APIs are deprecated for public use, but still ok for internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/opensslconf.h> /* To see if OPENSSL_NO_EC is defined */
 #include <test/testutil.h>
@@ -22,7 +22,7 @@
 # include <openssl/bn.h>
 # include <openssl/ec.h>
 # include <openssl/rand.h>
-# include "internal/nelem.h"
+# include <internal/nelem.h>
 # include <test/ecdsatest.h>
 
 static fake_random_generate_cb fbytes;

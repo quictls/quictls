@@ -10,12 +10,12 @@
 #include <openssl/crypto.h>
 #include <openssl/evp.h>
 #include <openssl/err.h>
-#include "internal/cryptlib.h"
-#include "internal/refcount.h"
-#include "internal/provider.h"
-#include "internal/core.h"
-#include "internal/numbers.h"   /* includes SIZE_MAX */
-#include "crypto/evp.h"
+#include <internal/cryptlib.h>
+#include <internal/refcount.h>
+#include <internal/provider.h>
+#include <internal/core.h>
+#include <internal/numbers.h>   /* includes SIZE_MAX */
+#include <crypto/evp.h>
 #include "evp_local.h"
 
 static EVP_KEYEXCH *evp_keyexch_new(OSSL_PROVIDER *prov)

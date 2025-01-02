@@ -14,7 +14,7 @@
 #include <openssl/asn1.h>
 #include <openssl/asn1t.h>
 #include <openssl/obj_mac.h>
-#include "internal/numbers.h"
+#include <internal/numbers.h>
 #include <test/testutil.h>
 
 #ifdef __GNUC__

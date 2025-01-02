@@ -9,7 +9,7 @@
 
 #include <assert.h>
 #include <openssl/core_dispatch.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <providers/bio.h>
 
 static OSSL_FUNC_BIO_new_file_fn *c_bio_new_file = NULL;

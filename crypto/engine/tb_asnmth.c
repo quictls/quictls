@@ -10,10 +10,10 @@
 /* We need to use some engine deprecated APIs */
 #define OPENSSL_SUPPRESS_DEPRECATED
 
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 #include "eng_local.h"
 #include <openssl/evp.h>
-#include "crypto/asn1.h"
+#include <crypto/asn1.h>
 
 /*
  * If this symbol is defined then ENGINE_get_pkey_asn1_meth_engine(), the

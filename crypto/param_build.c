@@ -14,7 +14,7 @@
 #include <openssl/params.h>
 #include <openssl/types.h>
 #include <openssl/safestack.h>
-#include "internal/param_build_set.h"
+#include <internal/param_build_set.h>
 
 /*
  * Special internal param type to indicate the end of an allocate OSSL_PARAM

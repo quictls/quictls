@@ -17,7 +17,7 @@
 #include <test/testutil.h>
 
 #ifndef OPENSSL_NO_SM3
-# include "internal/sm3.h"
+# include <internal/sm3.h>
 
 static int test_sm3(void)
 {

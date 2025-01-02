@@ -12,7 +12,7 @@
  */
 
 #include "cipher_sm4_gcm.h"
-#include "crypto/sm4_platform.h"
+#include <crypto/sm4_platform.h>
 
 # define SM4_GCM_HW_SET_KEY_CTR_FN(ks, fn_set_enc_key, fn_block, fn_ctr)       \
     fn_set_enc_key(key, ks);                                                   \

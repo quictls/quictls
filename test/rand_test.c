@@ -11,7 +11,7 @@
 #include <openssl/rand.h>
 #include <openssl/bio.h>
 #include <openssl/core_names.h>
-#include "crypto/rand.h"
+#include <crypto/rand.h>
 #include <test/testutil.h>
 
 static int test_rand(void)

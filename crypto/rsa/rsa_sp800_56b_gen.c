@@ -13,8 +13,8 @@
 #include <openssl/core.h>
 #include <openssl/evp.h>
 #include <openssl/rand.h>
-#include "crypto/bn.h"
-#include "crypto/security_bits.h"
+#include <crypto/bn.h>
+#include <crypto/security_bits.h>
 #include "rsa_local.h"
 
 #define RSA_FIPS1864_MIN_KEYGEN_KEYSIZE 2048

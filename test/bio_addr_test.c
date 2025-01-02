@@ -8,8 +8,8 @@
  */
 
 #include <openssl/bio.h>
-#include "internal/e_os.h"
-#include "internal/sockets.h"
+#include <internal/e_os.h>
+#include <internal/sockets.h>
 #include <test/testutil.h>
 
 static int families[] = {

@@ -11,14 +11,14 @@
  * DES and SHA-1 low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/sha.h>
 #include <openssl/rand.h>
 #include <openssl/proverr.h>
 #include "cipher_tdes_default.h"
-#include "crypto/evp.h"
-#include "crypto/sha.h"
+#include <crypto/evp.h>
+#include <crypto/sha.h>
 #include <providers/implementations.h>
 #include <providers/providercommon.h>
 

@@ -17,8 +17,8 @@
 #include <openssl/pkcs12.h>
 #include <openssl/x509.h>
 #include <openssl/proverr.h>
-#include "internal/asn1.h"
-#include "internal/sizes.h"
+#include <internal/asn1.h>
+#include <internal/sizes.h>
 #include <providers/bio.h>
 #include <providers/implementations.h>
 #include "endecoder_local.h"

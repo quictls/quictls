@@ -10,7 +10,7 @@
 
 #include <openssl/err.h>
 #include <openssl/esserr.h>
-#include "crypto/esserr.h"
+#include <crypto/esserr.h>
 
 #ifndef OPENSSL_NO_ERR
 

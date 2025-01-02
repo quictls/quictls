@@ -7,11 +7,11 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/deprecated.h" /* to be able to use EC_KEY and EC_GROUP */
+#include <internal/deprecated.h> /* to be able to use EC_KEY and EC_GROUP */
 
 #include <openssl/err.h>
-#include "crypto/sm2err.h"
-#include "crypto/sm2.h"
+#include <crypto/sm2err.h>
+#include <crypto/sm2.h>
 #include <openssl/ec.h> /* EC_KEY and EC_GROUP functions */
 
 /*

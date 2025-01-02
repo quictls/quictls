@@ -20,7 +20,7 @@
 #include <errno.h>
 
 #include "bio_local.h"
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 
 #if defined(__wasi__)
 # define NO_SYSLOG

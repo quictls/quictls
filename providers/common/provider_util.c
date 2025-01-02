@@ -16,7 +16,7 @@
 #include <openssl/proverr.h>
 #ifndef FIPS_MODULE
 # include <openssl/engine.h>
-# include "crypto/evp.h"
+# include <crypto/evp.h>
 #endif
 #include <providers/provider_util.h>
 

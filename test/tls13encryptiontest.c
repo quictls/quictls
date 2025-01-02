@@ -11,9 +11,9 @@
 #include <openssl/evp.h>
 #include "../ssl/ssl_local.h"
 #include "../ssl/record/record_local.h"
-#include "internal/recordmethod.h"
+#include <internal/recordmethod.h>
 #include "../ssl/record/methods/recmethod_local.h"
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <test/testutil.h>
 
 /*

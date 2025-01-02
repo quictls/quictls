@@ -13,7 +13,7 @@
  */
 
 #include <openssl/opensslconf.h>
-#include "internal/common.h"
+#include <internal/common.h>
 #include "rsaz_exp.h"
 
 #ifndef RSAZ_ENABLED

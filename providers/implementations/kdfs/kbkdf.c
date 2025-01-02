@@ -35,17 +35,17 @@
 #include <openssl/params.h>
 #include <openssl/proverr.h>
 
-#include "internal/cryptlib.h"
-#include "crypto/evp.h"
-#include "internal/numbers.h"
-#include "internal/endian.h"
+#include <internal/cryptlib.h>
+#include <crypto/evp.h>
+#include <internal/numbers.h>
+#include <internal/endian.h>
 #include <providers/implementations.h>
 #include <providers/provider_ctx.h>
 #include <providers/provider_util.h>
 #include <providers/providercommon.h>
 
-#include "internal/e_os.h"
-#include "internal/params.h"
+#include <internal/e_os.h>
+#include <internal/params.h>
 
 #define ossl_min(a, b) ((a) < (b)) ? (a) : (b)
 

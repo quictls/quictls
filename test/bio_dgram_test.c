@@ -11,8 +11,8 @@
 #include <openssl/bio.h>
 #include <openssl/rand.h>
 #include <test/testutil.h>
-#include "internal/sockets.h"
-#include "internal/bio_addr.h"
+#include <internal/sockets.h>
+#include <internal/bio_addr.h>
 
 #if !defined(OPENSSL_NO_SOCK)
 

@@ -8,7 +8,7 @@
  */
 
 #include <openssl/trace.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include "bn_local.h"
 
 /* How many bignums are in each "pool item"; */

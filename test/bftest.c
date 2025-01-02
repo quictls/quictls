@@ -11,7 +11,7 @@
  * BF low level APIs are deprecated for public use, but still ok for internal
  * use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <string.h>
@@ -19,7 +19,7 @@
 #include <openssl/opensslconf.h> /* To see if OPENSSL_NO_BF is defined */
 #include <test/testutil.h>
 
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 #ifndef OPENSSL_NO_BF
 # include <openssl/blowfish.h>

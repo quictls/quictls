@@ -11,7 +11,7 @@
  * low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/core_dispatch.h>
 #include <openssl/core_names.h>
@@ -23,19 +23,19 @@
 #include <openssl/pkcs12.h>
 #include <openssl/x509.h>
 #include <openssl/proverr.h>
-#include "internal/cryptlib.h"   /* ossl_assert() */
-#include "internal/asn1.h"
-#include "crypto/dh.h"
-#include "crypto/dsa.h"
-#include "crypto/ec.h"
-#include "crypto/evp.h"
-#include "crypto/ecx.h"
-#include "crypto/rsa.h"
-#include "crypto/x509.h"
+#include <internal/cryptlib.h>   /* ossl_assert() */
+#include <internal/asn1.h>
+#include <crypto/dh.h>
+#include <crypto/dsa.h>
+#include <crypto/ec.h>
+#include <crypto/evp.h>
+#include <crypto/ecx.h>
+#include <crypto/rsa.h>
+#include <crypto/x509.h>
 #include <providers/bio.h>
 #include <providers/implementations.h>
 #include "endecoder_local.h"
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 struct der2key_ctx_st;           /* Forward declaration */
 typedef int check_key_fn(void *, struct der2key_ctx_st *ctx);

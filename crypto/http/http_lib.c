@@ -13,7 +13,7 @@
 #include <openssl/httperr.h>
 #include <openssl/bio.h> /* for BIO_snprintf() */
 #include <openssl/err.h>
-#include "internal/cryptlib.h" /* for ossl_assert() */
+#include <internal/cryptlib.h> /* for ossl_assert() */
 
 static void init_pstring(char **pstr)
 {

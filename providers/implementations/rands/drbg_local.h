@@ -14,9 +14,9 @@
 # include <openssl/core_dispatch.h>
 # include <openssl/core_names.h>
 # include <openssl/params.h>
-# include "internal/tsan_assist.h"
-# include "internal/nelem.h"
-# include "internal/numbers.h"
+# include <internal/tsan_assist.h>
+# include <internal/nelem.h>
+# include <internal/numbers.h>
 # include <providers/provider_ctx.h>
 
 /* How many times to read the TSC as a randomness source. */

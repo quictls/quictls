@@ -8,7 +8,7 @@
  */
 
 /* We need to use some  deprecated APIs */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include "eng_local.h"
 #include <openssl/evp.h>

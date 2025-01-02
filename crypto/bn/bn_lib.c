@@ -9,11 +9,11 @@
 
 #include <assert.h>
 #include <limits.h>
-#include "internal/cryptlib.h"
-#include "internal/endian.h"
+#include <internal/cryptlib.h>
+#include <internal/endian.h>
 #include "bn_local.h"
 #include <openssl/opensslconf.h>
-#include "internal/constant_time.h"
+#include <internal/constant_time.h>
 
 const BIGNUM *BN_value_one(void)
 {

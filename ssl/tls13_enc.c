@@ -9,9 +9,9 @@
 
 #include <stdlib.h>
 #include "ssl_local.h"
-#include "internal/ktls.h"
+#include <internal/ktls.h>
 #include "record/record_local.h"
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/evp.h>
 #include <openssl/kdf.h>
 #include <openssl/core_names.h>
