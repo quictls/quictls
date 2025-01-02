@@ -68,7 +68,7 @@ VirtualLock(
 
 #include <openssl/bn.h>
 #include <openssl/rsa.h>
-#include <apps/testkeys.h>
+#include "testkeys.inc"
 #ifndef OPENSSL_NO_DH
 # include <openssl/dh.h>
 #endif
@@ -128,7 +128,6 @@ static void print_result(int alg, int run_no, int count, double time_used);
 #ifndef NO_FORK
 static int do_multi(int multi, int size_num);
 #endif
-
 
 static int domlock = 0;
 

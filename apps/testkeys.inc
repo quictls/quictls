@@ -181,16 +181,6 @@ static unsigned char dsa2048_g[] = {
     0xF8, 0xB2, 0xE5, 0x38,
 };
 
-
-/*
- * Copyright 1995-2016 The OpenSSL Project Authors. All Rights Reserved.
- *
- * Licensed under the Apache License 2.0 (the "License").  You may not use
- * this file except in compliance with the License.  You can obtain a copy
- * in the file LICENSE in the source distribution or at
- * https://www.openssl.org/source/license.html
- */
-
 static unsigned char test512[] = {
     0x30, 0x82, 0x01, 0x3a, 0x02, 0x01, 0x00, 0x02, 0x41, 0x00,
     0xd6, 0x33, 0xb9, 0xc8, 0xfb, 0x4f, 0x3c, 0x7d, 0xc0, 0x01,
