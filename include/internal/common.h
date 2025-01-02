@@ -236,7 +236,7 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
         } \
     }
 
-#define l2nn(l1, l2, c, n) \
+# define l2nn(l1, l2, c, n) \
     { \
         c += n; \
         switch (n) { \
