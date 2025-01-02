@@ -53,6 +53,10 @@ aliases for others: `BUF_strdup`, `BUF_strndup`, `BUF_memdup`,
   - Support for the undocumented and outdated "Strong Extranet ID"
 certificate extension and the "Netscape Certificate Sequence"
 data format have been removed.
+  - Removed all uses of `X509_get_default_cert_dir_env` and
+`X09_get_default_cert_file_env` and just use the names documented
+in `doc/man7/openssl-env.pod` but kept the function for downstream
+compatibility.
 
 - Header files were reorganized:
   - The redundant `#pragma once` and old-style header guards were removed.

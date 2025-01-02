@@ -537,7 +537,7 @@ int rehash_main(int argc, char **argv)
     if (*argv != NULL) {
         while (*argv != NULL)
             errs += do_dir(*argv++, h);
-    } else if ((env = getenv(X509_get_default_cert_dir_env())) != NULL) {
+    } else if ((env = getenv(X509_CERT_DIR_EVP)) != NULL) {
         char lsc[2] = { LIST_SEPARATOR_CHAR, '\0' };
         m = OPENSSL_strdup(env);
         for (e = strtok(m, lsc); e != NULL; e = strtok(NULL, lsc))
