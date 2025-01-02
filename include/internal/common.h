@@ -213,7 +213,7 @@ __owur static inline int ossl_assert_int(int expr, const char *exprstr,
         } \
     }
 
-#define n2ln(c, l1, l2, n) \
+# define n2ln(c, l1, l2, n) \
     { \
         c += n; \
         l1 = l2 = 0; \
