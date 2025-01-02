@@ -21,14 +21,14 @@
  * specified in SP800-56A) when generating keys. Hence DH pairwise tests are
  * omitted here.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/bn.h>
 #include <openssl/sha.h>
-#include "crypto/dh.h"
-#include "crypto/security_bits.h"
+#include <crypto/dh.h>
+#include <crypto/security_bits.h>
 #include "dh_local.h"
 
 #ifndef FIPS_MODULE

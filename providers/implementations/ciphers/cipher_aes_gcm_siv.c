@@ -13,7 +13,7 @@
  * This file uses the low level AES functions (which are deprecated for
  * non-internal use) in order to implement provider AES ciphers.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/proverr.h>
 #include <providers/implementations.h>

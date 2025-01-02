@@ -12,8 +12,8 @@
 #include <errno.h>
 
 #include "bio_local.h"
-#include "internal/ktls.h"
-#include "internal/bio_tfo.h"
+#include <internal/ktls.h>
+#include <internal/bio_tfo.h>
 
 #include <openssl/err.h>
 

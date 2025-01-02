@@ -12,7 +12,7 @@ ossl_method_store_cache_flush_all
 
 =head1 SYNOPSIS
 
- #include "internal/property.h"
+ #include <internal/property.h>
 
  typedef struct ossl_method_store_st OSSL_METHOD_STORE;
 

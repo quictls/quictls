@@ -11,7 +11,7 @@
 #include <openssl/err.h>
 #include <openssl/ocsp.h>
 #include "ocsp_local.h"
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/pem.h>
 
 static int ocsp_certid_print(BIO *bp, OCSP_CERTID *a, int indent)

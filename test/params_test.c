@@ -17,8 +17,8 @@
 #include <openssl/core.h>
 #include <openssl/err.h>
 #include <openssl/params.h>
-#include "internal/numbers.h"
-#include "internal/nelem.h"
+#include <internal/numbers.h>
+#include <internal/nelem.h>
 #include <test/testutil.h>
 
 /*-

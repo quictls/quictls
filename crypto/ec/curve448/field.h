@@ -13,7 +13,7 @@
 #ifndef OSSL_CRYPTO_EC_CURVE448_FIELD_H
 # define OSSL_CRYPTO_EC_CURVE448_FIELD_H
 
-# include "internal/constant_time.h"
+# include <internal/constant_time.h>
 # include <string.h>
 # include <assert.h>
 # include "word.h"

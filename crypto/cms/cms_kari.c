@@ -11,9 +11,9 @@
  * Low level key APIs (DH etc) are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/asn1t.h>
 #include <openssl/pem.h>
 #include <openssl/x509v3.h>
@@ -21,7 +21,7 @@
 #include <openssl/cms.h>
 #include <openssl/aes.h>
 #include "cms_local.h"
-#include "crypto/asn1.h"
+#include <crypto/asn1.h>
 
 /* Key Agreement Recipient Info (KARI) routines */
 

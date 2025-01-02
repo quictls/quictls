@@ -7,12 +7,12 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 #include <stdio.h>
 #include <openssl/objects.h>
 #include <openssl/rand.h>
 #include "ssl_local.h"
-#include "internal/time.h"
+#include <internal/time.h>
 
 static int dtls1_handshake_write(SSL_CONNECTION *s);
 static size_t dtls1_link_min_mtu(void);

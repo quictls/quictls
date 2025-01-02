@@ -13,7 +13,7 @@
  * RSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <string.h>
@@ -22,7 +22,7 @@
 #include <openssl/evp.h>
 #include <openssl/objects.h>
 #include <test/testutil.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 /**********************************************************************
  *
@@ -65,7 +65,7 @@ static int test_tbl_standard(void)
  *
  ***/
 
-#include "crypto/asn1.h"
+#include <crypto/asn1.h>
 #include "../crypto/asn1/standard_methods.h"
 
 static int test_standard_methods(void)

@@ -10,7 +10,7 @@
 
 #include <openssl/err.h>
 #include <openssl/randerr.h>
-#include "crypto/randerr.h"
+#include <crypto/randerr.h>
 
 #ifndef OPENSSL_NO_ERR
 

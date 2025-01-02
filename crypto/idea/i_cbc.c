@@ -12,7 +12,7 @@
  * use where we're using them to implement the higher level EVP interface, as is
  * the case here.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/idea.h>
 #include "idea_local.h"

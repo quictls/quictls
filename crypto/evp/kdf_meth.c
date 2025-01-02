@@ -12,9 +12,9 @@
 #include <openssl/core.h>
 #include <openssl/core_dispatch.h>
 #include <openssl/kdf.h>
-#include "internal/provider.h"
-#include "internal/core.h"
-#include "crypto/evp.h"
+#include <internal/provider.h>
+#include <internal/core.h>
+#include <crypto/evp.h>
 #include "evp_local.h"
 
 static int evp_kdf_up_ref(void *vkdf)

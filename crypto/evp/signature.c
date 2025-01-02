@@ -11,11 +11,11 @@
 #include <stdlib.h>
 #include <openssl/objects.h>
 #include <openssl/evp.h>
-#include "internal/numbers.h"   /* includes SIZE_MAX */
-#include "internal/cryptlib.h"
-#include "internal/provider.h"
-#include "internal/core.h"
-#include "crypto/evp.h"
+#include <internal/numbers.h>   /* includes SIZE_MAX */
+#include <internal/cryptlib.h>
+#include <internal/provider.h>
+#include <internal/core.h>
+#include <crypto/evp.h>
 #include "evp_local.h"
 
 static EVP_SIGNATURE *evp_signature_new(OSSL_PROVIDER *prov)

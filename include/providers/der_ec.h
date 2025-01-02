@@ -7,8 +7,8 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "crypto/ec.h"
-#include "internal/der.h"
+#include <crypto/ec.h>
+#include <internal/der.h>
 
 /* Well known OIDs precompiled */
 

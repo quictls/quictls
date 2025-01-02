@@ -10,7 +10,7 @@
 
 #include <openssl/err.h>
 #include <openssl/cmserr.h>
-#include "crypto/cmserr.h"
+#include <crypto/cmserr.h>
 
 #ifndef OPENSSL_NO_CMS
 

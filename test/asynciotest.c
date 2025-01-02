@@ -13,7 +13,7 @@
 #include <openssl/bio.h>
 #include <openssl/err.h>
 
-#include "internal/packet.h"
+#include <internal/packet.h>
 
 #include <test/ssltestlib.h>
 #include <test/testutil.h>

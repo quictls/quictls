@@ -17,7 +17,7 @@
 #include <setjmp.h>
 #include <signal.h>
 #endif
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #ifdef _WIN32
 #include <windows.h>
 #else

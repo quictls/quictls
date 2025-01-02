@@ -8,7 +8,7 @@
  */
 #include <openssl/crypto.h>
 
-#include "internal/tsan_assist.h"
+#include <internal/tsan_assist.h>
 
 struct lhash_node_st {
     void *data;

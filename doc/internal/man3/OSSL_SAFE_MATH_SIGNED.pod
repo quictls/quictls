@@ -11,7 +11,7 @@ safe_div_round_up_TYPE, safe_neg_TYPE
 
 =for openssl generic
 
- #include "internal/safe_math.h"
+ #include <internal/safe_math.h>
 
  OSSL_SAFE_MATH_SIGNED(NAME, TYPE)
  OSSL_SAFE_MATH_UNSIGNED(NAME, TYPE)

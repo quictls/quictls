@@ -8,9 +8,9 @@
  */
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/pkcs12.h>
-#include "crypto/x509.h" /* for ossl_x509_add_cert_new() */
+#include <crypto/x509.h> /* for ossl_x509_add_cert_new() */
 
 /* Simplified PKCS#12 routines */
 

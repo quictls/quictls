@@ -15,7 +15,7 @@
  */
 
 #include <string.h>
-#include "internal/endian.h"
+#include <internal/endian.h>
 
 static inline uint32_t load32(const uint8_t *src)
 {

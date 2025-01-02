@@ -9,11 +9,11 @@
 
 #include <stddef.h>
 #include <string.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/asn1.h>
 #include <openssl/asn1t.h>
 #include <openssl/objects.h>
-#include "crypto/asn1.h"
+#include <crypto/asn1.h>
 #include "asn1_local.h"
 
 static int asn1_i2d_ex_primitive(const ASN1_VALUE **pval, unsigned char **out,

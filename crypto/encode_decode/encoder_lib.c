@@ -14,8 +14,8 @@
 #include <openssl/params.h>
 #include <openssl/provider.h>
 #include <openssl/trace.h>
-#include "internal/bio.h"
-#include "internal/provider.h"
+#include <internal/bio.h>
+#include <internal/provider.h>
 #include "encoder_local.h"
 
 struct encoder_process_data_st {

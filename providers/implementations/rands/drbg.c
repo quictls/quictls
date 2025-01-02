@@ -12,17 +12,17 @@
 #include <openssl/err.h>
 #include <openssl/rand.h>
 #include <openssl/evp.h>
-#include "crypto/rand.h"
+#include <crypto/rand.h>
 #include <openssl/proverr.h>
 #include "drbg_local.h"
-#include "internal/thread_once.h"
-#include "crypto/cryptlib.h"
+#include <internal/thread_once.h>
+#include <crypto/cryptlib.h>
 #include <providers/seeding.h>
-#include "crypto/rand_pool.h"
+#include <crypto/rand_pool.h>
 #include <providers/provider_ctx.h>
 #include <providers/providercommon.h>
 #include <providers/fipscommon.h>
-#include "crypto/context.h"
+#include <crypto/context.h>
 
 /*
  * Support framework for NIST SP 800-90A DRBG

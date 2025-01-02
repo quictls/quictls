@@ -11,8 +11,8 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-#include "internal/nelem.h"
-#include "internal/o_dir.h"
+#include <internal/nelem.h>
+#include <internal/o_dir.h>
 #include <openssl/bio.h>
 #include <openssl/pem.h>
 #include <openssl/store.h>
@@ -20,10 +20,10 @@
 #include <openssl/dh.h>
 #include <openssl/bn.h>
 #include <openssl/crypto.h>
-#include "internal/refcount.h"
+#include <internal/refcount.h>
 #include "ssl_local.h"
 #include "ssl_cert_table.h"
-#include "internal/thread_once.h"
+#include <internal/thread_once.h>
 #ifndef OPENSSL_NO_POSIX_IO
 # include <sys/stat.h>
 # ifdef _WIN32

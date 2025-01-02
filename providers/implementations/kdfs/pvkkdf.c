@@ -11,7 +11,7 @@
 #include <openssl/core_names.h>
 #include <openssl/proverr.h>
 #include <openssl/err.h>
-#include "internal/numbers.h"    /* SIZE_MAX */
+#include <internal/numbers.h>    /* SIZE_MAX */
 #include <providers/provider_ctx.h>
 #include <providers/providercommon.h>
 #include <providers/implementations.h>

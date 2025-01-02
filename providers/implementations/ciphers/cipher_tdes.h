@@ -9,7 +9,7 @@
 
 #include <openssl/des.h>
 #include <openssl/core_dispatch.h>
-#include "crypto/des_platform.h"
+#include <crypto/des_platform.h>
 
 #define DES_BLOCK_SIZE 8
 #define TDES_IVLEN 8

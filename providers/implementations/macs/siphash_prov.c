@@ -15,7 +15,7 @@
 #include <openssl/err.h>
 #include <openssl/proverr.h>
 
-#include "crypto/siphash.h"
+#include <crypto/siphash.h>
 
 #include <providers/implementations.h>
 #include <providers/providercommon.h>

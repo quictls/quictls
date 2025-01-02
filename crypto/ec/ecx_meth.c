@@ -11,7 +11,7 @@
  * ECDSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <openssl/x509.h>
@@ -19,11 +19,11 @@
 #include <openssl/core_names.h>
 #include <openssl/param_build.h>
 #include <openssl/rand.h>
-#include "internal/cryptlib.h"
-#include "internal/provider.h"
-#include "crypto/asn1.h"
-#include "crypto/evp.h"
-#include "crypto/ecx.h"
+#include <internal/cryptlib.h>
+#include <internal/provider.h>
+#include <crypto/asn1.h>
+#include <crypto/evp.h>
+#include <crypto/ecx.h>
 #include "ec_local.h"
 #include "curve448/curve448_local.h"
 #include "ecx_backend.h"

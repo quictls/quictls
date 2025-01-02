@@ -12,13 +12,13 @@
  * This is an internal test that is intentionally using internal APIs. Some of
  * those APIs are deprecated for public use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <openssl/crypto.h>
 #include <openssl/bio.h>
 #include <openssl/bn.h>
@@ -26,8 +26,8 @@
 #include <openssl/err.h>
 #include <test/testutil.h>
 
-#include "internal/ffc.h"
-#include "crypto/security_bits.h"
+#include <internal/ffc.h>
+#include <crypto/security_bits.h>
 
 #ifndef OPENSSL_NO_DSA
 static const unsigned char dsa_2048_224_sha224_p[] = {

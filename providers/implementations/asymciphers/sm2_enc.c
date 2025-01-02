@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/crypto.h>
 #include <openssl/evp.h>
@@ -16,7 +16,7 @@
 #include <openssl/params.h>
 #include <openssl/err.h>
 #include <openssl/proverr.h>
-#include "crypto/sm2.h"
+#include <crypto/sm2.h>
 #include <providers/provider_ctx.h>
 #include <providers/implementations.h>
 #include <providers/provider_util.h>

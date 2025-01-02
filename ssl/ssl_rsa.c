@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 #include "ssl_local.h"
-#include "internal/packet.h"
+#include <internal/packet.h>
 #include <openssl/bio.h>
 #include <openssl/objects.h>
 #include <openssl/evp.h>

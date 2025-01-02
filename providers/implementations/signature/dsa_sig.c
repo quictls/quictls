@@ -11,7 +11,7 @@
  * DSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h>
 
@@ -23,14 +23,14 @@
 #include <openssl/params.h>
 #include <openssl/evp.h>
 #include <openssl/proverr.h>
-#include "internal/nelem.h"
-#include "internal/sizes.h"
-#include "internal/cryptlib.h"
+#include <internal/nelem.h>
+#include <internal/sizes.h>
+#include <internal/cryptlib.h>
 #include <providers/providercommon.h>
 #include <providers/implementations.h>
 #include <providers/provider_ctx.h>
 #include <providers/securitycheck.h>
-#include "crypto/dsa.h"
+#include <crypto/dsa.h>
 #include <providers/der_dsa.h>
 
 static OSSL_FUNC_signature_newctx_fn dsa_newctx;

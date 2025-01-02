@@ -11,10 +11,10 @@
  * MD2 low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/mdc2.h>
 
 unsigned char *MDC2(const unsigned char *d, size_t n, unsigned char *md)

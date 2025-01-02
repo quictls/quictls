@@ -38,7 +38,7 @@
 
 #include <windows.h>
 #include <tchar.h>
-#include "internal/numbers.h"
+#include <internal/numbers.h>
 #ifndef LPDIR_H
 # include "LPdir.h"
 #endif
