@@ -14,11 +14,11 @@
 #include <openssl/core.h>
 #include <openssl/core_names.h>
 #include <openssl/crypto.h>
-#include "internal/cryptlib.h"
-#include "internal/numbers.h"
-#include "internal/provider.h"
-#include "internal/core.h"
-#include "crypto/evp.h"
+#include <internal/cryptlib.h>
+#include <internal/numbers.h>
+#include <internal/provider.h>
+#include <internal/core.h>
+#include <crypto/evp.h>
 #include "evp_local.h"
 
 struct evp_rand_st {

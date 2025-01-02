@@ -7,13 +7,13 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/core_names.h>
 #include <openssl/err.h>
 #include <openssl/ec.h>
-#include "crypto/evp.h"
-#include "crypto/ec.h"
+#include <crypto/evp.h>
+#include <crypto/ec.h>
 
 /*
  * This file is meant to contain functions to provide EVP_PKEY support for EC

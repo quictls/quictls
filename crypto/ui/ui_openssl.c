@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 #include <openssl/e_os2.h>
 #include <openssl/err.h>
 #include <openssl/ui.h>
@@ -45,7 +45,7 @@
 # endif
 
 # include "ui_local.h"
-# include "internal/cryptlib.h"
+# include <internal/cryptlib.h>
 
 
 # ifdef WIN_CONSOLE_BUG

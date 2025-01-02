@@ -10,10 +10,10 @@
 #include <stddef.h>
 
 #include <openssl/core.h>
-#include "internal/cryptlib.h"
-#include "internal/core.h"
-#include "internal/property.h"
-#include "internal/provider.h"
+#include <internal/cryptlib.h>
+#include <internal/core.h>
+#include <internal/property.h>
+#include <internal/provider.h>
 
 struct construct_data_st {
     OSSL_LIB_CTX *libctx;

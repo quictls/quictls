@@ -20,7 +20,7 @@
 #include <sys/stat.h>
 #include <openssl/crypto.h>
 #include "fuzzer.h"
-#include "internal/o_dir.h"
+#include <internal/o_dir.h>
 
 #if defined(_WIN32) && defined(_MAX_PATH) && !defined(PATH_MAX)
 # define PATH_MAX _MAX_PATH

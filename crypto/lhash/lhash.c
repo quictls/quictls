@@ -13,8 +13,8 @@
 #include <openssl/crypto.h>
 #include <openssl/lhash.h>
 #include <openssl/err.h>
-#include "crypto/ctype.h"
-#include "crypto/lhash.h"
+#include <crypto/ctype.h>
+#include <crypto/lhash.h>
 #include "lhash_local.h"
 
 /*

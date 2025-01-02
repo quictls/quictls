@@ -11,13 +11,13 @@
  * DH low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <openssl/crypto.h>
 #include <openssl/bio.h>
 #include <openssl/bn.h>
@@ -29,8 +29,8 @@
 
 #ifndef OPENSSL_NO_DH
 # include <openssl/dh.h>
-# include "crypto/bn_dh.h"
-# include "crypto/dh.h"
+# include <crypto/bn_dh.h>
+# include <crypto/dh.h>
 
 static int cb(int p, int n, BN_GENCB *arg);
 

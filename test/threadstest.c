@@ -27,10 +27,10 @@
 #include <openssl/rand.h>
 #include <openssl/pem.h>
 #include <openssl/evp.h>
-#include "internal/tsan_assist.h"
-#include "internal/nelem.h"
-#include "internal/time.h"
-#include "internal/rcu.h"
+#include <internal/tsan_assist.h>
+#include <internal/nelem.h>
+#include <internal/time.h>
+#include <internal/rcu.h>
 #include <test/testutil.h>
 #include <test/threadstest.h>
 

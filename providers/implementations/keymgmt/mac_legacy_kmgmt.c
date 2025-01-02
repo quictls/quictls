@@ -21,7 +21,7 @@
 #ifndef FIPS_MODULE
 # include <openssl/engine.h>
 #endif
-#include "internal/param_build_set.h"
+#include <internal/param_build_set.h>
 #include <providers/implementations.h>
 #include <providers/providercommon.h>
 #include <providers/provider_ctx.h>

@@ -10,7 +10,7 @@
 
 #include <openssl/err.h>
 #include <openssl/asn1err.h>
-#include "crypto/asn1err.h"
+#include <crypto/asn1err.h>
 
 #ifndef OPENSSL_NO_ERR
 

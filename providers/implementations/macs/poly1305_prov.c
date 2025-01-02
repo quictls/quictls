@@ -14,7 +14,7 @@
 #include <openssl/err.h>
 #include <openssl/proverr.h>
 
-#include "crypto/poly1305.h"
+#include <crypto/poly1305.h>
 
 #include <providers/implementations.h>
 #include <providers/providercommon.h>

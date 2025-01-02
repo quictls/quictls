@@ -11,7 +11,7 @@
  * DSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,7 +27,7 @@
 #include <openssl/core_names.h>
 
 #include <test/testutil.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 #ifndef OPENSSL_NO_DSA
 static int dsa_cb(int p, int n, BN_GENCB *arg);

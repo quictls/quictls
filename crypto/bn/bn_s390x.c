@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "crypto/bn.h"
+#include <crypto/bn.h>
 #include "crypto/s390x_arch.h"
 
 #ifdef S390X_MOD_EXP

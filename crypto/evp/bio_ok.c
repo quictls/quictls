@@ -71,13 +71,13 @@
 #include <stdio.h>
 #include <errno.h>
 #include <assert.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/buffer.h>
-#include "internal/bio.h"
+#include <internal/bio.h>
 #include <openssl/evp.h>
 #include <openssl/rand.h>
-#include "internal/endian.h"
-#include "crypto/evp.h"
+#include <internal/endian.h>
+#include <crypto/evp.h>
 
 static int ok_write(BIO *h, const char *buf, int num);
 static int ok_read(BIO *h, char *buf, int size);

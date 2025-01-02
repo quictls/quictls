@@ -8,14 +8,14 @@
  */
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/buffer.h>
 #include <openssl/bn.h>
 #include <openssl/objects.h>
 #include <openssl/x509.h>
 #include <openssl/x509v3.h>
-#include "crypto/asn1.h"
-#include "crypto/x509.h"
+#include <crypto/asn1.h>
+#include <crypto/x509.h>
 
 void OSSL_STACK_OF_X509_free(STACK_OF(X509) *certs)
 {

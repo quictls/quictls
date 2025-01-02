@@ -8,8 +8,8 @@
  */
 
 #include <openssl/dsa.h>
-#include "internal/refcount.h"
-#include "internal/ffc.h"
+#include <internal/refcount.h>
+#include <internal/ffc.h>
 
 struct dsa_st {
     /*

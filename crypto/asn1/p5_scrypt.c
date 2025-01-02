@@ -8,14 +8,14 @@
  */
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/asn1t.h>
 #include <openssl/core_names.h>
 #include <openssl/err.h>
 #include <openssl/evp.h>
 #include <openssl/x509.h>
 #include <openssl/rand.h>
-#include "crypto/evp.h"
+#include <crypto/evp.h>
 
 #ifndef OPENSSL_NO_SCRYPT
 /* PKCS#5 scrypt password based encryption structures */

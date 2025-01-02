@@ -8,9 +8,9 @@
  */
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
-#include "internal/numbers.h"
-#include "internal/safe_math.h"
+#include <internal/cryptlib.h>
+#include <internal/numbers.h>
+#include <internal/safe_math.h>
 #include <openssl/stack.h>
 #include <errno.h>
 #include <openssl/e_os2.h>      /* For inline */

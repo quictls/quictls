@@ -13,7 +13,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "bio_local.h"
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/err.h>
 
 long BIO_debug_callback_ex(BIO *bio, int cmd, const char *argp, size_t len,

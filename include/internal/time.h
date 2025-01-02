@@ -11,8 +11,8 @@
 # define OSSL_INTERNAL_TIME_H
 
 # include <openssl/e_os2.h>     /* uint64_t */
-# include "internal/e_os.h"     /* for struct timeval */
-# include "internal/safe_math.h"
+# include <internal/e_os.h>     /* for struct timeval */
+# include <internal/safe_math.h>
 
 /*
  * Internal type defining a time.

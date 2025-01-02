@@ -19,7 +19,7 @@
  * DSA/DH low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 #include <assert.h>
 #include <openssl/evp.h>
 #include <openssl/provider.h>
@@ -31,8 +31,8 @@
 #include <openssl/x509.h>
 #include <openssl/encoder.h>
 #include <test/testutil.h>
-#include "internal/nelem.h"
-#include "crypto/bn_dh.h"   /* _bignum_ffdhe2048_p */
+#include <internal/nelem.h>
+#include <crypto/bn_dh.h>   /* _bignum_ffdhe2048_p */
 
 static OSSL_LIB_CTX *libctx = NULL;
 static OSSL_PROVIDER *nullprov = NULL;

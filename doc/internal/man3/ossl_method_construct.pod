@@ -7,7 +7,7 @@ OSSL_METHOD_CONSTRUCT_METHOD, ossl_method_construct
 
 =head1 SYNOPSIS
 
- #include "internal/core.h"
+ #include <internal/core.h>
 
  struct ossl_method_construct_method_st {
      /* Get a temporary store */

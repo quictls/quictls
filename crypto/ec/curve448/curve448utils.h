@@ -15,7 +15,7 @@
 
 # include <openssl/e_os2.h>
 
-# include "internal/numbers.h"
+# include <internal/numbers.h>
 
 /*
  * Internal word types. Somewhat tricky.  This could be decided separately per

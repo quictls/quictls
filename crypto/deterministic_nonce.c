@@ -11,7 +11,7 @@
 #include <openssl/evp.h>
 #include <openssl/core_names.h>
 #include <openssl/kdf.h>
-#include "internal/deterministic_nonce.h"
+#include <internal/deterministic_nonce.h>
 
 /*
  * Convert a Bit String to an Integer (See RFC 6979 Section 2.3.2)

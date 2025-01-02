@@ -8,7 +8,7 @@
  */
 
 #include <openssl/crypto.h>
-#include "internal/sm3.h"
+#include <internal/sm3.h>
 #include <providers/digestcommon.h>
 #include <providers/implementations.h>
 

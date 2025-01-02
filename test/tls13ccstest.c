@@ -11,7 +11,7 @@
 #include <string.h>
 #include <test/ssltestlib.h>
 #include <test/testutil.h>
-#include "internal/packet.h"
+#include <internal/packet.h>
 
 static char *cert = NULL;
 static char *privkey = NULL;

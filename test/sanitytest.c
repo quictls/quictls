@@ -10,8 +10,8 @@
 #include <string.h>
 #include <openssl/types.h>
 #include <test/testutil.h>
-#include "internal/numbers.h"
-#include "internal/time.h"
+#include <internal/numbers.h>
+#include <internal/time.h>
 
 static int test_sanity_null_zero(void)
 {

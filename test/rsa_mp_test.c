@@ -14,7 +14,7 @@
  * RSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <string.h>
@@ -27,7 +27,7 @@
 #include <test/testutil.h>
 
 #include <openssl/rsa.h>
-#include "crypto/rsa.h"
+#include <crypto/rsa.h>
 
 #define NUM_EXTRA_PRIMES 1
 

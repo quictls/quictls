@@ -13,16 +13,16 @@
  * DH low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
-#include "internal/ffc.h"
+#include <internal/cryptlib.h>
+#include <internal/ffc.h>
 #include "dh_local.h"
 #include <openssl/bn.h>
 #include <openssl/objects.h>
-#include "internal/nelem.h"
-#include "crypto/dh.h"
+#include <internal/nelem.h>
+#include <crypto/dh.h>
 
 static DH *dh_param_init(OSSL_LIB_CTX *libctx, const DH_NAMED_GROUP *group)
 {

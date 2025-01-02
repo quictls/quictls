@@ -10,7 +10,7 @@
 
 #include <openssl/err.h>
 #include <openssl/dherr.h>
-#include "crypto/dherr.h"
+#include <crypto/dherr.h>
 
 #ifndef OPENSSL_NO_DH
 

@@ -9,7 +9,7 @@
 
 #include <stdlib.h>
 #include <openssl/crypto.h>
-#include "internal/refcount.h"
+#include <internal/refcount.h>
 #include <providers/provider_util.h>
 
 struct mac_key_st {

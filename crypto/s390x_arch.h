@@ -12,7 +12,7 @@
 
 # ifndef __ASSEMBLER__
 
-#include "crypto/bn.h"
+#include <crypto/bn.h>
 
 void s390x_kimd(const unsigned char *in, size_t len, unsigned int fc,
                 void *param);

@@ -10,7 +10,7 @@
 
 #include <openssl/err.h>
 #include <openssl/storeerr.h>
-#include "crypto/storeerr.h"
+#include <crypto/storeerr.h>
 
 #ifndef OPENSSL_NO_ERR
 

@@ -27,7 +27,7 @@
  * ECDSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 /*
  * A 64-bit implementation of the NIST P-521 elliptic curve point multiplication
@@ -43,7 +43,7 @@
 #include <openssl/err.h>
 #include "ec_local.h"
 
-#include "internal/numbers.h"
+#include <internal/numbers.h>
 
 #ifndef INT128_MAX
 # error "Your compiler doesn't appear to support 128-bit integer types"
@@ -688,7 +688,7 @@ void p521_felem_square(largefelem out, const felem in);
 void p521_felem_mul(largefelem out, const felem in1, const felem in2);
 
 # if defined(_ARCH_PPC64)
-#  include "crypto/ppc_arch.h"
+#  include <crypto/ppc_arch.h>
 # endif
 
 static void felem_select(void)

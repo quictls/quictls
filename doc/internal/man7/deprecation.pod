@@ -123,7 +123,7 @@ any translation unit that uses it:
   * RSA low level APIs are deprecated for public use, but are kept for
   * internal use.
   */
- #include "internal/deprecated.h"
+ #include <internal/deprecated.h>
 
 =head1 SEE ALSO
 

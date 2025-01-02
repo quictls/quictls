@@ -11,7 +11,7 @@
 #include <openssl/err.h>
 #include <openssl/kdf.h>
 #include <openssl/core_names.h>
-#include "internal/numbers.h"
+#include <internal/numbers.h>
 
 #ifndef OPENSSL_NO_SCRYPT
 

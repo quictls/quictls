@@ -12,8 +12,8 @@
 #include <openssl/asn1.h>
 #include <openssl/asn1t.h>
 #include <openssl/err.h>
-#include "crypto/asn1.h"
-#include "crypto/evp.h"
+#include <crypto/asn1.h>
+#include <crypto/evp.h>
 
 ASN1_SEQUENCE(X509_ALGOR) = {
         ASN1_SIMPLE(X509_ALGOR, algorithm, ASN1_OBJECT),

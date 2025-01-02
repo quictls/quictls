@@ -10,9 +10,9 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <openssl/e_os2.h>
-#include "crypto/punycode.h"
-#include "internal/common.h" /* for HAS_PREFIX */
-#include "internal/packet.h" /* for WPACKET */
+#include <crypto/punycode.h>
+#include <internal/common.h> /* for HAS_PREFIX */
+#include <internal/packet.h> /* for WPACKET */
 
 static const unsigned int base = 36;
 static const unsigned int tmin = 1;

@@ -8,8 +8,8 @@
  */
 
 #include <openssl/crypto.h>
-#include "internal/cryptlib.h"
-#include "internal/rcu.h"
+#include <internal/cryptlib.h>
+#include <internal/rcu.h>
 #include "rcu_internal.h"
 
 #if !defined(OPENSSL_THREADS) || defined(CRYPTO_TDEBUG)

@@ -17,9 +17,9 @@
 #include <openssl/sha.h>
 #include <openssl/evp.h>
 #include <openssl/err.h>
-#include "internal/hpke_util.h"
-#include "internal/nelem.h"
-#include "internal/common.h"
+#include <internal/hpke_util.h>
+#include <internal/nelem.h>
+#include <internal/common.h>
 
 /* default buffer size for keys and internal buffers we use */
 #define OSSL_HPKE_MAXSIZE 512

@@ -9,12 +9,12 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
-#include "crypto/sm2.h"
-#include "crypto/sm2err.h"
-#include "crypto/ec.h" /* ossl_ec_group_do_inverse_ord() */
-#include "internal/numbers.h"
+#include <crypto/sm2.h>
+#include <crypto/sm2err.h>
+#include <crypto/ec.h> /* ossl_ec_group_do_inverse_ord() */
+#include <internal/numbers.h>
 #include <openssl/err.h>
 #include <openssl/evp.h>
 #include <openssl/bn.h>

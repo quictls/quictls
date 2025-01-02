@@ -10,7 +10,7 @@
 
 #include <openssl/err.h>
 #include <openssl/pkcs7err.h>
-#include "crypto/pkcs7err.h"
+#include <crypto/pkcs7err.h>
 
 #ifndef OPENSSL_NO_ERR
 

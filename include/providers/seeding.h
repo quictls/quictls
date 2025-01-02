@@ -8,7 +8,7 @@
  */
 
 #include <providers/provider_ctx.h>
-#include "crypto/rand_pool.h"
+#include <crypto/rand_pool.h>
 
 /* Hardware-based seeding functions. */
 size_t ossl_prov_acquire_entropy_from_tsc(RAND_POOL *pool);

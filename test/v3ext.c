@@ -13,7 +13,7 @@
 #include <openssl/x509v3.h>
 #include <openssl/pem.h>
 #include <openssl/err.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 #include <test/testutil.h>
 

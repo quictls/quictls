@@ -19,10 +19,10 @@
 #endif
 #include <openssl/params.h>
 #include <openssl/core_names.h>
-#include "internal/cryptlib.h"
-#include "internal/provider.h"
-#include "internal/core.h"
-#include "crypto/evp.h"
+#include <internal/cryptlib.h>
+#include <internal/provider.h>
+#include <internal/core.h>
+#include <crypto/evp.h>
 #include "evp_local.h"
 
 static void cleanup_old_md_data(EVP_MD_CTX *ctx, int force)

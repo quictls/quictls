@@ -15,7 +15,7 @@
 #include <openssl/x509.h>
 #include <openssl/x509v3.h>
 #include <test/testutil.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 /**********************************************************************
  *

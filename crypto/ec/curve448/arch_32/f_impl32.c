@@ -10,9 +10,9 @@
  * Originally written by Mike Hamburg
  */
 
-#include "internal/e_os.h"
+#include <internal/e_os.h>
 #include <openssl/macros.h>
-#include "internal/numbers.h"
+#include <internal/numbers.h>
 
 #ifdef UINT128_MAX
 /* We have support for 128 bit ints, so do nothing here */

@@ -9,7 +9,7 @@
 #include <openssl/ssl.h>
 
 #include <test/ssltestlib.h>
-#include "internal/dane.h"
+#include <internal/dane.h>
 #include <test/testutil.h>
 
 #undef OSSL_NO_USABLE_TLS1_3

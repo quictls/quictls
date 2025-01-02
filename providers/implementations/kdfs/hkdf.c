@@ -11,7 +11,7 @@
  * HMAC low level APIs are deprecated for public use, but still ok for internal
  * use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdlib.h>
 #include <stdarg.h>
@@ -21,16 +21,16 @@
 #include <openssl/kdf.h>
 #include <openssl/core_names.h>
 #include <openssl/proverr.h>
-#include "internal/cryptlib.h"
-#include "internal/numbers.h"
-#include "internal/packet.h"
-#include "crypto/evp.h"
+#include <internal/cryptlib.h>
+#include <internal/numbers.h>
+#include <internal/packet.h>
+#include <crypto/evp.h>
 #include <providers/provider_ctx.h>
 #include <providers/providercommon.h>
 #include <providers/implementations.h>
 #include <providers/provider_util.h>
-#include "internal/e_os.h"
-#include "internal/params.h"
+#include <internal/e_os.h>
+#include <internal/params.h>
 
 #define HKDF_MAXBUF 2048
 #define HKDF_MAXINFO (32*1024)

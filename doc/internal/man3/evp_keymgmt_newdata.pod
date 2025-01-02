@@ -11,7 +11,7 @@ evp_keymgmt_export, evp_keymgmt_export_types
 
 =head1 SYNOPSIS
 
- #include "crypto/evp.h"
+ #include <crypto/evp.h>
 
  void *evp_keymgmt_newdata(const EVP_KEYMGMT *keymgmt);
  void evp_keymgmt_freedata(const EVP_KEYMGMT *keymgmt, void *keyddata);

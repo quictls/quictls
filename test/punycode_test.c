@@ -10,9 +10,9 @@
 #include <openssl/crypto.h>
 #include <string.h>
 
-#include "crypto/punycode.h"
-#include "internal/nelem.h"
-#include "internal/packet.h"
+#include <crypto/punycode.h>
+#include <internal/nelem.h>
+#include <internal/packet.h>
 #include <test/testutil.h>
 
 

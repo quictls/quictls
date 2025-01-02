@@ -16,12 +16,12 @@
 #include <openssl/hpke.h>
 #include <openssl/sha.h>
 #include <openssl/rand.h>
-#include "crypto/ecx.h"
-#include "crypto/rand.h"
-#include "internal/hpke_util.h"
-#include "internal/packet.h"
-#include "internal/nelem.h"
-#include "internal/common.h"
+#include <crypto/ecx.h>
+#include <crypto/rand.h>
+#include <internal/hpke_util.h>
+#include <internal/packet.h>
+#include <internal/nelem.h>
+#include <internal/common.h>
 
 /*
  * Delimiter used in OSSL_HPKE_str2suite

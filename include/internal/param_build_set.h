@@ -12,7 +12,7 @@
 
 # include <openssl/safestack.h>
 # include <openssl/param_build.h>
-# include "internal/cryptlib.h"
+# include <internal/cryptlib.h>
 
 typedef union {
     OSSL_UNION_ALIGN;

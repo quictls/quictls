@@ -18,10 +18,10 @@
 #include <openssl/err.h>
 #include <time.h>
 
-#include "internal/packet.h"
+#include <internal/packet.h>
 
 #include <test/testutil.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <test/ssltestlib.h>
 
 #define CLIENT_VERSION_LEN      2

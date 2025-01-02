@@ -8,8 +8,8 @@
  */
 
 #include <openssl/dh.h>
-#include "internal/refcount.h"
-#include "internal/ffc.h"
+#include <internal/refcount.h>
+#include <internal/ffc.h>
 
 #define DH_MIN_MODULUS_BITS     512
 

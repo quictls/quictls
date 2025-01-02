@@ -10,7 +10,7 @@
  */
 
 #include "cmp_local.h"
-#include "crypto/asn1.h"
+#include <crypto/asn1.h>
 
 /* explicit #includes not strictly needed since implied by the above: */
 #include <openssl/asn1t.h>

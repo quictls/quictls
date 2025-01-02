@@ -6,8 +6,8 @@
  * in the file LICENSE in the source distribution or at
  * https://www.openssl.org/source/license.html
  */
-#include "internal/e_os.h"
-#include "internal/param_names.h"
+#include <internal/e_os.h>
+#include <internal/param_names.h>
 #include <string.h>
 
 
