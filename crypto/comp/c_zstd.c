@@ -490,7 +490,7 @@ static const BIO_METHOD bio_meth_zstd = {
     .ctrl = bio_zstd_ctrl,
     .create = bio_zstd_new,
     .destroy = bio_zstd_free,
-    .callback_ctrl = bio_zstd_callback_ctrl
+    .callback_ctrl = bio_zstd_callback_ctrl,
     .bsendmmsg = NULL,
     .brecvmmsg = NULL,
 };
