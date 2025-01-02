@@ -99,7 +99,7 @@ void spawn_loop(const char *prog)
                     killall(1, kidpids);
                 }
                 if (status != 0) {
-                    trace_log_message(OSSL_TRACE_CATEGORY_HTTP, prog,
+                    trace_log_message(prog,
                             "child pid %ld, exit %d", (long)fpid, status);
                     OSSL_sleep(1000);
                 }
