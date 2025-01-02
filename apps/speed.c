@@ -144,51 +144,60 @@ static const int aead_lengths_list[] = {
 #define START   0
 #define STOP    1
 
-typedef struct testdsa_st {
-    unsigned char *priv;
-    unsigned char *pub;
-    unsigned char *p;
-    unsigned char *g;
-    unsigned char *q;
-    int priv_l;
-    int pub_l;
-    int p_l;
-    int g_l;
-    int q_l;
-} testdsa;
+struct testdsa_st {
+    const unsigned char *priv;
+    const unsigned char *pub;
+    const unsigned char *p;
+    const unsigned char *q;
+    const unsigned char *g;
+    size_t priv_l;
+    size_t pub_l;
+    size_t p_l;
+    size_t q_l;
+    size_t g_l;
+};
 
-#define set_dsa_ptr(st, bits) \
-    do { \
-        st.priv = dsa##bits##_priv; \
-        st.pub = dsa##bits##_pub; \
-        st.p = dsa##bits##_p; \
-        st.g = dsa##bits##_g; \
-        st.q = dsa##bits##_q; \
-        st.priv_l = sizeof(dsa##bits##_priv); \
-        st.pub_l = sizeof(dsa##bits##_pub); \
-        st.p_l = sizeof(dsa##bits##_p); \
-        st.g_l = sizeof(dsa##bits##_g); \
-        st.q_l = sizeof(dsa##bits##_q); \
-    } while (0)
+static const struct testdsa_st dsa1024 = {
+    .priv = dsa1024_priv,
+    .pub = dsa1024_pub,
+    .p = dsa1024_p,
+    .q = dsa1024_q,
+    .g = dsa1024_g,
+    .priv_l = sizeof(dsa1024_priv),
+    .pub_l = sizeof(dsa1024_pub),
+    .p_l = sizeof(dsa1024_p),
+    .q_l = sizeof(dsa1024_q),
+    .g_l = sizeof(dsa1024_g),
+};
+
+static const struct testdsa_st dsa2048 = {
+    .priv = dsa2048_priv,
+    .pub = dsa2048_pub,
+    .p = dsa2048_p,
+    .q = dsa2048_q,
+    .g = dsa2048_g,
+    .priv_l = sizeof(dsa2048_priv),
+    .pub_l = sizeof(dsa2048_pub),
+    .p_l = sizeof(dsa2048_p),
+    .q_l = sizeof(dsa2048_q),
+    .g_l = sizeof(dsa2048_g),
+};
 
 static EVP_PKEY *get_dsa(int dsa_bits)
 {
     EVP_PKEY *pkey = NULL;
     BIGNUM *priv_key, *pub_key, *p, *q, *g;
     EVP_PKEY_CTX *pctx;
-    testdsa dsa_t;
+    const struct testdsa_st *dsa;
     OSSL_PARAM_BLD *tmpl = NULL;
     OSSL_PARAM *params = NULL;
 
     switch (dsa_bits) {
-    case 512:
-        set_dsa_ptr(dsa_t, 512);
-        break;
     case 1024:
-        set_dsa_ptr(dsa_t, 1024);
+        dsa = &dsa1024;
         break;
     case 2048:
-        set_dsa_ptr(dsa_t, 2048);
+        dsa = &dsa2048;
         break;
     default:
         return NULL;
@@ -197,26 +206,21 @@ static EVP_PKEY *get_dsa(int dsa_bits)
     if ((pctx = EVP_PKEY_CTX_new_from_name(NULL, "DSA", NULL)) == NULL)
         return NULL;
 
-    priv_key = BN_bin2bn(dsa_t.priv, dsa_t.priv_l, NULL);
-    pub_key = BN_bin2bn(dsa_t.pub, dsa_t.pub_l, NULL);
-    p = BN_bin2bn(dsa_t.p, dsa_t.p_l, NULL);
-    q = BN_bin2bn(dsa_t.q, dsa_t.q_l, NULL);
-    g = BN_bin2bn(dsa_t.g, dsa_t.g_l, NULL);
+    priv_key = BN_bin2bn(dsa->priv, dsa->priv_l, NULL);
+    pub_key = BN_bin2bn(dsa->pub, dsa->pub_l, NULL);
+    p = BN_bin2bn(dsa->p, dsa->p_l, NULL);
+    q = BN_bin2bn(dsa->q, dsa->q_l, NULL);
+    g = BN_bin2bn(dsa->g, dsa->g_l, NULL);
     if (priv_key == NULL || pub_key == NULL || p == NULL || q == NULL
         || g == NULL) {
         goto err;
     }
     if ((tmpl = OSSL_PARAM_BLD_new()) == NULL
-        || !OSSL_PARAM_BLD_push_BN(tmpl, OSSL_PKEY_PARAM_FFC_P,
-                                   p)
-        || !OSSL_PARAM_BLD_push_BN(tmpl, OSSL_PKEY_PARAM_FFC_Q,
-                                   q)
-        || !OSSL_PARAM_BLD_push_BN(tmpl, OSSL_PKEY_PARAM_FFC_G,
-                                   g)
-        || !OSSL_PARAM_BLD_push_BN(tmpl, OSSL_PKEY_PARAM_PRIV_KEY,
-                                   priv_key)
-        || !OSSL_PARAM_BLD_push_BN(tmpl, OSSL_PKEY_PARAM_PUB_KEY,
-                                   pub_key)
+        || !OSSL_PARAM_BLD_push_BN(tmpl, OSSL_PKEY_PARAM_FFC_P, p)
+        || !OSSL_PARAM_BLD_push_BN(tmpl, OSSL_PKEY_PARAM_FFC_Q, q)
+        || !OSSL_PARAM_BLD_push_BN(tmpl, OSSL_PKEY_PARAM_FFC_G, g)
+        || !OSSL_PARAM_BLD_push_BN(tmpl, OSSL_PKEY_PARAM_PRIV_KEY, priv_key)
+        || !OSSL_PARAM_BLD_push_BN(tmpl, OSSL_PKEY_PARAM_PUB_KEY, pub_key)
         || (params = OSSL_PARAM_BLD_to_param(tmpl)) == NULL)
         goto err;
 
