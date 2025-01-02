@@ -28,18 +28,20 @@ static long linebuffer_callback_ctrl(BIO *h, int cmd, BIO_info_cb *fp);
 /* #define DEBUG */
 
 static const BIO_METHOD methods_linebuffer = {
-    BIO_TYPE_LINEBUFFER,
-    "linebuffer",
-    bwrite_conv,
-    linebuffer_write,
-    bread_conv,
-    linebuffer_read,
-    linebuffer_puts,
-    linebuffer_gets,
-    linebuffer_ctrl,
-    linebuffer_new,
-    linebuffer_free,
-    linebuffer_callback_ctrl,
+    .type = BIO_TYPE_LINEBUFFER,
+    .name = "linebuffer",
+    .bwrite = bwrite_conv,
+    .bwrite_old = linebuffer_write,
+    .bread = bread_conv,
+    .bread_old = linebuffer_read,
+    .bputs = linebuffer_puts,
+    .bgets = linebuffer_gets,
+    .ctrl = linebuffer_ctrl,
+    .create = linebuffer_new,
+    .destroy = linebuffer_free,
+    .callback_ctrl = linebuffer_callback_ctrl,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 const BIO_METHOD *BIO_f_linebuffer(void)

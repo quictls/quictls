@@ -17,19 +17,22 @@ static int null_read(BIO *h, char *buf, int size);
 static int null_puts(BIO *h, const char *str);
 static int null_gets(BIO *h, char *str, int size);
 static long null_ctrl(BIO *h, int cmd, long arg1, void *arg2);
+
 static const BIO_METHOD null_method = {
-    BIO_TYPE_NULL,
-    "NULL",
-    bwrite_conv,
-    null_write,
-    bread_conv,
-    null_read,
-    null_puts,
-    null_gets,
-    null_ctrl,
-    NULL,
-    NULL,
-    NULL,                     /* null_callback_ctrl */
+    .type = BIO_TYPE_NULL,
+    .name = "NULL",
+    .bwrite = bwrite_conv,
+    .bwrite_old = null_write,
+    .bread = bread_conv,
+    .bread_old = null_read,
+    .bputs = null_puts,
+    .bgets = null_gets,
+    .ctrl = null_ctrl,
+    .create = NULL,
+    .destroy = NULL,
+    .callback_ctrl = NULL,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 const BIO_METHOD *BIO_s_null(void)

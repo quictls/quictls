@@ -58,18 +58,20 @@ static int fd_free(BIO *data);
 int BIO_fd_should_retry(int s);
 
 static const BIO_METHOD methods_fdp = {
-    BIO_TYPE_FD,
-    "file descriptor",
-    bwrite_conv,
-    fd_write,
-    bread_conv,
-    fd_read,
-    fd_puts,
-    fd_gets,
-    fd_ctrl,
-    fd_new,
-    fd_free,
-    NULL,                       /* fd_callback_ctrl */
+    .type = BIO_TYPE_FD,
+    .name = "file descriptor",
+    .bwrite = bwrite_conv,
+    .bwrite_old = fd_write,
+    .bread = bread_conv,
+    .bread_old = fd_read,
+    .bputs = fd_puts,
+    .bgets = fd_gets,
+    .ctrl = fd_ctrl,
+    .create = fd_new,
+    .destroy = fd_free,
+    .callback_ctrl = NULL,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 const BIO_METHOD *BIO_s_fd(void)
