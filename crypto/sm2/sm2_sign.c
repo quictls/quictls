@@ -173,7 +173,7 @@ static BIGNUM *sm2_compute_msg_hash(const EVP_MD *digest,
     }
 
     if (!ossl_sm2_compute_z_digest(z, fetched_digest, id, id_len, key)) {
-        /* SM2err already called */
+        /* ERR_raise already called */
         goto done;
     }
 
@@ -407,7 +407,7 @@ ECDSA_SIG *ossl_sm2_do_sign(const EC_KEY *key,
 
     e = sm2_compute_msg_hash(digest, key, id, id_len, msg, msg_len);
     if (e == NULL) {
-        /* SM2err already called */
+        /* ERR_raise already called */
         goto done;
     }
 
@@ -430,7 +430,7 @@ int ossl_sm2_do_verify(const EC_KEY *key,
 
     e = sm2_compute_msg_hash(digest, key, id, id_len, msg, msg_len);
     if (e == NULL) {
-        /* SM2err already called */
+        /* ERR_raise already called */
         goto done;
     }
 

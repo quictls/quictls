@@ -88,15 +88,15 @@ IF[{- $config{target} =~ /^(?:Cygwin|mingw|VC-|BC-)/ -}]
 ENDIF
 
 # This file sets the build directory up for pkg-config
-GENERATE[libcrypto.pc]=exporters/pkg-config/libcrypto.pc.in
+GENERATE[libcrypto.pc]=exporters/libcrypto.pc.in
 DEPEND[libcrypto.pc]=builddata.pm
-GENERATE[libssl.pc]=exporters/pkg-config/libssl.pc.in
+GENERATE[libssl.pc]=exporters/libssl.pc.in
 DEPEND[libssl.pc]=builddata.pm
-GENERATE[openssl.pc]=exporters/pkg-config/openssl.pc.in
+GENERATE[openssl.pc]=exporters/openssl.pc.in
 DEPEND[openssl.pc]=builddata.pm
 DEPEND[openssl.pc]=libcrypto.pc libssl.pc
 
-GENERATE[builddata.pm]=util/mkinstallvars.pl \
+GENERATE[builddata.pm]=exporters/mkinstalldata.pl \
     PREFIX=. BINDIR=apps LIBDIR= INCLUDEDIR=include APPLINKDIR=ms \
     ENGINESDIR=engines MODULESDIR=providers \
     "VERSION=$(VERSION)" "LDLIBS=$(LIB_EX_LIBS)"
