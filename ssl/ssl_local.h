@@ -1085,6 +1085,11 @@ struct ssl_ctx_st {
     SSL_CTX_keylog_cb_func keylog_callback;
 
     /*
+     * Private flag for internal key logging based on SSLKEYLOG env
+     */
+    uint32_t do_sslkeylog;
+
+    /*
      * The maximum number of bytes advertised in session tickets that can be
      * sent as early data.
      */
