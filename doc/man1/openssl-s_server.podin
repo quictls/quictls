@@ -33,7 +33,6 @@ B<openssl> B<s_server>
 [B<-dkey> I<filename>|I<uri>]
 [B<-dkeyform> B<DER>|B<PEM>|B<P12>|B<ENGINE>]
 [B<-dpass> I<val>]
-[B<-nbio_test>]
 [B<-crlf>]
 [B<-debug>]
 [B<-msg>]
@@ -299,10 +298,6 @@ See L<openssl-format-options(1)> for details.
 The passphrase for the additional private key and certificate.
 For more information about the format of I<val>,
 see L<openssl-passphrase-options(1)>.
-
-=item B<-nbio_test>
-
-Tests non blocking I/O.
 
 =item B<-crlf>
 

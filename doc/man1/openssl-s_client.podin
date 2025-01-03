@@ -19,7 +19,6 @@ B<openssl> B<s_client>
 [B<-unix> I<path>]
 [B<-4>]
 [B<-6>]
-[B<-quic>]
 [B<-servername> I<name>]
 [B<-noservername>]
 [B<-verify> I<depth>]
@@ -63,7 +62,6 @@ B<openssl> B<s_client>
 [B<-keymatexport> I<label>]
 [B<-keymatexportlen> I<len>]
 [B<-msgfile> I<filename>]
-[B<-nbio_test>]
 [B<-state>]
 [B<-nbio>]
 [B<-crlf>]
@@ -208,11 +206,6 @@ Use IPv4 only.
 =item B<-6>
 
 Use IPv6 only.
-
-=item B<-quic>
-
-Connect using the QUIC protocol. If specified then the B<-alpn> option must also
-be provided.
 
 =item B<-servername> I<name>
 
@@ -492,10 +485,6 @@ Show verbose trace output of protocol messages.
 =item B<-msgfile> I<filename>
 
 File to send output of B<-msg> or B<-trace> to, default standard output.
-
-=item B<-nbio_test>
-
-Tests nonblocking I/O
 
 =item B<-nbio>
 

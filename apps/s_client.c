@@ -437,7 +437,7 @@ typedef enum OPTION_choice {
     OPT_SSL_CLIENT_ENGINE, OPT_IGN_EOF, OPT_NO_IGN_EOF,
     OPT_DEBUG, OPT_TLSEXTDEBUG, OPT_STATUS, OPT_WDEBUG,
     OPT_MSG, OPT_MSGFILE, OPT_ENGINE, OPT_TRACE, OPT_SECURITY_DEBUG,
-    OPT_SECURITY_DEBUG_VERBOSE, OPT_SHOWCERTS, OPT_NBIO_TEST, OPT_STATE,
+    OPT_SECURITY_DEBUG_VERBOSE, OPT_SHOWCERTS, OPT_STATE,
     OPT_PSK_IDENTITY, OPT_PSK, OPT_PSK_SESS,
     OPT_SSL3, OPT_SSL_CONFIG,
     OPT_TLS1_3, OPT_TLS1_2, OPT_TLS1_1, OPT_TLS1, OPT_DTLS, OPT_DTLS1,
@@ -580,7 +580,6 @@ const OPTIONS s_client_options[] = {
     {"msg", OPT_MSG, '-', "Show protocol messages"},
     {"msgfile", OPT_MSGFILE, '>',
      "File to send output of -msg or -trace, instead of stdout"},
-    {"nbio_test", OPT_NBIO_TEST, '-', "More ssl protocol testing"},
     {"state", OPT_STATE, '-', "Print the ssl states"},
     {"keymatexport", OPT_KEYMATEXPORT, 's',
      "Export keying material using label"},
@@ -811,7 +810,7 @@ int s_client_main(int argc, char **argv)
     int nointeractive = 0;
     int sdebug = 0;
     int reconnect = 0, verify = SSL_VERIFY_NONE, vpmtouched = 0;
-    int ret = 1, in_init = 1, i, nbio_test = 0, sock = -1, k, width, state = 0;
+    int ret = 1, in_init = 1, i, sock = -1, k, width, state = 0;
     int sbuf_len, sbuf_off, cmdmode = USER_DATA_MODE_BASIC;
     int socket_family = AF_UNSPEC, socket_type = SOCK_STREAM, protocol = 0;
     int starttls_proto = PROTO_OFF, crl_format = FORMAT_UNDEF, crl_download = 0;
@@ -1142,9 +1141,6 @@ int s_client_main(int argc, char **argv)
             break;
         case OPT_SHOWCERTS:
             c_showcerts = 1;
-            break;
-        case OPT_NBIO_TEST:
-            nbio_test = 1;
             break;
         case OPT_STATE:
             state = 1;
@@ -2058,18 +2054,6 @@ int s_client_main(int argc, char **argv)
     if (tfo) {
         (void)BIO_set_conn_address(sbio, peer_addr);
         (void)BIO_set_tfo(sbio, 1);
-    }
-
-    if (nbio_test) {
-        BIO *test;
-
-        test = BIO_new(BIO_f_nbio_test());
-        if (test == NULL) {
-            BIO_printf(bio_err, "Unable to create BIO\n");
-            BIO_free(sbio);
-            goto shut;
-        }
-        sbio = BIO_push(test, sbio);
     }
 
     if (c_debug) {

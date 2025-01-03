@@ -2863,7 +2863,6 @@ EC_POINT_point2buf                      2998	3_0_0	EXIST::FUNCTION:EC
 RSA_padding_add_PKCS1_OAEP_mgf1         2999	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
 COMP_CTX_get_type                       3000	3_0_0	EXIST::FUNCTION:COMP
 TS_RESP_CTX_set_status_info             3001	3_0_0	EXIST::FUNCTION:TS
-BIO_f_nbio_test                         3002	3_0_0	EXIST::FUNCTION:
 SEED_ofb128_encrypt                     3003	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,SEED
 d2i_RSAPrivateKey_bio                   3004	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0
 DH_KDF_X9_42                            3005	3_0_0	EXIST::FUNCTION:DEPRECATEDIN_3_0,DH
