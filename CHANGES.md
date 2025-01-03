@@ -38,7 +38,7 @@ separate directory. Perl is optional on intalled systems.
 system were replaced with short custom scripts. Perl is still required
 to configure and set up the build system.
 
-- Removed the `-nbio-test` flag from the client and server apps, and
+- Removed the `-nbio_test` flag from the client and server apps, and
 removed the undocumented and otherwise unused "test NB IO" BIO.
 
 - Several API changes were made:
