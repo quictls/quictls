@@ -77,7 +77,7 @@ If this variable is set, then the library will record all secrets produced
 by SSL/TLS connections into that file.
 
 This feature only works if the library is compiled with the B<enable-keylog>
-flag; it is disabled by default.  Note that support for this feature, and
+flag; it is disabled by default because support for this feature, and
 its use, pose a security risk.  By recording the keys exchanged during
 an SSL/TLS session any party with access to the file can decrypt all of
 the traffic sent during that session.
