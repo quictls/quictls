@@ -54,18 +54,20 @@ static void BIO_ACCEPT_free(BIO_ACCEPT *a);
 # define ACPT_S_OK                       6
 
 static const BIO_METHOD methods_acceptp = {
-    BIO_TYPE_ACCEPT,
-    "socket accept",
-    bwrite_conv,
-    acpt_write,
-    bread_conv,
-    acpt_read,
-    acpt_puts,
-    NULL,                       /* connect_gets,         */
-    acpt_ctrl,
-    acpt_new,
-    acpt_free,
-    NULL,                       /* connect_callback_ctrl */
+    .type = BIO_TYPE_ACCEPT,
+    .name = "socket accept",
+    .bwrite = bwrite_conv,
+    .bwrite_old = acpt_write,
+    .bread = bread_conv,
+    .bread_old = acpt_read,
+    .bputs = acpt_puts,
+    .bgets = NULL,
+    .ctrl = acpt_ctrl,
+    .create = acpt_new,
+    .destroy = acpt_free,
+    .callback_ctrl = NULL,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 const BIO_METHOD *BIO_s_accept(void)

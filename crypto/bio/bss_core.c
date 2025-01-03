@@ -105,18 +105,20 @@ static int bio_core_free(BIO *bio)
 }
 
 static const BIO_METHOD corebiometh = {
-    BIO_TYPE_CORE_TO_PROV,
-    "BIO to Core filter",
-    bio_core_write_ex,
-    NULL,
-    bio_core_read_ex,
-    NULL,
-    bio_core_puts,
-    bio_core_gets,
-    bio_core_ctrl,
-    bio_core_new,
-    bio_core_free,
-    NULL,
+    .type = BIO_TYPE_CORE_TO_PROV,
+    .name = "BIO to Core filter",
+    .bwrite = bio_core_write_ex,
+    .bwrite_old = NULL,
+    .bread = bio_core_read_ex,
+    .bread_old = NULL,
+    .bputs = bio_core_puts,
+    .bgets = bio_core_gets,
+    .ctrl = bio_core_ctrl,
+    .create = bio_core_new,
+    .destroy = bio_core_free,
+    .callback_ctrl = NULL,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 const BIO_METHOD *BIO_s_core(void)
