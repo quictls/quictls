@@ -20,7 +20,7 @@ SSL_CTX_set_keylog_callback() sets the TLS key logging callback. This callback
 is called whenever TLS key material is generated or received, in order to allow
 applications to store this keying material for debugging purposes.
 
-The key logging callback is called with two items: the B<ssl> object
+The key logging callback is called with two arguments: the B<ssl> object
 associated with the connection, and B<line>, a NUL-terminated string
 containing the key material.  The key logging callback should log B<line>,
 followed by a newline.

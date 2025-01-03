@@ -144,7 +144,7 @@ static int hostname_cb(SSL *s, int *al, void *arg)
     return SSL_TLSEXT_ERR_NOACK;
 }
 
-#if !defined(OPENSSL_NO_SSLKEYLOG)
+#if !defined(OPENSSL_NO_SSLKEYLOG_CB)
 static void client_keylog_callback(const SSL *ssl, const char *line)
 {
     int line_length = strlen(line);
@@ -377,7 +377,7 @@ static int test_keylog(void)
     if (!TEST_true(SSL_CTX_get_keylog_callback(cctx) == NULL)
             || !TEST_true(SSL_CTX_get_keylog_callback(sctx) == NULL))
         goto end;
-# ifndef OPENSSL_NO_SSLKEYLOG_CB
+# if !defined(OPENSSL_NO_SSLKEYLOG_CB)
     SSL_CTX_set_keylog_callback(cctx, client_keylog_callback);
     if (!TEST_true(SSL_CTX_get_keylog_callback(cctx)
                    == client_keylog_callback))
@@ -427,7 +427,7 @@ end:
 }
 #endif
 
-#if !defined( OSSL_NO_USABLE_TLS1_3) && !defined(OPENSSL_NO_SSLKEYLOG)
+#if !defined(OSSL_NO_USABLE_TLS1_3) && !defined(OPENSSL_NO_SSLKEYLOG_CB)
 static int test_keylog_no_master_key(void)
 {
     SSL_CTX *cctx = NULL, *sctx = NULL;
@@ -12105,7 +12105,7 @@ int setup_tests(void)
     ADD_ALL_TESTS(test_set_sigalgs, OSSL_NELEM(testsigalgs) * 2);
     ADD_TEST(test_keylog);
 #endif
-#if !defined( OSSL_NO_USABLE_TLS1_3) && !defined(OPENSSL_NO_SSLKEYLOG)
+#if !defined(OSSL_NO_USABLE_TLS1_3) && !defined(OPENSSL_NO_SSLKEYLOG_CB)
     ADD_TEST(test_keylog_no_master_key);
 #endif
     ADD_TEST(test_client_cert_verify_cb);
