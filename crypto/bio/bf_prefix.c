@@ -23,18 +23,20 @@ static int prefix_destroy(BIO *b);
 static long prefix_callback_ctrl(BIO *b, int cmd, BIO_info_cb *fp);
 
 static const BIO_METHOD prefix_meth = {
-    BIO_TYPE_BUFFER,
-    "prefix",
-    prefix_write,
-    NULL,
-    prefix_read,
-    NULL,
-    prefix_puts,
-    prefix_gets,
-    prefix_ctrl,
-    prefix_create,
-    prefix_destroy,
-    prefix_callback_ctrl,
+    .type = BIO_TYPE_BUFFER,
+    .name = "prefix",
+    .bwrite = prefix_write,
+    .bwrite_old = NULL,
+    .bread = prefix_read,
+    .bread_old = NULL,
+    .bputs = prefix_puts,
+    .bgets = prefix_gets,
+    .ctrl = prefix_ctrl,
+    .create = prefix_create,
+    .destroy = prefix_destroy,
+    .callback_ctrl = prefix_callback_ctrl,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 const BIO_METHOD *BIO_f_prefix(void)

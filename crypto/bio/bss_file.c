@@ -39,19 +39,22 @@ static int file_gets(BIO *h, char *str, int size);
 static long file_ctrl(BIO *h, int cmd, long arg1, void *arg2);
 static int file_new(BIO *h);
 static int file_free(BIO *data);
+
 static const BIO_METHOD methods_filep = {
-    BIO_TYPE_FILE,
-    "FILE pointer",
-    bwrite_conv,
-    file_write,
-    bread_conv,
-    file_read,
-    file_puts,
-    file_gets,
-    file_ctrl,
-    file_new,
-    file_free,
-    NULL,                      /* file_callback_ctrl */
+    .type = BIO_TYPE_FILE,
+    .name = "FILE pointer",
+    .bwrite = bwrite_conv,
+    .bwrite_old = file_write,
+    .bread = bread_conv,
+    .bread_old = file_read,
+    .bputs = file_puts,
+    .bgets = file_gets,
+    .ctrl = file_ctrl,
+    .create = file_new,
+    .destroy = file_free,
+    .callback_ctrl = NULL,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 BIO *BIO_new_file(const char *filename, const char *mode)

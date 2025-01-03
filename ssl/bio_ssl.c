@@ -38,18 +38,20 @@ typedef struct bio_ssl_st {
 } BIO_SSL;
 
 static const BIO_METHOD methods_sslp = {
-    BIO_TYPE_SSL,
-    "ssl",
-    ssl_write,
-    NULL,                       /* ssl_write_old, */
-    ssl_read,
-    NULL,                       /* ssl_read_old,  */
-    ssl_puts,
-    NULL,                       /* ssl_gets,      */
-    ssl_ctrl,
-    ssl_new,
-    ssl_free,
-    ssl_callback_ctrl,
+    .type = BIO_TYPE_SSL,
+    .name = "ssl",
+    .bwrite = ssl_write,
+    .bwrite_old = NULL,
+    .bread = ssl_read,
+    .bread_old = NULL,
+    .bputs = ssl_puts,
+    .bgets = NULL,
+    .ctrl = ssl_ctrl,
+    .create = ssl_new,
+    .destroy = ssl_free,
+    .callback_ctrl = ssl_callback_ctrl,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 const BIO_METHOD *BIO_f_ssl(void)

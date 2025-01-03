@@ -42,18 +42,20 @@ typedef struct enc_struct {
 } BIO_ENC_CTX;
 
 static const BIO_METHOD methods_enc = {
-    BIO_TYPE_CIPHER,
-    "cipher",
-    bwrite_conv,
-    enc_write,
-    bread_conv,
-    enc_read,
-    NULL,                       /* enc_puts, */
-    NULL,                       /* enc_gets, */
-    enc_ctrl,
-    enc_new,
-    enc_free,
-    enc_callback_ctrl,
+    .type = BIO_TYPE_CIPHER,
+    .name = "cipher",
+    .bwrite = bwrite_conv,
+    .bwrite_old = enc_write,
+    .bread = bread_conv,
+    .bread_old = enc_read,
+    .bputs = NULL,
+    .bgets = NULL,
+    .ctrl = enc_ctrl,
+    .create = enc_new,
+    .destroy = enc_free,
+    .callback_ctrl = enc_callback_ctrl,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 const BIO_METHOD *BIO_f_cipher(void)
