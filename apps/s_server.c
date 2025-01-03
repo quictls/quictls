@@ -64,7 +64,6 @@ static int accept_socket = -1;
 #define TEST_CERT2      "server2.pem"
 
 static int s_nbio = 0;
-static int s_nbio_test = 0;
 static int s_crlf = 0;
 static SSL_CTX *ctx = NULL;
 static SSL_CTX *ctx2 = NULL;
@@ -687,7 +686,7 @@ typedef enum OPTION_choice {
     OPT_BUILD_CHAIN, OPT_CAFILE, OPT_NOCAFILE, OPT_CHAINCAFILE,
     OPT_VERIFYCAFILE,
     OPT_CASTORE, OPT_NOCASTORE, OPT_CHAINCASTORE, OPT_VERIFYCASTORE,
-    OPT_NBIO, OPT_NBIO_TEST, OPT_IGN_EOF, OPT_NO_IGN_EOF,
+    OPT_NBIO, OPT_IGN_EOF, OPT_NO_IGN_EOF,
     OPT_DEBUG, OPT_TLSEXTDEBUG, OPT_STATUS, OPT_STATUS_VERBOSE,
     OPT_STATUS_TIMEOUT, OPT_PROXY, OPT_NO_PROXY, OPT_STATUS_URL,
     OPT_STATUS_FILE, OPT_MSG, OPT_MSGFILE,
@@ -792,7 +791,6 @@ const OPTIONS s_server_options[] = {
      "Servername for HostName TLS extension"},
     {"servername_fatal", OPT_SERVERNAME_FATAL, '-',
      "On servername mismatch send fatal alert (default warning alert)"},
-    {"nbio_test", OPT_NBIO_TEST, '-', "Test with the non-blocking test bio"},
     {"crlf", OPT_CRLF, '-', "Convert LF from terminal into CRLF"},
     {"quiet", OPT_QUIET, '-', "No server output"},
     {"no_resume_ephemeral", OPT_NO_RESUME_EPHEMERAL, '-',
@@ -1047,7 +1045,7 @@ int s_server_main(int argc, char *argv[])
     local_argv = argv;
 
     ctx = ctx2 = NULL;
-    s_nbio = s_nbio_test = 0;
+    s_nbio = 0;
     www = 0;
     bio_s_out = NULL;
     s_debug = 0;
@@ -1317,9 +1315,6 @@ int s_server_main(int argc, char *argv[])
             break;
         case OPT_NBIO:
             s_nbio = 1;
-            break;
-        case OPT_NBIO_TEST:
-            s_nbio = s_nbio_test = 1;
             break;
         case OPT_IGN_EOF:
             s_ign_eof = 1;
@@ -2442,19 +2437,6 @@ static int sv_body(int s, int stype, int prot, unsigned char *context)
         goto err;
     }
 
-    if (s_nbio_test) {
-        BIO *test;
-
-        test = BIO_new(BIO_f_nbio_test());
-        if (test == NULL) {
-            BIO_printf(bio_err, "Unable to create BIO\n");
-            ret = -1;
-            BIO_free(sbio);
-            goto err;
-        }
-        sbio = BIO_push(test, sbio);
-    }
-
     SSL_set_bio(con, sbio, sbio);
     SSL_set_accept_state(con);
     /* SSL_set_fd(con,s); */
@@ -3062,18 +3044,6 @@ static int www_body(int s, int stype, int prot, unsigned char *context)
         goto err;
     }
 
-    if (s_nbio_test) {
-        BIO *test;
-
-        test = BIO_new(BIO_f_nbio_test());
-        if (test == NULL) {
-            SSL_free(con);
-            BIO_free(sbio);
-            goto err;
-        }
-
-        sbio = BIO_push(test, sbio);
-    }
     SSL_set_bio(con, sbio, sbio);
     SSL_set_accept_state(con);
 

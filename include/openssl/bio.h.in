@@ -52,7 +52,6 @@ extern "C" {
 # define BIO_TYPE_CONNECT        (12|BIO_TYPE_SOURCE_SINK|BIO_TYPE_DESCRIPTOR)
 # define BIO_TYPE_ACCEPT         (13|BIO_TYPE_SOURCE_SINK|BIO_TYPE_DESCRIPTOR)
 
-# define BIO_TYPE_NBIO_TEST      (16|BIO_TYPE_FILTER)/* server proxy BIO */
 # define BIO_TYPE_NULL_FILTER    (17|BIO_TYPE_FILTER)
 # define BIO_TYPE_BIO            (19|BIO_TYPE_SOURCE_SINK)/* half a BIO pair */
 # define BIO_TYPE_LINEBUFFER     (20|BIO_TYPE_FILTER)
@@ -745,7 +744,6 @@ const BIO_METHOD *BIO_f_null(void);
 const BIO_METHOD *BIO_f_buffer(void);
 const BIO_METHOD *BIO_f_readbuffer(void);
 const BIO_METHOD *BIO_f_linebuffer(void);
-const BIO_METHOD *BIO_f_nbio_test(void);
 const BIO_METHOD *BIO_f_prefix(void);
 const BIO_METHOD *BIO_s_core(void);
 # ifndef OPENSSL_NO_SCTP
