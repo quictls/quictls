@@ -32,18 +32,20 @@ typedef struct nbio_test_st {
 } NBIO_TEST;
 
 static const BIO_METHOD methods_nbiof = {
-    BIO_TYPE_NBIO_TEST,
-    "non-blocking IO test filter",
-    bwrite_conv,
-    nbiof_write,
-    bread_conv,
-    nbiof_read,
-    nbiof_puts,
-    nbiof_gets,
-    nbiof_ctrl,
-    nbiof_new,
-    nbiof_free,
-    nbiof_callback_ctrl,
+    .type = BIO_TYPE_NBIO_TEST,
+    .name = "non-blocking IO test filter",
+    .bwrite = bwrite_conv,
+    .bwrite_old = nbiof_write,
+    .bread = bread_conv,
+    .bread_old = nbiof_read,
+    .bputs = nbiof_puts,
+    .bgets = nbiof_gets,
+    .ctrl = nbiof_ctrl,
+    .create = nbiof_new,
+    .destroy = nbiof_free,
+    .callback_ctrl = nbiof_callback_ctrl,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 const BIO_METHOD *BIO_f_nbio_test(void)

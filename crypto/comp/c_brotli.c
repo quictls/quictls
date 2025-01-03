@@ -411,20 +411,22 @@ static long bio_brotli_ctrl(BIO *b, int cmd, long num, void *ptr);
 static long bio_brotli_callback_ctrl(BIO *b, int cmd, BIO_info_cb *fp);
 
 static const BIO_METHOD bio_meth_brotli = {
-    BIO_TYPE_COMP,
-    "brotli",
-    /* TODO: Convert to new style write function */
-    bwrite_conv,
-    bio_brotli_write,
-    /* TODO: Convert to new style read function */
-    bread_conv,
-    bio_brotli_read,
-    NULL,                      /* bio_brotli_puts, */
-    NULL,                      /* bio_brotli_gets, */
-    bio_brotli_ctrl,
-    bio_brotli_new,
-    bio_brotli_free,
-    bio_brotli_callback_ctrl
+    .type = BIO_TYPE_COMP,
+    .name = "brotli",
+        /* TODO: Convert to new style write function */
+    .bwrite = bwrite_conv,
+    .bwrite_old = bio_brotli_write,
+        /* TODO: Convert to new style read function */
+    .bread = bread_conv,
+    .bread_old = bio_brotli_read,
+    .bputs = NULL,
+    .bgets = NULL,
+    .ctrl = bio_brotli_ctrl,
+    .create = bio_brotli_new,
+    .destroy = bio_brotli_free,
+    .callback_ctrl = bio_brotli_callback_ctrl,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 #endif
 

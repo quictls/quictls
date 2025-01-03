@@ -36,18 +36,20 @@ static int bio_make_pair(BIO *bio1, BIO *bio2);
 static void bio_destroy_pair(BIO *bio);
 
 static const BIO_METHOD methods_biop = {
-    BIO_TYPE_BIO,
-    "BIO pair",
-    bwrite_conv,
-    bio_write,
-    bread_conv,
-    bio_read,
-    bio_puts,
-    NULL /* no bio_gets */ ,
-    bio_ctrl,
-    bio_new,
-    bio_free,
-    NULL                        /* no bio_callback_ctrl */
+    .type = BIO_TYPE_BIO,
+    .name = "BIO pair",
+    .bwrite = bwrite_conv,
+    .bwrite_old = bio_write,
+    .bread = bread_conv,
+    .bread_old = bio_read,
+    .bputs = bio_puts,
+    .bgets = NULL,
+    .ctrl = bio_ctrl,
+    .create = bio_new,
+    .destroy = bio_free,
+    .callback_ctrl = NULL,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 const BIO_METHOD *BIO_s_bio(void)

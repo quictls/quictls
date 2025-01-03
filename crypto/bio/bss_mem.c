@@ -24,33 +24,37 @@ static int mem_buf_free(BIO *data);
 static int mem_buf_sync(BIO *h);
 
 static const BIO_METHOD mem_method = {
-    BIO_TYPE_MEM,
-    "memory buffer",
-    bwrite_conv,
-    mem_write,
-    bread_conv,
-    mem_read,
-    mem_puts,
-    mem_gets,
-    mem_ctrl,
-    mem_new,
-    mem_free,
-    NULL,                      /* mem_callback_ctrl */
+    .type = BIO_TYPE_MEM,
+    .name = "memory buffer",
+    .bwrite = bwrite_conv,
+    .bwrite_old = mem_write,
+    .bread = bread_conv,
+    .bread_old = mem_read,
+    .bputs = mem_puts,
+    .bgets = mem_gets,
+    .ctrl = mem_ctrl,
+    .create = mem_new,
+    .destroy = mem_free,
+    .callback_ctrl = NULL,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 static const BIO_METHOD secmem_method = {
-    BIO_TYPE_MEM,
-    "secure memory buffer",
-    bwrite_conv,
-    mem_write,
-    bread_conv,
-    mem_read,
-    mem_puts,
-    mem_gets,
-    mem_ctrl,
-    secmem_new,
-    mem_free,
-    NULL,                      /* mem_callback_ctrl */
+    .type = BIO_TYPE_MEM,
+    .name = "secure memory buffer",
+    .bwrite = bwrite_conv,
+    .bwrite_old = mem_write,
+    .bread = bread_conv,
+    .bread_old = mem_read,
+    .bputs = mem_puts,
+    .bgets = mem_gets,
+    .ctrl = mem_ctrl,
+    .create = secmem_new,
+    .destroy = mem_free,
+    .callback_ctrl = NULL,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 /*
