@@ -365,18 +365,20 @@ static long bio_zlib_ctrl(BIO *b, int cmd, long num, void *ptr);
 static long bio_zlib_callback_ctrl(BIO *b, int cmd, BIO_info_cb *fp);
 
 static const BIO_METHOD bio_meth_zlib = {
-    BIO_TYPE_COMP,
-    "zlib",
-    bwrite_conv,
-    bio_zlib_write,
-    bread_conv,
-    bio_zlib_read,
-    NULL,                      /* bio_zlib_puts, */
-    NULL,                      /* bio_zlib_gets, */
-    bio_zlib_ctrl,
-    bio_zlib_new,
-    bio_zlib_free,
-    bio_zlib_callback_ctrl
+    .type = BIO_TYPE_COMP,
+    .name = "zlib",
+    .bwrite = bwrite_conv,
+    .bwrite_old = bio_zlib_write,
+    .bread = bread_conv,
+    .bread_old = bio_zlib_read,
+    .bputs = NULL,
+    .bgets = NULL,
+    .ctrl = bio_zlib_ctrl,
+    .create = bio_zlib_new,
+    .destroy = bio_zlib_free,
+    .callback_ctrl = bio_zlib_callback_ctrl,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 #endif
 

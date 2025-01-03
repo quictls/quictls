@@ -45,18 +45,20 @@ static int sock_free(BIO *data);
 int BIO_sock_should_retry(int s);
 
 static const BIO_METHOD methods_sockp = {
-    BIO_TYPE_SOCKET,
-    "socket",
-    bwrite_conv,
-    sock_write,
-    bread_conv,
-    sock_read,
-    sock_puts,
-    NULL,                       /* sock_gets,         */
-    sock_ctrl,
-    sock_new,
-    sock_free,
-    NULL,                       /* sock_callback_ctrl */
+    .type = BIO_TYPE_SOCKET,
+    .name = "socket",
+    .bwrite = bwrite_conv,
+    .bwrite_old = sock_write,
+    .bread = bread_conv,
+    .bread_old = sock_read,
+    .bputs = sock_puts,
+    .bgets = NULL,
+    .ctrl = sock_ctrl,
+    .create = sock_new,
+    .destroy = sock_free,
+    .callback_ctrl = NULL,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 const BIO_METHOD *BIO_s_socket(void)
