@@ -67,7 +67,7 @@ The old file currently exists for compatibility with cmake.
 - Imported the sslkeylog build-time configuration option from OpenSSL. If
 enabled, all secrets are logged to the file specified in the `SSLKEYLOGFILE`
 environment variable. *Do not enable or use this in production.*
-Added an additiional `sslkeylog-cb` configuration option that makes
+Added an additional `sslkeylog-cb` configuration option that makes
 the application-specified logging callback work.
 Ported from OpenSSL PR#25297.
 
