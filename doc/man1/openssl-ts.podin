@@ -595,21 +595,10 @@ You could also look at the 'test' directory for more examples.
 
 =head1 BUGS
 
-=over 2
-
-=item *
-
 The file containing the last serial number of the TSA is not
 locked when being read or written. This is a problem if more than one
 instance of L<openssl(1)> is trying to create a timestamp
 response at the same time.
-
-=item *
-
-More testing is needed, I have done only some basic tests (see
-test/testtsa).
-
-=back
 
 =head1 HISTORY
 
