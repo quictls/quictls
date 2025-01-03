@@ -376,7 +376,7 @@ static const BIO_METHOD bio_meth_zlib = {
     .ctrl = bio_zlib_ctrl,
     .create = bio_zlib_new,
     .destroy = bio_zlib_free,
-    .callback_ctrl = bio_zlib_callback_ctrl
+    .callback_ctrl = bio_zlib_callback_ctrl,
     .bsendmmsg = NULL,
     .brecvmmsg = NULL,
 };
