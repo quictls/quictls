@@ -26,6 +26,9 @@
 #include <internal/nelem.h>
 #include <internal/refcount.h>
 #include <internal/ktls.h>
+#ifndef OPENSSL_NO_SSLKEYLOG
+# include <internal/thread_once.h>
+#endif
 
 static int ssl_undefined_function_3(SSL_CONNECTION *sc, unsigned char *r,
                                     unsigned char *s, size_t t, size_t *u)
@@ -6577,22 +6580,14 @@ void SSL_CTX_set_keylog_callback(SSL_CTX *ctx, SSL_CTX_keylog_cb_func cb)
 {
 #ifndef OPENSSL_NO_SSLKEYLOG_CB
     ctx->keylog_callback = cb;
-#else
-    ERR_raise_data(ERR_LIB_SSL, ERR_R_INTERNAL_ERROR,
-                   "Keylogging not supported");
 #endif
 }
 
 SSL_CTX_keylog_cb_func SSL_CTX_get_keylog_callback(const SSL_CTX *ctx)
 {
-#ifndef OPENSSL_NO_SSLKEYLOG_CB
     return ctx->keylog_callback;
-#else
-    return NULL;
-#endif
 }
 
-#if !defined(OPENSSL_NO_SSLKEYLOG_CB) && !defined(OPENSSL_NO_SSLKEYLOG)
 static int nss_keylog_int(const char *prefix,
                           SSL_CONNECTION *sc,
                           const uint8_t *parameter_1,
@@ -6607,6 +6602,7 @@ static int nss_keylog_int(const char *prefix,
     size_t prefix_len;
     SSL_CTX *sctx = SSL_CONNECTION_GET_CTX(sc);
 
+    /* If no logging at all, return early. */
     if (sctx->keylog_callback == NULL && sctx->do_sslkeylog == 0)
         return 1;
 
@@ -6639,15 +6635,15 @@ static int nss_keylog_int(const char *prefix,
     }
     *cursor = '\0';
 
+#if !defined(OPENSSL_NO_SSLKEYLOG)
     if (sctx->do_sslkeylog)
         do_sslkeylog(SSL_CONNECTION_GET_SSL(sc), (const char *)out);
-    if (sctx->keylog_callback != NULL)
+    if (sctx->keylog_callback)
         sctx->keylog_callback(SSL_CONNECTION_GET_SSL(sc), (const char *)out);
     OPENSSL_clear_free(out, out_len);
     return 1;
 
 }
-#endif
 
 int ssl_log_rsa_client_key_exchange(SSL_CONNECTION *sc,
                                     const uint8_t *encrypted_premaster,
@@ -6660,7 +6656,6 @@ int ssl_log_rsa_client_key_exchange(SSL_CONNECTION *sc,
         return 0;
     }
 
-#ifndef OPENSSL_NO_SSLKEYLOG
     /* We only want the first 8 bytes of the encrypted premaster as a tag. */
     return nss_keylog_int("RSA",
                           sc,
@@ -6668,9 +6663,6 @@ int ssl_log_rsa_client_key_exchange(SSL_CONNECTION *sc,
                           8,
                           premaster,
                           premaster_len);
-#else
-    return 0;
-#endif
 }
 
 int ssl_log_secret(SSL_CONNECTION *sc,
@@ -6678,16 +6670,12 @@ int ssl_log_secret(SSL_CONNECTION *sc,
                    const uint8_t *secret,
                    size_t secret_len)
 {
-#ifndef OPENSSL_NO_SSLKEYLOG
     return nss_keylog_int(label,
                           sc,
                           sc->s3.client_random,
                           SSL3_RANDOM_SIZE,
                           secret,
                           secret_len);
-#else
-    return 0;
-#endif
 }
 
 #define SSLV2_CIPHER_LEN    3

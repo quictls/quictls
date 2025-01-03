@@ -1078,20 +1078,21 @@ struct ssl_ctx_st {
 
     CRYPTO_RWLOCK *lock;
 
-# ifndef OPENSSL_NO_SSLKEYLOG_CB
     /*
      * Callback for logging key material for use with debugging tools like
      * Wireshark. The callback should log `line` followed by a newline.
      */
     SSL_CTX_keylog_cb_func keylog_callback;
-# endif
 
-# ifndef OPENSSL_NO_SSLKEYLOG
     /*
      * Private flag for internal key logging based on SSLKEYLOG env
      */
     uint32_t do_sslkeylog;
-# endif
+
+    /*
+     * Private flag for internal key logging based on SSLKEYLOG env
+     */
+    uint32_t do_sslkeylog;
 
     /*
      * The maximum number of bytes advertised in session tickets that can be
