@@ -98,12 +98,14 @@ static char *dhfile = NULL;
 static int is_fips = 0;
 static int fips_ems_check = 0;
 
-#define LOG_BUFFER_SIZE 2048
+#if !defined(OPENSSL_NO_SSLKEYLOG_CB)
+# define LOG_BUFFER_SIZE 2048
 static char server_log_buffer[LOG_BUFFER_SIZE + 1] = {0};
 static size_t server_log_buffer_index = 0;
 static char client_log_buffer[LOG_BUFFER_SIZE + 1] = {0};
 static size_t client_log_buffer_index = 0;
 static int error_writing_log = 0;
+#endif
 
 #ifndef OPENSSL_NO_OCSP
 static const unsigned char orespder[] = "Dummy OCSP Response";
@@ -142,6 +144,17 @@ static int hostname_cb(SSL *s, int *al, void *arg)
         return  SSL_TLSEXT_ERR_OK;
 
     return SSL_TLSEXT_ERR_NOACK;
+}
+
+static void clean_log_space(void)
+{
+#if !defined(OPENSSL_NO_SSLKEYLOG_CB)
+    memset(client_log_buffer, 0, sizeof(client_log_buffer));
+    memset(server_log_buffer, 0, sizeof(server_log_buffer));
+    client_log_buffer_index = 0;
+    server_log_buffer_index = 0;
+    error_writing_log = 0;
+#endif
 }
 
 #if !defined(OPENSSL_NO_SSLKEYLOG_CB)
@@ -350,15 +363,6 @@ static int test_keylog(void)
     SSL_CTX *cctx = NULL, *sctx = NULL;
     SSL *clientssl = NULL, *serverssl = NULL;
     int testresult = 0;
-    struct sslapitest_log_counts expected;
-
-    /* Clean up logging space */
-    memset(&expected, 0, sizeof(expected));
-    memset(client_log_buffer, 0, sizeof(client_log_buffer));
-    memset(server_log_buffer, 0, sizeof(server_log_buffer));
-    client_log_buffer_index = 0;
-    server_log_buffer_index = 0;
-    error_writing_log = 0;
 
     if (!TEST_true(create_ssl_ctx_pair(libctx, TLS_server_method(),
                                        TLS_client_method(),
@@ -378,6 +382,9 @@ static int test_keylog(void)
             || !TEST_true(SSL_CTX_get_keylog_callback(sctx) == NULL))
         goto end;
 # if !defined(OPENSSL_NO_SSLKEYLOG_CB)
+    clean_log_space();
+    struct sslapitest_log_counts expected;
+
     SSL_CTX_set_keylog_callback(cctx, client_keylog_callback);
     if (!TEST_true(SSL_CTX_get_keylog_callback(cctx)
                    == client_keylog_callback))
@@ -438,13 +445,7 @@ static int test_keylog_no_master_key(void)
     unsigned char buf[1];
     size_t readbytes, written;
 
-    /* Clean up logging space */
-    memset(&expected, 0, sizeof(expected));
-    memset(client_log_buffer, 0, sizeof(client_log_buffer));
-    memset(server_log_buffer, 0, sizeof(server_log_buffer));
-    client_log_buffer_index = 0;
-    server_log_buffer_index = 0;
-    error_writing_log = 0;
+    clean_log_space();
 
     if (!TEST_true(create_ssl_ctx_pair(libctx, TLS_server_method(),
                                        TLS_client_method(), TLS1_VERSION, 0,
@@ -500,11 +501,7 @@ static int test_keylog_no_master_key(void)
     SSL_free(clientssl);
     serverssl = clientssl = NULL;
 
-    /* Reset key log */
-    memset(client_log_buffer, 0, sizeof(client_log_buffer));
-    memset(server_log_buffer, 0, sizeof(server_log_buffer));
-    client_log_buffer_index = 0;
-    server_log_buffer_index = 0;
+    clean_log_space();
 
     if (!TEST_true(create_ssl_objects(sctx, cctx, &serverssl,
                                       &clientssl, NULL, NULL))
@@ -10769,11 +10766,7 @@ static int test_quic_api(int tst)
      */
 
     /* Clean up logging space */
-    memset(client_log_buffer, 0, sizeof(client_log_buffer));
-    memset(server_log_buffer, 0, sizeof(server_log_buffer));
-    client_log_buffer_index = 0;
-    server_log_buffer_index = 0;
-    error_writing_log = 0;
+    clean_log_space();
 
     if (!TEST_ptr(sctx = SSL_CTX_new_ex(libctx, NULL, TLS_server_method()))
             || !TEST_true(SSL_CTX_set_quic_method(sctx, &quic_method))

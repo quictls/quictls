@@ -67,9 +67,8 @@ The old file currently exists for compatibility with cmake.
 - Imported the sslkeylog build-time configuration option from OpenSSL. If
 enabled, all secrets are logged to the file specified in the `SSLKEYLOGFILE`
 environment variable. *Do not enable or use this in production.*
-Ported from OpenSSL PR#25297.
-enabled during build and the SSLKEYLOGFILE env var is set, all secrets
-are recorded to that file. *Do not enable or use this in production.*
+Added an additiional `sslkeylog-cb` configuration option that makes
+the application-specified logging callback work.
 Ported from OpenSSL PR#25297.
 
 - Remove support for some old configuration options, `configuration.h`

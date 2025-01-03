@@ -6638,6 +6638,7 @@ static int nss_keylog_int(const char *prefix,
 #if !defined(OPENSSL_NO_SSLKEYLOG)
     if (sctx->do_sslkeylog)
         do_sslkeylog(SSL_CONNECTION_GET_SSL(sc), (const char *)out);
+#endif
     if (sctx->keylog_callback)
         sctx->keylog_callback(SSL_CONNECTION_GET_SSL(sc), (const char *)out);
     OPENSSL_clear_free(out, out_len);
