@@ -12,6 +12,7 @@
 
 # include <openssl/bio.h>
 
-void trace_log_message(const char *prog, const char *fmt, ...);
+void trace_log_message(const char *prog, const char *fmt, ...)
+    ossl_printf__attr__((__format__(printf, 2, 3)));
 
 #endif /* OSSL_APPS_LOG_H */
