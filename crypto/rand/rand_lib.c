@@ -879,9 +879,6 @@ static int random_conf_init(CONF_IMODULE *md, const CONF *cnf)
     RAND_GLOBAL *dgbl = rand_get_global(NCONF_get0_libctx((CONF *)cnf));
     int i, r = 1;
 
-    OSSL_TRACE1(CONF, "Loading random module: section %s\n",
-                CONF_imodule_get_value(md));
-
     /* Value is a section containing RANDOM configuration */
     elist = NCONF_get_section(cnf, CONF_imodule_get_value(md));
     if (elist == NULL) {
@@ -922,16 +919,9 @@ static int random_conf_init(CONF_IMODULE *md, const CONF *cnf)
     return r;
 }
 
-
-static void random_conf_deinit(CONF_IMODULE *md)
-{
-    OSSL_TRACE(CONF, "Cleaned up random\n");
-}
-
 void ossl_random_add_conf_module(void)
 {
-    OSSL_TRACE(CONF, "Adding config module 'random'\n");
-    CONF_module_add("random", random_conf_init, random_conf_deinit);
+    CONF_module_add("random", random_conf_init, NULL);
 }
 
 int RAND_set_DRBG_type(OSSL_LIB_CTX *ctx, const char *drbg, const char *propq,

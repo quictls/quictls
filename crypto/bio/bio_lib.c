@@ -126,7 +126,6 @@ int BIO_free(BIO *a)
     if (CRYPTO_DOWN_REF(&a->references, &ret) <= 0)
         return 0;
 
-    REF_PRINT_COUNT("BIO", a);
     if (ret > 0)
         return 1;
     REF_ASSERT_ISNT(ret < 0);
@@ -191,7 +190,6 @@ int BIO_up_ref(BIO *a)
     if (CRYPTO_UP_REF(&a->references, &i) <= 0)
         return 0;
 
-    REF_PRINT_COUNT("BIO", a);
     REF_ASSERT_ISNT(i < 2);
     return i > 1;
 }

@@ -629,8 +629,7 @@ int ocsp_main(int argc, char **argv)
 #endif
 
     if (acbio != NULL)
-        trace_log_message(-1, prog,
-                          LOG_INFO, "waiting for OCSP client connections...");
+        trace_log_message(prog, "waiting for OCSP client connections...");
 
 redo_accept:
 
@@ -644,8 +643,7 @@ redo_accept:
                 rdb = newrdb;
             } else {
                 free_index(newrdb);
-                trace_log_message(-1, prog,
-                                  LOG_ERR, "error reloading updated index: %s",
+                trace_log_message(prog, "error reloading updated index: %s",
                                   ridx_filename);
             }
         }
@@ -886,7 +884,6 @@ static int index_changed(CA_DB *rdb)
             || rdb->dbst.st_ctime != sb.st_ctime
             || rdb->dbst.st_ino != sb.st_ino
             || rdb->dbst.st_dev != sb.st_dev) {
-            syslog(LOG_INFO, "index file changed, reloading");
             return 1;
         }
     }

@@ -1672,7 +1672,6 @@ int EVP_PKEY_up_ref(EVP_PKEY *pkey)
     if (CRYPTO_UP_REF(&pkey->references, &i) <= 0)
         return 0;
 
-    REF_PRINT_COUNT("EVP_PKEY", pkey);
     REF_ASSERT_ISNT(i < 2);
     return ((i > 1) ? 1 : 0);
 }
@@ -1793,7 +1792,6 @@ void EVP_PKEY_free(EVP_PKEY *x)
         return;
 
     CRYPTO_DOWN_REF(&x->references, &i);
-    REF_PRINT_COUNT("EVP_PKEY", x);
     if (i > 0)
         return;
     REF_ASSERT_ISNT(i < 0);

@@ -508,10 +508,6 @@ MSG_PROCESS_RETURN tls_process_cert_verify(SSL_CONNECTION *s, PACKET *pkt)
         goto err;
     }
 
-    if (SSL_USE_SIGALGS(s))
-        OSSL_TRACE1(TLS, "USING TLSv1.2 HASH %s\n",
-                    md == NULL ? "n/a" : EVP_MD_get0_name(md));
-
     /* Check for broken implementations of GOST ciphersuites */
     /*
      * If key is GOST and len is exactly 64 or 128, it is signature without
@@ -541,9 +537,6 @@ MSG_PROCESS_RETURN tls_process_cert_verify(SSL_CONNECTION *s, PACKET *pkt)
         /* SSLfatal() already called */
         goto err;
     }
-
-    OSSL_TRACE1(TLS, "Using client verify alg %s\n",
-                md == NULL ? "n/a" : EVP_MD_get0_name(md));
 
     if (EVP_DigestVerifyInit_ex(mctx, &pctx,
                                 md == NULL ? NULL : EVP_MD_get0_name(md),

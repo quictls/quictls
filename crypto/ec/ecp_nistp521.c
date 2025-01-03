@@ -1760,7 +1760,6 @@ void EC_nistp521_pre_comp_free(NISTP521_PRE_COMP *p)
         return;
 
     CRYPTO_DOWN_REF(&p->references, &i);
-    REF_PRINT_COUNT("EC_nistp521", p);
     if (i > 0)
         return;
     REF_ASSERT_ISNT(i < 0);

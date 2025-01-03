@@ -120,7 +120,6 @@ OSSL_STORE_open_ex(const char *uri, OSSL_LIB_CTX *libctx, const char *propq,
      */
     for (i = 0; loader_ctx == NULL && i < schemes_n; i++) {
         scheme = schemes[i];
-        OSSL_TRACE1(STORE, "Looking up scheme %s\n", scheme);
 #ifndef OPENSSL_NO_DEPRECATED_3_0
         ERR_set_mark();
         if ((loader = ossl_store_get0_loader_int(scheme)) != NULL) {
@@ -175,16 +174,12 @@ OSSL_STORE_open_ex(const char *uri, OSSL_LIB_CTX *libctx, const char *propq,
          */
         goto err;
 
-    OSSL_TRACE1(STORE, "Found loader for scheme %s\n", scheme);
-
     if (loader_ctx == NULL)
         /*
          * It's assumed that the loader's open() method reports its own
          * errors
          */
         goto err;
-
-    OSSL_TRACE2(STORE, "Opened %s => %p\n", uri, (void *)loader_ctx);
 
     if ((propq != NULL && (propq_copy = OPENSSL_strdup(propq)) == NULL)
         || (ctx = OPENSSL_zalloc(sizeof(*ctx))) == NULL)
@@ -425,9 +420,6 @@ OSSL_STORE_INFO *OSSL_STORE_load(OSSL_STORE_CTX *ctx)
     if (OSSL_STORE_eof(ctx))
         return NULL;
 
-    if (ctx->loader != NULL)
-        OSSL_TRACE(STORE, "Loading next object\n");
-
     if (ctx->cached_info != NULL
         && sk_OSSL_STORE_INFO_num(ctx->cached_info) == 0) {
         sk_OSSL_STORE_INFO_free(ctx->cached_info);
@@ -487,10 +479,6 @@ OSSL_STORE_INFO *OSSL_STORE_load(OSSL_STORE_CTX *ctx)
         }
     }
 
-    if (v != NULL)
-        OSSL_TRACE1(STORE, "Got a %s\n",
-                    OSSL_STORE_INFO_type_string(OSSL_STORE_INFO_get_type(v)));
-
     return v;
 }
 
@@ -516,7 +504,6 @@ int OSSL_STORE_delete(const char *uri, OSSL_LIB_CTX *libctx, const char *propq,
         return 0;
     }
 
-    OSSL_TRACE1(STORE, "Looking up scheme %s\n", scheme);
     fetched_loader = OSSL_STORE_LOADER_fetch(libctx, scheme, propq);
 
     if (fetched_loader != NULL && fetched_loader->p_delete != NULL) {
@@ -528,7 +515,6 @@ int OSSL_STORE_delete(const char *uri, OSSL_LIB_CTX *libctx, const char *propq,
          * It's assumed that the loader's delete() method reports its own
          * errors
          */
-        OSSL_TRACE1(STORE, "Performing URI delete %s\n", uri);
         res = fetched_loader->p_delete(provctx, uri, params,
                                        ossl_pw_passphrase_callback_dec,
                                        &pwdata);
@@ -573,7 +559,6 @@ static int ossl_store_close_it(OSSL_STORE_CTX *ctx)
 
     if (ctx == NULL)
         return 1;
-    OSSL_TRACE1(STORE, "Closing %p\n", (void *)ctx->loader_ctx);
 
     if (ctx->fetched_loader != NULL)
         ret = ctx->loader->p_close(ctx->loader_ctx);
@@ -1021,7 +1006,6 @@ OSSL_STORE_CTX *OSSL_STORE_attach(BIO *bp, const char *scheme,
     if (scheme == NULL)
         scheme = "file";
 
-    OSSL_TRACE1(STORE, "Looking up scheme %s\n", scheme);
     ERR_set_mark();
 #ifndef OPENSSL_NO_DEPRECATED_3_0
     if ((loader = ossl_store_get0_loader_int(scheme)) != NULL)

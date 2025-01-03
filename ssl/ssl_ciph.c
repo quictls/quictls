@@ -810,14 +810,6 @@ static void ssl_cipher_apply_rule(uint32_t cipher_id, uint32_t alg_mkey,
     const SSL_CIPHER *cp;
     int reverse = 0;
 
-    OSSL_TRACE_BEGIN(TLS_CIPHER) {
-        BIO_printf(trc_out,
-                   "Applying rule %d with %08x/%08x/%08x/%08x/%08x %08x (%d)\n",
-                   rule, (unsigned int)alg_mkey, (unsigned int)alg_auth,
-                   (unsigned int)alg_enc, (unsigned int)alg_mac, min_tls,
-                   (unsigned int)algo_strength, (int)strength_bits);
-    }
-
     if (rule == CIPHER_DEL || rule == CIPHER_BUMP)
         reverse = 1;            /* needed to maintain sorting between currently
                                  * deleted ciphers */
@@ -855,18 +847,6 @@ static void ssl_cipher_apply_rule(uint32_t cipher_id, uint32_t alg_mkey,
             if (strength_bits != cp->strength_bits)
                 continue;
         } else {
-            if (trc_out != NULL) {
-                BIO_printf(trc_out,
-                           "\nName: %s:"
-                           "\nAlgo = %08x/%08x/%08x/%08x/%08x Algo_strength = %08x\n",
-                           cp->name,
-                           (unsigned int)cp->algorithm_mkey,
-                           (unsigned int)cp->algorithm_auth,
-                           (unsigned int)cp->algorithm_enc,
-                           (unsigned int)cp->algorithm_mac,
-                           cp->min_tls,
-                           (unsigned int)cp->algo_strength);
-            }
             if (cipher_id != 0 && (cipher_id != cp->id))
                 continue;
             if (alg_mkey && !(alg_mkey & cp->algorithm_mkey))
@@ -886,9 +866,6 @@ static void ssl_cipher_apply_rule(uint32_t cipher_id, uint32_t alg_mkey,
                 && !(algo_strength & SSL_DEFAULT_MASK & cp->algo_strength))
                 continue;
         }
-
-        if (trc_out != NULL)
-            BIO_printf(trc_out, "Action = %d\n", rule);
 
         /* add the cipher if it has not been added yet. */
         if (rule == CIPHER_ADD) {
@@ -938,8 +915,6 @@ static void ssl_cipher_apply_rule(uint32_t cipher_id, uint32_t alg_mkey,
 
     *head_p = head;
     *tail_p = tail;
-
-    OSSL_TRACE_END(TLS_CIPHER);
 }
 
 static int ssl_cipher_strength_sort(CIPHER_ORDER **head_p,
@@ -1663,9 +1638,6 @@ STACK_OF(SSL_CIPHER) *ssl_create_cipher_list(SSL_CTX *ctx,
         }
     }
 
-    OSSL_TRACE_BEGIN(TLS_CIPHER) {
-        BIO_printf(trc_out, "cipher selection:\n");
-    }
     /*
      * The cipher selection for the list is done. The ciphers are added
      * to the resulting precedence to the STACK_OF(SSL_CIPHER).
@@ -1675,15 +1647,11 @@ STACK_OF(SSL_CIPHER) *ssl_create_cipher_list(SSL_CTX *ctx,
             if (!sk_SSL_CIPHER_push(cipherstack, curr->cipher)) {
                 OPENSSL_free(co_list);
                 sk_SSL_CIPHER_free(cipherstack);
-                OSSL_TRACE_CANCEL(TLS_CIPHER);
                 return NULL;
             }
-            if (trc_out != NULL)
-                BIO_printf(trc_out, "<%s>\n", curr->cipher->name);
         }
     }
     OPENSSL_free(co_list);      /* Not needed any longer */
-    OSSL_TRACE_END(TLS_CIPHER);
 
     if (!update_cipher_list_by_id(cipher_list_by_id, cipherstack)) {
         sk_SSL_CIPHER_free(cipherstack);

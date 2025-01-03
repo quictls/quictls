@@ -85,7 +85,6 @@ void EC_ec_pre_comp_free(EC_PRE_COMP *pre)
         return;
 
     CRYPTO_DOWN_REF(&pre->references, &i);
-    REF_PRINT_COUNT("EC_ec", pre);
     if (i > 0)
         return;
     REF_ASSERT_ISNT(i < 0);

@@ -207,10 +207,6 @@ static int dtls_process_record(OSSL_RECORD_LAYER *rl, DTLS_BITMAP *bitmap)
         goto end;
     }
     ERR_clear_last_mark();
-    OSSL_TRACE_BEGIN(TLS) {
-        BIO_printf(trc_out, "dec %zd\n", rr->length);
-        BIO_dump_indent(trc_out, rr->data, rr->length, 4);
-    } OSSL_TRACE_END(TLS);
 
     /* r->length is now the compressed data plus mac */
     if (!rl->use_etm
