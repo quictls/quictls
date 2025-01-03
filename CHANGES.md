@@ -53,6 +53,8 @@ aliases for others: `BUF_strdup`, `BUF_strndup`, `BUF_memdup`,
   - Support for the undocumented and outdated "Strong Extranet ID"
 certificate extension and the "Netscape Certificate Sequence"
 data format have been removed.
+  - The unused and undocumented `BIO_f_linebuffer`, `BIO_f_md`, and
+`BIO_s_log` now return NULL.
 
 - Header files were reorganized:
   - The redundant `#pragma once` and old-style header guards were removed.
