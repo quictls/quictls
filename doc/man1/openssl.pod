@@ -689,8 +689,8 @@ See L<property(7)> for a more detailed description.
 
 The OpenSSL library can be take some configuration parameters from the
 environment.  Some of these variables are listed below.  For information
-about specific commands, see L<openssl-engine(1)>,
-L<openssl-rehash(1)>, and L<tsget(1)>.
+about specific commands, see L<openssl-engine(1)> and
+L<openssl-rehash(1)>.
 
 For information about the use of environment variables in configuration,
 see L<config(5)/ENVIRONMENT>.

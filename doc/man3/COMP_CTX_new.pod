@@ -112,7 +112,7 @@ input. Care should be taken to size output buffers appropriate for both
 compression and expansion.
 
 Compression support and compression algorithms must be enabled and built into
-the library before use. Refer to the INSTALL.md file when configuring OpenSSL.
+the library before use.
 
 ZLIB may be found at L<https://zlib.net>
 

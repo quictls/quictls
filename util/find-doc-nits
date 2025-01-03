@@ -1058,7 +1058,7 @@ my %skips = (
     'digest' => 1,
 );
 
-my %genopts; # generic options parsed from apps/include/opt.h
+my %genopts; # generic options parsed from include/apps/opt.h
 
 # Check the flags of a command and see if everything is in the manpage
 sub checkflags {
@@ -1141,8 +1141,8 @@ if ( $opt_c ) {
 
     # Get the lists of generic options.
     my $active = "";
-    open OFH, catdir($config{sourcedir}, "apps/include/opt.h")
-        or die "Can't open apps/include/opt.h to list generic options, $!";
+    open OFH, catdir($config{sourcedir}, "include/apps/opt.h")
+        or die "Can't open include/apps/opt.h to list generic options, $!";
     while ( <OFH> ) {
         chop;
         push @{ $genopts{$active} }, $1 if $active ne "" && m/^\s+\{\s*"([^"]+)"\s*,\s*OPT_/;

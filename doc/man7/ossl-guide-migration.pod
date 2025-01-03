@@ -520,12 +520,6 @@ Prior to OpenSSL 3.0 the ivlen could be smaller that the required 12 byte length
 using EVP_CIPHER_CTX_ctrl(ctx, EVP_CRTL_AEAD_SET_IVLEN, ivlen, NULL). This resulted
 in an IV that had leading zero padding.
 
-=head2 Installation and Compilation
-
-Please refer to the INSTALL.md file in the top of the distribution for
-instructions on how to build and install OpenSSL 3.0. Please also refer to the
-various platform specific NOTES files for your specific platform.
-
 =head2 Upgrading from OpenSSL 1.1.1
 
 Upgrading to OpenSSL 3.0 from OpenSSL 1.1.1 should be relatively straight
@@ -574,9 +568,7 @@ L</Upgrading from OpenSSL 1.1.1>, the main things to be aware of are:
 
 The build and installation procedure has changed significantly.
 
-Check the file INSTALL.md in the top of the installation for instructions on how
-to build and install OpenSSL for your platform. Also read the various NOTES
-files in the same directory, as applicable for your platform.
+Check the various C<NOTES> and C<README> files.
 
 =item 2.
 

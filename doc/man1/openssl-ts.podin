@@ -595,40 +595,10 @@ You could also look at the 'test' directory for more examples.
 
 =head1 BUGS
 
-=for openssl foreign manual procmail(1) perl(1)
-
-=over 2
-
-=item *
-
-No support for timestamps over SMTP, though it is quite easy
-to implement an automatic e-mail based TSA with L<procmail(1)>
-and L<perl(1)>. HTTP server support is provided in the form of
-a separate apache module. HTTP client support is provided by
-L<tsget(1)>. Pure TCP/IP protocol is not supported.
-
-=item *
-
 The file containing the last serial number of the TSA is not
 locked when being read or written. This is a problem if more than one
 instance of L<openssl(1)> is trying to create a timestamp
-response at the same time. This is not an issue when using the apache
-server module, it does proper locking.
-
-=item *
-
-Look for the FIXME word in the source files.
-
-=item *
-
-The source code should really be reviewed by somebody else, too.
-
-=item *
-
-More testing is needed, I have done only some basic tests (see
-test/testtsa).
-
-=back
+response at the same time.
 
 =head1 HISTORY
 
@@ -642,7 +612,6 @@ The B<-engine> option was deprecated in OpenSSL 3.0.
 =head1 SEE ALSO
 
 L<openssl(1)>,
-L<tsget(1)>,
 L<openssl-req(1)>,
 L<openssl-x509(1)>,
 L<openssl-ca(1)>,

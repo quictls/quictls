@@ -33,9 +33,6 @@ The native builds using Visual C++ have a `VC-*` prefix.
 Requirement details
 -------------------
 
-In addition to the requirements and instructions listed in `INSTALL.md`,
-these are required as well:
-
 ### Perl
 
 We recommend Strawberry Perl, available from <http://strawberryperl.com/>
@@ -92,9 +89,6 @@ Quick start
  7. `nmake test`
 
  8. `nmake install`
-
-For the full installation instructions, or if anything goes wrong at any stage,
-check the INSTALL.md file.
 
 Installation directories
 ------------------------
@@ -199,8 +193,6 @@ MinGW offers an alternative way to build native OpenSSL, by cross compilation.
 
    for the default architecture.
 
-   Apart from that, follow the Unix / Linux instructions in `INSTALL.md`.
-
  * It is also possible to build mingw[64] on Linux or Cygwin.
 
    In this case configure with the corresponding `--cross-compile-prefix=`
@@ -264,8 +256,6 @@ To build OpenSSL using Cygwin, you need to:
    and ensure it is in the $PATH
 
  * Run the Cygwin Bash shell
-
-Apart from that, follow the Unix / Linux instructions in INSTALL.md.
 
 NOTE: `make test` and normal file operations may fail in directories
 mounted as text (i.e. `mount -t c:\somewhere /home`) due to Cygwin
