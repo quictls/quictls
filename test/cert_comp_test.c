@@ -30,7 +30,7 @@
 # define OSSL_NO_USABLE_TLS1_3
 #endif
 
-#if !defined(OSSL_NO_USEABLE_TLS1_3)
+#if !defined(OSSL_NO_USABLE_TLS1_3)
 
 static char *certsdir = NULL;
 static char *cert = NULL;
@@ -248,7 +248,7 @@ OPT_TEST_DECLARE_USAGE("certdir\n")
 
 int setup_tests(void)
 {
-#if !defined(OSSL_NO_USEABLE_TLS1_3)
+#if !defined(OSSL_NO_USABLE_TLS1_3)
     if (!test_skip_common_options()) {
         TEST_error("Error parsing test options\n");
         return 0;
@@ -279,7 +279,7 @@ int setup_tests(void)
 
 void cleanup_tests(void)
 {
-#if !defined(OSSL_NO_USEABLE_TLS1_3)
+#if !defined(OSSL_NO_USABLE_TLS1_3)
     OPENSSL_free(cert);
     OPENSSL_free(privkey);
 #endif
