@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-ossl-guide-migration, migration_guide
+migration-guide
 - OpenSSL Guide: Migrating from older OpenSSL versions
 
 =head1 SYNOPSIS
@@ -81,9 +81,6 @@ L<EVP_EncryptInit_ex(3)>, and L<EVP_DigestInit(3)> functions. In case when
 the requested algorithm is not available, these functions will fail.
 
 See also L</Legacy Algorithms> for information on the legacy provider.
-
-See also L</Completing the installation of the FIPS Module> and
-L</Using the FIPS Module in applications>.
 
 =head3 Low Level APIs
 
@@ -609,24 +606,6 @@ L<TLS1.3 page|https://wiki.openssl.org/index.php/TLS1.3> for further details.
 More details about the breaking changes between OpenSSL versions 1.0.2 and 1.1.0
 can be found on the
 L<OpenSSL 1.1.0 Changes page|https://wiki.openssl.org/index.php/OpenSSL_1.1.0_Changes>.
-
-=head3 Upgrading from the OpenSSL 2.0 FIPS Object Module
-
-The OpenSSL 2.0 FIPS Object Module was a separate download that had to be built
-separately and then integrated into your main OpenSSL 1.0.2 build.
-In OpenSSL 3.0 the FIPS support is fully integrated into the mainline version of
-OpenSSL and is no longer a separate download. For further information see
-L</Completing the installation of the FIPS Module>.
-
-The function calls FIPS_mode() and FIPS_mode_set() have been removed
-from OpenSSL 3.0. You should rewrite your application to not use them.
-See L<fips_module(7)> and L<OSSL_PROVIDER-FIPS(7)> for details.
-
-=head2 Completing the installation of the FIPS Module
-
-The FIPS Module will be built and installed automatically if FIPS support has
-been configured. The current documentation can be found in the
-L<README-FIPS|https://github.com/openssl/openssl/blob/master/README-FIPS.md> file.
 
 =head2 Programming
 
@@ -2251,10 +2230,6 @@ the name of the EVP_PKEY algorithm.
 
 =back
 
-=head2 Using the FIPS Module in applications
-
-See L<fips_module(7)> and L<OSSL_PROVIDER-FIPS(7)> for details.
-
 =head2 OpenSSL command line application changes
 
 =head3 New applications
@@ -2448,10 +2423,6 @@ be set using L<X509_VERIFY_PARAM_set_auth_level(3)> or using the B<-auth_level>
 options of the commands.
 
 =back
-
-=head1 SEE ALSO
-
-L<fips_module(7)>
 
 =head1 HISTORY
 

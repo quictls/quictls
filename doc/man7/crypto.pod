@@ -2,8 +2,7 @@
 
 =head1 NAME
 
-ossl-guide-libcrypto-introduction, crypto
-- OpenSSL Guide: An introduction to libcrypto
+crypto - An introduction to libcrypto
 
 
 =head1 INTRODUCTION
@@ -28,9 +27,6 @@ a "default" implementation suitable for general use, and a "fips" implementation
 which has been validated to FIPS 140 standards for situations where that is
 important. It is also possible that a third party could add additional
 implementations such as in a hardware security module (HSM).
-
-Algorithms are implemented in providers. See
-L<ossl-guide-libraries-introduction(7)> for information about providers.
 
 =head2 Operations
 
@@ -95,8 +91,7 @@ format is currently unsupported.
 =item A property query string
 
 The property query string used to guide selection of the algorithm
-implementation. See
-L<ossl-guide-libraries-introduction(7)/PROPERTY QUERY STRINGS>.
+implementation.
 
 =back
 
@@ -133,8 +128,7 @@ the function that has been called.
 If you perform the same operation many times with the same algorithm then it is
 recommended to use a single explicit fetch of the algorithm and then reuse the
 explicitly fetched algorithm each subsequent time. This will typically be
-faster than implicitly fetching the algorithm every time you use it. See an
-example of Explicit fetching in L</USING ALGORITHMS IN APPLICATIONS>.
+faster than implicitly fetching the algorithm every time you use it.
 
 Prior to OpenSSL 3.0, functions such as EVP_sha256() which return a "const"
 object were used directly to indicate the algorithm to use in various function
@@ -265,99 +259,6 @@ other providers:
  EVP_MD_free(md_whirlpool);
  EVP_MD_free(md_sha256);
 
-
-=head1 USING ALGORITHMS IN APPLICATIONS
-
-Cryptographic algorithms are made available to applications through use of the
-"EVP" APIs. Each of the various operations such as encryption, digesting,
-message authentication codes, etc., have a set of EVP function calls that can
-be invoked to use them. See the L<evp(7)> page for further details.
-
-Most of these follow a common pattern. A "context" object is first created. For
-example for a digest operation you would use an B<EVP_MD_CTX>, and for an
-encryption/decryption operation you would use an B<EVP_CIPHER_CTX>. The
-operation is then initialised ready for use via an "init" function - optionally
-passing in a set of parameters (using the L<OSSL_PARAM(3)> type) to configure how
-the operation should behave. Next data is fed into the operation in a series of
-"update" calls. The operation is finalised using a "final" call which will
-typically provide some kind of output. Finally the context is cleaned up and
-freed.
-
-The following shows a complete example for doing this process for digesting
-data using SHA256. The process is similar for other operations such as
-encryption/decryption, signatures, message authentication codes, etc. Additional
-examples can be found in the OpenSSL demos (see
-L<ossl-guide-libraries-introduction(7)/DEMO APPLICATIONS>).
-
- #include <stdio.h>
- #include <openssl/evp.h>
- #include <openssl/bio.h>
- #include <openssl/err.h>
-
- int main(void)
- {
-     EVP_MD_CTX *ctx = NULL;
-     EVP_MD *sha256 = NULL;
-     const unsigned char msg[] = {
-         0x00, 0x01, 0x02, 0x03
-     };
-     unsigned int len = 0;
-     unsigned char *outdigest = NULL;
-     int ret = 1;
-
-     /* Create a context for the digest operation */
-     ctx = EVP_MD_CTX_new();
-     if (ctx == NULL)
-         goto err;
-
-     /*
-      * Fetch the SHA256 algorithm implementation for doing the digest. We're
-      * using the "default" library context here (first NULL parameter), and
-      * we're not supplying any particular search criteria for our SHA256
-      * implementation (second NULL parameter). Any SHA256 implementation will
-      * do.
-      * In a larger application this fetch would just be done once, and could
-      * be used for multiple calls to other operations such as EVP_DigestInit_ex().
-      */
-     sha256 = EVP_MD_fetch(NULL, "SHA256", NULL);
-     if (sha256 == NULL)
-         goto err;
-
-    /* Initialise the digest operation */
-    if (!EVP_DigestInit_ex(ctx, sha256, NULL))
-        goto err;
-
-     /*
-      * Pass the message to be digested. This can be passed in over multiple
-      * EVP_DigestUpdate calls if necessary
-      */
-     if (!EVP_DigestUpdate(ctx, msg, sizeof(msg)))
-         goto err;
-
-     /* Allocate the output buffer */
-     outdigest = OPENSSL_malloc(EVP_MD_get_size(sha256));
-     if (outdigest == NULL)
-         goto err;
-
-     /* Now calculate the digest itself */
-     if (!EVP_DigestFinal_ex(ctx, outdigest, &len))
-         goto err;
-
-     /* Print out the digest result */
-     BIO_dump_fp(stdout, outdigest, len);
-
-     ret = 0;
-
-  err:
-     /* Clean up all the resources we allocated */
-     OPENSSL_free(outdigest);
-     EVP_MD_free(sha256);
-     EVP_MD_CTX_free(ctx);
-     if (ret != 0)
-        ERR_print_errors_fp(stderr);
-     return ret;
- }
-
 =head1 ENCODING AND DECODING KEYS
 
 Many algorithms require the use of a key. Keys can be generated dynamically
@@ -378,10 +279,6 @@ As well as using encoders/decoders directly there are also some helper functions
 that can be used for certain well known and commonly used formats. For example
 see L<PEM_read_PrivateKey(3)> and L<PEM_write_PrivateKey(3)> for information
 about reading and writing key data from PEM encoded files.
-
-=head1 FURTHER READING
-
-See L<ossl-guide-libssl-introduction(7)> for an introduction to using C<libssl>.
 
 =head1 SEE ALSO
 

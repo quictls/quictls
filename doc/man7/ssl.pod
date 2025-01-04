@@ -2,8 +2,7 @@
 
 =head1 NAME
 
-ossl-guide-libssl-introduction, ssl
-- OpenSSL Guide: An introduction to libssl
+ssl - An introduction to libssl
 
 =head1 INTRODUCTION
 
@@ -11,7 +10,7 @@ The OpenSSL C<libssl> library provides implementations of several secure network
 communications protocols. Specifically it provides SSL/TLS (SSLv3, TLSv1,
 TLSv1.1, TLSv1.2 and TLSv1.3) and DTLS (DTLSv1 and DTLSv1.2).
 The library depends on C<libcrypto> for its underlying cryptographic
-operations (see L<ossl-guide-libcrypto-introduction(7)>).
+operations (see L<crypto(7)>).
 
 The set of APIs supplied by C<libssl> is common across all of these different
 network protocols, so a developer familiar with writing applications using one
@@ -37,8 +36,7 @@ can be uni- or bi-directional.
 
 SSL/TLS only supports one stream of data per connection and it is always
 bi-directional. In this case the B<SSL> object used for the connection also
-represents that stream. See L<ossl-guide-tls-introduction(7)> for more
-information.
+represents that stream.
 
 An B<SSL_CTX> object is used to create the B<SSL> object for the underlying
 connection. A single B<SSL_CTX> object can be used to create many connections
@@ -85,16 +83,9 @@ B<SSL_CTX> or B<SSL>.
 
 =back
 
-=head1 FURTHER READING
-
-See L<ossl-guide-tls-introduction(7)> for an introduction to the SSL/TLS
-protocol.
-
-See L<ossl-guide-libcrypto-introduction(7)> for an introduction to C<libcrypto>.
-
 =head1 SEE ALSO
 
-L<ossl-guide-libcrypto-introduction(7)>, L<ossl-guide-tls-introduction(7)>
+L<crypto(7)>
 
 =head1 COPYRIGHT
 
