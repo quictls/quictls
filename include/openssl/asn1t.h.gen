@@ -886,7 +886,6 @@ DECLARE_ASN1_ITEM(ZLONG)
 
 #generate stack ASN1_VALUE
 
-
 /* Functions used internally by the ASN1 code */
 
 int ASN1_item_ex_new(ASN1_VALUE **pval, const ASN1_ITEM *it);
