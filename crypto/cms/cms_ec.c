@@ -12,9 +12,9 @@
 #include <openssl/cms.h>
 #include <openssl/err.h>
 #include <openssl/decoder.h>
-#include "internal/sizes.h"
-#include "crypto/asn1.h"
-#include "crypto/evp.h"
+#include <internal/sizes.h>
+#include <crypto/asn1.h>
+#include <crypto/evp.h>
 #include "cms_local.h"
 
 static EVP_PKEY *pkey_type2param(int ptype, const void *pval,

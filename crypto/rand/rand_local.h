@@ -16,8 +16,8 @@
 # include <openssl/hmac.h>
 # include <openssl/ec.h>
 # include <openssl/rand.h>
-# include "internal/tsan_assist.h"
-# include "crypto/rand.h"
+# include <internal/tsan_assist.h>
+# include <crypto/rand.h>
 
 /* Default reseed intervals */
 # define PRIMARY_RESEED_INTERVAL                 (1 << 8)

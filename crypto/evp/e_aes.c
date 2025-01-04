@@ -11,7 +11,7 @@
  * This file uses the low-level AES functions (which are deprecated for
  * non-internal use) in order to implement the EVP AES ciphers.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h>
 #include <assert.h>
@@ -22,11 +22,11 @@
 #include <openssl/aes.h>
 #include <openssl/rand.h>
 #include <openssl/cmac.h>
-#include "crypto/evp.h"
-#include "internal/cryptlib.h"
-#include "crypto/modes.h"
-#include "crypto/siv.h"
-#include "crypto/aes_platform.h"
+#include <crypto/evp.h>
+#include <internal/cryptlib.h>
+#include <crypto/modes.h>
+#include <crypto/siv.h>
+#include <crypto/aes_platform.h>
 #include "evp_local.h"
 
 typedef struct {

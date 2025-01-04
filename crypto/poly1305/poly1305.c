@@ -11,7 +11,7 @@
 #include <string.h>
 #include <openssl/crypto.h>
 
-#include "crypto/poly1305.h"
+#include <crypto/poly1305.h>
 
 size_t Poly1305_ctx_size(void)
 {

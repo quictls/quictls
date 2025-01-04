@@ -10,7 +10,7 @@
 /*
  * Low level APIs are deprecated for public use, but still ok for internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h>
 #include <openssl/core.h>
@@ -20,8 +20,8 @@
 #include <openssl/err.h>
 #include <openssl/pem.h>         /* Functions for writing MSBLOB and PVK */
 #include <openssl/dsa.h>
-#include "internal/passphrase.h"
-#include "crypto/rsa.h"
+#include <internal/passphrase.h>
+#include <crypto/rsa.h>
 #include <providers/implementations.h>
 #include <providers/bio.h>
 #include <providers/provider_ctx.h>

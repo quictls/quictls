@@ -11,10 +11,10 @@
  * DSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/obj_mac.h>
-#include "internal/packet.h"
+#include <internal/packet.h>
 #include <providers/der_dsa.h>
 
 #define MD_CASE(name)                                                   \

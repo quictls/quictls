@@ -9,7 +9,7 @@
 
 #include "../ssl_local.h"
 #include "statem_local.h"
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 
 int quic_get_message(SSL_CONNECTION *s, int *mt)
 {

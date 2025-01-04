@@ -19,11 +19,11 @@
 #include <openssl/self_test.h>
 #include <providers/providercommon.h>
 #include <providers/provider_ctx.h>
-#include "internal/cryptlib.h"
-#include "crypto/rand_pool.h"
+#include <internal/cryptlib.h>
+#include <crypto/rand_pool.h>
 #include "drbg_local.h"
 #include <providers/seeding.h>
-#include "crypto/context.h"
+#include <crypto/context.h>
 
 typedef struct crng_test_global_st {
     unsigned char crngt_prev[EVP_MAX_MD_SIZE];

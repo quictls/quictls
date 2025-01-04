@@ -14,7 +14,7 @@
 #include <openssl/fips_names.h>
 #include <openssl/rand.h> /* RAND_get0_public() */
 #include <openssl/proverr.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <providers/implementations.h>
 #include <providers/names.h>
 #include <providers/provider_ctx.h>
@@ -22,10 +22,10 @@
 #include <providers/provider_util.h>
 #include <providers/seeding.h>
 #include <providers/fipscommon.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include "self_test.h"
-#include "crypto/context.h"
-#include "internal/core.h"
+#include <crypto/context.h>
+#include <internal/core.h>
 
 static const char FIPS_DEFAULT_PROPERTIES[] = "provider=fips,fips=yes";
 static const char FIPS_UNAPPROVED_PROPERTIES[] = "provider=fips,fips=no";

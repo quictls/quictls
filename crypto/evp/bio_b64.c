@@ -9,10 +9,10 @@
 
 #include <stdio.h>
 #include <errno.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/buffer.h>
 #include <openssl/evp.h>
-#include "internal/bio.h"
+#include <internal/bio.h>
 
 static int b64_write(BIO *h, const char *buf, int num);
 static int b64_read(BIO *h, char *buf, int size);
@@ -44,18 +44,20 @@ typedef struct b64_struct {
 } BIO_B64_CTX;
 
 static const BIO_METHOD methods_b64 = {
-    BIO_TYPE_BASE64,
-    "base64 encoding",
-    bwrite_conv,
-    b64_write,
-    bread_conv,
-    b64_read,
-    b64_puts,
-    NULL,                       /* b64_gets, */
-    b64_ctrl,
-    b64_new,
-    b64_free,
-    b64_callback_ctrl,
+    .type = BIO_TYPE_BASE64,
+    .name = "base64 encoding",
+    .bwrite = bwrite_conv,
+    .bwrite_old = b64_write,
+    .bread = bread_conv,
+    .bread_old = b64_read,
+    .bputs = b64_puts,
+    .bgets = NULL,
+    .ctrl = b64_ctrl,
+    .create = b64_new,
+    .destroy = b64_free,
+    .callback_ctrl = b64_callback_ctrl,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 const BIO_METHOD *BIO_f_base64(void)

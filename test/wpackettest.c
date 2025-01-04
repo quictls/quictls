@@ -10,7 +10,7 @@
 #include <string.h>
 #include <openssl/buffer.h>
 #include <openssl/rand.h>
-#include "internal/packet.h"
+#include <internal/packet.h>
 #include <test/testutil.h>
 
 static const unsigned char simple1[] = { 0xff };

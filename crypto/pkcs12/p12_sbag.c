@@ -8,10 +8,10 @@
  */
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/pkcs12.h>
 #include "p12_local.h"
-#include "crypto/x509.h"
+#include <crypto/x509.h>
 
 const ASN1_TYPE *PKCS12_SAFEBAG_get0_attr(const PKCS12_SAFEBAG *bag,
                                           int attr_nid)

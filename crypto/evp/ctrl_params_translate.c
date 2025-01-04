@@ -13,7 +13,7 @@
  * configured.  When we drop #legacy EVP_PKEYs, this source should be
  * possible to drop as well.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h>
 
@@ -30,12 +30,12 @@
 #include <openssl/err.h>
 #include <openssl/evperr.h>
 #include <openssl/params.h>
-#include "internal/nelem.h"
-#include "internal/cryptlib.h"
-#include "internal/ffc.h"
-#include "crypto/evp.h"
-#include "crypto/dh.h"
-#include "crypto/ec.h"
+#include <internal/nelem.h>
+#include <internal/cryptlib.h>
+#include <internal/ffc.h>
+#include <crypto/evp.h>
+#include <crypto/dh.h>
+#include <crypto/ec.h>
 
 struct translation_ctx_st;       /* Forwarding */
 struct translation_st;           /* Forwarding */

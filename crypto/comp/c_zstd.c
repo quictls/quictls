@@ -16,11 +16,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <openssl/objects.h>
-#include "internal/comp.h"
+#include <internal/comp.h>
 #include <openssl/err.h>
-#include "crypto/cryptlib.h"
-#include "internal/bio.h"
-#include "internal/thread_once.h"
+#include <crypto/cryptlib.h>
+#include <internal/bio.h>
+#include <internal/thread_once.h>
 #include "comp_local.h"
 
 COMP_METHOD *COMP_zstd(void);
@@ -73,7 +73,7 @@ static ZSTD_customMem zstd_mem_funcs = {
 # endif
 
 # ifdef ZSTD_SHARED
-#  include "internal/dso.h"
+#  include <internal/dso.h>
 
 /* Function pointers */
 typedef ZSTD_CStream* (*createCStream_ft)(void);
@@ -477,20 +477,22 @@ static long bio_zstd_ctrl(BIO *b, int cmd, long num, void *ptr);
 static long bio_zstd_callback_ctrl(BIO *b, int cmd, BIO_info_cb *fp);
 
 static const BIO_METHOD bio_meth_zstd = {
-    BIO_TYPE_COMP,
-    "zstd",
-    /* TODO: Convert to new style write function */
-    bwrite_conv,
-    bio_zstd_write,
-    /* TODO: Convert to new style read function */
-    bread_conv,
-    bio_zstd_read,
-    NULL,                      /* bio_zstd_puts, */
-    NULL,                      /* bio_zstd_gets, */
-    bio_zstd_ctrl,
-    bio_zstd_new,
-    bio_zstd_free,
-    bio_zstd_callback_ctrl
+    .type = BIO_TYPE_COMP,
+    .name = "zstd",
+        /* TODO: Convert to new style write function */
+    .bwrite = bwrite_conv,
+    .bwrite_old = bio_zstd_write,
+        /* TODO: Convert to new style read function */
+    .bread = bread_conv,
+    .bread_old = bio_zstd_read,
+    .bputs = NULL,
+    .bgets = NULL,
+    .ctrl = bio_zstd_ctrl,
+    .create = bio_zstd_new,
+    .destroy = bio_zstd_free,
+    .callback_ctrl = bio_zstd_callback_ctrl,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 #endif
 

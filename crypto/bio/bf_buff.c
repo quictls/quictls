@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include "bio_local.h"
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 
 static int buffer_write(BIO *h, const char *buf, int num);
 static int buffer_read(BIO *h, char *buf, int size);
@@ -23,18 +23,20 @@ static long buffer_callback_ctrl(BIO *h, int cmd, BIO_info_cb *fp);
 #define DEFAULT_BUFFER_SIZE     4096
 
 static const BIO_METHOD methods_buffer = {
-    BIO_TYPE_BUFFER,
-    "buffer",
-    bwrite_conv,
-    buffer_write,
-    bread_conv,
-    buffer_read,
-    buffer_puts,
-    buffer_gets,
-    buffer_ctrl,
-    buffer_new,
-    buffer_free,
-    buffer_callback_ctrl,
+    .type = BIO_TYPE_BUFFER,
+    .name = "buffer",
+    .bwrite = bwrite_conv,
+    .bwrite_old = buffer_write,
+    .bread = bread_conv,
+    .bread_old = buffer_read,
+    .bputs = buffer_puts,
+    .bgets = buffer_gets,
+    .ctrl = buffer_ctrl,
+    .create = buffer_new,
+    .destroy = buffer_free,
+    .callback_ctrl = buffer_callback_ctrl,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 const BIO_METHOD *BIO_f_buffer(void)

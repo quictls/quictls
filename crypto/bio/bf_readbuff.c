@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include "bio_local.h"
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 
 #define DEFAULT_BUFFER_SIZE     4096
 
@@ -31,18 +31,20 @@ static int readbuffer_free(BIO *data);
 static long readbuffer_callback_ctrl(BIO *h, int cmd, BIO_info_cb *fp);
 
 static const BIO_METHOD methods_readbuffer = {
-    BIO_TYPE_BUFFER,
-    "readbuffer",
-    bwrite_conv,
-    readbuffer_write,
-    bread_conv,
-    readbuffer_read,
-    readbuffer_puts,
-    readbuffer_gets,
-    readbuffer_ctrl,
-    readbuffer_new,
-    readbuffer_free,
-    readbuffer_callback_ctrl,
+    .type = BIO_TYPE_BUFFER,
+    .name = "readbuffer",
+    .bwrite = bwrite_conv,
+    .bwrite_old = readbuffer_write,
+    .bread = bread_conv,
+    .bread_old = readbuffer_read,
+    .bputs = readbuffer_puts,
+    .bgets = readbuffer_gets,
+    .ctrl = readbuffer_ctrl,
+    .create = readbuffer_new,
+    .destroy = readbuffer_free,
+    .callback_ctrl = readbuffer_callback_ctrl,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 const BIO_METHOD *BIO_f_readbuffer(void)

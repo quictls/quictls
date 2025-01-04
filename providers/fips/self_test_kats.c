@@ -13,9 +13,9 @@
 #include <openssl/core_names.h>
 #include <openssl/param_build.h>
 #include <openssl/rand.h>
-#include "crypto/rand.h"
-#include "internal/cryptlib.h"
-#include "internal/nelem.h"
+#include <crypto/rand.h>
+#include <internal/cryptlib.h>
+#include <internal/nelem.h>
 #include "self_test.h"
 #include "self_test_data.inc"
 

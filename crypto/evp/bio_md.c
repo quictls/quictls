@@ -11,7 +11,7 @@
 #include <errno.h>
 #include <openssl/buffer.h>
 #include <openssl/evp.h>
-#include "internal/bio.h"
+#include <internal/bio.h>
 
 /*
  * BIO_put and BIO_get both add to the digest, BIO_gets returns the digest
@@ -26,18 +26,20 @@ static int md_free(BIO *data);
 static long md_callback_ctrl(BIO *h, int cmd, BIO_info_cb *fp);
 
 static const BIO_METHOD methods_md = {
-    BIO_TYPE_MD,
-    "message digest",
-    bwrite_conv,
-    md_write,
-    bread_conv,
-    md_read,
-    NULL,                       /* md_puts, */
-    md_gets,
-    md_ctrl,
-    md_new,
-    md_free,
-    md_callback_ctrl,
+    .type = BIO_TYPE_MD,
+    .name = "message digest",
+    .bwrite = bwrite_conv,
+    .bwrite_old = md_write,
+    .bread = bread_conv,
+    .bread_old = md_read,
+    .bputs = NULL,
+    .bgets = md_gets,
+    .ctrl = md_ctrl,
+    .create = md_new,
+    .destroy = md_free,
+    .callback_ctrl = md_callback_ctrl,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 const BIO_METHOD *BIO_f_md(void)

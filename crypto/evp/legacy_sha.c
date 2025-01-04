@@ -11,13 +11,13 @@
  * All SHA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/sha.h>         /* diverse SHA macros */
-#include "internal/sha3.h"       /* KECCAK1600_WIDTH */
-#include "crypto/evp.h"
+#include <internal/sha3.h>       /* KECCAK1600_WIDTH */
+#include <crypto/evp.h>
 /* Used by legacy methods */
-#include "crypto/sha.h"
+#include <crypto/sha.h>
 #include "legacy_meth.h"
 #include "evp_local.h"
 

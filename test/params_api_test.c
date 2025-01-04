@@ -10,8 +10,8 @@
 
 #include <string.h>
 #include <test/testutil.h>
-#include "internal/nelem.h"
-#include "internal/endian.h"
+#include <internal/nelem.h>
+#include <internal/endian.h>
 #include <openssl/params.h>
 #include <openssl/bn.h>
 

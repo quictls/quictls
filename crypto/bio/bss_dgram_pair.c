@@ -10,8 +10,8 @@
 #include <stdio.h>
 #include <errno.h>
 #include "bio_local.h"
-#include "internal/cryptlib.h"
-#include "internal/safe_math.h"
+#include <internal/cryptlib.h>
+#include <internal/safe_math.h>
 
 #if !defined(OPENSSL_NO_SOCK)
 
@@ -197,37 +197,37 @@ static size_t dgram_pair_read_inner(struct bio_dgram_pair_st *b, uint8_t *buf,
 #define BIO_MSG_N(array, n) (*(BIO_MSG *)((char *)(array) + (n)*stride))
 
 static const BIO_METHOD dgram_pair_method = {
-    BIO_TYPE_DGRAM_PAIR,
-    "BIO dgram pair",
-    bwrite_conv,
-    dgram_pair_write,
-    bread_conv,
-    dgram_pair_read,
-    NULL, /* dgram_pair_puts */
-    NULL, /* dgram_pair_gets */
-    dgram_pair_ctrl,
-    dgram_pair_init,
-    dgram_pair_free,
-    NULL, /* dgram_pair_callback_ctrl */
-    dgram_pair_sendmmsg,
-    dgram_pair_recvmmsg,
+    .type = BIO_TYPE_DGRAM_PAIR,
+    .name = "BIO dgram pair",
+    .bwrite = bwrite_conv,
+    .bwrite_old = dgram_pair_write,
+    .bread = bread_conv,
+    .bread_old = dgram_pair_read,
+    .bputs = NULL,
+    .bgets = NULL,
+    .ctrl = dgram_pair_ctrl,
+    .create = dgram_pair_init,
+    .destroy = dgram_pair_free,
+    .callback_ctrl = NULL,
+    .bsendmmsg = dgram_pair_sendmmsg,
+    .brecvmmsg = dgram_pair_recvmmsg,
 };
 
 static const BIO_METHOD dgram_mem_method = {
-    BIO_TYPE_DGRAM_MEM,
-    "BIO dgram mem",
-    bwrite_conv,
-    dgram_pair_write,
-    bread_conv,
-    dgram_mem_read,
-    NULL, /* dgram_pair_puts */
-    NULL, /* dgram_pair_gets */
-    dgram_mem_ctrl,
-    dgram_mem_init,
-    dgram_pair_free,
-    NULL, /* dgram_pair_callback_ctrl */
-    dgram_pair_sendmmsg,
-    dgram_pair_recvmmsg,
+    .type = BIO_TYPE_DGRAM_MEM,
+    .name = "BIO dgram mem",
+    .bwrite = bwrite_conv,
+    .bwrite_old = dgram_pair_write,
+    .bread = bread_conv,
+    .bread_old = dgram_mem_read,
+    .bputs = NULL,
+    .bgets = NULL,
+    .ctrl = dgram_mem_ctrl,
+    .create = dgram_mem_init,
+    .destroy = dgram_pair_free,
+    .callback_ctrl = NULL,
+    .bsendmmsg = dgram_pair_sendmmsg,
+    .brecvmmsg = dgram_pair_recvmmsg,
 };
 
 const BIO_METHOD *BIO_s_dgram_pair(void)

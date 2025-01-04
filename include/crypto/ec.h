@@ -23,7 +23,7 @@ int evp_pkey_ctx_set_ec_param_enc_prov(EVP_PKEY_CTX *ctx, int param_enc);
 # ifndef OPENSSL_NO_EC
 #  include <openssl/core.h>
 #  include <openssl/ec.h>
-#  include "crypto/types.h"
+#  include <crypto/types.h>
 
 /*-
  * Computes the multiplicative inverse of x in the range

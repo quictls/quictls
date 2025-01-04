@@ -23,11 +23,11 @@
  * available.  The digest lengths, block sizes and sizeof(CTX) are used herein
  * for several different digests.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <string.h>
-#include "internal/common.h" /* for CHECK_AND_SKIP_CASE_PREFIX */
+#include <internal/common.h> /* for CHECK_AND_SKIP_CASE_PREFIX */
 
 #include <openssl/engine.h>
 #include <openssl/sha.h>

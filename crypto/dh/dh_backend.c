@@ -11,15 +11,15 @@
  * DH low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/err.h>
 #include <openssl/core_names.h>
 #ifndef FIPS_MODULE
 # include <openssl/x509.h>
 #endif
-#include "internal/param_build_set.h"
-#include "crypto/dh.h"
+#include <internal/param_build_set.h>
+#include <crypto/dh.h>
 #include "dh_local.h"
 
 /*

@@ -11,7 +11,7 @@
 #ifndef OSSL_INTERNAL_PROPERTY_H
 # define OSSL_INTERNAL_PROPERTY_H
 
-# include "internal/cryptlib.h"
+# include <internal/cryptlib.h>
 
 typedef struct ossl_method_store_st OSSL_METHOD_STORE;
 typedef struct ossl_property_list_st OSSL_PROPERTY_LIST;

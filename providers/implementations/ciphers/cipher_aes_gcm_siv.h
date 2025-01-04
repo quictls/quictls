@@ -9,7 +9,7 @@
 
 #include <openssl/aes.h>
 #include <providers/ciphercommon.h>
-#include "crypto/aes_platform.h"
+#include <crypto/aes_platform.h>
 
 #define BLOCK_SIZE 16
 #define NONCE_SIZE 12

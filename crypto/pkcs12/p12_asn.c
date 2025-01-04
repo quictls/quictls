@@ -8,11 +8,11 @@
  */
 
 #include <stdio.h>
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/asn1t.h>
 #include <openssl/pkcs12.h>
 #include "p12_local.h"
-#include "crypto/pkcs7.h"
+#include <crypto/pkcs7.h>
 
 /* PKCS#12 ASN1 module */
 

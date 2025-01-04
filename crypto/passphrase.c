@@ -10,8 +10,8 @@
 #include <openssl/err.h>
 #include <openssl/ui.h>
 #include <openssl/core_names.h>
-#include "internal/cryptlib.h"
-#include "internal/passphrase.h"
+#include <internal/cryptlib.h>
+#include <internal/passphrase.h>
 
 void ossl_pw_clear_passphrase_data(struct ossl_passphrase_data_st *data)
 {

@@ -11,15 +11,15 @@
  * ECDSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h>
 #include <openssl/err.h>
 #include <openssl/obj_mac.h>
 #include <openssl/rand.h>
-#include "crypto/bn.h"
+#include <crypto/bn.h>
 #include "ec_local.h"
-#include "internal/deterministic_nonce.h"
+#include <internal/deterministic_nonce.h>
 
 #define MIN_ECDSA_SIGN_ORDERBITS 64
 /*

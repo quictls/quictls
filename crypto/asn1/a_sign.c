@@ -11,7 +11,7 @@
 #include <time.h>
 #include <sys/types.h>
 
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 
 #include <openssl/bn.h>
 #include <openssl/evp.h>
@@ -19,8 +19,8 @@
 #include <openssl/objects.h>
 #include <openssl/buffer.h>
 #include <openssl/core_names.h>
-#include "crypto/asn1.h"
-#include "crypto/evp.h"
+#include <crypto/asn1.h>
+#include <crypto/evp.h>
 
 #ifndef OPENSSL_NO_DEPRECATED_3_0
 

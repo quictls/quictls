@@ -11,8 +11,8 @@
 #include <errno.h>
 
 #include "bio_local.h"
-#include "internal/bio_tfo.h"
-#include "internal/ktls.h"
+#include <internal/bio_tfo.h>
+#include <internal/ktls.h>
 
 #ifndef OPENSSL_NO_SOCK
 
@@ -74,20 +74,20 @@ static void BIO_CONNECT_free(BIO_CONNECT *a);
 #define BIO_CONN_S_CONNECT_ERROR         7
 
 static const BIO_METHOD methods_connectp = {
-    BIO_TYPE_CONNECT,
-    "socket connect",
-    bwrite_conv,
-    conn_write,
-    bread_conv,
-    conn_read,
-    conn_puts,
-    conn_gets,
-    conn_ctrl,
-    conn_new,
-    conn_free,
-    conn_callback_ctrl,
-    conn_sendmmsg,
-    conn_recvmmsg,
+    .type = BIO_TYPE_CONNECT,
+    .name = "socket connect",
+    .bwrite = bwrite_conv,
+    .bwrite_old = conn_write,
+    .bread = bread_conv,
+    .bread_old = conn_read,
+    .bputs = conn_puts,
+    .bgets = conn_gets,
+    .ctrl = conn_ctrl,
+    .create = conn_new,
+    .destroy = conn_free,
+    .callback_ctrl = conn_callback_ctrl,
+    .bsendmmsg = conn_sendmmsg,
+    .brecvmmsg = conn_recvmmsg,
 };
 
 static int conn_create_dgram_bio(BIO *b, BIO_CONNECT *c)

@@ -11,7 +11,7 @@
 #include <string.h>
 
 #include <openssl/bn.h>
-#include "crypto/asn1_dsa.h"
+#include <crypto/asn1_dsa.h>
 #include <test/testutil.h>
 
 static unsigned char t_dsa_sig[] = {

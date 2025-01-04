@@ -14,8 +14,8 @@
 # include <openssl/core_dispatch.h>
 # include <openssl/core_names.h>
 # include <openssl/evp.h>
-# include "internal/cryptlib.h"
-# include "crypto/modes.h"
+# include <internal/cryptlib.h>
+# include <crypto/modes.h>
 
 # define MAXCHUNK    ((size_t)1 << 30)
 # define MAXBITCHUNK ((size_t)1 << (sizeof(size_t) * 8 - 4))

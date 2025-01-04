@@ -15,7 +15,7 @@
 #include <openssl/rand.h>
 #include <stdio.h>
 #include <string.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <test/testutil.h>
 
 #ifndef OPENSSL_NO_DEPRECATED_3_0

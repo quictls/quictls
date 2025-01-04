@@ -7,10 +7,5 @@
  * https://www.openssl.org/source/license.html
  */
 
-/*
- * The original <openssl/ossl_typ.h> was renamed to <openssl/types.h>
- *
- * This header file only exists for compatibility reasons with older
- * applications which #include <openssl/ossl_typ.h>.
- */
+/* Kept for compatibility with downstream applications. */
 # include <openssl/types.h>

@@ -7,9 +7,9 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/e_os.h"
-#include "internal/sockets.h"
-#include "internal/bio_addr.h"
+#include <internal/e_os.h>
+#include <internal/sockets.h>
+#include <internal/bio_addr.h>
 
 /* BEGIN BIO_ADDRINFO/BIO_ADDR stuff. */
 
@@ -57,9 +57,9 @@ struct bio_addrinfo_st {
 
 /* END BIO_ADDRINFO/BIO_ADDR stuff. */
 
-#include "internal/cryptlib.h"
-#include "internal/bio.h"
-#include "internal/refcount.h"
+#include <internal/cryptlib.h>
+#include <internal/bio.h>
+#include <internal/refcount.h>
 
 typedef struct bio_f_buffer_ctx_struct {
     /*-

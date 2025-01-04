@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include "bio_local.h"
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 
 /*
  * BIO_put and BIO_get both add to the digest, BIO_gets returns the digest
@@ -22,19 +22,22 @@ static int nullf_puts(BIO *h, const char *str);
 static int nullf_gets(BIO *h, char *str, int size);
 static long nullf_ctrl(BIO *h, int cmd, long arg1, void *arg2);
 static long nullf_callback_ctrl(BIO *h, int cmd, BIO_info_cb *fp);
+
 static const BIO_METHOD methods_nullf = {
-    BIO_TYPE_NULL_FILTER,
-    "NULL filter",
-    bwrite_conv,
-    nullf_write,
-    bread_conv,
-    nullf_read,
-    nullf_puts,
-    nullf_gets,
-    nullf_ctrl,
-    NULL,
-    NULL,
-    nullf_callback_ctrl,
+    .type = BIO_TYPE_NULL_FILTER,
+    .name = "NULL filter",
+    .bwrite = bwrite_conv,
+    .bwrite_old = nullf_write,
+    .bread = bread_conv,
+    .bread_old = nullf_read,
+    .bputs = nullf_puts,
+    .bgets = nullf_gets,
+    .ctrl = nullf_ctrl,
+    .create = NULL,
+    .destroy = NULL,
+    .callback_ctrl = nullf_callback_ctrl,
+    .bsendmmsg = NULL,
+    .brecvmmsg = NULL,
 };
 
 const BIO_METHOD *BIO_f_null(void)

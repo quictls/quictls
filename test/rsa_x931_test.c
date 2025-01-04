@@ -7,11 +7,11 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/rsa.h>
 #include <openssl/bn.h>
-#include "crypto/rsa.h"
+#include <crypto/rsa.h>
 #include <test/testutil.h>
 
 static OSSL_PROVIDER *prov_null = NULL;

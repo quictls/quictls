@@ -18,7 +18,7 @@
 #include <openssl/evp.h>
 #include <openssl/objects.h>
 #include <test/testutil.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 struct testdata {
     char *data;             /* TIME string value */

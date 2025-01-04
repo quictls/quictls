@@ -9,7 +9,7 @@
 
 #include <errno.h>
 #include <openssl/err.h>
-#include "internal/time.h"
+#include <internal/time.h>
 
 OSSL_TIME ossl_time_now(void)
 {

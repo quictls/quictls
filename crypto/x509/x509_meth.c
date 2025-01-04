@@ -11,7 +11,7 @@
 #include <time.h>
 #include <errno.h>
 
-#include "internal/cryptlib.h"
+#include <internal/cryptlib.h>
 #include <openssl/asn1.h>
 #include <openssl/x509.h>
 #include <openssl/types.h>

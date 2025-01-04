@@ -11,7 +11,7 @@
  * DSA low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <openssl/core_dispatch.h>
 #include <openssl/core_names.h>
@@ -20,10 +20,10 @@
 #include <providers/providercommon.h>
 #include <providers/implementations.h>
 #include <providers/provider_ctx.h>
-#include "crypto/dsa.h"
-#include "internal/sizes.h"
-#include "internal/nelem.h"
-#include "internal/param_build_set.h"
+#include <crypto/dsa.h>
+#include <internal/sizes.h>
+#include <internal/nelem.h>
+#include <internal/param_build_set.h>
 
 static OSSL_FUNC_keymgmt_new_fn dsa_newdata;
 static OSSL_FUNC_keymgmt_free_fn dsa_freedata;

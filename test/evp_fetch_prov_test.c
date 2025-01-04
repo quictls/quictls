@@ -12,13 +12,13 @@
  * internal use.  Note, that due to symbols not being exported, only the
  * #defines can be accessed.  In this case SHA256_CBLOCK.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <string.h>
 #include <openssl/sha.h>
 #include <openssl/evp.h>
 #include <openssl/provider.h>
-#include "internal/sizes.h"
+#include <internal/sizes.h>
 #include <test/testutil.h>
 
 static char *config_file = NULL;

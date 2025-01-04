@@ -7,7 +7,7 @@ ossl_rsa_set0_all_params, ossl_rsa_get0_all_params
 
 =head1 SYNOPSIS
 
- #include "crypto/rsa.h"
+ #include <crypto/rsa.h>
 
  int ossl_rsa_get0_all_params(RSA *r, STACK_OF(BIGNUM_const) *primes,
                               STACK_OF(BIGNUM_const) *exps,

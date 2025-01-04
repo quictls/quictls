@@ -13,14 +13,14 @@
  * MDC2 low level APIs are deprecated for public use, but still ok for
  * internal use.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 #include <stdio.h>
 #include <string.h>
 
 #include <openssl/mdc2.h>
 #include <test/testutil.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 
 typedef struct {
     const char *input;

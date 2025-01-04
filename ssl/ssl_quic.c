@@ -8,8 +8,8 @@
  */
 
 #include "ssl_local.h"
-#include "internal/cryptlib.h"
-#include "internal/refcount.h"
+#include <internal/cryptlib.h>
+#include <internal/refcount.h>
 
 int SSL_set_quic_transport_params(SSL *ssl, const uint8_t *params,
                                   size_t params_len)

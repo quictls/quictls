@@ -12,7 +12,7 @@
 #include <openssl/x509.h>
 #include <openssl/x509v3.h>
 #include <openssl/pem.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <test/testutil.h>
 
 #ifndef OPENSSL_NO_EC

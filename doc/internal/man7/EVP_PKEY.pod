@@ -6,7 +6,7 @@ EVP_PKEY - an internal description
 
 =head1 SYNOPSIS
 
- #include "crypto/evp.h"
+ #include <crypto/evp.h>
 
  typedef struct evp_pkey_st EVP_PKEY;
 

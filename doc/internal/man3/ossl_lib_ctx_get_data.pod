@@ -9,7 +9,7 @@ ossl_lib_ctx_is_child
 =head1 SYNOPSIS
 
  #include <openssl/types.h>
- #include "internal/cryptlib.h"
+ #include <internal/cryptlib.h>
 
  void *ossl_lib_ctx_get_data(OSSL_LIB_CTX *ctx, int index);
 

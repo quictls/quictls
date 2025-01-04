@@ -12,7 +12,7 @@
 #include <openssl/bio.h>
 #include <openssl/err.h>
 #include <openssl/conf.h>
-#include "internal/nelem.h"
+#include <internal/nelem.h>
 #include <test/testutil.h>
 
 #ifndef OPENSSL_NO_SOCK

@@ -12,7 +12,7 @@
  * use where we're using them to implement the higher level EVP interface, as is
  * the case here.
  */
-#include "internal/deprecated.h"
+#include <internal/deprecated.h>
 
 /* Dispatch functions for AES cipher modes ecb, cbc, ofb, cfb, ctr */
 

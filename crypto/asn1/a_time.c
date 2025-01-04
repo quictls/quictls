@@ -18,9 +18,9 @@
 
 #include <stdio.h>
 #include <time.h>
-#include "crypto/asn1.h"
-#include "crypto/ctype.h"
-#include "internal/cryptlib.h"
+#include <crypto/asn1.h>
+#include <crypto/ctype.h>
+#include <internal/cryptlib.h>
 #include <openssl/asn1t.h>
 #include "asn1_local.h"
 

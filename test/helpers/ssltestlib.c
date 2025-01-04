@@ -9,14 +9,14 @@
 
 #include <string.h>
 
-#include "internal/e_os.h"
-#include "internal/nelem.h"
+#include <internal/e_os.h>
+#include <internal/nelem.h>
 #include <test/ssltestlib.h>
 #include <test/testutil.h>
 
 #if !defined(OPENSSL_NO_KTLS) && !defined(OPENSSL_NO_POSIX_IO) && !defined(OPENSSL_NO_SOCK)
 # define OSSL_USE_SOCKETS 1
-# include "internal/sockets.h"
+# include <internal/sockets.h>
 # include <openssl/bio.h>
 #endif
 

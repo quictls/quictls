@@ -38,6 +38,9 @@ separate directory. Perl is optional on intalled systems.
 system were replaced with short custom scripts. Perl is still required
 to configure and set up the build system.
 
+- Removed the `-nbio_test` flag from the client and server apps, and
+removed the undocumented and otherwise unused "test non-blocking IO" BIO.
+
 - Several API changes were made:
   - The undocumented function `X509_OBJECT_up_ref_count` has been
 made private.
@@ -55,6 +58,8 @@ certificate extension and the "Netscape Certificate Sequence"
 data format have been removed.
   - Remove most of the ERRxxx() macros; engines still use them since their
 library number is dynamic not static.
+  - The unused and undocumented `BIO_f_linebuffer`, `BIO_f_reliable`, and
+`BIO_s_log` now return NULL.
 
 - Header files were reorganized:
   - The redundant `#pragma once` and old-style header guards were removed.

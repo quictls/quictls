@@ -9,8 +9,8 @@
 
 #include <openssl/asn1.h>
 #include <openssl/pem.h>
-#include "internal/sizes.h"
-#include "crypto/evp.h"
+#include <internal/sizes.h>
+#include <crypto/evp.h>
 #include <test/testutil.h>
 
 /* Collected arguments */

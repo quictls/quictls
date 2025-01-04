@@ -9,7 +9,7 @@
 
 #include <string.h>
 #include <openssl/crypto.h>
-#include "crypto/modes.h"
+#include <crypto/modes.h>
 
 #if defined(__GNUC__) && !defined(STRICT_ALIGNMENT)
 typedef size_t size_t_aX __attribute((__aligned__(1)));
