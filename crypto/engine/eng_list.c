@@ -12,7 +12,6 @@
 #define OPENSSL_SUPPRESS_DEPRECATED
 
 #include "eng_local.h"
-#include <internal/sslconf.h>
 
 /*
  * The linked-list of pointers to engine types. engine_list_head incorporates

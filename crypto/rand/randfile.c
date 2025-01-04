@@ -17,7 +17,6 @@
 #include <openssl/crypto.h>
 #include <openssl/rand.h>
 #include <openssl/buffer.h>
-#include <internal/sslconf.h>
 
 #include <sys/types.h>
 #ifndef OPENSSL_NO_POSIX_IO
