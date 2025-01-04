@@ -37,10 +37,8 @@ L<https://wiki.openssl.org/index.php/Binaries>.
 If you build and install OpenSSL from the source code then you should download
 the appropriate files for the version that you want to use from the link given
 above. Extract the contents of the B<tar.gz> archive file that you downloaded
-into an appropriate directory. Inside that archive you will find a file named
-B<INSTALL.md> which will supply detailed instructions on how to build and
-install OpenSSL from source. Make sure you read the contents of that file
-carefully in order to achieve a successful build. In the directory you will also
+into an appropriate directory.
+In the directory you also
 find a set of B<NOTES> files that provide further platform specific information.
 Make sure you carefully read the file appropriate to your platform. As well as
 the platform specific B<NOTES> files there is also a B<NOTES-PERL.md> file that

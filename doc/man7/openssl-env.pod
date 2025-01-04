@@ -18,11 +18,10 @@ the executable is set-user-ID or set-group-ID.
 Specifies the path to a certificate transparency log list.
 See L<CTLOG_STORE_new(3)>.
 
-=item B<OPENSSL>
+=item B<HTTPS_PROXY>, B<HTTP_PROXY>, B<NO_PROXY>
 
-Specifies the path to the B<openssl> executable. Used by
-the B<rehash> script (see L<openssl-rehash(1)/Script Configuration>)
-and by the B<CA.pl> script (see L<CA.pl(1)/NOTES>
+Specify a proxy hostname.
+See L<OSSL_HTTP_parse_url(3)>.
 
 =item B<OPENSSL_CONF>, B<OPENSSL_CONF_INCLUDE>
 
@@ -30,21 +29,10 @@ Specifies the path to a configuration file and the directory for
 included files.
 See L<config(5)>.
 
-=item B<OPENSSL_CONFIG>
-
-Specifies a configuration option and filename for the B<req> and B<ca>
-commands invoked by the B<CA.pl> script.
-See L<CA.pl(1)>.
-
 =item B<OPENSSL_ENGINES>
 
 Specifies the directory from which dynamic engines are loaded.
 See L<openssl-engine(1)>.
-
-=item B<OPENSSL_MALLOC_FD>, B<OPENSSL_MALLOC_FAILURES>
-
-If built with debugging, this allows memory allocation to fail.
-See L<OPENSSL_malloc(3)>.
 
 =item B<OPENSSL_MODULES>
 
@@ -59,6 +47,35 @@ the L<openssl(1)> program also transcodes the command-line parameters
 from the current code page to UTF-8.
 This environment variable is only checked on Microsoft Windows platforms.
 
+=item B<OPENSSL_XXXcap>
+
+OpenSSL supports a number of different algorithm implementations for
+various machines and, by default, it determines which to use based on the
+processor capabilities and run-time feature enquiry.  These environment
+variables can be used to exert more control over this selection process.
+
+The follow architecture-specific environment variables are supported:
+
+=over 4
+
+=item B<OPENSSL_armcap>
+
+=item B<OPENSSL_ia32cap>
+
+=item B<OPENSSL_ppccap>
+
+=item B<OPENSSL_riscvcap>
+
+=item B<OPENSSL_s390xcap>
+
+=item B<OPENSSL_sparcv9cap>
+
+=back
+
+Note that B<OPENSSL_ia32cap> supports both the 32-bit and 64-bit X86
+architectures.
+See L<OPENSSL_ia32cap(3)>, L<OPENSSL_s390xcap(3)>.
+
 =item B<RANDFILE>
 
 The state file for the random number generator.
@@ -69,23 +86,6 @@ See L<RAND_load_file(3)>.
 
 Specify the default directory or file containing CA certificates.
 See L<SSL_CTX_load_verify_locations(3)>.
-
-=item B<TSGET>
-
-Additional arguments for the L<tsget(1)> command.
-
-=item B<OPENSSL_ia32cap>, B<OPENSSL_sparcv9cap>, B<OPENSSL_ppccap>, B<OPENSSL_armcap>, B<OPENSSL_s390xcap>, B<OPENSSL_riscvcap>
-
-OpenSSL supports a number of different algorithm implementations for
-various machines and, by default, it determines which to use based on the
-processor capabilities and run time feature enquiry.  These environment
-variables can be used to exert more control over this selection process.
-See L<OPENSSL_ia32cap(3)>, L<OPENSSL_s390xcap(3)>.
-
-=item B<NO_PROXY>, B<HTTPS_PROXY>, B<HTTP_PROXY>
-
-Specify a proxy hostname.
-See L<OSSL_HTTP_parse_url(3)>.
 
 =back
 
