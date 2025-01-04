@@ -18,7 +18,7 @@ SOURCE[../libssl]=\
         ssl_cert_comp.c \
         tls_depr.c
 
-# For shared builds we need to some othe files in libssl
+# For shared builds we need to include some of the files in libssl.
 SHARED_SOURCE[../libssl]=\
         ../crypto/packet.c ../crypto/time.c ../crypto/getenv.c
 
