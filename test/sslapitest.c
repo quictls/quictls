@@ -146,16 +146,16 @@ static int hostname_cb(SSL *s, int *al, void *arg)
     return SSL_TLSEXT_ERR_NOACK;
 }
 
+#if !defined(OPENSSL_NO_SSLKEYLOG_CB)
 static void clean_log_space(void)
 {
-#if !defined(OPENSSL_NO_SSLKEYLOG_CB)
     memset(client_log_buffer, 0, sizeof(client_log_buffer));
     memset(server_log_buffer, 0, sizeof(server_log_buffer));
     client_log_buffer_index = 0;
     server_log_buffer_index = 0;
     error_writing_log = 0;
-#endif
 }
+#endif
 
 #if !defined(OPENSSL_NO_SSLKEYLOG_CB)
 static void client_keylog_callback(const SSL *ssl, const char *line)
@@ -381,8 +381,8 @@ static int test_keylog(void)
     if (!TEST_true(SSL_CTX_get_keylog_callback(cctx) == NULL)
             || !TEST_true(SSL_CTX_get_keylog_callback(sctx) == NULL))
         goto end;
-    clean_log_space();
 # if !defined(OPENSSL_NO_SSLKEYLOG_CB)
+    clean_log_space();
     struct sslapitest_log_counts expected;
 
     SSL_CTX_set_keylog_callback(cctx, client_keylog_callback);
@@ -10764,9 +10764,6 @@ static int test_quic_api(int tst)
      * test 6/[5] clnt = parameters, srvr = draft
      * test 8/[7] clnt = draft, srvr = parameters
      */
-
-    /* Clean up logging space */
-    clean_log_space();
 
     if (!TEST_ptr(sctx = SSL_CTX_new_ex(libctx, NULL, TLS_server_method()))
             || !TEST_true(SSL_CTX_set_quic_method(sctx, &quic_method))
