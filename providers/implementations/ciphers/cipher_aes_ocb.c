@@ -199,7 +199,7 @@ static int aes_ocb_block_update_internal(PROV_AES_OCB_CTX *ctx,
     }
     if (inl != 0
         && !ossl_cipher_trailingdata(buf, bufsz, AES_BLOCK_SIZE, &in, &inl)) {
-        /* PROVerr already called */
+        /* ERR_raise already called */
         return 0;
     }
 

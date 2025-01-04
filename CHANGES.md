@@ -56,6 +56,8 @@ aliases for others: `BUF_strdup`, `BUF_strndup`, `BUF_memdup`,
   - Support for the undocumented and outdated "Strong Extranet ID"
 certificate extension and the "Netscape Certificate Sequence"
 data format have been removed.
+  - Remove most of the ERRxxx() macros; engines still use them since their
+library number is dynamic not static.
   - The unused and undocumented `BIO_f_linebuffer`, `BIO_f_reliable`, and
 `BIO_s_log` now return NULL.
 

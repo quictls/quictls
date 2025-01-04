@@ -49,7 +49,7 @@ int ossl_err_load_crypto_strings(void)
 {
     if (0
 #ifndef OPENSSL_NO_ERR
-        || ossl_err_load_ERR_strings() == 0 /* include error strings for SYSerr */
+        || ossl_err_load_ERR_strings() == 0 /* include error strings for ERR_lib_sys */
         || ossl_err_load_BN_strings() == 0
         || ossl_err_load_RSA_strings() == 0
 # ifndef OPENSSL_NO_DH
