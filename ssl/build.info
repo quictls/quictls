@@ -20,7 +20,7 @@ SOURCE[../libssl]=\
 
 # For shared builds we need to include some of the files in libssl.
 SHARED_SOURCE[../libssl]=\
-        ../crypto/packet.c ../crypto/time.c ../crypto/getenv.c
+        ../crypto/getenv.c ../crypto/packet.c ../crypto/time.c
 
 IF[{- !$disabled{'deprecated-3.0'} -}]
   SOURCE[../libssl]=ssl_rsa_legacy.c
