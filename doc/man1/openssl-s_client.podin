@@ -62,7 +62,6 @@ B<openssl> B<s_client>
 [B<-keymatexport> I<label>]
 [B<-keymatexportlen> I<len>]
 [B<-msgfile> I<filename>]
-[B<-nbio_test>]
 [B<-state>]
 [B<-nbio>]
 [B<-crlf>]
@@ -486,10 +485,6 @@ Show verbose trace output of protocol messages.
 =item B<-msgfile> I<filename>
 
 File to send output of B<-msg> or B<-trace> to, default standard output.
-
-=item B<-nbio_test>
-
-Tests nonblocking I/O
 
 =item B<-nbio>
 
