@@ -86,7 +86,6 @@ static int provider_conf_params_internal(OSSL_PROVIDER *prov,
         char buffer[512];
         size_t buffer_len = 0;
 
-
         /*
          * Check to see if the provided section value has already
          * been visited.  If it has, then we have a recursive lookup
@@ -129,7 +128,6 @@ static int provider_conf_params_internal(OSSL_PROVIDER *prov,
             }
         }
         sk_OPENSSL_CSTRING_pop(visited);
-
     } else {
         if (prov != NULL)
             ok = ossl_provider_add_parameter(prov, name, value);
