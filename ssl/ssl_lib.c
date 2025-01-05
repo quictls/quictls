@@ -20,7 +20,6 @@
 #include <openssl/engine.h>
 #include <openssl/async.h>
 #include <openssl/ct.h>
-#include <openssl/trace.h>
 #include <openssl/core_names.h>
 #include <internal/cryptlib.h>
 #include <internal/nelem.h>
@@ -4023,14 +4022,15 @@ SSL_CTX *SSL_CTX_new_ex(OSSL_LIB_CTX *libctx, const char *propq,
 
     /* Make sure we have a global lock allocated */
     if (!RUN_ONCE(&ssl_keylog_once, ssl_keylog_init)) {
-        /* use a trace message as a warning */
-        OSSL_TRACE(TLS, "Unable to initalize keylog data\n");
+        ERR_raise_data(ERR_LIB_SSL, SSL_R_KEYLOG_INIT,
+                       "Can't run-once ssl_keylog_init");
         goto out;
     }
 
     /* Grab our global lock */
     if (!CRYPTO_THREAD_write_lock(keylog_lock)) {
-        OSSL_TRACE(TLS, "Unable to acquire keylog write lock\n");
+        ERR_raise_data(ERR_LIB_SSL, SSL_R_KEYLOG_INIT,
+                       "Can't get keylog lock");
         goto out;
     }
     /*
@@ -4041,7 +4041,8 @@ SSL_CTX *SSL_CTX_new_ex(OSSL_LIB_CTX *libctx, const char *propq,
     if (keylog_bio == NULL) {
         keylog_bio = BIO_new_file(keylogfile, "a");
         if (keylog_bio == NULL) {
-            OSSL_TRACE(TLS, "Unable to create keylog bio\n");
+            ERR_raise_data(ERR_LIB_SSL, SSL_R_KEYLOG_INIT,
+                           "Can't create keylog BIO");
             goto out;
         }
         BIO_set_callback_ex(keylog_bio, check_keylog_bio_free);
