@@ -60,6 +60,13 @@ extern "C" {
 # endif
 
 /*
+ * Features no longer removable.
+ */
+# ifdef OPENSSL_NO_TLS1_3
+#  undef OPENSSL_NO_TLS1_3
+# endif
+
+/*
  * Features completely removed.
  */
 # ifndef OPENSSL_NO_EC2M
@@ -82,9 +89,6 @@ extern "C" {
 # endif
 # ifndef OPENSSL_NO_TRACE
 #  define OPENSSL_NO_TRACE
-# endif
-# ifdef OPENSSL_NO_TLS1_3
-#  undef OPENSSL_NO_TLS1_3
 # endif
 # ifndef OPENSSL_NO_UNIT_TEST
 #  define OPENSSL_NO_UNIT_TEST
