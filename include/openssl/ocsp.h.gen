@@ -1,6 +1,4 @@
 /*
- * {- join("\n * ", @autowarntext) -}
- *
  * Copyright 2000-2021 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
@@ -8,10 +6,6 @@
  * in the file LICENSE in the source distribution or at
  * https://www.openssl.org/source/license.html
  */
-
-{-
-use OpenSSL::stackhash qw(generate_stack_macros);
--}
 
 #ifndef OPENSSL_OCSP_H
 # define OPENSSL_OCSP_H
@@ -88,10 +82,8 @@ typedef struct ocsp_req_info_st OCSP_REQINFO;
 typedef struct ocsp_signature_st OCSP_SIGNATURE;
 typedef struct ocsp_request_st OCSP_REQUEST;
 
-{-
-    generate_stack_macros("OCSP_CERTID")
-    .generate_stack_macros("OCSP_ONEREQ");
--}
+#generate stack OCSP_CERTID
+#generate stack OCSP_ONEREQ
 
 #  define OCSP_RESPONSE_STATUS_SUCCESSFUL           0
 #  define OCSP_RESPONSE_STATUS_MALFORMEDREQUEST     1
@@ -105,9 +97,7 @@ typedef struct ocsp_resp_bytes_st OCSP_RESPBYTES;
 #  define V_OCSP_RESPID_NAME 0
 #  define V_OCSP_RESPID_KEY  1
 
-{-
-    generate_stack_macros("OCSP_RESPID");
--}
+#generate stack OCSP_RESPID
 
 typedef struct ocsp_revoked_info_st OCSP_REVOKEDINFO;
 
@@ -118,9 +108,7 @@ typedef struct ocsp_revoked_info_st OCSP_REVOKEDINFO;
 typedef struct ocsp_cert_status_st OCSP_CERTSTATUS;
 typedef struct ocsp_single_response_st OCSP_SINGLERESP;
 
-{-
-    generate_stack_macros("OCSP_SINGLERESP");
--}
+#generate stack OCSP_SINGLERESP
 
 typedef struct ocsp_response_data_st OCSP_RESPDATA;
 

@@ -1202,13 +1202,13 @@ errors:
    our %sslheaders = ();
    foreach my $d ( qw( include/openssl include/internal ) ) {
        my @header_patterns =
-           map { catfile($config{sourcedir}, $d, $_) } ( '*.h', '*.h.in' );
+           map { catfile($config{sourcedir}, $d, $_) } ( '*.h', '*.h.gen' );
        foreach my $f ( map { glob($_) } @header_patterns ) {
            my $base = basename($f);
-           my $base_in = basename($f, '.in');
+           my $base_in = basename($f, '.gen');
            my $dir = catfile($config{sourcedir}, $d);
            if ($base ne $base_in) {
-               # We have a .h.in file, which means the header file is in the
+               # We have a .h.gen file, which means the header file is in the
                # build tree.
                $base = $base_in;
                $dir = catfile($config{builddir}, $d);
@@ -1444,6 +1444,11 @@ EOF
 	return <<"EOF";
 $args{src}: $gen0  doc/mkdoc.pl
 \t\$(PERL) "doc/mkdoc.pl" $gen0 $args{src}
+EOF
+      } elsif ($gen0 =~ m|^.*\.gen$|) {
+	return <<"EOF";
+$args{src}: $gen0 \$(SRCDIR)/include/mkhdr.pl
+\t\$(PERL) "\$(SRCDIR)/include/mkhdr.pl" $gen0 $args{src}
 EOF
       } elsif ($gen0 =~ m|^.*\.in$|) {
           #

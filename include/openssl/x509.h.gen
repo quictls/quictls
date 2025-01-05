@@ -1,6 +1,4 @@
 /*
- * {- join("\n * ", @autowarntext) -}
- *
  * Copyright 1995-2023 The OpenSSL Project Authors. All Rights Reserved.
  * Copyright (c) 2002, Oracle and/or its affiliates. All rights reserved
  *
@@ -9,10 +7,6 @@
  * in the file LICENSE in the source distribution or at
  * https://www.openssl.org/source/license.html
  */
-
-{-
-use OpenSSL::stackhash qw(generate_stack_macros);
--}
 
 #ifndef OPENSSL_X509_H
 # define OPENSSL_X509_H
@@ -43,12 +37,10 @@ extern "C" {
 #endif
 
 /* Needed stacks for types defined in other headers */
-{-
-    generate_stack_macros("X509_NAME")
-    .generate_stack_macros("X509")
-    .generate_stack_macros("X509_REVOKED")
-    .generate_stack_macros("X509_CRL");
--}
+#generate stack X509_NAME
+#generate stack X509
+#generate stack X509_REVOKED
+#generate stack X509_CRL
 
 /* Flags for X509_get_signature_info() */
 /* Signature info is valid */
@@ -87,21 +79,15 @@ typedef struct X509_sig_st X509_SIG;
 
 typedef struct X509_name_entry_st X509_NAME_ENTRY;
 
-{-
-    generate_stack_macros("X509_NAME_ENTRY");
--}
+#generate stack X509_NAME_ENTRY
 
 # define X509_EX_V_NETSCAPE_HACK         0x8000
 # define X509_EX_V_INIT                  0x0001
 typedef struct X509_extension_st X509_EXTENSION;
-{-
-    generate_stack_macros("X509_EXTENSION");
--}
+#generate stack X509_EXTENSION
 typedef STACK_OF(X509_EXTENSION) X509_EXTENSIONS;
 typedef struct x509_attributes_st X509_ATTRIBUTE;
-{-
-    generate_stack_macros("X509_ATTRIBUTE");
--}
+#generate stack X509_ATTRIBUTE
 typedef struct X509_req_info_st X509_REQ_INFO;
 typedef struct X509_req_st X509_REQ;
 typedef struct x509_cert_aux_st X509_CERT_AUX;
@@ -210,9 +196,7 @@ typedef struct X509_info_st {
     int enc_len;
     char *enc_data;
 } X509_INFO;
-{-
-    generate_stack_macros("X509_INFO");
--}
+#generate stack X509_INFO
 
 /*
  * The next 2 structures and their 8 routines are used to manipulate Netscape's

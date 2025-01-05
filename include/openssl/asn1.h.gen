@@ -1,6 +1,4 @@
 /*
- * {- join("\n * ", @autowarntext) -}
- *
  * Copyright 1995-2023 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
@@ -8,10 +6,6 @@
  * in the file LICENSE in the source distribution or at
  * https://www.openssl.org/source/license.html
  */
-
-{-
-use OpenSSL::stackhash qw(generate_stack_macros);
--}
 
 #ifndef OPENSSL_ASN1_H
 # define OPENSSL_ASN1_H
@@ -125,10 +119,7 @@ extern "C" {
 # define SMIME_STREAM            0x1000
 
 /* Stacks for types not otherwise defined in this header */
-{-
-    generate_stack_macros("X509_ALGOR");
--}
-
+#generate stack X509_ALGOR
 
 # define ASN1_STRING_FLAG_BITS_LEFT 0x08 /* Set if 0x07 has bits left value */
 /*
@@ -203,9 +194,7 @@ struct asn1_string_table_st {
     unsigned long flags;
 };
 
-{-
-    generate_stack_macros("ASN1_STRING_TABLE");
--}
+#generate stack ASN1_STRING_TABLE
 
 /* size limits: this stuff is taken straight from RFC2459 */
 
@@ -499,9 +488,7 @@ struct asn1_type_st {
     } value;
 };
 
-{-
-    generate_stack_macros("ASN1_TYPE");
--}
+#generate stack ASN1_TYPE
 
 typedef STACK_OF(ASN1_TYPE) ASN1_SEQUENCE_ANY;
 
@@ -555,9 +542,7 @@ int ASN1_TYPE_cmp(const ASN1_TYPE *a, const ASN1_TYPE *b);
 ASN1_TYPE *ASN1_TYPE_pack_sequence(const ASN1_ITEM *it, void *s, ASN1_TYPE **t);
 void *ASN1_TYPE_unpack_sequence(const ASN1_ITEM *it, const ASN1_TYPE *t);
 
-{-
-    generate_stack_macros("ASN1_OBJECT");
--}
+#generate stack ASN1_OBJECT
 
 DECLARE_ASN1_FUNCTIONS(ASN1_OBJECT)
 
@@ -597,10 +582,7 @@ int ASN1_BIT_STRING_num_asc(const char *name, BIT_STRING_BITNAME *tbl);
 int ASN1_BIT_STRING_set_asc(ASN1_BIT_STRING *bs, const char *name, int value,
                             BIT_STRING_BITNAME *tbl);
 
-{-
-    generate_stack_macros("ASN1_INTEGER");
--}
-
+#generate stack ASN1_INTEGER
 
 DECLARE_ASN1_FUNCTIONS(ASN1_INTEGER)
 ASN1_INTEGER *d2i_ASN1_UINTEGER(ASN1_INTEGER **a, const unsigned char **pp,
@@ -635,9 +617,7 @@ int ASN1_OCTET_STRING_cmp(const ASN1_OCTET_STRING *a,
 int ASN1_OCTET_STRING_set(ASN1_OCTET_STRING *str, const unsigned char *data,
                           int len);
 
-{-
-    generate_stack_macros("ASN1_UTF8STRING");
--}
+#generate stack ASN1_UTF8STRING
 
 DECLARE_ASN1_FUNCTIONS(ASN1_VISIBLESTRING)
 DECLARE_ASN1_FUNCTIONS(ASN1_UNIVERSALSTRING)
@@ -648,9 +628,7 @@ DECLARE_ASN1_FUNCTIONS(ASN1_BMPSTRING)
 int UTF8_getc(const unsigned char *str, int len, unsigned long *val);
 int UTF8_putc(unsigned char *str, int len, unsigned long value);
 
-{-
-    generate_stack_macros("ASN1_GENERALSTRING");
--}
+#generate stack ASN1_GENERALSTRING
 
 DECLARE_ASN1_FUNCTIONS_name(ASN1_STRING, ASN1_PRINTABLE)
 
