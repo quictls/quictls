@@ -315,8 +315,6 @@ OSSL_DECODER_INSTANCE *ossl_decoder_instance_dup(const OSSL_DECODER_INSTANCE *sr
 int ossl_decoder_ctx_add_decoder_inst(OSSL_DECODER_CTX *ctx,
                                       OSSL_DECODER_INSTANCE *di)
 {
-    int ok;
-
     if (ctx->decoder_insts == NULL
         && (ctx->decoder_insts =
             sk_OSSL_DECODER_INSTANCE_new_null()) == NULL) {
@@ -324,8 +322,7 @@ int ossl_decoder_ctx_add_decoder_inst(OSSL_DECODER_CTX *ctx,
         return 0;
     }
 
-    ok = (sk_OSSL_DECODER_INSTANCE_push(ctx->decoder_insts, di) > 0);
-    return ok;
+    return sk_OSSL_DECODER_INSTANCE_push(ctx->decoder_insts, di) > 0;
 }
 
 int OSSL_DECODER_CTX_add_decoder(OSSL_DECODER_CTX *ctx, OSSL_DECODER *decoder)
@@ -709,8 +706,6 @@ static int decoder_process(const OSSL_PARAM params[], void *arg)
 
         bio = data->bio;
     } else {
-        const OSSL_PARAM *p;
-
         decoder_inst =
             sk_OSSL_DECODER_INSTANCE_value(ctx->decoder_insts,
                                            data->current_decoder_inst_index);
@@ -718,13 +713,11 @@ static int decoder_process(const OSSL_PARAM params[], void *arg)
 
         data->flag_construct_called = 0;
         if (ctx->construct != NULL) {
-            int rv;
+            if (ctx->construct(decoder_inst, params,
+                               ctx->construct_data) > 0) {
 
-            rv = ctx->construct(decoder_inst, params, ctx->construct_data);
-
-            ok = (rv > 0);
-            if (ok) {
                 data->flag_construct_called = 1;
+                ok = 1;
                 goto end;
             }
         }
@@ -738,7 +731,8 @@ static int decoder_process(const OSSL_PARAM params[], void *arg)
          * If this data isn't present, decoding has failed.
          */
 
-        p = OSSL_PARAM_locate_const(params, OSSL_OBJECT_PARAM_DATA);
+        const OSSL_PARAM *p =
+            OSSL_PARAM_locate_const(params, OSSL_OBJECT_PARAM_DATA);
         if (p == NULL || p->data_type != OSSL_PARAM_OCTET_STRING)
             goto end;
         new_data.bio = BIO_new_mem_buf(p->data, (int)p->data_size);
@@ -769,8 +763,8 @@ static int decoder_process(const OSSL_PARAM params[], void *arg)
          * too special knowledge.
          */
         if (data_type != NULL
-                && data_structure != NULL
-                && OPENSSL_strcasecmp(data_structure, "type-specific") == 0)
+            && data_structure != NULL
+            && OPENSSL_strcasecmp(data_structure, "type-specific") == 0)
             data_structure = NULL;
     }
 
@@ -811,9 +805,8 @@ static int decoder_process(const OSSL_PARAM params[], void *arg)
          * that's the case, we do this extra check.
          */
         if (decoder == NULL && ctx->start_input_type != NULL
-            && OPENSSL_strcasecmp(ctx->start_input_type, new_input_type) != 0) {
+            && OPENSSL_strcasecmp(ctx->start_input_type, new_input_type) != 0)
             continue;
-        }
 
         /*
          * If we have a previous decoder, we check that the input type
@@ -822,17 +815,15 @@ static int decoder_process(const OSSL_PARAM params[], void *arg)
          * for the decoder we're currently considering.
          */
         if (decoder != NULL && !ossl_decoder_fast_is_a(decoder, new_input_type,
-                                                       &new_decoder_inst->input_type_id)) {
+                                                       &new_decoder_inst->input_type_id))
             continue;
-        }
 
         /*
          * If the previous decoder gave us a data type, we check to see
          * if that matches the decoder we're currently considering.
          */
-        if (data_type != NULL && !OSSL_DECODER_is_a(new_decoder, data_type)) {
+        if (data_type != NULL && !OSSL_DECODER_is_a(new_decoder, data_type))
             continue;
-        }
 
         /*
          * If the previous decoder gave us a data structure name, we check
@@ -842,9 +833,8 @@ static int decoder_process(const OSSL_PARAM params[], void *arg)
         if (data_structure != NULL
             && (new_input_structure == NULL
                 || OPENSSL_strcasecmp(data_structure,
-                                      new_input_structure) != 0)) {
+                                      new_input_structure) != 0))
             continue;
-        }
 
         /*
          * If the decoder we're currently considering specifies a structure,
@@ -857,9 +847,8 @@ static int decoder_process(const OSSL_PARAM params[], void *arg)
             && new_input_structure != NULL) {
             data->flag_input_structure_checked = 1;
             if (OPENSSL_strcasecmp(new_input_structure,
-                                   ctx->input_structure) != 0) {
+                                   ctx->input_structure) != 0)
                 continue;
-            }
         }
 
         /*

@@ -736,7 +736,6 @@ OSSL_DECODER_CTX_new_for_pkey(EVP_PKEY **pkey,
 
     /* First see if we have a template OSSL_DECODER_CTX */
     res = lh_DECODER_CACHE_ENTRY_retrieve(cache->hashtable, &cacheent);
-
     if (res == NULL) {
         /*
          * There is no template so we will have to construct one. This will be
@@ -750,15 +749,13 @@ OSSL_DECODER_CTX_new_for_pkey(EVP_PKEY **pkey,
             return NULL;
         }
 
-        if (OSSL_DECODER_CTX_set_input_type(ctx, input_type)
-            && OSSL_DECODER_CTX_set_input_structure(ctx, input_structure)
-            && OSSL_DECODER_CTX_set_selection(ctx, selection)
-            && ossl_decoder_ctx_setup_for_pkey(ctx, keytype, libctx, propquery)
-            && OSSL_DECODER_CTX_add_extra(ctx, libctx, propquery)
-            && (propquery == NULL
-                || OSSL_DECODER_CTX_set_params(ctx, decoder_params))) {
-            ;
-        } else {
+        if (!OSSL_DECODER_CTX_set_input_type(ctx, input_type)
+            || !OSSL_DECODER_CTX_set_input_structure(ctx, input_structure)
+            || !OSSL_DECODER_CTX_set_selection(ctx, selection)
+            || !ossl_decoder_ctx_setup_for_pkey(ctx, keytype, libctx, propquery)
+            || !OSSL_DECODER_CTX_add_extra(ctx, libctx, propquery)
+            || (propquery != NULL
+                && !OSSL_DECODER_CTX_set_params(ctx, decoder_params))) {
             ERR_raise(ERR_LIB_OSSL_DECODER, ERR_R_OSSL_DECODER_LIB);
             OSSL_DECODER_CTX_free(ctx);
             return NULL;
@@ -820,8 +817,8 @@ OSSL_DECODER_CTX_new_for_pkey(EVP_PKEY **pkey,
 
     ctx = ossl_decoder_ctx_for_pkey_dup(ctx, pkey, input_type, input_structure);
     CRYPTO_THREAD_unlock(cache->lock);
-
     return ctx;
+
  err:
     decoder_cache_entry_free(newcache);
     OSSL_DECODER_CTX_free(ctx);
