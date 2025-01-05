@@ -7,9 +7,13 @@ openssl-env - OpenSSL environment variables
 =head1 DESCRIPTION
 
 The OpenSSL libraries use environment variables to override the
-compiled-in default paths for various data.
+compiled-in default paths for various items.
+
 To avoid security risks, the environment is usually not consulted when
 the executable is set-user-ID or set-group-ID.
+The method used will act improperly on some platforms; applications
+that could be affected should remove the environment variables
+during start-up.
 
 =over 4
 
@@ -86,6 +90,26 @@ See L<RAND_load_file(3)>.
 
 Specify the default directory or file containing CA certificates.
 See L<SSL_CTX_load_verify_locations(3)>.
+
+=item B<SSLKEYLOGFILE>
+
+Used to produce the standard format output file for SSL key logging.
+If this variable is set, then the library will record all secrets produced
+by SSL/TLS connections into that file.
+
+This feature only works if the library is compiled with the B<enable-sslkeylog>
+flag; it is disabled by default because support for this feature, and
+its use, pose a security risk.  By recording the keys exchanged during
+an SSL/TLS session any party with access to the file can decrypt all of
+the traffic sent during that session.
+
+I<Enabling and using this feature should be limited to test and debug
+environments only.>
+
+=head1 SEE ALSO
+
+L<Current IETF keylog file format draft|https://datatracker.ietf.org/doc/draft-ietf-tls-keylogfile/>
+
 
 =back
 

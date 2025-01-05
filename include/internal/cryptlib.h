@@ -28,9 +28,6 @@
 typedef struct ex_callback_st EX_CALLBACK;
 DEFINE_STACK_OF(EX_CALLBACK)
 
-typedef struct mem_st MEM;
-DEFINE_LHASH_OF_EX(MEM);
-
 void OPENSSL_cpuid_setup(void);
 #if defined(__i386)   || defined(__i386__)   || defined(_M_IX86) || \
     defined(__x86_64) || defined(__x86_64__) || \
@@ -45,7 +42,6 @@ int openssl_get_fork_id(void);
 
 char *ossl_safe_getenv(const char *name);
 
-extern CRYPTO_RWLOCK *memdbg_lock;
 int openssl_strerror_r(int errnum, char *buf, size_t buflen);
 # if !defined(OPENSSL_NO_STDIO)
 FILE *openssl_fopen(const char *filename, const char *mode);
