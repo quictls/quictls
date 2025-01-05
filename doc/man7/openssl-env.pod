@@ -106,12 +106,11 @@ the traffic sent during that session.
 I<Enabling and using this feature should be limited to test and debug
 environments only.>
 
+=back
+
 =head1 SEE ALSO
 
 L<Current IETF keylog file format draft|https://datatracker.ietf.org/doc/draft-ietf-tls-keylogfile/>
-
-
-=back
 
 =head1 COPYRIGHT
 
