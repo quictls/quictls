@@ -339,17 +339,6 @@ L<OSSL_PROVIDER-FIPS(7)>.
 Windows thread synchronization uses read/write primitives (SRWLock) when
 supported by the OS, otherwise CriticalSection continues to be used.
 
-=head4 Trace API
-
-A new generic trace API has been added which provides support for enabling
-instrumentation through trace output. This feature is mainly intended as an aid
-for developers and is disabled by default. To utilize it, OpenSSL needs to be
-configured with the C<enable-trace> option.
-
-If the tracing API is enabled, the application can activate trace output by
-registering BIOs as trace channels for a number of tracing and debugging
-categories. See L<OSSL_trace_enabled(3)>.
-
 =head4 Key validation updates
 
 L<EVP_PKEY_public_check(3)> and L<EVP_PKEY_param_check(3)> now work for

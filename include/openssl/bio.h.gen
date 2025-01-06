@@ -872,19 +872,18 @@ void BIO_copy_next_retry(BIO *b);
 
 # if defined(__GNUC__) && !defined(__MINGW32__) && !defined(__MINGW64__) \
     && !defined(__APPLE__)
-#  define ossl_bio__attr__ __attribute__
+#  define ossl_printf__attr__ __attribute__
 # else
-#  define ossl_bio__attr__(x)
+#  define ossl_printf__attr__(x)
 # endif
 int BIO_printf(BIO *bio, const char *format, ...)
-    ossl_bio__attr__((__format__(printf, 2, 3)));
+    ossl_printf__attr__((__format__(printf, 2, 3)));
 int BIO_vprintf(BIO *bio, const char *format, va_list args)
-    ossl_bio__attr__((__format__(printf, 2, 0)));
+    ossl_printf__attr__((__format__(printf, 2, 0)));
 int BIO_snprintf(char *buf, size_t n, const char *format, ...)
-    ossl_bio__attr__((__format__(printf, 3, 4)));
+    ossl_printf__attr__((__format__(printf, 3, 4)));
 int BIO_vsnprintf(char *buf, size_t n, const char *format, va_list args)
-    ossl_bio__attr__((__format__(printf, 3, 0)));
-# undef ossl_bio__attr__
+    ossl_printf__attr__((__format__(printf, 3, 0)));
 
 
 BIO_METHOD *BIO_meth_new(int type, const char *name);

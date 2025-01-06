@@ -77,44 +77,6 @@ struct bignum_ctx {
     OSSL_LIB_CTX *libctx;
 };
 
-#ifndef FIPS_MODULE
-/* Debugging functionality */
-static void ctxdbg(BIO *channel, const char *text, BN_CTX *ctx)
-{
-    unsigned int bnidx = 0, fpidx = 0;
-    BN_POOL_ITEM *item = ctx->pool.head;
-    BN_STACK *stack = &ctx->stack;
-
-    BIO_printf(channel, "%s\n", text);
-    BIO_printf(channel, "  (%16p): ", (void*)ctx);
-    while (bnidx < ctx->used) {
-        BIO_printf(channel, "%03x ",
-                   item->vals[bnidx++ % BN_CTX_POOL_SIZE].dmax);
-        if (!(bnidx % BN_CTX_POOL_SIZE))
-            item = item->next;
-    }
-    BIO_printf(channel, "\n");
-    bnidx = 0;
-    BIO_printf(channel, "   %16s : ", "");
-    while (fpidx < stack->depth) {
-        while (bnidx++ < stack->indexes[fpidx])
-            BIO_printf(channel, "    ");
-        BIO_printf(channel, "^^^ ");
-        bnidx++;
-        fpidx++;
-    }
-    BIO_printf(channel, "\n");
-}
-
-# define CTXDBG(str, ctx)           \
-    OSSL_TRACE_BEGIN(BN_CTX) {      \
-        ctxdbg(trc_out, str, ctx);  \
-    } OSSL_TRACE_END(BN_CTX)
-#else
-/* We do not want tracing in FIPS module */
-# define CTXDBG(str, ctx) do {} while(0)
-#endif /* FIPS_MODULE */
-
 BN_CTX *BN_CTX_new_ex(OSSL_LIB_CTX *ctx)
 {
     BN_CTX *ret;
@@ -155,22 +117,6 @@ void BN_CTX_free(BN_CTX *ctx)
 {
     if (ctx == NULL)
         return;
-#ifndef FIPS_MODULE
-    OSSL_TRACE_BEGIN(BN_CTX) {
-        BN_POOL_ITEM *pool = ctx->pool.head;
-        BIO_printf(trc_out,
-                   "BN_CTX_free(): stack-size=%d, pool-bignums=%d\n",
-                   ctx->stack.size, ctx->pool.size);
-        BIO_printf(trc_out, "  dmaxs: ");
-        while (pool) {
-            unsigned loop = 0;
-            while (loop < BN_CTX_POOL_SIZE)
-                BIO_printf(trc_out, "%02x ", pool->vals[loop++].dmax);
-            pool = pool->next;
-        }
-        BIO_printf(trc_out, "\n");
-    } OSSL_TRACE_END(BN_CTX);
-#endif
     BN_STACK_finish(&ctx->stack);
     BN_POOL_finish(&ctx->pool);
     OPENSSL_free(ctx);
@@ -178,7 +124,6 @@ void BN_CTX_free(BN_CTX *ctx)
 
 void BN_CTX_start(BN_CTX *ctx)
 {
-    CTXDBG("ENTER BN_CTX_start()", ctx);
     /* If we're already overflowing ... */
     if (ctx->err_stack || ctx->too_many)
         ctx->err_stack++;
@@ -187,14 +132,12 @@ void BN_CTX_start(BN_CTX *ctx)
         ERR_raise(ERR_LIB_BN, BN_R_TOO_MANY_TEMPORARY_VARIABLES);
         ctx->err_stack++;
     }
-    CTXDBG("LEAVE BN_CTX_start()", ctx);
 }
 
 void BN_CTX_end(BN_CTX *ctx)
 {
     if (ctx == NULL)
         return;
-    CTXDBG("ENTER BN_CTX_end()", ctx);
     if (ctx->err_stack)
         ctx->err_stack--;
     else {
@@ -206,14 +149,12 @@ void BN_CTX_end(BN_CTX *ctx)
         /* Unjam "too_many" in case "get" had failed */
         ctx->too_many = 0;
     }
-    CTXDBG("LEAVE BN_CTX_end()", ctx);
 }
 
 BIGNUM *BN_CTX_get(BN_CTX *ctx)
 {
     BIGNUM *ret;
 
-    CTXDBG("ENTER BN_CTX_get()", ctx);
     if (ctx->err_stack || ctx->too_many)
         return NULL;
     if ((ret = BN_POOL_get(&ctx->pool, ctx->flags)) == NULL) {
@@ -230,7 +171,6 @@ BIGNUM *BN_CTX_get(BN_CTX *ctx)
     /* clear BN_FLG_CONSTTIME if leaked from previous frames */
     ret->flags &= (~BN_FLG_CONSTTIME);
     ctx->used++;
-    CTXDBG("LEAVE BN_CTX_get()", ctx);
     return ret;
 }
 

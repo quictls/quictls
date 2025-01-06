@@ -361,7 +361,7 @@ static const ERR_STRING_DATA SSL_str_reasons[] = {
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_PSK_NO_SERVER_CB), "psk no server cb"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_QUIC_HANDSHAKE_LAYER_ERROR),
     "quic handshake layer error"},
-    {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_QUIC_NETWORK_ERROR), "quic network error"},
+    {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_KEYLOG_INIT), "initializing keylog"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_QUIC_PROTOCOL_ERROR),
     "quic protocol error"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_READ_BIO_NOT_SET), "read bio not set"},

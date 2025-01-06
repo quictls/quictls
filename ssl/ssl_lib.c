@@ -20,7 +20,6 @@
 #include <openssl/engine.h>
 #include <openssl/async.h>
 #include <openssl/ct.h>
-#include <openssl/trace.h>
 #include <openssl/core_names.h>
 #include <internal/cryptlib.h>
 #include <internal/nelem.h>
@@ -988,7 +987,6 @@ int SSL_up_ref(SSL *s)
     if (CRYPTO_UP_REF(&s->references, &i) <= 0)
         return 0;
 
-    REF_PRINT_COUNT("SSL", s);
     REF_ASSERT_ISNT(i < 2);
     return ((i > 1) ? 1 : 0);
 }
@@ -1391,7 +1389,6 @@ void SSL_free(SSL *s)
     if (s == NULL)
         return;
     CRYPTO_DOWN_REF(&s->references, &i);
-    REF_PRINT_COUNT("SSL", s);
     if (i > 0)
         return;
     REF_ASSERT_ISNT(i < 0);
@@ -4025,14 +4022,15 @@ SSL_CTX *SSL_CTX_new_ex(OSSL_LIB_CTX *libctx, const char *propq,
 
     /* Make sure we have a global lock allocated */
     if (!RUN_ONCE(&ssl_keylog_once, ssl_keylog_init)) {
-        /* use a trace message as a warning */
-        OSSL_TRACE(TLS, "Unable to initalize keylog data\n");
+        ERR_raise_data(ERR_LIB_SSL, SSL_R_KEYLOG_INIT,
+                       "Can't run-once ssl_keylog_init");
         goto out;
     }
 
     /* Grab our global lock */
     if (!CRYPTO_THREAD_write_lock(keylog_lock)) {
-        OSSL_TRACE(TLS, "Unable to acquire keylog write lock\n");
+        ERR_raise_data(ERR_LIB_SSL, SSL_R_KEYLOG_INIT,
+                       "Can't get keylog lock");
         goto out;
     }
     /*
@@ -4043,7 +4041,8 @@ SSL_CTX *SSL_CTX_new_ex(OSSL_LIB_CTX *libctx, const char *propq,
     if (keylog_bio == NULL) {
         keylog_bio = BIO_new_file(keylogfile, "a");
         if (keylog_bio == NULL) {
-            OSSL_TRACE(TLS, "Unable to create keylog bio\n");
+            ERR_raise_data(ERR_LIB_SSL, SSL_R_KEYLOG_INIT,
+                           "Can't create keylog BIO");
             goto out;
         }
         BIO_set_callback_ex(keylog_bio, check_keylog_bio_free);
@@ -4075,7 +4074,6 @@ int SSL_CTX_up_ref(SSL_CTX *ctx)
     if (CRYPTO_UP_REF(&ctx->references, &i) <= 0)
         return 0;
 
-    REF_PRINT_COUNT("SSL_CTX", ctx);
     REF_ASSERT_ISNT(i < 2);
     return ((i > 1) ? 1 : 0);
 }
@@ -4089,7 +4087,6 @@ void SSL_CTX_free(SSL_CTX *a)
         return;
 
     CRYPTO_DOWN_REF(&a->references, &i);
-    REF_PRINT_COUNT("SSL_CTX", a);
     if (i > 0)
         return;
     REF_ASSERT_ISNT(i < 0);
@@ -4308,9 +4305,6 @@ void ssl_set_masks(SSL_CONNECTION *s)
     have_ecc_cert = pvalid[SSL_PKEY_ECC] & CERT_PKEY_VALID;
     mask_k = 0;
     mask_a = 0;
-
-    OSSL_TRACE4(TLS_CIPHER, "dh_tmp=%d rsa_enc=%d rsa_sign=%d dsa_sign=%d\n",
-               dh_tmp, rsa_enc, rsa_sign, dsa_sign);
 
 #ifndef OPENSSL_NO_GOST
     if (ssl_has_cert(s, SSL_PKEY_GOST12_512)) {

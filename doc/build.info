@@ -1763,18 +1763,6 @@ DEPEND[html/man3/OSSL_sleep.html]=man3/OSSL_sleep.pod
 GENERATE[html/man3/OSSL_sleep.html]=man3/OSSL_sleep.pod
 DEPEND[man/man3/OSSL_sleep.3]=man3/OSSL_sleep.pod
 GENERATE[man/man3/OSSL_sleep.3]=man3/OSSL_sleep.pod
-DEPEND[html/man3/OSSL_trace_enabled.html]=man3/OSSL_trace_enabled.pod
-GENERATE[html/man3/OSSL_trace_enabled.html]=man3/OSSL_trace_enabled.pod
-DEPEND[man/man3/OSSL_trace_enabled.3]=man3/OSSL_trace_enabled.pod
-GENERATE[man/man3/OSSL_trace_enabled.3]=man3/OSSL_trace_enabled.pod
-DEPEND[html/man3/OSSL_trace_get_category_num.html]=man3/OSSL_trace_get_category_num.pod
-GENERATE[html/man3/OSSL_trace_get_category_num.html]=man3/OSSL_trace_get_category_num.pod
-DEPEND[man/man3/OSSL_trace_get_category_num.3]=man3/OSSL_trace_get_category_num.pod
-GENERATE[man/man3/OSSL_trace_get_category_num.3]=man3/OSSL_trace_get_category_num.pod
-DEPEND[html/man3/OSSL_trace_set_channel.html]=man3/OSSL_trace_set_channel.pod
-GENERATE[html/man3/OSSL_trace_set_channel.html]=man3/OSSL_trace_set_channel.pod
-DEPEND[man/man3/OSSL_trace_set_channel.3]=man3/OSSL_trace_set_channel.pod
-GENERATE[man/man3/OSSL_trace_set_channel.3]=man3/OSSL_trace_set_channel.pod
 DEPEND[html/man3/OpenSSL_add_all_algorithms.html]=man3/OpenSSL_add_all_algorithms.pod
 GENERATE[html/man3/OpenSSL_add_all_algorithms.html]=man3/OpenSSL_add_all_algorithms.pod
 DEPEND[man/man3/OpenSSL_add_all_algorithms.3]=man3/OpenSSL_add_all_algorithms.pod
@@ -3265,9 +3253,6 @@ html/man3/OSSL_STORE_attach.html \
 html/man3/OSSL_STORE_expect.html \
 html/man3/OSSL_STORE_open.html \
 html/man3/OSSL_sleep.html \
-html/man3/OSSL_trace_enabled.html \
-html/man3/OSSL_trace_get_category_num.html \
-html/man3/OSSL_trace_set_channel.html \
 html/man3/OpenSSL_add_all_algorithms.html \
 html/man3/OpenSSL_version.html \
 html/man3/PEM_X509_INFO_read_bio_ex.html \
@@ -3887,9 +3872,6 @@ man/man3/OSSL_STORE_attach.3 \
 man/man3/OSSL_STORE_expect.3 \
 man/man3/OSSL_STORE_open.3 \
 man/man3/OSSL_sleep.3 \
-man/man3/OSSL_trace_enabled.3 \
-man/man3/OSSL_trace_get_category_num.3 \
-man/man3/OSSL_trace_set_channel.3 \
 man/man3/OpenSSL_add_all_algorithms.3 \
 man/man3/OpenSSL_version.3 \
 man/man3/PEM_X509_INFO_read_bio_ex.3 \

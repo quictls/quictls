@@ -305,38 +305,6 @@ DEFINE_OSSL_set(OSSL_CMP_CTX, certConf_cb_arg, void *)
  */
 DEFINE_OSSL_get(OSSL_CMP_CTX, certConf_cb_arg, void *, NULL)
 
-#ifndef OPENSSL_NO_TRACE
-static size_t ossl_cmp_log_trace_cb(const char *buf, size_t cnt,
-                                    int category, int cmd, void *vdata)
-{
-    OSSL_CMP_CTX *ctx = vdata;
-    const char *msg;
-    OSSL_CMP_severity level = -1;
-    char *func = NULL;
-    char *file = NULL;
-    int line = 0;
-
-    if (buf == NULL || cnt == 0 || cmd != OSSL_TRACE_CTRL_WRITE || ctx == NULL)
-        return 0;
-    if (ctx->log_cb == NULL)
-        return 1; /* silently drop message */
-
-    msg = ossl_cmp_log_parse_metadata(buf, &level, &func, &file, &line);
-
-    if (level > ctx->log_verbosity) /* excludes the case level is unknown */
-        goto end; /* suppress output since severity is not sufficient */
-
-    if (!ctx->log_cb(func != NULL ? func : "(no func)",
-                     file != NULL ? file : "(no file)",
-                     line, level, msg))
-        cnt = 0;
-
- end:
-    OPENSSL_free(func);
-    OPENSSL_free(file);
-    return cnt;
-}
-#endif
 
 /* Print CMP log messages (i.e., diagnostic info) via the log cb of the ctx */
 int ossl_cmp_print_log(OSSL_CMP_severity level, const OSSL_CMP_CTX *ctx,
@@ -365,26 +333,8 @@ int ossl_cmp_print_log(OSSL_CMP_severity level, const OSSL_CMP_CTX *ctx,
     if (level_str == NULL)
         level_str = "(unset level string)";
 
-#ifndef OPENSSL_NO_TRACE
-    if (OSSL_TRACE_ENABLED(CMP)) {
-        OSSL_TRACE_BEGIN(CMP) {
-            int printed =
-                BIO_snprintf(hugebuf, sizeof(hugebuf),
-                             "%s:%s:%d:" OSSL_CMP_LOG_PREFIX "%s: ",
-                             func, file, line, level_str);
-            if (printed > 0 && (size_t)printed < sizeof(hugebuf)) {
-                if (BIO_vsnprintf(hugebuf + printed,
-                                  sizeof(hugebuf) - printed, format, args) > 0)
-                    res = BIO_puts(trc_out, hugebuf) > 0;
-            }
-        } OSSL_TRACE_END(CMP);
-    }
-#else /* compensate for disabled trace API */
-    {
-        if (BIO_vsnprintf(hugebuf, sizeof(hugebuf), format, args) > 0)
-            res = ctx->log_cb(func, file, line, level, hugebuf);
-    }
-#endif
+    if (BIO_vsnprintf(hugebuf, sizeof(hugebuf), format, args) > 0)
+        res = ctx->log_cb(func, file, line, level, hugebuf);
     va_end(args);
     return res;
 }
@@ -397,13 +347,6 @@ int OSSL_CMP_CTX_set_log_cb(OSSL_CMP_CTX *ctx, OSSL_CMP_log_cb_t cb)
         return 0;
     }
     ctx->log_cb = cb;
-
-#ifndef OPENSSL_NO_TRACE
-    /* do also in case cb == NULL, to switch off logging output: */
-    if (!OSSL_trace_set_callback(OSSL_TRACE_CATEGORY_CMP,
-                                 ossl_cmp_log_trace_cb, ctx))
-        return 0;
-#endif
 
     return 1;
 }

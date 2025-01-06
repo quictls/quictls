@@ -3257,20 +3257,6 @@ static void print_stuff(BIO *bio, SSL *s, int full)
         BIO_printf(bio_err, "Using Kernel TLS for receiving\n");
 #endif
 
-    if (OSSL_TRACE_ENABLED(TLS)) {
-        /* Print out local port of connection: useful for debugging */
-        int sock;
-        union BIO_sock_info_u info;
-
-        sock = SSL_get_fd(s);
-        if ((info.addr = BIO_ADDR_new()) != NULL
-            && BIO_sock_info(sock, BIO_SOCK_INFO_ADDRESS, &info)) {
-            BIO_printf(bio_c_out, "LOCAL PORT is %u\n",
-                       ntohs(BIO_ADDR_rawport(info.addr)));
-        }
-        BIO_ADDR_free(info.addr);
-    }
-
     {
         const unsigned char *proto;
         unsigned int proto_len;
