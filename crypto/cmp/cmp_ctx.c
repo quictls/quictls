@@ -350,7 +350,6 @@ int OSSL_CMP_CTX_set_log_cb(OSSL_CMP_CTX *ctx, OSSL_CMP_log_cb_t cb)
     }
     ctx->log_cb = cb;
 
-
     return 1;
 }
 
