@@ -1732,7 +1732,7 @@ unless ($disabled{ktls}) {
 }
 
 unless ($disabled{winstore}) {
-    unless ($target =~ /^(?:Cygwin|mingw|VC-|BC-)/) {
+    unless ($target =~ /^(?:Cygwin|mingw|VC-)/) {
         disable('not-windows', 'winstore');
     }
 }
