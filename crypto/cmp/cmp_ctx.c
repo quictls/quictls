@@ -333,10 +333,8 @@ int ossl_cmp_print_log(OSSL_CMP_severity level, const OSSL_CMP_CTX *ctx,
     if (level_str == NULL)
         level_str = "(unset level string)";
 
-    {
-        if (BIO_vsnprintf(hugebuf, sizeof(hugebuf), format, args) > 0)
-            res = ctx->log_cb(func, file, line, level, hugebuf);
-    }
+    if (BIO_vsnprintf(hugebuf, sizeof(hugebuf), format, args) > 0)
+        res = ctx->log_cb(func, file, line, level, hugebuf);
     va_end(args);
     return res;
 }
