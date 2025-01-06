@@ -25,7 +25,7 @@ int ossl_pkcs5_pbkdf2_hmac_ex(const char *pass, int passlen,
                               OSSL_LIB_CTX *libctx, const char *propq)
 {
     const char *empty = "";
-    int rv = 1, mode = 1;
+    int mode = 1;
     EVP_KDF *kdf;
     EVP_KDF_CTX *kctx;
     const char *mdname = EVP_MD_get0_name(digest);
@@ -57,11 +57,9 @@ int ossl_pkcs5_pbkdf2_hmac_ex(const char *pass, int passlen,
     *p++ = OSSL_PARAM_construct_utf8_string(OSSL_KDF_PARAM_DIGEST,
                                             (char *)mdname, 0);
     *p = OSSL_PARAM_construct_end();
-    if (EVP_KDF_derive(kctx, out, keylen, params) != 1)
-        rv = 0;
 
+    int rv =EVP_KDF_derive(kctx, out, keylen, params) == 1;
     EVP_KDF_CTX_free(kctx);
-
     return rv;
 }
 

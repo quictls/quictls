@@ -881,7 +881,7 @@ while (<>) { # loop over all lines of all input files
         $if_maybe_terminated = 0;
         if (my ($head, $before, $tail) = m/^([\s@]*([^{}]*)\})[\s@]*(.*)$/) { # leading closing '}', but possibly
                                                                               # with non-whitespace non-'{' before
-            report("code after '}'") unless $tail eq "" || $tail =~ m/(else|while|$)/;
+            report("code after '}'") unless $tail eq "" || $tail =~ m/(else|while|(\W|$)/;
             my $outermost_level = @nested_block_indents == 1 && @nested_block_indents[0] == 0;
             if (!$sloppy_bodylen && $outermost_level && $line_body_start != 0) {
                 my $body_len = $line - $line_body_start - 1;

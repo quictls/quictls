@@ -257,8 +257,6 @@ void ossl_encoder_instance_free(OSSL_ENCODER_INSTANCE *encoder_inst)
 static int ossl_encoder_ctx_add_encoder_inst(OSSL_ENCODER_CTX *ctx,
                                              OSSL_ENCODER_INSTANCE *ei)
 {
-    int ok;
-
     if (ctx->encoder_insts == NULL
         && (ctx->encoder_insts =
             sk_OSSL_ENCODER_INSTANCE_new_null()) == NULL) {
@@ -266,8 +264,7 @@ static int ossl_encoder_ctx_add_encoder_inst(OSSL_ENCODER_CTX *ctx,
         return 0;
     }
 
-    ok = (sk_OSSL_ENCODER_INSTANCE_push(ctx->encoder_insts, ei) > 0);
-    return ok;
+    return sk_OSSL_ENCODER_INSTANCE_push(ctx->encoder_insts, ei) > 0;
 }
 
 int OSSL_ENCODER_CTX_add_encoder(OSSL_ENCODER_CTX *ctx, OSSL_ENCODER *encoder)
