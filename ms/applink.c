@@ -94,7 +94,7 @@ extern "C" {
 __declspec(dllexport)
 void **
 __cdecl
-OPENSSL_Applink(void)
+__declspec(dllexport) void ** __cdecl OPENSSL_Applink(void)
 {
     static int once = 1;
     static void *OPENSSL_ApplinkTable[APPLINK_MAX + 1] =
