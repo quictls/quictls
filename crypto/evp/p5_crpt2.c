@@ -58,7 +58,7 @@ int ossl_pkcs5_pbkdf2_hmac_ex(const char *pass, int passlen,
                                             (char *)mdname, 0);
     *p = OSSL_PARAM_construct_end();
 
-    int rv =EVP_KDF_derive(kctx, out, keylen, params) == 1;
+    int rv = EVP_KDF_derive(kctx, out, keylen, params) == 1;
     EVP_KDF_CTX_free(kctx);
     return rv;
 }
