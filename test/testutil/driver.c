@@ -19,7 +19,7 @@
 
 #include <apps/platform.h>
 
-#if defined(_WIN32) && !defined(__BORLANDC__)
+#if defined(_WIN32)
 # define strdup _strdup
 #endif
 

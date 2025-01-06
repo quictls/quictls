@@ -18,7 +18,7 @@
 #include <openssl/asn1.h>
 #include <openssl/engine.h>
 
-#if defined(_WIN32) && !defined(__BORLANDC__)
+#if defined(_WIN32)
 # define strdup _strdup
 #endif
 

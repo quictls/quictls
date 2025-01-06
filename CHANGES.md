@@ -108,3 +108,4 @@ log key material.
   - Remove Itanium (IA-64) support.
   - Removed OSF/1, True64, and Ultrix support.
   - VMS, OpenVMS, etc., on all hardware.
+  - Removed support for Borland/Embarcadero compilers.

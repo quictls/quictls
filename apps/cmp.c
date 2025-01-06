@@ -22,7 +22,7 @@
 #include <apps/cmp_mock_srv.h>
 
 /* tweaks needed due to missing unistd.h on Windows */
-#if defined(_WIN32) && !defined(__BORLANDC__)
+#if defined(_WIN32)
 # define access _access
 #endif
 #ifndef F_OK

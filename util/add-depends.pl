@@ -190,61 +190,11 @@ my %procedures = (
 
             return undef;
         },
-    'embarcadero' =>
-        sub {
-            # With Embarcadero C++Builder's preprocessor (cpp32.exe) the -Sx -Hp
-            # flags give us the list of #include files read, like the following:
-            #
-            #   Including ->->{whatever header file}
-            #
-            # where each "->" indicates the nesting level of the #include.  The
-            # logic here is otherwise the same as the 'VC' scheme.
-            #
-            # Since there's no object file name at all in that information,
-            # we must construct it ourselves.
-
-            (my $objfile = shift) =~ s|\.d$|.obj|i;
-            my $line = shift;
-
-            # There are also other lines mixed in, for example compiler
-            # warnings, so we simply discard anything that doesn't start with
-            # the Note:
-
-            if (/^Including (->)*/) {
-                (my $tail = $') =~ s/\s*\R$//;
-
-                # C++Builder gives us relative paths when possible, so to
-                # remove system header dependencies, we convert them to
-                # absolute paths and check that they don't match $abs_srcdir
-                # or $abs_blddir, just as the 'VC' scheme.
-                $tail = rel2abs($tail);
-
-                unless (defined $depconv_cache{$tail}) {
-                    my $dep = $tail;
-                    # Since we have already pre-populated the cache with
-                    # mappings for generated headers, we only need to deal
-                    # with the source tree.
-                    if ($dep =~ s|^\Q$abs_srcdir\E\\|\$(SRCDIR)\\|i) {
-                        # Also check that the header actually exists
-                        if (-f $line) {
-                            $depconv_cache{$tail} = $dep;
-                        }
-                    }
-                }
-                return ($objfile, '"'.$depconv_cache{$tail}.'"')
-                    if defined $depconv_cache{$tail};
-                print STDERR "DEBUG[$producer]: ignoring $objfile <- $tail\n"
-                    if $debug;
-            }
-
-            return undef;
-        },
 );
 my %continuations = (
     'gcc' => "\\",
     'makedepend' => "\\",
     'VC' => "\\",
-    'embarcadero' => "\\",
 );
 
 die "Producer unrecognised: $producer\n"

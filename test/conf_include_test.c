@@ -16,9 +16,6 @@
 #ifdef _WIN32
 # include <direct.h>
 # define DIRSEP "/\\"
-# ifndef __BORLANDC__
-#  define chdir _chdir
-# endif
 # define DIRSEP_PRESERVE 0
 #elif !defined(OPENSSL_NO_POSIX_IO)
 # include <unistd.h>

@@ -47,12 +47,6 @@
 #  include <fcntl.h>
 # endif
 
-# ifdef __BORLANDC__
-   /* _lseek in <io.h> is a function-like macro so we can't take its address */
-#  undef _lseek
-#  define _lseek lseek
-# endif
-
 static void *app_stdin(void)
 {
     return stdin;
@@ -99,16 +93,7 @@ extern "C" {
 
 __declspec(dllexport)
 void **
-# if defined(__BORLANDC__)
-/*
- * __stdcall appears to be the only way to get the name
- * decoration right with Borland C. Otherwise it works
- * purely incidentally, as we pass no parameters.
- */
-__stdcall
-# else
 __cdecl
-# endif
 OPENSSL_Applink(void)
 {
     static int once = 1;
