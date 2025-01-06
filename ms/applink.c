@@ -90,9 +90,6 @@ static int app_fsetmod(FILE *fp, char mod)
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-__declspec(dllexport)
-void **
 __cdecl
 __declspec(dllexport) void ** __cdecl OPENSSL_Applink(void)
 {
