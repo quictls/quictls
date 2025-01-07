@@ -1099,16 +1099,19 @@ static void dump_digest_info(void)
 #define DEVCRYPTO_CMD_DIGESTS (ENGINE_CMD_BASE + 2)
 #define DEVCRYPTO_CMD_DUMP_INFO (ENGINE_CMD_BASE + 3)
 
+# define STR_HELPER(x) #x
+# define STR(x) STR_HELPER(x)
+
 static const ENGINE_CMD_DEFN devcrypto_cmds[] = {
 #if defined(CIOCGSESSINFO) || defined(CIOCGSESSION2)
    {DEVCRYPTO_CMD_USE_SOFTDRIVERS,
     "USE_SOFTDRIVERS",
     "specifies whether to use software (not accelerated) drivers ("
-        OPENSSL_MSTR(DEVCRYPTO_REQUIRE_ACCELERATED) "=use only accelerated drivers, "
-        OPENSSL_MSTR(DEVCRYPTO_USE_SOFTWARE) "=allow all drivers, "
-        OPENSSL_MSTR(DEVCRYPTO_REJECT_SOFTWARE)
+        STR(DEVCRYPTO_REQUIRE_ACCELERATED) "=use only accelerated drivers, "
+        STR(DEVCRYPTO_USE_SOFTWARE) "=allow all drivers, "
+        STR(DEVCRYPTO_REJECT_SOFTWARE)
         "=use if acceleration can't be determined) [default="
-        OPENSSL_MSTR(DEVCRYPTO_DEFAULT_USE_SOFTDRIVERS) "]",
+        STR(DEVCRYPTO_DEFAULT_USE_SOFTDRIVERS) "]",
     ENGINE_CMD_FLAG_NUMERIC},
 #endif
 

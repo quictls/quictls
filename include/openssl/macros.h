@@ -14,9 +14,6 @@
 #include <openssl/opensslv.h>
 
 
-/* Helper macros for CPP string composition */
-# define OPENSSL_MSTR_HELPER(x) #x
-# define OPENSSL_MSTR(x) OPENSSL_MSTR_HELPER(x)
 
 /*
  * Sometimes OPENSSL_NO_xxx ends up with an empty file and some compilers
