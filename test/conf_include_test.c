@@ -17,6 +17,7 @@
 # include <direct.h>
 # define DIRSEP "/\\"
 # define DIRSEP_PRESERVE 0
+# define chdir _chdir
 #elif !defined(OPENSSL_NO_POSIX_IO)
 # include <unistd.h>
 # define DIRSEP "/"
