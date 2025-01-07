@@ -119,7 +119,7 @@ IF[{- !$disabled{fips} -}]
   DEPEND[fipsmodule.cnf]=$FIPSGOAL
 
   # Add VERSIONINFO resource for windows
-  IF[{- $config{target} =~ /^(?:Cygwin|mingw|VC-|BC-)/ -}]
+  IF[{- $config{target} =~ /^(?:Cygwin|mingw|VC-)/ -}]
     GENERATE[fips.rc]=../util/mkrc.pl fips
     SOURCE[$FIPSGOAL]=fips.rc
   ENDIF
