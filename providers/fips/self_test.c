@@ -12,7 +12,6 @@
 #include <openssl/params.h>
 #include <openssl/crypto.h>
 #include <internal/cryptlib.h>
-#include <openssl/fipskey.h>
 #include <openssl/err.h>
 #include <openssl/proverr.h>
 #include <openssl/rand.h>

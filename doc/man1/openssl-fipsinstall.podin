@@ -144,8 +144,8 @@ configured is used.
 Specifies the MAC key in hexadecimal form (two hex digits per byte).
 The key length must conform to any restrictions of the MAC algorithm.
 A key must be specified for every MAC algorithm.
-If no key is provided, the default that was specified when OpenSSL was
-configured is used.
+The key must be provided and should be obtained from your FIPS
+vendor.
 
 =item B<digest>:I<string>
 
