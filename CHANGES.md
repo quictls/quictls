@@ -61,7 +61,7 @@ library number is dynamic not static.
   - The unused and undocumented `BIO_f_linebuffer`, `BIO_f_reliable`, and
 `BIO_s_log` now return NULL.
   - Removed all uses of `X509_get_default_cert_dir_env` and
-`X09_get_default_cert_file_env` and just use the names documented
+`X509_get_default_cert_file_env` and just use the names documented
 in `doc/man7/openssl-env.pod` but kept the function for downstream
 compatibility.
 
