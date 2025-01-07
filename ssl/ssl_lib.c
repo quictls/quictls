@@ -6590,55 +6590,46 @@ static int nss_keylog_int(const char *prefix,
                           const uint8_t *parameter_2,
                           size_t parameter_2_len)
 {
+    BIO *bio;
     char *out = NULL;
-    char *cursor = NULL;
-    size_t out_len = 0;
     size_t i;
-    size_t prefix_len;
     SSL_CTX *sctx = SSL_CONNECTION_GET_CTX(sc);
+    int ret = 0;
 
     /* If no logging at all, return early. */
     if (sctx->keylog_callback == NULL && sctx->do_sslkeylog == 0)
         return 1;
 
-    /*
-     * Our output buffer will contain the following strings, rendered with
-     * space characters in between, terminated by a NULL character: first the
-     * prefix, then the first parameter, then the second parameter. The
-     * meaning of each parameter depends on the specific key material being
-     * logged. Note that the first and second parameters are encoded in
-     * hexadecimal, so we need a buffer that is twice their lengths.
-     */
-    prefix_len = strlen(prefix);
-    out_len = prefix_len + (2 * parameter_1_len) + (2 * parameter_2_len) + 3;
-    if ((out = cursor = OPENSSL_malloc(out_len)) == NULL)
-        return 0;
+    if ((bio = BIO_new(BIO_s_secmem())) == NULL)
+        goto err;
 
-    strcpy(cursor, prefix);
-    cursor += prefix_len;
-    *cursor++ = ' ';
-
+    if (BIO_printf(bio, "%s ", prefix) <= 0)
+        goto err;
     for (i = 0; i < parameter_1_len; i++) {
-        sprintf(cursor, "%02x", parameter_1[i]);
-        cursor += 2;
+        if (BIO_printf(bio, "%02x", parameter_1[i]) <= 0)
+            goto err;
     }
-    *cursor++ = ' ';
-
+    if (BIO_printf(bio, " ") <= 0)
+        goto err;
     for (i = 0; i < parameter_2_len; i++) {
-        sprintf(cursor, "%02x", parameter_2[i]);
-        cursor += 2;
+        if (BIO_printf(bio, "%02x", parameter_2[i]) <= 0)
+            goto err;
     }
-    *cursor = '\0';
+    if (BIO_write(bio, "", sizeof("")) <= 0)
+        goto err;
+    if (BIO_get_mem_data(bio, &out) <= 0)
+        goto err;
 
 #if !defined(OPENSSL_NO_SSLKEYLOG)
     if (sctx->do_sslkeylog)
-        do_sslkeylog(SSL_CONNECTION_GET_SSL(sc), (const char *)out);
+        do_sslkeylog(SSL_CONNECTION_GET_SSL(sc), out);
 #endif
-    if (sctx->keylog_callback)
-        sctx->keylog_callback(SSL_CONNECTION_GET_SSL(sc), (const char *)out);
-    OPENSSL_clear_free(out, out_len);
-    return 1;
-
+    if (sctx->keylog_callback != NULL)
+        sctx->keylog_callback(SSL_CONNECTION_GET_SSL(sc), out);
+    ret = 1;
+ err:
+    BIO_free(bio);
+    return ret;
 }
 
 int ssl_log_rsa_client_key_exchange(SSL_CONNECTION *sc,
