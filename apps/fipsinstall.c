@@ -14,7 +14,6 @@
 #include <openssl/fips_names.h>
 #include <openssl/core_names.h>
 #include <openssl/self_test.h>
-#include <openssl/fipskey.h>
 #include <apps/apps.h>
 #include <apps/progs.h>
 
@@ -471,6 +470,10 @@ opthelp:
         BIO_printf(bio_err, "Missing -in option for -verify\n");
         goto opthelp;
     }
+    if (!gotkey) {
+	BIO_printf(bio_err, "Missing FIPS verification key\n");
+        goto end;
+    }
 
     if (parent_config != NULL) {
         /* Test that a parent config can load the module */
@@ -503,8 +506,6 @@ opthelp:
 
     /* Use the default FIPS HMAC digest and key if not specified. */
     if (!gotdigest && !sk_OPENSSL_STRING_push(opts, "digest:SHA256"))
-        goto end;
-    if (!gotkey && !sk_OPENSSL_STRING_push(opts, "hexkey:" FIPS_KEY_STRING))
         goto end;
 
     module_bio = bio_open_default(module_fname, 'r', FORMAT_BINARY);

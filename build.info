@@ -28,7 +28,6 @@ DEPEND[]=include/openssl/asn1.h \
          include/openssl/ct.h \
          include/openssl/err.h \
          include/openssl/ess.h \
-         include/openssl/fipskey.h \
          include/openssl/lhash.h \
          include/openssl/ocsp.h \
          include/openssl/pkcs12.h \
@@ -71,7 +70,6 @@ GENERATE[include/openssl/x509_vfy.h]=include/openssl/x509_vfy.h.gen
 # We still need this information for the FIPS module checksum, but the attribute
 # 'skip' ensures that nothing is actually done with it.
 GENERATE[include/openssl/configuration.h]{skip}=include/openssl/configuration.h.in
-GENERATE[include/openssl/fipskey.h]=include/openssl/fipskey.h.in
 GENERATE[include/crypto/dso_conf.h]=include/crypto/dso_conf.h.in
 
 IF[{- defined $target{shared_defflag} -}]

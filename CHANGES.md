@@ -34,6 +34,9 @@ this script.
 - Move the two apps, CA.pl and tsget, that were written in Perl, to a
 separate directory. Perl is optional on intalled systems.
 
+- No longer ship `fipskey.h`; have to enter the key on the commandline
+if installing the OpenSSL FIPS module.
+
 - Almost all uses of the Perl templating package other than the build
 system were replaced with short custom scripts. Perl is still required
 to configure and set up the build system.
