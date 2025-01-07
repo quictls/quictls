@@ -383,7 +383,7 @@ static int test_keylog(void)
         goto end;
 # if !defined(OPENSSL_NO_SSLKEYLOG_CB)
     clean_log_space();
-    struct sslapitest_log_counts expected;
+    struct sslapitest_log_counts expected = {0};
 
     SSL_CTX_set_keylog_callback(cctx, client_keylog_callback);
     if (!TEST_true(SSL_CTX_get_keylog_callback(cctx)
@@ -441,7 +441,7 @@ static int test_keylog_no_master_key(void)
     SSL *clientssl = NULL, *serverssl = NULL;
     SSL_SESSION *sess = NULL;
     int testresult = 0;
-    struct sslapitest_log_counts expected;
+    struct sslapitest_log_counts expected = {0};
     unsigned char buf[1];
     size_t readbytes, written;
 
