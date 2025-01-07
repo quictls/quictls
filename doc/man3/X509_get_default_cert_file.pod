@@ -32,8 +32,8 @@ The environment variable B<SSL_CERT_FILE>
 specifies a nondefault value to be used instead of the value
 returned by X509_get_default_cert_file(). The value returned by the latter
 function is not affected by these environment variables; you must check for this
-environment variable yourself, using this function to retrieve the correct
-environment variable name. If an environment variable is not set, the value
+environment variable yourself.
+If the environment variable is not set, the value
 returned by the X509_get_default_cert_file() should be used.
 
 =head1 BUGS
