@@ -26,8 +26,8 @@ How can I contribute?
 
 Open a PR! Your code must be Apache 2 licensed. We are interested in
 expanding compatibility with BoringSSL and LibreSSL, simplifying and
-improving the security of some grotty code, cleaning this up, and new
-features, even before RFCs are final.
+improving the security of some grotty code, cleaning this up, and
+adding new features, even before RFCs are final.
 
 We're also interested in KEM interfaces and postquantum algorithms, and if an
 issue appeals to you, feel free to jump in and get started on it.
@@ -41,7 +41,8 @@ Where/how can I report vulnerabilities?
 Please see our [security
 policy](https://github.com/quictls/quictls/blob/main/SECURITY.md)
 for information on how to report vulnerabilities in
-QuicTLS to us.
+QuicTLS to us. We are committed to sharing items with OpenSSL,
+BoringSSL, and LibreSSL as necessary.
 
 
 What about sonames and the like?
@@ -52,6 +53,12 @@ and generally ABI compatibility is a big priority for us.
 
 Who are you?
 ------------
+
+This is a collaborative effort, currently among a small group of *SSL
+developers. We welcome your involvement, please join us! We hope to
+turn this over to the ASF if we build enough momentum. There is a
+mailing list, [quictls-setup](https://groups.google.com/u/1/g/quictls-setup)
+for anyone interested in helping set up the governance.
 
 This is a collaborative effort between [Akamai](https://www.akamai.com) and
 [Microsoft](https://www.microsoft.com). We welcome anyone to contribute and
