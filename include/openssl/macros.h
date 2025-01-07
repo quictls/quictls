@@ -78,17 +78,13 @@
 
 /*
  * Applications should use -DOPENSSL_API_COMPAT=<version> to suppress the
- * declarations of functions deprecated in or before <version>.  If this is
- * undefined, the value of the macro OPENSSL_CONFIGURED_API (defined in
- * <openssl/opensslconf.h>) is the default.
+ * declarations of functions deprecated in or before <version>.
  *
  * For any version number up until version 1.1.x, <version> is expected to be
  * the calculated version number 0xMNNFFPPSL.
  * For version numbers 3.0 and on, <version> is expected to be a computation
  * of the major and minor numbers in decimal using this formula:
- *
  *     MAJOR * 10000 + MINOR * 100
- *
  * So version 3.0 becomes 30000, version 3.2 becomes 30200, etc.
  */
 
@@ -123,16 +119,8 @@
  * the API compatibility level.
  */
 # ifndef OPENSSL_API_LEVEL
-#  if OPENSSL_CONFIGURED_API > 0
-#   define OPENSSL_API_LEVEL (OPENSSL_CONFIGURED_API)
-#  else
-#   define OPENSSL_API_LEVEL \
+#  define OPENSSL_API_LEVEL \
            (OPENSSL_VERSION_MAJOR * 10000 + OPENSSL_VERSION_MINOR * 100)
-#  endif
-# endif
-
-# if OPENSSL_API_LEVEL > OPENSSL_CONFIGURED_API
-#  error "The requested API level higher than the configured API compatibility level"
 # endif
 
 /*
