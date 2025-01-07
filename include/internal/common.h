@@ -12,9 +12,8 @@
 
 # include <stdlib.h>
 # include <string.h>
-# include "openssl/configuration.h"
-
-# include <internal/e_os.h> /* inline in many files */
+# include <openssl/configuration.h>
+# include <internal/e_os.h>
 # include <internal/nelem.h>
 
 # if defined(__GNUC__) || defined(__clang__)

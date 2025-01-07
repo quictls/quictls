@@ -403,8 +403,6 @@ OPENSSL_VERSION_PATCH                   define
 OPENSSL_VERSION_PRE_RELEASE             define
 OPENSSL_VERSION_PREREQ                  define
 OPENSSL_VERSION_BUILD_METADATA          define
-OPENSSL_VERSION_PRE_RELEASE_STR         define
-OPENSSL_VERSION_BUILD_METADATA_STR      define
 OPENSSL_VERSION_TEXT                    define
 OPENSSL_clear_free                      define
 OPENSSL_clear_realloc                   define

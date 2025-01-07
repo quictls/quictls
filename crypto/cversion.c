@@ -8,8 +8,7 @@
  */
 
 #include <internal/cryptlib.h>
-
-#include "buildinf.h"
+#include <internal/buildinf.h>
 
 unsigned long OpenSSL_version_num(void)
 {

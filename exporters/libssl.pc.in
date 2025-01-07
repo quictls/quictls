@@ -1,9 +1,10 @@
-libdir={- $OpenSSL::safe::installdata::LIBDIR -}
-includedir={- $OpenSSL::safe::installdata::INCLUDEDIR -}
+libdir=$(INSTALLPREFIX)/lib
+includedir=$(INSTALLPREFIX)/include
 
-Name: QuicTLS-libssl
+Name: OpenSSL-libssl
 Description: QUIC, TLS and cryptography libraries
-Version: {- $OpenSSL::safe::installdata::VERSION -}
+Version: ${OPENSSL_FULL_VERSION_STRING}
 Requires.private: libcrypto
-Libs: -L${libdir} -lssl
-Cflags: -I${includedir}
+Libs: -L${OPENSSL_LIB_DIR} -lcrypto
+Libs.private: $(extra libs to link with)
+Cflags: -I$(OPENSSL_INC_DIR)

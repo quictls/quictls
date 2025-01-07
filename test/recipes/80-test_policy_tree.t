@@ -14,7 +14,6 @@ use POSIX;
 use OpenSSL::Test qw/:DEFAULT srctop_file with data_file/;
 
 use OpenSSL::Test::Utils;
-use OpenSSL::Glob;
 
 setup("test_policy_tree");
 

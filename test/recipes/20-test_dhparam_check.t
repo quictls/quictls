@@ -11,7 +11,6 @@ use strict;
 use warnings;
 
 use File::Spec;
-use OpenSSL::Glob;
 use OpenSSL::Test qw/:DEFAULT data_file/;
 use OpenSSL::Test::Utils;
 

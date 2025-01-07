@@ -14,7 +14,7 @@
 # ifdef  __cplusplus
 extern "C" {
 # endif
-# include <include/internal/params_idx.inc>
+# include <internal/params_idx.inc>
 # ifdef  __cplusplus
 }
 # endif
