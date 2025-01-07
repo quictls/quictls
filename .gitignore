@@ -13,6 +13,8 @@
 /tmp.*
 /configdata.pm
 /builddata.pm
+/cmake/include/**
+/cmake/**
 
 # Exporters
 /*.pc
@@ -29,7 +31,6 @@
 
 # Auto generated headers
 /crypto/buildinf.h
-/include/crypto/*_conf.h
 /include/openssl/asn1.h
 /include/openssl/asn1t.h
 /include/openssl/bio.h
@@ -119,8 +120,6 @@ doc/man1/openssl-*.pod
 /TAGS
 *.map
 *.ld
-/apps/progs.c
-/include/apps/progs.h
 
 # Windows (legacy)
 /tmp32
@@ -169,15 +168,6 @@ doc/man1/openssl-*.pod
 # Generated docs directories
 /doc/html
 /doc/man
-
-##### Generic patterns
-# Auto generated assembly language source files
-*.s
-!/crypto/*/asm/*.s
-/crypto/arm*.S
-/crypto/*/*.S
-*.asm
-!/crypto/*/asm/*.asm
 
 # Object files
 *.o

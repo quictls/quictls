@@ -84,6 +84,7 @@ static int test_lib(void)
     case CRYPTO_FIRST:
         if (!sd_load(path_crypto, &cryptolib, SD_SHLIB)) {
             fprintf(stderr, "Failed to load libcrypto\n");
+            fprintf(stderr, "dlerror: %s\n", dlerror());
             goto end;
         }
         if (test_type != CRYPTO_FIRST)
@@ -93,12 +94,14 @@ static int test_lib(void)
     case SSL_FIRST:
         if (!sd_load(path_ssl, &ssllib, SD_SHLIB)) {
             fprintf(stderr, "Failed to load libssl\n");
+            fprintf(stderr, "dlerror: %s\n", dlerror());
             goto end;
         }
         if (test_type != SSL_FIRST)
             break;
         if (!sd_load(path_crypto, &cryptolib, SD_SHLIB)) {
             fprintf(stderr, "Failed to load libcrypto\n");
+            fprintf(stderr, "dlerror: %s\n", dlerror());
             goto end;
         }
         break;

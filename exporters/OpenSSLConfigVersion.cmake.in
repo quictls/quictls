@@ -1,0 +1,16 @@
+set(PACKAGE_VERSION ${OPENSSL_VERSION})
+
+if (NOT PACKAGE_FIND_VERSION)
+    # find_package() was called without any version information, so we
+    # assume the caller accepts whatever they get.
+    set(PACKAGE_VERSION_COMPATIBLE 1)
+elseif (PACKAGE_FIND_VERSION_MAJOR LESS ${OPENSSL_VERSION_MAJOR}
+        OR PACKAGE_FIND_VERSION VERSION_GREATER ${PACKAGE_VERSION})
+    # Major version is older or full version is later
+    set(PACKAGE_VERSION_UNSUITABLE 1)
+else ()
+    set(PACKAGE_VERSION_COMPATIBLE 1)
+    if (PACKAGE_FIND_VERSION VERSION_EQUAL ${PACKAGE_VERSION})
+        set(PACKAGE_VERSION_EXACT 1)
+    endif ()
+endif ()

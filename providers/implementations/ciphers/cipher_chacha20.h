@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include "include/crypto/chacha.h"
+#include <crypto/chacha.h>
 #include <providers/ciphercommon.h>
 
 typedef struct {

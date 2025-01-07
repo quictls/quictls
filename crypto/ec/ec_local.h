@@ -10,6 +10,7 @@
 
 #include <stdlib.h>
 
+#include <openssl/configuration.h>
 #include <openssl/obj_mac.h>
 #include <openssl/ec.h>
 #include <openssl/bn.h>

@@ -11,6 +11,6 @@ providers = providers
 p_test_configured = p_test_configured
 
 [p_test_configured]
-module = {- platform->dso('p_test') -}
+module = ${CMAKE_SHARED_LIBRARY_SUFFIX}
 activate = 1
 greeting = Hello OpenSSL, greetings from Test Provider

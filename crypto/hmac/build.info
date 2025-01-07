@@ -1,5 +1,0 @@
-LIBS=../../libcrypto
-
-$COMMON=hmac.c
-
-SOURCE[../../libcrypto]=$COMMON
