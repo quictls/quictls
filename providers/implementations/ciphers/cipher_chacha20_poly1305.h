@@ -9,7 +9,7 @@
 
 /* Dispatch functions for chacha20_poly1305 cipher */
 
-#include "include/crypto/poly1305.h"
+#include <crypto/poly1305.h>
 #include "cipher_chacha20.h"
 
 #define NO_TLS_PAYLOAD_LENGTH ((size_t)-1)

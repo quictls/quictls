@@ -13,7 +13,7 @@
 #include <openssl/opensslconf.h>
 #include "fuzzer.h"
 
-#ifndef OPENSSL_NO_FUZZ_LIBFUZZER
+#ifndef OPENSSL_DO_FUZZ_LIBFUZZER
 
 int LLVMFuzzerInitialize(int *argc, char ***argv);
 int LLVMFuzzerTestOneInput(const uint8_t *buf, size_t len);
@@ -28,7 +28,7 @@ int LLVMFuzzerTestOneInput(const uint8_t *buf, size_t len)
     return FuzzerTestOneInput(buf, len);
 }
 
-#elif !defined(OPENSSL_NO_FUZZ_AFL)
+#elif !defined(OPENSSL_DO_FUZZ_AFL)
 
 #define BUF_SIZE 65536
 

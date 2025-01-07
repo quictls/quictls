@@ -1,7 +1,4 @@
-libdir={- $OpenSSL::safe::installdata::LIBDIR -}
-includedir={- $OpenSSL::safe::installdata::INCLUDEDIR -}
-
 Name: OpenSSL
 Description: Secure Sockets Layer and cryptography libraries and tools
-Version: {- $OpenSSL::safe::installdata::VERSION -}
+Version: ${OPENSSL_FULL_VERSION_STRING}
 Requires: libssl libcrypto

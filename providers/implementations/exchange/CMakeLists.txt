@@ -1,0 +1,18 @@
+if (NOT OPENSSL_NO_ASM)
+    set(ecdef_s390x S390X_EC_ASM)
+    if (DEFINED ecdef_${ARCH})
+        set(ecdef ${ecdef_${ARCH}})
+    endif ()
+endif ()
+
+if (NOT OPENSSL_NO_DH)
+    target_sources(defprov PRIVATE dh_exch.c)
+    if (NOT OPENSSL_NO_EC)
+        if (DEFINED ecdef)
+            target_compile_definitions(defprov ${ecdef})
+        endif ()
+        target_sources(defprov PRIVATE ecx_exch.c ecdh_exch.c)
+    endif ()
+endif ()
+
+target_sources(defprov PRIVATE kdf_exch.c)
