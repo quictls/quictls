@@ -84,6 +84,9 @@ extern "C" {
 # ifndef OPENSSL_NO_QUIC
 #  define OPENSSL_NO_QUIC
 # endif
+# ifndef OPENSSL_NO_RDRAND
+#  define OPENSSL_NO_RDRAND
+# endif
 # ifndef OPENSSL_NO_SRP
 #  define OPENSSL_NO_SRP
 # endif

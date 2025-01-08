@@ -101,6 +101,8 @@ replaced by the ALPN extension, IETF RFC 7301, in 2014.
   - no-trace (the default) code has been removed. This was not uniformly
 used. It was also a security concern as it was not documented that it would
 log key material.
+  - The `RDRAND` engine has been removed, no-rdrand configuration option,
+a it was replaced by the built-in RAND changes.
 
 - Removed support for some old platforms:
   - Removed support for old HPE platforms: NonStop and Tandem
