@@ -442,7 +442,6 @@ my @disablables = (
     "idea",
     "ktls",
     "legacy",
-    "loadereng",
     "makedepend",
     "md2",
     "md4",
@@ -616,7 +615,6 @@ my @disable_cascades = (
     "pic"               => [ "shared", "module" ],
 
     "engine"            => [ "dynamic-engine", grep(/eng$/, @disablables) ],
-    "dynamic-engine"    => [ "loadereng" ],
     "hw"                => [ "padlockeng" ],
 
     # no-autoalginit is only useful when building non-shared
