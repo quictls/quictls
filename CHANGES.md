@@ -27,6 +27,10 @@ keyword, named initializers, etc.
 in execute-only mode and with indirect branch tracking on modern Intel
 hardware.
 
+- Cherry-picked no_cache provider behavior change to fix pkcs11-provider,
+which initially reports "no algorithms" and expects to be queried again
+when the supported algorithms can be determined from the HSM token.
+
 - Simplified `util/shlib_wrap`; if your shell doesn't do "$@" properly
 when there are no arguments, please look at an earlier version of
 this script.
