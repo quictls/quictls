@@ -396,8 +396,6 @@ OCSP_set_max_response_length            define deprecated 3.0.0
 OPENSSL_FILE                            define
 OPENSSL_FUNC                            define
 OPENSSL_LINE                            define
-OPENSSL_MSTR                            define
-OPENSSL_MSTR_HELPER                     define
 OPENSSL_VERSION_MAJOR                   define
 OPENSSL_VERSION_MINOR                   define
 OPENSSL_VERSION_NUMBER                  define
@@ -449,8 +447,6 @@ OSSL_CMP_LOG_INFO                       define
 OSSL_CMP_LOG_NOTICE                     define
 OSSL_CMP_LOG_TRACE                      define
 OSSL_CMP_LOG_WARNING                    define
-OSSL_CMP_MSTR_HELPER                    define
-OSSL_CMP_MSTR                           define
 OSSL_CMP_P10CR                          define
 OSSL_CMP_certConf_cb_t                  datatype
 OSSL_CMP_log_cb_t                       datatype

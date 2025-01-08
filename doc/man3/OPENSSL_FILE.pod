@@ -2,8 +2,7 @@
 
 =head1 NAME
 
-OPENSSL_FILE, OPENSSL_LINE, OPENSSL_FUNC,
-OPENSSL_MSTR, OPENSSL_MSTR_HELPER
+OPENSSL_FILE, OPENSSL_LINE, OPENSSL_FUNC
 - generic C programming utility macros
 
 =head1 SYNOPSIS
@@ -13,9 +12,6 @@ OPENSSL_MSTR, OPENSSL_MSTR_HELPER
  #define OPENSSL_FILE /* typically: __FILE__ */
  #define OPENSSL_LINE /* typically: __LINE__ */
  #define OPENSSL_FUNC /* typically: __func__ */
-
- #define OPENSSL_MSTR_HELPER(x) #x
- #define OPENSSL_MSTR(x) OPENSSL_MSTR_HELPER(x)
 
 =head1 DESCRIPTION
 
@@ -27,10 +23,6 @@ The macro B<OPENSSL_FUNC> attempts to yield the name of the C function
 currently being compiled, as far as language and compiler versions allow.
 Otherwise, it yields "(unknown function)".
 
-The macro B<OPENSSL_MSTR> yields the expansion of the macro given as argument,
-which is useful for concatenation with string constants.
-The macro B<OPENSSL_MSTR_HELPER> is an auxiliary macro for this purpose.
-
 =head1 RETURN VALUES
 
 see above
@@ -41,8 +33,7 @@ L<crypto(7)>
 
 =head1 HISTORY
 
-B<OPENSSL_FUNC>, B<OPENSSL_MSTR>, and B<OPENSSL_MSTR_HELPER>
-were added in OpenSSL 3.0.
+B<OPENSSL_FUNC> was added in OpenSSL 3.0.
 
 =head1 COPYRIGHT
 
