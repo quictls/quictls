@@ -263,7 +263,7 @@ static int use_proxy(const char *no_proxy, const char *server)
     if (no_proxy == NULL)
         no_proxy = ossl_safe_getenv("no_proxy");
     if (no_proxy == NULL)
-        no_proxy = ossl_safe_getenv(OPENSSL_NO_PROXY);
+        no_proxy = ossl_safe_getenv("NO_PROXY");
 
     if (no_proxy != NULL)
         found = strstr(no_proxy, server);
@@ -285,7 +285,7 @@ const char *OSSL_HTTP_adapt_proxy(const char *proxy, const char *no_proxy,
     if (proxy == NULL)
         proxy = ossl_safe_getenv(use_ssl ? "https_proxy" : "http_proxy");
     if (proxy == NULL)
-        proxy = ossl_safe_getenv(use_ssl ? OPENSSL_HTTP_PROXY : OPENSSL_HTTPS_PROXY);
+        proxy = ossl_safe_getenv(use_ssl ? "HTTPS_PROXY" : "HTTP_PROXY");
 
     if (proxy == NULL || *proxy == '\0' || !use_proxy(no_proxy, server))
         return NULL;

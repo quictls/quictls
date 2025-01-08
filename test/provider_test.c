@@ -246,8 +246,8 @@ static int test_builtin_provider_with_child(void)
     legacy = OSSL_PROVIDER_load(libctx, "legacy");
     if (legacy == NULL) {
         /*
-         * In this case we assume we've been built with "no-legacy" and skip
-         * this test (there is no OPENSSL_NO_LEGACY)
+         * Assume we were configured with "no-legacy" and skip the test.
+         * For some reason, that option does not get turned into a define.
          */
         OSSL_LIB_CTX_free(libctx);
         return 1;

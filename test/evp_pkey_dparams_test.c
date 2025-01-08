@@ -22,10 +22,10 @@
 #include <test/testutil.h>
 
 #if defined(OPENSSL_NO_DH) && defined(OPENSSL_NO_DSA) && defined(OPENSSL_NO_EC)
-# define OPENSSL_NO_KEYPARAMS
+# define NO_KEY_PARAMETERS
 #endif
 
-#ifndef OPENSSL_NO_KEYPARAMS
+#ifndef NO_KEY_PARAMETERS
 
 struct pubkey {
     int bad;
@@ -314,7 +314,7 @@ static int set_enc_pubkey_test(int id)
 
 int setup_tests(void)
 {
-#ifdef OPENSSL_NO_KEYPARAMS
+#ifdef NO_KEY_PARAMETERS
     TEST_note("No DH/DSA/EC support");
 #else
     ADD_ALL_TESTS(params_bio_test, OSSL_NELEM(pkey_params));

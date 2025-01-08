@@ -37,7 +37,7 @@
 #include "endecoder_local.h"
 
 #if defined(OPENSSL_NO_DH) && defined(OPENSSL_NO_DSA) && defined(OPENSSL_NO_EC)
-# define OPENSSL_NO_KEYPARAMS
+# define NO_KEY_PARAMETERS
 #endif
 
 struct key2any_ctx_st {
@@ -425,7 +425,7 @@ static int key_to_type_specific_pem_pub_bio(BIO *out, const void *key,
                                            p2s, k2d, ctx, NULL, NULL);
 }
 
-#ifndef OPENSSL_NO_KEYPARAMS
+#ifndef NO_KEY_PARAMETERS
 static int key_to_type_specific_pem_param_bio(BIO *out, const void *key,
                                               int key_nid, const char *pemname,
                                               key_to_paramstring_fn *p2s,

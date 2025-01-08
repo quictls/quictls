@@ -72,7 +72,6 @@ IF[{- !$disabled{"engine"} -}]
     IF[{- !$disabled{"loadereng"} -}]
       MODULES{engine}=loader_attic
       SOURCE[loader_attic]=e_loader_attic.c ../crypto/pem/pvkfmt.c
-      DEFINE[loader_attic]=OPENSSL_NO_PROVIDER_CODE
       DEPEND[loader_attic]=../libcrypto
       INCLUDE[loader_attic]=../include
       IF[{- defined $target{shared_defflag} -}]

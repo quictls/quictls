@@ -42,7 +42,7 @@ OSSL_provider_init_fn ossl_legacy_provider_init;
 #define TEST_FL_true(a)              test_true(file, line, #a, (a) != 0)
 
 #if defined(OPENSSL_NO_DH) && defined(OPENSSL_NO_DSA) && defined(OPENSSL_NO_EC)
-# define OPENSSL_NO_KEYPARAMS
+# define NO_KEY_PARAMETERS
 #endif
 
 static int default_libctx = 1;
@@ -66,7 +66,7 @@ static OSSL_PARAM *ec_explicit_prime_params_explicit = NULL;
 
 #endif
 
-#ifndef OPENSSL_NO_KEYPARAMS
+#ifndef NO_KEY_PARAMETERS
 static EVP_PKEY *make_template(const char *type, OSSL_PARAM *genparams)
 {
     EVP_PKEY *pkey = NULL;
@@ -577,7 +577,7 @@ static int test_unprotected_via_PEM(const char *type, EVP_PKEY *key, int fips)
                               dump_pem, fips ? 0 : FLAG_FAIL_IF_FIPS);
 }
 
-#ifndef OPENSSL_NO_KEYPARAMS
+#ifndef NO_KEY_PARAMETERS
 static int check_params_DER(const char *file, const int line,
                             const char *type, const void *data, size_t data_len)
 {
@@ -634,7 +634,7 @@ static int test_params_via_PEM(const char *type, EVP_PKEY *key)
                               test_text, check_params_PEM,
                               dump_pem, 0);
 }
-#endif /* !OPENSSL_NO_KEYPARAMS */
+#endif /* !NO_KEY_PARAMETERS */
 
 static int check_unprotected_legacy_PEM(const char *file, const int line,
                                         const char *type,
