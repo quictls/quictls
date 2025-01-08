@@ -18,3 +18,4 @@ Individuals
  * Theo Buehler
  * Rich Salz
  * Watson Ladd
+ * Shih-Ping Chan
