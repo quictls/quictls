@@ -1106,12 +1106,12 @@ static const ENGINE_CMD_DEFN devcrypto_cmds[] = {
 #if defined(CIOCGSESSINFO) || defined(CIOCGSESSION2)
    {DEVCRYPTO_CMD_USE_SOFTDRIVERS,
     "USE_SOFTDRIVERS",
-    "specifies whether to use software (not accelerated) drivers ("
-        STR(DEVCRYPTO_REQUIRE_ACCELERATED) "=use only accelerated drivers, "
-        STR(DEVCRYPTO_USE_SOFTWARE) "=allow all drivers, "
-        STR(DEVCRYPTO_REJECT_SOFTWARE)
-        "=use if acceleration can't be determined) [default="
-        STR(DEVCRYPTO_DEFAULT_USE_SOFTDRIVERS) "]",
+    "specifies whether to use software (not accelerated) drivers ["
+        "DEVCRYPTO_REQUIRE_ACCELERATED=use only accelerated drivers, "
+        "DEVCRYPTO_USE_SOFTWARE=allow all drivers, "
+        "DEVCRYPTO_REJECT_SOFTWARE"
+        "=use if acceleration can't be determined)"
+        " [default=DEVCRYPTO_DEFAULT_USE_SOFTDRIVERS]",
     ENGINE_CMD_FLAG_NUMERIC},
 #endif
 
