@@ -103,8 +103,6 @@ my @methods;
 my @prov_method = qw(-provider default);
 push @prov_method, qw(-provider legacy) unless disabled('legacy');
 push @methods, [ @prov_method ];
-push @methods, [qw(-engine loader_attic)]
-    unless disabled('loadereng');
 
 my $n = 2 + scalar @methods
     * ( (3 * scalar @noexist_files)

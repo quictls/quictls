@@ -7,8 +7,6 @@
  * https://www.openssl.org/source/license.html
  */
 
-/* This file has quite some overlap with engines/e_loader_attic.c */
-
 #include <string.h>
 #include <sys/stat.h>
 #include <ctype.h>  /* isdigit */
@@ -390,7 +388,7 @@ static int file_load_construct(OSSL_DECODER_INSTANCE *decoder_inst,
     /*
      * At some point, we may find it justifiable to recognise PKCS#12 and
      * handle it specially here, making |file_load()| return pass its
-     * contents one piece at ta time, like |e_loader_attic.c| does.
+     * contents one piece at a time.
      *
      * However, that currently means parsing them out, which converts the
      * DER encoded PKCS#12 into a bunch of EVP_PKEYs and X509s, just to
