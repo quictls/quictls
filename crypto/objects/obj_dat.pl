@@ -9,9 +9,6 @@
 use integer;
 use strict;
 use warnings;
-use FindBin;
-use lib "$FindBin::Bin/../../util/perl";
-use OpenSSL::copyright;
 
 # Generate the DER encoding for the given OID.
 sub der_it
@@ -40,7 +37,7 @@ sub der_it
 }
 
 # The year the output file is generated.
-my $YEAR = OpenSSL::copyright::latest(($0, $ARGV[0]));
+my $YEAR = 2021;
 
 # Read input, parse all #define's into OID name and value.
 # Populate %ln and %sn with long and short names (%dupln and %dupsn)
