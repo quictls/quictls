@@ -22,13 +22,11 @@ $ALL=$COMMON\
      fcrypt.c xcbc_enc.c cbc_cksm.c
 
 SOURCE[../../libcrypto]=$ALL $DESASM
-SOURCE[../../providers/libfips.a]=$COMMON $DESASM
 IF[{- !$disabled{module} && !$disabled{shared} -}]
   SOURCE[../../providers/liblegacy.a]=$DESASM
 ENDIF
 
 DEFINE[../../libcrypto]=$DESDEF
-DEFINE[../../providers/libfips.a]=$DESDEF
 
 # When all deprecated symbols are removed, libcrypto doesn't export the
 # DES functions, so we must include them directly in liblegacy.a

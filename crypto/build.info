@@ -65,8 +65,6 @@ INCLUDE[cpuid.o]=..
 
 SOURCE[../libcrypto]=$CPUID_COMMON
 DEFINE[../libcrypto]=$CPUIDDEF
-SOURCE[../providers/libfips.a]=$CPUID_COMMON
-DEFINE[../providers/libfips.a]=$CPUIDDEF
 # We only need to include the CPUID stuff in the legacy provider when it's a
 # separate module and it's dynamically linked with libcrypto.  Otherwise, it
 # already gets everything that the static libcrypto.a has, and doesn't need it
@@ -86,7 +84,6 @@ $CORE_COMMON=provider_core.c provider_predefined.c \
         core_fetch.c core_algorithm.c core_namemap.c self_test_core.c
 
 SOURCE[../libcrypto]=$CORE_COMMON provider_conf.c
-SOURCE[../providers/libfips.a]=$CORE_COMMON
 
 # Central utilities
 $UTIL_COMMON=\
@@ -102,7 +99,6 @@ SOURCE[../libcrypto]=$UTIL_COMMON \
         o_fopen.c getenv.c o_init.c init.c trace.c provider.c provider_child.c \
         punycode.c passphrase.c sleep.c deterministic_nonce.c \
         time.c
-SOURCE[../providers/libfips.a]=$UTIL_COMMON
 
 SOURCE[../libcrypto]=$UPLINKSRC
 DEFINE[../libcrypto]=$UPLINKDEF

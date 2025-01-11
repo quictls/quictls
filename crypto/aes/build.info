@@ -67,12 +67,10 @@ SOURCE[../../libcrypto]=$COMMON aes_cfb.c aes_ofb.c aes_wrap.c
 IF[{- !$disabled{'deprecated-3.0'} -}]
   SOURCE[../../libcrypto]=aes_ige.c
 ENDIF
-SOURCE[../../providers/libfips.a]=$COMMON
 
 # Implementations are now spread across several libraries, so the defines
 # need to be applied to all affected libraries and modules.
 DEFINE[../../libcrypto]=$AESDEF
-DEFINE[../../providers/libfips.a]=$AESDEF
 DEFINE[../../providers/libdefault.a]=$AESDEF
 # We only need to include the AESDEF stuff in the legacy provider when it's a
 # separate module and it's dynamically linked with libcrypto.  Otherwise, it

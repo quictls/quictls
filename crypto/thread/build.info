@@ -18,4 +18,3 @@ ELSE
 ENDIF
 
 SOURCE[../../libcrypto]=$THREADS
-SOURCE[../../providers/libfips.a]=$THREADS

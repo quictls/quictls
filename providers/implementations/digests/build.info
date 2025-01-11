@@ -3,9 +3,9 @@
 
 $COMMON_GOAL=../../libcommon.a
 
-$SHA1_GOAL=../../libdefault.a ../../libfips.a
-$SHA2_GOAL=../../libdefault.a ../../libfips.a
-$SHA3_GOAL=../../libdefault.a ../../libfips.a
+$SHA1_GOAL=../../libdefault.a
+$SHA2_GOAL=../../libdefault.a
+$SHA3_GOAL=../../libdefault.a
 $BLAKE2_GOAL=../../libdefault.a
 $SM3_GOAL=../../libdefault.a
 $MD5_GOAL=../../libdefault.a

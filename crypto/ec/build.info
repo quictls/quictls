@@ -86,12 +86,10 @@ SOURCE[../../libcrypto]=$COMMON ec_ameth.c ec_pmeth.c \
 IF[{- !$disabled{'ec'} -}]
   SOURCE[../../libcrypto]=ecx_meth.c
 ENDIF
-SOURCE[../../providers/libfips.a]=$COMMON
 
 # Implementations are now spread across several libraries, so the defines
 # need to be applied to all affected libraries and modules.
 DEFINE[../../libcrypto]=$ECDEF
-DEFINE[../../providers/libfips.a]=$ECDEF
 DEFINE[../../providers/libdefault.a]=$ECDEF
 # We only need to include the ECDEF stuff in the legacy provider when
 # it's a separate module and it's dynamically linked with libcrypto.

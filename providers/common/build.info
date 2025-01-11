@@ -7,4 +7,3 @@ SOURCE[../libdefault.a]=$FIPSCOMMON securitycheck_default.c
 IF[{- !$disabled{module} && !$disabled{shared} -}]
   SOURCE[../liblegacy.a]=provider_util.c
 ENDIF
-SOURCE[../libfips.a]=$FIPSCOMMON securitycheck_fips.c

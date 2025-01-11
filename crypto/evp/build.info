@@ -60,8 +60,6 @@ IF[{- !$disabled{camellia} -}]
   INCLUDE[e_camellia.o]=.. ../modes
 ENDIF
 
-SOURCE[../../providers/libfips.a]=$COMMON
-
 INCLUDE[e_aes.o]=.. ../modes
 INCLUDE[e_aes_cbc_hmac_sha1.o]=../modes
 INCLUDE[e_aes_cbc_hmac_sha256.o]=../modes
