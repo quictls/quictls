@@ -1,10 +1,6 @@
 # libcommon.a           Contains common building blocks and other routines,
 #                       potentially needed by any of our providers.
 #
-# libfips.a             Contains all algorithm implementations that should
-#                       go in the FIPS provider.  The compilations for this
-#                       library are all done with FIPS_MODULE defined.
-#
 # liblegacy.a           Contains all algorithm implementations that should
 #                       go into the legacy provider.  The compilations for
 #                       this library are all done with STATIC_LEGACY defined.
@@ -12,31 +8,24 @@
 # libdefault.a          Contains all algorithm implementations that should
 #                       into the default or base provider.
 #
-# To be noted is that the FIPS provider shares source code with libcrypto,
-# which means that select source files from crypto/ are compiled for
-# libfips.a the sources from providers/implementations.
-#
 # This is how a provider module should be linked:
 #
 #     -o {modulename}.so {object files...} lib{modulename}.a libcommon.a
 #
-# It is crucial that code that checks the FIPS_MODULE macro ends up in
-# libfips.a.
 # It is crucial that code that checks the STATIC_LEGACY macro ends up in
 # liblegacy.a.
 # It is recommended that code that is written for libcommon.a doesn't end
-# up depending on libfips.a, liblegacy.a or libdefault.a
+# up depending on liblegacy.a or libdefault.a
 #
 # Code in providers/implementations/ should be written in such a way that
 # the OSSL_DISPATCH arrays (and preferably the majority of the actual code)
-# end up in either libfips.a, liblegacy.a or libdefault.a.
+# end up in either liblegacy.a or libdefault.a.
 
 SUBDIRS=common implementations
 
 
 # Libraries we're dealing with
 $LIBCOMMON=libcommon.a
-$LIBFIPS=libfips.a
 $LIBLEGACY=liblegacy.a
 $LIBDEFAULT=libdefault.a
 LIBS{noinst}=$LIBDEFAULT $LIBCOMMON
@@ -48,10 +37,8 @@ LIBS{noinst}=$LIBDEFAULT $LIBCOMMON
 $COMMON_INCLUDES=../crypto ../include
 
 INCLUDE[$LIBCOMMON]=$COMMON_INCLUDES
-INCLUDE[$LIBFIPS]=.. $COMMON_INCLUDES
 INCLUDE[$LIBLEGACY]=.. $COMMON_INCLUDES
 INCLUDE[$LIBDEFAULT]=.. $COMMON_INCLUDES
-DEFINE[$LIBFIPS]=FIPS_MODULE
 
 # Weak dependencies to provide library order information.  What is actually
 # used is determined by non-weak dependencies.
@@ -59,9 +46,6 @@ DEPEND[$LIBCOMMON]{weak}=../libcrypto
 
 # Strong dependencies.  This ensures that any time an implementation library
 # is used, libcommon gets included as well.
-# The $LIBFIPS dependency on $LIBCOMMON is extra strong, to mitigate for
-# linking problems because they are interdependent
-SOURCE[$LIBFIPS]=$LIBCOMMON
 DEPEND[$LIBLEGACY]=$LIBCOMMON
 DEPEND[$LIBDEFAULT]=$LIBCOMMON
 
@@ -86,44 +70,6 @@ INCLUDE[$DEFAULTGOAL]=implementations/include
 $BASEGOAL=../libcrypto
 SOURCE[$BASEGOAL]=$LIBDEFAULT baseprov.c
 INCLUDE[$BASEGOAL]=implementations/include
-
-#
-# FIPS provider stuff
-#
-# We define it this way to ensure that configdata.pm will have all the
-# necessary information even if we don't build the module.  This will allow
-# us to make all kinds of checks on the source, based on what we specify in
-# diverse build.info files.  libfips.a, fips.so and their sources aren't
-# built unless the proper LIBS or MODULES statement has been seen, so we
-# have those and only those within a condition.
-IF[{- !$disabled{fips} -}]
-  SUBDIRS=fips
-  $FIPSGOAL=fips
-
-  # This is the trigger to actually build the FIPS module.  Without these
-  # statements, the final build file will not have a trace of it.
-  MODULES{fips}=$FIPSGOAL
-  LIBS{noinst}=$LIBFIPS
-
-  DEPEND[$FIPSGOAL]=$LIBFIPS
-  INCLUDE[$FIPSGOAL]=../include
-  DEFINE[$FIPSGOAL]=FIPS_MODULE
-  IF[{- defined $target{shared_defflag} -}]
-    SOURCE[$FIPSGOAL]=fips.ld
-    GENERATE[fips.ld]=../util/providers.num
-  ENDIF
-
-  DEPEND[|build_modules_nodep|]=fipsmodule.cnf
-  GENERATE[fipsmodule.cnf]=../util/mk-fipsmodule-cnf.pl \
-          -module $(FIPSMODULE) -section_name fips_sect -key $(FIPSKEY)
-  DEPEND[fipsmodule.cnf]=$FIPSGOAL
-
-  # Add VERSIONINFO resource for windows
-  IF[{- $config{target} =~ /^(?:Cygwin|mingw|VC-)/ -}]
-    GENERATE[fips.rc]=../util/mkrc.pl fips
-    SOURCE[$FIPSGOAL]=fips.rc
-  ENDIF
-ENDIF
 
 #
 # Legacy provider stuff

@@ -1,10 +1,10 @@
 # We make separate GOAL variables for each algorithm, to make it easy to
 # switch each to the Legacy provider when needed.
 
-$GMAC_GOAL=../../libdefault.a ../../libfips.a
-$HMAC_GOAL=../../libdefault.a ../../libfips.a
-$KMAC_GOAL=../../libdefault.a ../../libfips.a
-$CMAC_GOAL=../../libdefault.a ../../libfips.a
+$GMAC_GOAL=../../libdefault.a
+$HMAC_GOAL=../../libdefault.a
+$KMAC_GOAL=../../libdefault.a
+$CMAC_GOAL=../../libdefault.a
 $BLAKE2_GOAL=../../libdefault.a
 $SIPHASH_GOAL=../../libdefault.a
 $POLY1305_GOAL=../../libdefault.a

@@ -9,5 +9,3 @@ SOURCE[../../libcrypto]=$COMMON\
 IF[{- !$disabled{'deprecated-0.9.8'} -}]
   SOURCE[../../libcrypto]=dh_depr.c
 ENDIF
-
-SOURCE[../../providers/libfips.a]=$COMMON

@@ -7,6 +7,4 @@ $CRYPTO=randfile.c rand_err.c prov_seed.c rand_pool.c \
 IF[{- !$disabled{'deprecated-3.0'} -}]
   $CRYPTO=$CRYPTO rand_meth.c
 ENDIF
-
 SOURCE[../../libcrypto]=$COMMON $CRYPTO
-SOURCE[../../providers/libfips.a]=$COMMON

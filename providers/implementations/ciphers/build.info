@@ -8,8 +8,8 @@
 $COMMON_GOAL=../../libcommon.a
 
 $NULL_GOAL=../../libdefault.a
-$AES_GOAL=../../libdefault.a ../../libfips.a
-$TDES_1_GOAL=../../libdefault.a ../../libfips.a
+$AES_GOAL=../../libdefault.a
+$TDES_1_GOAL=../../libdefault.a
 $TDES_2_GOAL=../../libdefault.a
 $ARIA_GOAL=../../libdefault.a
 $CAMELLIA_GOAL=../../libdefault.a

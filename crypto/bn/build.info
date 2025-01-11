@@ -90,8 +90,6 @@ ENDIF
 IF[{- !$disabled{'deprecated-3.0'} -}]
   SOURCE[../../libcrypto]=bn_x931p.c
 ENDIF
-SOURCE[../../providers/libfips.a]=$COMMON $BNASM
-DEFINE[../../providers/libfips.a]=$BNDEF
 # Implementations are now spread across several libraries, so the defines
 # need to be applied to all affected libraries and modules.
 DEFINE[../../providers/libcommon.a]=$BNDEF

@@ -5,4 +5,3 @@ $COMMON=ffc_params.c ffc_params_generate.c ffc_key_generate.c \
         ffc_dh.c
 
 SOURCE[../../libcrypto]=$COMMON
-SOURCE[../../providers/libfips.a]=$COMMON

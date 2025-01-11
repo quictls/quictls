@@ -77,5 +77,4 @@ IF[{- !$disabled{sm2} -}]
 ENDIF
 
 SOURCE[../../libcommon.a]= $COMMON
-SOURCE[../../libfips.a]= $DER_RSA_FIPSABLE
 SOURCE[../../libdefault.a]= $DER_RSA_FIPSABLE $NONFIPS
