@@ -8,8 +8,9 @@ bn_sqr_comba4, bn_sqr_comba8, bn_cmp_words, bn_mul_normal,
 bn_mul_low_normal, bn_mul_recursive, bn_mul_part_recursive,
 bn_mul_low_recursive, bn_sqr_normal, bn_sqr_recursive,
 bn_expand, bn_wexpand, bn_expand2, bn_fix_top, bn_check_top,
-bn_print, bn_dump, bn_set_max, bn_set_high, bn_set_low - BIGNUM
-library internal functions
+bn_print, bn_dump, bn_set_max, bn_set_high, bn_set_low,
+mul, mul_add, sqr
+- BIGNUM library internal functions
 
 =head1 SYNOPSIS
 
@@ -208,7 +209,7 @@ call bn_expand2(), which allocates a new B<d> array and copies the
 data.  They return B<NULL> on error, B<b> otherwise.
 
 The bn_fix_top() macro reduces B<a-E<gt>top> to point to the most
-significant non-zero word plus one when B<a> has shrunk.
+significant nonzero word plus one when B<a> has shrunk.
 
 =head2 Debugging
 
@@ -225,9 +226,9 @@ B<BIGNUM> that contains the B<n> low or high words of B<a>.
 If B<BN_DEBUG> is not defined, bn_check_top(), bn_print(), bn_dump()
 and bn_set_max() are defined as empty macros.
 
-=head1 SEE ALSO
+=head1 RETURN VALUES
 
-L<bn(3)>
+Described above.
 
 =head1 COPYRIGHT
 
