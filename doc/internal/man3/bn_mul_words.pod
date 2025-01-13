@@ -51,7 +51,7 @@ mul, mul_add, sqr
  BIGNUM *bn_expand2(BIGNUM *a, int n);
  void bn_fix_top(BIGNUM *a);
 
-The following are macro's:
+The following are macros:
 
  void mul(BN_ULONG r, BN_ULONG a, BN_ULONG w, BN_ULONG c);
  void mul_add(BN_ULONG r, BN_ULONG a, BN_ULONG w, BN_ULONG c);
