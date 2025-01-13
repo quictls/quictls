@@ -69,20 +69,19 @@ applications.
 
  typedef struct bignum_st BIGNUM;
 
- struct bignum_st
-        {
-        BN_ULONG *d;    /* Pointer to an array of 'BN_BITS2' bit chunks. */
-        int top;        /* Index of last used d +1. */
-        /* The next are internal book keeping for bn_expand. */
-        int dmax;       /* Size of the d array. */
-        int neg;        /* one if the number is negative */
-        int flags;
-        };
+ struct bignum_st {
+     BN_ULONG *d;    /* Pointer to an array of 'BN_BITS2' bit chunks. */
+     int top;        /* Index of last used d +1. */
+     /* The next are internal book keeping for bn_expand. */
+     int dmax;       /* Size of the d array. */
+     int neg;        /* one if the number is negative */
+     int flags;
+ };
 
 
-The integer value is stored in B<d>, a malloc()ed array of words (B<BN_ULONG>),
-least significant word first. A B<BN_ULONG> can be either 16, 32 or 64 bits
-in size, depending on the 'number of bits' (B<BITS2>) specified in
+The integer value is stored in B<d>, an allocated array of words (B<BN_ULONG>),
+least significant word first. A B<BN_ULONG> can be either 32 or 64 bits
+in size, depending on the 'number of bits' (B<BN_BITS2>) specified in
 C<openssl/bn.h>.
 
 B<dmax> is the size of the B<d> array that has been allocated.  B<top>
@@ -91,7 +90,7 @@ bn.top=1.  B<neg> is 1 if the number is negative.  When a B<BIGNUM> is
 B<0>, the B<d> field can be B<NULL> and B<top> == B<0>.
 
 B<flags> is a bit field of flags which are defined in C<openssl/bn.h>. The
-flags begin with B<BN_FLG_>. The macros BN_set_flags(b, n) and
+flags begin with B<BN_FLG_>. The functions BN_set_flags(b, n) and
 BN_get_flags(b, n) exist to enable or fetch flag(s) B<n> from B<BIGNUM>
 structure B<b>.
 
