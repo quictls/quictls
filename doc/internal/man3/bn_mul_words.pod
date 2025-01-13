@@ -58,7 +58,6 @@ The following are macros:
  void sqr(BN_ULONG r0, BN_ULONG r1, BN_ULONG a);
 
  void bn_check_top(BIGNUM *a);
- void bn_print(BIGNUM *a);
 
 =head1 DESCRIPTION
 
@@ -213,11 +212,8 @@ significant nonzero word plus one when B<a> has shrunk.
 
 bn_check_top() verifies that C<((a)-E<gt>top E<gt>= 0 && (a)-E<gt>top
 E<lt>= (a)-E<gt>dmax)>.  A violation will cause the program to abort.
-
-bn_print() prints B<a> to stderr.
-
-If B<BN_DEBUG> is not defined bn_check_top() and  bn_print()
-are defined as empty macros.
+If B<BN_DEBUG> is not defined bn_check_top().
+is am empty macro.
 
 =head1 RETURN VALUES
 
