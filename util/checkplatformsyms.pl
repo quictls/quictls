@@ -52,6 +52,7 @@ if ($Config{osname} eq "MSWin32") {
             }
         }
         foreach (@symlist) {
+            next if /^__/; #Reserved by the C standard.
             if (index($exps, $_) < 0) {
                 print "Symbol $_ not in the allowed platform symbols list\n";
                 exit 1;
@@ -74,6 +75,7 @@ else {
         open($OBJFH, "$cmd|") or die "Cannot open process: $!";
         while (<$OBJFH>)
         {
+                next if /^__/; #Reserved by the C standard.
                 if (index($exps, $_) < 0) {
                     print "Symbol $_ not in the allowed platform symbols list\n";
                     exit 1;
