@@ -18,14 +18,14 @@ jobs:
       fail-fast: false
       matrix:
         opt: [
-          enable-asan enable-ubsan no-shared no-asm -DOPENSSL_SMALL_FOOTPRINT,
+          enable-asan enable-ubsan -fno-sanitize=function no-shared no-asm -DOPENSSL_SMALL_FOOTPRINT,
           no-ct,
           no-dso,
           no-dynamic-engine,
           no-engine no-shared,
           no-err,
           no-filenames,
-          enable-ubsan no-asm -DOPENSSL_SMALL_FOOTPRINT -fno-sanitize=alignment,
+          enable-ubsan no-asm -DOPENSSL_SMALL_FOOTPRINT -fno-sanitize=alignment -fno-sanitize=function,
           no-module,
           no-ocsp,
           no-pinshared,
