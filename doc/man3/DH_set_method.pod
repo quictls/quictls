@@ -69,8 +69,6 @@ L<DH_meth_new(3)>).
 DH_OpenSSL() and DH_get_default_method() return pointers to the respective
 B<DH_METHOD>s.
 
-DH_set_default_method() returns no value.
-
 DH_set_method() returns nonzero if the provided B<meth> was successfully set as
 the method for B<dh> (including unloading the ENGINE handle if the previous
 method was supplied by an ENGINE).

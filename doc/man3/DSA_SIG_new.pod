@@ -37,8 +37,6 @@ error code that can be obtained by
 L<ERR_get_error(3)>. Otherwise it returns a pointer
 to the newly allocated structure.
 
-DSA_SIG_free() returns no value.
-
 DSA_SIG_set0() returns 1 on success or 0 on failure.
 
 =head1 SEE ALSO
