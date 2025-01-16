@@ -144,8 +144,6 @@ CRYPTO_THREAD_run_once() returns 1 on success, or 0 on error.
 
 CRYPTO_THREAD_lock_new() returns the allocated lock, or NULL on error.
 
-CRYPTO_THREAD_lock_free() returns no value.
-
 OSSL_set_max_threads() returns 1 on success and 0 on failure. Returns failure
 if OpenSSL-managed thread pooling is not supported (for example, if it is not
 supported on the current platform, or because OpenSSL is not built with the

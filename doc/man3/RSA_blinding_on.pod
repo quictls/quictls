@@ -35,8 +35,6 @@ the blinding factor.
 
 RSA_blinding_on() returns 1 on success, and 0 if an error occurred.
 
-RSA_blinding_off() returns no value.
-
 =head1 HISTORY
 
 All of these functions were deprecated in OpenSSL 3.0.
