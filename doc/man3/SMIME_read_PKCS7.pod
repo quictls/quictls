@@ -68,7 +68,7 @@ or B<NULL> if an error occurred. The error can be obtained from ERR_get_error(3)
 =head1 SEE ALSO
 
 L<ERR_get_error(3)>,
-L<SMIME_read_PKCS7(3)>, L<PKCS7_sign(3)>,
+L<PKCS7_sign(3)>,
 L<PKCS7_verify(3)>, L<PKCS7_encrypt(3)>
 L<PKCS7_decrypt(3)>
 
