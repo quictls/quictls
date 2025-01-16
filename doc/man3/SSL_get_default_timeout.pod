@@ -35,8 +35,7 @@ See description.
 L<ssl(7)>,
 L<SSL_CTX_set_session_cache_mode(3)>,
 L<SSL_SESSION_get_time(3)>,
-L<SSL_CTX_flush_sessions(3)>,
-L<SSL_get_default_timeout(3)>
+L<SSL_CTX_flush_sessions(3)>
 
 =head1 COPYRIGHT
 
