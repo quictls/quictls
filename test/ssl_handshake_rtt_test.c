@@ -47,7 +47,7 @@ static int test_handshake_rtt(int tst)
     SSL_CTX *cctx = NULL, *sctx = NULL;
     SSL *clientssl = NULL, *serverssl = NULL;
     int testresult = 0;
-    SSL_CONNECTION *s = NULL;
+    SSL *s = NULL;
     OSSL_STATEM *st = NULL;
     uint64_t rtt;
 
@@ -70,7 +70,7 @@ static int test_handshake_rtt(int tst)
                                              NULL, NULL)))
         goto end;
 
-    s = SSL_CONNECTION_FROM_SSL(tst % 2 == 0 ? clientssl : serverssl);
+    s = tst % 2 == 0 ? clientssl : serverssl;
     if (!TEST_ptr(s) || !TEST_ptr(st = &s->statem))
         return 0;
 
@@ -113,7 +113,7 @@ static int test_handshake_rtt(int tst)
         break;
     }
 
-    if (!TEST_int_gt(SSL_get_handshake_rtt(SSL_CONNECTION_GET_SSL(s), &rtt), 0))
+    if (!TEST_int_gt(SSL_get_handshake_rtt(s, &rtt), 0))
         goto end;
     /* 1 millisec is the absolute minimum it could be given the delay */
     if (!TEST_uint64_t_ge(rtt, 1000))

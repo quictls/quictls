@@ -441,11 +441,10 @@ static int cmd_Certificate(SSL_CONF_CTX *cctx, const char *value)
         c = cctx->ctx->cert;
     }
     if (cctx->ssl != NULL) {
-        SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(cctx->ssl);
 
-        if (sc != NULL) {
+        if (cctx->ssl != NULL) {
             rv = SSL_use_certificate_chain_file(cctx->ssl, value);
-            c = sc->cert;
+            c = cctx->ssl->cert;
         } else {
             rv = 0;
         }
@@ -496,12 +495,7 @@ static int do_store(SSL_CONF_CTX *cctx,
         cert = cctx->ctx->cert;
         ctx = cctx->ctx;
     } else if (cctx->ssl != NULL) {
-        SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(cctx->ssl);
-
-        if (sc == NULL)
-            return 0;
-
-        cert = sc->cert;
+        cert = cctx->ssl->cert;
         ctx = cctx->ssl->ctx;
     } else {
         return 1;
@@ -1017,10 +1011,7 @@ int SSL_CONF_CTX_finish(SSL_CONF_CTX *cctx)
     if (cctx->ctx != NULL) {
         c = cctx->ctx->cert;
     } else if (cctx->ssl != NULL) {
-        SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(cctx->ssl);
-
-        if (sc != NULL)
-            c = sc->cert;
+        c = cctx->ssl->cert;
     }
     if (c != NULL && cctx->flags & SSL_CONF_FLAG_REQUIRE_PRIVATE) {
         for (i = 0; i < SSL_PKEY_NUM; i++) {
@@ -1092,15 +1083,11 @@ void SSL_CONF_CTX_set_ssl(SSL_CONF_CTX *cctx, SSL *ssl)
     cctx->ssl = ssl;
     cctx->ctx = NULL;
     if (ssl != NULL) {
-        SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(ssl);
-
-        if (sc == NULL)
-            return;
-        cctx->poptions = &sc->options;
-        cctx->min_version = &sc->min_proto_version;
-        cctx->max_version = &sc->max_proto_version;
-        cctx->pcert_flags = &sc->cert->cert_flags;
-        cctx->pvfy_flags = &sc->verify_mode;
+        cctx->poptions = &ssl->options;
+        cctx->min_version = &ssl->min_proto_version;
+        cctx->max_version = &ssl->max_proto_version;
+        cctx->pcert_flags = &ssl->cert->cert_flags;
+        cctx->pvfy_flags = &ssl->verify_mode;
     } else {
         cctx->poptions = NULL;
         cctx->min_version = NULL;

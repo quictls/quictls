@@ -619,14 +619,14 @@ const EVP_MD *ssl_md(SSL_CTX *ctx, int idx)
     return ctx->ssl_digest_methods[idx];
 }
 
-const EVP_MD *ssl_handshake_md(SSL_CONNECTION *s)
+const EVP_MD *ssl_handshake_md(SSL *s)
 {
-    return ssl_md(SSL_CONNECTION_GET_CTX(s), ssl_get_algorithm2(s));
+    return ssl_md(s->ctx, ssl_get_algorithm2(s));
 }
 
-const EVP_MD *ssl_prf_md(SSL_CONNECTION *s)
+const EVP_MD *ssl_prf_md(SSL *s)
 {
-    return ssl_md(SSL_CONNECTION_GET_CTX(s),
+    return ssl_md(s->ctx,
                   ssl_get_algorithm2(s) >> TLS1_PRF_DGST_SHIFT);
 }
 
@@ -1402,22 +1402,21 @@ int SSL_CTX_set_ciphersuites(SSL_CTX *ctx, const char *str)
 int SSL_set_ciphersuites(SSL *s, const char *str)
 {
     STACK_OF(SSL_CIPHER) *cipher_list;
-    SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(s);
     int ret;
 
-    if (sc == NULL)
+    if (s == NULL)
         return 0;
 
-    ret = set_ciphersuites(&(sc->tls13_ciphersuites), str);
+    ret = set_ciphersuites(&(s->tls13_ciphersuites), str);
 
-    if (sc->cipher_list == NULL) {
+    if (s->cipher_list == NULL) {
         if ((cipher_list = SSL_get_ciphers(s)) != NULL)
-            sc->cipher_list = sk_SSL_CIPHER_dup(cipher_list);
+            s->cipher_list = sk_SSL_CIPHER_dup(cipher_list);
     }
-    if (ret && sc->cipher_list != NULL)
-        return update_cipher_list(s->ctx, &sc->cipher_list,
-                                  &sc->cipher_list_by_id,
-                                  sc->tls13_ciphersuites);
+    if (ret && s->cipher_list != NULL)
+        return update_cipher_list(s->ctx, &s->cipher_list,
+                                  &s->cipher_list_by_id,
+                                  s->tls13_ciphersuites);
 
     return ret;
 }
@@ -2056,11 +2055,11 @@ int SSL_COMP_get_id(const SSL_COMP *comp)
 #endif
 }
 
-const SSL_CIPHER *ssl_get_cipher_by_char(SSL_CONNECTION *s,
+const SSL_CIPHER *ssl_get_cipher_by_char(SSL *s,
                                          const unsigned char *ptr,
                                          int all)
 {
-    const SSL_CIPHER *c = SSL_CONNECTION_GET_SSL(s)->method->get_cipher_by_char(ptr);
+    const SSL_CIPHER *c = s->method->get_cipher_by_char(ptr);
 
     if (c == NULL || (!all && c->valid == 0))
         return NULL;

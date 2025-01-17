@@ -749,18 +749,14 @@ int ossl_ssl_init(SSL *ssl, SSL_CTX *ctx, const SSL_METHOD *method, int type)
 
 SSL *ossl_ssl_connection_new_int(SSL_CTX *ctx, const SSL_METHOD *method)
 {
-    SSL_CONNECTION *s;
-    SSL *ssl;
-
+    SSL *s;
     s = OPENSSL_zalloc(sizeof(*s));
     if (s == NULL)
         return NULL;
 
-    ssl = &s->ssl;
-    if (!ossl_ssl_init(ssl, ctx, method, SSL_TYPE_SSL_CONNECTION)) {
+    if (!ossl_ssl_init(s, ctx, method, SSL_TYPE_SSL_CONNECTION)) {
         OPENSSL_free(s);
         s = NULL;
-        ssl = NULL;
         goto sslerr;
     }
 
@@ -885,12 +881,12 @@ SSL *ossl_ssl_connection_new_int(SSL_CTX *ctx, const SSL_METHOD *method)
     s->allow_early_data_cb_data = ctx->allow_early_data_cb_data;
 
 
-    if (!method->ssl_init(ssl))
+    if (!method->ssl_init(s))
         goto sslerr;
 
     s->server = (method->ssl_accept == ssl_undefined_function) ? 0 : 1;
 
-    if (!method->ssl_reset(ssl))
+    if (!method->ssl_reset(s))
         goto sslerr;
 
 #ifndef OPENSSL_NO_PSK
@@ -927,13 +923,13 @@ SSL *ossl_ssl_connection_new_int(SSL_CTX *ctx, const SSL_METHOD *method)
 #endif
 
 #ifndef OPENSSL_NO_CT
-    if (!SSL_set_ct_validation_callback(ssl, ctx->ct_validation_callback,
+    if (!SSL_set_ct_validation_callback(s, ctx->ct_validation_callback,
                                         ctx->ct_validation_callback_arg))
         goto sslerr;
 #endif
 
     s->ssl_pkey_num = SSL_PKEY_NUM + ctx->sigalg_list_len;
-    return ssl;
+    return s;
  cerr:
     ERR_raise(ERR_LIB_SSL, ERR_R_CRYPTO_LIB);
     goto err;
@@ -943,7 +939,7 @@ SSL *ossl_ssl_connection_new_int(SSL_CTX *ctx, const SSL_METHOD *method)
  sslerr:
     ERR_raise(ERR_LIB_SSL, ERR_R_SSL_LIB);
  err:
-    SSL_free(ssl);
+    SSL_free(s);
     return NULL;
 }
 
@@ -3210,9 +3206,9 @@ STACK_OF(SSL_CIPHER) *ssl_get_ciphers_by_id(SSL_CONNECTION *s)
     if (s != NULL) {
         if (s->cipher_list_by_id != NULL)
             return s->cipher_list_by_id;
-        else if (s->ssl.ctx != NULL
-                 && s->ssl.ctx->cipher_list_by_id != NULL)
-            return s->ssl.ctx->cipher_list_by_id;
+        else if (s->ctx != NULL
+                 && s->ctx->cipher_list_by_id != NULL)
+            return s->ctx->cipher_list_by_id;
     }
     return NULL;
 }
@@ -3627,16 +3623,14 @@ int SSL_export_keying_material(SSL *s, unsigned char *out, size_t olen,
                                const unsigned char *context, size_t contextlen,
                                int use_context)
 {
-    SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(s);
-
-    if (sc == NULL)
+    if (s  == NULL)
         return -1;
 
-    if (sc->session == NULL
-        || (sc->version < TLS1_VERSION && sc->version != DTLS1_BAD_VER))
+    if (s->session == NULL
+        || (s->version < TLS1_VERSION && s->version != DTLS1_BAD_VER))
         return -1;
 
-    return sc->ssl.method->ssl3_enc->export_keying_material(sc, out, olen, label,
+    return s->method->ssl3_enc->export_keying_material(s, out, olen, label,
                                                             llen, context,
                                                             contextlen,
                                                             use_context);
@@ -4334,7 +4328,7 @@ void ssl_set_masks(SSL_CONNECTION *s)
 
     if (rsa_enc || rsa_sign || (ssl_has_cert(s, SSL_PKEY_RSA_PSS_SIGN)
                 && pvalid[SSL_PKEY_RSA_PSS_SIGN] & CERT_PKEY_EXPLICIT_SIGN
-                && TLS1_get_version(&s->ssl) == TLS1_2_VERSION))
+                && TLS1_get_version(s) == TLS1_2_VERSION))
         mask_a |= SSL_aRSA;
 
     if (dsa_sign) {
@@ -4353,7 +4347,7 @@ void ssl_set_masks(SSL_CONNECTION *s)
     }
     if (pvalid[SSL_PKEY_ECC] & CERT_PKEY_RPK)
         mask_a |= SSL_aECDSA;
-    if (TLS1_get_version(&s->ssl) == TLS1_2_VERSION) {
+    if (TLS1_get_version(s) == TLS1_2_VERSION) {
         if (pvalid[SSL_PKEY_RSA_PSS_SIGN] & CERT_PKEY_RPK)
             mask_a |= SSL_aRSA;
         if (pvalid[SSL_PKEY_ED25519] & CERT_PKEY_RPK
@@ -4377,13 +4371,13 @@ void ssl_set_masks(SSL_CONNECTION *s)
     /* Allow Ed25519 for TLS 1.2 if peer supports it */
     if (!(mask_a & SSL_aECDSA) && ssl_has_cert(s, SSL_PKEY_ED25519)
             && pvalid[SSL_PKEY_ED25519] & CERT_PKEY_EXPLICIT_SIGN
-            && TLS1_get_version(&s->ssl) == TLS1_2_VERSION)
+            && TLS1_get_version(s) == TLS1_2_VERSION)
             mask_a |= SSL_aECDSA;
 
     /* Allow Ed448 for TLS 1.2 if peer supports it */
     if (!(mask_a & SSL_aECDSA) && ssl_has_cert(s, SSL_PKEY_ED448)
             && pvalid[SSL_PKEY_ED448] & CERT_PKEY_EXPLICIT_SIGN
-            && TLS1_get_version(&s->ssl) == TLS1_2_VERSION)
+            && TLS1_get_version(s) == TLS1_2_VERSION)
             mask_a |= SSL_aECDSA;
 
     mask_k |= SSL_kECDHE;

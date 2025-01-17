@@ -36,9 +36,8 @@ static SSL_CTX *clientctx = NULL;
 
 static int checkbuffers(SSL *s, int isalloced)
 {
-    SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(s);
-    OSSL_RECORD_LAYER *rrl = sc->rlayer.rrl;
-    OSSL_RECORD_LAYER *wrl = sc->rlayer.wrl;
+    OSSL_RECORD_LAYER *rrl = s->rlayer.rrl;
+    OSSL_RECORD_LAYER *wrl = s->rlayer.wrl;
 
     if (isalloced)
         return rrl->rbuf.buf != NULL && wrl->wbuf[0].buf != NULL;
