@@ -1046,7 +1046,7 @@ static int ping_pong_query(SSL *clientssl, SSL *serverssl)
     cbuf[0] = count++;
     memcpy(crec_wseq_before, &clientssl->rlayer.wrl->sequence, SEQ_NUM_SIZE);
     memcpy(srec_wseq_before, &serverssl->rlayer.wrl->sequence, SEQ_NUM_SIZE);
-    memcpy(crec_rseq_before, &clientsl->rlayer.rrl->sequence, SEQ_NUM_SIZE);
+    memcpy(crec_rseq_before, &clientssl->rlayer.rrl->sequence, SEQ_NUM_SIZE);
     memcpy(srec_rseq_before, &serverssl->rlayer.rrl->sequence, SEQ_NUM_SIZE);
 
     if (!TEST_true(SSL_write(clientssl, cbuf, sizeof(cbuf)) == sizeof(cbuf)))
