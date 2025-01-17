@@ -575,7 +575,7 @@ STACK_OF(X509_NAME) *SSL_dup_CA_list(const STACK_OF(X509_NAME) *sk)
 
 void SSL_set0_CA_list(SSL *s, STACK_OF(X509_NAME) *name_list)
 {
-     set0_CA_list(&s->ca_names, name_list);
+    set0_CA_list(&s->ca_names, name_list);
 }
 
 void SSL_CTX_set0_CA_list(SSL_CTX *ctx, STACK_OF(X509_NAME) *name_list)
@@ -610,7 +610,7 @@ void SSL_set_client_CA_list(SSL *s, STACK_OF(X509_NAME) *name_list)
 
 const STACK_OF(X509_NAME) *SSL_get0_peer_CA_list(const SSL *s)
 {
-     return s->s3.tmp.peer_ca_names;
+    return s->s3.tmp.peer_ca_names;
 }
 
 STACK_OF(X509_NAME) *SSL_get_client_CA_list(const SSL *s)
@@ -618,7 +618,7 @@ STACK_OF(X509_NAME) *SSL_get_client_CA_list(const SSL *s)
     if (!s->server)
         return s->s3.tmp.peer_ca_names;
     return s->client_ca_names != NULL ? s->client_ca_names
-                                       : s->ctx->client_ca_names;
+                                      : s->ctx->client_ca_names;
 }
 
 static int add_ca_name(STACK_OF(X509_NAME) **sk, const X509 *x)
@@ -642,7 +642,7 @@ static int add_ca_name(STACK_OF(X509_NAME) **sk, const X509 *x)
 
 int SSL_add1_to_CA_list(SSL *ssl, const X509 *x)
 {
-  if (ssl == NULL)
+    if (ssl == NULL)
         return 0;
 
     return add_ca_name(&ssl->ca_names, x);

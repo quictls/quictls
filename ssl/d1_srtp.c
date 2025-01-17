@@ -164,6 +164,6 @@ STACK_OF(SRTP_PROTECTION_PROFILE) *SSL_get_srtp_profiles(SSL *s)
 
 SRTP_PROTECTION_PROFILE *SSL_get_selected_srtp_profile(SSL *s)
 {
-     return s->srtp_profile;
+    return s->srtp_profile;
 }
 #endif
