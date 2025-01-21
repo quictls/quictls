@@ -11,7 +11,7 @@
 #include "statem_local.h"
 #include <internal/cryptlib.h>
 
-int quic_get_message(SSL_CONNECTION *s, int *mt)
+int quic_get_message(SSL *s, int *mt)
 {
     size_t l;
     QUIC_DATA *qd = s->quic_input_data_head;
@@ -59,7 +59,7 @@ int quic_get_message(SSL_CONNECTION *s, int *mt)
     return 1;
 }
 
-int quic_get_message_body(SSL_CONNECTION *s, size_t *len)
+int quic_get_message_body(SSL *s, size_t *len)
 {
     /* No CCS in QUIC/TLSv1.3? */
     if (s->s3.tmp.message_type == SSL3_MT_CHANGE_CIPHER_SPEC) {
@@ -109,7 +109,7 @@ int quic_get_message_body(SSL_CONNECTION *s, size_t *len)
     }
     if (s->msg_callback)
         s->msg_callback(0, s->version, SSL3_RT_HANDSHAKE, s->init_buf->data,
-                        (size_t)s->init_num + SSL3_HM_HEADER_LENGTH, SSL_CONNECTION_GET_SSL(s),
+                        (size_t)s->init_num + SSL3_HM_HEADER_LENGTH, s,
                         s->msg_callback_arg);
 
     *len = s->init_num;
