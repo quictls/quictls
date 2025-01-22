@@ -38,9 +38,6 @@ typedef struct tls_record_st {
     uint16_t epoch;
     /* sequence number. DTLS only */
     unsigned char seq_num[SEQ_NUM_SIZE];
-#ifndef OPENSSL_NO_SCTP
-    struct bio_dgram_sctp_rcvinfo recordinfo;
-#endif
 } TLS_RECORD;
 
 typedef struct dtls_record_layer_st {

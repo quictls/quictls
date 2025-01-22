@@ -742,12 +742,6 @@ WORK_STATE ossl_statem_client_pre_work(SSL_CONNECTION *s, WORK_STATE wst)
                  */
                 st->use_timer = 0;
             }
-#ifndef OPENSSL_NO_SCTP
-            if (BIO_dgram_is_sctp(SSL_get_wbio(SSL_CONNECTION_GET_SSL(s)))) {
-                /* Calls SSLfatal() as required */
-                return dtls_wait_for_dry(s);
-            }
-#endif
         }
         break;
 
@@ -857,30 +851,9 @@ WORK_STATE ossl_statem_client_post_work(SSL_CONNECTION *s, WORK_STATE wst)
             /* SSLfatal() already called */
             return WORK_ERROR;
         }
-
-#ifndef OPENSSL_NO_SCTP
-        if (SSL_CONNECTION_IS_DTLS(s) && s->hit) {
-            /*
-            * Change to new shared key of SCTP-Auth, will be ignored if
-            * no SCTP used.
-            */
-            BIO_ctrl(SSL_get_wbio(ssl), BIO_CTRL_DGRAM_SCTP_NEXT_AUTH_KEY,
-                     0, NULL);
-        }
-#endif
         break;
 
     case TLS_ST_CW_FINISHED:
-#ifndef OPENSSL_NO_SCTP
-        if (wst == WORK_MORE_A && SSL_CONNECTION_IS_DTLS(s) && s->hit == 0) {
-            /*
-             * Change to new shared key of SCTP-Auth, will be ignored if
-             * no SCTP used.
-             */
-            BIO_ctrl(SSL_get_wbio(ssl), BIO_CTRL_DGRAM_SCTP_NEXT_AUTH_KEY,
-                     0, NULL);
-        }
-#endif
         if (statem_flush(s) != 1)
             return WORK_MORE_B;
 
@@ -1735,37 +1708,6 @@ MSG_PROCESS_RETURN tls_process_server_hello(SSL_CONNECTION *s, PACKET *pkt)
         goto err;
     }
 
-#ifndef OPENSSL_NO_SCTP
-    if (SSL_CONNECTION_IS_DTLS(s) && s->hit) {
-        unsigned char sctpauthkey[64];
-        char labelbuffer[sizeof(DTLS1_SCTP_AUTH_LABEL)];
-        size_t labellen;
-
-        /*
-         * Add new shared key for SCTP-Auth, will be ignored if
-         * no SCTP used.
-         */
-        memcpy(labelbuffer, DTLS1_SCTP_AUTH_LABEL,
-               sizeof(DTLS1_SCTP_AUTH_LABEL));
-
-        /* Don't include the terminating zero. */
-        labellen = sizeof(labelbuffer) - 1;
-        if (s->mode & SSL_MODE_DTLS_SCTP_LABEL_LENGTH_BUG)
-            labellen += 1;
-
-        if (SSL_export_keying_material(ssl, sctpauthkey,
-                                       sizeof(sctpauthkey),
-                                       labelbuffer,
-                                       labellen, NULL, 0, 0) <= 0) {
-            SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
-            goto err;
-        }
-
-        BIO_ctrl(SSL_get_wbio(ssl),
-                 BIO_CTRL_DGRAM_SCTP_ADD_AUTH_KEY,
-                 sizeof(sctpauthkey), sctpauthkey);
-    }
-#endif
 
     /*
      * In TLSv1.3 we have some post-processing to change cipher state, otherwise
@@ -3494,37 +3436,6 @@ int tls_client_key_exchange_post_work(SSL_CONNECTION *s)
     }
     pms = NULL;
     pmslen = 0;
-
-#ifndef OPENSSL_NO_SCTP
-    if (SSL_CONNECTION_IS_DTLS(s)) {
-        unsigned char sctpauthkey[64];
-        char labelbuffer[sizeof(DTLS1_SCTP_AUTH_LABEL)];
-        size_t labellen;
-        SSL *ssl = SSL_CONNECTION_GET_SSL(s);
-
-        /*
-         * Add new shared key for SCTP-Auth, will be ignored if no SCTP
-         * used.
-         */
-        memcpy(labelbuffer, DTLS1_SCTP_AUTH_LABEL,
-               sizeof(DTLS1_SCTP_AUTH_LABEL));
-
-        /* Don't include the terminating zero. */
-        labellen = sizeof(labelbuffer) - 1;
-        if (s->mode & SSL_MODE_DTLS_SCTP_LABEL_LENGTH_BUG)
-            labellen += 1;
-
-        if (SSL_export_keying_material(ssl, sctpauthkey,
-                                       sizeof(sctpauthkey), labelbuffer,
-                                       labellen, NULL, 0, 0) <= 0) {
-            SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
-            goto err;
-        }
-
-        BIO_ctrl(SSL_get_wbio(ssl), BIO_CTRL_DGRAM_SCTP_ADD_AUTH_KEY,
-                 sizeof(sctpauthkey), sctpauthkey);
-    }
-#endif
 
     return 1;
  err:

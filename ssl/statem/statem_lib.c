@@ -837,16 +837,6 @@ MSG_PROCESS_RETURN tls_process_change_cipher_spec(SSL_CONNECTION *s,
     if (SSL_CONNECTION_IS_DTLS(s)) {
         if (s->version == DTLS1_BAD_VER)
             s->d1->handshake_read_seq++;
-
-#ifndef OPENSSL_NO_SCTP
-        /*
-         * Remember that a CCS has been received, so that an old key of
-         * SCTP-Auth can be deleted when a CCS is sent. Will be ignored if no
-         * SCTP is used
-         */
-        BIO_ctrl(SSL_get_wbio(SSL_CONNECTION_GET_SSL(s)),
-                 BIO_CTRL_DGRAM_SCTP_AUTH_CCS_RCVD, 1, NULL);
-#endif
     }
 
     return MSG_PROCESS_CONTINUE_READING;
@@ -1438,17 +1428,7 @@ WORK_STATE tls_finish_handshake(SSL_CONNECTION *s, ossl_unused WORK_STATE wst,
     SSL_CTX *sctx = SSL_CONNECTION_GET_CTX(s);
 
     if (clearbufs) {
-        if (!SSL_CONNECTION_IS_DTLS(s)
-#ifndef OPENSSL_NO_SCTP
-            /*
-             * RFC6083: SCTP provides a reliable and in-sequence transport service for DTLS
-             * messages that require it. Therefore, DTLS procedures for retransmissions
-             * MUST NOT be used.
-             * Hence the init_buf can be cleared when DTLS over SCTP as transport is used.
-             */
-            || BIO_dgram_is_sctp(SSL_get_wbio(ssl))
-#endif
-            ) {
+        if (!SSL_CONNECTION_IS_DTLS(s)) {
             /*
              * We don't do this in DTLS over UDP because we may still need the init_buf
              * in case there are any unexpected retransmits

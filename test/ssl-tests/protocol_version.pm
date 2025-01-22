@@ -143,41 +143,39 @@ sub generate_version_tests {
 
     my @tests = ();
 
-    for (my $sctp = 0; $sctp < ($dtls && !disabled("sctp") ? 2 : 1); $sctp++) {
-        foreach my $c_min (0..$#min_protocols) {
-            my $c_max_min = $c_min == 0 ? 0 : $c_min - 1;
-            foreach my $c_max ($c_max_min..$#max_protocols) {
-                foreach my $s_min (0..$#min_protocols) {
-                    my $s_max_min = $s_min == 0 ? 0 : $s_min - 1;
-                    foreach my $s_max ($s_max_min..$#max_protocols) {
-                        my ($result, $protocol) =
-                            expected_result($c_min, $c_max, $s_min, $s_max,
-                                            $min_enabled, $max_enabled,
-                                            \@protocols);
-                        push @tests, {
-                            "name" => "version-negotiation",
-                            "client" => {
-                                "CipherString" => "DEFAULT:\@SECLEVEL=0",
-                                "MinProtocol" => $min_protocols[$c_min],
-                                "MaxProtocol" => $max_protocols[$c_max],
-                            },
-                            "server" => {
-                                "CipherString" => "DEFAULT:\@SECLEVEL=0",
-                                "MinProtocol" => $min_protocols[$s_min],
-                                "MaxProtocol" => $max_protocols[$s_max],
-                            },
-                            "test" => {
-                                "ExpectedResult" => $result,
-                                "ExpectedProtocol" => $protocol,
-                                "Method" => $method,
-                            }
-                        };
-                        $tests[-1]{"test"}{"UseSCTP"} = "Yes" if $sctp;
-                    }
+    foreach my $c_min (0..$#min_protocols) {
+        my $c_max_min = $c_min == 0 ? 0 : $c_min - 1;
+        foreach my $c_max ($c_max_min..$#max_protocols) {
+            foreach my $s_min (0..$#min_protocols) {
+                my $s_max_min = $s_min == 0 ? 0 : $s_min - 1;
+                foreach my $s_max ($s_max_min..$#max_protocols) {
+                    my ($result, $protocol) =
+                      expected_result($c_min, $c_max, $s_min, $s_max,
+                                      $min_enabled, $max_enabled,
+                                      \@protocols);
+                    push @tests, {
+                                  "name" => "version-negotiation",
+                                  "client" => {
+                                               "CipherString" => "DEFAULT:\@SECLEVEL=0",
+                                               "MinProtocol" => $min_protocols[$c_min],
+                                               "MaxProtocol" => $max_protocols[$c_max],
+                                              },
+                                  "server" => {
+                                               "CipherString" => "DEFAULT:\@SECLEVEL=0",
+                                               "MinProtocol" => $min_protocols[$s_min],
+                                               "MaxProtocol" => $max_protocols[$s_max],
+                                              },
+                                  "test" => {
+                                             "ExpectedResult" => $result,
+                                             "ExpectedProtocol" => $protocol,
+                                             "Method" => $method,
+                                            }
+                                 };
                 }
             }
         }
     }
+
     return @tests
         if disabled("tls1_2")
            || (disabled("ec") && disabled("dh"))
@@ -286,7 +284,6 @@ sub generate_resumption_tests {
                             "ResumptionExpected" => $resumption_expected,
                         }
                     };
-                    $server_tests[-1]{"test"}{"UseSCTP"} = "Yes" if $sctp;
                     # Server is flexible, client upgrades/downgrades.
                     push @client_tests, {
                         "name" => "resumption",
@@ -310,7 +307,6 @@ sub generate_resumption_tests {
                             "ResumptionExpected" => $resumption_expected,
                         }
                     };
-                    $client_tests[-1]{"test"}{"UseSCTP"} = "Yes" if $sctp;
                 }
             }
         }

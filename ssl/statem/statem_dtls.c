@@ -1003,47 +1003,6 @@ CON_FUNC_RETURN dtls_construct_change_cipher_spec(SSL_CONNECTION *s,
     return CON_FUNC_SUCCESS;
 }
 
-#ifndef OPENSSL_NO_SCTP
-/*
- * Wait for a dry event. Should only be called at a point in the handshake
- * where we are not expecting any data from the peer except an alert.
- */
-WORK_STATE dtls_wait_for_dry(SSL_CONNECTION *s)
-{
-    int ret, errtype;
-    size_t len;
-    SSL *ssl = SSL_CONNECTION_GET_SSL(s);
-
-    /* read app data until dry event */
-    ret = BIO_dgram_sctp_wait_for_dry(SSL_get_wbio(ssl));
-    if (ret < 0) {
-        SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
-        return WORK_ERROR;
-    }
-
-    if (ret == 0) {
-        /*
-         * We're not expecting any more messages from the peer at this point -
-         * but we could get an alert. If an alert is waiting then we will never
-         * return successfully. Therefore we attempt to read a message. This
-         * should never succeed but will process any waiting alerts.
-         */
-        if (dtls_get_reassembled_message(s, &errtype, &len)) {
-            /* The call succeeded! This should never happen */
-            SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);
-            return WORK_ERROR;
-        }
-
-        s->s3.in_read_app_data = 2;
-        s->rwstate = SSL_READING;
-        BIO_clear_retry_flags(SSL_get_rbio(ssl));
-        BIO_set_retry_read(SSL_get_rbio(ssl));
-        return WORK_MORE_A;
-    }
-    return WORK_FINISHED_CONTINUE;
-}
-#endif
-
 int dtls1_read_failed(SSL_CONNECTION *s, int code)
 {
     SSL *ssl = SSL_CONNECTION_GET_SSL(s);

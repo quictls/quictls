@@ -697,12 +697,12 @@ typedef enum OPTION_choice {
     OPT_UPPER_WWW, OPT_HTTP, OPT_ASYNC, OPT_SSL_CONFIG,
     OPT_MAX_SEND_FRAG, OPT_SPLIT_SEND_FRAG, OPT_MAX_PIPELINES, OPT_READ_BUF,
     OPT_SSL3, OPT_TLS1_3, OPT_TLS1_2, OPT_TLS1_1, OPT_TLS1, OPT_DTLS, OPT_DTLS1,
-    OPT_DTLS1_2, OPT_SCTP, OPT_TIMEOUT, OPT_MTU, OPT_LISTEN, OPT_STATELESS,
+    OPT_DTLS1_2, OPT_TIMEOUT, OPT_MTU, OPT_LISTEN, OPT_STATELESS,
     OPT_ID_PREFIX, OPT_SERVERNAME, OPT_SERVERNAME_FATAL,
     OPT_CERT2, OPT_KEY2, OPT_ALPN, OPT_SENDFILE,
     OPT_SRTP_PROFILES, OPT_KEYMATEXPORT, OPT_KEYMATEXPORTLEN,
     OPT_KEYLOG_FILE, OPT_MAX_EARLY, OPT_RECV_MAX_EARLY, OPT_EARLY_DATA,
-    OPT_S_NUM_TICKETS, OPT_ANTI_REPLAY, OPT_NO_ANTI_REPLAY, OPT_SCTP_LABEL_BUG,
+    OPT_S_NUM_TICKETS, OPT_ANTI_REPLAY, OPT_NO_ANTI_REPLAY,
     OPT_HTTP_SERVER_BINMODE, OPT_NOCANAMES, OPT_IGNORE_UNEXPECTED_EOF, OPT_KTLS,
     OPT_USE_ZC_SENDFILE,
     OPT_TFO, OPT_CERT_COMP,
@@ -931,10 +931,6 @@ const OPTIONS s_server_options[] = {
 #ifndef OPENSSL_NO_DTLS1_2
     {"dtls1_2", OPT_DTLS1_2, '-', "Just talk DTLSv1.2"},
 #endif
-#ifndef OPENSSL_NO_SCTP
-    {"sctp", OPT_SCTP, '-', "Use SCTP"},
-    {"sctp_label_bug", OPT_SCTP_LABEL_BUG, '-', "Enable SCTP label length bug"},
-#endif
 #ifndef OPENSSL_NO_SRTP
     {"use_srtp", OPT_SRTP_PROFILES, 's',
      "Offer SRTP key management with a colon-separated profile list"},
@@ -1029,9 +1025,6 @@ int s_server_main(int argc, char *argv[])
     int max_early_data = -1, recv_max_early_data = -1;
     char *psksessf = NULL;
     int no_ca_names = 0;
-#ifndef OPENSSL_NO_SCTP
-    int sctp_label_bug = 0;
-#endif
     int ignore_unexpected_eof = 0;
 #ifndef OPENSSL_NO_KTLS
     int enable_ktls = 0;
@@ -1486,16 +1479,6 @@ int s_server_main(int argc, char *argv[])
             socket_type = SOCK_DGRAM;
 #endif
             break;
-        case OPT_SCTP:
-#ifndef OPENSSL_NO_SCTP
-            protocol = IPPROTO_SCTP;
-#endif
-            break;
-        case OPT_SCTP_LABEL_BUG:
-#ifndef OPENSSL_NO_SCTP
-            sctp_label_bug = 1;
-#endif
-            break;
         case OPT_TIMEOUT:
 #ifndef OPENSSL_NO_DTLS
             enable_timeouts = 1;
@@ -1679,17 +1662,6 @@ int s_server_main(int argc, char *argv[])
         goto end;
     }
 
-#ifndef OPENSSL_NO_SCTP
-    if (protocol == IPPROTO_SCTP) {
-        if (socket_type != SOCK_DGRAM) {
-            BIO_printf(bio_err, "Can't use -sctp without DTLS\n");
-            goto end;
-        }
-        /* SCTP is unusual. It uses DTLS over a SOCK_STREAM protocol */
-        socket_type = SOCK_STREAM;
-    }
-#endif
-
 #ifndef OPENSSL_NO_KTLS
     if (use_zc_sendfile && !use_sendfile) {
         BIO_printf(bio_out, "Warning: -zerocopy_sendfile depends on -sendfile, enabling -sendfile now.\n");
@@ -1846,10 +1818,6 @@ int s_server_main(int argc, char *argv[])
             goto end;
         }
     }
-#ifndef OPENSSL_NO_SCTP
-    if (protocol == IPPROTO_SCTP && sctp_label_bug == 1)
-        SSL_CTX_set_mode(ctx, SSL_MODE_DTLS_SCTP_LABEL_LENGTH_BUG);
-#endif
 
     if (min_version != 0
         && SSL_CTX_set_min_proto_version(ctx, min_version) == 0)
@@ -2340,11 +2308,7 @@ static int sv_body(int s, int stype, int prot, unsigned char *context)
     struct timeval *timeoutp;
 #endif
 #ifndef OPENSSL_NO_DTLS
-# ifndef OPENSSL_NO_SCTP
-    int isdtls = (stype == SOCK_DGRAM || prot == IPPROTO_SCTP);
-# else
     int isdtls = (stype == SOCK_DGRAM);
-# endif
 #endif
 
     buf = app_malloc(bufsize, "server buffer");
@@ -2381,12 +2345,7 @@ static int sv_body(int s, int stype, int prot, unsigned char *context)
     }
 #ifndef OPENSSL_NO_DTLS
     if (isdtls) {
-# ifndef OPENSSL_NO_SCTP
-        if (prot == IPPROTO_SCTP)
-            sbio = BIO_new_dgram_sctp(s, BIO_NOCLOSE);
-        else
-# endif
-            sbio = BIO_new_dgram(s, BIO_NOCLOSE);
+        sbio = BIO_new_dgram(s, BIO_NOCLOSE);
         if (sbio == NULL) {
             BIO_printf(bio_err, "Unable to create BIO\n");
             ERR_print_errors(bio_err);
@@ -2422,11 +2381,8 @@ static int sv_body(int s, int stype, int prot, unsigned char *context)
             /* want to do MTU discovery */
             BIO_ctrl(sbio, BIO_CTRL_DGRAM_MTU_DISCOVER, 0, NULL);
 
-# ifndef OPENSSL_NO_SCTP
-        if (prot != IPPROTO_SCTP)
-# endif
-            /* Turn on cookie exchange. Not necessary for SCTP */
-            SSL_set_options(con, SSL_OP_COOKIE_EXCHANGE);
+        /* Turn on cookie exchange. Not necessary for SCTP */
+        SSL_set_options(con, SSL_OP_COOKIE_EXCHANGE);
     } else
 #endif
         sbio = BIO_new_socket(s, BIO_NOCLOSE);

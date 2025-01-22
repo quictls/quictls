@@ -1850,10 +1850,6 @@ typedef struct sigalg_lookup_st {
 
 /* DTLS structures */
 
-# ifndef OPENSSL_NO_SCTP
-#  define DTLS1_SCTP_AUTH_LABEL   "EXPORTER_DTLS_OVER_SCTP"
-# endif
-
 /* Max MTU overhead we know about so far is 40 for IPv6 + 8 for UDP */
 # define DTLS1_MAX_MTU_OVERHEAD                   48
 
@@ -1933,9 +1929,6 @@ typedef struct dtls1_state_st {
     unsigned int timeout_duration_us;
 
     unsigned int retransmitting;
-# ifndef OPENSSL_NO_SCTP
-    int shutdown_received;
-# endif
 
     DTLS_timer_cb timer_cb;
 

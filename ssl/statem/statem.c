@@ -377,16 +377,6 @@ static int state_machine(SSL_CONNECTION *s, int server)
             return -1;
 #endif
     }
-#ifndef OPENSSL_NO_SCTP
-    if (SSL_CONNECTION_IS_DTLS(s) && BIO_dgram_is_sctp(SSL_get_wbio(ssl))) {
-        /*
-         * Notify SCTP BIO socket to enter handshake mode and prevent stream
-         * identifier other than 0.
-         */
-        BIO_ctrl(SSL_get_wbio(ssl), BIO_CTRL_DGRAM_SCTP_SET_IN_HANDSHAKE,
-                 st->in_handshake, NULL);
-    }
-#endif
 
     /* Initialise state machine */
     if (st->state == MSG_FLOW_UNINITED
@@ -447,19 +437,14 @@ static int state_machine(SSL_CONNECTION *s, int server)
         s->s3.change_cipher_spec = 0;
 
         /*
-         * Ok, we now need to push on a buffering BIO ...but not with
-         * SCTP
+         * Ok, we now need to push on a buffering BIO
          */
-#ifndef OPENSSL_NO_SCTP
-        if (!SSL_CONNECTION_IS_DTLS(s) || !BIO_dgram_is_sctp(SSL_get_wbio(ssl)))
-#endif
-            if (!ssl_init_wbio_buffer(s)) {
-                SSLfatal(s, SSL_AD_NO_ALERT, ERR_R_INTERNAL_ERROR);
-                goto end;
-            }
+        if (!ssl_init_wbio_buffer(s)) {
+            SSLfatal(s, SSL_AD_NO_ALERT, ERR_R_INTERNAL_ERROR);
+            goto end;
+        }
 
-        if ((SSL_in_before(ssl))
-                || s->renegotiate) {
+        if (SSL_in_before(ssl) || s->renegotiate) {
             if (!tls_setup_handshake(s)) {
                 /* SSLfatal() already called */
                 goto end;
@@ -506,17 +491,6 @@ static int state_machine(SSL_CONNECTION *s, int server)
 
  end:
     st->in_handshake--;
-
-#ifndef OPENSSL_NO_SCTP
-    if (SSL_CONNECTION_IS_DTLS(s) && BIO_dgram_is_sctp(SSL_get_wbio(ssl))) {
-        /*
-         * Notify SCTP BIO socket to leave handshake mode and allow stream
-         * identifier other than 0.
-         */
-        BIO_ctrl(SSL_get_wbio(ssl), BIO_CTRL_DGRAM_SCTP_SET_IN_HANDSHAKE,
-                 st->in_handshake, NULL);
-    }
-#endif
 
     BUF_MEM_free(buf);
     if (cb != NULL) {

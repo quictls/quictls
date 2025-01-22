@@ -54,44 +54,6 @@ our @tests_standard = (
     }
 );
 
-our @tests_sctp = (
-    {
-        name => "certstatus-good",
-        server => {
-            "CipherString" => "DEFAULT:\@SECLEVEL=0",
-            extra => {
-                "CertStatus" => "GoodResponse",
-            },
-        },
-        client => {
-            "CipherString" => "DEFAULT:\@SECLEVEL=0",
-        },
-        test => {
-            "Method" => "DTLS",
-            "UseSCTP" => "Yes",
-            "ExpectedResult" => "Success"
-        }
-    },
-    {
-        name => "certstatus-bad",
-        server => {
-            "CipherString" => "DEFAULT:\@SECLEVEL=0",
-            extra => {
-                "CertStatus" => "BadResponse",
-            },
-        },
-        client => {
-            "CipherString" => "DEFAULT:\@SECLEVEL=0",
-        },
-        test => {
-            "Method" => "DTLS",
-            "UseSCTP" => "Yes",
-            "ExpectedResult" => "ClientFail"
-        }
-    },
-);
-
 if  (!$fips_mode || !disabled("dtls1_2")) {
     push @tests, @tests_standard;
-    push @tests, @tests_sctp unless disabled("sctp") || disabled("sock");
 }

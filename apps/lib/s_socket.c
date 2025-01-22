@@ -133,23 +133,6 @@ int init_client(int *sock, const char *host, const char *port,
             }
         }
 
-#ifndef OPENSSL_NO_SCTP
-        if (protocol == IPPROTO_SCTP) {
-            /*
-             * For SCTP we have to set various options on the socket prior to
-             * connecting. This is done automatically by BIO_new_dgram_sctp().
-             * We don't actually need the created BIO though so we free it again
-             * immediately.
-             */
-            BIO *tmpbio = BIO_new_dgram_sctp(*sock, BIO_NOCLOSE);
-
-            if (tmpbio == NULL) {
-                ERR_print_errors(bio_err);
-                return 0;
-            }
-            BIO_free(tmpbio);
-        }
-#endif
         if (BIO_ADDRINFO_protocol(ai) == IPPROTO_TCP) {
             options |= BIO_SOCK_NODELAY;
             if (tfo)
@@ -347,25 +330,6 @@ int do_server(int *accept_sock, const char *host, const char *port,
             BIO_closesocket(asock);
         goto end;
     }
-
-#ifndef OPENSSL_NO_SCTP
-    if (protocol == IPPROTO_SCTP) {
-        /*
-         * For SCTP we have to set various options on the socket prior to
-         * accepting. This is done automatically by BIO_new_dgram_sctp().
-         * We don't actually need the created BIO though so we free it again
-         * immediately.
-         */
-        BIO *tmpbio = BIO_new_dgram_sctp(asock, BIO_NOCLOSE);
-
-        if (tmpbio == NULL) {
-            BIO_closesocket(asock);
-            ERR_print_errors(bio_err);
-            goto end;
-        }
-        BIO_free(tmpbio);
-    }
-#endif
 
     sock_port = BIO_ADDR_rawport(sock_address);
 

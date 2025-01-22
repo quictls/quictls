@@ -37,7 +37,6 @@ ExpectedResult = Success
 HandshakeMode = RenegotiateClient
 Method = DTLS
 ResumptionExpected = No
-UseSCTP = No
 
 
 # ===========================================================
@@ -65,7 +64,6 @@ ExpectedResult = Success
 HandshakeMode = RenegotiateClient
 Method = DTLS
 ResumptionExpected = Yes
-UseSCTP = No
 
 
 # ===========================================================
@@ -93,7 +91,6 @@ ExpectedResult = Success
 HandshakeMode = RenegotiateServer
 Method = DTLS
 ResumptionExpected = No
-UseSCTP = No
 
 
 # ===========================================================
@@ -125,7 +122,6 @@ ExpectedResult = Success
 HandshakeMode = RenegotiateServer
 Method = DTLS
 ResumptionExpected = No
-UseSCTP = No
 
 
 # ===========================================================
@@ -157,7 +153,6 @@ ExpectedResult = Success
 HandshakeMode = RenegotiateServer
 Method = DTLS
 ResumptionExpected = No
-UseSCTP = No
 
 
 # ===========================================================
@@ -186,7 +181,6 @@ ExpectedResult = Success
 HandshakeMode = RenegotiateClient
 Method = DTLS
 ResumptionExpected = No
-UseSCTP = No
 client = 5-renegotiate-aead-to-non-aead-client-extra
 
 [5-renegotiate-aead-to-non-aead-client-extra]
@@ -219,7 +213,6 @@ ExpectedResult = Success
 HandshakeMode = RenegotiateClient
 Method = DTLS
 ResumptionExpected = No
-UseSCTP = No
 client = 6-renegotiate-non-aead-to-aead-client-extra
 
 [6-renegotiate-non-aead-to-aead-client-extra]
@@ -252,7 +245,6 @@ ExpectedResult = Success
 HandshakeMode = RenegotiateClient
 Method = DTLS
 ResumptionExpected = No
-UseSCTP = No
 client = 7-renegotiate-non-aead-to-non-aead-client-extra
 
 [7-renegotiate-non-aead-to-non-aead-client-extra]
@@ -285,7 +277,6 @@ ExpectedResult = Success
 HandshakeMode = RenegotiateClient
 Method = DTLS
 ResumptionExpected = No
-UseSCTP = No
 client = 8-renegotiate-aead-to-aead-client-extra
 
 [8-renegotiate-aead-to-aead-client-extra]

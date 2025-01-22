@@ -516,19 +516,13 @@ int dtls_get_more_records(OSSL_RECORD_LAYER *rl)
         rl->packet_length = 0; /* dump this record */
         goto again;             /* get another record */
     }
-#ifndef OPENSSL_NO_SCTP
-    /* Only do replay check if no SCTP bio */
-    if (!BIO_dgram_is_sctp(rl->bio)) {
-#endif
-        /* Check whether this is a repeat, or aged record. */
-        if (!dtls_record_replay_check(rl, bitmap)) {
-            rr->length = 0;
-            rl->packet_length = 0; /* dump this record */
-            goto again;         /* get another record */
-        }
-#ifndef OPENSSL_NO_SCTP
+
+    /* Check whether this is a repeat, or aged record. */
+    if (!dtls_record_replay_check(rl, bitmap)) {
+        rr->length = 0;
+        rl->packet_length = 0; /* dump this record */
+        goto again;         /* get another record */
     }
-#endif
 
     /* just read a 0 length packet */
     if (rr->length == 0)
