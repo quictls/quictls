@@ -46,8 +46,6 @@ IF[{- !$disabled{asm} -}]
   $GHASHDEF_ppc32=
   $GHASHDEF_ppc64=$GHASHDEF_ppc32
 
-  $GHASHDEF_c64xplus=GHASH_ASM
-
   $GHASHDEF_riscv64=GHASH_ASM
 
   # Now that we have defined all the arch specific variables, use the

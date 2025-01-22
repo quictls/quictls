@@ -53,8 +53,6 @@ IF[{- !$disabled{asm} -}]
     INCLUDE[ecx_s390x.o]=..
   ENDIF
 
-  $ECASM_c64xplus=
-
   # Now that we have defined all the arch specific variables, use the
   # appropriate one, and define the appropriate macros
   IF[$ECASM_{- $target{asm_arch} -}]

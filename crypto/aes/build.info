@@ -39,10 +39,6 @@ IF[{- !$disabled{asm} -}]
   $AESASM_ppc64=$AESASM_ppc32
   $AESDEF_ppc64=$AESDEF_ppc32
 
-  $AESASM_c64xplus=aes-c64xplus.s aes_cbc.c
-  # aes-c64xplus.s implements AES_ctr32_encrypt
-  $AESDEF_c64xplus=AES_ASM AES_CTR_ASM
-
   $AESASM_riscv64=aes_cbc.c aes-riscv64.s aes-riscv64-zkn.s aes-riscv64-zvkb-zvkned.s aes-riscv64-zvkned.s aes-riscv64-zvbb-zvkg-zvkned.s
   $AESDEF_riscv64=AES_ASM
   $AESASM_riscv32=aes_core.c aes_cbc.c aes-riscv32-zkn.s
@@ -131,8 +127,6 @@ INCLUDE[bsaes-armv7.o]=..
 
 GENERATE[aes-s390x.S]=asm/aes-s390x.pl
 INCLUDE[aes-s390x.o]=..
-
-GENERATE[aes-c64xplus.S]=asm/aes-c64xplus.pl
 
 GENERATE[vpaes-loongarch64.S]=asm/vpaes-loongarch64.pl
 INCLUDE[vpaes-loongarch64.o]=..

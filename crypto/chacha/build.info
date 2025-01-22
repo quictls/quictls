@@ -18,8 +18,6 @@ IF[{- !$disabled{asm} -}]
   ENDIF
   $CHACHAASM_ppc64=$CHACHAASM_ppc32
 
-  $CHACHAASM_c64xplus=chacha-c64xplus.s
-
   $CHACHAASM_riscv64=chacha_riscv.c chacha_enc.c chacha-riscv64-zvkb.s
   $CHACHADEF_riscv64=INCLUDE_C_CHACHA20
 
@@ -46,7 +44,6 @@ INCLUDE[chacha-armv8.o]=..
 INCLUDE[chacha-armv8-sve.o]=..
 INCLUDE[chacha-loongarch64.o]=..
 INCLUDE[chacha-s390x.o]=..
-GENERATE[chacha-c64xplus.S]=asm/chacha-c64xplus.pl
 GENERATE[chacha-s390x.S]=asm/chacha-s390x.pl
 GENERATE[chacha-loongarch64.S]=asm/chacha-loongarch64.pl
 GENERATE[chacha-riscv64-zvkb.s]=asm/chacha-riscv64-zvkb.pl
