@@ -211,14 +211,8 @@ typedef struct {
     int expected_client_sign_type;
     /* Expected CA names for client auth */
     STACK_OF(X509_NAME) *expected_client_ca_names;
-    /* Whether to use SCTP for the transport */
-    int use_sctp;
     /* Whether to pre-compress server certificates */
     int compress_certificates;
-    /* Enable SSL_MODE_DTLS_SCTP_LABEL_LENGTH_BUG on client side */
-    int enable_client_sctp_label_bug;
-    /* Enable SSL_MODE_DTLS_SCTP_LABEL_LENGTH_BUG on server side */
-    int enable_server_sctp_label_bug;
     /* Whether to expect a session id from the server */
     ssl_session_id_t session_id_expected;
     char *expected_cipher;

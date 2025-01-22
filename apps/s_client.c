@@ -441,7 +441,7 @@ typedef enum OPTION_choice {
     OPT_PSK_IDENTITY, OPT_PSK, OPT_PSK_SESS,
     OPT_SSL3, OPT_SSL_CONFIG,
     OPT_TLS1_3, OPT_TLS1_2, OPT_TLS1_1, OPT_TLS1, OPT_DTLS, OPT_DTLS1,
-    OPT_DTLS1_2, OPT_SCTP, OPT_TIMEOUT, OPT_MTU, OPT_KEYFORM,
+    OPT_DTLS1_2, OPT_TIMEOUT, OPT_MTU, OPT_KEYFORM,
     OPT_PASS, OPT_CERT_CHAIN, OPT_KEY, OPT_RECONNECT, OPT_BUILD_CHAIN,
     OPT_ALPN,
     OPT_CAPATH, OPT_NOCAPATH, OPT_CHAINCAPATH, OPT_VERIFYCAPATH,
@@ -464,7 +464,6 @@ typedef enum OPTION_choice {
     OPT_ENABLE_PHA,
     OPT_ENABLE_SERVER_RPK,
     OPT_ENABLE_CLIENT_RPK,
-    OPT_SCTP_LABEL_BUG,
     OPT_KTLS,
     OPT_R_ENUM, OPT_PROV_ENUM
 } OPTION_CHOICE;
@@ -641,10 +640,6 @@ const OPTIONS s_client_options[] = {
 #endif
 #ifndef OPENSSL_NO_DTLS1_2
     {"dtls1_2", OPT_DTLS1_2, '-', "Just use DTLSv1.2"},
-#endif
-#ifndef OPENSSL_NO_SCTP
-    {"sctp", OPT_SCTP, '-', "Use SCTP"},
-    {"sctp_label_bug", OPT_SCTP_LABEL_BUG, '-', "Enable SCTP label length bug"},
 #endif
     {"early_data", OPT_EARLY_DATA, '<', "File to send as early data"},
     {"enable_pha", OPT_ENABLE_PHA, '-', "Enable post-handshake-authentication"},
@@ -863,9 +858,6 @@ int s_client_main(int argc, char **argv)
     char *psksessf = NULL;
     int enable_pha = 0;
     int enable_client_rpk = 0;
-#ifndef OPENSSL_NO_SCTP
-    int sctp_label_bug = 0;
-#endif
     int ignore_unexpected_eof = 0;
 #ifndef OPENSSL_NO_KTLS
     int enable_ktls = 0;
@@ -1227,16 +1219,6 @@ int s_client_main(int argc, char **argv)
             isdtls = 1;
 #endif
             break;
-        case OPT_SCTP:
-#ifndef OPENSSL_NO_SCTP
-            protocol = IPPROTO_SCTP;
-#endif
-            break;
-        case OPT_SCTP_LABEL_BUG:
-#ifndef OPENSSL_NO_SCTP
-            sctp_label_bug = 1;
-#endif
-            break;
         case OPT_TIMEOUT:
 #ifndef OPENSSL_NO_DTLS
             enable_timeouts = 1;
@@ -1549,18 +1531,6 @@ int s_client_main(int argc, char **argv)
     }
 #endif
 
-#ifndef OPENSSL_NO_SCTP
-    if (protocol == IPPROTO_SCTP) {
-        if (socket_type != SOCK_DGRAM) {
-            BIO_printf(bio_err, "Can't use -sctp without DTLS\n");
-            goto end;
-        }
-        /* SCTP is unusual. It uses DTLS over a SOCK_STREAM protocol */
-        socket_type = SOCK_STREAM;
-    }
-#endif
-
-
     if (!app_passwd(passarg, NULL, &pass, NULL)) {
         BIO_printf(bio_err, "Error getting private key password\n");
         goto end;
@@ -1657,11 +1627,6 @@ int s_client_main(int argc, char **argv)
             goto end;
         }
     }
-
-#ifndef OPENSSL_NO_SCTP
-    if (protocol == IPPROTO_SCTP && sctp_label_bug == 1)
-        SSL_CTX_set_mode(ctx, SSL_MODE_DTLS_SCTP_LABEL_LENGTH_BUG);
-#endif
 
     if (min_version != 0
         && SSL_CTX_set_min_proto_version(ctx, min_version) == 0)
@@ -1986,12 +1951,7 @@ int s_client_main(int argc, char **argv)
     if (isdtls) {
         union BIO_sock_info_u peer_info;
 
-#ifndef OPENSSL_NO_SCTP
-        if (protocol == IPPROTO_SCTP)
-            sbio = BIO_new_dgram_sctp(sock, BIO_NOCLOSE);
-        else
-#endif
-            sbio = BIO_new_dgram(sock, BIO_NOCLOSE);
+        sbio = BIO_new_dgram(sock, BIO_NOCLOSE);
 
         if (sbio == NULL || (peer_info.addr = BIO_ADDR_new()) == NULL) {
             BIO_printf(bio_err, "memory allocation failure\n");

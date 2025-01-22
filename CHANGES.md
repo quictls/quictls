@@ -121,3 +121,5 @@ as they were replaced by the built-in RAND changes.
   - Removed OSF/1, True64, and Ultrix support.
   - VMS, OpenVMS, etc., on all hardware.
   - Removed support for Borland/Embarcadero compilers.
+
+- Removed support for SCTP.

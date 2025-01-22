@@ -53,9 +53,6 @@ extern "C" {
 # define BIO_TYPE_DGRAM          (21|BIO_TYPE_SOURCE_SINK|BIO_TYPE_DESCRIPTOR)
 # define BIO_TYPE_ASN1           (22|BIO_TYPE_FILTER)
 # define BIO_TYPE_COMP           (23|BIO_TYPE_FILTER)
-# ifndef OPENSSL_NO_SCTP
-#  define BIO_TYPE_DGRAM_SCTP    (24|BIO_TYPE_SOURCE_SINK|BIO_TYPE_DESCRIPTOR)
-# endif
 # define BIO_TYPE_CORE_TO_PROV   (25|BIO_TYPE_SOURCE_SINK)
 # define BIO_TYPE_DGRAM_PAIR     (26|BIO_TYPE_SOURCE_SINK)
 # define BIO_TYPE_DGRAM_MEM      (27|BIO_TYPE_SOURCE_SINK)
@@ -130,22 +127,6 @@ extern "C" {
 
 # define BIO_CTRL_DGRAM_GET_MTU_OVERHEAD   49
 
-/* Deliberately outside of OPENSSL_NO_SCTP - used in bss_dgram.c */
-#  define BIO_CTRL_DGRAM_SCTP_SET_IN_HANDSHAKE    50
-# ifndef OPENSSL_NO_SCTP
-/* SCTP stuff */
-#  define BIO_CTRL_DGRAM_SCTP_ADD_AUTH_KEY                51
-#  define BIO_CTRL_DGRAM_SCTP_NEXT_AUTH_KEY               52
-#  define BIO_CTRL_DGRAM_SCTP_AUTH_CCS_RCVD               53
-#  define BIO_CTRL_DGRAM_SCTP_GET_SNDINFO         60
-#  define BIO_CTRL_DGRAM_SCTP_SET_SNDINFO         61
-#  define BIO_CTRL_DGRAM_SCTP_GET_RCVINFO         62
-#  define BIO_CTRL_DGRAM_SCTP_SET_RCVINFO         63
-#  define BIO_CTRL_DGRAM_SCTP_GET_PRINFO                  64
-#  define BIO_CTRL_DGRAM_SCTP_SET_PRINFO                  65
-#  define BIO_CTRL_DGRAM_SCTP_SAVE_SHUTDOWN               70
-# endif
-
 # define BIO_CTRL_DGRAM_SET_PEEK_MODE      71
 
 /*
@@ -157,9 +138,6 @@ extern "C" {
 
 # define BIO_CTRL_GET_KTLS_SEND                 73
 # define BIO_CTRL_GET_KTLS_RECV                 76
-
-# define BIO_CTRL_DGRAM_SCTP_WAIT_FOR_DRY       77
-# define BIO_CTRL_DGRAM_SCTP_MSG_WAITING        78
 
 /* BIO_f_prefix controls */
 # define BIO_CTRL_SET_PREFIX                    79
@@ -325,34 +303,6 @@ typedef BIO_info_cb bio_info_cb;  /* backward compatibility */
 /* Prefix and suffix callback in ASN1 BIO */
 typedef int asn1_ps_func (BIO *b, unsigned char **pbuf, int *plen,
                           void *parg);
-
-typedef void (*BIO_dgram_sctp_notification_handler_fn) (BIO *b,
-                                                        void *context,
-                                                        void *buf);
-# ifndef OPENSSL_NO_SCTP
-/* SCTP parameter structs */
-struct bio_dgram_sctp_sndinfo {
-    uint16_t snd_sid;
-    uint16_t snd_flags;
-    uint32_t snd_ppid;
-    uint32_t snd_context;
-};
-
-struct bio_dgram_sctp_rcvinfo {
-    uint16_t rcv_sid;
-    uint16_t rcv_ssn;
-    uint16_t rcv_flags;
-    uint32_t rcv_ppid;
-    uint32_t rcv_tsn;
-    uint32_t rcv_cumtsn;
-    uint32_t rcv_context;
-};
-
-struct bio_dgram_sctp_prinfo {
-    uint16_t pr_policy;
-    uint32_t pr_value;
-};
-# endif
 
 /* BIO_sendmmsg/BIO_recvmmsg-related definitions */
 typedef struct bio_msg_st {
@@ -738,16 +688,6 @@ const BIO_METHOD *BIO_f_readbuffer(void);
 const BIO_METHOD *BIO_f_linebuffer(void);
 const BIO_METHOD *BIO_f_prefix(void);
 const BIO_METHOD *BIO_s_core(void);
-# ifndef OPENSSL_NO_SCTP
-const BIO_METHOD *BIO_s_datagram_sctp(void);
-BIO *BIO_new_dgram_sctp(int fd, int close_flag);
-int BIO_dgram_is_sctp(BIO *bio);
-int BIO_dgram_sctp_notification_cb(BIO *b,
-                BIO_dgram_sctp_notification_handler_fn handle_notifications,
-                void *context);
-int BIO_dgram_sctp_wait_for_dry(BIO *b);
-int BIO_dgram_sctp_msg_waiting(BIO *b);
-# endif
 
 # ifndef OPENSSL_NO_SOCK
 int BIO_sock_should_retry(int i);

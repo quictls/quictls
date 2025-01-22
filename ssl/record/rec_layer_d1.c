@@ -115,16 +115,6 @@ static int dtls_buffer_record(SSL_CONNECTION *s, TLS_RECORD *rec)
 
     item->data = rdata;
 
-#ifndef OPENSSL_NO_SCTP
-    /* Store bio_dgram_sctp_rcvinfo struct */
-    if (BIO_dgram_is_sctp(s->rbio) &&
-        (ossl_statem_get_state(s) == TLS_ST_SR_FINISHED
-         || ossl_statem_get_state(s) == TLS_ST_CR_FINISHED)) {
-        BIO_ctrl(s->rbio, BIO_CTRL_DGRAM_SCTP_GET_RCVINFO,
-                 sizeof(rdata->recordinfo), &rdata->recordinfo);
-    }
-#endif
-
     if (pqueue_insert(queue, item) == NULL) {
         /* Must be a duplicate so ignore it */
         OPENSSL_free(rdata->allocdata);
@@ -152,14 +142,6 @@ static void dtls_unbuffer_record(SSL_CONNECTION *s)
         s->rlayer.tlsrecs[0] = *rdata;
         s->rlayer.num_recs = 1;
         s->rlayer.curr_rec = 0;
-
-#ifndef OPENSSL_NO_SCTP
-        /* Restore bio_dgram_sctp_rcvinfo struct */
-        if (BIO_dgram_is_sctp(s->rbio)) {
-            BIO_ctrl(s->rbio, BIO_CTRL_DGRAM_SCTP_SET_RCVINFO,
-                     sizeof(rdata->recordinfo), &rdata->recordinfo);
-        }
-#endif
 
         OPENSSL_free(item->data);
         pitem_free(item);
@@ -356,19 +338,6 @@ int dtls1_read_bytes(SSL *s, uint8_t type, uint8_t *recvd_type,
             if (!ssl_release_record(sc, rr, n))
                 return -1;
         }
-#ifndef OPENSSL_NO_SCTP
-        /*
-         * We might had to delay a close_notify alert because of reordered
-         * app data. If there was an alert and there is no message to read
-         * anymore, finally set shutdown.
-         */
-        if (BIO_dgram_is_sctp(SSL_get_rbio(s)) &&
-            sc->d1->shutdown_received
-            && BIO_dgram_sctp_msg_waiting(SSL_get_rbio(s)) <= 0) {
-            sc->shutdown |= SSL_RECEIVED_SHUTDOWN;
-            return 0;
-        }
-#endif
         *readbytes = n;
         return 1;
     }
@@ -418,21 +387,6 @@ int dtls1_read_bytes(SSL *s, uint8_t type, uint8_t *recvd_type,
             }
 
             if (alert_descr == SSL_AD_CLOSE_NOTIFY) {
-#ifndef OPENSSL_NO_SCTP
-                /*
-                 * With SCTP and streams the socket may deliver app data
-                 * after a close_notify alert. We have to check this first so
-                 * that nothing gets discarded.
-                 */
-                if (BIO_dgram_is_sctp(SSL_get_rbio(s)) &&
-                    BIO_dgram_sctp_msg_waiting(SSL_get_rbio(s)) > 0) {
-                    sc->d1->shutdown_received = 1;
-                    sc->rwstate = SSL_READING;
-                    BIO_clear_retry_flags(SSL_get_rbio(s));
-                    BIO_set_retry_read(SSL_get_rbio(s));
-                    return -1;
-                }
-#endif
                 sc->shutdown |= SSL_RECEIVED_SHUTDOWN;
                 return 0;
             }

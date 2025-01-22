@@ -42,7 +42,7 @@ if (defined $ENV{SSL_TESTS}) {
     @conf_srcs = glob(srctop_file("test", "ssl-tests", "*.cnf.dat"));
     # We hard-code the number of tests to double-check that the globbing above
     # finds all files as expected.
-    plan tests => 29;
+    plan tests => 28;
 }
 my @conf_files = map { basename($_, ".dat") } @conf_srcs;
 
@@ -73,15 +73,14 @@ my $no_ocsp = disabled("ocsp");
 # expectations dynamically based on the OpenSSL compile-time config.
 my %conf_dependent_tests = (
   "02-protocol-version.cnf" => !$is_default_tls,
-  "04-client_auth.cnf" => !$is_default_tls || !$is_default_dtls
-                           || !disabled("sctp"),
+  "04-client_auth.cnf" => !$is_default_tls || !$is_default_dtls,
   "05-sni.cnf" => disabled("tls1_1"),
-  "07-dtls-protocol-version.cnf" => !$is_default_dtls || !disabled("sctp"),
+  "07-dtls-protocol-version.cnf" => !$is_default_dtls,
   "10-resumption.cnf" => !$is_default_tls || $no_ec,
-  "11-dtls_resumption.cnf" => !$is_default_dtls || !disabled("sctp"),
-  "16-dtls-certstatus.cnf" => !$is_default_dtls || !disabled("sctp"),
+  "11-dtls_resumption.cnf" => !$is_default_dtls,
+  "16-dtls-certstatus.cnf" => !$is_default_dtls,
   "17-renegotiate.cnf" => disabled("tls1_2"),
-  "18-dtls-renegotiate.cnf" => disabled("dtls1_2") || !disabled("sctp"),
+  "18-dtls-renegotiate.cnf" => disabled("dtls1_2"),
   "19-mac-then-encrypt.cnf" => !$is_default_tls,
   "20-cert-select.cnf" => !$is_default_tls || $no_dh || $no_dsa,
   "22-compression.cnf" => !$is_default_tls,
@@ -119,7 +118,6 @@ my %skip = (
   "24-padding.cnf" => ($no_ec && $no_dh),
   "25-cipher.cnf" => disabled("ec") || disabled("tls1_2"),
   "26-tls13_client_auth.cnf" => ($no_ec && $no_dh),
-  "29-dtls-sctp-label-bug.cnf" => disabled("sctp") || disabled("sock"),
   "32-compressed-certificate.cnf" => disabled("comp"),
 );
 

@@ -279,14 +279,6 @@ void dtls1_start_timer(SSL_CONNECTION *s)
     OSSL_TIME duration;
     SSL *ssl = SSL_CONNECTION_GET_SSL(s);
 
-#ifndef OPENSSL_NO_SCTP
-    /* Disable timer for SCTP */
-    if (BIO_dgram_is_sctp(SSL_get_wbio(ssl))) {
-        s->d1->next_timeout = ossl_time_zero();
-        return;
-    }
-#endif
-
     /*
      * If timer is not set, initialize duration with 1 second or
      * a user-specified value if the timer callback is installed.
@@ -856,31 +848,7 @@ static int dtls1_handshake_write(SSL_CONNECTION *s)
 
 int dtls1_shutdown(SSL *s)
 {
-    int ret;
-#ifndef OPENSSL_NO_SCTP
-    BIO *wbio;
-    SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL_ONLY(s);
-
-    if (s == NULL)
-        return -1;
-
-    wbio = SSL_get_wbio(s);
-    if (wbio != NULL && BIO_dgram_is_sctp(wbio) &&
-        !(sc->shutdown & SSL_SENT_SHUTDOWN)) {
-        ret = BIO_dgram_sctp_wait_for_dry(wbio);
-        if (ret < 0)
-            return -1;
-
-        if (ret == 0)
-            BIO_ctrl(SSL_get_wbio(s), BIO_CTRL_DGRAM_SCTP_SAVE_SHUTDOWN, 1,
-                     NULL);
-    }
-#endif
-    ret = ssl3_shutdown(s);
-#ifndef OPENSSL_NO_SCTP
-    BIO_ctrl(SSL_get_wbio(s), BIO_CTRL_DGRAM_SCTP_SAVE_SHUTDOWN, 0, NULL);
-#endif
-    return ret;
+    return ssl3_shutdown(s);
 }
 
 int dtls1_query_mtu(SSL_CONNECTION *s)

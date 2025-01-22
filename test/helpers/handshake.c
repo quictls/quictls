@@ -20,10 +20,6 @@
 #include <test/handshake.h>
 #include <test/testutil.h>
 
-#if !defined(OPENSSL_NO_SCTP) && !defined(OPENSSL_NO_SOCK)
-#include <netinet/sctp.h>
-#endif
-
 HANDSHAKE_RESULT *HANDSHAKE_RESULT_new(void)
 {
     HANDSHAKE_RESULT *ret;
@@ -1204,127 +1200,6 @@ static int peer_pkey_type(SSL *s)
     return NID_undef;
 }
 
-#if !defined(OPENSSL_NO_SCTP) && !defined(OPENSSL_NO_SOCK)
-static int set_sock_as_sctp(int sock)
-{
-    struct sctp_assocparams assocparams;
-    struct sctp_rtoinfo rto_info;
-    BIO *tmpbio;
-
-    /*
-     * To allow tests to fail fast (within a second or so), reduce the
-     * retransmission timeouts and the number of retransmissions.
-     */
-    memset(&rto_info, 0, sizeof(struct sctp_rtoinfo));
-    rto_info.srto_initial = 100;
-    rto_info.srto_max = 200;
-    rto_info.srto_min = 50;
-    (void)setsockopt(sock, IPPROTO_SCTP, SCTP_RTOINFO,
-                     (const void *)&rto_info, sizeof(struct sctp_rtoinfo));
-    memset(&assocparams, 0, sizeof(struct sctp_assocparams));
-    assocparams.sasoc_asocmaxrxt = 2;
-    (void)setsockopt(sock, IPPROTO_SCTP, SCTP_ASSOCINFO,
-                     (const void *)&assocparams,
-                     sizeof(struct sctp_assocparams));
-
-    /*
-     * For SCTP we have to set various options on the socket prior to
-     * connecting. This is done automatically by BIO_new_dgram_sctp().
-     * We don't actually need the created BIO though so we free it again
-     * immediately.
-     */
-    tmpbio = BIO_new_dgram_sctp(sock, BIO_NOCLOSE);
-
-    if (tmpbio == NULL)
-        return 0;
-    BIO_free(tmpbio);
-
-    return 1;
-}
-
-static int create_sctp_socks(int *ssock, int *csock)
-{
-    BIO_ADDRINFO *res = NULL;
-    const BIO_ADDRINFO *ai = NULL;
-    int lsock = INVALID_SOCKET, asock = INVALID_SOCKET;
-    int consock = INVALID_SOCKET;
-    int ret = 0;
-    int family = 0;
-
-    if (BIO_sock_init() != 1)
-        return 0;
-
-    /*
-     * Port is 4463. It could be anything. It will fail if it's already being
-     * used for some other SCTP service. It seems unlikely though so we don't
-     * worry about it here.
-     */
-    if (!BIO_lookup_ex(NULL, "4463", BIO_LOOKUP_SERVER, family, SOCK_STREAM,
-                       IPPROTO_SCTP, &res))
-        return 0;
-
-    for (ai = res; ai != NULL; ai = BIO_ADDRINFO_next(ai)) {
-        family = BIO_ADDRINFO_family(ai);
-        lsock = BIO_socket(family, SOCK_STREAM, IPPROTO_SCTP, 0);
-        if (lsock == INVALID_SOCKET) {
-            /* Maybe the kernel doesn't support the socket family, even if
-             * BIO_lookup() added it in the returned result...
-             */
-            continue;
-        }
-
-        if (!set_sock_as_sctp(lsock)
-                || !BIO_listen(lsock, BIO_ADDRINFO_address(ai),
-                               BIO_SOCK_REUSEADDR)) {
-            BIO_closesocket(lsock);
-            lsock = INVALID_SOCKET;
-            continue;
-        }
-
-        /* Success, don't try any more addresses */
-        break;
-    }
-
-    if (lsock == INVALID_SOCKET)
-        goto err;
-
-    BIO_ADDRINFO_free(res);
-    res = NULL;
-
-    if (!BIO_lookup_ex(NULL, "4463", BIO_LOOKUP_CLIENT, family, SOCK_STREAM,
-                        IPPROTO_SCTP, &res))
-        goto err;
-
-    consock = BIO_socket(family, SOCK_STREAM, IPPROTO_SCTP, 0);
-    if (consock == INVALID_SOCKET)
-        goto err;
-
-    if (!set_sock_as_sctp(consock)
-            || !BIO_connect(consock, BIO_ADDRINFO_address(res), 0)
-            || !BIO_socket_nbio(consock, 1))
-        goto err;
-
-    asock = BIO_accept_ex(lsock, NULL, BIO_SOCK_NONBLOCK);
-    if (asock == INVALID_SOCKET)
-        goto err;
-
-    *csock = consock;
-    *ssock = asock;
-    consock = asock = INVALID_SOCKET;
-    ret = 1;
-
- err:
-    BIO_ADDRINFO_free(res);
-    if (consock != INVALID_SOCKET)
-        BIO_closesocket(consock);
-    if (lsock != INVALID_SOCKET)
-        BIO_closesocket(lsock);
-    if (asock != INVALID_SOCKET)
-        BIO_closesocket(asock);
-    return ret;
-}
-#endif
-
 /*
  * Note that |extra| points to the correct client/server configuration
  * within |test_ctx|. When configuring the handshake, general mode settings
@@ -1362,7 +1237,6 @@ static HANDSHAKE_RESULT *do_handshake_internal(
     unsigned int proto_len = 0;
     EVP_PKEY *tmp_key;
     const STACK_OF(X509_NAME) *names;
-    time_t start;
     const char* cipher;
 
     if (ret == NULL)
@@ -1383,13 +1257,6 @@ static HANDSHAKE_RESULT *do_handshake_internal(
         HANDSHAKE_RESULT_free(ret);
         return NULL;
     }
-
-#if !defined(OPENSSL_NO_SCTP) && !defined(OPENSSL_NO_SOCK)
-    if (test_ctx->enable_client_sctp_label_bug)
-        SSL_CTX_set_mode(client_ctx, SSL_MODE_DTLS_SCTP_LABEL_LENGTH_BUG);
-    if (test_ctx->enable_server_sctp_label_bug)
-        SSL_CTX_set_mode(server_ctx, SSL_MODE_DTLS_SCTP_LABEL_LENGTH_BUG);
-#endif
 
     /* Setup SSL and buffers; additional configuration happens below. */
     if (!create_peer(&server, server_ctx)) {
@@ -1418,20 +1285,8 @@ static HANDSHAKE_RESULT *do_handshake_internal(
 
     ret->result = SSL_TEST_INTERNAL_ERROR;
 
-    if (test_ctx->use_sctp) {
-#if !defined(OPENSSL_NO_SCTP) && !defined(OPENSSL_NO_SOCK)
-        int csock, ssock;
-
-        if (create_sctp_socks(&ssock, &csock)) {
-            client_to_server = BIO_new_dgram_sctp(csock, BIO_CLOSE);
-            server_to_client = BIO_new_dgram_sctp(ssock, BIO_CLOSE);
-        }
-#endif
-    } else {
-        client_to_server = BIO_new(BIO_s_mem());
-        server_to_client = BIO_new(BIO_s_mem());
-    }
-
+    client_to_server = BIO_new(BIO_s_mem());
+    server_to_client = BIO_new(BIO_s_mem());
     if (!TEST_ptr(client_to_server)
             || !TEST_ptr(server_to_client))
         goto err;
@@ -1444,16 +1299,11 @@ static HANDSHAKE_RESULT *do_handshake_internal(
     SSL_set_accept_state(server.ssl);
 
     /* The bios are now owned by the SSL object. */
-    if (test_ctx->use_sctp) {
-        SSL_set_bio(client.ssl, client_to_server, client_to_server);
-        SSL_set_bio(server.ssl, server_to_client, server_to_client);
-    } else {
-        SSL_set_bio(client.ssl, server_to_client, client_to_server);
-        if (!TEST_int_gt(BIO_up_ref(server_to_client), 0)
-                || !TEST_int_gt(BIO_up_ref(client_to_server), 0))
-            goto err;
-        SSL_set_bio(server.ssl, client_to_server, server_to_client);
-    }
+    SSL_set_bio(client.ssl, server_to_client, client_to_server);
+    if (!TEST_int_gt(BIO_up_ref(server_to_client), 0)
+        || !TEST_int_gt(BIO_up_ref(client_to_server), 0))
+      goto err;
+    SSL_set_bio(server.ssl, client_to_server, server_to_client);
 
     ex_data_idx = SSL_get_ex_new_index(0, "ex data", NULL, NULL, NULL);
     if (!TEST_int_ge(ex_data_idx, 0)
@@ -1466,9 +1316,6 @@ static HANDSHAKE_RESULT *do_handshake_internal(
 
     client.status = PEER_RETRY;
     server.status = PEER_WAITING;
-
-    start = time(NULL);
-
     /*
      * Half-duplex handshake loop.
      * Client and server speak to each other synchronously in the same process.
@@ -1518,49 +1365,32 @@ static HANDSHAKE_RESULT *do_handshake_internal(
             ret->result = SSL_TEST_INTERNAL_ERROR;
             goto err;
         case HANDSHAKE_RETRY:
-            if (test_ctx->use_sctp) {
-                if (time(NULL) - start > 3) {
-                    /*
-                     * We've waited for too long. Give up.
-                     */
-                    ret->result = SSL_TEST_INTERNAL_ERROR;
-                    goto err;
-                }
+            if (client_turn_count++ >= 2000) {
                 /*
-                 * With "real" sockets we only swap to processing the peer
-                 * if they are expecting to retry. Otherwise we just retry the
-                 * same endpoint again.
+                 * At this point, there's been so many PEER_RETRY in a row
+                 * that it's likely both sides are stuck waiting for a read.
+                 * It's time to give up.
                  */
-                if ((client_turn && server.status == PEER_RETRY)
-                        || (!client_turn && client.status == PEER_RETRY))
-                    client_turn ^= 1;
-            } else {
-                if (client_turn_count++ >= 2000) {
-                    /*
-                     * At this point, there's been so many PEER_RETRY in a row
-                     * that it's likely both sides are stuck waiting for a read.
-                     * It's time to give up.
-                     */
+                ret->result = SSL_TEST_INTERNAL_ERROR;
+                goto err;
+            }
+            if (client_turn && server.status == PEER_SUCCESS) {
+                /*
+                 * The server may finish before the client because the
+                 * client spends some turns processing NewSessionTickets.
+                 */
+                if (client_wait_count++ >= 2) {
                     ret->result = SSL_TEST_INTERNAL_ERROR;
                     goto err;
                 }
-                if (client_turn && server.status == PEER_SUCCESS) {
-                    /*
-                     * The server may finish before the client because the
-                     * client spends some turns processing NewSessionTickets.
-                     */
-                    if (client_wait_count++ >= 2) {
-                        ret->result = SSL_TEST_INTERNAL_ERROR;
-                        goto err;
-                    }
-                } else {
-                    /* Continue. */
-                    client_turn ^= 1;
-                }
+            } else {
+                /* Continue. */
+                client_turn ^= 1;
             }
             break;
         }
     }
+
  err:
     ret->server_alert_sent = server_ex_data.alert_sent;
     ret->server_num_fatal_alerts_sent = server_ex_data.num_fatal_alerts_sent;
