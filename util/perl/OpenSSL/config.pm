@@ -371,9 +371,7 @@ _____
     }
 }
 
-my $map_patterns =
-    [ [ 'uClinux.*64.*',          { target => 'uClinux-dist64' } ],
-      [ 'uClinux.*',              { target => 'uClinux-dist' } ],
+my $map_patterns = [
       [ 'ppc-apple-rhapsody',     { target => "rhapsody-ppc" } ],
       [ 'ppc-apple-darwin.*',
         sub {

@@ -108,6 +108,8 @@ as they were replaced by the built-in RAND changes.
   - Removed support for old HPE platforms: NonStop and Tandem
   - Removed DJGPP support.
   - Removed WinCE support.
+  - Removed UWIN support.
+  - Removed uClinux support.
   - Removed IRIX support.
   - Removed HP-PARISC (including MPE/ix) support.
   - Removed `I386_only` support.
