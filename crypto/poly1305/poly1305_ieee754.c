@@ -101,9 +101,6 @@ static const u64 one = 1;
 static const u32 fpc = 1;
 #elif defined(__sparc__)
 static const u64 fsr = 1ULL<<30;
-#elif defined(__mips__)
-static const u32 fcsr = 1;
-#else
 #error "unrecognized platform"
 #endif
 
@@ -149,11 +146,6 @@ int poly1305_init(void *ctx, const unsigned char key[16])
 
         asm volatile ("stx	%%fsr,%0":"=m"(fsr_orig));
         asm volatile ("ldx	%0,%%fsr"::"m"(fsr));
-#elif defined(__mips__)
-        u32 fcsr_orig;
-
-        asm volatile ("cfc1	%0,$31":"=r"(fcsr_orig));
-        asm volatile ("ctc1	%0,$31"::"r"(fcsr));
 #endif
 
         /* r &= 0xffffffc0ffffffc0ffffffc0fffffff */
@@ -213,8 +205,6 @@ int poly1305_init(void *ctx, const unsigned char key[16])
         asm volatile ("lfpc	%0"::"m"(fpc_orig));
 #elif defined(__sparc__)
         asm volatile ("ldx	%0,%%fsr"::"m"(fsr_orig));
-#elif defined(__mips__)
-        asm volatile ("ctc1	%0,$31"::"r"(fcsr_orig));
 #endif
     }
 
@@ -271,11 +261,6 @@ void poly1305_blocks(void *ctx, const unsigned char *inp, size_t len,
 
     asm volatile ("stx		%%fsr,%0":"=m"(fsr_orig));
     asm volatile ("ldx		%0,%%fsr"::"m"(fsr));
-#elif defined(__mips__)
-    u32 fcsr_orig;
-
-    asm volatile ("cfc1		%0,$31":"=r"(fcsr_orig));
-    asm volatile ("ctc1		%0,$31"::"r"(fcsr));
 #endif
 
     /*
@@ -422,8 +407,6 @@ void poly1305_blocks(void *ctx, const unsigned char *inp, size_t len,
     asm volatile ("lfpc		%0"::"m"(fpc_orig));
 #elif defined(__sparc__)
     asm volatile ("ldx		%0,%%fsr"::"m"(fsr_orig));
-#elif defined(__mips__)
-    asm volatile ("ctc1		%0,$31"::"r"(fcsr_orig));
 #endif
 }
 

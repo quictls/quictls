@@ -358,7 +358,7 @@ static int afalg_fin_cipher_aio(afalg_aio *aio, int sfd, unsigned char *buf,
                         char strbuf[32];
                         /*
                          * sometimes __s64 is defined as long long int
-                         * but on some archs ( like mips64 or powerpc64 ) it's just long int
+                         * but on some archs ( like powerpc64 ) it's just long int
                          *
                          * to be able to use BIO_snprintf() with %lld without warnings
                          * copy events[0].res to an long long int variable

@@ -429,19 +429,6 @@ unsigned __int64 _umul128(unsigned __int64 a, unsigned __int64 b,
 #    define BN_UMULT_HIGH(a,b)           __umulh((a),(b))
 #    define BN_UMULT_LOHI(low,high,a,b)  ((low)=_umul128((a),(b),&(high)))
 #   endif
-#  elif defined(__mips) && (defined(SIXTY_FOUR_BIT) || defined(SIXTY_FOUR_BIT_LONG))
-#   if defined(__GNUC__) && __GNUC__>=2
-#    define BN_UMULT_HIGH(a,b) ({       \
-        register BN_ULONG ret;          \
-        asm ("dmultu    %1,%2"          \
-             : "=h"(ret)                \
-             : "r"(a), "r"(b) : "l");   \
-        ret;                    })
-#    define BN_UMULT_LOHI(low,high,a,b) \
-        asm ("dmultu    %2,%3"          \
-             : "=l"(low),"=h"(high)     \
-             : "r"(a), "r"(b));
-#   endif
 #  elif defined(__aarch64__) && defined(SIXTY_FOUR_BIT_LONG)
 #   if defined(__GNUC__) && __GNUC__>=2
 #    define BN_UMULT_HIGH(a,b)   ({     \

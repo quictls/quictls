@@ -251,7 +251,7 @@ int HASH_FINAL(unsigned char *md, HASH_CTX *c)
 }
 
 # ifndef MD32_REG_T
-#  if defined(__alpha) || defined(__sparcv9) || defined(__mips)
+#  if defined(__alpha) || defined(__sparcv9)
 #   define MD32_REG_T long
 /*
  * This comment was originally written for MD5, which is why it

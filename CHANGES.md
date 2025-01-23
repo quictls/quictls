@@ -116,8 +116,9 @@ as they were replaced by the built-in RAND changes.
   - Removed support for SCO platforms.
   - Removed support for Apollo.
   - OSF/1, True64, and Ultrix support.
-  - Remove Itanium (IA-64) support.
-  - Remove C64x+ (a digital signal processor from TI).
+  - Removed Itanium (IA-64) support.
+  - Removed C64x+ (a digital signal processor from TI).
+  - Removed MIPS32 and MIPS64 support.
   - Removed OSF/1, True64, and Ultrix support.
   - VMS, OpenVMS, etc., on all hardware.
   - Removed support for Borland/Embarcadero compilers.

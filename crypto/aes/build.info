@@ -16,11 +16,6 @@ IF[{- !$disabled{asm} -}]
         aes_core.c aes_cbc.c aes-sparcv9.S aest4-sparcv9.S aesfx-sparcv9.S
   $AESDEF_sparcv9=AES_ASM
 
-  $AESASM_mips32=aes_cbc.c aes-mips.S
-  $AESDEF_mips32=AES_ASM
-  $AESASM_mips64=$AESASM_mips32
-  $AESDEF_mips64=$AESDEF_mips32
-
   $AESASM_s390x=aes-s390x.S
   # aes-390x.S implements AES_ctr32_encrypt and AES_xts_[en|de]crypt
   $AESDEF_s390x=AES_ASM AES_CTR_ASM AES_XTS_ASM
@@ -104,9 +99,6 @@ INCLUDE[aesfx-sparcv9.o]=..
 GENERATE[aes-ppc.s]=asm/aes-ppc.pl
 GENERATE[vpaes-ppc.s]=asm/vpaes-ppc.pl
 GENERATE[aesp8-ppc.s]=asm/aesp8-ppc.pl
-
-GENERATE[aes-mips.S]=asm/aes-mips.pl
-INCLUDE[aes-mips.o]=..
 
 GENERATE[aes-riscv64.s]=asm/aes-riscv64.pl
 GENERATE[aes-riscv64-zkn.s]=asm/aes-riscv64-zkn.pl

@@ -41,11 +41,6 @@ IF[{- !$disabled{asm} -}]
   $BNASM_alpha=bn_asm.c alpha-mont.S
   $BNDEF_alpha=OPENSSL_BN_ASM_MONT
 
-  $BNASM_mips32=bn-mips.S mips-mont.S
-  $BNDEF_mips32=OPENSSL_BN_ASM_MONT
-  $BNASM_mips64=$BNASM_mips32
-  $BNDEF_mips64=$BNDEF_mips32
-
   IF[{- ($target{perlasm_scheme} // '') eq '31' -}]
     $BNASM_s390x=bn_asm.c s390x-mont.S
   ELSE
@@ -110,11 +105,6 @@ GENERATE[vis3-mont.S]=asm/vis3-mont.pl
 INCLUDE[vis3-mont.o]=..
 GENERATE[sparct4-mont.S]=asm/sparct4-mont.pl
 INCLUDE[sparct4-mont.o]=..
-
-GENERATE[bn-mips.S]=asm/mips.pl
-INCLUDE[bn-mips.o]=..
-GENERATE[mips-mont.S]=asm/mips-mont.pl
-INCLUDE[mips-mont.o]=..
 
 GENERATE[s390x-mont.S]=asm/s390x-mont.pl
 

@@ -17,9 +17,6 @@ IF[{- !$disabled{asm} -}]
 
   $ECASM_alpha=
 
-  $ECASM_mips32=
-  $ECASM_mips64=
-
   $ECASM_s390x=ecp_s390x_nistp.c
   IF[{- !$disabled{'ec'} -}]
     $ECASM_s390x=$ECASM_s390x ecx_s390x.c

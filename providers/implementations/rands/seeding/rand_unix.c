@@ -201,14 +201,6 @@ static ssize_t sysctl_random(char *buf, size_t buflen)
 #    define __NR_getrandom    389
 #   elif defined(__powerpc__)
 #    define __NR_getrandom    359
-#   elif defined(__mips__) || defined(__mips64)
-#    if _MIPS_SIM == _MIPS_SIM_ABI32
-#     define __NR_getrandom   (__NR_Linux + 353)
-#    elif _MIPS_SIM == _MIPS_SIM_ABI64
-#     define __NR_getrandom   (__NR_Linux + 313)
-#    elif _MIPS_SIM == _MIPS_SIM_NABI32
-#     define __NR_getrandom   (__NR_Linux + 317)
-#    endif
 #   elif defined(__hppa__)
 #    define __NR_getrandom    (__NR_Linux + 339)
 #   elif defined(__sparc__)

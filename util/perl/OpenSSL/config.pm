@@ -486,22 +486,10 @@ EOF
       ],
       [ 'ppc64le-.*-linux2',      { target => "linux-ppc64le" } ],
       [ 'ppc-.*-linux2',          { target => "linux-ppc" } ],
-      [ 'mips64.*-*-linux2',
-        sub {
-            print <<EOF;
-WARNING! To build 64-bit package, do this:
-         $WHERE/Configure linux64-mips64
-EOF
-            maybe_abort();
-            return { target => "linux-mips64" };
-        }
-      ],
-      [ 'mips.*-.*-linux2',       { target => "linux-mips32" } ],
       [ 'ppc60x-.*-vxworks.*',    { target => "vxworks-ppc60x" } ],
       [ 'ppcgen-.*-vxworks.*',    { target => "vxworks-ppcgen" } ],
       [ 'pentium-.*-vxworks.*',   { target => "vxworks-pentium" } ],
       [ 'simlinux-.*-vxworks.*',  { target => "vxworks-simlinux" } ],
-      [ 'mips-.*-vxworks.*',      { target => "vxworks-mips" } ],
       [ 'e2k-.*-linux.*',         { target => "linux-generic64",
                                     defines => [ 'L_ENDIAN' ] } ],
       [ 'sparc64-.*-linux2',

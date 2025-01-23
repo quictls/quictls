@@ -16,9 +16,8 @@ Notes for Android platforms
 
  Android is a cross-compiled target and you can't rely on `./Configure`
  to find out the configuration target for you.  You have to name your
- target explicitly; there are `android-arm`, `android-arm64`, `android-mips`,
- `android-mip64`, `android-x86`, `android-x86_64` and `android-riscv64`
- (`*MIPS` targets are no longer supported with NDK R20+).
+ target explicitly; there are `android-arm`, `android-arm64`,
+ `android-x86`, `android-x86_64` and `android-riscv64`
 
  Do not pass --cross-compile-prefix (as you might be tempted), as it
  will be "calculated" automatically based on chosen platform. However,
@@ -87,4 +86,4 @@ Notes for Android platforms
 
  If you need to pass additional flag to qemu, quotes are your friend, e.g.
 
-    env EXE_SHELL="qemu-mips64el -cpu MIPS64R6-generic" make test
+    env EXE_SHELL="qemu-sparcv9 -cpu sparcv9-generic" make test

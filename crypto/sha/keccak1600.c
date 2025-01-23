@@ -27,7 +27,7 @@ void SHA3_squeeze(uint64_t A[5][5], unsigned char *out, size_t len, size_t r, in
 
 #if defined(__i386) || defined(__i386__) || defined(_M_IX86) || \
     (defined(__x86_64) && !defined(__BMI__)) || defined(_M_X64) || \
-    defined(__mips) || defined(__riscv) || defined(__s390__) || \
+    defined(__riscv) || defined(__s390__) || \
     defined(__EMSCRIPTEN__)
 /*
  * These don't have "and with complement" instruction, so minimize amount
@@ -36,8 +36,7 @@ void SHA3_squeeze(uint64_t A[5][5], unsigned char *out, size_t len, size_t r, in
 # define KECCAK_COMPLEMENTING_TRANSFORM
 #endif
 
-#if defined(__x86_64__) || defined(__aarch64__) || \
-    defined(__mips64)
+#if defined(__x86_64__) || defined(__aarch64__)
 /*
  * These are available even in ILP32 flavours, but even then they are
  * capable of performing 64-bit operations as efficiently as in *P64.
