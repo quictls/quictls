@@ -43,8 +43,6 @@ IF[{- !$disabled{asm} && $config{processor} ne '386' -}]
   $CPUIDASM_ppc32=ppccpuid.s ppccap.c
   $CPUIDASM_ppc64=$CPUIDASM_ppc32
 
-  $CPUIDASM_c64xplus=c64xpluscpuid.s
-
   $CPUIDASM_riscv64=riscvcap.c riscv64cpuid.s
   $CPUIDASM_riscv32=riscvcap.c riscv32cpuid.s
 

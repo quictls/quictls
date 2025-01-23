@@ -64,8 +64,6 @@ IF[{- !$disabled{asm} -}]
   $BNASM_ppc64=$BNASM_ppc32 ppc64-mont-fixed.s
   $BNDEF_ppc64=$BNDEF_ppc32
 
-  $BNASM_c64xplus=asm/bn-c64xplus.asm
-
   # Now that we have defined all the arch specific variables, use the
   # appropriate ones, and define the appropriate macros
   IF[$BNASM_{- $target{asm_arch} -}]
