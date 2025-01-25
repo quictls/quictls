@@ -312,7 +312,7 @@ $code.=<<___;
 
 .text
 .set	noat
-#if !defined(__mips_eabi) && (!defined(__vxworks) || defined(__pic__))
+#if !defined(__mips_eabi)
 .option	pic2
 #endif
 

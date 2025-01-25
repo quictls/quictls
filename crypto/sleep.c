@@ -16,20 +16,12 @@
 
 void OSSL_sleep(uint64_t millis)
 {
-# ifdef OPENSSL_SYS_VXWORKS
-    struct timespec ts;
-
-    ts.tv_sec = (long int) (millis / 1000);
-    ts.tv_nsec = (long int) (millis % 1000) * 1000000ul;
-    nanosleep(&ts, NULL);
-# else
     unsigned int s = (unsigned int)(millis / 1000);
     unsigned int us = (unsigned int)((millis % 1000) * 1000);
 
     if (s > 0)
         sleep(s);
     usleep(us);
-# endif
 }
 #elif defined(_WIN32) && !defined(OPENSSL_SYS_UEFI)
 # include <windows.h>

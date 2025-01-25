@@ -826,14 +826,8 @@ int BIO_lookup_ex(const char *host, const char *service, int lookup_type,
                  * anyway [above getaddrinfo/gai_strerror is]. We just let
                  * system administrator figure this out...
                  */
-# if defined(OPENSSL_SYS_VXWORKS)
-                /* h_errno doesn't exist on VxWorks */
-                ERR_raise_data(ERR_LIB_SYS, 1000,
-                               "calling gethostbyname()");
-# else
                 ERR_raise_data(ERR_LIB_SYS, 1000 + h_errno,
                                "calling gethostbyname()");
-# endif
 #else
                 ERR_raise_data(ERR_LIB_SYS, get_last_socket_error(),
                                "calling gethostbyname()");

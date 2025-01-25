@@ -111,6 +111,7 @@ as they were replaced by the built-in RAND changes.
   - Removed UWIN support.
   - Removed uClinux support.
   - Removed IRIX support.
+  - Remove Vxworks support.
   - Removed HP-PARISC (including MPE/ix) support.
   - Removed `I386_only` support.
   - Removed support for SCO platforms.

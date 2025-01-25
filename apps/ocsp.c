@@ -28,20 +28,6 @@
 #include <openssl/bn.h>
 #include <openssl/x509v3.h>
 
-#if defined(OPENSSL_SYS_VXWORKS)
-/* not supported */
-int setpgid(pid_t pid, pid_t pgid)
-{
-    errno = ENOSYS;
-    return 0;
-}
-/* not supported */
-pid_t fork(void)
-{
-    errno = ENOSYS;
-    return (pid_t) -1;
-}
-#endif
 /* Maximum leeway in validity period: default 5 minutes */
 #define MAX_VALIDITY_PERIOD    (5 * 60)
 

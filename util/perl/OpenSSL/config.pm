@@ -150,7 +150,6 @@ my $guess_patterns = [
     [ 'MINGW64.*?:.*?:.*?:x86_64',  '${MACHINE}-whatever-mingw64' ],
     [ 'MINGW.*',                    '${MACHINE}-whatever-mingw' ],
     [ 'CYGWIN.*',                   '${MACHINE}-pc-cygwin' ],
-    [ 'vxworks.*',                  '${MACHINE}-whatever-vxworks' ],
 ];
 
 # Run a command, return true if exit zero else false.
@@ -497,11 +496,6 @@ EOF
         }
       ],
       [ 'mips.*-.*-linux2',       { target => "linux-mips32" } ],
-      [ 'ppc60x-.*-vxworks.*',    { target => "vxworks-ppc60x" } ],
-      [ 'ppcgen-.*-vxworks.*',    { target => "vxworks-ppcgen" } ],
-      [ 'pentium-.*-vxworks.*',   { target => "vxworks-pentium" } ],
-      [ 'simlinux-.*-vxworks.*',  { target => "vxworks-simlinux" } ],
-      [ 'mips-.*-vxworks.*',      { target => "vxworks-mips" } ],
       [ 'e2k-.*-linux.*',         { target => "linux-generic64",
                                     defines => [ 'L_ENDIAN' ] } ],
       [ 'sparc64-.*-linux2',

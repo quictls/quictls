@@ -78,7 +78,7 @@ VirtualLock(
 #include <openssl/param_build.h>
 
 #ifndef HAVE_FORK
-# if defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_VXWORKS)
+# if defined(OPENSSL_SYS_WINDOWS)
 #  define HAVE_FORK 0
 # else
 #  define HAVE_FORK 1

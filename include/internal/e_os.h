@@ -22,7 +22,7 @@
  * outside; this file e_os.h is not part of the exported interface.
  */
 
-# if defined(OPENSSL_SYS_VXWORKS) || defined(OPENSSL_SYS_UEFI)
+# if defined(OPENSSL_SYS_UEFI)
 #  define NO_CHMOD
 #  define NO_SYSLOG
 # endif
@@ -156,11 +156,7 @@ FILE *__iob_func(void);
 
 # else                          /* The non-microsoft world */
 
-#  if defined(OPENSSL_SYS_VXWORKS)
-#   include <time.h>
-#  else
 #   include <sys/time.h>
-#  endif
 
 #  include <unistd.h>
 #  include <sys/types.h>
@@ -191,29 +187,6 @@ FILE *__iob_func(void);
 # else
 #  include <strings.h>
 # endif
-
-/* vxworks */
-# if defined(OPENSSL_SYS_VXWORKS)
-#  include <ioLib.h>
-#  include <tickLib.h>
-#  include <sysLib.h>
-#  include <vxWorks.h>
-#  include <sockLib.h>
-#  include <taskLib.h>
-
-#  define TTY_STRUCT int
-#  define sleep(a) taskDelay((a) * sysClkRateGet())
-
-/*
- * NOTE: these are implemented by helpers in database app! if the database is
- * not linked, we need to implement them elsewhere
- */
-struct hostent *gethostbyname(const char *name);
-struct hostent *gethostbyaddr(const char *addr, int length, int type);
-struct servent *getservbyname(const char *name, const char *proto);
-
-# endif
-/* end vxworks */
 
 # ifdef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
 #  define CRYPTO_memcmp memcmp

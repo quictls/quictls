@@ -19,9 +19,6 @@
  * sigaction and fileno included. -pedantic would be more appropriate for the
  * intended purposes, but we can't prevent users from adding -ansi.
  */
-# if defined(OPENSSL_SYS_VXWORKS)
-#  include <sys/types.h>
-# endif
 
 # include <signal.h>
 # include <stdio.h>
@@ -72,10 +69,9 @@
 #   define TERMIO
 #   undef  SGTTY
 /*
- * We know that MSDOS, VXWORKS, use entirely other mechanisms.
+ * We know that MSDOS uses other mechanisms.
  */
-#  elif !defined(OPENSSL_SYS_MSDOS) \
-        && !defined(OPENSSL_SYS_VXWORKS)
+#  elif !defined(OPENSSL_SYS_MSDOS)
 #   define TERMIOS
 #   undef  TERMIO
 #   undef  SGTTY
@@ -83,11 +79,6 @@
 
 # endif
 
-# if defined(OPENSSL_SYS_VXWORKS)
-#  undef TERMIOS
-#  undef TERMIO
-#  undef SGTTY
-# endif
 
 # ifdef TERMIOS
 #  include <termios.h>
@@ -333,10 +324,7 @@ static int open_console(UI *ui)
         return 0;
     is_a_tty = 1;
 
-# if defined(OPENSSL_SYS_VXWORKS)
-    tty_in = stdin;
-    tty_out = stderr;
-# elif defined(_WIN32) && !defined(_WIN32_WCE)
+# if   defined(_WIN32) && !defined(_WIN32_WCE)
     if ((tty_out = fopen("conout$", "w")) == NULL)
         tty_out = stderr;
 

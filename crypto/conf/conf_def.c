@@ -199,8 +199,6 @@ static int parsebool(const char *pval, int *flag)
 
 static int def_load_bio(CONF *conf, BIO *in, long *line)
 {
-/* The macro BUFSIZE conflicts with a system macro in VxWorks */
-#define CONFBUFSIZE     512
     int bufnum = 0, i, ii;
     BUF_MEM *buff = NULL;
     char *s, *p, *end;
@@ -245,16 +243,16 @@ static int def_load_bio(CONF *conf, BIO *in, long *line)
     bufnum = 0;
     again = 0;
     for (;;) {
-        if (!BUF_MEM_grow(buff, bufnum + CONFBUFSIZE)) {
+        if (!BUF_MEM_grow(buff, bufnum + BUFSIZ)) {
             ERR_raise(ERR_LIB_CONF, ERR_R_BUF_LIB);
             goto err;
         }
         p = &(buff->data[bufnum]);
         *p = '\0';
  read_retry:
-        if (in != NULL && BIO_gets(in, p, CONFBUFSIZE - 1) < 0)
+        if (in != NULL && BIO_gets(in, p, BUFSIZ - 1) < 0)
             goto err;
-        p[CONFBUFSIZE - 1] = '\0';
+        p[BUFSIZ - 1] = '\0';
         ii = i = strlen(p);
         if (first_call) {
             /* Other BOMs imply unsupported multibyte encoding,

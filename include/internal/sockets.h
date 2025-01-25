@@ -12,7 +12,7 @@
 
 # include <openssl/opensslconf.h>
 
-# if defined(OPENSSL_SYS_VXWORKS) || defined(OPENSSL_SYS_UEFI)
+# if defined(OPENSSL_SYS_UEFI)
 #  define NO_SYS_PARAM_H
 # endif
 # ifdef WIN32
@@ -69,9 +69,6 @@ struct servent *PASCAL getservbyname(const char *, const char *);
 
 #  ifndef NO_SYS_PARAM_H
 #   include <sys/param.h>
-#  endif
-#  ifdef OPENSSL_SYS_VXWORKS
-#   include <time.h>
 #  endif
 
 #  include <netdb.h>
@@ -139,11 +136,6 @@ struct servent *PASCAL getservbyname(const char *, const char *);
 #  define get_last_socket_error_is_eintr() (get_last_socket_error() == WSAEINTR)
 #  define readsocket(s,b,n)       recv((s),(b),(n),0)
 #  define writesocket(s,b,n)      send((s),(b),(n),0)
-# elif defined(OPENSSL_SYS_VXWORKS)
-#  define ioctlsocket(a,b,c)          ioctl((a),(b),(int)(c))
-#  define closesocket(s)              close(s)
-#  define readsocket(s,b,n)           read((s),(b),(n))
-#  define writesocket(s,b,n)          write((s),(char *)(b),(n))
 # else
 #  define ioctlsocket(a,b,c)      ioctl(a,b,c)
 #  define closesocket(s)          close(s)
