@@ -3416,33 +3416,12 @@ CON_FUNC_RETURN tls_construct_client_key_exchange(SSL_CONNECTION *s,
 
 int tls_client_key_exchange_post_work(SSL_CONNECTION *s)
 {
-    unsigned char *pms = NULL;
-    size_t pmslen = 0;
-
-    pms = s->s3.tmp.pms;
-    pmslen = s->s3.tmp.pmslen;
-
-
-    if (pms == NULL && !(s->s3.tmp.new_cipher->algorithm_mkey & SSL_kPSK)) {
+    if (s->s3.tmp.pms == NULL
+        && !(s->s3.tmp.new_cipher->algorithm_mkey & SSL_kPSK)) {
         SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_PASSED_INVALID_ARGUMENT);
-        goto err;
+        return 0;
     }
-    if (!ssl_generate_master_secret(s, pms, pmslen, 1)) {
-        /* SSLfatal() already called */
-        /* ssl_generate_master_secret frees the pms even on error */
-        pms = NULL;
-        pmslen = 0;
-        goto err;
-    }
-    pms = NULL;
-    pmslen = 0;
-
-    return 1;
- err:
-    OPENSSL_clear_free(pms, pmslen);
-    s->s3.tmp.pms = NULL;
-    s->s3.tmp.pmslen = 0;
-    return 0;
+    return ssl_generate_master_secret(s, s->s3.tmp.pms, s->s3.tmp.pmslen, 1);
 }
 
 /*
