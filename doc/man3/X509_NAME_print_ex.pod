@@ -34,7 +34,7 @@ and I<buf> is returned.
 
 X509_NAME_print() prints out I<name> to I<bp> with a limited attempt
 to make the output more readable.
-The I<dummy> parameter is an historical artificate and not used.
+The I<dummy> parameter is a historical artifact and not used.
 
 =head1 NOTES
 
