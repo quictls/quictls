@@ -500,7 +500,7 @@ int X509_NAME_set(X509_NAME **xn, const X509_NAME *name)
     return 1;
 }
 
-int X509_NAME_print(BIO *bp, const X509_NAME *name, int obase)
+int X509_NAME_print(BIO *bp, const X509_NAME *name, int dummy)
 {
     char *s, *c, *b;
     int i;
@@ -514,13 +514,14 @@ int X509_NAME_print(BIO *bp, const X509_NAME *name, int obase)
     }
     s = b + 1;                  /* skip the first slash */
 
-    c = s;
-    for (;;) {
-        if (((*s == '/') &&
-             (ossl_isupper(s[1]) && ((s[2] == '=') ||
-                                (ossl_isupper(s[2]) && (s[3] == '='))
-              ))) || (*s == '\0'))
-        {
+    for (c = s; ; s++) {
+        int ended = *s == '\0';
+        if (!ended)
+            ended = *s == '/'
+                && (ossl_isupper(s[1])
+                        && (s[2] == '='
+                            || (ossl_isupper(s[2]) && s[3] == '=')));
+        if (ended) {
             i = s - c;
             if (BIO_write(bp, c, i) != i)
                 goto err;
@@ -532,7 +533,6 @@ int X509_NAME_print(BIO *bp, const X509_NAME *name, int obase)
         }
         if (*s == '\0')
             break;
-        s++;
     }
 
     OPENSSL_free(b);
