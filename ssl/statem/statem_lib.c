@@ -1416,7 +1416,7 @@ unsigned long ssl3_output_cert_chain(SSL_CONNECTION *s, WPACKET *pkt,
 
 /*
  * Tidy up after the end of a handshake.
- * If |clearbufs| is set then init_buf and the wbio buffer is
+ * If |clearbufs| is set then init_buf and the wbio buffer are
  * freed up as well.
  */
 WORK_STATE tls_finish_handshake(SSL_CONNECTION *s, ossl_unused WORK_STATE wst,
