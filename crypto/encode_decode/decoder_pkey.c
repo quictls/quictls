@@ -17,7 +17,7 @@
 #include <openssl/trace.h>
 #include <crypto/evp.h>
 #include <crypto/decoder.h>
-#include "crypto/evp/evp_local.h"
+#include <internal/evp.h>
 #include <crypto/lhash.h>
 #include "encoder_local.h"
 #include <internal/namemap.h>
