@@ -257,8 +257,7 @@ sub generate_resumption_tests {
                 $resumption_expected = "No";
             }
 
-            for (my $sctp = 0; $sctp < ($dtls && !disabled("sctp") ? 2 : 1);
-                 $sctp++) {
+            for (my $sctp = 0; $sctp < 1; $sctp++) {
                 foreach my $ticket ("SessionTicket", "-SessionTicket") {
                     # Client is flexible, server upgrades/downgrades.
                     push @server_tests, {

@@ -49,7 +49,7 @@ determine what protocol family, socket type and protocol should be used for
 the lookup.  B<family> can be any of AF_INET, AF_INET6, AF_UNIX and
 AF_UNSPEC. B<socktype> can be SOCK_STREAM, SOCK_DGRAM or 0. Specifying 0
 indicates that any type can be used. B<protocol> specifies a protocol such as
-IPPROTO_TCP, IPPROTO_UDP or IPPORTO_SCTP. If set to 0 than any protocol can be
+IPPROTO_TCP or IPPROTO_UDP. If set to 0 than any protocol can be
 used. B<res> points at a pointer to hold the start of a B<BIO_ADDRINFO>
 chain.
 
@@ -92,10 +92,7 @@ information they should return isn't available.
 =head1 NOTES
 
 The BIO_lookup_ex() implementation uses the platform provided getaddrinfo()
-function. On Linux it is known that specifying 0 for the protocol will not
-return any SCTP based addresses when calling getaddrinfo(). Therefore, if an SCTP
-address is required then the B<protocol> parameter to BIO_lookup_ex() should be
-explicitly set to IPPROTO_SCTP. The same may be true on other platforms.
+function.
 
 =head1 HISTORY
 

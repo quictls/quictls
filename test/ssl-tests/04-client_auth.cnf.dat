@@ -33,7 +33,6 @@ sub generate_tests() {
         my $protocol_name = $protocol || "flex";
         my $caalert;
         my $method;
-        my $sctpenabled = 0;
         if (!$is_disabled[$_]) {
             if ($protocol_name eq "SSLv3") {
                 $caalert = "BadCertificate";
@@ -42,7 +41,6 @@ sub generate_tests() {
             }
             if ($protocol_name =~ m/^DTLS/) {
                 $method = "DTLS";
-                $sctpenabled = 1 if !disabled("sctp");
             }
             my $clihash;
             my $clisigtype;

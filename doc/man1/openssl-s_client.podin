@@ -71,8 +71,6 @@ B<openssl> B<s_client>
 [B<-psk> I<key>]
 [B<-psk_session> I<file>]
 [B<-quiet>]
-[B<-sctp>]
-[B<-sctp_label_bug>]
 [B<-fallback_scsv>]
 [B<-async>]
 [B<-maxfraglen> I<len>]
@@ -526,20 +524,6 @@ This option must be provided in order to use a PSK cipher.
 
 Use the pem encoded SSL_SESSION data stored in I<file> as the basis of a PSK.
 Note that this will only work if TLSv1.3 is negotiated.
-
-=item B<-sctp>
-
-Use SCTP for the transport protocol instead of UDP in DTLS. Must be used in
-conjunction with B<-dtls>, B<-dtls1> or B<-dtls1_2>. This option is only
-available where OpenSSL has support for SCTP enabled.
-
-=item B<-sctp_label_bug>
-
-Use the incorrect behaviour of older OpenSSL implementations when computing
-endpoint-pair shared secrets for DTLS/SCTP. This allows communication with
-older broken implementations but breaks interoperability with correct
-implementations. Must be used in conjunction with B<-sctp>. This option is only
-available where OpenSSL has support for SCTP enabled.
 
 =item B<-fallback_scsv>
 
