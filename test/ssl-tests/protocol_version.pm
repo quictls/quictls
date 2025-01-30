@@ -257,56 +257,54 @@ sub generate_resumption_tests {
                 $resumption_expected = "No";
             }
 
-            for (my $sctp = 0; $sctp < 1; $sctp++) {
-                foreach my $ticket ("SessionTicket", "-SessionTicket") {
-                    # Client is flexible, server upgrades/downgrades.
-                    push @server_tests, {
-                        "name" => "resumption",
-                        "client" => {
-                            "CipherString" => "DEFAULT:\@SECLEVEL=0",
-                        },
-                        "server" => {
-                            "CipherString" => "DEFAULT:\@SECLEVEL=0",
-                            "MinProtocol" => $protocols[$original_protocol],
-                            "MaxProtocol" => $protocols[$original_protocol],
-                            "Options" => $ticket,
-                        },
-                        "resume_server" => {
-                            "CipherString" => "DEFAULT:\@SECLEVEL=0",
-                            "MaxProtocol" => $protocols[$resume_protocol],
-                            "Options" => $ticket,
-                        },
-                        "test" => {
-                            "ExpectedProtocol" => $protocols[$resume_protocol],
-                            "Method" => $method,
-                            "HandshakeMode" => "Resume",
-                            "ResumptionExpected" => $resumption_expected,
-                        }
-                    };
-                    # Server is flexible, client upgrades/downgrades.
-                    push @client_tests, {
-                        "name" => "resumption",
-                        "client" => {
-                            "CipherString" => "DEFAULT:\@SECLEVEL=0",
-                            "MinProtocol" => $protocols[$original_protocol],
-                            "MaxProtocol" => $protocols[$original_protocol],
-                        },
-                        "server" => {
-                            "CipherString" => "DEFAULT:\@SECLEVEL=0",
-                            "Options" => $ticket,
-                        },
-                        "resume_client" => {
-                            "CipherString" => "DEFAULT:\@SECLEVEL=0",
-                            "MaxProtocol" => $protocols[$resume_protocol],
-                        },
-                        "test" => {
-                            "ExpectedProtocol" => $protocols[$resume_protocol],
-                            "Method" => $method,
-                            "HandshakeMode" => "Resume",
-                            "ResumptionExpected" => $resumption_expected,
-                        }
-                    };
-                }
+            foreach my $ticket ("SessionTicket", "-SessionTicket") {
+                # Client is flexible, server upgrades/downgrades.
+                push @server_tests, {
+                    "name" => "resumption",
+                    "client" => {
+                        "CipherString" => "DEFAULT:\@SECLEVEL=0",
+                    },
+                    "server" => {
+                        "CipherString" => "DEFAULT:\@SECLEVEL=0",
+                        "MinProtocol" => $protocols[$original_protocol],
+                        "MaxProtocol" => $protocols[$original_protocol],
+                        "Options" => $ticket,
+                    },
+                    "resume_server" => {
+                        "CipherString" => "DEFAULT:\@SECLEVEL=0",
+                        "MaxProtocol" => $protocols[$resume_protocol],
+                        "Options" => $ticket,
+                    },
+                    "test" => {
+                        "ExpectedProtocol" => $protocols[$resume_protocol],
+                        "Method" => $method,
+                        "HandshakeMode" => "Resume",
+                        "ResumptionExpected" => $resumption_expected,
+                    }
+                };
+                # Server is flexible, client upgrades/downgrades.
+                push @client_tests, {
+                    "name" => "resumption",
+                    "client" => {
+                        "CipherString" => "DEFAULT:\@SECLEVEL=0",
+                        "MinProtocol" => $protocols[$original_protocol],
+                        "MaxProtocol" => $protocols[$original_protocol],
+                    },
+                    "server" => {
+                        "CipherString" => "DEFAULT:\@SECLEVEL=0",
+                        "Options" => $ticket,
+                    },
+                    "resume_client" => {
+                        "CipherString" => "DEFAULT:\@SECLEVEL=0",
+                        "MaxProtocol" => $protocols[$resume_protocol],
+                    },
+                    "test" => {
+                        "ExpectedProtocol" => $protocols[$resume_protocol],
+                        "Method" => $method,
+                        "HandshakeMode" => "Resume",
+                        "ResumptionExpected" => $resumption_expected,
+                    }
+                };
             }
         }
     }
