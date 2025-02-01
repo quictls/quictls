@@ -12,25 +12,23 @@
 # include <openssl/configuration.h>
 # include <openssl/e_os2.h>
 # include <internal/time.h>
-
 # if defined(_WIN32)
 #  include <windows.h>
 # endif
 
-# if defined(OPENSSL_THREADS) && defined(OPENSSL_SYS_UNIX)
-#  define OPENSSL_THREADS_POSIX
-# elif defined(OPENSSL_THREADS) && defined(OPENSSL_SYS_WINDOWS) && \
-    defined(_WIN32_WINNT)
-#  if _WIN32_WINNT >= 0x0600
-#   define OPENSSL_THREADS_WINNT
-#  elif _WIN32_WINNT >= 0x0501
-#   define OPENSSL_THREADS_WINNT
-#   define OPENSSL_THREADS_WINNT_LEGACY
-#  else
-#   define OPENSSL_THREADS_NONE
+# if defined(OPENSSL_THREADS)
+#  if defined(OPENSSL_SYS_UNIX)
+#   define OPENSSL_THREADS_POSIX
+#  elif defined(OPENSSL_SYS_WINDOWS) && defined(_WIN32_WINNT)
+#   if _WIN32_WINNT >= 0x0600
+#    define OPENSSL_THREADS_WINNT
+#   elif _WIN32_WINNT >= 0x0501
+#    define OPENSSL_THREADS_WINNT
+#    define OPENSSL_THREADS_WINNT_LEGACY
+#   else
+#    error "Unsupported Windows for threads; configure with no-threads"
+#   endif
 #  endif
-# else
-#  define OPENSSL_THREADS_NONE
 # endif
 
 # include <openssl/crypto.h>
