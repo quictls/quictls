@@ -1415,9 +1415,8 @@ unsigned long ssl3_output_cert_chain(SSL_CONNECTION *s, WPACKET *pkt,
 }
 
 /*
- * Tidy up after the end of a handshake. In the case of SCTP this may result
- * in NBIO events. If |clearbufs| is set then init_buf and the wbio buffer is
- * freed up as well.
+ * Tidy up after the end of a handshake.
+ * If |clearbufs| is set then connection buffers are also freed.
  */
 WORK_STATE tls_finish_handshake(SSL_CONNECTION *s, ossl_unused WORK_STATE wst,
                                 int clearbufs, int stop)

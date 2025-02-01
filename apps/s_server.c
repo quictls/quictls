@@ -2381,7 +2381,6 @@ static int sv_body(int s, int stype, int prot, unsigned char *context)
             /* want to do MTU discovery */
             BIO_ctrl(sbio, BIO_CTRL_DGRAM_MTU_DISCOVER, 0, NULL);
 
-        /* Turn on cookie exchange. Not necessary for SCTP */
         SSL_set_options(con, SSL_OP_COOKIE_EXCHANGE);
     } else
 #endif
