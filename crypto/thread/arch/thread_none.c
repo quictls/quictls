@@ -9,7 +9,7 @@
 
 #include <internal/thread_arch.h>
 
-#if defined(OPENSSL_THREADS_NONE)
+#if !defined(OPENSSL_THREADS)
 
 int ossl_crypto_thread_native_spawn(CRYPTO_THREAD *thread)
 {
