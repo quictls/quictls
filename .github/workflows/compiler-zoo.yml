@@ -18,18 +18,24 @@ jobs:
       fail-fast: false
       matrix:
         zoo: [
+        # - we set gcc-ppc-name if the GCC version isn't
+        # part of the Ubuntu version we're using (see
+        # https://launchpad.net/~ubuntu-toolchain-r/+archive/ubuntu/test).
           {
-            cc: gcc-7,
-            distro: ubuntu-20.04
+            cc: gcc-11,
+            distro: ubuntu-22.04
           }, {
             cc: gcc-13,
             distro: ubuntu-22.04,
             gcc-ppa-name: ubuntu-toolchain-r/test
           }, {
-            cc: clang-6.0,
-            distro: ubuntu-20.04
+        # Set llvm-ppa-name if an LLVM version isn't part of the
+        # Ubuntu version we're using (see https://apt.llvm.org/).
+            cc: clang-18,
+            distro: ubuntu-22.04,
+            llvm-ppa-name: jammy
           }, {
-            cc: clang-17,
+            cc: clang-19,
             distro: ubuntu-22.04,
             llvm-ppa-name: jammy
           }
@@ -45,8 +51,6 @@ jobs:
         llvm_ppa_name="${{ matrix.zoo.llvm-ppa-name }}"
 
         # In the Matrix above:
-        # - we set gcc-ppc-name if the GCC version isn't part of the Ubuntu version we're using (see https://launchpad.net/~ubuntu-toolchain-r/+archive/ubuntu/test).
-        # - we set llvm-ppa-name if an LLVM version isn't part of the Ubuntu version we're using (see https://apt.llvm.org/).
         # This is especially needed because even new Ubuntu LTSes aren't available
         # until a while after release on Github Actions.
         if [[ -n ${gcc_ppa_name} ]] ; then
