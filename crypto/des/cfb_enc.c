@@ -13,6 +13,7 @@
  */
 #include <internal/deprecated.h>
 
+#include <openssl/configuration.h>
 #include <internal/e_os.h>
 #include "des_local.h"
 #include <assert.h>
