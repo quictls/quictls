@@ -14,6 +14,11 @@ We're going to keep API compatibility, but add new APIs that serve
 programmers better, remove old cruft and deepen deprecation to help migrate
 to a better world
 
+This fork is based on OpenSSL 3.3 release, with some features and fixes
+cherry-picked from OpenSSL. If there's something you find missing, please
+[open an issue](https://github.com/quictls/quictls/issues) or -- better yet
+:) -- make a [pull request](https://github.com/quictls/quictls/pulls).
+
 What about FIPS?
 ----------------
 
