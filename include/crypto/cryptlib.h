@@ -13,8 +13,6 @@
 # include <openssl/core.h>
 # include <internal/cryptlib.h>
 
-/* This file is not scanned by mkdef.pl, whereas cryptlib.h is */
-
 int ossl_init_thread_start(const void *index, void *arg,
                            OSSL_thread_stop_handler_fn handfn);
 int ossl_init_thread_deregister(void *index);

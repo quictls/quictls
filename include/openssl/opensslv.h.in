@@ -1,0 +1,54 @@
+/*
+ * Copyright 1999-2020 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2025 The QuicTLS Project Authors. All Rights Reserved.
+ *
+ * Licensed under the Apache License 2.0 (the "License").  You may not use
+ * this file except in compliance with the License.  You can obtain a copy
+ * in the file LICENSE in the source distribution or at one of these two
+ * places:
+ *      https://github.com/quictls/quictls/blob/main/LICENSE.txt
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ */
+
+#ifndef OPENSSL_OPENSSLV_H
+# define OPENSSL_OPENSSLV_H
+
+/* The basic version nunmber. */
+#define OPENSSL_VERSION_MAJOR ${OPENSSL_VERSION_MAJOR}
+#define OPENSSL_VERSION_MINOR ${OPENSSL_VERSION_MINOR}
+#define OPENSSL_VERSION_PATCH ${OPENSSL_VERSION_PATCH}
+# define OPENSSL_VERSION_STR \
+    "${OPENSSL_VERSION_MAJOR}" "." \
+    "${OPENSSL_VERSION_MINOR}" "." \
+    "${OPENSSL_VERSION_PATCH}"
+
+/*
+ * Additional version information which is part of the version naming
+ * but not the version number itself. The pre-release string is "-XXX"
+ * (like "-alpha1") and the metadata string is "+xxx" (e.g., "+quic").
+ */
+# define OPENSSL_VERSION_PRE_RELEASE "${OPENSSL_VERSION_PRE_RELEASE}"
+# define OPENSSL_VERSION_BUILD_METADATA "${OPENSSL_VERSION_BUILD_METADATA}"
+
+# define OPENSSL_FULL_VERSION_STR \
+        OPENSSL_VERSION_PRE_RELEASE \
+        OPENSSL_VERSION_STR \
+        OPENSSL_VERSION_BUILD_METADATA
+/* For backward compatibility. */
+# define OPENSSL_VERSION_TEXT "QuicTLS " OPENSSL_FULL_VERSION_STR
+
+/* For checking general API compatibility when preprocessing */
+# define OPENSSL_VERSION_PREREQ(maj, min) \
+    ((OPENSSL_VERSION_MAJOR << 16) + OPENSSL_VERSION_MINOR \
+      >= ((maj) << 16) + (min))
+
+/*
+ * Synthesize OPENSSL_VERSION_NUMBER with the layout 0xMNN00PP
+ */
+# define OPENSSL_VERSION_NUMBER     \
+    ( (OPENSSL_VERSION_MAJOR << 28) \
+    | (OPENSSL_VERSION_MINOR << 20) \
+    | (OPENSSL_VERSION_PATCH <<  4) \
+    | ${OPENSSL_PRE_MARKER} )
+
+#endif
