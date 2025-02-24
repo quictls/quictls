@@ -510,6 +510,9 @@ install_dev: install_runtime_libs
 	@"$(PERL)" "$(SRCDIR)\util\copy.pl" \
 				       "$(SRCDIR)\include\openssl\*.h" \
 				       "$(INSTALLTOP)\include\openssl"
+	@"$(PERL)" "$(SRCDIR)\util\copy.pl" \
+				       "$(SRCDIR)\include\openssl\*.inc" \
+				       "$(INSTALLTOP)\include\openssl"
 	@"$(PERL)" "$(SRCDIR)\util\copy.pl" "$(BLDDIR)\include\openssl\*.h" \
 				       "$(INSTALLTOP)\include\openssl"
 	@"$(PERL)" "$(SRCDIR)\util\mkdir-p.pl" "$(libdir)"
