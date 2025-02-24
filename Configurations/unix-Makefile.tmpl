@@ -683,7 +683,7 @@ install_dev: install_runtime_libs
 	@chmod 644 "$(DESTDIR)$(INSTALLTOP)/include/openssl/applink.c"
 	@ : {- output_on() if $disabled{uplink}; "" -}
 	@set -e; for i in $(SRCDIR)/include/openssl/*.h \
-                          $(SRCDIR)/include/*.inc \
+                          $(SRCDIR)/include/openssl/*.inc \
 			  $(BLDDIR)/include/openssl/*.h; do \
 		fn=`basename $$i`; \
 		$(ECHO) "install $$i -> $(DESTDIR)$(INSTALLTOP)/include/openssl/$$fn"; \
