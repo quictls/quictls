@@ -134,7 +134,7 @@ const OPTIONS ts_options[] = {
 static char* opt_helplist[] = {
     "",
     "Typical uses:",
-    " openssl ts -query [-rand file...] [-config file] [-data file]",
+    " openssl ts -query [-config file] [-data file]",
     "    [-digest hexstring] [-tspolicy oid] [-no_nonce] [-cert]",
     "    [-in file] [-out file] [-text]",
     "",
@@ -297,9 +297,6 @@ int ts_main(int argc, char **argv)
         BIO_printf(bio_err, "%s: Must give one of -query, -reply, or -verify\n", prog);
         goto opthelp;
     }
-
-    if (!app_RAND_load())
-        goto end;
 
     if (!opt_md(digestname, &md))
         goto opthelp;

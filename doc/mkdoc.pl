@@ -85,6 +85,7 @@ r_synopsis => ""
 r_item => "\n"
     . "=item B<-rand> I<files>, B<-writerand> I<file>\n"
     . "\n"
+    . "These options are ignored.\n"
     . "See L<openssl(1)/Random State Options> for details.",
     # Provider options
 provider_synopsis => ""

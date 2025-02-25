@@ -180,9 +180,6 @@ int rand_main(int argc, char **argv)
         goto opthelp;
     }
 
-    if (!app_RAND_load())
-        goto end;
-
     out = bio_open_default(outfile, 'w', format);
     if (out == NULL)
         goto end;

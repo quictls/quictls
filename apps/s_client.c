@@ -1424,8 +1424,6 @@ int s_client_main(int argc, char **argv)
     } else if (!opt_check_rest_arg(NULL)) {
         goto opthelp;
     }
-    if (!app_RAND_load())
-        goto end;
 
     if (c_ign_eof)
         cmdmode = USER_DATA_MODE_NONE;
