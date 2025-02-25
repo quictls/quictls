@@ -374,9 +374,6 @@ int pkcs12_main(int argc, char **argv)
     if (!opt_check_rest_arg(NULL))
         goto opthelp;
 
-    if (!app_RAND_load())
-        goto end;
-
     if (!opt_cipher_any(ciphername, &enc))
         goto opthelp;
     if (export_pkcs12) {

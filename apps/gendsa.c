@@ -111,9 +111,6 @@ int gendsa_main(int argc, char **argv)
     argv = opt_rest();
     dsaparams = argv[0];
 
-    if (!app_RAND_load())
-        goto end;
-
     if (!opt_cipher(ciphername, &enc))
         goto end;
     private = 1;
