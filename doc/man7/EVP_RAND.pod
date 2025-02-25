@@ -86,8 +86,8 @@ the thread-local <public> and <private> DRBG instance, respectively.
 
 The <primary> DRBG is not used directly by the application, only for reseeding
 the two other two DRBG instances. It reseeds itself by obtaining randomness
-either from os entropy sources or by consuming randomness which was added
-previously by L<RAND_add(3)>.
+either from the platform entropy sources or by consuming randomness which
+was added previously by L<RAND_add(3)>.
 
 =head2 The <public> DRBG instance
 

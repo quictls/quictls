@@ -50,10 +50,6 @@
  */
 # define _UC(c) ((unsigned char)(c))
 
-void app_RAND_load_conf(CONF *c, const char *section);
-int app_RAND_write(void);
-int app_RAND_load(void);
-
 int setup_engine_loader(void);
 void destroy_engine_loader(void);
 

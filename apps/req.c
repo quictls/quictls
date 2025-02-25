@@ -489,9 +489,6 @@ int req_main(int argc, char **argv)
     if (!opt_check_rest_arg(NULL))
         goto opthelp;
 
-    if (!app_RAND_load())
-        goto end;
-
     if (!gen_x509) {
         if (days != UNSET_DAYS)
             BIO_printf(bio_err, "Ignoring -days without -x509; not generating a certificate\n");
@@ -604,7 +601,6 @@ int req_main(int argc, char **argv)
         pkey = load_key(keyfile, keyform, 0, passin, e, "private key");
         if (pkey == NULL)
             goto end;
-        app_RAND_load_conf(req_conf, section);
     }
     if (keyalg != NULL && pkey != NULL) {
         BIO_printf(bio_err,
@@ -612,8 +608,6 @@ int req_main(int argc, char **argv)
         /* Better throw an error in this case */
     }
     if (newreq && pkey == NULL) {
-        app_RAND_load_conf(req_conf, section);
-
         if (!app_conf_try_number(req_conf, section, BITS, &newkey_len))
             newkey_len = DEFAULT_KEY_LENGTH;
 

@@ -87,7 +87,6 @@ The error codes can be obtained by L<ERR_get_error(3)>.
 =head1 SEE ALSO
 
 L<ERR_get_error(3)>,
-L<RAND_add(3)>,
 L<RAND_bytes(3)>,
 L<RAND_priv_bytes(3)>,
 L<RAND(7)>,
@@ -95,31 +94,13 @@ L<EVP_RAND(7)>
 
 =head1 HISTORY
 
-=over 2
-
-=item *
-
-Starting with OpenSSL release 1.1.0, BN_pseudo_rand() has been identical
-to BN_rand() and BN_pseudo_rand_range() has been identical to
-BN_rand_range().
-The BN_pseudo_rand() and BN_pseudo_rand_range() functions were
-deprecated in OpenSSL 3.0.
-
-=item *
-
-The BN_priv_rand() and BN_priv_rand_range() functions were added in
-OpenSSL 1.1.1.
-
-=item *
-
 The BN_rand_ex(), BN_priv_rand_ex(), BN_rand_range_ex() and
 BN_priv_rand_range_ex() functions were added in OpenSSL 3.0.
-
-=back
 
 =head1 COPYRIGHT
 
 Copyright 2000-2022 The OpenSSL Project Authors. All Rights Reserved.
+Copyright 2000-2025 The QuicTLS Project Authors. All Rights Reserved.
 
 Licensed under the Apache License 2.0 (the "License").  You may not use
 this file except in compliance with the License.  You can obtain a copy

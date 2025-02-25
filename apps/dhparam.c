@@ -167,8 +167,6 @@ int dhparam_main(int argc, char **argv)
     } else if (!opt_check_rest_arg(NULL)) {
         goto opthelp;
     }
-    if (!app_RAND_load())
-        goto end;
 
     if (g && !num)
         num = DEFBITS;

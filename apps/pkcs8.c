@@ -207,9 +207,6 @@ int pkcs8_main(int argc, char **argv)
         goto opthelp;
 
     private = 1;
-    if (!app_RAND_load())
-        goto end;
-
     if (ciphername != NULL) {
         if (!opt_cipher(ciphername, &cipher))
             goto opthelp;
