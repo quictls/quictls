@@ -189,9 +189,6 @@ int ecparam_main(int argc, char **argv)
     if (!opt_check_rest_arg(NULL))
         goto opthelp;
 
-    if (!app_RAND_load())
-        goto end;
-
     private = genkey ? 1 : 0;
 
     out = bio_open_owner(outfile, outformat, private);
