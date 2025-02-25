@@ -3262,10 +3262,7 @@ int cmp_main(int argc, char **argv)
     ret = get_opts(argc, argv);
     if (ret <= 0)
         goto err;
-
     ret = 0;
-    if (!app_RAND_load())
-        goto err;
 
     if (opt_batch)
         set_base_ui_method(UI_null());

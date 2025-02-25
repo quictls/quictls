@@ -164,9 +164,6 @@ opthelp:
         goto opthelp;
     }
 
-    if (!app_RAND_load())
-        goto end;
-
     private = 1;
     if (!opt_cipher(ciphername, &enc))
         goto end;

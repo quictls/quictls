@@ -699,8 +699,6 @@ int cms_main(int argc, char **argv)
             break;
         }
     }
-    if (!app_RAND_load())
-        goto end;
 
     if (digestname != NULL) {
         if (!opt_md(digestname, &sign_md))

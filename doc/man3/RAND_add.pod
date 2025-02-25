@@ -45,8 +45,6 @@ B<buf>, in bytes, and should be a number between zero and B<num>.
 Details about sources of randomness and how to estimate their randomness
 can be found in the literature; for example [NIST SP 800-90B].
 The content of B<buf> cannot be recovered from subsequent random generator output.
-Applications that intend to save and restore random state in an external file
-should consider using L<RAND_load_file(3)> instead.
 
 NOTE: In FIPS mode, random data provided by the application is not considered to
 be a trusted entropy source. It is mixed into the internal state of the RNG as
@@ -77,7 +75,6 @@ The other functions do not return values.
 =head1 SEE ALSO
 
 L<RAND_bytes(3)>,
-L<RAND_load_file(3)>,
 L<RAND(7)>
 L<EVP_RAND(7)>
 

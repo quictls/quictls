@@ -172,9 +172,6 @@ int rsautl_main(int argc, char **argv)
     if (!opt_check_rest_arg(NULL))
         goto opthelp;
 
-    if (!app_RAND_load())
-        goto end;
-
     if (need_priv && (key_type != KEY_PRIVKEY)) {
         BIO_printf(bio_err, "A private key is needed for this operation\n");
         goto end;
