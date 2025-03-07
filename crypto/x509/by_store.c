@@ -113,7 +113,7 @@ static int by_store_ctrl_ex(X509_LOOKUP *ctx, int cmd, const char *argp,
     case X509_L_ADD_STORE:
         /* If no URI is given, use the default cert dir as default URI */
         if (argp == NULL)
-            argp = ossl_safe_getenv(X509_get_default_cert_dir_env());
+            argp = ossl_safe_getenv(X509_CERT_DIR_EVP);
 
         if (argp == NULL)
             argp = X509_get_default_cert_dir();
