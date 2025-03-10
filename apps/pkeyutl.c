@@ -256,9 +256,6 @@ int pkeyutl_main(int argc, char **argv)
     if (!opt_check_rest_arg(NULL))
         goto opthelp;
 
-    if (!app_RAND_load())
-        goto end;
-
     if (rawin && pkey_op != EVP_PKEY_OP_SIGN && pkey_op != EVP_PKEY_OP_VERIFY) {
         BIO_printf(bio_err,
                    "%s: -rawin can only be used with -sign or -verify\n",
