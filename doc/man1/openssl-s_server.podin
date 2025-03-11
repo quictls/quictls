@@ -467,10 +467,6 @@ Ignore input EOF (default: when B<-quiet>).
 
 Do not ignore input EOF.
 
-=item B<-no_etm>
-
-Disable Encrypt-then-MAC negotiation.
-
 =item B<-no_ems>
 
 Disable Extended master secret negotiation.
@@ -591,10 +587,6 @@ Disables support for receiving TLSv1.3 compressed certificates.
 Control the number of tickets that will be sent to the client after a full
 handshake in TLSv1.3. The default number of tickets is 2. This option does not
 affect the number of tickets sent after a resumption handshake.
-
-=item B<-no_resumption_on_reneg>
-
-Set the B<SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION> option.
 
 =item B<-dhparam> I<infile>
 
