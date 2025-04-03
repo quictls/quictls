@@ -20,6 +20,7 @@ Individuals
  * Shih-Ping Chan
  * William Ahern
  * Ilia Shipitsin
+ * Guillaume Hetier
 
 
 Groups
