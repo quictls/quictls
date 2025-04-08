@@ -3,8 +3,8 @@ includedir={- $OpenSSL::safe::installdata::INCLUDEDIR -}
 enginesdir={- $OpenSSL::safe::installdata::ENGINESDIR -}
 modulesdir={- $OpenSSL::safe::installdata::MODULESDIR -}
 
-Name: OpenSSL-libcrypto
-Description: OpenSSL cryptography library
+Name: QuicTLS-libcrypto
+Description: QuicTLS cryptography library
 Version: {- $OpenSSL::safe::installdata::VERSION -}
 Libs: -L${libdir} -lcrypto
 Libs.private: {- join(' ', @OpenSSL::safe::installdata::LDLIBS) -}
