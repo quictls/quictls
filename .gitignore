@@ -213,6 +213,7 @@ doc/man1/openssl-*.pod
 
 # Misc generated stuff
 Makefile.save
+**/*.tmp
 /crypto/**/lib
 /engines/**/lib
 /ssl/**/lib

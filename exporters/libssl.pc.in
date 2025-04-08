@@ -1,8 +1,8 @@
 libdir={- $OpenSSL::safe::installdata::LIBDIR -}
 includedir={- $OpenSSL::safe::installdata::INCLUDEDIR -}
 
-Name: OpenSSL-libssl
-Description: Secure Sockets Layer and cryptography libraries
+Name: QuicTLS-libssl
+Description: QUIC, TLS and cryptography libraries
 Version: {- $OpenSSL::safe::installdata::VERSION -}
 Requires.private: libcrypto
 Libs: -L${libdir} -lssl
