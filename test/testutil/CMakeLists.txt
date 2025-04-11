@@ -16,7 +16,7 @@ list(APPEND SOURCE
     ssltestlib.c fake_rsaprov.c simpledynamic.c
     )
 
-add_library(testutil STATIC)
+add_library(testutil)
 target_include_directories(testutil PUBLIC ${CMAKE_BINARY_DIR}/include)
 add_dependencies(testutil headers)
 target_sources(testutil PRIVATE ${SOURCE})

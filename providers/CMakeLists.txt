@@ -1,5 +1,5 @@
 # Provider common library
-add_library(common STATIC)
+add_library(common)
 target_include_directories(common PUBLIC
     ../crypto ../include ${CMAKE_BINARY_DIR}/include)
 target_compile_options(common PRIVATE -fPIC)
@@ -7,7 +7,7 @@ add_dependencies(common headers)
 target_sources(common PRIVATE ../ssl/record/methods/tls_pad.c)
 
 # Default provider
-add_library(defprov STATIC)
+add_library(defprov)
 target_include_directories(defprov PUBLIC
     ../crypto ../include ${CMAKE_BINARY_DIR}/include)
 target_compile_options(defprov PRIVATE -fPIC)
