@@ -74,6 +74,7 @@ add_custom_target(progs COMMENT "Generated progs.[ch]"
 add_subdirectory(lib)
 
 add_executable(openssl)
+install(TARGETS openssl DESTINATION bin)
 target_include_directories(openssl PUBLIC ${CMAKE_BINARY_DIR}/include)
 add_dependencies(openssl headers progs)
 target_sources(openssl PRIVATE ${SOURCE})
