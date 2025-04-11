@@ -16,3 +16,8 @@ set(FILES OpenSSLConfigVersion.cmake libcrypto.pc libssl.pc openssl.pc)
 foreach (F ${FILES})
     configure_file("${F}.in" "${F}")
 endforeach ()
+
+install(FILES libcrypto.pc libssl.pc openssl.pc
+    DESTINATION lib/pkgconfig)
+install(FILES OpenSSLConfigVersion.cmake
+    DESTINATION lib/cmake/OpenSSL)

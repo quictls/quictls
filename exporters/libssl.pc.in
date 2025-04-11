@@ -1,5 +1,5 @@
-Name: OpenSSL-libssl
-Description: SSL/TLS transport
+Name: QuicTLS-libssl
+Description: QuicTLS SSL/TLS transport (compatible with OpenSSL)
 Version: ${OPENSSL_FULL_VERSION_STRING}
 Requires.private: libcrypto
 Libs: -L${OPENSSL_LIB_DIR} -lcrypto

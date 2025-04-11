@@ -1,4 +1,4 @@
-Name: OpenSSL
-Description: Secure Sockets Layer and cryptography libraries and tools
+Name: QuicTLS
+Description: QuicTLS cryptography libraries and tools (compatible with OpenSSL)
 Version: ${OPENSSL_FULL_VERSION_STRING}
 Requires: libssl libcrypto
