@@ -326,7 +326,7 @@ if (NOT OPENSSL_NO_SHARED)
     simple(timing_load_creds timing_load_creds.c crypto)
 endif ()
 
-add_custom_target(testprogs COMMENT "Compiled tests"
+add_custom_target(build_tests COMMENT "Build tests"
     DEPENDS ${TESTPROGS})
 
 if (NOT OPENSSL_NO_BUILDTEST_CXX)
