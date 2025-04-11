@@ -17,7 +17,7 @@ set(CXXTESTS)
 macro(cxxbuild src)
     set(prog test/test${src})
     add_executable(${prog} ${prog}.cpp)
-    list(APPEND CXXPROGS ${prog})
+    list(APPEND CXXTESTS ${prog})
     target_include_directories(${prog} PUBLIC
         -I${CMAKE_SOURCE_DIR}/include -I${CMAKE_BINARY_DIR}/include)
 endmacro ()
