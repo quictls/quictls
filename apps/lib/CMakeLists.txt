@@ -1,9 +1,4 @@
-if (NOT OPENSSL_NO_SHARED)
-    #add_library(apps SHARED)
-    add_library(apps)
-else ()
-    add_library(apps)
-endif ()
+add_library(apps)
 target_include_directories(apps PUBLIC ${CMAKE_BINARY_DIR}/include)
 add_dependencies(apps headers)
 
