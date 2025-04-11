@@ -2,6 +2,9 @@ include(EngineLib.cmake)
 
 macro(engine lib src)
     add_library(${lib} MODULE)
+    install(TARGETS ${lib}
+        RUNTIME DESTINATION bin ARCHIVE DESTINATION lib/quictls
+        LIBRARY DESTINATION lib)
     add_dependencies(${lib} headers)
     target_include_directories(${lib} PUBLIC ${CMAKE_BINARY_DIR}/include)
     target_sources(${lib} PRIVATE ${src})
