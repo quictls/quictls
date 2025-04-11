@@ -1,10 +1,5 @@
-libdir=$(INSTALLPREFIX)/lib
-includedir=$(INSTALLPREFIX)/include
-enginesdir=$(ENGINESDIR)
-modulesdir=$(MODULESDIR)
-
 Name: QuicTLS-libcrypto
-Description: QuicTLS cryptography library
+Description: QuicTLS cryptography library (compatible with OpenSSL)
 Version: ${OPENSSL_FULL_VERSION_STRING}
 Libs: -L${OPENSSL_LIB_DIR} -lcrypto
 Libs.private: $(extra libs to link with)

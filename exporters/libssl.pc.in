@@ -1,8 +1,5 @@
-libdir=$(INSTALLPREFIX)/lib
-includedir=$(INSTALLPREFIX)/include
-
-Name: OpenSSL-libssl
-Description: QUIC, TLS and cryptography libraries
+Name: QuicSSL-libssl
+Description: QuicTLS SSL/TLS transport (compatible with OpenSSL)
 Version: ${OPENSSL_FULL_VERSION_STRING}
 Requires.private: libcrypto
 Libs: -L${OPENSSL_LIB_DIR} -lcrypto

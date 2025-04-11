@@ -2,5 +2,5 @@ libdir=$(INSTALLPREFIX)/lib
 includedir=$(INSTALLPREFIX)/include
 
 Name: QuicTLS
-Description: QUIC, TLS and cryptography libraries and tools
+Description: QuicTLS cryptography libraries and tools (compatible with OpenSSL)
 Version: ${OPENSSL_FULL_VERSION_STRING}
