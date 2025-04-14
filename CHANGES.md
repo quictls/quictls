@@ -124,3 +124,5 @@ as they were replaced by the built-in RAND changes.
   - WinCE
 
 - Removed support for SCTP.
+
+- Removed support for compressed EC key formats.

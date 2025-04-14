@@ -167,7 +167,7 @@ extern "C" {
 /* status request value from RFC3546 */
 # define TLSEXT_STATUSTYPE_ocsp 1
 
-/* ECPointFormat values from RFC4492 */
+/* ECPointFormat values from RFC4492; only uncompressed is supported */
 # define TLSEXT_ECPOINTFORMAT_first                      0
 # define TLSEXT_ECPOINTFORMAT_uncompressed               0
 # define TLSEXT_ECPOINTFORMAT_ansiX962_compressed_prime  1
