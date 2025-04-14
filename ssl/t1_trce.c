@@ -537,8 +537,6 @@ static const ssl_trace_tbl ssl_groups_tbl[] = {
 
 static const ssl_trace_tbl ssl_point_tbl[] = {
     {0, "uncompressed"},
-    {1, "ansiX962_compressed_prime"},
-    {2, "ansiX962_compressed_char2"}
 };
 
 static const ssl_trace_tbl ssl_mfl_tbl[] = {
