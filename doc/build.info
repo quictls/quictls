@@ -1535,10 +1535,6 @@ DEPEND[html/man3/OPENSSL_init_ssl.html]=man3/OPENSSL_init_ssl.pod
 GENERATE[html/man3/OPENSSL_init_ssl.html]=man3/OPENSSL_init_ssl.pod
 DEPEND[man/man3/OPENSSL_init_ssl.3]=man3/OPENSSL_init_ssl.pod
 GENERATE[man/man3/OPENSSL_init_ssl.3]=man3/OPENSSL_init_ssl.pod
-DEPEND[html/man3/OPENSSL_instrument_bus.html]=man3/OPENSSL_instrument_bus.pod
-GENERATE[html/man3/OPENSSL_instrument_bus.html]=man3/OPENSSL_instrument_bus.pod
-DEPEND[man/man3/OPENSSL_instrument_bus.3]=man3/OPENSSL_instrument_bus.pod
-GENERATE[man/man3/OPENSSL_instrument_bus.3]=man3/OPENSSL_instrument_bus.pod
 DEPEND[html/man3/OPENSSL_load_builtin_modules.html]=man3/OPENSSL_load_builtin_modules.pod
 GENERATE[html/man3/OPENSSL_load_builtin_modules.html]=man3/OPENSSL_load_builtin_modules.pod
 DEPEND[man/man3/OPENSSL_load_builtin_modules.3]=man3/OPENSSL_load_builtin_modules.pod
@@ -3196,7 +3192,6 @@ html/man3/OPENSSL_hexchar2int.html \
 html/man3/OPENSSL_ia32cap.html \
 html/man3/OPENSSL_init_crypto.html \
 html/man3/OPENSSL_init_ssl.html \
-html/man3/OPENSSL_instrument_bus.html \
 html/man3/OPENSSL_load_builtin_modules.html \
 html/man3/OPENSSL_malloc.html \
 html/man3/OPENSSL_s390xcap.html \
@@ -3815,7 +3810,6 @@ man/man3/OPENSSL_hexchar2int.3 \
 man/man3/OPENSSL_ia32cap.3 \
 man/man3/OPENSSL_init_crypto.3 \
 man/man3/OPENSSL_init_ssl.3 \
-man/man3/OPENSSL_instrument_bus.3 \
 man/man3/OPENSSL_load_builtin_modules.3 \
 man/man3/OPENSSL_malloc.3 \
 man/man3/OPENSSL_s390xcap.3 \
