@@ -47,24 +47,6 @@ uint32_t OPENSSL_rdtsc(void)
         return _sparcv9_rdtick();
 }
 
-size_t OPENSSL_instrument_bus(unsigned int *out, size_t cnt)
-{
-    if ((OPENSSL_sparcv9cap_P[0] & (SPARCV9_TICK_PRIVILEGED | SPARCV9_BLK)) ==
-        SPARCV9_BLK)
-        return _sparcv9_vis1_instrument_bus(out, cnt);
-    else
-        return 0;
-}
-
-size_t OPENSSL_instrument_bus2(unsigned int *out, size_t cnt, size_t max)
-{
-    if ((OPENSSL_sparcv9cap_P[0] & (SPARCV9_TICK_PRIVILEGED | SPARCV9_BLK)) ==
-        SPARCV9_BLK)
-        return _sparcv9_vis1_instrument_bus2(out, cnt, max);
-    else
-        return 0;
-}
-
 static sigjmp_buf common_jmp;
 static void common_handler(int sig)
 {
