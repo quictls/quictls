@@ -51,13 +51,10 @@ static const BIO_METHOD methods_b64 = {
     .bread = bread_conv,
     .bread_old = b64_read,
     .bputs = b64_puts,
-    .bgets = NULL,
     .ctrl = b64_ctrl,
     .create = b64_new,
     .destroy = b64_free,
     .callback_ctrl = b64_callback_ctrl,
-    .bsendmmsg = NULL,
-    .brecvmmsg = NULL,
 };
 
 const BIO_METHOD *BIO_f_base64(void)
@@ -349,7 +346,6 @@ static int b64_write(BIO *b, const char *in, int inl)
             BIO_copy_next_retry(b);
             return i;
         }
-        OPENSSL_assert(i <= n);
         ctx->buf_off += i;
         OPENSSL_assert(ctx->buf_off <= (int)sizeof(ctx->buf));
         OPENSSL_assert(ctx->buf_len >= ctx->buf_off);
@@ -421,7 +417,6 @@ static int b64_write(BIO *b, const char *in, int inl)
                 BIO_copy_next_retry(b);
                 return ret == 0 ? i : ret;
             }
-            OPENSSL_assert(i <= n);
             n -= i;
             ctx->buf_off += i;
             OPENSSL_assert(ctx->buf_off <= (int)sizeof(ctx->buf));
