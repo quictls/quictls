@@ -190,12 +190,6 @@ static const struct {
     {NID_ffdhe8192, OSSL_TLS_GROUP_ID_ffdhe8192}
 };
 
-static const unsigned char ecformats_default[] = {
-    TLSEXT_ECPOINTFORMAT_uncompressed,
-    TLSEXT_ECPOINTFORMAT_ansiX962_compressed_prime,
-    TLSEXT_ECPOINTFORMAT_ansiX962_compressed_char2
-};
-
 /* The default curves */
 static const uint16_t supported_groups_default[] = {
     OSSL_TLS_GROUP_ID_x25519,        /* X25519 (29) */
@@ -1187,12 +1181,11 @@ void tls1_get_formatlist(SSL_CONNECTION *s, const unsigned char **pformats,
         *pformats = s->ext.ecpointformats;
         *num_formats = s->ext.ecpointformats_len;
     } else {
+        static const unsigned char ecformats_default[] = {
+            TLSEXT_ECPOINTFORMAT_uncompressed,
+        };
         *pformats = ecformats_default;
-        /* For Suite B we don't support char2 fields */
-        if (tls1_suiteb(s))
-            *num_formats = sizeof(ecformats_default) - 1;
-        else
-            *num_formats = sizeof(ecformats_default);
+        *num_formats = 1;
     }
 }
 
@@ -1213,7 +1206,7 @@ static int tls1_check_pkey_comp(SSL_CONNECTION *s, EVP_PKEY *pkey)
     if (point_conv == 0)
         return 0;
     if (point_conv == POINT_CONVERSION_UNCOMPRESSED) {
-            comp_id = TLSEXT_ECPOINTFORMAT_uncompressed;
+        comp_id = TLSEXT_ECPOINTFORMAT_uncompressed;
     } else if (SSL_CONNECTION_IS_TLS13(s)) {
         /*
          * ec_point_formats extension is not used in TLSv1.3 so we ignore
@@ -1221,14 +1214,9 @@ static int tls1_check_pkey_comp(SSL_CONNECTION *s, EVP_PKEY *pkey)
          */
         return 1;
     } else {
-        int field_type = EVP_PKEY_get_field_type(pkey);
-
-        if (field_type == NID_X9_62_prime_field)
-            comp_id = TLSEXT_ECPOINTFORMAT_ansiX962_compressed_prime;
-        else if (field_type == NID_X9_62_characteristic_two_field)
-            comp_id = TLSEXT_ECPOINTFORMAT_ansiX962_compressed_char2;
-        else
-            return 0;
+        /*OPENSSL_assert("unknown point conversion type" == NULL);
+         */
+        return 0;
     }
     /*
      * If point formats extension present check it, otherwise everything is
