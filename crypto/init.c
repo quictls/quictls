@@ -33,7 +33,7 @@
 #include <openssl/cmp_util.h> /* for OSSL_CMP_log_close() */
 #include <openssl/trace.h>
 #include <crypto/ctype.h>
-#include <openssl/ssl.h> /* For OPENSSL_INIT_(NO_)?LOAD_SSL_STRIONGS */
+#include <openssl/ssl.h> /* For OPENSSL_INIT_(NO_)?LOAD_SSL_STRINGS */
 #include "sslerr.h"
 
 static int stopped = 0;
