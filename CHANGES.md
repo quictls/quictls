@@ -67,6 +67,8 @@ data format have been removed.
 library number is dynamic not static.
   - The unused and undocumented `BIO_f_linebuffer`, `BIO_f_reliable`, and
 `BIO_s_log` now return NULL.
+  - Removed `OPENSSL_instrument_bus`, `OPENSSL_instrument_bus2`, and
+`OPENSSL_wipe_cpu` functions.
 
 - Header files were reorganized:
   - The redundant `#pragma once` and old-style header guards were removed.
