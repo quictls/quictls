@@ -484,7 +484,7 @@ This sets the property query used when fetching the randomness source.
 =head2 ASN.1 String-Table Configuration
 
 The name B<stbl_section> in the initialization section names the section
-containing overrides for the build-in ASN.1 string-table size limits
+containing overrides for the built-in ASN.1 string-table size limits
 (defined in C<tbl_standard.h>). Within this section, each entry is a
 name/value pair where the B<name> is an ASN.1 object short or long name,
 and the B<value> is a comma-separated list of parameters in the form
