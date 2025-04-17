@@ -1229,7 +1229,6 @@ _armv4_AES_decrypt:
 	sub	$tbl,$tbl,#1024
 	ldr	pc,[sp],#4		@ pop and return
 .size	_armv4_AES_decrypt,.-_armv4_AES_decrypt
-.asciz	"AES for ARMv4, CRYPTOGAMS by <https://github.com/dot-asm>"
 .align	2
 ___
 

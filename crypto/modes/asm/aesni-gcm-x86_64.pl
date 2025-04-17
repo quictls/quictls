@@ -955,7 +955,6 @@ $code.=<<___;
 	.byte	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 .Lone_lsb:
 	.byte	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-.asciz	"AES-NI GCM module for x86_64, CRYPTOGAMS by <https://github.com/dot-asm>"
 .previous
 .align	64
 ___

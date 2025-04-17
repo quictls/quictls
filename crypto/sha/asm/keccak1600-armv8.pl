@@ -848,9 +848,6 @@ SHA3_squeeze_cext:
 .size	SHA3_squeeze_cext,.-SHA3_squeeze_cext
 ___
 }								}}}
-$code.=<<___;
-.asciz	"Keccak-1600 absorb and squeeze for ARMv8, CRYPTOGAMS by <https://github.com/dot-asm>"
-___
 
 {   my  %opcode = (
 	"rax1"	=> 0xce608c00,	"eor3"	=> 0xce000000,

@@ -623,8 +623,6 @@ $sbit=$num;
 &set_label("just_leave");
 &function_end("bn_mul_mont");
 
-&asciz("Montgomery Multiplication for x86, CRYPTOGAMS by <https://github.com/dot-asm>");
-
 &asm_finish();
 
 close STDOUT or die "error closing STDOUT: $!";

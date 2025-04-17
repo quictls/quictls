@@ -133,7 +133,6 @@ $code.=<<___;
 .long	16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16
 .Lsigma:
 .asciz	"expand 32-byte k"
-.asciz	"ChaCha20 for x86_64, CRYPTOGAMS by <https://github.com/dot-asm>"
 .previous
 ___
 
