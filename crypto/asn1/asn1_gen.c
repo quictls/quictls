@@ -499,7 +499,7 @@ static int append_exp(tag_exp_arg *arg, int exp_tag, int exp_class,
 static int asn1_str2tag(const char *tagstr, int len)
 {
     unsigned int i;
-    static const struct tag_name_st *tntmp, tnst[] = {
+    static const struct tag_name_st tnst[] = {
         ASN1_GEN_STR("BOOL", V_ASN1_BOOLEAN),
         ASN1_GEN_STR("BOOLEAN", V_ASN1_BOOLEAN),
         ASN1_GEN_STR("NULL", V_ASN1_NULL),
@@ -536,7 +536,6 @@ static int asn1_str2tag(const char *tagstr, int len)
         ASN1_GEN_STR("GENSTR", V_ASN1_GENERALSTRING),
         ASN1_GEN_STR("NUMERIC", V_ASN1_NUMERICSTRING),
         ASN1_GEN_STR("NUMERICSTRING", V_ASN1_NUMERICSTRING),
-
         /* Special cases */
         ASN1_GEN_STR("SEQUENCE", V_ASN1_SEQUENCE),
         ASN1_GEN_STR("SEQ", V_ASN1_SEQUENCE),
@@ -563,11 +562,10 @@ static int asn1_str2tag(const char *tagstr, int len)
     if (len == -1)
         len = strlen(tagstr);
 
-    tntmp = tnst;
-    for (i = 0; i < OSSL_NELEM(tnst); i++, tntmp++) {
-        if ((len == tntmp->len)
-            && (OPENSSL_strncasecmp(tntmp->strnam, tagstr, len) == 0))
-            return tntmp->tag;
+    const struct tag_name_st *tp = tnst;
+    for (i = OSSL_NELEM(tnst); --i >= 0; tp++) {
+        if (len == tp->len && OPENSSL_strncasecmp(tp->strnam, tagstr, len) == 0)
+            return tp->tag;
     }
 
     return -1;
