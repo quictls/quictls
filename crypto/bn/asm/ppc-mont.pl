@@ -1985,9 +1985,6 @@ $code.=<<___;
 .size	__bn_sqr8x_mont,.-__bn_sqr8x_mont
 ___
 }
-$code.=<<___;
-.asciz  "Montgomery Multiplication for PPC, CRYPTOGAMS by <https://github.com/dot-asm>"
-___
 
 $code =~ s/\`([^\`]*)\`/eval $1/gem;
 print $code;
