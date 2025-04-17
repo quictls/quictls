@@ -517,7 +517,6 @@ $code.=<<___;
 ___
 }
 $code.=<<___;
-.asciiz	"SHA${label} for MIPS, CRYPTOGAMS by <https://github.com/dot-asm>"
 .align	5
 
 ___

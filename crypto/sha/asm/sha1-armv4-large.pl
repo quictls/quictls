@@ -322,7 +322,6 @@ $code.=<<___;
 .word	OPENSSL_armcap_P-.Lsha1_block
 # endif
 #endif
-.asciz	"SHA1 block transform for ARMv4/NEON/ARMv8, CRYPTOGAMS by <https://github.com/dot-asm>"
 .align	5
 ___
 #####################################################################

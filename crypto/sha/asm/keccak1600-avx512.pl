@@ -543,7 +543,6 @@ iotas:
 	.quad	0x0000000080000001
 	.quad	0x8000000080008008
 
-.asciz	"Keccak-1600 absorb and squeeze for AVX-512F, CRYPTOGAMS by <https://github.com/dot-asm>"
 ___
 
 $output=pop and open STDOUT,">$output";
