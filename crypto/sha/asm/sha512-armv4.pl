@@ -657,7 +657,6 @@ $code.=<<___;
 ___
 }
 $code.=<<___;
-.asciz	"SHA512 block transform for ARMv4/NEON, CRYPTOGAMS by <https://github.com/dot-asm>"
 .align	2
 #if __ARM_MAX_ARCH__>=7 && !defined(__KERNEL__)
 .extern	OPENSSL_armcap_P

@@ -461,7 +461,6 @@ $TABLE:
 	.long	0x03020100,0x0b0a0908,0xffffffff,0xffffffff
 	.long	0xffffffff,0xffffffff,0x03020100,0x0b0a0908
 	.long	0xffffffff,0xffffffff,0x03020100,0x0b0a0908
-	.asciz	"SHA256 block transform for x86_64, CRYPTOGAMS by <https://github.com/dot-asm>"
 .previous
 ___
 } else {
