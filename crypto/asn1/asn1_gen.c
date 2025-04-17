@@ -563,7 +563,7 @@ static int asn1_str2tag(const char *tagstr, int len)
         len = strlen(tagstr);
 
     const struct tag_name_st *tp = tnst;
-    for (i = OSSL_NELEM(tnst); --i >= 0; tp++) {
+    for (i = 0; i < OSSL_NELEM(tnst); i++, tp++) {
         if (len == tp->len && OPENSSL_strncasecmp(tp->strnam, tagstr, len) == 0)
             return tp->tag;
     }
