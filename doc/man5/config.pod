@@ -498,8 +498,7 @@ Specify the minimum and maximum character counts, respectively.
 
 =item C<mask>
 
-Passed through L<ASN1_str2mask(3)>; defines which ASN.1 string encodings are
-permitted (case is not significant).
+Defines which ASN.1 string encodings are permitted (case is not significant).
 Acceptable values include
 C<printableString>, C<ia5String>, C<utf8String>,
 C<bmpString>, C<numericString>, and C<teletexString>.
