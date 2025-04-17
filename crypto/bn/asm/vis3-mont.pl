@@ -340,7 +340,6 @@ $code.=<<___;
 	restore
 .type	bn_mul_mont_vis3, #function
 .size	bn_mul_mont_vis3, .-bn_mul_mont_vis3
-.asciz  "Montgomery Multiplication for SPARCv9 VIS3, CRYPTOGAMS by <https://github.com/dot-asm>"
 .align	4
 ___
 

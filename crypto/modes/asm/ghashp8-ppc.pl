@@ -654,7 +654,6 @@ ___
 $code.=<<___;
 .size	.gcm_ghash_p8,.-.gcm_ghash_p8
 
-.asciz  "GHASH for PowerISA 2.07, CRYPTOGAMS by <https://github.com/dot-asm>"
 .align  2
 ___
 
