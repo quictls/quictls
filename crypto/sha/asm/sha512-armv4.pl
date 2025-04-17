@@ -43,9 +43,7 @@
 # terms it's 22.6 cycles per byte, which is disappointing result.
 # Technical writers asserted that 3-way S4 pipeline can sustain
 # multiple NEON instructions per cycle, but dual NEON issue could
-# not be observed.
-# On side note Cortex-A15 processes one byte in
-# 16 cycles.
+# not be observed. Side note: Cortex-A15 processes one byte in 16 cycles.
 
 # Byte order [in]dependence. =========================================
 #
@@ -657,7 +655,6 @@ $code.=<<___;
 ___
 }
 $code.=<<___;
-.asciz	"SHA512 block transform for ARMv4/NEON, CRYPTOGAMS by <https://github.com/dot-asm>"
 .align	2
 #if __ARM_MAX_ARCH__>=7 && !defined(__KERNEL__)
 .extern	OPENSSL_armcap_P

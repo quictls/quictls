@@ -243,8 +243,6 @@ $sp=&DWP(28,"esp");
 &set_label("leave");
 &function_end($func);
 
-&asciz("Padlock Montgomery Multiplication, CRYPTOGAMS by <https://github.com/dot-asm>");
-
 &asm_finish();
 
 close STDOUT or die "error closing STDOUT: $!";

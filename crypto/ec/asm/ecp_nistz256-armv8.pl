@@ -115,7 +115,6 @@ $code.=<<___;
 .quad	0xf3b9cac2fc632551,0xbce6faada7179e84,0xffffffffffffffff,0xffffffff00000000
 .LordK:
 .quad	0xccd1c8aaee00bc4f
-.asciz	"ECP_NISTZ256 for ARMv8, CRYPTOGAMS by <https://github.com/dot-asm>"
 
 // void	ecp_nistz256_to_mont(BN_ULONG x0[4],const BN_ULONG x1[4]);
 .globl	ecp_nistz256_to_mont
