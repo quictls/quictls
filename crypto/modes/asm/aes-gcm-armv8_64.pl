@@ -6035,7 +6035,6 @@ ___
 }
 
 $code.=<<___;
-.asciz  "GHASH for ARMv8, CRYPTOGAMS by <appro\@openssl.org>"
 .align  2
 #endif
 ___
