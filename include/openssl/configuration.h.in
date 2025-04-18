@@ -178,6 +178,9 @@
 #cmakedefine OPENSSL_NO_TLS1_3
 #cmakedefine OPENSSL_NO_TLS1_METHOD
 
+/* Randomness */
+#cmakedefine OPENSSL_RAND_SEED_OS
+#cmakedefine OPENSSL_RAND_SEED_RDCPU
 
 /*
  * Compatibility with OpenSSL configuration.
