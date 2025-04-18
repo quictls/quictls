@@ -19,6 +19,7 @@ macro(linux_generic64)
     linux_generic32()
     set(SIXTY_FOUR_BIT_LONG 1)
     set(RC4_CHAR 1)
+    set(OPENSSL_RAND_SEED_OS 1)
 endmacro ()
 
 macro(linux_ppc)
