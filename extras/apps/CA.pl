@@ -18,14 +18,17 @@ my @OPENSSL_CMDS = ("req", "ca", "pkcs12", "x509", "verify");
 
 my $openssl = $ENV{'OPENSSL'} // "openssl";
 $ENV{'OPENSSL'} = $openssl;
+my @openssl = split(" ", $openssl);
+
 my $OPENSSL_CONFIG = $ENV{"OPENSSL_CONFIG"} // "";
+my @OPENSSL_CONFIG = split(" ", $OPENSSL_CONFIG);
 
 # Command invocations.
-my $REQ = "$openssl req $OPENSSL_CONFIG";
-my $CA = "$openssl ca $OPENSSL_CONFIG";
-my $VERIFY = "$openssl verify";
-my $X509 = "$openssl x509";
-my $PKCS12 = "$openssl pkcs12";
+my @REQ = (@openssl, "req", @OPENSSL_CONFIG);
+my @CA = (@openssl, "ca", @OPENSSL_CONFIG);
+my @VERIFY = (@openssl, "verify");
+my @X509 = (@openssl, "x509");
+my @PKCS12 = (@openssl, "pkcs12");
 
 # Default values for various configuration settings.
 my $CATOP = "./demoCA";
@@ -33,10 +36,10 @@ my $CAKEY = "cakey.pem";
 my $CAREQ = "careq.pem";
 my $CACERT = "cacert.pem";
 my $CACRL = "crl.pem";
-my $DAYS = "-days 365";
-my $CADAYS = "-days 1095";	# 3 years
-my $EXTENSIONS = "-extensions v3_ca";
-my $POLICY = "-policy policy_anything";
+my @DAYS = qw(-days 365);
+my @CADAYS = qw(-days 1095);	# 3 years
+my @EXTENSIONS = qw(-extensions v3_ca);
+my @POLICY = qw(-policy policy_anything);
 my $NEWKEY = "newkey.pem";
 my $NEWREQ = "newreq.pem";
 my $NEWCERT = "newcert.pem";
@@ -44,7 +47,7 @@ my $NEWP12 = "newcert.p12";
 
 # Commandline parsing
 my %EXTRA;
-my $WHAT = shift @ARGV || "";
+my $WHAT = shift @ARGV // "";
 @ARGV = parse_extra(@ARGV);
 my $RET = 0;
 
@@ -52,23 +55,23 @@ my $RET = 0;
 # |EXTRA{CMD}| with list of values.
 sub parse_extra
 {
+    my @args;
     foreach ( @OPENSSL_CMDS ) {
-        $EXTRA{$_} = '';
+        $EXTRA{$_} = [];
     }
-
-    my @result;
-    while ( scalar(@_) > 0 ) {
-        my $arg = shift;
-        if ( $arg !~ m/-extra-([a-z0-9]+)/ ) {
-            push @result, $arg;
+    while (@_) {
+        my $arg = shift(@_);
+        if ( $arg !~ m{^-extra-(\w+)$} ) {
+            push @args, $arg;
             next;
         }
-        $arg =~ s/-extra-//;
-        die("Unknown \"-${arg}-extra\" option, exiting")
-            unless scalar grep { $arg eq $_ } @OPENSSL_CMDS;
-        $EXTRA{$arg} .= " " . shift;
+        $arg = $1;
+        die "Unknown \"-extra-${arg}\" option, exiting\n"
+            unless grep { $arg eq $_ } @OPENSSL_CMDS;
+        # XXX no quoting of arguments with internal whitespace supported
+        push @{$EXTRA{$arg}}, split(" ", shift(@_));
     }
-    return @result;
+    return @args;
 }
 
 
@@ -111,9 +114,9 @@ sub copy_pemfile
 # Wrapper around system; useful for debugging.  Returns just the exit status
 sub run
 {
-    my $cmd = shift;
-    print "====\n$cmd\n" if $verbose;
-    my $status = system($cmd);
+    my ($cmd, @args) = @_;
+    print "====\n$cmd @args\n" if $verbose;
+    my $status = system {$cmd} $cmd, @args;
     print "==> $status\n====\n" if $verbose;
     return $status >> 8;
 }
@@ -222,10 +225,10 @@ if ($WHAT eq '-newcert' ) {
         print "Certificate filename is required; reason optional.\n";
         exit 1;
     }
-    my $reason = $ARGV[1];
-    $reason = " -crl_reason $reason"
-        if defined $reason && crl_reason_ok($reason);
-    $RET = run("$CA -revoke \"$cname\"" . $reason . $EXTRA{ca});
+    my @reason;
+    @reason = ("-crl_reason", $ARGV[1])
+        if defined $ARGV[1] && crl_reason_ok($ARGV[1]);
+    $RET = run(@CA, "-revoke", $cname, @reason, @{$EXTRA{ca}});
 } else {
     print STDERR "Unknown arg \"$WHAT\"\n";
     print STDERR "Use -help for help.\n";
