@@ -2273,7 +2273,7 @@ B<openssl genrsa> and B<openssl rsa> now write PKCS #8 keys by default.
 
 =head3 Default settings
 
-"SHA256" is now the default digest for TS query used by B<openssl ts>.
+SHA-256 is now the default digest for TS query used by B<openssl ts>.
 
 =head3 Deprecated apps
 
@@ -2387,7 +2387,7 @@ instead and so the returned error becomes SSL_ERROR_ZERO_RETURN.
 
 =item *
 
-The security strength of SHA1 and MD5 based signatures in TLS has been reduced.
+The security strength of SHA-1 and MD5 based signatures in TLS has been reduced.
 
 This results in SSL 3, TLS 1.0, TLS 1.1 and DTLS 1.0 no longer
 working at the default security level of 1 and instead requires security
@@ -2397,11 +2397,11 @@ that where the signature algorithms extension is missing from a ClientHello
 then the handshake will fail in TLS 1.2 at security level 1. This is because,
 although this extension is optional, failing to provide one means that
 OpenSSL will fallback to a default set of signature algorithms. This default
-set requires the availability of SHA1.
+set requires the availability of SHA-1.
 
 =item *
 
-X509 certificates signed using SHA1 are no longer allowed at security level 1 and above.
+X509 certificates signed using SHA-1 are no longer allowed at security level 1 and above.
 
 In TLS/SSL the default security level is 1. It can be set either using the cipher
 string with C<@SECLEVEL>, or calling L<SSL_CTX_set_security_level(3)>. If the

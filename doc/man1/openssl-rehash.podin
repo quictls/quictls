@@ -109,7 +109,7 @@ This is needed when keeping new and old-style links in the same directory.
 
 =item B<-compat>
 
-Generate links for both old-style (MD5) and new-style (SHA1) hashing.
+Generate links for both old-style (MD5) and new-style (SHA-1) hashing.
 This allows releases before 1.0.0 to use these links along-side newer
 releases.
 
