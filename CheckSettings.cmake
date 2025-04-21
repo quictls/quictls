@@ -27,7 +27,7 @@ endif()
 macro (setdefault var value)
     if (NOT DEFINED ${var})
         set(${var} ${value})
-        message(WARNING "Setting ${var} to ${value}")
+        message(STATUS "Setting ${var} to ${value}")
     endif ()
 endmacro ()
 
