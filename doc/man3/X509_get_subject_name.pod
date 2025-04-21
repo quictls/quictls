@@ -42,7 +42,7 @@ X509_NAME_hash_ex() returns a hash value of name I<x> or 0 on failure,
 using any given library context I<libctx> and property query I<propq>.
 The I<ok> result argument may be NULL
 or else is used to return 1 for success and 0 for failure.
-Failure may happen on malloc error or if no SHA1 implementation is available.
+Failure may happen on malloc error or if no SHA.1 implementation is available.
 
 X509_NAME_hash() returns a hash value of name I<x> or 0 on failure,
 using the default library context and default property query.
@@ -73,7 +73,7 @@ and X509_CRL_get_issuer() return an B<X509_NAME> pointer.
 
 X509_NAME_hash_ex(), X509_NAME_hash(),
 X509_subject_name_hash() and X509_issuer_name_hash()
-return the first four bytes of the SHA1 hash value,
+return the first four bytes of the SHA.1 hash value,
 converted to B<unsigned long> in little endian order,
 or 0 on failure.
 
