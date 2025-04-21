@@ -77,7 +77,7 @@ parameters offering below 80 bits of security are excluded. As a result RSA,
 DSA and DH keys shorter than 1024 bits and ECC keys shorter than 160 bits
 are prohibited. Any cipher suite using MD5 for the MAC is also prohibited. Any
 cipher suites using CCM with a 64 bit authentication tag are prohibited. Note
-that signatures using SHA1 and MD5 are also forbidden at this level as they
+that signatures using SHA.1 and MD5 are also forbidden at this level as they
 have less than 80 security bits. Additionally, SSLv3, TLS 1.0, TLS 1.1 and
 DTLS 1.0 are all disabled at this level.
 
@@ -99,7 +99,7 @@ secrecy are prohibited. Session tickets are disabled.
 
 Security level set to 192 bits of security. As a result RSA, DSA and
 DH keys shorter than 7680 bits and ECC keys shorter than 384 bits are
-prohibited.  Cipher suites using SHA1 for the MAC are prohibited.
+prohibited.  Cipher suites using SHA.1 for the MAC are prohibited.
 
 =item B<Level 5>
 
@@ -148,7 +148,7 @@ alert.
 
 Attempts to set certificates or parameters with insufficient security are
 also blocked. For example trying to set a certificate using a 512 bit RSA key
-or a certificate with a signature with SHA1 digest at level 1 using
+or a certificate with a signature with SHA.1 digest at level 1 using
 SSL_CTX_use_certificate(). Applications which do not check the return values
 for errors will misbehave: for example it might appear that a certificate is
 not set at all because it had been rejected.

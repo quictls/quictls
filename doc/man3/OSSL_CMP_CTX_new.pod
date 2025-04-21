@@ -287,13 +287,13 @@ The following options can be set:
 
         The NID of the digest algorithm to be used in RFC 4210's MSG_SIG_ALG
         for signature-based message protection and Proof-of-Possession (POPO).
-        Default is SHA256.
+        Default is SHA-256.
 
 =item B<OSSL_CMP_OPT_OWF_ALGNID>
         The NID of the digest algorithm to be used as one-way function (OWF)
         for MAC-based message protection with password-based MAC (PBM).
         See RFC 4210 section 5.1.3.1 for details.
-        Default is SHA256.
+        Default is SHA-256.
 
 =item B<OSSL_CMP_OPT_MAC_ALGNID>
         The NID of the MAC algorithm to be used for message protection with PBM.

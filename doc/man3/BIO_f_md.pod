@@ -73,7 +73,7 @@ BIO_set_md(), BIO_get_md() and BIO_md_ctx() return 1 for success and
 
 =head1 EXAMPLES
 
-The following example creates a BIO chain containing an SHA1 and MD5
+The following example creates a BIO chain containing an SHA-1 and MD5
 digest BIO and passes the string "Hello World" through it. Error
 checking has been omitted for clarity.
 
