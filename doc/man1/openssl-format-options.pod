@@ -79,8 +79,8 @@ the private key.
 
 =item B<PEM>
 
-A text format defined in IETF RFC 1421 and IETF RFC 7468. Briefly, this is
-a block of base-64 encoding (defined in IETF RFC 4648), with specific
+A text format defined in RFC 1421 and RFC 7468. Briefly, this is
+a block of base-64 encoding (defined in RFC 4648), with specific
 lines used to mark the start and end:
 
  Text before the BEGIN line is ignored.
@@ -127,7 +127,7 @@ with earlier releases:
 
 =item B<SMIME>
 
-An S/MIME object as described in IETF RFC 8551.
+An S/MIME object as described in RFC 8551.
 Earlier versions were known as CMS and are compatible.
 Note that the parsing is simple and might fail to parse some legal data.
 

@@ -74,7 +74,7 @@ SSL_quic_max_handshake_flight_len() returns the maximum number of bytes
 that may be received at the given encryption level. This function should be
 used to limit buffering in the QUIC implementation.
 
-See L<https://tools.ietf.org/html/RFC9000#section-4>.
+See Section 4 of RFC 9000.
 
 SSL_quic_read_level() returns the current read encryption level.
 
@@ -137,7 +137,7 @@ pass the active write level to add_handshake_data() when writing data. Callers
 can use SSL_quic_write_level() to query the active write level when
 generating their own errors.
 
-See L<https://tools.ietf.org/html/RFC9001#section-4.1> for more details.
+See Section 4.1 of RFC 9000 for more details.
 
 To avoid amplifying DoS attacks, the QUIC implementation must limit the amount
 of data being queued up. The implementation can call
@@ -147,7 +147,7 @@ encryption level.
 RFC9001 defines a new TLS extension "quic_transport_parameters"
 used by QUIC for each endpoint to unilaterally declare its supported
 transport parameters. The contents of the extension are specified in
-L<https://tools.ietf.org/html/RFC9000#section-18> (as
+Section 18 of RFC 9000 (as
 a sequence of tag/length/value parameters) along with the interpretation of the
 various parameters and the rules for their processing.
 

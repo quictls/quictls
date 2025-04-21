@@ -56,7 +56,7 @@ The key output format; the default is B<PEM>.
 See L<openssl-format-options(1)> for details.
 
 Private keys are an SEC1 private key or PKCS#8 format.
-Public keys are a B<SubjectPublicKeyInfo> as specified in IETF RFC 3280.
+Public keys are a B<SubjectPublicKeyInfo> as specified in RFC 3280.
 
 =item B<-in> I<filename>|I<uri>
 
