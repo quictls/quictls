@@ -51,7 +51,7 @@ See L<openssl-format-options(1)> for details.
 The EC parameters output format; the default is B<PEM>.
 See L<openssl-format-options(1)> for details.
 
-Parameters are encoded as B<EcpkParameters> as specified in IETF RFC 3279.
+Parameters are encoded as B<EcpkParameters> as specified in RFC 3279.
 
 =item B<-in> I<filename>
 

@@ -39,7 +39,7 @@ details of the B<EVP_MD> structure.
 
 =head1 CONFORMING TO
 
-IETF RFC 1319.
+RFC 1319.
 
 =head1 SEE ALSO
 
