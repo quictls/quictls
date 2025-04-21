@@ -168,11 +168,11 @@ else ()
     add_library(ssl)
 endif ()
 install(TARGETS crypto
-    RUNTIME DESTINATION bin ARCHIVE DESTINATION lib/quictls
-    LIBRARY DESTINATION lib)
+    RUNTIME DESTINATION bin ARCHIVE DESTINATION ${LIBSUBDIR}/quictls
+    LIBRARY DESTINATION ${LIBSUBDIR})
 install(TARGETS ssl
-    RUNTIME DESTINATION bin ARCHIVE DESTINATION lib/quictls
-    LIBRARY DESTINATION lib)
+    RUNTIME DESTINATION bin ARCHIVE DESTINATION ${LIBSUBDIR}/quictls
+    LIBRARY DESTINATION ${LIBSUBDIR})
 target_include_directories(crypto PUBLIC ${CMAKE_BINARY_DIR}/include)
 add_dependencies(crypto headers)
 target_link_libraries(crypto PUBLIC common defprov)

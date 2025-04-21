@@ -17,7 +17,7 @@ function (makeman SEC VARNAME)
         list(APPEND MANPAGES ${out})
     endforeach ()
     add_custom_target(${manX} DEPENDS ${MANPAGES})
-    install(FILES ${MANPAGES} TYPE MAN)
+    install(FILES ${MANPAGES} DESTINATION ${MANDIR}/${manX})
     installsymlinks(${MANPAGES} ${SEC})
 endfunction ()
 
