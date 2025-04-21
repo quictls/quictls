@@ -76,7 +76,7 @@ All of these functions return a valid B<PKCS12_SAFEBAG> structure or NULL if an 
 
 =head1 CONFORMING TO
 
-IETF RFC 7292 (L<https://tools.ietf.org/html/rfc7292>)
+RFC 7292
 
 =head1 SEE ALSO
 
