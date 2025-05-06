@@ -1,4 +1,3 @@
-
 if (NOT OPENSSL_NO_ASM)
     set(ghashdef_x86 GHASH_ASM)
     set(ghashdef_x86_sse2 OPENSSL_IA32_SSE2)

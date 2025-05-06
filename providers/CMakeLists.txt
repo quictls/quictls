@@ -13,6 +13,7 @@ target_include_directories(defprov PUBLIC
 target_compile_options(defprov PRIVATE -fPIC)
 add_dependencies(defprov headers)
 target_sources(defprov PRIVATE ../ssl/record/methods/ssl3_cbc.c)
+target_link_libraries(defprov PRIVATE common)
 
 
 # Built-in providers

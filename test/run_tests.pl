@@ -31,6 +31,7 @@ $ENV{OPENSSL_CONF_INCLUDE} = rel2abs(catdir($bldtop, "test"));
 $ENV{OPENSSL_MODULES} = rel2abs(catdir($bldtop, "providers"));
 $ENV{OPENSSL_ENGINES} = rel2abs(catdir($bldtop, "engines"));
 $ENV{CTLOG_FILE} = rel2abs(catfile($srctop, "test", "ct", "log_list.cnf"));
+$ENV{BUILD_CONF} = rel2abs(catfile($bldtop, "test", "testvars.pm"));
 
 # On platforms that support this, this will ensure malloc returns data that is
 # set to a non-zero value. Can be helpful for detecting uninitialized reads in

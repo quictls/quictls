@@ -9,6 +9,8 @@ macro(engine lib src)
     target_include_directories(${lib} PUBLIC ${CMAKE_BINARY_DIR}/include)
     target_sources(${lib} PRIVATE ${src})
     target_link_libraries(${lib} crypto)
+    set_target_properties(${lib} PROPERTIES PREFIX "")
+    set_target_properties(${lib} PROPERTIES SUFFIX ".")
 endmacro()
 
 if (NOT OPENSSL_NO_PACLOCKENG)

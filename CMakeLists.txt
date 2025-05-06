@@ -126,7 +126,7 @@ foreach (f openssl/configuration.h openssl/opensslv.h internal/paths.h)
     configure_file(${in} ${out})
     list(APPEND MADEHEADERS ${out})
 endforeach ()
-configure_file("test/testvars.pl.in" "test/testvars.pl")
+configure_file("test/testvars.pm.in" "test/testvars.pm")
 
 # Generate some header files.
 set(GENHEADERS
@@ -185,6 +185,8 @@ add_dependencies(ssl headers)
 foreach (SD ${SUBDIRS})
     add_subdirectory(${SD})
 endforeach ()
+
+target_link_libraries(ssl PUBLIC crypto)
 
 # in the toolchain file(?)
 # SET(ASM_OPTIONS "-x assembler-with-cpp")
