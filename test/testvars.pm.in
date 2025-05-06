@@ -8,9 +8,18 @@
 #      https://github.com/quictls/quictls/blob/main/LICENSE.txt
 #      https://www.apache.org/licenses/LICENSE-2.0
 
-our %settings = {
+package testvars;
+use strict;
+use warnings;
+use Exporter;
+
+our @ISA = qw(Exporter);
+our @EXPORT = qw(%settings);
+
+our %settings = (
     'OPENSSL_NO_EC_NISTP_64_GCC_128' => '${OPENSSL_NO_EC_NISTP_64_GCC_128}',
     'OPENSSL_NO_ASM' => '${OPENSSL_NO_ASM}',
+    'OPENSSL_NO_ASAN' => '${OPENSSL_NO_ASAN}',
     'OPENSSL_NO_INLINE_ASM' => '${OPENSSL_NO_INLINE_ASM}',
     'OPENSSL_NO_ATEXIT' => '${OPENSSL_NO_ATEXIT}',
     'OPENSSL_NO_PINSHARED' => '${OPENSSL_NO_PINSHARED}',
@@ -121,4 +130,9 @@ our %settings = {
     'OPENSSL_NO_TLS1_2_METHOD' => '${OPENSSL_NO_TLS1_2_METHOD}',
     'OPENSSL_NO_TLS1_3' => '${OPENSSL_NO_TLS1_3}',
     'OPENSSL_NO_TLS1_METHOD' => '${OPENSSL_NO_TLS1_METHOD}',
-};
+    'OPENSSL_NO_LEGACY' => '${OPENSSL_NO_LEGACY}',
+    'OPENSSL_NO_FIPS' => '${OPENSSL_NO_FIPS}',
+    'OPENSSL_NO_MODULE' => '${OPENSSL_NO_MODULE}',
+);
+
+1;

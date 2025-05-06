@@ -130,6 +130,7 @@ simple(aesgcmtest aesgcmtest.c testutil;crypto)
 simple(bio_prefix_text bio_prefix_text.c testutil;crypto)
 simple(ssl_ctx_test ssl_ctx_test.c "testutil;ssl;crypto")
 simple(build_wincrypt_test build_wincrypt_test.c ssl;crypto)
+simple(bio_printf_test bio_printf_test.c "testutil;crypto")
 
 simple(evp_test evp_test.c testutil;crypto)
 if (NOT OPENSSL_NO_LEGACY)
@@ -148,6 +149,7 @@ if (NOT OPENSSL_NO_MODULE AND NOT OPENSSL_NO_LEGACY)
 else ()
     simple(endecode_test endecode_test.c testutil;crypto)
     simple(evp_extra_test evp_extra_test.c testutil;crypto)
+    simple(evp_extra_test2 evp_extra_test2.c testutil;crypto)
 endif ()
 
 if (NOT OPENSSL_NO_SHARED)
@@ -274,7 +276,7 @@ if (NOT OPENSSL_NO_MDC2)
     simple(mdc2_internal_test mdc2_internal_test.c testutil;crypto)
 endif ()
 
-# We disable this test completely in a shared build because it deliberately
+# We disable this test completely in a non-shared build because it deliberately
 # redefines some internal libssl symbols. This doesn't work in a non-shared
 # build
 if (NOT OPENSSL_NO_SHARED)
