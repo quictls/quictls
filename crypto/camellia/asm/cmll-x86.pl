@@ -1141,8 +1141,6 @@ my ($s0,$s1,$s2,$s3) = @T;
 &function_end("Camellia_cbc_encrypt");
 }
 
-&asciz("Camellia for x86 by <https://github.com/dot-asm>");
-
 &asm_finish();
 
 close STDOUT or die "error closing STDOUT: $!";

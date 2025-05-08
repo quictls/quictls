@@ -935,8 +935,6 @@ Camellia_cbc_encrypt:
 	ret
 .cfi_endproc
 .size	Camellia_cbc_encrypt,.-Camellia_cbc_encrypt
-
-.asciz	"Camellia for x86_64 by <https://github.com/dot-asm>"
 ___
 }
 

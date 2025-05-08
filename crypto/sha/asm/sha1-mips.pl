@@ -457,8 +457,6 @@ $code.=<<___;
 	jr	$ra
 	$PTR_ADD $sp,$FRAMESIZE*$SZREG
 .end	sha1_block_data_order
-.rdata
-.asciiz	"SHA1 for MIPS, CRYPTOGAMS by <https://github.com/dot-asm>"
 ___
 print $code;
 close STDOUT or die "error closing STDOUT: $!";
