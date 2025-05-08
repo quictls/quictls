@@ -2275,9 +2275,6 @@ $code.=<<___;
 .size	AES_xts_decrypt,.-AES_xts_decrypt
 ___
 }
-$code.=<<___;
-.string	"AES for s390x, CRYPTOGAMS by <https://github.com/dot-asm>"
-___
 
 $code =~ s/\`([^\`]*)\`/eval $1/gem;
 print $code;
