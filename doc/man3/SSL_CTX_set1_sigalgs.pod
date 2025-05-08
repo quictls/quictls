@@ -98,7 +98,7 @@ using an array:
 
  SSL_CTX_set1_sigalgs(ctx, slist, 4);
 
-Set supported signature algorithms to SHA.256 with ECDSA and SHA.256 with RSA
+Set supported signature algorithms to SHA-256 with ECDSA and SHA-256 with RSA
 using a string:
 
  SSL_CTX_set1_sigalgs_list(ctx, "ECDSA+SHA256:RSA+SHA256");
