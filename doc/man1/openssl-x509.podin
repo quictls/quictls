@@ -477,8 +477,8 @@ The digest to use.
 This affects any signing or printing option that uses a message
 digest, such as the B<-fingerprint>, B<-key>, and B<-CA> options.
 Any digest supported by the L<openssl-dgst(1)> command can be used.
-If not specified then SHA1 is used with B<-fingerprint> or
-the default digest for the signing algorithm is used, typically SHA256.
+If not specified then SHA-1 is used with B<-fingerprint> or
+the default digest for the signing algorithm is used, typically SHA-256.
 
 =back
 
@@ -729,7 +729,7 @@ supporting UTF8:
 
  openssl x509 -in cert.pem -noout -subject -nameopt oneline,-esc_msb
 
-Print the certificate SHA1 fingerprint:
+Print the certificate SHA-1 fingerprint:
 
  openssl x509 -sha1 -in cert.pem -noout -fingerprint
 
@@ -794,7 +794,7 @@ L<x509v3_config(5)>
 The hash algorithm used in the B<-subject_hash> and B<-issuer_hash> options
 before OpenSSL 1.0.0 was based on the deprecated MD5 algorithm and the encoding
 of the distinguished name. In OpenSSL 1.0.0 and later it is based on a canonical
-version of the DN using SHA1. This means that any directories using the old
+version of the DN using SHA-1. This means that any directories using the old
 form must have their links rebuilt using L<openssl-rehash(1)> or similar.
 
 The B<-signkey> option has been renamed to B<-key> in OpenSSL 3.0,
