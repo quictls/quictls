@@ -6,7 +6,7 @@ EVP_MD-SHA3 - The SHA-3 EVP_MD implementations
 
 =head1 DESCRIPTION
 
-Support for computing SHA3- digests through the B<EVP_MD> API.
+Support for computing SHA-3 digests through the B<EVP_MD> API.
 
 =head2 Identities
 
