@@ -1,6 +1,3 @@
-.ident	"sparcv8plus.s, Version 1.4"
-.ident	"SPARC v9 ISA artwork by Andy Polyakov <https://github.com/dot-asm>"
-
 /*
  * ====================================================================
  * Copyright 1999-2016 The OpenSSL Project Authors. All Rights Reserved.
