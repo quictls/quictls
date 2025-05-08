@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-EVP_MD-SHA3 - The SHA.3 EVP_MD implementations
+EVP_MD-SHA3 - The SHA-3 EVP_MD implementations
 
 =head1 DESCRIPTION
 
