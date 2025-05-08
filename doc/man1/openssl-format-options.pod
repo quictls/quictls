@@ -80,7 +80,7 @@ the private key.
 =item B<PEM>
 
 A text format defined in RFC 1421 and RFC 7468. Briefly, this is
-a block of base-64 encoding (defined in RFC 4648), with specific
+a block of Base64 encoding (defined in RFC 4648), with specific
 lines used to mark the start and end:
 
  Text before the BEGIN line is ignored.
