@@ -49,9 +49,9 @@ can modify or delete the existing certificate.
 
 A more advanced callback might examine the handshake parameters and set
 whatever chain is appropriate. For example a legacy client supporting only
-TLSv1.0 might receive a certificate chain signed using SHA.1 whereas a
-TLSv1.2 or later client which advertises support for SHA.256 could receive a
-chain using SHA.256.
+TLSv1.0 might receive a certificate chain signed using SHA-1 whereas a
+TLSv1.2 or later client which advertises support for SHA-256 could receive a
+chain using SHA-256.
 
 Normal server sanity checks are performed on any certificates set
 by the callback. So if an EC chain is set for a curve the client does not
