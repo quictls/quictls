@@ -1,6 +1,3 @@
-.ident	"sparcv8plus.s, Version 1.4"
-.ident	"SPARC v9 ISA artwork by Andy Polyakov <appro@openssl.org>"
-
 /*
  * ====================================================================
  * Copyright 1999-2016 The OpenSSL Project Authors. All Rights Reserved.
@@ -16,7 +13,7 @@
  * This is my modest contribution to OpenSSL project (see
  * http://www.openssl.org/ for more information about it) and is
  * a drop-in UltraSPARC ISA replacement for crypto/bn/bn_asm.c
- * module. For updates see http://fy.chalmers.se/~appro/hpe/.
+ * module.
  *
  * Questions-n-answers.
  *
