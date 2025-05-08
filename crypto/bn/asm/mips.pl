@@ -120,10 +120,6 @@ $code.=<<___;
 # define mfrm(rd,rs,rt)	mfhi	rd
 #endif
 
-.rdata
-.asciiz	"mips3.s, Version 1.2"
-.asciiz	"MIPS II/III/IV ISA artwork by Andy Polyakov <https://github.com/dot-asm>"
-
 .text
 .set	noat
 
