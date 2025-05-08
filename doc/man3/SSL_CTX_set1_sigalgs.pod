@@ -91,7 +91,7 @@ All these functions return 1 for success and 0 for failure.
 
 =head1 EXAMPLES
 
-Set supported signature algorithms to SHA.256 with ECDSA and SHA.256 with RSA
+Set supported signature algorithms to SHA-256 with ECDSA and SHA-256 with RSA
 using an array:
 
  const int slist[] = {NID_sha256, EVP_PKEY_EC, NID_sha256, EVP_PKEY_RSA};
