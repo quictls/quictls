@@ -275,7 +275,6 @@ $code.=<<___;
 	lghi	%r2,1		# signal "processed"
 	br	%r14
 .size	bn_mul_mont,.-bn_mul_mont
-.string	"Montgomery Multiplication for s390x, CRYPTOGAMS by <https://github.com/dot-asm>"
 ___
 
 foreach (split("\n",$code)) {
