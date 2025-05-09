@@ -11,14 +11,15 @@
 #include <apps/apps.h>
 #include <apps/progs.h>
 
-#if defined(OPENSSL_SYS_UNIX) || defined(__APPLE__)
+#ifndef OPENSSL_SYS_WIN32
 # include <unistd.h>
-# include <stdio.h>
-# include <limits.h>
-# include <errno.h>
-# include <string.h>
-# include <ctype.h>
-# include <sys/stat.h>
+#endif
+#include <stdio.h>
+#include <limits.h>
+#include <errno.h>
+#include <string.h>
+#include <ctype.h>
+#include <sys/stat.h>
 
 # include <internal/o_dir.h>
 
@@ -26,30 +27,17 @@
 # include <openssl/pem.h>
 # include <openssl/x509.h>
 
-# ifndef PATH_MAX
-#  define PATH_MAX 4096
+#ifndef PATH_MAX
+# define PATH_MAX 4096
+#endif
+#define MAX_COLLISIONS  256
+
+#if defined(OPENSSL_SYS_VXWORKS) || defined(OPENSSL_SYS_WIN32) \
+    || defined(OPENSSL_NO_SYMLINKS)
+# if defined(S_ISLNK)
+#  undef S_ISLNK
 # endif
-# define MAX_COLLISIONS  256
-
-# if defined(OPENSSL_SYS_VXWORKS)
-/*
- * VxWorks has no symbolic links
- */
-
-#  define lstat(path, buf) stat(path, buf)
-
-int symlink(const char *target, const char *linkpath)
-{
-    errno = ENOSYS;
-    return -1;
-}
-
-ssize_t readlink(const char *pathname, char *buf, size_t bufsiz)
-{
-    errno = ENOSYS;
-    return -1;
-}
-# endif
+#endif
 
 typedef struct hentry_st {
     struct hentry_st *next;
@@ -172,6 +160,7 @@ static int add_entry(enum Type type, unsigned int hash, const char *filename,
     return 0;
 }
 
+#if defined(S_ISLNK)
 /*
  * Check if a symlink goes to the right spot; return 0 if okay.
  * This can be -1 if bad filename, or an error count.
@@ -211,6 +200,7 @@ static int handle_symlink(const char *filename, const char *fullpath)
 
     return add_entry(type, hash, linktarget, NULL, 0, id);
 }
+#endif
 
 /*
  * process a file, return number of errors.
@@ -311,10 +301,14 @@ static int ends_with_dirsep(const char *path)
 {
     if (*path != '\0')
         path += strlen(path) - 1;
+<<<<<<< HEAD
 # if   defined _WIN32
+=======
+#if defined _WIN32
+>>>>>>> 1a9a045af4 (Port this to Win32.)
     if (*path == '\\')
         return 1;
-# endif
+#endif
     return *path == '/';
 }
 
@@ -322,6 +316,55 @@ static int sk_strcmp(const char * const *a, const char * const *b)
 {
     return strcmp(*a, *b);
 }
+
+#ifndef S_ISLNK
+/*
+ * Make a copy of the file, return -1 on error.
+ */
+static int copyfile(const char* source, const char *dest)
+{
+    FILE *in = NULL, *out = NULL;
+    char buff[BUFSIZ];
+    int retval = -1;
+    size_t count;
+
+    if (unlink(dest) < 0 && errno != ENOENT) {
+	BIO_printf(bio_err, "%s: Can't unlink %s, %s\n",
+		opt_getprog(), dest, strerror(errno));
+	goto end;
+    }
+    if ((in = fopen(source, "rb")) == NULL) {
+	BIO_printf(bio_err, "%s: Can't open %s for reading %s\n",
+		   opt_getprog(), source, strerror(errno));
+	goto end;
+    }
+    if ((out = fopen(source, "wb")) == NULL) {
+	BIO_printf(bio_err, "%s: Can't open %s for writing %s\n",
+		   opt_getprog(), dest, strerror(errno));
+	goto end;
+    }
+
+    while ((count = fread(buff, sizeof(buff), 1, in)) != 0) {
+	if (fwrite(buff, count, 1, out) != count) {
+	    BIO_printf(bio_err, "%s: Can't write to %s %s\n",
+		       opt_getprog(), dest, strerror(errno));
+	    goto end;
+	}
+    }
+
+    retval = 0;
+end:
+    if (in != NULL)
+	fclose(in);
+    if (out != NULL && (fflush(out) == EOF || fclose(out) == EOF)) {
+	BIO_printf(bio_err, "%s: Can't close %s %s\n",
+		   opt_getprog(), dest, strerror(errno));
+	retval = -1;
+    }
+
+    return retval;
+}
+#endif
 
 /*
  * Process a directory; return number of errors found.
@@ -384,10 +427,12 @@ static int do_dir(const char *dirname, enum Hash h)
         if (BIO_snprintf(buf, buflen, "%s%s%s",
                          dirname, pathsep, filename) >= buflen)
             continue;
+#if defined(S_ISLNK)
         if (lstat(buf, &st) < 0)
             continue;
         if (S_ISLNK(st.st_mode) && handle_symlink(filename, buf) == 0)
             continue;
+#endif
         errs += do_file(filename, buf, h);
     }
 
@@ -426,13 +471,19 @@ static int do_dir(const char *dirname, enum Hash h)
                                    opt_getprog(), buf, strerror(errno));
                         errs++;
                     }
+#ifdef S_ISLNK
                     if (symlink(ep->filename, buf) < 0) {
                         BIO_printf(bio_err,
-                                   "%s: Can't symlink %s, %s\n",
-                                   opt_getprog(), ep->filename,
+                                   "%s: Can't symlink(%s,%s), %s\n",
+                                   opt_getprog(),
+				   ep->filename, buf,
                                    strerror(errno));
                         errs++;
                     }
+#else
+                    if (copyfile(ep->filename, buf) < 0)
+			errs++;
+#endif
                     bit_set(idmask, nextid);
                 } else if (remove_links) {
                     /* Link to be deleted */
@@ -471,6 +522,9 @@ typedef enum OPTION_choice {
 
 const OPTIONS rehash_options[] = {
     {OPT_HELP_STR, 1, '-', "Usage: %s [options] [directory...]\n"},
+#ifndef S_ISLNK
+    {OPT_MORE_STR, 1, '-', "(Symlinks not supported, files are copied)\n"},
+#endif
 
     OPT_SECTION("General"),
     {"help", OPT_HELP, '-', "Display this summary"},
@@ -550,16 +604,3 @@ int rehash_main(int argc, char **argv)
  end:
     return errs;
 }
-
-#else
-const OPTIONS rehash_options[] = {
-    {NULL}
-};
-
-int rehash_main(int argc, char **argv)
-{
-    BIO_printf(bio_err, "Not available; use c_rehash script\n");
-    return 1;
-}
-
-#endif /* defined(OPENSSL_SYS_UNIX) || defined(__APPLE__) */
