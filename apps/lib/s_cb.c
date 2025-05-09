@@ -334,24 +334,10 @@ int ssl_print_point_formats(BIO *out, SSL *s)
     for (i = 0; i < nformats; i++, pformats++) {
         if (i)
             BIO_puts(out, ":");
-        switch (*pformats) {
-        case TLSEXT_ECPOINTFORMAT_uncompressed:
+        if (*pformats == TLSEXT_ECPOINTFORMAT_uncompressed)
             BIO_puts(out, "uncompressed");
-            break;
-
-        case TLSEXT_ECPOINTFORMAT_ansiX962_compressed_prime:
-            BIO_puts(out, "ansiX962_compressed_prime");
-            break;
-
-        case TLSEXT_ECPOINTFORMAT_ansiX962_compressed_char2:
-            BIO_puts(out, "ansiX962_compressed_char2");
-            break;
-
-        default:
+        else
             BIO_printf(out, "unknown(%d)", (int)*pformats);
-            break;
-
-        }
     }
     BIO_puts(out, "\n");
     return 1;
