@@ -60,7 +60,7 @@ sub run_test {
 
     # openssl ocsp -port 0 -index index.txt -rsigner ocsp.pem -CA intermediate-cert.pem
     my @ocsp_cmd = ("ocsp", "-port", "0", "-index", $index_txt, "-rsigner", $ocsp_pem, "-CA", $intermediate_cert_pem);
-    my $ocsp_pid = open3(my $ocsp_i, my $ocsp_o, my $ocsp_e = gensym, $shlib_wrap, $apps_openssl, @ocsp_cmd);
+    my $ocsp_pid = open3(my $ocsp_i, my $ocsp_o, my $ocsp_e = gensym, $apps_openssl, @ocsp_cmd);
 
     ## ipv4
     # ACCEPT 0.0.0.0:19254 PID=620007
@@ -89,7 +89,7 @@ sub run_test {
     #                  -status_verbose -status_url http://localhost:19254/ocsp
     my @s_server_cmd = ("s_server", "-accept", "0", "-cert", $server_pem, "-cert_chain", $intermediate_cert_pem,
                         "-status_verbose", "-status_url", "http://localhost:${ocsp_port}/ocsp");
-    my $s_server_pid = open3(my $s_server_i, my $s_server_o, my $s_server_e = gensym, $shlib_wrap, $apps_openssl, @s_server_cmd);
+    my $s_server_pid = open3(my $s_server_i, my $s_server_o, my $s_server_e = gensym, $apps_openssl, @s_server_cmd);
 
     # ACCEPT 0.0.0.0:45921
     # ACCEPT [::]:45921
@@ -116,7 +116,7 @@ sub run_test {
 
     # openssl s_client -connect localhost:45921 -status -verify_return_error
     my @s_client_cmd = ("s_client", "-connect", "localhost:$server_port", "-status", "-verify_return_error");
-    my $s_client_pid = open3(my $s_client_i, my $s_client_o, my $s_client_e = gensym, $shlib_wrap, $apps_openssl, @s_client_cmd);
+    my $s_client_pid = open3(my $s_client_i, my $s_client_o, my $s_client_e = gensym, $apps_openssl, @s_client_cmd);
 
     ### the output from s_server that we want to check is written to its stderr
     ###    cert_status: ocsp response sent:
