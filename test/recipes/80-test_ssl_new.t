@@ -16,7 +16,6 @@ use warnings;
 
 use File::Basename;
 use File::Compare qw/compare_text/;
-use OpenSSL::Glob;
 use OpenSSL::Test qw/:DEFAULT srctop_dir srctop_file bldtop_file bldtop_dir/;
 use OpenSSL::Test::Utils qw/disabled alldisabled available_protocols/;
 
@@ -123,7 +122,7 @@ my %skip = (
 
 foreach my $conf (@conf_files) {
     subtest "Test configuration $conf" => sub {
-        plan tests => 6 + ($no_fips ? 0 : 3);
+        plan tests => 2 + ($no_fips ? 0 : 3);
         test_conf($conf,
                   0, # WAS: $conf_dependent_tests{$conf}
                   defined($skip{$conf}) ? $skip{$conf} : $no_tls,
@@ -148,34 +147,18 @@ sub test_conf {
     my $run_test = 1;
 
   SKIP: {
-      # "Test" 1. Generate the source.
-      skip 'failure', 2 unless
-        ok(run(perltest(["generate_ssl_tests.pl", $input_file, $provider],
-                        interpreter_args => [ "-I", srctop_dir("util", "perl")],
-                        stdout => $output_file)),
-           "Getting output from generate_ssl_tests.pl.");
-
-    SKIP: {
-        # Test 2. Compare against existing output in test/ssl-tests/
-        skip "Skipping generated source test for $conf", 1
-          if !$check_source;
-
-        $run_test = is(cmp_text($output_file, $conf_file), 0,
-                       "Comparing generated $output_file with $conf_file.");
-      }
-
       # Test 3. Run the test.
       skip "No tests available; skipping tests", 1 if $skip;
       skip "Stale sources; skipping tests", 1 if !$run_test;
 
-      my $msg = "running CTLOG_FILE=test/ct/log_list.cnf". # $ENV{CTLOG_FILE}.
-          " TEST_CERTS_DIR=test/certs". # $ENV{TEST_CERTS_DIR}.
-          " test/ssl_test test/ssl-tests/$conf $provider";
+      my $msg = "running CTLOG_FILE=". $ENV{CTLOG_FILE}.
+          " TEST_CERTS_DIR=". $ENV{TEST_CERTS_DIR}.
+          " test/ssl_test $conf_file $provider";
       if ($provider eq "fips") {
           ok(run(test(["ssl_test", $output_file, $provider,
                        srctop_file("test", "fips-and-base.cnf")])), $msg);
       } else {
-          ok(run(test(["ssl_test", $output_file, $provider])), $msg);
+          ok(run(test(["ssl_test", $conf_file, $provider])), $msg);
       }
     }
 }

@@ -24,7 +24,7 @@ plan skip_all => "test_tfo_cli does not run on Windows"
 
 plan tests => 8;
 
-my $shlib_wrap = bldtop_file("util", "shlib_wrap.sh");
+my $shlib_wrap = srctop_file("util", "shlib_wrap.sh");
 my $apps_openssl = bldtop_file("apps", "openssl");
 my $cert = srctop_file("apps", "server.pem");
 
@@ -40,7 +40,7 @@ sub run_test {
     my @s_cmd = ("s_server", "-accept", ":0", "-cert", $cert, "-www", "-no_tls1_3", "-naccept", "1");
     push @s_cmd, "-tfo" if ($tfo);
 
-    my $spid = open2(my $sout, my $sin, $shlib_wrap, $apps_openssl, @s_cmd);
+    my $spid = open2(my $sout, my $sin, $apps_openssl, @s_cmd);
 
     # Read until we get the port, TFO is output before the ACCEPT line
     while (<$sout>) {
@@ -58,7 +58,7 @@ sub run_test {
     my @c_cmd = ("s_client", "-connect", ":$port", "-no_tls1_3");
     push @c_cmd, "-tfo" if ($tfo);
 
-    my $cpid = open2(my $cout, my $cin, $shlib_wrap, $apps_openssl, @c_cmd);
+    my $cpid = open2(my $cout, my $cin, $apps_openssl, @c_cmd);
 
     # Do the "GET", which will cause the client to finish
     print $cin "GET /\r\n";

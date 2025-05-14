@@ -13,7 +13,7 @@
 #include <internal/thread_once.h>
 #include <internal/cryptlib.h>
 #include <internal/e_os.h>
-#include "buildinf.h"
+#include <internal/buildinf.h>
 #include <openssl/quic.h>
 
 #if defined(__arm__) || defined(__arm) || defined(__aarch64__)
