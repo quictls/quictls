@@ -195,3 +195,10 @@ target_link_libraries(ssl PUBLIC crypto)
 #/* XXX NEED TO SET THESE */ include/crypto/dso_conf.h
 ## define DSO_DLFCN
 
+add_custom_target(test
+	COMMAND SRCTOP=.. BLDTOP=. perl ../test/run_tests.pl
+	VERBATIM
+	USES_TERMINAL
+	)
+
+# add_dependencies(test world)
