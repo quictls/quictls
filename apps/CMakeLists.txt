@@ -48,7 +48,7 @@ if (NOT OPENSSL_NO_TS)
     list(APPEND SOURCE ts.c)
 endif ()
 if (WIN32)
-    set(rc, openssl.rc)
+    set(rc openssl.rc)
     add_custom_command(COMMENT "Generating ${rc}"
         OUTPUT "${rc}" DEPENDS ../util/mkrc.pl
         COMMAND ${PERL} ../util/mkrc.pl openssl >${rc}

@@ -5,7 +5,7 @@ macro (cfg_add_define flag setting)
 endmacro ()
 
 macro (cfg_add_include path)
-    if (NOT ${path})
+    if (${path})
         include_directories(${path})
     endif ()
 endmacro ()
@@ -17,6 +17,11 @@ macro (cfg_add_libraries libs)
 endmacro ()
 
 macro (base)
+    cfg_add_define(OPENSSL_NO_FUZZER FUZZER)
+    cfg_add_define(OPENSSL_NO_FUZZER_DYNAMIC FUZZER_SHARED)
+    cfg_add_include(FUZZER_INCLUDE)
+    cfg_add_libraries(FUZZER_LIBS)
+
     cfg_add_define(OPENSSL_NO_BROTLI BROTLI)
     cfg_add_define(OPENSSL_NO_BROTLI_DYNAMIC BROTLI_SHARED)
     cfg_add_include(BROTLI_INCLUDE)
@@ -40,15 +45,16 @@ macro (base_unix)
     set(OPENSSL_NO_STATIC_ENGINE 1)
 endmacro ()
 
+# Compiler strict warnings settings
 set(GCC_STRICT_WARNINGS
     -Wall -pedantic -Wno-long-long -Wmissing-declarations -Wextra
     -Wno-unused-parameter -Wno-missing-field-initializers -Wswitch
     -Wsign-compare -Wshadow -Wformat -Wno-type-limits -Wundef -Werror
     -Wmissing-prototypes -Wstrict-prototypes
+    -DPEDANTIC -DUNUSEDRESULT_DEBUG
     )
-set(GCC_STRICT_DEFS PEDANTIC UNUSEDRESULT_DEBUG)
 
-set(CLANG_STRICT_WARNINGS ${GCC_STRICT_WRARNINGS})
+set(CLANG_STRICT_WARNINGS ${GCC_STRICT_WARNINGS})
 list(APPEND CLANG_STRICT_WARNINGS
     -Wno-unknown-warning-option -Wno-parentheses-equality
     -Wno-language-extension-token -Wno-extended-offsetof
@@ -56,4 +62,18 @@ list(APPEND CLANG_STRICT_WARNINGS
     -Wconditional-uninitialized -Wincompatible-pointer-types-discards-qualifiers
     -Wmissing-variable-declarations
     )
-set(CLANG_STRICT_DEFS ${GCC_STRICT_DEFS})
+
+set(MSVC_STRICT_WARNINGS
+    )
+
+if (${STRICT_WARNINGS})
+    if (${CMAKE_C_COMPILER_ID} STREQUAL "Clang")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CLANG_STRICT_WARNINGS}")
+    endif ()
+    if (${CMAKE_C_COMPILER_ID} STREQUAL "GNU")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${GCC_STRICT_WARNINGS}")
+    endif ()
+    if (${CMAKE_C_COMPILER_ID} STREQUAL "MSVC")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${MSVC_STRICT_WARNINGS}")
+    endif ()
+endif ()
