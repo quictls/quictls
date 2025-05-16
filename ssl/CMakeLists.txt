@@ -5,7 +5,7 @@ set(SOURCE
     ssl_err_legacy.c ssl_init.c ssl_mcnf.c ssl_rsa.c ssl_stat.c ssl_txt.c
     tls13_enc.c t1_enc.c t1_lib.c t1_trce.c
     )
-if (NOT OPENSSL_NO_DEPRECATION_3_0)
+if (NOT OPENSSL_NO_DEPRECATED_3_0)
     list(APPEND SOURCE ssl_rsa_legacy.c)
 endif ()
 if (NOT OPENSSL_NO_BORING_QUIC_API)

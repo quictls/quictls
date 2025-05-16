@@ -66,7 +66,6 @@
 #cmakedefine OPENSSL_NO_THREAD_POOL
 
 /* API deprecation. */
-#cmakedefine OPENSSL_NO_DEPRECATION_3_0
 #cmakedefine OPENSSL_NO_DEPRECATED_3_0
 #cmakedefine OPENSSL_NO_DEPRECATED_1_1_1
 #cmakedefine OPENSSL_NO_DEPRECATED_1_1_0
