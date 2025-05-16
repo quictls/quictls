@@ -58,6 +58,8 @@ else ()
        message(FATAL_ERROR "No -DTARGET=... defined")
     endif()
 endif ()
+
+# XXX REMOVE THESE ONCE SUPPORTED
 set(OPENSSL_NO_ASM 1)
 set(OPENSSL_NO_LEGACY 1)
 
