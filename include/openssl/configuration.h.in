@@ -99,7 +99,6 @@
 #cmakedefine OPENSSL_NO_OCSP
 #cmakedefine OPENSSL_NO_PSK
 #cmakedefine OPENSSL_NO_RFC3779
-#cmakedefine OPENSSL_NO_SCTP
 #cmakedefine OPENSSL_NO_SRTP
 #cmakedefine OPENSSL_NO_SSLKEYLOG
 #cmakedefine OPENSSL_NO_SSLKEYLOG_CB
@@ -196,6 +195,7 @@
 # define OPENSSL_NO_NEGPROTONEG
 # define OPENSSL_NO_QUIC
 # define OPENSSL_NO_SRP
+# define OPENSSL_NO_SCTP
 # define OPENSSL_NO_TRACE
 # define OPENSSL_NO_UNIT_TEST
 #endif

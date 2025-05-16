@@ -4,15 +4,72 @@ use warnings;
 
 ##
 ## Handle enable-xxx and disable-xxx options.
-## (For now, just set/clear a variable without any checking.
 ##
+
+# API deprecation XXX
+#cmakedefine OPENSSL_NO_DEPRECATION_3_0
+#cmakedefine OPENSSL_NO_DEPRECATED_3_0
+#cmakedefine OPENSSL_NO_DEPRECATED_1_1_1
+#cmakedefine OPENSSL_NO_DEPRECATED_1_1_0
+#cmakedefine OPENSSL_NO_DEPRECATED_1_0_2
+#cmakedefine OPENSSL_NO_DEPRECATED_1_0_1
+#cmakedefine OPENSSL_NO_DEPRECATED_1_0_0
+#cmakedefine OPENSSL_NO_DEPRECATED_0_9_8
+
+# Threads XXX
+#cmakedefine OPENSSL_THREADS_NONE
+#cmakedefine OPENSSL_THREADS_POSIX
+#cmakedefine OPENSSL_THREADS_WINNT
+#cmakedefine OPENSSL_THREADS         /* Derived from the above three. */
+
+# (D)TLS versions. XXX
+#cmakedefine OPENSSL_NO_DTLS
+#cmakedefine OPENSSL_NO_DTLS1
+#cmakedefine OPENSSL_NO_DTLS1_2
+#cmakedefine OPENSSL_NO_DTLS1_2_METHOD
+#cmakedefine OPENSSL_NO_DTLS1_METHOD
+#cmakedefine OPENSSL_NO_TLS
+#cmakedefine OPENSSL_NO_SSL3
+#cmakedefine OPENSSL_NO_SSL3_METHOD
+#cmakedefine OPENSSL_NO_TLS1_1
+#cmakedefine OPENSSL_NO_TLS1_1_METHOD
+#cmakedefine OPENSSL_NO_TLS1_2
+#cmakedefine OPENSSL_NO_TLS1_2_METHOD
+#cmakedefine OPENSSL_NO_TLS1_3
+#cmakedefine OPENSSL_NO_TLS1_METHOD
+
+# Randomness XXX
+#cmakedefine OPENSSL_RAND_SEED_OS
+#cmakedefine OPENSSL_RAND_SEED_RDCPU
+
+my @ifdefs = (
+    'AFALGENG', 'ASM', 'ASYNC', 'ATEXIT', 'AUTOALGINIT', 'AUTOERRINIT',
+    'AUTOLOAD_CONFIG', 'BUILTIN_OVERFLOW_CHECKING', 'CACHED_FETCH',
+    'CAPIENG', 'CMP', 'CMS', 'CT', 'DEFAULT_THREAD_POOL', 'DEVCRYPTOENG',
+    'EC_NISTP_64_GCC_128', 'ENGINE', 'ERR', 'FILENAMES', 'HTTP',
+    'INLINE_ASM', 'KTLS', 'KTLS_RX', 'KTLS_ZC_TX', 'MUTEX_ERRORCHECK',
+    'OCSP', 'PADLOCKENG', 'PINSHARED', 'POSIX_IO', 'PSK', 'RFC3779',
+    'SECURE_MEMORY', 'SHARED', 'SOCK', 'SRTP', 'SSLKEYLOG', 'SSLKEYLOG_CB',
+    'STATIC_ENGINE', 'STDIO', 'TFO', 'THREADS', 'THREAD_POOL', 'TS',
+    'UI_CONSOLE', 'UNIX_SOCK', 'WINSTORE',
+
+    # Ciphers
+    'WEAK_SSL_CIPHERS', 'MULTIBLOCK', 'ARGON2', 'ARIA', 'BF', 'BLAKE2',
+    'CAMELLIA', 'CAST', 'CHACHA', 'CMAC', 'CRMF', 'DES', 'DH', 'DSA', 'EC',
+    'GOST', 'IDEA', 'MD2', 'MD4', 'MD5', 'MDC2', 'OCB', 'POLY1305', 'RC2',
+    'RC4', 'RC5', 'RMD160', 'RSA', 'SCRYPT', 'SEED', 'SHA1', 'SIPHASH',
+    'SIV', 'SM2', 'SM2_PRECOMP', 'SM3', 'SM4', 'WHIRLPOOL',
+);
 
 sub
 enable
 {
     my $arg = uc shift;
     $arg =~ s/ENABLE-//;
-    print "set(OPENSSL_NO_${arg} \"\")\n";
+    warn "warning: Enabling $arg might not be supported\n"
+        unless grep { $arg eq $_ } @ifdefs;
+    print "set(OPENSSL_NO_COMP \"\")\n" if $arg =~ /BROTLI|ZLIB|ZSTD/;
+    print "set(OPENSSL_NO_${arg} \"\") # Enabling\n";
 }
 
 # For now, just set a variable without any checking.
@@ -21,7 +78,10 @@ disable
 {
     my $arg = uc shift;
     $arg =~ s/(NO|DISABLE)-//;
+    warn "warning: Disabling $arg might not be supported\n"
+        unless grep { $arg eq $_ } @ifdefs;
     print "set(OPENSSL_NO_${arg} 1)\n";
+    print "set(OPENSSL_NO_THREADS 1)\n" if $arg eq "THREADS";
 }
 
 # Scan environment; for now, just warn.
@@ -44,11 +104,11 @@ my @warnvars = (
 );
 my @found = grep { defined $ENV{$_} } @warnvars;
 if ( $#found >= 0 ) {
-    warn "Ignoring the following environment variables:\n";
+    warn "warning: Ignoring the following environment variables:\n";
     foreach my $var ( @found ) {
         warn "\t$var\n"
     }
-    warn "You might have to edit the cmake configuration.\n";
+    warn "(You might have to edit the cmake configuration.)\n";
 }
 
 # Skip the command if the cut/pasted the whole line
@@ -89,13 +149,16 @@ while ( @ARGV ) {
     s/^fips$/enable-fips/;
 
     if ( m|^\w+=.+$| ) {
-        warn "Ignoring assignment parameter $_\n";
+        warn "warning: Ignoring assignment parameter $_\n";
     }
     elsif ( defined $skipargs{$_} ) {
-        warn "Skipping $_\n";
+        warn "warning: Skipping $_\n";
     }
     elsif ( /--prefix=(.*)/ ) {
         print "set(INSTALLPREFIX $1)\n";
+    }
+    elsif ( /--openssldir=(.*)/ ) {
+        print "set(OPENSSLDIR $1)\n";
     }
     elsif ( /--with-([^-]+)-lib=(.*)/ ) {
         my $prot = uc $1;
@@ -111,17 +174,19 @@ while ( @ARGV ) {
         $cppdefs .= ' ' . $_;
     }
     elsif ( /-d/ or /--debug/ or /--release/ ) {
-        warn "Set build type debug/release via cmake\n";
+        warn "warning: Set build type debug/release via cmake\n";
     }
     elsif ( /enable-(.*)/ ) {
         enable($1);
     }
     elsif ( /disable-(.*)/ or /no-(.*)/ ) {
         disable($1);
-    } elsif ( /-Wall/ || /-Werror/ || /--strict-warnings/ ) {
+    }
+    elsif ( /-Wall/ || /-Werror/ || /--strict-warnings/ ) {
         print "set(STRICT_WARNINGS 1)\n";
-    } else {
-        warn "Unknown option $_\n";
+    }
+    else {
+        warn "warning: Ignoriong unknown option $_\n";
     }
 }
 
