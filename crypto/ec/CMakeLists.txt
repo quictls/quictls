@@ -1,28 +1,28 @@
 set(SOURCE)
 if (NOT OPENSSL_NO_ASM) 
     set(ecsrc_x86 ecp_nistz256.c)
-    set(ecasm_x86 ${ecsrc_x86} ecp_nistz256-x86.S)
+    set(ecasm_x86 ${ecsrc_x86} asm/ecp_nistz256-x86.S)
     set(ecdef_x86 ECP_NISTZ256_ASM)
 
     set(ecsrc_x86_64 ecp_nistz256.c)
-    set(ecasm_x86_64 ${ecsrc_x86_64} ecp_nistz256-x86_64.s
-        x25519-x86_64.s)
+    set(ecasm_x86_64 ${ecsrc_x86_64} asm/ecp_nistz256-x86_64.s
+        asm/x25519-x86_64.s)
     set(ecdef_x86_64 ECP_NISTZ256_ASM X25519_ASM)
 
     set(ecsrc_sparcv9 ecp_nistz256.c)
-    set(ecasm_sparcv9 ${ecsrc_sparcv9} ecp_nistz256-sparcv9.S)
+    set(ecasm_sparcv9 ${ecsrc_sparcv9} asm/ecp_nistz256-sparcv9.S)
     set(ecdef_sparcv9 ECP_NISTZ256_ASM)
 
-    set(ecsrc_s390x ecp_s390x_nistp.c ecx_s390x.c)
+    set(ecsrc_s390x ecp_s390x_nistp.c asm/ecx_s390x.c)
     set(ecasm_s390x ${ecsrc_s390x})
     set(ecdef_s390x S390X_EC_ASM)
 
     set(ecsrc_armv4 ecp_nistz256.c)
-    set(ecasm_armv4 ${ecsrc_armv4} ecp_nistz256-armv4.S)
+    set(ecasm_armv4 ${ecsrc_armv4} asm/ecp_nistz256-armv4.S)
     set(ecdef_armv4 ECP_NISTZ256_ASM)
 
-    set(ecsrc_aarch64 ecp_nistz256.c ecp_sm2p256.c)
-    set(ecasm_aarch64 ${ecsrc_aarch64} ecp_nistz256-armv8.S
+    set(ecsrc_aarch64 ecp_nistz256.c asm/ecp_sm2p256.c)
+    set(ecasm_aarch64 ${ecsrc_aarch64} asm/ecp_nistz256-armv8.S
         ecp_sm2p256-armv8.S)
     set(ecdef_aarch64 ECP_NISTZ256_ASM)
     if (NOT OPENSSL_NO_SM2)

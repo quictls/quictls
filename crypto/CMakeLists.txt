@@ -111,10 +111,16 @@ if (NOT OPENSSL_NO_ASM)
 endif ()
 if (FOUND)
     list(APPEND SOURCE ${FOUND})
-    target_compile_definitions(crypto PUBLIC OPENSSL_CPUID_OBJ)
+    set(OPENSSL_CPUID_OBJ)
+    target_compile_definitions(crypto PRIVATE OPENSSL_CPUID_OBJ)
 else ()
-    list(APPEND SOURCE cpuid.c ctype.c mem_clr.c)
 endif ()
+
+if ((NOT OPENSSL_NO_ASM) AND "${ARCH}" STREQUAL "x86_64")
+    target_compile_definitions(crypto PUBLIC AES_ASM)
+ endif ()
+ 
+list(APPEND SOURCE cpuid.c ctype.c)
 
 if (NOT OPENSSL_NO_STATIC_ENGINE)
     include(../engines/EngineLib.cmake)

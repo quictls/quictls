@@ -109,6 +109,7 @@ my @disableables = (
     "rc4",
     "ssl3",
     "sslkeylog",
+    "static",
     "tfo",
     "zlib",
     "zstd",

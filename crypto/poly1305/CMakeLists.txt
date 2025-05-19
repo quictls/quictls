@@ -1,7 +1,7 @@
 set(SOURCE)
 if (NOT OPENSSL_NO_ASM)
     set(poly1305asm_x86 gasm/poly1305-x86.S)
-    set(poly1305asm_x86_64 gasm/poly1305-x86_64.s)
+    set(poly1305asm_x86_64 asm/poly1305-x86_64.s)
     set(poly1305asm_sparcv9 gasm/poly1305-sparcv9.S)
     set(poly1305asm_mips64 gasm/poly1305-mips.S)
     set(poly1305asm_s390x gasm/poly1305-s390x.S)

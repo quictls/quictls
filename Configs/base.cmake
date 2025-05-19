@@ -43,6 +43,7 @@ macro (base_unix)
     set(OPENSSL_THREADS_POSIX 1)
     set(DSO_SCHEME_DLFCN 1)
     set(OPENSSL_NO_STATIC_ENGINE 1)
+    set(OPENSSL_NO_STATIC 1)
 endmacro ()
 
 # Compiler strict warnings settings
