@@ -60,6 +60,7 @@ if (NOT OPENSSL_NO_ASM)
   set(aesdef_loongarch64 VPAES_ASM)
 
   look_for_assembler(aes crypto "${aesdef_${ARCH}}")
+  target_compile_definitions(crypto PRIVATE AES_ASM)
 endif ()
 if (NOT FOUND)
     list(APPEND SOURCE aes_core.c aes_cbc.c)

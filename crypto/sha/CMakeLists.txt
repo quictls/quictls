@@ -1,10 +1,10 @@
 set(SOURCE)
 if (NOT OPENSSL_NO_ASM)
-    set(sha1asm_x86 sha1-586.S sha256-586.S sha512-586.S)
+    set(sha1asm_x86 asm/sha1-586.S asm/sha256-586.S asm/sha512-586.S)
     set(sha1def_x86 SHA1_ASM SHA256_ASM SHA512_ASM)
     set(sha1asm_x86_64 
-        sha1-x86_64.s sha256-x86_64.s sha512-x86_64.s sha1-mb-x86_64.s
-        sha256-mb-x86_64.s)
+        asm/sha1-x86_64.s asm/sha512-x86_64.s asm/sha1-mb-x86_64.s
+        asm/sha256-mb-x86_64.s asm/sha256-x86_64.s)
     set(sha1def_x86_64 SHA1_ASM SHA256_ASM SHA512_ASM)
     set(sha1asm_sparcv9 sha1-sparcv9.S sha256-sparcv9.S sha512-sparcv9.S)
     set(sha1def_sparcv9 SHA1_ASM SHA256_ASM SHA512_ASM)
@@ -33,7 +33,7 @@ if (NOT OPENSSL_NO_ASM)
 endif ()
 
 if (NOT OPENSSL_NO_ASM)
-    set(keccak1600_x86_64 keccak1600-x86_64.s)
+    set(keccak1600_x86_64 asm/keccak1600-x86_64.s)
     set(keccak1600_s390x keccak1600-s390x.S)
     set(keccak1600_armv4 keccak1600-armv4.S)
     set(keccak1600_aarch64 keccak1600-armv8.S)

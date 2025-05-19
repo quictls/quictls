@@ -2,7 +2,7 @@ set(SOURCE)
 
 if (NOT OPENSSL_NO_ASM)
     set(chachaasm_x86 chacha-x86.S)
-    set(chachaasm_x86_64 chacha-x86_64.s)
+    set(chachaasm_x86_64 asm/chacha-x86_64.s)
     set(chachaasm_s390x chacha-s390x.S)
     set(chachaasm_armv4 chacha-armv4.S)
     set(chachaasm_aarch64 chacha-armv8.S chacha-armv8-sve.S)

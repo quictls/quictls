@@ -60,9 +60,9 @@ else ()
 endif ()
 
 # XXX REMOVE THESE ONCE SUPPORTED
-set(OPENSSL_NO_ASM 1)
+# set(OPENSSL_NO_ASM 1)
 set(OPENSSL_NO_LEGACY 1)
-
+set(OPENSSL_NO_FUZZ 1) #mystery
 # Threads
 if (NOT OPENSSL_THREADS_NONE)
     set(OPENSSL_THREADS 1)

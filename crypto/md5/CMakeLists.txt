@@ -1,7 +1,7 @@
 set(SOURCE)
 if (NOT OPENSSL_NO_ASM)
     set(md5asm_x86 md5-586.S)
-    set(md5asm_x86_64 md5-x86_64.s)
+    set(md5asm_x86_64 asm/md5-x86_64.s)
     set(md5asm_aarch64 md5-aarch64.S)
     set(md5asm_loongarch64 md5-loongarch64.S)
     set(md5asm_sparcv9 md5-sparcv9.S)
