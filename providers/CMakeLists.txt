@@ -5,7 +5,7 @@ macro (provider_library library)
     add_dependencies(${library} headers)
     target_include_directories(${library} PUBLIC
         ../crypto ../include ${CMAKE_BINARY_DIR}/include)
-    target_compile_definitions(${library} PRIVATE PROVIDER_DEFINITIONS)
+    target_compile_definitions(${library} PRIVATE ${PROVIDER_DEFINITIONS})
     target_compile_options(${library} PRIVATE -fPIC)
 endmacro ()
 
