@@ -160,8 +160,11 @@ while ( @ARGV ) {
     elsif ( /-([DUI])(.*)/ ) {
         $cppdefs .= ' ' . $_;
     }
-    elsif ( /^-d$/ or /--debug/ or /--release/ ) {
-        warn "warning: Set build type debug/release via cmake\n";
+    elsif ( /--release/ ) {
+        print "set(CMAKE_BUILD_TYPE Release)\n";
+    }
+    elsif ( /^-d$/ or /--debug/ ) {
+        print "set(CMAKE_BUILD_TYPE Debug)\n";
     }
     elsif ( /enable-(.*)/ ) {
         enable($1);
