@@ -63,6 +63,7 @@ endif ()
 # set(OPENSSL_NO_ASM 1)
 set(OPENSSL_NO_LEGACY 1)
 set(OPENSSL_NO_FUZZ 1) #mystery
+
 # Threads
 if (NOT OPENSSL_THREADS_NONE)
     set(OPENSSL_THREADS 1)
@@ -102,6 +103,7 @@ if (NOT OPENSSL_NO_APPS)
     list(APPEND SUBDIRS apps)
 endif ()
 list(APPEND SUBDIRS providers)
+set(PROVIDER_DEFINITIONS OPENSSL_CPUID_OBJ)
 if (NOT OPENSSL_NO_DOC)
     list(APPEND SUBDIRS doc)
 endif ()
