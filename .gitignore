@@ -120,8 +120,6 @@ doc/man1/openssl-*.pod
 /TAGS
 *.map
 *.ld
-/apps/progs.c
-/include/apps/progs.h
 
 # Windows (legacy)
 /tmp32

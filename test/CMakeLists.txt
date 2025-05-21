@@ -334,6 +334,10 @@ endif ()
 add_custom_target(build_tests COMMENT "Build tests"
     DEPENDS ${TESTPROGS})
 
+add_dependencies(build_tests openssl)
+add_dependencies(build_tests dasync)
+add_dependencies(build_tests ossltest)
+
 if (NOT OPENSSL_NO_BUILDTEST_CXX)
     include(CXXTests.cmake)
 endif ()
