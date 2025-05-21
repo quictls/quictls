@@ -12,7 +12,7 @@ list(APPEND SOURCE openssl.c
     passwd.c pkcs12.c pkcs7.c pkcs8.c pkey.c pkeyparam.c pkeyutl.c
     prime.c rand.c rehash.c req.c
     sess_id.c smime.c speed.c spkac.c storeutl.c verify.c version.c
-    x509.c
+    x509.c progs.c
     )
 if (NOT OPENSSL_NO_CMP)
     list(APPEND SOURCE cmp.c lib/cmp_mock_srv.c)
@@ -56,26 +56,11 @@ if (WIN32)
     list(APPEND SOURCE ${rc})
 endif ()
 
-set(mkprog ${CMAKE_SOURCE_DIR}/apps/mkprogs.pl)
-set(phdr ../include/apps/progs.h)
-set(psrc progs.c)
-add_custom_command(COMMENT "Generating ${phdr}"
-    OUTPUT ${phdr} DEPENDS ${SOURCE} ${mkprog}
-    COMMAND ${PERL} ${mkprog} -H ${phdr} ${CMAKE_CURRENT_SOURCE_DIR} ${SOURCE}
-    VERBATIM)
-add_custom_command(COMMENT "Generating ${psrc}"
-    OUTPUT ${psrc} DEPENDS ${SOURCE} ${mkprog}
-    COMMAND ${PERL} ${mkprog} -C ${psrc} ${CMAKE_CURRENT_SOURCE_DIR} ${SOURCE}
-    VERBATIM)
-list(APPEND SOURCE ${psrc})
-add_custom_target(progs COMMENT "Generated progs.[ch]"
-    DEPENDS ${phdr} ${psrc})
-
 add_subdirectory(lib)
 
 add_executable(openssl)
 install(TARGETS openssl DESTINATION bin)
 target_include_directories(openssl PUBLIC ${CMAKE_BINARY_DIR}/include)
-add_dependencies(openssl headers progs)
+add_dependencies(openssl headers)
 target_sources(openssl PRIVATE ${SOURCE})
 target_link_libraries(openssl apps ssl crypto)

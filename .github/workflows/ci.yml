@@ -24,7 +24,5 @@ jobs:
       run: mkdir build
     - name: run cmake
       run: cd build && cmake .. -GNinja
-    - name: execute build
-      run: cd build && ninja
     - name: run tests
       run: cd build && ninja test

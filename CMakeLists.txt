@@ -60,7 +60,6 @@ else ()
 endif ()
 
 # XXX REMOVE THESE ONCE SUPPORTED
-# set(OPENSSL_NO_ASM 1)
 set(OPENSSL_NO_LEGACY 1)
 set(OPENSSL_NO_FUZZ 1) #mystery
 # Threads
@@ -207,5 +206,5 @@ add_custom_target(test
 	VERBATIM
 	USES_TERMINAL
 	)
-
-# add_dependencies(test world)
+set_property(TARGET test PROPERTY EXCLUDE_FROM_ALL 1)
+add_dependencies(test build_tests)
