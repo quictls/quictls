@@ -8,18 +8,18 @@ set(SOURCE)
 #                                  when sse2 is enabled
 #    BN_DIV3W                      For any collection with /-div3w/ file names
 if (NOT OPENSSL_NO_ASM)
-    set(bnasm_x86 bn-586.S co-586.S x86-mont.S)
+    set(bnasm_x86 asm/bn-586.S asm/co-586.S asm/x86-mont.S)
     # bn-586 is the only one implementing bn_*_part_words
     set(bndef_x86 OPENSSL_BN_ASM_PART_WORDS OPENSSL_BN_ASM_MONT)
 
     set(bnasm_x86_64
-        x86_64-mont.s x86_64-mont5.s rsaz_exp.c rsaz-x86_64.s 
-        rsaz-avx2.s rsaz_exp_x2.c rsaz-2k-avx512.s rsaz-3k-avx512.s
-        rsaz-4k-avx512.s)
+        asm/x86_64-mont.s asm/x86_64-mont5.s rsaz_exp.c asm/rsaz-x86_64.s 
+        asm/rsaz-avx2.s rsaz_exp_x2.c asm/rsaz-2k-avx512.s asm/rsaz-3k-avx512.s
+        asm/rsaz-4k-avx512.s)
     if (NOT WIN32)
-        list(APPEND bnasm_x64_65 asm/x86_64-gcc.c)
+        list(APPEND bnasm_x86_64 asm/x86_64-gcc.c)
     else ()
-        list(APPEND bnasm_x64_65 bn_asm.c)
+        list(APPEND bnasm_x86_64 bn_asm.c)
     endif ()
     set(bndef_x86_64 OPENSSL_BN_ASM_MONT OPENSSL_BN_ASM_MONT5)
     if (NOT OPENSSL_NO_SSE2)
@@ -61,9 +61,12 @@ if (NOT OPENSSL_NO_ASM)
     look_for_assembler(aes crypto "${bndef_${ARCH}}")
 endif ()
 
-if (NOT FOUND)
+if (OPENSSL_NO_ASM)
     list(APPEND SOURCE bn_asm.c)
+ else ()
+    list(APPEND SOURCE ${bnasm_x86_64})
 endif ()
+
 list(APPEND SOURCE
     bn_add.c bn_div.c bn_exp.c bn_lib.c bn_ctx.c bn_mul.c bn_mod.c bn_conv.c
     bn_rand.c bn_shift.c bn_word.c bn_blind.c bn_kron.c bn_sqrt.c bn_gcd.c
