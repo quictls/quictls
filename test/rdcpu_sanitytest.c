@@ -129,8 +129,8 @@ int setup_tests(void)
     int have_rdseed = (OPENSSL_ia32cap_P[2] & (1 << 18)) != 0;
     int have_rdrand = (OPENSSL_ia32cap_P[1] & (1 << (62 - 32))) != 0;
 
-    if (have_rdrand) {
-        ADD_TEST(sanity_check_rdrand_bytes);
+     if (have_rdrand) {
+         ADD_TEST(sanity_check_rdrand_bytes);
     }
 
     if (have_rdseed) {

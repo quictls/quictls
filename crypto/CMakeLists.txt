@@ -118,7 +118,7 @@ endif ()
 
 if ((NOT OPENSSL_NO_ASM) AND "${ARCH}" STREQUAL "x86_64")
     target_compile_definitions(crypto PUBLIC AES_ASM)
- endif ()
+endif ()
  
 list(APPEND SOURCE cpuid.c ctype.c)
 

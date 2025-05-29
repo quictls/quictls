@@ -15,8 +15,6 @@ setup($test_name);
 plan skip_all => "$test_name is not supported in this build"
     if disabled("shared") || (disabled("ec") && disabled("dh"));
 
-plan skip_all => "$test_name doesn't work for deep linker reasons. Fix it if you can!";
-
 plan tests => 1;
 
 ok(run(test(["tls13secretstest"])), "running tls13secretstest");
