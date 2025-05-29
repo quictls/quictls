@@ -169,9 +169,13 @@ include_directories(include ${CMAKE_BINARY_DIR}/include)
 if (NOT OPENSSL_NO_SHARED)
     add_library(crypto SHARED)
     add_library(ssl SHARED)
+    add_library(crypto-static STATIC $<TARGET_OBJECTS:crypto>)
+    add_library(ssl-static STATIC $<TARGET_OBJECTS:ssl>)
+    set_target_properties(crypto-static PROPERTIES OUTPUT_NAME crypto)
+    set_target_properties(ssl-static PROPERTIES OUTPUT_NAME ssl)
 else ()
-    add_library(crypto)
-    add_library(ssl)
+    add_library(crypto STATIC)
+    add_library(ssl STATIC)
 endif ()
 install(TARGETS crypto
     RUNTIME DESTINATION bin ARCHIVE DESTINATION ${LIBSUBDIR}/quictls
@@ -182,6 +186,8 @@ install(TARGETS ssl
 target_include_directories(crypto PUBLIC ${CMAKE_BINARY_DIR}/include)
 add_dependencies(crypto headers)
 target_link_libraries(crypto PUBLIC common defprov)
+target_link_libraries(crypto-static PUBLIC common defprov)
+
 if (NOT OPENSSL_THREADS_NONE)
     target_link_libraries(crypto PUBLIC Threads::Threads)
 endif ()
@@ -193,6 +199,7 @@ foreach (SD ${SUBDIRS})
 endforeach ()
 
 target_link_libraries(ssl PUBLIC crypto)
+target_link_libraries(ssl-static PUBLIC crypto-static)
 
 # in the toolchain file(?)
 # SET(ASM_OPTIONS "-x assembler-with-cpp")
@@ -208,3 +215,7 @@ add_custom_target(test
 	)
 set_property(TARGET test PROPERTY EXCLUDE_FROM_ALL 1)
 add_dependencies(test build_tests)
+
+include(hide_symbols.cmake)
+export_symbol(ssl libssl.sym)
+export_symbol(crypto libcrypto.sym)
