@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         os:
-          - windows-2019
+          - windows-latest
           - windows-2022
         platform:
           - arch: win32
@@ -74,7 +74,7 @@ jobs:
     strategy:
       matrix:
         os:
-          - windows-2019
+          - windows-latest
           - windows-2022
     runs-on: ${{ github.server_url == 'https://github.com' && matrix.os || format('{0}-self-hosted', matrix.os) }}
     steps:
@@ -111,7 +111,7 @@ jobs:
     strategy:
       matrix:
         os:
-          - windows-2019
+          - windows-latest
           - windows-2022
     runs-on: ${{ github.server_url == 'https://github.com' && matrix.os || format('{0}-self-hosted', matrix.os) }}
     steps:
@@ -149,7 +149,7 @@ jobs:
     strategy:
       matrix:
         os:
-          - windows-2019
+          - windows-latest
 # really worth while running, too? cygwin should mask this
 #          - windows-2022
         platform:
