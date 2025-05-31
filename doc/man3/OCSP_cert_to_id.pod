@@ -31,7 +31,7 @@ OCSP_id_cmp, OCSP_id_get0_info - OCSP certificate ID utility functions
 
 OCSP_cert_to_id() creates and returns a new B<OCSP_CERTID> structure using
 message digest B<dgst> for certificate B<subject> with issuer B<issuer>. If
-B<dgst> is B<NULL> then SHA1 is used.
+B<dgst> is B<NULL> then SHA-1 is used.
 
 OCSP_cert_id_new() creates and returns a new B<OCSP_CERTID> using B<dgst> and
 issuer name B<issuerName>, issuer key hash B<issuerKey> and serial number

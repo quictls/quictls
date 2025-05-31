@@ -154,7 +154,7 @@ NULL if an error occurs.
 
 =head1 CONFORMING TO
 
-IETF RFC 8018 (L<https://tools.ietf.org/html/rfc8018>)
+RFC 8018
 
 =head1 SEE ALSO
 

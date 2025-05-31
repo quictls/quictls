@@ -52,7 +52,7 @@ subject name in the supplied X509 certificate I<cert> for the OCSP responder.
 
 OCSP_RESPID_set_by_key_ex() sets the key of the OCSP_RESPID to be the same as the
 key in the supplied X509 certificate I<cert> for the OCSP responder. The key is
-stored as a SHA1 hash. To calculate the hash the SHA1 algorithm is fetched using
+stored as a SHA-1 hash. To calculate the hash the SHA-1 algorithm is fetched using
 the library ctx I<libctx> and the property query string I<propq> (see
 L<crypto(7)/ALGORITHM FETCHING> for further information).
 
@@ -64,8 +64,8 @@ OCSP_RESPID_set_by_name() or OCSP_RESPID_set_by_key() will clear any existing
 setting.
 
 OCSP_RESPID_match_ex() tests whether the OCSP_RESPID given in I<respid> matches
-with the X509 certificate I<cert> based on the SHA1 hash. To calculate the hash
-the SHA1 algorithm is fetched using the library ctx I<libctx> and the property
+with the X509 certificate I<cert> based on the SHA-1 hash. To calculate the hash
+the SHA-1 algorithm is fetched using the library ctx I<libctx> and the property
 query string I<propq> (see L<crypto(7)/ALGORITHM FETCHING> for further
 information).
 

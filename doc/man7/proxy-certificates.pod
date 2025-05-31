@@ -347,7 +347,7 @@ L<X509_STORE_CTX_set_verify_cb(3)>,
 L<X509_VERIFY_PARAM_set_flags(3)>,
 L<SSL_CTX_set_cert_verify_callback(3)>,
 L<openssl-req(1)>, L<openssl-x509(1)>,
-L<RFC 3820|https://tools.ietf.org/html/rfc3820>
+RFC 3820.
 
 =head1 COPYRIGHT
 
