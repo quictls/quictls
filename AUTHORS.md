@@ -24,4 +24,4 @@ Individuals
 
 Projects
 -------
-OpenBSD (hide_symbols.cmake)
+LibreSSL (hide_symbols.cmake)
