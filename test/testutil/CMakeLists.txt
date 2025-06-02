@@ -26,5 +26,3 @@ add_library(testutil-dyn SHARED)
 target_include_directories(testutil-dyn PUBLIC ${CMAKE_BINARY_DIR}/include)
 add_dependencies(testutil-dyn headers)
 target_sources(testutil-dyn PRIVATE ${SOURCE})
-
-
