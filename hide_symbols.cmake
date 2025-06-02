@@ -1,4 +1,4 @@
-# Copied from LibReSSL
+# Copied from LibreSSL
 # ISC licensed
 macro(export_symbol TARGET SYMBOLS_PATH)
 
