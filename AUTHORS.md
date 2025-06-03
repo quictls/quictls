@@ -20,3 +20,4 @@ Individuals
  * Watson Ladd
  * Shih-Ping Chan
  * William Ahern
+ * Ilia Shipitsin

@@ -1,0 +1,36 @@
+name: Coverity
+
+on:
+  schedule:
+  - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    if: ${{ github.repository_owner == 'quictls' }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: config
+      run: ./config
+    - name: Download Coverity
+      run: |
+        wget -c -N https://scan.coverity.com/download/linux64 --post-data "token=${{ secrets.COVERITY_SCAN_TOKEN }}&project=QuicTLS" -O coverity_tool.tar.gz
+        mkdir coverity_tool
+        tar xzf coverity_tool.tar.gz --strip 1 -C coverity_tool
+    - name: Build with Coverity build tool
+      run: |
+        export PATH=`pwd`/coverity_tool/bin:$PATH
+        cov-build --dir cov-int make -s
+    - name: Submit build result to Coverity Scan
+      run: |
+        tar czvf cov.tar.gz cov-int
+        curl --form token=${{ secrets.COVERITY_SCAN_TOKEN }} \
+          --form email=rsalz@akamai.com \
+          --form file=@cov.tar.gz \
+          --form version="Commit $GITHUB_SHA" \
+          --form description="Build submitted via CI" \
+          https://scan.coverity.com/builds?project=QuicTLS
