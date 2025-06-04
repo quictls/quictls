@@ -137,14 +137,14 @@ B<openssl> B<s_server>
 [B<-num_tickets>]
 [B<-tfo>]
 [B<-cert_comp>]
-[B<-engine> I<id>]
 #include name_synopsis
 #include version_synopsis
-#include v_synopsis
-#include s_synopsis
-#include x_synopsis
+#include connoptions_synopsis
 #include trust_synopsis
-#include r_synopsis
+#include certverify_synopsis
+#include extverify_synopsis
+#include randstate_synopsis
+#include engine_synopsis
 #include provider_synopsis
 [B<-enable_server_rpk>]
 [B<-enable_client_rpk>]
@@ -820,28 +820,6 @@ Enable acceptance of TCP Fast Open (RFC7413) connections.
 
 Pre-compresses certificates (RFC8879) that will be sent during the handshake.
 
-#include name_item
-
-#include version_item
-
-#include s_item
-
-#include x_item
-
-#include trust_item
-
-#include r_item
-
-#include engine_item
-
-#include provider_item
-
-#include v_item
-
-If the server requests a client certificate, then
-verification errors are displayed, for debugging, but the command will
-proceed unless the B<-verify_return_error> option is used.
-
 =item B<-enable_server_rpk>
 
 Enable support for sending raw public keys (RFC7250) to the client.
@@ -861,6 +839,28 @@ Clients that don't support raw public keys or prefer to use X.509
 certificates can still elect to send X.509 certificates as usual.
 
 Raw public keys are extracted from the configured certificate/private key.
+
+#include name_item
+
+#include version_item
+
+#include connoptions_item
+
+#include trust_item
+
+#include certverify_item
+
+If the server requests a client certificate, then
+verification errors are displayed, for debugging, but the command will
+proceed unless the B<-verify_return_error> option is used.
+
+#include extverify_item
+
+#include randstate_item
+
+#include engine_item
+
+#include provider_item
 
 =back
 

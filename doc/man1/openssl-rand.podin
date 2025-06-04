@@ -11,8 +11,8 @@ B<openssl rand>
 [B<-out> I<file>]
 [B<-base64>]
 [B<-hex>]
-[B<-engine> I<id>]
-#include r_synopsis
+#include randstate_synopsis
+#include engine_synopsis
 #include provider_synopsis
 I<num>[K|M|G|T]
 
@@ -55,9 +55,9 @@ Perform base64 encoding on the output.
 
 Show the output as a hex string.
 
-#include engine_item
+#include randstate_item
 
-#include r_item
+#include engine_item
 
 #include provider_item
 

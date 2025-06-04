@@ -18,9 +18,9 @@ B<openssl> B<pkcs12>
 [B<-nocerts>]
 [B<-noout>]
 [B<-legacy>]
-[B<-engine> I<id>]
+#include randstate_synopsis
+#include engine_synopsis
 #include provider_synopsis
-#include r_synopsis
 
 PKCS#12 input (parsing) options:
 [B<-info>]
@@ -149,11 +149,11 @@ If the legacy option is not specified, then the legacy provider is not loaded
 and the default encryption algorithm for both certificates and private keys is
 AES_256_CBC with PBKDF2 for key derivation.
 
+#include randstate_item
+
 #include engine_item
 
 #include provider_item
-
-#include r_item
 
 =back
 
