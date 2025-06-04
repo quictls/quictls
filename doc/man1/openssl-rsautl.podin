@@ -26,8 +26,8 @@ B<openssl> B<rsautl>
 [B<-raw>]
 [B<-hexdump>]
 [B<-asn1parse>]
-[B<-engine> I<id>]
-#include r_synopsis
+#include randstate_synopsis
+#include engine_synopsis
 #include provider_synopsis
 
 =head1 DESCRIPTION
@@ -121,9 +121,9 @@ Hex dump the output data.
 Parse the ASN.1 output data, this is useful when combined with the
 B<-verify> option.
 
-#include engine_item
+#include randstate_item
 
-#include r_item
+#include engine_item
 
 #include provider_item
 

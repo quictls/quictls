@@ -17,7 +17,7 @@ B<openssl> B<pkcs7>
 [B<-quiet>]
 [B<-text>]
 [B<-noout>]
-[B<-engine> I<id>]
+#include engine_synopsis
 #include provider_synopsis
 
 =head1 DESCRIPTION

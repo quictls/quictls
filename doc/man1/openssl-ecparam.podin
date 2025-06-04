@@ -22,8 +22,8 @@ B<openssl ecparam>
 [B<-param_enc> I<arg>]
 [B<-no_seed>]
 [B<-genkey>]
-[B<-engine> I<id>]
-#include r_synopsis
+#include randstate_synopsis
+#include engine_synopsis
 #include provider_synopsis
 
 =head1 DESCRIPTION
@@ -119,9 +119,9 @@ is included in the ECParameters structure (see RFC 3279).
 
 This option will generate an EC private key using the specified parameters.
 
-#include engine_item
+#include randstate_item
 
-#include r_item
+#include engine_item
 
 #include provider_item
 
