@@ -6,7 +6,7 @@
 # in the file LICENSE in the source distribution or at
 # https://www.openssl.org/source/license.html
 
-use OpenSSL::Test qw/:DEFAULT srctop_dir bldtop_dir/;
+use OpenSSL::Test qw/:DEFAULT srctop_dir bldtop_dir bldtop_file/;
 use OpenSSL::Test::Utils;
 
 #Load configdata.pm
@@ -14,20 +14,16 @@ use OpenSSL::Test::Utils;
 BEGIN {
     setup("test_shlibload");
 }
-use lib srctop_dir('Configurations');
-use lib bldtop_dir('.');
-use platform;
 
 plan skip_all => "Test only supported in a shared build" if disabled("shared");
-plan skip_all => "Test is disabled on AIX" if config('target') =~ m|^aix|;
 plan skip_all => "Test only supported in a dso build" if disabled("dso");
 plan skip_all => "Test is disabled in an address sanitizer build" unless disabled("asan");
 plan skip_all => "Test is disabled in no-atexit build" if disabled("atexit");
 
 plan tests => 10;
 
-my $libcrypto = platform->sharedlib('libcrypto');
-my $libssl = platform->sharedlib('libssl');
+my $libcrypto = bldtop_file("libcrypto.so");
+my $libssl = bldtop_file("libssl.so");
 my $atexit_outfile;
 
 $atexit_outfile = 'atexit-cryptofirst.txt';

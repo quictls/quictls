@@ -1,0 +1,186 @@
+#! /usr/bin/env perl
+use strict;
+use warnings;
+
+##
+## Handle enable-xxx and disable-xxx options.
+##
+
+# API deprecation XXX
+#cmakedefine OPENSSL_NO_DEPRECATED_3_0
+#cmakedefine OPENSSL_NO_DEPRECATED_1_1_1
+#cmakedefine OPENSSL_NO_DEPRECATED_1_1_0
+#cmakedefine OPENSSL_NO_DEPRECATED_1_0_2
+#cmakedefine OPENSSL_NO_DEPRECATED_1_0_1
+#cmakedefine OPENSSL_NO_DEPRECATED_1_0_0
+#cmakedefine OPENSSL_NO_DEPRECATED_0_9_8
+
+# Randomness XXX
+#cmakedefine OPENSSL_RAND_SEED_OS
+#cmakedefine OPENSSL_RAND_SEED_RDCPU
+
+my @ifdefs = (
+    # General options
+    'AFALGENG', 'ASM', 'ASYNC', 'ATEXIT', 'AUTOALGINIT', 'AUTOERRINIT',
+    'AUTOLOAD_CONFIG', 'BUILTIN_OVERFLOW_CHECKING', 'CACHED_FETCH',
+    'CAPIENG', 'CMP', 'CMS', 'CT', 'DEFAULT_THREAD_POOL', 'DEVCRYPTOENG',
+    'EC_NISTP_64_GCC_128', 'ENGINE', 'ERR', 'FILENAMES', 'HTTP',
+    'INLINE_ASM', 'KTLS', 'KTLS_RX', 'KTLS_ZC_TX', 'MUTEX_ERRORCHECK',
+    'OCSP', 'PADLOCKENG', 'PINSHARED', 'POSIX_IO', 'PSK', 'RFC3779',
+    'SECURE_MEMORY', 'SHARED', 'SOCK', 'SRTP', 'SSLKEYLOG', 'SSLKEYLOG_CB',
+    'STATIC_ENGINE', 'STDIO', 'TFO', 'THREADS', 'THREAD_POOL', 'TS',
+    'UI_CONSOLE', 'UNIX_SOCK', 'WINSTORE',
+
+    # Ciphers
+    'WEAK_SSL_CIPHERS', 'MULTIBLOCK', 'ARGON2', 'ARIA', 'BF', 'BLAKE2',
+    'CAMELLIA', 'CAST', 'CHACHA', 'CMAC', 'CRMF', 'DES', 'DH', 'DSA', 'EC',
+    'GOST', 'IDEA', 'MD2', 'MD4', 'MD5', 'MDC2', 'OCB', 'POLY1305', 'RC2',
+    'RC4', 'RC5', 'RMD160', 'RSA', 'SCRYPT', 'SEED', 'SHA1', 'SIPHASH',
+    'SIV', 'SM2', 'SM2_PRECOMP', 'SM3', 'SM4', 'WHIRLPOOL',
+
+    # Protocols and versions
+    'DTLS',
+    'DTLS1', 'DTLS1_METHOD',
+    'DTLS1_2', 'DTLS1_2_METHOD',
+    'TLS',
+    'SSL3', 'SSL3_METHOD',
+    'TLS1_1', 'TLS1_1_METHOD',
+    'TLS1_2', 'TLS1_2_METHOD',
+    'TLS1_3', 'TLS1_METHOD',
+);
+
+sub
+enable
+{
+    my $arg = uc shift;
+    $arg =~ s/ENABLE-//;
+    warn "warning: Enabling $arg might not be supported\n"
+        unless grep { $arg eq $_ } @ifdefs;
+    print "set(OPENSSL_NO_COMP \"\")\n" if $arg =~ /BROTLI|ZLIB|ZSTD/;
+    print "set(OPENSSL_NO_${arg} \"\") # Enabling\n";
+
+    # Threads
+    if ( $arg eq 'THREADS' ) {
+        if ( $^O eq 'MSWin32' ) {
+            print "set(OPENSSL_THREADS_WINNT 1)\n";
+        }
+        else {
+            print "set(OPENSSL_THREADS_POSIX 1)\n";
+        }
+    }
+}
+
+# For now, just set a variable without any checking.
+sub
+disable
+{
+    my $arg = uc shift;
+    $arg =~ s/(NO|DISABLE)-//;
+    warn "warning: Disabling $arg might not be supported\n"
+        unless grep { $arg eq $_ } @ifdefs;
+    print "set(OPENSSL_NO_${arg} 1)\n";
+    print "set(OPENSSL_THREADS_NONE 1)\n" if $arg eq 'THREADS';
+
+    # Handle SSL/TLS/DTLS methods and overall protocol
+    print "set(OPENSS_NO_${arg}_METHOD 1)\n"
+        if $arg =~ /D?TLS[123]/ or $arg eq 'SSL';
+    if ( $arg eq 'DTLS' ) {
+        disable('DTLS1');
+        disable('DTLS1_2');
+    }
+    elsif ( $arg eq 'TLS' ) {
+        disable('TLS1_1');
+        disable('TLS1_2');
+        disable('TLS1_3');
+    }
+}
+
+# Scan environment; for now, just warn.
+my @warnvars = (
+    'AR', 'ARFLAGS',
+    'AS', 'ASFLAGS',
+    'CC', 'CFLAGS',
+    'CXX', 'CXXFLAGS',
+    'CPP', 'CPPFLAGS',
+    'CPPDEFINES',
+    'CPPINCLUDES',
+    'CROSS_COMPILE',
+    'HASHBANGPERL',
+    'LD', 'LDFLAGS', 'LDLIBS',
+    'MT', 'MTFLAGS',
+    'PERL',
+    'RANLIB',
+    'RC', 'RCFLAGS',
+    'RM',
+);
+my @found = grep { defined $ENV{$_} } @warnvars;
+if ( $#found >= 0 ) {
+    warn "warning: Ignoring the following environment variables:\n";
+    foreach my $var ( @found ) {
+        warn "\t$var\n"
+    }
+    warn "(You might have to edit the cmake configuration.)\n";
+}
+
+# Skip the command if the cut/pasted the whole line
+shift @ARGV if $ARGV[0] =~ m@(./)?config@ || $ARGV[0] =~ m@(./)?Configure@;
+
+# Scan arguments.
+my $cppdefs = "";
+while ( @ARGV ) {
+    $_ = shift @ARGV;
+
+    # Convert to enable-xxx form
+    s/^-?-?shared$/enable-shared/;
+    s/^sctp$/enable-sctp/;
+    s/^threads$/enable-threads/;
+    s/^zlib$/enable-zlib/;
+    s/^zlib-dynamic$/enable-zlib-dynamic/;
+    s/^fips$/enable-fips/;
+
+    if ( m|^\w+=.+$| ) {
+        warn "warning: Ignoring assignment parameter $_\n";
+    }
+    elsif ( /--prefix=(.*)/ ) {
+        print "set(INSTALLPREFIX $1)\n";
+    }
+    elsif ( /--openssldir=(.*)/ ) {
+        print "set(OPENSSLDIR $1)\n";
+    }
+    elsif ( /--with-([^-]+)-lib=(.*)/ ) {
+        my $prot = uc $1;
+        my $arg = $2;
+        print "set(${prot}LIB $arg)\n";
+    }
+    elsif ( /--with-([^-]+)-include=(.*)/ ) {
+        my $prot = uc $1;
+        my $arg = $2;
+        print "set(${prot}INCLUDE $arg)\n";
+    }
+    elsif ( /-([DUI])(.*)/ ) {
+        $cppdefs .= ' ' . $_;
+    }
+    elsif ( /--release/ ) {
+        print "set(CMAKE_BUILD_TYPE Release)\n";
+    }
+    elsif ( /^-d$/ or /--debug/ ) {
+        print "set(CMAKE_BUILD_TYPE Debug)\n";
+    }
+    elsif ( /enable-(.*)/ ) {
+        enable($1);
+    }
+    elsif ( /disable-(.*)/ or /no-(.*)/ ) {
+        disable($1);
+    }
+    elsif ( /-Wall/ || /-Werror/ || /--strict-warnings/ ) {
+        print "set(STRICT_WARNINGS 1)\n";
+    }
+    else {
+        warn "warning: Ignoring unknown option $_\n";
+    }
+}
+
+print "set(CMAKE_C_FLAGS \"\${CMAKE_C_FLAGS} $cppdefs\")n"
+    if $cppdefs;
+
+exit 0;

@@ -22,8 +22,7 @@ plan skip_all => "$test_name requires SSLKEYLOGFILE support"
 plan tests => 1;
 
 
-my $shlib_wrap   = srctop_file("util", "wrap.pl");
-my $apps_openssl = srctop_file("apps", "openssl");
+my $apps_openssl = bldtop_file("apps", "openssl");
 my $server_pem   = srctop_file("test", "certs", "servercert.pem");
 my $server_key   = srctop_file("test", "certs", "serverkey.pem");
 
@@ -31,10 +30,13 @@ my $resultdir = result_dir();
 my $sslkeylogfile = "$resultdir/sslkeylog.keys";
 my $trace_file = "$resultdir/keylog.keys";
 
+# Use SSLKEYLOGFILE to record keylogging
+$ENV{SSLKEYLOGFILE} = $sslkeylogfile; 
+
 # Start s_server
 my @s_server_cmd = ("s_server", "-accept", "0", "-naccept", "1",
                     "-cert", $server_pem, "-key", $server_key);
-my $s_server_pid = open3(my $s_server_i, my $s_server_o, my $s_server_e, $shlib_wrap, $apps_openssl, @s_server_cmd);
+my $s_server_pid = open3(my $s_server_i, my $s_server_o, my $s_server_e, $apps_openssl, @s_server_cmd);
 
 # expected outputs from the server
 # ACCEPT 0.0.0.0:<port>
@@ -60,12 +62,9 @@ my $server_port = $port;
 
 print("s_server ready, listening on port $server_port\n");
 
-# Use SSLKEYLOGFILE to record keylogging
-$ENV{SSLKEYLOGFILE} = $sslkeylogfile; 
-
 # Start a client and use the -keylogfile option to independently trace keylog messages
 my @s_client_cmd = ("s_client", "-connect", "localhost:$server_port", "-keylogfile", $trace_file);
-my $s_client_pid = open3(my $s_client_i, my $s_client_o, my $s_client_e, $shlib_wrap, $apps_openssl, @s_client_cmd);
+my $s_client_pid = open3(my $s_client_i, my $s_client_o, my $s_client_e, $apps_openssl, @s_client_cmd);
 
 # Issue a quit command to terminate the client after connect
 print $s_client_i "Q\n";

@@ -11,6 +11,7 @@ use strict;
 use warnings;
 
 use Exporter;
+use Data::Dumper;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 $VERSION = "0.1";
 @ISA = qw(Exporter);
@@ -83,6 +84,9 @@ our %config;
 my $configdata_loaded = 0;
 
 sub load_configdata {
+    if ($ENV{BUILD_CONF}) {
+	return load_cmake_config_data();
+    }
     # We eval it so it doesn't run at compile time of this file.
     # The latter would have bldtop_file() complain that setup() hasn't
     # been run yet.
@@ -95,6 +99,72 @@ sub load_configdata {
     $configdata_loaded = 1;
 }
 
+my @disableables = (
+    "asan",
+    "asm",
+    "brotli",
+    "fips",
+    "legacy",
+    "module",
+    "rc4",
+    "ssl3",
+    "sslkeylog",
+    "static",
+    "tfo",
+    "zlib",
+    "zstd",
+    );
+
+my %all_protocols = (
+    tls  => [
+	"ssl3",
+	"tls1",
+	"tls1_1",
+	"tls1_2",
+	"tls1_3",
+    ],
+    dtls => [
+	"dtls1",
+	"dtls1_2",
+    ],
+    );
+
+sub load_cmake_config_data {
+    my $testvars = $ENV{BUILD_CONF};
+    eval {
+	require $testvars;
+	%disabled = process_disableables(\%testvars::settings);
+	%available_protocols = process_protocols(\%testvars::settings);
+    };
+    if($@) {
+	die "eval failed: $@";
+    }
+    $configdata_loaded = 1;
+}
+
+sub process_disableables {
+    my %ret;
+    my %preprocessor_vars = %{$_[0]};
+    foreach (@disableables) {
+	if($preprocessor_vars{"OPENSSL_NO_" . uc($_)}) {
+	    $ret{$_} = 1;
+	}
+    }
+    return %ret;
+}
+
+sub process_protocols {
+    my %preprocessor_vars = %{$_[0]};
+    foreach my $prototype (keys %all_protocols) {
+	if($preprocessor_vars{"OPENSSL_NO_" . uc($prototype)}) {
+	    delete $all_protocols{$prototype};
+	}
+    }
+    foreach my $prototype (keys %all_protocols) {
+	$all_protocols{$prototype} = [grep { !$preprocessor_vars{"OPENSSL_NO_" . uc($_)}} @{$all_protocols{$prototype}}];
+    }
+    return %all_protocols;
+}
 # args
 #  list of 1s and 0s, coming from check_disabled()
 sub anyof {

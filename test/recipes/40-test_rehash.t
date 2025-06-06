@@ -13,7 +13,6 @@ use warnings;
 use File::Spec::Functions;
 use File::Copy;
 use File::Basename;
-use OpenSSL::Glob;
 use OpenSSL::Test qw/:DEFAULT srctop_file/;
 
 setup("test_rehash");
