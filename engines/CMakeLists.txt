@@ -1,0 +1,33 @@
+include(EngineLib.cmake)
+
+macro(engine lib src)
+    add_library(${lib} MODULE)
+    install(TARGETS ${lib}
+        RUNTIME DESTINATION bin ARCHIVE DESTINATION ${LIBSUBDIR}/quictls
+        LIBRARY DESTINATION ${LIBSUBDIR})
+    add_dependencies(${lib} headers)
+    target_include_directories(${lib} PUBLIC ${CMAKE_BINARY_DIR}/include)
+    target_sources(${lib} PRIVATE ${src})
+    target_link_libraries(${lib} crypto)
+    set_target_properties(${lib} PROPERTIES PREFIX "")
+    set_target_properties(${lib} PROPERTIES SUFFIX ".")
+endmacro()
+
+if (NOT OPENSSL_NO_PACLOCKENG)
+    engine(padlock e_padlock.c;${PL_ASM})
+    if (PL_DEF)
+        target_compile_definitions(padlock PUBLIC ${PL_DEF})
+    endif ()
+endif ()
+if (WIN32 AND NOT OPENSSL_NO_CAPIENG)
+    engine(capi e_capi.c)
+endif ()
+if (NOT OPENSSL_NO_AFALGENG)
+    engine(afalg e_afalg.c)
+endif ()
+if (NOT OPENSSL_NO_DEVCRYPTOENG)
+    engine(devcrypto e_devcrypto.c)
+endif ()
+
+engine(dasync e_dasync.c)
+engine(ossltest e_ossltest.c)

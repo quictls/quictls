@@ -33,7 +33,7 @@ guidelines:
     often. We do not accept merge commits, you will have to remove them
     (usually by rebasing) before it will be acceptable.
 
- 3. Code provided should follow thecoding style and compile without warnings.
+ 3. Code provided should follow the coding style and compile without warnings.
     There is a [Perl tool](util/check-format.pl) that helps
     finding code formatting mistakes and other coding style nits.
     Where `gcc` or `clang` is available, you should use the

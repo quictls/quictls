@@ -12,6 +12,6 @@
 #endif
 
 STORE("file", "yes", ossl_file_store_functions)
-#ifndef OPENSSL_NO_WINSTORE
+#if defined(_WIN32) && !defined(OPENSSL_NO_WINSTORE)
 STORE("org.openssl.winstore", "yes", ossl_winstore_store_functions)
 #endif

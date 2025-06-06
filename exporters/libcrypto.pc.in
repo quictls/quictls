@@ -1,11 +1,6 @@
-libdir={- $OpenSSL::safe::installdata::LIBDIR -}
-includedir={- $OpenSSL::safe::installdata::INCLUDEDIR -}
-enginesdir={- $OpenSSL::safe::installdata::ENGINESDIR -}
-modulesdir={- $OpenSSL::safe::installdata::MODULESDIR -}
-
 Name: QuicTLS-libcrypto
-Description: QuicTLS cryptography library
-Version: {- $OpenSSL::safe::installdata::VERSION -}
-Libs: -L${libdir} -lcrypto
-Libs.private: {- join(' ', @OpenSSL::safe::installdata::LDLIBS) -}
-Cflags: -I${includedir}
+Description: QuicTLS cryptography library (compatible with OpenSSL)
+Version: ${OPENSSL_FULL_VERSION_STRING}
+Libs: -L${OPENSSL_LIB_DIR} -lcrypto
+Libs.private: $(extra libs to link with)
+Cflags: -I$(OPENSSL_INC_DIR)

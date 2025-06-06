@@ -10,7 +10,7 @@
 #ifndef OSSL_INTERNAL_CRYPTLIB_H
 # define OSSL_INTERNAL_CRYPTLIB_H
 
-# ifdef OPENSSL_USE_APPLINK
+# ifdef OPENSSL_DO_UPLINK
 #  define BIO_FLAGS_UPLINK_INTERNAL 0x8000
 #  include "ms/uplink.h"
 # else

@@ -8,7 +8,6 @@
 use strict;
 use warnings;
 
-use OpenSSL::Glob;
 use OpenSSL::Test qw/:DEFAULT srctop_dir/;
 
 sub fuzz_ok {

@@ -1,56 +1,156 @@
 /*
- * {- join("\n * ", @autowarntext) -}
- *
- * Copyright 2016-2021 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2025 The QuicTLS Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
- * in the file LICENSE in the source distribution or at
- * https://www.openssl.org/source/license.html
+ * in the file LICENSE in the source distribution or at one of these two
+ * places:
+ *      https://github.com/quictls/quictls/blob/main/LICENSE.txt
+ *      https://www.apache.org/licenses/LICENSE-2.0
  */
 
 #ifndef OPENSSL_CONFIGURATION_H
 # define OPENSSL_CONFIGURATION_H
 
-# ifdef  __cplusplus
-extern "C" {
-# endif
-
-# ifdef OPENSSL_ALGORITHM_DEFINES
-#  error OPENSSL_ALGORITHM_DEFINES no longer supported
-# endif
+#include <openssl/opensslv.h>
 
 /*
- * OpenSSL was configured with the following options:
+ * Build date.
  */
-{-
-    if (@{$config{openssl_sys_defines}}) {
-        $OUT .= "\n/* System defines */\n";
-        foreach (@{$config{openssl_sys_defines}}) {
-            $OUT .= "# ifndef $_\n";
-            $OUT .= "#  define $_ 1\n";
-            $OUT .= "# endif\n";
-        }
-    }
-    $OUT .= "\n/* API defines */\n";
-    foreach (@{$config{openssl_api_defines}}) {
-        (my $macro, my $value) = $_ =~ /^(.*?)=(.*?)$/;
-        $OUT .= "# define $macro $value\n";
-    }
-    if (@{$config{openssl_feature_defines}}) {
-        $OUT .= "\n/* Feature defines */\n";
-        foreach (@{$config{openssl_feature_defines}}) {
-            $OUT .= "# ifndef $_\n";
-            $OUT .= "#  define $_\n";
-            $OUT .= "# endif\n";
-        }
-    }
-    "";
--}
+#define BUILD_DATE "${BUILD_DATE}"
 
 /*
- * Is compression available?
- * */
+** QuicTLS was configured with the following options:
+*/
+
+/* Architecture-specific defines. */
+#cmakedefine THIRTY_TWO_BIT
+#cmakedefine BN_LLONG
+#cmakedefine SIXTY_FOUR_BIT_LONG
+#cmakedefine SIXTY_FOUR_BIT
+#define RC4_INT ${RC4_TYPE}
+#cmakedefine OPENSSL_NO_EC_NISTP_64_GCC_128
+#cmakedefine OPENSSL_NO_ASM
+#cmakedefine OPENSSL_NO_INLINE_ASM
+#cmakedefine L_ENDIAN
+#cmakedefine B_ENDIAN
+
+/* Platform details. */
+#define INSTALLPREFIX "${INSTALLPREFIX}"
+#define OPENSSLDIR "${OPENSSLDIR}"
+#define MODULESDIR "${MODULESDIR}"
+#define ENGINESDIR "${ENGINESDIR}"
+#cmakedefine OPENSSL_NO_ATEXIT
+#cmakedefine OPENSSL_NO_PINSHARED
+#cmakedefine OPENSSL_NO_POSIX_IO
+#cmakedefine OPENSSL_NO_STDIO
+#cmakedefine OPENSSL_NO_SOCK
+#cmakedefine OPENSSL_NO_UNIX_SOCK
+#cmakedefine OPENSSL_NO_TFO
+#cmakedefine OPENSSL_NO_KTLS
+#cmakedefine OPENSSL_NO_KTLS_RX
+#cmakedefine OPENSSL_NO_KTLS_ZC_TX
+#cmakedefine OPENSSL_NO_MUTEX_ERRORCHECK
+#cmakedefine OPENSSL_NO_SECURE_MEMORY
+#cmakedefine OPENSSL_NO_WINSTORE
+#cmakedefine OPENSSL_NO_BUILTIN_OVERFLOW_CHECKING
+#cmakedefine OPENSSL_DO_UPLINK
+
+/* Threads */
+#cmakedefine OPENSSL_THREADS_NONE
+#cmakedefine OPENSSL_THREADS_POSIX
+#cmakedefine OPENSSL_THREADS_WINNT
+#cmakedefine OPENSSL_THREADS         /* Derived from the above three. */
+#cmakedefine OPENSSL_NO_ASYNC
+#cmakedefine OPENSSL_NO_DEFAULT_THREAD_POOL
+#cmakedefine OPENSSL_NO_THREAD_POOL
+
+/* API deprecation. */
+#cmakedefine OPENSSL_NO_DEPRECATED_3_0
+#cmakedefine OPENSSL_NO_DEPRECATED_1_1_1
+#cmakedefine OPENSSL_NO_DEPRECATED_1_1_0
+#cmakedefine OPENSSL_NO_DEPRECATED_1_0_2
+#cmakedefine OPENSSL_NO_DEPRECATED_1_0_1
+#cmakedefine OPENSSL_NO_DEPRECATED_1_0_0
+#cmakedefine OPENSSL_NO_DEPRECATED_0_9_8
+
+/* Library initialization */
+#cmakedefine OPENSSL_NO_AUTOALGINIT
+#cmakedefine OPENSSL_NO_AUTOERRINIT
+#cmakedefine OPENSSL_NO_AUTOLOAD_CONFIG
+
+/* Engines. */
+#cmakedefine OPENSSL_NO_ENGINE
+#cmakedefine OPENSSL_NO_STATIC_ENGINE
+#cmakedefine OPENSSL_NO_AFALGENG
+#cmakedefine OPENSSL_NO_CAPIENG
+#cmakedefine OPENSSL_NO_DEVCRYPTOENG
+#cmakedefine OPENSSL_NO_PADLOCKENG
+
+/* Library and command features. */
+#cmakedefine OPENSSL_NO_CACHED_FETCH
+#cmakedefine OPENSSL_NO_CMP
+#cmakedefine OPENSSL_NO_CMS
+#cmakedefine OPENSSL_NO_CT
+#cmakedefine OPENSSL_NO_ERR
+#cmakedefine OPENSSL_NO_FILENAMES
+#cmakedefine OPENSSL_NO_HTTP
+#cmakedefine OPENSSL_NO_OCSP
+#cmakedefine OPENSSL_NO_PSK
+#cmakedefine OPENSSL_NO_RFC3779
+#cmakedefine OPENSSL_NO_SRTP
+#cmakedefine OPENSSL_NO_SSLKEYLOG
+#cmakedefine OPENSSL_NO_SSLKEYLOG_CB
+#cmakedefine OPENSSL_NO_TS
+#cmakedefine OPENSSL_NO_UI_CONSOLE
+
+/* Cryptographic algorithms. */
+#cmakedefine OPENSSL_NO_MULTIBLOCK
+#cmakedefine OPENSSL_NO_ARGON2
+#cmakedefine OPENSSL_NO_ARIA
+#cmakedefine OPENSSL_NO_BF
+#cmakedefine OPENSSL_NO_BLAKE2
+#cmakedefine OPENSSL_NO_CAMELLIA
+#cmakedefine OPENSSL_NO_CAST
+#cmakedefine OPENSSL_NO_CHACHA
+#cmakedefine OPENSSL_NO_CMAC
+#cmakedefine OPENSSL_NO_CRMF
+#cmakedefine OPENSSL_NO_DSA
+#cmakedefine OPENSSL_NO_DES
+#cmakedefine OPENSSL_NO_DH
+#cmakedefine OPENSSL_NO_EC
+#cmakedefine OPENSSL_NO_GOST
+#cmakedefine OPENSSL_NO_IDEA
+#cmakedefine OPENSSL_NO_MD2
+#cmakedefine OPENSSL_NO_MD4
+#cmakedefine OPENSSL_NO_MD5
+#cmakedefine OPENSSL_NO_MDC2
+#cmakedefine OPENSSL_NO_OCB
+#cmakedefine OPENSSL_NO_POLY1305
+#cmakedefine OPENSSL_NO_RC2
+#cmakedefine OPENSSL_NO_RC4
+#cmakedefine OPENSSL_NO_RC5
+#cmakedefine OPENSSL_NO_RMD160
+#cmakedefine OPENSSL_NO_RSA
+#cmakedefine OPENSSL_NO_SCRYPT
+#cmakedefine OPENSSL_NO_SEED
+#cmakedefine OPENSSL_NO_SHA1
+#cmakedefine OPENSSL_NO_SIPHASH
+#cmakedefine OPENSSL_NO_SIV
+#cmakedefine OPENSSL_NO_SM2
+#cmakedefine OPENSSL_NO_SM2_PRECOMP
+#cmakedefine OPENSSL_NO_SM3
+#cmakedefine OPENSSL_NO_SM4
+#cmakedefine OPENSSL_NO_WHIRLPOOL
+
+/* Compression. */
+#cmakedefine OPENSSL_NO_COMP
+#cmakedefine OPENSSL_NO_BROTLI
+#cmakedefine OPENSSL_NO_BROTLI_DYNAMIC
+#cmakedefine OPENSSL_NO_ZLIB
+#cmakedefine OPENSSL_NO_ZLIB_DYNAMIC
+#cmakedefine OPENSSL_NO_ZSTD
+#cmakedefine OPENSSL_NO_ZSTD_DYNAMIC
 # if defined(OPENSSL_NO_COMP) \
     || (defined(OPENSSL_NO_BROTLI) && defined(OPENSSL_NO_ZSTD) \
             && defined(OPENSSL_NO_ZLIB))
@@ -59,105 +159,42 @@ extern "C" {
 #  undef  OPENSSL_NO_COMP_ALG
 # endif
 
-/*
- * Features no longer removable.
- */
-# ifdef OPENSSL_NO_TLS1_3
-#  undef OPENSSL_NO_TLS1_3
-# endif
+/* (D)TLS versions. */
+#cmakedefine OPENSSL_NO_WEAK_SSL_CIPHERS
+#cmakedefine OPENSSL_NO_DTLS
+#cmakedefine OPENSSL_NO_DTLS1
+#cmakedefine OPENSSL_NO_DTLS1_2
+#cmakedefine OPENSSL_NO_DTLS1_2_METHOD
+#cmakedefine OPENSSL_NO_DTLS1_METHOD
+#cmakedefine OPENSSL_NO_TLS
+#cmakedefine OPENSSL_NO_SSL3
+#cmakedefine OPENSSL_NO_SSL3_METHOD
+#cmakedefine OPENSSL_NO_TLS1_1
+#cmakedefine OPENSSL_NO_TLS1_1_METHOD
+#cmakedefine OPENSSL_NO_TLS1_2
+#cmakedefine OPENSSL_NO_TLS1_2_METHOD
+#cmakedefine OPENSSL_NO_TLS1_3
+#cmakedefine OPENSSL_NO_TLS1_METHOD
+
+/* Randomness */
+#cmakedefine OPENSSL_RAND_SEED_OS
+#cmakedefine OPENSSL_RAND_SEED_RDCPU
 
 /*
- * Features completely removed.
+ * Compatibility with OpenSSL configuration.
  */
-# ifndef OPENSSL_NO_EC2M
-#  define OPENSSL_NO_EC2M
-# endif
-# ifndef OPENSSL_NO_EGD
-#  define OPENSSL_NO_EGD
-# endif
-# ifndef OPENSSL_NO_CRYPTO_MDEBUG
-#  define OPENSSL_NO_CRYPTO_MDEBUG
-# endif
-# ifndef OPENSSL_NO_NEXTPROTONEG
-#  define OPENSSL_NO_NEXTPROTONEG
-# endif
-# ifndef OPENSSL_NO_QUIC
-#  define OPENSSL_NO_QUIC
-# endif
-# ifndef OPENSSL_NO_RDRAND
-#  define OPENSSL_NO_RDRAND
-# endif
-# ifndef OPENSSL_NO_SCTP
-#  define OPENSSL_NO_SCTP
-# endif
-# ifndef OPENSSL_NO_SRP
-#  define OPENSSL_NO_SRP
-# endif
-# ifndef OPENSSL_NO_TRACE
-#  define OPENSSL_NO_TRACE
-# endif
-# ifndef OPENSSL_NO_UNIT_TEST
-#  define OPENSSL_NO_UNIT_TEST
-# endif
 
-/*
- * The following are cipher-specific, but are part of the public API.
- */
-# if !defined(OPENSSL_SYS_UEFI)
-{- $config{bn_ll} ? "#  define" : "#  undef" -} BN_LLONG
-/* Only one for the following should be defined */
-{- $config{b64l} ? "#  define" : "#  undef" -} SIXTY_FOUR_BIT_LONG
-{- $config{b64}  ? "#  define" : "#  undef" -} SIXTY_FOUR_BIT
-{- $config{b32}  ? "#  define" : "#  undef" -} THIRTY_TWO_BIT
-# endif
+/* Features no longer removable. */
+# undef OPENSSL_NO_TLS1_3
 
-# define RC4_INT {- $config{rc4_int} -}
-
-/*
- * These macros express version number MAJOR.MINOR.PATCH exactly
- */
-# define OPENSSL_VERSION_MAJOR  {- $config{major} -}
-# define OPENSSL_VERSION_MINOR  {- $config{minor} -}
-# define OPENSSL_VERSION_PATCH  {- $config{patch} -}
-
-/*
- * Additional version information which is part of the version naming
- * but not the version number itself. The pre-release string is "-XXX"
- * (like "-alpha1") and the metadata string is "+xxx" (e.g., "+quic").
- */
-# define OPENSSL_VERSION_PRE_RELEASE "{- $config{prerelease} -}"
-# define OPENSSL_VERSION_BUILD_METADATA "{- $config{build_metadata} -}"
-
-/*
- * Macros to set the version in easily digested string form, both the short
- * "MAJOR.MINOR.PATCH" variant and the longer variant with pre-release
- * and metadata appeded.
- */
-# define OPENSSL_VERSION_STR "{- $config{version} -}"
-# define OPENSSL_FULL_VERSION_STR "{- $config{full_version} -}"
-
-/*
- * For backward compatibility.
- */
-# define OPENSSL_VERSION_TEXT "OpenSSL {- "$config{full_version} $config{release_date}" -}"
-
-/*
- * Synthesize OPENSSL_VERSION_NUMBER with the layout 0xMNN00PP
- */
-# ifdef OPENSSL_VERSION_PRE_RELEASE
-#  define _OPENSSL_VERSION_PRE_RELEASE 0x0L
-# else
-#  define _OPENSSL_VERSION_PRE_RELEASE 0xfL
-# endif
-# define OPENSSL_VERSION_NUMBER          \
-    ( (OPENSSL_VERSION_MAJOR<<28)        \
-      |(OPENSSL_VERSION_MINOR<<20)       \
-      |(OPENSSL_VERSION_PATCH<<4)        \
-      |_OPENSSL_VERSION_PRE_RELEASE )
-
-# ifdef  __cplusplus
-}
-# endif
-
-
+/* Features completely removed. */
+# define OPENSSL_NO_EC2M
+# define OPENSSL_NO_EGD
+# define OPENSSL_NO_CRYPTO_MDEBUG
+# define OPENSSL_NO_NEGPROTONEG
+# define OPENSSL_NO_QUIC
+# define OPENSSL_NO_SRP
+# define OPENSSL_NO_SCTP
+# define OPENSSL_NO_TRACE
+# define OPENSSL_NO_UNIT_TEST
 #endif

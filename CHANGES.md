@@ -91,7 +91,7 @@ has hardwired `#define` values as appropriate.
   - no-fips since we do not build a FIPS-validated container
   - no-ecdh, it was a no-op
   - no-ecx and no-ecdsa were merged into no-ec.
-  - no-tls1_3, so TLS 1.3 cannot be disabled.
+  - `no-tls1_3,` so TLS 1.3 cannot be disabled.
   - no-dgram and no-http are now implied by no-sock
   - no-nextprotoneg (the default) code has been removed; it was
 replaced by the ALPN extension, IETF RFC 7301, in 2014.
@@ -103,23 +103,24 @@ used. It was also a security concern as it was not documented that it would
 log key material.
   - The `RDRAND` engine and the no-rdrand configuration option have been removed
 as they were replaced by the built-in RAND changes.
+  - Removed `I386_only`
 
-- Removed support for some old platforms:
-  - Removed support for old HPE platforms: NonStop and Tandem
-  - Removed DJGPP support.
-  - Removed WinCE support.
-  - Removed UWIN support.
-  - Removed uClinux support.
-  - Removed IRIX support.
-  - Removed HP-PARISC (including MPE/ix) support.
-  - Removed `I386_only` support.
-  - Removed support for SCO platforms.
-  - Removed support for Apollo.
-  - OSF/1, True64, and Ultrix support.
-  - Remove Itanium (IA-64) support.
-  - Remove C64x+ (a digital signal processor from TI).
-  - Removed OSF/1, True64, and Ultrix support.
-  - VMS, OpenVMS, etc., on all hardware.
-  - Removed support for Borland/Embarcadero compilers.
+- Removed support for some old or unsupported platforms:
+  - Apollo.
+  - Borland/Embarcadero compilers
+  - C64x+ (a digital signal processor from TI)
+  - DJGPP
+  - HP-PARISC (including MPE/ix)
+  - IRIX
+  - Itanium (IA-64)
+  - NonStop (HPE)
+  - SCO platforms.
+  - Tandem (HPE)
+  - uClinux
+  - Ultrix, OSF/1, and True64
+  - UWIN
+  - VMS, OpenVMS, etc.
+  - VxWorks
+  - WinCE
 
 - Removed support for SCTP.

@@ -123,8 +123,8 @@ C<setup> is used for initial setup, and it is mandatory that it's used.
 If it's not used in a OpenSSL test recipe, the rest of the recipe will
 most likely refuse to run.
 
-C<setup> checks for environment variables (see L</ENVIRONMENT> below),
-checks that C<$TOP/Configure> or C<$SRCTOP/Configure> exists, C<chdir>
+C<setup> checks for environment variables (see L</ENVIRONMENT> below).
+It then C<chdir>'s
 into the results directory (defined by the C<$RESULT_D> environment
 variable if defined, otherwise C<$BLDTOP/test-runs> or C<$TOP/test-runs>,
 whichever is defined).
@@ -150,9 +150,6 @@ sub setup {
         if $ENV{TOP} && ($ENV{SRCTOP} || $ENV{BLDTOP});
 
     __env();
-
-    BAIL_OUT("setup() expects the file Configure in the source top directory")
-        unless -f srctop_file("Configure");
 
     note "The results of this test will end up in $directories{RESULTS}"
         unless $opts{quiet};
@@ -1209,7 +1206,7 @@ sub __wrap_cmd {
         }
     }
 
-    return (@prefix, $cmd);
+    return ($cmd) # (@prefix, $cmd);
 }
 
 # __fixup_prg PROG
