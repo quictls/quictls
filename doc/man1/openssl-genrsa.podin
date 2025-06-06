@@ -29,8 +29,8 @@ B<openssl> B<genrsa>
 [B<-verbose>]
 [B<-quiet>]
 [B<-traditional>]
-[B<-engine> I<id>]
-#include r_synopsis
+#include randstate_synopsis
+#include engine_synopsis
 #include provider_synopsis
 [B<numbits>]
 
@@ -88,7 +88,7 @@ be handy during batch scripts and pipelines.
 
 Write the key using the traditional PKCS#1 format instead of the PKCS#8 format.
 
-#include r_item
+#include randstate_item
 
 #include engine_item
 

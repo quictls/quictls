@@ -27,8 +27,8 @@ B<openssl> B<pkcs8>
 [B<-scrypt_r> I<r>]
 [B<-scrypt_p> I<p>]
 [B<-saltlen> I<size>]
-[B<-engine> I<id>]
-#include r_synopsis
+#include randstate_synopsis
+#include engine_synopsis
 #include provider_synopsis
 
 =head1 DESCRIPTION
@@ -155,7 +155,7 @@ Sets the length (in bytes) of the salt to use for the PBE algorithm.
 If this value is not specified, the default for PBES2 is 16 (128 bits)
 and 8 (64 bits) for PBES1.
 
-#include r_item
+#include randstate_item
 
 #include engine_item
 

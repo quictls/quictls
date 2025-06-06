@@ -92,12 +92,12 @@ Credentials format options:
 [B<-certform> I<PEM|DER>]
 [B<-keyform> I<PEM|DER|P12|ENGINE>]
 [B<-otherpass> I<arg>]
-[B<-engine> I<id>]
+#include engine_synopsis
 #include provider_synopsis
 
 Random state options:
 
-#include r_synopsis
+#include randstate_synopsis
 
 TLS connection options:
 
@@ -155,7 +155,7 @@ Mock server options:
 
 Certificate verification options, for both CMP and TLS:
 
-#include v_synopsis
+#include certverify_synopsis
 
 =head1 DESCRIPTION
 
@@ -904,7 +904,7 @@ B<-tls_key>.
 
 =over 4
 
-#include r_item
+#include randstate_item
 
 =back
 
@@ -1222,7 +1222,7 @@ Accept RAVERIFED as proof of possession (POPO).
 
 =over 4
 
-#include v_item
+#include certverify_item
 
 The certificate verification options
 B<-verify_hostname>, B<-verify_ip>, and B<-verify_email>

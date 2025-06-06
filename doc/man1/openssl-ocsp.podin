@@ -70,7 +70,7 @@ B<openssl> B<ocsp>
 [B<-rcid> I<digest>]
 [B<-I<digest>>]
 #include trust_synopsis
-#include v_synopsis
+#include certverify_synopsis
 #include provider_synopsis
 
 =head1 DESCRIPTION
@@ -306,7 +306,7 @@ digest used by subsequent certificate identifiers.
 
 #include trust_item
 
-#include v_item
+#include certverify_item
 
 #include provider_item
 
