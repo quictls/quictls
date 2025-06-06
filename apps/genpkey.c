@@ -200,9 +200,6 @@ int genpkey_main(int argc, char **argv)
     if (!opt_check_rest_arg(NULL))
         goto opthelp;
 
-    if (!app_RAND_load())
-        goto end;
-
     /* Fetch cipher, etc. */
     if (paramfile != NULL) {
         if (!init_keygen_file(&ctx, paramfile, e, libctx, app_get0_propq()))
