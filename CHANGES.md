@@ -125,4 +125,4 @@ as they were replaced by the built-in RAND changes.
 
 - Removed support for SCTP.
 
-- Removed support for compressed EC key formats.
+- Removed support for compressed EC point formats.
