@@ -11,11 +11,11 @@ permissions:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    if: ${{ github.repository_owner == 'quictls' }}
+    if: ${{ github.repository_owner == 'quictls' || github.event_name == 'workflow_dispatch' }}
     steps:
     - uses: actions/checkout@v4
     - name: config
-      run: ./config
+      run: cmake .
     - name: Download Coverity
       run: |
         wget -c -N https://scan.coverity.com/download/linux64 --post-data "token=${{ secrets.COVERITY_SCAN_TOKEN }}&project=QuicTLS" -O coverity_tool.tar.gz
@@ -24,7 +24,7 @@ jobs:
     - name: Build with Coverity build tool
       run: |
         export PATH=`pwd`/coverity_tool/bin:$PATH
-        cov-build --dir cov-int make -s
+        cov-build --dir cov-int make
     - name: Submit build result to Coverity Scan
       run: |
         tar czvf cov.tar.gz cov-int
