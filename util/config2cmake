@@ -184,3 +184,88 @@ print "set(CMAKE_C_FLAGS \"\${CMAKE_C_FLAGS} $cppdefs\")n"
     if $cppdefs;
 
 exit 0;
+
+__END__
+
+=head1 NAME
+
+config2cmake - output cmake config from OpenSSL configure lne
+
+=head1 SYNOPSYS
+
+B<.../util/config2cmake> [ configure ] [ options... ]
+
+=head1 DESCRIPTION
+
+This script takes an OpenSSL configuration command line and outputs
+a L<cmake(1)> command file to standard output. Any leading C<config>
+or C<Configure> word is ignored.
+
+Many OpenSSL configuration options are turned into C<cmake> directives
+for the L<QuicTLS> build system. Options that are not supported, or
+for other reasons are ignored, will result in a diagnostic sent to the
+standard error.  This includes variable assignment on the command line,
+and certain environment variable (such as C<CC>) are ignored and will
+generate a warning.
+
+=head2 General options
+
+The following options from OpenSSL are supported:
+
+=over 4
+
+=item B<--prefix=I<path>>
+
+Set the installation prefix to the specified C<path>.
+
+=item B<--with-COMP-lib=I<path>>, B<--with-COMP-include=I<path>>
+
+Set path for the compression library, or its include directory to
+the specified C<path>, where COMP is one of "BROTLI", "ZLIB", or "ZSTD".
+
+=item B<-D...>, B<-U...>, B<-I...>
+
+Add the specified option and value to the list of C pre-processor flags.
+
+=item B<--release>, B<--debug>
+
+Indicate that a release or debug build should be done. Note that
+C<-d> is a synonym for C<--debug>. The default is the "empty"
+build type.
+
+=item B<-Wall>, B<-Werror>, B<--strict-warnings>
+
+Turn on strict compiler warnings.
+
+=back
+
+=head2 Enable/Disable Options
+
+The following options are parsed:
+
+=over 4
+
+=item B<--enable-COMP>, B<--disable-COMP>
+
+Comp specifies a component within QuicTLS that should be enabled or disabled.
+The defaults are generally correct for a modern system.
+The components supported are:
+
+o General options: AFALGENG, ASM, ASYNC, ATEXIT, AUTOALGINIT, AUTOERRINIT,
+AUTOLOAD_CONFIG, BUILTIN_OVERFLOW_CHECKING, CACHED_FETCH, CAPIENG, CMP, CMS,
+CT, DEFAULT_THREAD_POOL, DEVCRYPTOENG, EC_NISTP_64_GCC_128, ENGINE, ERR,
+FILENAMES, HTTP, INLINE_ASM, KTLS, KTLS_RX, KTLS_ZC_TX, MUTEX_ERRORCHECK,
+OCSP, PADLOCKENG, PINSHARED, POSIX_IO, PSK, RFC3779, SECURE_MEMORY, SHARED,
+SOCK, SRTP, SSLKEYLOG, SSLKEYLOG_CB, STATIC_ENGINE, STDIO, TFO, THREADS,
+THREAD_POOL, TS, UI_CONSOLE, UNIX_SOCK, WINSTORE
+
+o Cipher-related options: WEAK_SSL_CIPHERS, MULTIBLOCK, ARGON2, ARIA, BF,
+BLAKE2, CAMELLIA, CAST, CHACHA, CMAC, CRMF, DES, DH, DSA, EC, GOST, IDEA,
+MD2, MD4, MD5, MDC2, OCB, POLY1305, RC2, RC4, RC5, RMD160, RSA, SCRYPT,
+SEED, SHA1, SIPHASH, SIV, SM2, SM2_PRECOMP, SM3, SM4, WHIRLPOOL
+
+o Protocol and version options: # Protocols and versions DTLS, DTLS1,
+DTLS1_METHOD, DTLS1_2, DTLS1_2_METHOD, TLS, SSL3, SSL3_METHOD, TLS1_1,
+TLS1_1_METHOD, TLS1_2, TLS1_2_METHOD, TLS1_3, TLS1_METHOD
+
+=back
