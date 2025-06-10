@@ -29,9 +29,8 @@ B<openssl> B<dgst>|I<digest>
 [B<-mac> I<alg>]
 [B<-macopt> I<nm>:I<v>]
 [B<-fips-fingerprint>]
-[B<-engine> I<id>]
-[B<-engine_impl> I<id>]
-#include r_synopsis
+#include randstate_synopsis
+#include engineimpl_synopsis
 #include provider_synopsis
 [I<file> ...]
 
@@ -190,7 +189,7 @@ option.
 
 Compute HMAC using a specific key for certain OpenSSL-FIPS operations.
 
-#include r_item
+#include randstate_item
 
 #include engine_item
 The engine is not used for digests unless the B<-engine_impl> option is
