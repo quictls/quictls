@@ -76,11 +76,11 @@ Not all digests can be used for all key types. The following combinations apply.
 
 =item DSA
 
-Supports SHA1, SHA224, SHA256, SHA384 and SHA512
+Supports SHA-1, SHA-224, SHA-256, SHA-384 and SHA-512
 
 =item ECDSA
 
-Supports SHA1, SHA224, SHA256, SHA384, SHA512 and SM3
+Supports SHA-1, SHA-224, SHA-256, SHA-384, SHA-512 and SM3
 
 =item RSA with no padding
 
@@ -88,11 +88,11 @@ Supports no digests (the digest I<type> must be NULL)
 
 =item RSA with X931 padding
 
-Supports SHA1, SHA256, SHA384 and SHA512
+Supports SHA-1, SHA-256, SHA-384 and SHA-512
 
 =item All other RSA padding types
 
-Support SHA1, SHA224, SHA256, SHA384, SHA512, MD5, MD5_SHA1, MD2, MD4, MDC2,
+Support SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, MD5, MD5_SHA1, MD2, MD4, MDC2,
 SHA3-224, SHA3-256, SHA3-384, SHA3-512
 
 =item Ed25519 and Ed448

@@ -443,7 +443,7 @@ with caution: see the notes section below.
 =item B<-md> I<digest>
 
 Digest algorithm to use when signing or resigning. If not present then the
-default digest algorithm for the signing key will be used (usually SHA1).
+default digest algorithm for the signing key will be used (usually SHA-1).
 
 =item B<-signer> I<file>
 
@@ -860,7 +860,7 @@ Create an encrypted message using RSA-OAEP:
  openssl cms -encrypt -in plain.txt -out mail.msg \
         -recip cert.pem -keyopt rsa_padding_mode:oaep
 
-Use SHA256 KDF with an ECDH certificate:
+Use SHA-256 KDF with an ECDH certificate:
 
  openssl cms -encrypt -in plain.txt -out mail.msg \
         -recip ecdhcert.pem -keyopt ecdh_kdf_md:sha256

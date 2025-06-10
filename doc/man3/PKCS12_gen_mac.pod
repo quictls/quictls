@@ -53,7 +53,7 @@ All functions return 1 on success and 0 if an error occurred.
 
 =head1 CONFORMING TO
 
-IETF RFC 7292 (L<https://tools.ietf.org/html/rfc7292>)
+RFC 7292
 
 =head1 SEE ALSO
 
