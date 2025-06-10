@@ -17,7 +17,11 @@ None yet :)
 
 Currrent Changes
 ----------------
-- Based on OpenSSL 3.3, with some code from OpenSSL 3.4 cherry-picked.
+- The build system has been converted to `cmake`  A utility script,
+`util/config2cmake` can generate configuration from an OpenSSL configure
+command. POD documentation is in the script.
+
+- Based on OpenSSL 3.3, with some code from later releases cherry-picked.
 
 - The source now requires C99, and various simplifications were made
 as a result, such as using the standard sized types, the `inline`
@@ -41,9 +45,9 @@ separate directory. Perl is optional on intalled systems.
 - No longer ship `fipskey.h`; have to enter the key on the commandline
 if installing the OpenSSL FIPS module.
 
-- Almost all uses of the Perl templating package other than the build
-system were replaced with short custom scripts. Perl is still required
-to configure and set up the build system.
+- Uses of the Perl templating package have been replaced with short
+custom scripts. Perl scripts are still sometimes used to generate
+files.
 
 - Removed the `-nbio_test` flag from the client and server apps, and
 removed the undocumented and otherwise unused "test non-blocking IO" BIO.
@@ -76,7 +80,7 @@ in `test` were moved to a new `include/test` directory, and the two
 `include/providers` directory.
   - `#include` statements were modified to use angle brackets
   - The header file `opensslv.h` has been merged into `configuration.h`
-The old file currently exists for compatibility with cmake.
+The old file currently exists for compatibility.
 
 - Imported the sslkeylog build-time configuration option from OpenSSL. If
 enabled, all secrets are logged to the file specified in the `SSLKEYLOGFILE`
