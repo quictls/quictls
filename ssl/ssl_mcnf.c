@@ -48,7 +48,7 @@ static int ssl_do_config(SSL *s, SSL_CTX *ctx, const char *name, int system)
     cctx = SSL_CONF_CTX_new();
     if (cctx == NULL)
         goto err;
-    flags = SSL_CONF_FLAG_FILE;
+    flags = SSL_CONF_FLAG_FILE | SSL_CONF_FLAG_SHOW_ERRORS;
     if (!system)
         flags |= SSL_CONF_FLAG_CERTIFICATE | SSL_CONF_FLAG_REQUIRE_PRIVATE;
     if (s != NULL) {
