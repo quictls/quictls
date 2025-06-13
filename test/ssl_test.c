@@ -490,10 +490,10 @@ static int test_handshake(int idx)
             || !TEST_int_gt(CONF_modules_load(conf, test_app, 0),  0))
         goto err;
 
-    if (!SSL_CTX_config(server_ctx, "server")
-        || !SSL_CTX_config(client_ctx, "client")) {
+    if (!SSL_CTX_config(server_ctx, "server"))
         goto err;
-    }
+    if (!SSL_CTX_config(client_ctx, "client"))
+        goto err;
 
     if (server2_ctx != NULL && !SSL_CTX_config(server2_ctx, "server2"))
         goto err;
@@ -511,6 +511,7 @@ static int test_handshake(int idx)
         ret = check_test(result, test_ctx);
 
 err:
+    test_openssl_errors();
     CONF_modules_unload(0);
     SSL_CTX_free(server_ctx);
     SSL_CTX_free(server2_ctx);
@@ -534,11 +535,20 @@ int setup_tests(void)
         return 0;
     }
 
-    if (!TEST_ptr(conf = NCONF_new(NULL))
-            /* argv[1] should point to the test conf file */
-            || !TEST_int_gt(NCONF_load(conf, test_get_argument(0), NULL), 0)
-            || !TEST_int_ne(NCONF_get_number_e(conf, NULL, "num_tests",
-                                               &num_tests), 0)) {
+    if (!TEST_ptr(conf = NCONF_new(NULL))) {
+        TEST_error("NCONF_new failed");
+        return 0;
+    }
+    /* argv[1] should point to the test conf file */
+    const char *cp = test_get_argument(0);
+    if (!TEST_int_gt(NCONF_load(conf, cp, NULL), 0)) {
+        test_openssl_errors();
+        TEST_error("NCONF_load %s failed\n", cp);
+        return 0;
+    }
+
+    if (!TEST_int_ne(NCONF_get_number_e(conf, NULL, "num_tests",
+                                        &num_tests), 0)) {
         TEST_error("usage: ssl_test %s", USAGE);
         return 0;
     }
