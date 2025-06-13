@@ -2830,13 +2830,13 @@ typedef struct {
 
 static void get_sigorhash(int *psig, int *phash, const char *str)
 {
-    if (strcmp(str, "RSA") == 0) {
+    if (strcasecmp(str, "RSA") == 0) {
         *psig = EVP_PKEY_RSA;
-    } else if (strcmp(str, "RSA-PSS") == 0 || strcmp(str, "PSS") == 0) {
+    } else if (strcasecmp(str, "RSA-PSS") == 0 || strcasecmp(str, "PSS") == 0) {
         *psig = EVP_PKEY_RSA_PSS;
-    } else if (strcmp(str, "DSA") == 0) {
+    } else if (strcasecmp(str, "DSA") == 0) {
         *psig = EVP_PKEY_DSA;
-    } else if (strcmp(str, "ECDSA") == 0) {
+    } else if (strcasecmp(str, "ECDSA") == 0) {
         *psig = EVP_PKEY_EC;
     } else {
         *phash = OBJ_sn2nid(str);
@@ -2885,7 +2885,7 @@ static int sig_cb(const char *elem, int len, void *arg)
             /* Check if a provider supports the sigalg */
             for (i = 0; i < sarg->ctx->sigalg_list_len; i++) {
                 if (sarg->ctx->sigalg_list[i].sigalg_name != NULL
-                    && strcmp(etmp,
+                    && strcasecmp(etmp,
                               sarg->ctx->sigalg_list[i].sigalg_name) == 0) {
                     sarg->sigalgs[sarg->sigalgcnt++] =
                         sarg->ctx->sigalg_list[i].code_point;
@@ -2897,7 +2897,7 @@ static int sig_cb(const char *elem, int len, void *arg)
         if (sarg->ctx == NULL || i == sarg->ctx->sigalg_list_len) {
             for (i = 0, s = sigalg_lookup_tbl;
                  i < OSSL_NELEM(sigalg_lookup_tbl); i++, s++) {
-                if (s->name != NULL && strcmp(etmp, s->name) == 0) {
+                if (s->name != NULL && strcasecmp(etmp, s->name) == 0) {
                     sarg->sigalgs[sarg->sigalgcnt++] = s->sigalg;
                     break;
                 }
