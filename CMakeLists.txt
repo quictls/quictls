@@ -209,7 +209,7 @@ target_link_libraries(ssl-static PUBLIC crypto-static)
 ## define DSO_DLFCN
 
 add_custom_target(test
-	COMMAND SRCTOP=.. BLDTOP=. perl ../test/run_tests.pl
+    COMMAND SRCTOP=${CMAKE_SOURCE_DIR} BLDTOP=${CMAKE_BINARY_DIR} perl ${CMAKE_SOURCE_DIR}/test/run_tests.pl
 	VERBATIM
 	USES_TERMINAL
 	)
