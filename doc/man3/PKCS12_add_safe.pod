@@ -65,7 +65,7 @@ PKCS12_add_safes() returns a valid B<PKCS12> structure or NULL if an error occur
 
 =head1 CONFORMING TO
 
-IETF RFC 7292 (L<https://tools.ietf.org/html/rfc7292>)
+RFC 7292
 
 =head1 SEE ALSO
 

@@ -543,7 +543,7 @@ should not be freed by the caller.
 
 EVP_PKEY_CTX_set_dh_kdf_md() sets the key derivation function message digest to
 I<md> for DH key derivation. Note that RFC2631 specifies that this digest should
-be SHA1 but OpenSSL tolerates other digests.
+be SHA-1 but OpenSSL tolerates other digests.
 
 EVP_PKEY_CTX_get_dh_kdf_md() gets the key derivation function message digest for
 I<ctx> used for DH key derivation.
@@ -616,7 +616,7 @@ B<EVP_PKEY_ECDH_KDF_NONE> and B<EVP_PKEY_ECDH_KDF_X9_63>.
 
 EVP_PKEY_CTX_set_ecdh_kdf_md() sets the key derivation function message digest
 to I<md> for ECDH key derivation. Note that X9.63 specifies that this digest
-should be SHA1 but OpenSSL tolerates other digests.
+should be SHA-1 but OpenSSL tolerates other digests.
 
 EVP_PKEY_CTX_get_ecdh_kdf_md() gets the key derivation function message digest
 for I<ctx> used for ECDH key derivation.

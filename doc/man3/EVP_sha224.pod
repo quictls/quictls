@@ -35,11 +35,11 @@ EVP_sha512_256,
 EVP_sha384(),
 EVP_sha512()
 
-The SHA-2 SHA-224, SHA-256, SHA-512/224, SHA512/256, SHA-384 and SHA-512
+The SHA-2 SHA-224, SHA-256, SHA-512/224, SHA-512/256, SHA-384 and SHA-512
 algorithms, which generate 224, 256, 224, 256, 384 and 512 bits
 respectively of output from a given input.
 
-The two algorithms: SHA-512/224 and SHA512/256 are truncated forms of the
+The two algorithms: SHA-512/224 and SHA-512/256 are truncated forms of the
 SHA-512 algorithm. They are distinct from SHA-224 and SHA-256 even though
 their outputs are of the same size.
 
