@@ -26,8 +26,8 @@ B<openssl speed>
 [B<-bytes> I<num>]
 [B<-mr>]
 [B<-mlock>]
-[B<-engine> I<id>]
-#include r_synopsis
+#include randstate_synopsis
+#include engine_synopsis
 #include provider_synopsis
 [I<algorithm> ...]
 
@@ -130,7 +130,7 @@ Produce the summary in a mechanical, machine-readable, format.
 
 Lock memory into RAM for more deterministic measurements.
 
-#include r_item
+#include randstate_item
 
 #include engine_item
 

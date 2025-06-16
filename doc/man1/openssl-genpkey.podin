@@ -20,8 +20,8 @@ B<openssl> B<genpkey>
 [B<-pkeyopt> I<opt>:I<value>]
 [B<-genparam>]
 [B<-text>]
-[B<-engine> I<id>]
-#include r_synopsis
+#include randstate_synopsis
+#include engine_synopsis
 #include provider_synopsis
 #include config_synopsis
 
@@ -116,7 +116,7 @@ are mutually exclusive.
 Print an (unencrypted) text representation of private and public keys and
 parameters along with the PEM or DER structure.
 
-#include r_item
+#include randstate_item
 
 #include engine_item
 

@@ -38,8 +38,8 @@ B<openssl> B<enc>|I<cipher>
 [B<-v>]
 [B<-debug>]
 [B<-none>]
-[B<-engine> I<id>]
-#include r_synopsis
+#include randstate_synopsis
+#include engine_synopsis
 #include provider_synopsis
 
 B<openssl> I<cipher> [B<...>]
@@ -211,7 +211,7 @@ or zlib-dynamic option.
 
 Use NULL cipher (no encryption or decryption of input).
 
-#include r_item
+#include randstate_item
 
 #include provider_item
 

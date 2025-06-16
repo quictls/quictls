@@ -15,10 +15,10 @@ B<openssl> B<verify>
 [B<-trusted> I<filename>|I<uri>]
 [B<-untrusted> I<filename>|I<uri>]
 [B<-vfyopt> I<nm>:I<v>]
-[B<-engine> I<id>]
 #include name_synopsis
 #include trust_synopsis
-#include v_synopsis
+#include certverify_synopsis
+#include engine_synopsis
 #include provider_synopsis
 [B<-->]
 [I<certificate> ...]
@@ -77,14 +77,14 @@ Names and values of these options are algorithm-specific.
 
 #include name_item
 
+#include trust_item
+
+#include certverify_item
+
 #include engine_item
 To load certificates or CRLs that require engine support, specify the
 B<-engine> option before any of the
 B<-trusted>, B<-untrusted> or B<-CRLfile> options.
-
-#include trust_item
-
-#include v_item
 
 #include provider_item
 
