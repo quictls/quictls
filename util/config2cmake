@@ -31,6 +31,9 @@ my @ifdefs = (
     'STATIC_ENGINE', 'STDIO', 'TFO', 'THREADS', 'THREAD_POOL', 'TS',
     'UI_CONSOLE', 'UNIX_SOCK', 'WINSTORE',
 
+    # Special-cases
+    'EXTERNAL_TESTS',
+
     # Ciphers
     'WEAK_SSL_CIPHERS', 'MULTIBLOCK', 'ARGON2', 'ARIA', 'BF', 'BLAKE2',
     'CAMELLIA', 'CAST', 'CHACHA', 'CMAC', 'CRMF', 'DES', 'DH', 'DSA', 'EC',
@@ -53,6 +56,7 @@ sub
 enable
 {
     my $arg = uc shift;
+    $arg =~ s/EXTERNAL-/EXTERNAL_/;
     $arg =~ s/ENABLE-//;
     warn "warning: Enabling $arg might not be supported\n"
         unless grep { $arg eq $_ } @ifdefs;
@@ -75,6 +79,7 @@ sub
 disable
 {
     my $arg = uc shift;
+    $arg =~ s/EXTERNAL-/EXTERNAL_/;
     $arg =~ s/(NO|DISABLE)-//;
     warn "warning: Disabling $arg might not be supported\n"
         unless grep { $arg eq $_ } @ifdefs;
