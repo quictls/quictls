@@ -4,22 +4,14 @@ Guidelines for test developers
 How to add recipes
 ------------------
 
-For any test that you want to perform, you write a script located in
-`test/recipes/`, named `{nn}-test_{name}.t`,
-where `{nn}` is a two digit number and
-`{name}` is a unique name of your choice.
+To add a test, write a script `test/recipes/`, named `{nn}-test_{name}.t`,
+where `{nn}` is a two digit number and `{name}` is a unique name of
+your choice.
 
-Please note that if a test involves a new testing executable, you will need to
-do some additions in test/build.info. Please refer to the section
-["Changes to test/build.info"](README.md#changes-to-testbuildinfo) below.
-
-Naming conventions
-------------------
-
-A test executable is named `test/{name}test.c`
-
-A test recipe is named `test/recipes/{nn}-test_{name}.t`, where `{nn}` is a two
-digit number and `{name}` is a unique name of your choice.
+Please note that if a test involves a new testing executable, you will
+need to do some additions in `test/CMakeLists.txt`  Most changes should
+be adding another call to the `simple` macro.  Your source file should
+be named `test/{name}test.c`
 
 The number `{nn}` is (somewhat loosely) grouped as follows:
 
@@ -90,54 +82,42 @@ A script to start from could be this:
         # test feature 2
     }
 
-Changes to test/build.info
---------------------------
-
-Whenever a new test involves a new test executable you need to do the
-following (at all times, replace {NAME} and {name} with the name of your
-test):
-
- * add `{name}` to the list of programs under `PROGRAMS_NO_INST`
-
- * create a three line description of how to build the test, you will have
-   to modify the include paths and source files if you don't want to use the
-   basic test framework:
-
-       SOURCE[{name}]={name}.c
-       INCLUDE[{name}]=.. ../include ../apps/include
-       DEPEND[{name}]=../libcrypto libtestutil.a
-
 Generic form of C test executables
 ----------------------------------
 
     #include <tests/testutil.h>
 
+    /* A typical test.  Return 0 on failure, 1 on success. */
     static int my_test(void)
     {
-        int testresult = 0;                 /* Assume the test will fail    */
+        int testresult = 0;
         int observed;
 
-        observed = function();              /* Call the code under test     */
-        if (!TEST_int_eq(observed, 2))      /* Check the result is correct  */
-            goto end;                       /* Exit on failure - optional   */
+        /* Call the function, exit on failure if desired. */
+        observed = function();
+        if (!TEST_int_eq(observed, 2))
+            goto end;
 
-        testresult = 1;                     /* Mark the test case a success */
+        ... other tests ...
+
+        /* Test passed. */
+        testresult = 1;
+
     end:
-        cleanup();                          /* Any cleanup you require      */
+        /* Any cleanup needed ... */
         return testresult;
     }
 
+    /* Return 1 if okay to run the tests, 0 to error with usage message or
+     * -1 to exit without message. */
     int setup_tests(void)
     {
-        ADD_TEST(my_test);                  /* Add each test separately     */
-        return 1;                           /* Indicates success.  Return 0 */
-                                            /* to produce an error with a   */
-                                            /* usage message and -1 for     */
-                                            /* failure to set up with no    */
-                                            /* usage message.               */
+        /* Add each test separately.
+        ADD_TEST(my_test);
+        return 1;
     }
 
-You should use the `TEST_xxx` macros provided by `testutil.h` to test all failure
+Use the `TEST_xxx` macros provided by `testutil.h` to test all failure
 conditions.  These macros produce an error message in a standard format if the
 condition is not met (and nothing if the condition is met).  Additional
 information can be presented with the `TEST_info` macro that takes a `printf`

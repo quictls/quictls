@@ -14,7 +14,7 @@ use warnings;
 use Exporter;
 
 our @ISA = qw(Exporter);
-our @EXPORT = qw(%settings);
+our @EXPORT = qw(%settings $CROSS_COMPILE);
 
 our %settings = (
     'OPENSSL_NO_EC_NISTP_64_GCC_128' => '${OPENSSL_NO_EC_NISTP_64_GCC_128}',
@@ -133,6 +133,10 @@ our %settings = (
     'OPENSSL_NO_LEGACY' => '${OPENSSL_NO_LEGACY}',
     'OPENSSL_NO_FIPS' => '${OPENSSL_NO_FIPS}',
     'OPENSSL_NO_MODULE' => '${OPENSSL_NO_MODULE}',
+    'OPENSSL_NO_FUZZ' => '${OPENSSL_NO_FUZZ}',
+    'OPENSSL_NO_EXTERNAL_TESTS' => '${OPENSSL_NO_EXTERNAL_TESTS}',
 );
+
+our $CROSS_COMPILE = '${CMAKE_CROSSCOMPILING}';
 
 1;

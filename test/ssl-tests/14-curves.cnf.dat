@@ -8,7 +8,7 @@ use strict;
 use warnings;
 
 use OpenSSL::Test;
-use OpenSSL::Test::Utils qw(anydisabled);
+use OpenSSL::Test::Utils;
 
 our $fips_mode;
 

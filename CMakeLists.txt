@@ -133,6 +133,7 @@ foreach (f openssl/configuration.h openssl/opensslv.h internal/paths.h)
     list(APPEND MADEHEADERS ${out})
 endforeach ()
 configure_file("test/testvars.pm.in" "test/testvars.pm")
+configure_file("test/run_tests.in" "test/run_tests")
 
 # Generate some header files.
 set(GENHEADERS

@@ -21,8 +21,8 @@ BEGIN {
 use lib srctop_dir('Configurations');
 use lib bldtop_dir('.');
 
-plan skip_all => "These tests are not supported in a fuzz build"
-    if config('options') =~ /-DFUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION|enable-fuzz-afl/;
+plan skip_all => "Not supported in a fuzz build"
+    if !disabled("fuzz");
 
 plan skip_all => "These tests are not supported in a no-cmp build"
     if disabled("cmp");

@@ -15,7 +15,7 @@ use Data::Dumper;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 $VERSION = "0.1";
 @ISA = qw(Exporter);
-@EXPORT = qw(alldisabled anydisabled disabled config available_protocols
+@EXPORT = qw(alldisabled anydisabled disabled available_protocols
              have_IPv4 have_IPv6);
 
 =head1 NAME
@@ -28,10 +28,10 @@ OpenSSL::Test::Utils - test utility functions
 
   my @tls = available_protocols("tls");
   my @dtls = available_protocols("dtls");
+
+  disabled('rc4')
   alldisabled("dh", "dsa");
   anydisabled("dh", "dsa");
-
-  config("fips");
 
   have_IPv4();
   have_IPv6();
@@ -53,6 +53,10 @@ STRING is "tls", or for all the available DTLS versions if STRING is
 "dtls".  Otherwise, it returns the empty list.  The strings in the
 returned list can be used with B<alldisabled> and B<anydisabled>.
 
+=item B<disabled STRING>
+
+Returns true if the specified STRING is disabled.
+
 =item B<alldisabled ARRAY>
 
 =item B<anydisabled ARRAY>
@@ -64,107 +68,53 @@ In a scalar context, alldisabled returns 1 if all of the features in
 ARRAY are disabled, while anydisabled returns 1 if any of them are
 disabled.
 
-=item B<config STRING>
+=item B<have_IPv4>, B<have_IPv6>
 
-Returns an item from the %config hash in \$TOP/configdata.pm.
-
-=item B<have_IPv4>
-
-=item B<have_IPv6>
-
-Return true if IPv4 / IPv6 is possible to use on the current system.
+Return true if IPv4 / IPv6 can be used on the current system.
 
 =back
 
 =cut
 
 our %available_protocols;
-our %disabled;
-our %config;
-my $configdata_loaded = 0;
-
-sub load_configdata {
-    if ($ENV{BUILD_CONF}) {
-	return load_cmake_config_data();
-    }
-    # We eval it so it doesn't run at compile time of this file.
-    # The latter would have bldtop_file() complain that setup() hasn't
-    # been run yet.
-    my $configdata = bldtop_file("configdata.pm");
-    eval { require $configdata;
-	   %available_protocols = %configdata::available_protocols;
-	   %disabled = %configdata::disabled;
-	   %config = %configdata::config;
-    };
-    $configdata_loaded = 1;
-}
-
-my @disableables = (
-    "asan",
-    "asm",
-    "brotli",
-    "fips",
-    "legacy",
-    "module",
-    "rc4",
-    "ssl3",
-    "sslkeylog",
-    "static",
-    "tfo",
-    "zlib",
-    "zstd",
-    );
+my %disabled;
+my $loaded = 0;
 
 my %all_protocols = (
-    tls  => [
-	"ssl3",
-	"tls1",
-	"tls1_1",
-	"tls1_2",
-	"tls1_3",
-    ],
-    dtls => [
-	"dtls1",
-	"dtls1_2",
-    ],
-    );
+    tls  => [ "ssl3", "tls1", "tls1_1", "tls1_2", "tls1_3", ],
+    dtls => [ "dtls1", "dtls1_2", "dtls1_3", ],
+);
 
-sub load_cmake_config_data {
-    my $testvars = $ENV{BUILD_CONF};
+sub load_configdata {
+    my $tv = $ENV{TESTVARS};
     eval {
-	require $testvars;
-	%disabled = process_disableables(\%testvars::settings);
-	%available_protocols = process_protocols(\%testvars::settings);
+        require $tv;
     };
-    if($@) {
-	die "eval failed: $@";
+    die "eval failed: $@" if $@;
+
+    foreach my $k (
+        grep { $testvars::settings{$_} eq '1' }
+        keys %testvars::settings ) {
+        my $short = $k;
+        $short =~ s/OPENSSL_NO_//;
+        $disabled{lc $short} = 1;
     }
-    $configdata_loaded = 1;
+    $disabled{'cross_compile'} = 1
+    if $testvars::CROSS_COMPILE eq 'FALSE';
+
+    delete $all_protocols{'tls'} if $disabled{'tls'};
+    delete $all_protocols{'dtls'} if $disabled{'dtls'};
+    foreach my $k (keys %all_protocols) {
+        $all_protocols{$k} = [
+            grep { "$testvars::settings{'OPENSSL_NO_' . uc($_)}" eq '' }
+            @ { $all_protocols{$k} }
+        ];
+        %available_protocols = %all_protocols;
+    }
+
+    $loaded = 1;
 }
 
-sub process_disableables {
-    my %ret;
-    my %preprocessor_vars = %{$_[0]};
-    foreach (@disableables) {
-	if($preprocessor_vars{"OPENSSL_NO_" . uc($_)}) {
-	    $ret{$_} = 1;
-	}
-    }
-    return %ret;
-}
-
-sub process_protocols {
-    my %preprocessor_vars = %{$_[0]};
-    foreach my $prototype (keys %all_protocols) {
-	if($preprocessor_vars{"OPENSSL_NO_" . uc($prototype)}) {
-	    delete $all_protocols{$prototype};
-	}
-    }
-    foreach my $prototype (keys %all_protocols) {
-	$all_protocols{$prototype} = [grep { !$preprocessor_vars{"OPENSSL_NO_" . uc($_)}} @{$all_protocols{$prototype}}];
-    }
-    return %all_protocols;
-}
 # args
 #  list of 1s and 0s, coming from check_disabled()
 sub anyof {
@@ -187,6 +137,7 @@ sub allof {
 # returns a list of 1s (if the corresponding feature is disabled)
 #  and 0s (if it isn't)
 sub check_disabled {
+    load_configdata() unless $loaded;
     return map { exists $disabled{lc $_} ? 1 : 0 } @_;
 }
 
@@ -195,7 +146,6 @@ sub check_disabled {
 # args:
 #  list of features to check
 sub anydisabled {
-    load_configdata() unless $configdata_loaded;
     my @ret = check_disabled(@_);
     return @ret if wantarray;
     return anyof(@ret);
@@ -204,13 +154,11 @@ sub anydisabled {
 # args:
 #  list of features to check
 sub alldisabled {
-    load_configdata() unless $configdata_loaded;
     my @ret = check_disabled(@_);
     return @ret if wantarray;
     return allof(@ret);
 }
 
-# !!! Kept for backward compatibility
 # args:
 #  single string
 sub disabled {
@@ -218,17 +166,12 @@ sub disabled {
 }
 
 sub available_protocols {
-    load_configdata() unless $configdata_loaded;
+    load_configdata() unless $loaded;
     my $protocol_class = shift;
     if (exists $available_protocols{lc $protocol_class}) {
 	return @{$available_protocols{lc $protocol_class}}
     }
     return ();
-}
-
-sub config {
-    load_configdata() unless $configdata_loaded;
-    return $config{$_[0]};
 }
 
 # IPv4 / IPv6 checker
@@ -243,57 +186,47 @@ sub check_IP {
         my $s = IO::Socket::IP->new(
             LocalAddr => $listenaddress,
             LocalPort => 0,
-            Listen=>1,
+            Listen => 1,
             );
         $s or die "\n";
         $s->close();
     };
-    if ($@ eq "") {
-        return 1;
-    }
+    return 1 if $@ eq "";
 
     eval {
         require IO::Socket::INET6;
         my $s = IO::Socket::INET6->new(
             LocalAddr => $listenaddress,
             LocalPort => 0,
-            Listen=>1,
+            Listen => 1,
             );
         $s or die "\n";
         $s->close();
     };
-    if ($@ eq "") {
-        return 1;
-    }
+    return 1 if $@ eq "";
 
     eval {
         require IO::Socket::INET;
         my $s = IO::Socket::INET->new(
             LocalAddr => $listenaddress,
             LocalPort => 0,
-            Listen=>1,
+            Listen => 1,
             );
         $s or die "\n";
         $s->close();
     };
-    if ($@ eq "") {
-        return 1;
-    }
+    return 1 if $@ eq "";
 
     return 0;
 }
 
 sub have_IPv4 {
-    if ($have_IPv4 < 0) {
-        $have_IPv4 = check_IP("127.0.0.1");
-    }
+    $have_IPv4 = check_IP("127.0.0.1") if $have_IPv4 < 0;
     return $have_IPv4;
 }
 
 sub have_IPv6 {
-    if ($have_IPv6 < 0) {
-        $have_IPv6 = check_IP("::1");
-    }
+    $have_IPv6 = check_IP("::1") if $have_IPv6 < 0;
     return $have_IPv6;
 }
 
