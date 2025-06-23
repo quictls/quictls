@@ -259,7 +259,7 @@ Verify that the configuration file F<fips.cnf> contains the correct info:
 
  openssl fipsinstall -module ./fips.so -in fips.cnf  -provider_name fips -verify
 
-Corrupt any self tests which have the description C<SHA1>:
+Corrupt any self tests which have the description C<SHA-1>:
 
  openssl fipsinstall -module ./fips.so -out fips.cnf -provider_name fips \
          -corrupt_desc 'SHA1'

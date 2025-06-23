@@ -71,9 +71,9 @@ be hashed (B<len> bytes at B<data>).
 SHA1_Final() places the message digest in B<md>, which must have space
 for SHA_DIGEST_LENGTH == 20 bytes of output, and erases the B<SHA_CTX>.
 
-The SHA224, SHA256, SHA384 and SHA512 families of functions operate in the
-same way as for the SHA1 functions. Note that SHA224 and SHA256 use a
-B<SHA256_CTX> object instead of B<SHA_CTX>. SHA384 and SHA512 use B<SHA512_CTX>.
+The SHA-224, SHA-256, SHA-384 and SHA-512 families of functions operate in the
+same way as for the SHA-1 functions. Note that SHA-224 and SHA-256 use a
+B<SHA256_CTX> object instead of B<SHA_CTX>. SHA-384 and SHA-512 use B<SHA512_CTX>.
 The buffer B<md> must have space for the output from the SHA variant being used
 (defined by SHA224_DIGEST_LENGTH, SHA256_DIGEST_LENGTH, SHA384_DIGEST_LENGTH and
 SHA512_DIGEST_LENGTH). Also note that, as for the SHA1() function above, the
@@ -85,8 +85,8 @@ B<md> is NULL.
 SHA1(), SHA224(), SHA256(), SHA384() and SHA512() return a pointer to the hash
 value.
 
-SHA1_Init(), SHA1_Update() and SHA1_Final() and equivalent SHA224, SHA256,
-SHA384 and SHA512 functions return 1 for success, 0 otherwise.
+SHA1_Init(), SHA1_Update() and SHA1_Final() and equivalent SHA-224, SHA-256,
+SHA-384 and SHA-512 functions return 1 for success, 0 otherwise.
 
 =head1 CONFORMING TO
 

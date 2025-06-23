@@ -23,8 +23,8 @@ B<openssl> B<pkcs7>
 =head1 DESCRIPTION
 
 This command processes PKCS#7 files.  Note that it only understands PKCS#7
-v 1.5 as specified in IETF RFC 2315.  It cannot currently parse CMS as
-described in IETF RFC 2630.
+v 1.5 as specified in RFC 2315.  It cannot currently parse CMS as
+described in RFC 2630.
 
 =head1 OPTIONS
 

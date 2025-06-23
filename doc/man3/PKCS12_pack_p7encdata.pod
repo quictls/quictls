@@ -37,7 +37,7 @@ A B<PKCS7> object if successful, or NULL if an error occurred.
 
 =head1 CONFORMING TO
 
-IETF RFC 2315 (L<https://tools.ietf.org/html/rfc2315>)
+RFC 2315
 
 =head1 SEE ALSO
 

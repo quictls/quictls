@@ -10,7 +10,7 @@ Support for computing the B<argon2> password-based KDF through the B<EVP_KDF>
 API.
 
 The EVP_KDF-ARGON2 algorithm implements the Argon2 password-based key
-derivation function, as described in IETF RFC 9106.  It is memory-hard in
+derivation function, as described in RFC 9106.  It is memory-hard in
 the sense that it deliberately requires a significant amount of RAM for efficient
 computation. The intention of this is to render brute forcing of passwords on
 systems that lack large amounts of main memory (such as GPUs or ASICs)

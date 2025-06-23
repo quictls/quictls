@@ -464,13 +464,13 @@ Represents an ECDSA signature.
 
 =item B<X509_ALGOR>
 
-Represents an B<AlgorithmIdentifier> structure as used in IETF RFC 6960 and
+Represents an B<AlgorithmIdentifier> structure as used in RFC 6960 and
 elsewhere.
 
 =item B<X509_NAME>
 
 Represents a B<Name> type as used for subject and issuer names in
-IETF RFC 6960 and elsewhere.
+RFC 6960 and elsewhere.
 
 =item B<X509_REQ>
 

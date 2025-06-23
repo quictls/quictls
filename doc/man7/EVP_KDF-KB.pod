@@ -152,7 +152,7 @@ Label "label", and IV "sixteen bytes iv".
 
 =head1 CONFORMING TO
 
-NIST SP800-108, IETF RFC 6803, IETF RFC 8009.
+NIST SP800-108, RFC 6803, RFC 8009.
 
 =head1 SEE ALSO
 

@@ -118,12 +118,12 @@ It can consist of a single cipher suite such as B<RC4-SHA>.
 
 It can represent a list of cipher suites containing a certain algorithm, or
 cipher suites of a certain type. For example B<SHA1> represents all ciphers
-suites using the digest algorithm SHA1 and B<SSLv3> represents all SSL v3
+suites using the digest algorithm SHA-1 and B<SSLv3> represents all SSL v3
 algorithms.
 
 Lists of cipher suites can be combined in a single cipher string using the
 B<+> character. This is used as a logical B<and> operation. For example
-B<SHA1+DES> represents all cipher suites containing the SHA1 B<and> the DES
+B<SHA1+DES> represents all cipher suites containing the SHA-1 B<and> the DES
 algorithms.
 
 Each cipher string can be optionally preceded by the characters B<!>,
@@ -344,11 +344,11 @@ Cipher suites using MD5.
 
 =item B<SHA1>, B<SHA>
 
-Cipher suites using SHA1.
+Cipher suites using SHA-1.
 
 =item B<SHA256>, B<SHA384>
 
-Cipher suites using SHA256 or SHA384.
+Cipher suites using SHA-256 or SHA-384.
 
 =item B<aGOST>
 
@@ -394,7 +394,7 @@ list and anything after them is ignored.
 Setting Suite B mode has additional consequences required to comply with
 RFC6460.
 In particular the supported signature algorithms is reduced to support only
-ECDSA and SHA256 or SHA384, only the elliptic curves P-256 and P-384 can be
+ECDSA and SHA-256 or SHA-384, only the elliptic curves P-256 and P-384 can be
 used and only the two suite B compliant cipher suites
 (ECDHE-ECDSA-AES128-GCM-SHA256 and ECDHE-ECDSA-AES256-GCM-SHA384) are
 permissible.
