@@ -249,7 +249,7 @@ This overrides the digest algorithm specified in
 the configuration file.
 
 Some public key algorithms may override this choice. For instance, DSA
-signatures always use SHA1, GOST R 34.10 signatures always use
+signatures always use SHA-1, GOST R 34.10 signatures always use
 GOST R 34.11-94 (B<-md_gost94>), Ed25519 and Ed448 never use any digest.
 
 =item B<-config> I<filename>

@@ -270,7 +270,7 @@ explicitly set in PSS mode then the signing digest is used.
 =item B<rsa_oaep_md:>I<digest>
 
 Sets the digest used for the OAEP hash function. If not explicitly set then
-SHA1 is used.
+SHA-1 is used.
 
 =item B<rsa_pkcs1_implicit_rejection:>I<flag>
 
@@ -309,7 +309,7 @@ value less than the minimum restriction.
 =head1 DSA ALGORITHM
 
 The DSA algorithm supports signing and verification operations only. Currently
-there are no additional B<-pkeyopt> options other than B<digest>. The SHA1
+there are no additional B<-pkeyopt> options other than B<digest>. The SHA-1
 digest is assumed by default.
 
 =head1 DH ALGORITHM
@@ -320,7 +320,7 @@ B<-pkeyopt> options.
 =head1 EC ALGORITHM
 
 The EC algorithm supports sign, verify and derive operations. The sign and
-verify operations use ECDSA and derive uses ECDH. SHA1 is assumed by default for
+verify operations use ECDSA and derive uses ECDH. SHA-1 is assumed by default for
 the B<-pkeyopt> B<digest> option.
 
 =head1 X25519 AND X448 ALGORITHMS
@@ -411,7 +411,7 @@ Verify some data using an L<SM2(7)> certificate and a specific ID:
  openssl pkeyutl -verify -certin -in file -inkey sm2.cert -sigfile sig \
     -rawin -digest sm3 -pkeyopt distid:someid
 
-Decrypt some data using a private key with OAEP padding using SHA256:
+Decrypt some data using a private key with OAEP padding using SHA-256:
 
  openssl pkeyutl -decrypt -in file -inkey key.pem -out secret \
     -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256

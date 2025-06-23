@@ -166,7 +166,7 @@ and 8 (64 bits) for PBES1.
 =head1 NOTES
 
 By default, when converting a key to PKCS#8 format, PKCS#5 v2.0 using 256 bit
-AES with HMAC and SHA256 is used.
+AES with HMAC and SHA-256 is used.
 
 Some older implementations do not support PKCS#5 v2.0 format and require
 the older PKCS#5 v1.5 form instead, possibly also requiring insecure weak

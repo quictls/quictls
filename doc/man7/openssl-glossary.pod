@@ -154,9 +154,7 @@ depends on the type of object being written or read.
 For all OpenSSL uses, the binary content is expected to be a DER encoded
 structure.
 
-This is defined in IETF RFC 1421:
-
-L<https://tools.ietf.org/html/rfc1421>
+This is defined in RFC 1421.
 
 =item PKCS#8
 
@@ -166,9 +164,7 @@ There are two structures worth noting for OpenSSL use, one that contains the
 key data in unencrypted form (known as "PrivateKeyInfo") and an encrypted
 wrapper structure (known as "EncryptedPrivateKeyInfo").
 
-This is specified in RFC 5208:
-
-L<https://tools.ietf.org/html/rfc5208>
+This is specified in RFC 5208.
 
 =item Property
 
@@ -209,9 +205,7 @@ This form may be passphrase protected.
 SubjectPublicKeyInfo is an ASN.1 structure that OpenSSL uses for storing and
 transmitting any public key in a key type agnostic manner.
 
-This is specified as part of the specification for certificates, RFC 5280:
-
-L<https://tools.ietf.org/html/rfc5280>
+This is specified as part of the specification for certificates, RFC 5280.
 
 =back
 

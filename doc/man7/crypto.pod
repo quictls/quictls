@@ -20,7 +20,7 @@ derivation functions (KDFs), and various utilities.
 
 =head2 Algorithms
 
-Cryptographic primitives such as the SHA256 digest, or AES encryption are
+Cryptographic primitives such as the SHA-256 digest, or AES encryption are
 referred to in OpenSSL as "algorithms". Each algorithm may have multiple
 implementations available for use. For example the RSA algorithm is available as
 a "default" implementation suitable for general use, and a "fips" implementation
@@ -36,7 +36,7 @@ These different groups are known as "operations" in OpenSSL. Each operation
 has a different set of functions associated with it. For example to perform an
 encryption operation using AES (or any other encryption algorithm) you would use
 the encryption functions detailed on the L<EVP_EncryptInit(3)> page. Or to
-perform a digest operation using SHA256 then you would use the digesting
+perform a digest operation using SHA-256 then you would use the digesting
 functions on the L<EVP_DigestInit(3)> page.
 
 =head1 ALGORITHM FETCHING

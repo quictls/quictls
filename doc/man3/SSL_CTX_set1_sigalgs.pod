@@ -70,15 +70,15 @@ used to determined the set of client authentication shared signature
 algorithms.
 
 Signature algorithms will neither be advertised nor used if the security level
-prohibits them (for example SHA1 if the security level is 4 or more).
+prohibits them (for example SHA-1 if the security level is 4 or more).
 
 Currently the NID_md5, NID_sha1, NID_sha224, NID_sha256, NID_sha384 and
 NID_sha512 digest NIDs are supported and the public key algorithm NIDs
 EVP_PKEY_RSA, EVP_PKEY_RSA_PSS, EVP_PKEY_DSA and EVP_PKEY_EC.
 
 The short or long name values for digests can be used in a string (for
-example "MD5", "SHA1", "SHA224", "SHA256", "SHA384", "SHA512") and
-the public key algorithm strings "RSA", "RSA-PSS", "DSA" or "ECDSA".
+example B<MD5>, B<SHA1>, B<SHA224>, B<SHA256>, B<SHA384>, B<SHA512>) and
+the public key algorithm strings B<RSA>, B<RSA-PSS>, B<DSA> or B<ECDSA>.
 
 The TLS 1.3 signature scheme names (such as "rsa_pss_pss_sha256") can also
 be used with the B<_list> forms of the API.
@@ -91,14 +91,14 @@ All these functions return 1 for success and 0 for failure.
 
 =head1 EXAMPLES
 
-Set supported signature algorithms to SHA256 with ECDSA and SHA256 with RSA
+Set supported signature algorithms to SHA-256 with ECDSA and SHA-256 with RSA
 using an array:
 
  const int slist[] = {NID_sha256, EVP_PKEY_EC, NID_sha256, EVP_PKEY_RSA};
 
  SSL_CTX_set1_sigalgs(ctx, slist, 4);
 
-Set supported signature algorithms to SHA256 with ECDSA and SHA256 with RSA
+Set supported signature algorithms to SHA-256 with ECDSA and SHA-256 with RSA
 using a string:
 
  SSL_CTX_set1_sigalgs_list(ctx, "ECDSA+SHA256:RSA+SHA256");

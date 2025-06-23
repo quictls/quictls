@@ -463,7 +463,7 @@ If peer certificate verification is enabled, by default the TLS implementation
 as well as the commands B<s_client> and B<s_server> check for consistency
 with TLS server or TLS client use, respectively.
 
-While IETF RFC 5280 says that B<id-kp-serverAuth> and B<id-kp-clientAuth>
+While RFC 5280 says that B<id-kp-serverAuth> and B<id-kp-clientAuth>
 are only for WWW use, in practice they are used for all kinds of TLS clients
 and servers, and this is what OpenSSL assumes as well.
 
