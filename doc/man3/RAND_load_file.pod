@@ -21,9 +21,13 @@ longer stores or uses its state in external files.
 
 =head1 RETURN VALUES
 
-RAND_load_file() and RAND_write_file() return -1.
+RAND_load_file() returns -1.
 
-RAND_file_name() returns NULL.
+RAND_write_file() returns the number of bytes written (using RAND_bytes())
+or -1 on error.
+
+RAND_file_name() copies the name of a device that might be able to
+generate random numbers or NULL1 if the buffer is not big enough.
 
 =head1 SEE ALSO
 

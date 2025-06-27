@@ -67,9 +67,10 @@ aliases for others: `BUF_strdup`, `BUF_strndup`, `BUF_memdup`,
   - Support for the undocumented and outdated "Strong Extranet ID"
 certificate extension and the "Netscape Certificate Sequence"
 data format have been removed.
-  - The functions `RAND_load_file`, `RAND_write_file`, and `RAND_file_name`
-have been made no-ops as random number state has not been loaded or
-saved to a file for years.
+  - The functions `RAND_load_file` and `RAND_file_name` are deprecated
+as random number state has not been loaded or saved to a file for
+years. `RAND_write_file` writes a fixed number of random bytes to the
+specified file.
   - Remove most of the ERRxxx() macros; engines still use them since their
 library number is dynamic not static.
   - The unused and undocumented `BIO_f_linebuffer`, `BIO_f_reliable`, and
