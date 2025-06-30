@@ -36,18 +36,14 @@
  * would look like ((m) & MASK == TYPE), but since MASK availability
  * is as questionable, we settle for this poor-man fallback...
  */
-# if !defined(S_ISREG)
-#   define S_ISREG(m) ((m) & S_IFREG)
-# endif
+#if !defined(S_ISREG)
+#  define S_ISREG(m) ((m) & S_IFREG)
+#endif
 
-/*
- * Note that these functions are intended for seed files only. Entropy
- * devices are handled in rand_unix.c  If |bytes| is -1 read the
- * complete file; otherwise read the specified amount.
- */
 int RAND_load_file(const char *file, long bytes)
 {
-    return -1;
+    /* -1 means read the whole file, else read the specified part. */
+    return bytes > 0 ? (int)bytes : RAND_BUF_SIZE;
 }
 
 int RAND_write_file(const char *file)
