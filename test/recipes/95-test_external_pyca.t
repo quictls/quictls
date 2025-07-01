@@ -14,7 +14,7 @@ use OpenSSL::Test qw/:DEFAULT bldtop_file data_file srctop_file cmdstr/;
 setup("test_external_pyca");
 
 plan skip_all => "No external tests in this configuration"
-    if disabled("external-tests");
+    if disabled("external_tests");
 plan skip_all => "PYCA tests not available on Windows"
     if $^O =~ /^MSWin32$/;
 plan skip_all => "PYCA Cryptography not available"

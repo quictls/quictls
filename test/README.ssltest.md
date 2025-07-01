@@ -3,13 +3,11 @@ SSL tests
 
 SSL testcases are configured in the `ssl-tests` directory.
 
-Each `ssl_*.cnf.dat` file contains a number of test configurations. These files
-are used to generate testcases in the OpenSSL CONF format.
+Each `ssl_*.cnf.dat` file contains a number of test configurations. These
+files are used to generate testcases in the OpenSSL CONF format.
 
-The precise test output can be dependent on the library configuration. The test
-harness generates the output files on the fly.
-
-However, for verification, we also include checked-in configuration outputs
+The precise test output can be dependent on the library configuration.
+For verification, we include checked-in configuration outputs
 corresponding to the default configuration. These testcases live in
 `test/ssl-tests/*.cnf` files.
 
@@ -234,7 +232,7 @@ Alternatively (hackish but simple), you can comment out
 
 in `test/recipes/80-test_ssl_new.t` and run
 
-    $ make TESTS=test_ssl_new test
+    $ ./test/run_tests test_ssl_new
 
 This will save the generated output in a `*.tmp` file in the build directory.
 
@@ -245,7 +243,7 @@ This will save the generated output in a `*.tmp` file in the build directory.
 Running the tests with the test harness
 ---------------------------------------
 
-    HARNESS_VERBOSE=yes make TESTS=test_ssl_new test
+    HARNESS_VERBOSE=yes ./test/run_tests test_ssl_new
 
 Running a test manually
 -----------------------
@@ -288,6 +286,6 @@ Individual tests may be run by adding the SSL_TESTS variable to the `make`
 command line. The SSL_TESTS variable is set to the list of input (or ".dat")
 files. The values in SSL_TESTS are globbed.
 
-    $ make test TESTS=test_ssl_new SSL_TESTS="0*.cnf.dat"
+    $ SSL_TESTS="0*.cnf.dat" ./test/run_tests test_ssl_new
 
-    $ make test TESTS=test_ssl_new SSL_TESTS="01-simple.cnf.dat 05-sni.cnf.dat"
+    $ SSL_TESTS="01-simple.cnf.dat 05-sni.cnf.dat" ./test/run_tests test_ssl_new

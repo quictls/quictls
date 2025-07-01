@@ -17,7 +17,7 @@ use warnings;
 use List::Util qw/max min/;
 
 use OpenSSL::Test;
-use OpenSSL::Test::Utils qw/anydisabled alldisabled disabled/;
+use OpenSSL::Test::Utils;
 setup("no_test_here");
 
 my @tls_protocols = ("SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2", "TLSv1.3");

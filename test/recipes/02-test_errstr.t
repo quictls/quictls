@@ -23,7 +23,7 @@ setup('test_errstr');
 # same error.
 # The safest is not to test under such circumstances.
 plan skip_all => 'This is unsupported for cross compiled configurations'
-    if config('CROSS_COMPILE');
+    unless disabled('cross_compile');
 
 # The same can be said when compiling OpenSSL with mingw configuration
 # on Windows when built with msys perl.  Similar problems are also observed

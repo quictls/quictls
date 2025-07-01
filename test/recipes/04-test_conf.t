@@ -21,7 +21,7 @@ my %input_result = (
 );
 
 plan skip_all => 'This is unsupported for cross compiled configurations'
-    if config('CROSS_COMPILE');
+    unless disabled('cross_compile');
 
 plan tests => 2 * scalar(keys %input_result);
 
