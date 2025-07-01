@@ -208,13 +208,15 @@ target_link_libraries(ssl-static PUBLIC crypto-static)
 #/* XXX NEED TO SET THESE */ include/crypto/dso_conf.h
 ## define DSO_DLFCN
 
-add_custom_target(test
-    COMMAND SRCTOP=${CMAKE_SOURCE_DIR} BLDTOP=${CMAKE_BINARY_DIR} perl ${CMAKE_SOURCE_DIR}/test/run_tests.pl
-	VERBATIM
-	USES_TERMINAL
-	)
-set_property(TARGET test PROPERTY EXCLUDE_FROM_ALL 1)
-add_dependencies(test build_tests)
+if (NOT OPENSSL_NO_TESTS)
+    add_custom_target(test
+        COMMAND SRCTOP=${CMAKE_SOURCE_DIR} BLDTOP=${CMAKE_BINARY_DIR} perl ${CMAKE_SOURCE_DIR}/test/run_tests.pl
+        VERBATIM
+        USES_TERMINAL
+        )
+    set_property(TARGET test PROPERTY EXCLUDE_FROM_ALL 1)
+    add_dependencies(test build_tests)
+endif ()
 
 include(hide_symbols.cmake)
 export_symbol(ssl libssl.sym)
