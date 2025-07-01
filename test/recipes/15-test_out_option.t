@@ -51,8 +51,8 @@ plan tests => 4;
 
 # Test 4
 SKIP: {
-    skip "It's not safe to use perl's idea of the NULL device in an explicitly cross compiled build", 1
-        unless (config('CROSS_COMPILE') // '') eq '';
+    skip "Can't use perl's idea of the NULL device in an explicitly cross compiled build", 1
+        unless disabled('cross_compile');
 
     my $path = File::Spec->canonpath(File::Spec->devnull());
     ok(run(app([ 'openssl', 'rand', '-out', $path, '1'])),

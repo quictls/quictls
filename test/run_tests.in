@@ -1,0 +1,21 @@
+#! /usr/bin/sh
+
+SRCTOP="${CMAKE_SOURCE_DIR}"
+export SRCTOP
+BLDTOP="${CMAKE_BINARY_DIR}"
+export BLDTOP
+
+if [ "$V" != "" ] ; then
+    HARNESS_VERBOSE=yes
+    export HARNESS_VERBOSE
+fi
+if [ "$VF" != "" ] ; then
+    HARNESS_VERBOSE_FAILURE=yes
+    export HARNESS_VERBOSE_FAILURE
+fi
+if [ "$VFP" != "" ] ; then
+    HARNESS_VERBOSE_FAILURE_PROGRESS=yes
+    export HARNESS_VERBOSE_FAILURE_PROGRESS
+fi
+
+exec perl ${CMAKE_SOURCE_DIR}/test/run_tests.pl "$@"

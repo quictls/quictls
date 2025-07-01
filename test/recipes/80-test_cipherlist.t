@@ -13,7 +13,7 @@ use warnings;
 
 use OpenSSL::Test::Simple;
 use OpenSSL::Test qw(:DEFAULT openssl_versions);
-use OpenSSL::Test::Utils qw(alldisabled available_protocols);
+use OpenSSL::Test::Utils;
 
 setup("test_cipherlist");
 

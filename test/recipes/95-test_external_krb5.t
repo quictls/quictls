@@ -15,7 +15,7 @@ use Cwd qw(abs_path);
 setup("test_external_krb5");
 
 plan skip_all => "No external tests in this configuration"
-    if disabled("external-tests");
+    if disabled("external_tests");
 plan skip_all => "krb5 not available"
     if ! -f srctop_file("krb5", "src", "configure.ac");
 

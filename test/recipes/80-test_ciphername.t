@@ -14,7 +14,7 @@ use warnings;
 
 use OpenSSL::Test::Simple;
 use OpenSSL::Test;
-use OpenSSL::Test::Utils qw(alldisabled available_protocols);
+use OpenSSL::Test::Utils;
 
 setup("test_ciphername");
 

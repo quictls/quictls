@@ -14,7 +14,7 @@ use OpenSSL::Test qw/:DEFAULT data_file bldtop_dir srctop_dir cmdstr/;
 setup("test_external_oqsprovider");
 
 plan skip_all => "No external tests in this configuration"
-    if disabled("external-tests");
+    if disabled("external_tests");
 plan skip_all => "oqsprovider tests not available on Windows"
     if $^O =~ /^(MSWin32)$/;
 plan skip_all => "oqsprovider tests only available in a shared build"

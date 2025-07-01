@@ -17,7 +17,7 @@ use warnings;
 use File::Basename;
 use File::Compare qw/compare_text/;
 use OpenSSL::Test qw/:DEFAULT srctop_dir srctop_file bldtop_file bldtop_dir/;
-use OpenSSL::Test::Utils qw/disabled alldisabled available_protocols/;
+use OpenSSL::Test::Utils;
 
 BEGIN {
 setup("test_ssl_new");

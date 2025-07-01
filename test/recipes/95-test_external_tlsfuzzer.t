@@ -15,7 +15,7 @@ use Cwd qw(abs_path);
 setup("test_external_tlsfuzzer");
 
 plan skip_all => "No external tests in this configuration"
-    if disabled("external-tests");
+    if disabled("external_tests");
 plan skip_all => "TLSFuzzer tests not available on Windows"
     if $^O =~ /^MSWin32$/;
 plan skip_all => "TLSFuzzer is not properly checked out"
