@@ -157,8 +157,6 @@ OSSL_ENCRYPTION_LEVEL SSL_quic_write_level(const SSL *ssl)
 int SSL_provide_quic_data(SSL *ssl, OSSL_ENCRYPTION_LEVEL level,
                           const uint8_t *data, size_t len)
 {
-    size_t l, fragment_length;;
-
     if (!SSL_is_quic(ssl)) {
         ERR_raise(ERR_LIB_SSL, ERR_R_SHOULD_NOT_HAVE_BEEN_CALLED);
         return 0;
@@ -179,8 +177,7 @@ int SSL_provide_quic_data(SSL *ssl, OSSL_ENCRYPTION_LEVEL level,
         return 1;
 
     /* A TLS message must not cross an encryption level boundary */
-    fragment_length = ssl->quic_buf != NULL
-                        ? fragment_length = ssl->quic_buf->length : 0;
+    size_t fragment_length = ssl->quic_buf != NULL ? ssl->quic_buf->length : 0;
     if (fragment_length != 0 && level != ssl->quic_latest_level_received) {
         ERR_raise(ERR_LIB_SSL, SSL_R_WRONG_ENCRYPTION_LEVEL_RECEIVED);
         return 0;
@@ -204,6 +201,7 @@ int SSL_provide_quic_data(SSL *ssl, OSSL_ENCRYPTION_LEVEL level,
     /* Split on handshake message boundaries */
     while (len > SSL3_HM_HEADER_LENGTH) {
         QUIC_DATA *qd;
+        size_t l;
         const uint8_t *p = data + 1;
 
         n2l3(p, l);
