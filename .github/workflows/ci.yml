@@ -12,6 +12,15 @@ on: [pull_request, push]
 jobs:
   check_tests:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
+    strategy:
+      matrix:
+        platform: [
+          { cc: gcc, cxx: g++ },
+          { cc: clang, cxx: clang++ }
+        ]
+    env:
+      CC: ${{ matrix.cc }}
+      CXX: ${{ matrix.cxx }}
     steps:
     - name: install tools
       run: |
