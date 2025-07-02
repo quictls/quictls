@@ -664,7 +664,6 @@ OSSL_DEPRECATEDIN_3_0 int ERR_load_X509V3_strings(void);
 #   define EC_F_EC_GROUP_GET_ECPKPARAMETERS                 0
 #   define EC_F_EC_GROUP_GET_PENTANOMIAL_BASIS              0
 #   define EC_F_EC_GROUP_GET_TRINOMIAL_BASIS                0
-#   define EC_F_EC_GROUP_NEW                                0
 #   define EC_F_EC_GROUP_NEW_BY_CURVE_NAME                  0
 #   define EC_F_EC_GROUP_NEW_FROM_DATA                      0
 #   define EC_F_EC_GROUP_NEW_FROM_ECPARAMETERS              0
