@@ -82,9 +82,7 @@ See L<OPENSSL_ia32cap(3)>, L<OPENSSL_s390xcap(3)>.
 
 =item B<RANDFILE>
 
-The state file for the random number generator.
-This should not be needed in normal use.
-See L<RAND_load_file(3)>.
+This value is ignored.
 
 =item B<SSL_CERT_DIR>, B<SSL_CERT_FILE>
 
