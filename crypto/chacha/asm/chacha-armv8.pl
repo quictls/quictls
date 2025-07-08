@@ -8,10 +8,10 @@
 
 #
 # ====================================================================
-# Written by Andy Polyakov <appro@openssl.org> for the OpenSSL
+# Written by Andy Polyakov, @dot-asm, initially for use in the OpenSSL
 # project. The module is, however, dual licensed under OpenSSL and
 # CRYPTOGAMS licenses depending on where you obtain it. For further
-# details see http://www.openssl.org/~appro/cryptogams/.
+# details see https://github.com/dot-asm/cryptogams/.
 # ====================================================================
 #
 # June 2015
@@ -149,7 +149,6 @@ $code.=<<___;
 .long	1,2,3,4
 .Lrot24:
 .long	0x02010003,0x06050407,0x0a09080b,0x0e0d0c0f
-.asciz	"ChaCha20 for ARMv8, CRYPTOGAMS by \@dot-asm"
 
 .globl	ChaCha20_ctr32_dflt
 .type	ChaCha20_ctr32_dflt,%function
