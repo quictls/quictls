@@ -38,7 +38,7 @@ B<openssl> B<rsa>
 [B<-pvk-strong>]
 [B<-pvk-weak>]
 [B<-pvk-none>]
-[B<-engine> I<id>]
+#include engine_synopsis
 #include provider_synopsis
 
 =head1 DESCRIPTION

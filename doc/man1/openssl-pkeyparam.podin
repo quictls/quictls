@@ -13,7 +13,7 @@ B<openssl> B<pkeyparam>
 [B<-text>]
 [B<-noout>]
 [B<-check>]
-[B<-engine> I<id>]
+#include engine_synopsis
 #include provider_synopsis
 
 =head1 DESCRIPTION

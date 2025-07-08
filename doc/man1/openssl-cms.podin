@@ -56,9 +56,9 @@ Keys and password options:
 [B<-passin> I<arg>]
 [B<-keyopt> I<name>:I<parameter>]
 [B<-keyform> B<DER>|B<PEM>|B<P12>|B<ENGINE>]
-[B<-engine> I<id>]
+#include engine_synopsis
 #include provider_synopsis
-#include r_synopsis
+#include randstate_synopsis
 
 Encryption options:
 
@@ -120,7 +120,7 @@ Printing options:
 
 Validation options:
 
-#include v_synopsis
+#include certverify_synopsis
 
 =head1 DESCRIPTION
 
@@ -374,7 +374,7 @@ See L<openssl-format-options(1)> for details.
 
 #include provider_item
 
-#include r_item
+#include randstate_item
 
 =back
 
@@ -628,7 +628,7 @@ requests.
 
 =over 4
 
-#include v_item
+#include certverify_item
 
 Any validation errors cause the command to exit.
 
