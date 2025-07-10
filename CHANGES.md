@@ -67,6 +67,8 @@ data format have been removed.
 library number is dynamic not static.
   - The unused and undocumented `BIO_f_linebuffer`, `BIO_f_reliable`, and
 `BIO_s_log` now return NULL.
+  - Add the missing X509_CRL_get0_tbs_sig() API to access the algorithm
+identifier in the signed portion of a CRL.
 
 - Header files were reorganized:
   - The redundant `#pragma once` and old-style header guards were removed.
