@@ -5,7 +5,8 @@
 X509_get0_signature, X509_REQ_set0_signature, X509_REQ_set1_signature_algo,
 X509_get_signature_nid, X509_get0_tbs_sigalg, X509_REQ_get0_signature,
 X509_REQ_get_signature_nid, X509_CRL_get0_signature, X509_CRL_get_signature_nid,
-X509_get_signature_info, X509_SIG_INFO_get, X509_SIG_INFO_set - signature information
+X509_CRL_get0_tbs_sigalg, X509_get_signature_info,
+X509_SIG_INFO_get, X509_SIG_INFO_set - signature information
 
 =head1 SYNOPSIS
 
@@ -28,6 +29,7 @@ X509_get_signature_info, X509_SIG_INFO_get, X509_SIG_INFO_set - signature inform
                               const ASN1_BIT_STRING **psig,
                               const X509_ALGOR **palg);
  int X509_CRL_get_signature_nid(const X509_CRL *crl);
+ const X509_ALGOR *X509_CRL_get0_tbs_sigalg(const X509_crl *crl);
 
  int X509_get_signature_info(X509 *x, int *mdnid, int *pknid, int *secbits,
                              uint32_t *flags);
@@ -46,8 +48,8 @@ pointers which B<MUST NOT> be freed up after the call.
 X509_set0_signature() and X509_REQ_set1_signature_algo() are the
 equivalent setters for the two values of X509_get0_signature().
 
-X509_get0_tbs_sigalg() returns the signature algorithm in the signed
-portion of B<x>.
+X509_get0_tbs_sigalg() and X509_CRL_get0_tbs_sigalg() return the signature
+algorithm in the signed portion of the certificate or CRL.
 
 X509_get_signature_nid() returns the NID corresponding to the signature
 algorithm of B<x>.
@@ -129,6 +131,8 @@ added in OpenSSL 1.1.0.
 
 The X509_REQ_set0_signature() and X509_REQ_set1_signature_algo()
 were added in OpenSSL 1.1.1e.
+
+The X509_CRL_get0_tbs_sigalg() function was added in OpenSSL 3.6.
 
 =head1 COPYRIGHT
 

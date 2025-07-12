@@ -69,6 +69,8 @@ library number is dynamic not static.
 `BIO_s_log` now return NULL.
   - Removed `OPENSSL_instrument_bus`, `OPENSSL_instrument_bus2`, and
 `OPENSSL_wipe_cpu` functions.
+  - Add the missing X509_CRL_get0_tbs_sig() API to access the algorithm
+identifier in the signed portion of a CRL.
 
 - Header files were reorganized:
   - The redundant `#pragma once` and old-style header guards were removed.
