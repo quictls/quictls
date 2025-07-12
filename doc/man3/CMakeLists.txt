@@ -85,7 +85,7 @@ set(SOURCE
     OPENSSL_Applink.pod OPENSSL_FILE.pod OPENSSL_LH_COMPFUNC.pod
     OPENSSL_LH_stats.pod OPENSSL_config.pod OPENSSL_fork_prepare.pod
     OPENSSL_gmtime.pod OPENSSL_hexchar2int.pod OPENSSL_ia32cap.pod
-    OPENSSL_init_crypto.pod OPENSSL_init_ssl.pod OPENSSL_instrument_bus.pod
+    OPENSSL_init_crypto.pod OPENSSL_init_ssl.pod
     OPENSSL_load_builtin_modules.pod OPENSSL_malloc.pod
     OPENSSL_s390xcap.pod OPENSSL_secure_malloc.pod OPENSSL_strcasecmp.pod
     OSSL_ALGORITHM.pod OSSL_CALLBACK.pod OSSL_CMP_CTX_new.pod
