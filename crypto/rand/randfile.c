@@ -76,8 +76,7 @@ int RAND_write_file(const char *file)
 
     fclose(out);
     OPENSSL_cleanse(buff, sizeof buff);
-    return (int)sizeof buff;;
-
+    return (int)sizeof buff;
 }
 
 const char *RAND_file_name(char *buff, size_t size)
