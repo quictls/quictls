@@ -324,8 +324,6 @@ int enc_main(int argc, char **argv)
     /* No extra arguments. */
     if (!opt_check_rest_arg(NULL))
         goto opthelp;
-    if (!app_RAND_load())
-        goto end;
     if (saltlen == 0 || pbkdf2 == 0)
         saltlen = PKCS5_SALT_LEN;
 

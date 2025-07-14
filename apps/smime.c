@@ -392,9 +392,6 @@ int smime_main(int argc, char **argv)
     argc = opt_num_rest();
     argv = opt_rest();
 
-    if (!app_RAND_load())
-        goto end;
-
     if (digestname != NULL) {
         if (!opt_md(digestname, &sign_md))
             goto opthelp;
