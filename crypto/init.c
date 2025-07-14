@@ -213,7 +213,6 @@ DEFINE_RUN_ONCE_STATIC_ALT(ossl_init_no_load_ssl_strings,
     return 1;
 }
 
-
 static CRYPTO_ONCE add_all_ciphers = CRYPTO_ONCE_STATIC_INIT;
 DEFINE_RUN_ONCE_STATIC(ossl_init_add_all_ciphers)
 {
