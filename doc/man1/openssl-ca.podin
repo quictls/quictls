@@ -62,8 +62,8 @@ B<openssl> B<ca>
 [B<-create_serial>]
 [B<-rand_serial>]
 [B<-multivalue-rdn>]
-#include r_synopsis
-[B<-engine> I<id>]
+#include randstate_synopsis
+#include engine_synopsis
 #include provider_synopsis
 [I<certreq>...]
 
@@ -341,7 +341,7 @@ This overrides any option or configuration to use a serial number file.
 
 This option has been deprecated and has no effect.
 
-#include r_item
+#include randstate_item
 
 #include engine_item
 

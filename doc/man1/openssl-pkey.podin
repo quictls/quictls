@@ -25,7 +25,7 @@ B<openssl> B<pkey>
 [B<-text_pub>]
 [B<-ec_conv_form> I<arg>]
 [B<-ec_param_enc> I<arg>]
-[B<-engine> I<id>]
+#include engine_synopsis
 #include provider_synopsis
 
 =head1 DESCRIPTION

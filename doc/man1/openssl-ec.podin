@@ -26,7 +26,7 @@ B<openssl> B<ec>
 [B<-param_enc> I<arg>]
 [B<-no_public>]
 [B<-check>]
-[B<-engine> I<id>]
+#include engine_synopsis
 #include provider_synopsis
 
 =head1 DESCRIPTION

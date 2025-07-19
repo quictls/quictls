@@ -24,8 +24,8 @@ B<openssl> B<gendsa>
 [B<-idea>]
 [B<-verbose>]
 [B<-quiet>]
-[B<-engine> I<id>]
-#include r_synopsis
+#include randstate_synopsis
+#include engine_synopsis
 #include provider_synopsis
 [I<paramfile>]
 
@@ -69,7 +69,7 @@ Print extra details about the operations being performed.
 Print fewer details about the operations being performed, which may
 be handy during batch scripts and pipelines.
 
-#include r_item
+#include randstate_item
 
 #include engine_item
 

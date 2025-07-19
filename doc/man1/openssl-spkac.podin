@@ -20,7 +20,7 @@ B<openssl> B<spkac>
 [B<-spksect> I<section>]
 [B<-noout>]
 [B<-verify>]
-[B<-engine> I<id>]
+#include engine_synopsis
 #include provider_synopsis
 
 =head1 DESCRIPTION
