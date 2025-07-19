@@ -116,16 +116,16 @@ B<openssl> B<s_client>
 [B<-tfo>]
 [B<-enable_server_rpk>]
 [B<-enable_client_rpk>]
-[B<-engine> I<id>]
 #include name_synopsis
-#include version_synopsis
-#include x_synopsis
 #include trust_synopsis
-#include s_synopsis
-#include r_synopsis
-#include provider_synopsis
+#include certverify_synopsis
+#include extverify_synopsis
+#include version_synopsis
+#include connoptions_synopsis
+#include randstate_synopsis
+#include engine_synopsis
 [B<-ssl_client_engine> I<id>]
-#include v_synopsis
+#include provider_synopsis
 [I<host>:I<port>]
 
 =head1 DESCRIPTION
@@ -755,19 +755,19 @@ Kernel TLS is off by default as of OpenSSL 3.2.0.
 
 Enable creation of connections via TCP fast open (RFC7413).
 
-#include version_item
-
 #include name_item
-
-#include x_item
 
 #include trust_item
 
-#include s_item
+#include certverify_item
 
-#include r_item
+#include extverify_item
 
-#include provider_item
+#include version_item
+
+#include connoptions_item
+
+#include randstate_item
 
 #include engine_item
 
@@ -775,7 +775,7 @@ Enable creation of connections via TCP fast open (RFC7413).
 
 Specify engine to be used for client certificate operations.
 
-#include v_item
+#include provider_item
 
 Verification errors are displayed, for debugging, but the command will
 proceed unless the B<-verify_return_error> option is used.

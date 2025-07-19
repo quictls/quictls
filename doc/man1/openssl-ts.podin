@@ -21,7 +21,7 @@ B<-query>
 [B<-in> I<request.tsq>]
 [B<-out> I<request.tsq>]
 [B<-text>]
-#include r_synopsis
+#include randstate_synopsis
 #include provider_synopsis
 
 B<openssl> B<ts>
@@ -40,7 +40,7 @@ B<-reply>
 [B<-out> I<response.tsr>]
 [B<-token_out>]
 [B<-text>]
-[B<-engine> I<id>]
+#include engine_synopsis
 #include provider_synopsis
 
 B<openssl> B<ts>
@@ -54,7 +54,7 @@ B<-verify>
 [B<-CAfile> I<file>]
 [B<-CApath> I<dir>]
 [B<-CAstore> I<uri>]
-#include v_synopsis
+#include certverify_synopsis
 #include provider_synopsis
 
 =head1 DESCRIPTION
@@ -189,7 +189,7 @@ is stdout. (Optional)
 If this option is specified the output is human-readable text format
 instead of DER. (Optional)
 
-#include r_item
+#include randstate_item
 
 =back
 
@@ -352,7 +352,7 @@ Each file may contain multiple certificates.
 See L<openssl-verification-options(1)/Trusted Certificate Options> for details.
 At least one of B<-CAfile>, B<-CApath> or B<-CAstore> must be specified.
 
-#include v_item
+#include certverify_item
 
 Any verification errors cause the command to exit.
 

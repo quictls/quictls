@@ -21,8 +21,8 @@ B<openssl dhparam>
 [B<-2>]
 [B<-3>]
 [B<-5>]
-[B<-engine> I<id>]
-#include r_synopsis
+#include randstate_synopsis
+#include engine_synopsis
 #include provider_synopsis
 [I<numbits>]
 
@@ -99,9 +99,9 @@ This option inhibits the output of the encoded version of the parameters.
 
 This option prints out the DH parameters in human readable form.
 
-#include engine_item
+#include randstate_item
 
-#include r_item
+#include engine_item
 
 #include provider_item
 

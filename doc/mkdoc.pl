@@ -12,7 +12,8 @@ use warnings;
 # A simple script to insert common option information into a manpage.
 
 my %texts = (
-v_synopsis => ""
+    # Certificate validation options.
+certverify_synopsis => ""
     . "[B<-allow_proxy_certs>]\n"
     . "[B<-attime> I<timestamp>]\n"
     . "[B<-no_check_time>]\n"
@@ -43,7 +44,7 @@ v_synopsis => ""
     . "[B<-verify_name> I<name>]\n"
     . "[B<-x509_strict>]\n"
     . "[B<-issuer_checks>]",
-v_item => "\n"
+certverify_item => "\n"
     . "=item B<-allow_proxy_certs>, B<-attime>, B<-no_check_time>,\n"
     . "B<-check_ss_sig>, B<-crl_check>, B<-crl_check_all>,\n"
     . "B<-explicit_policy>, B<-extended_crl>, B<-ignore_critical>, B<-inhibit_any>,\n"
@@ -56,20 +57,21 @@ v_item => "\n"
     . "Set various options of certificate chain verification.\n"
     . "See L<openssl-verification-options(1)/Verification Options> for details.",
     # Extended validation options.
-x_synopsis => ""
+extverify_synopsis => ""
     . "[B<-xkey> I<infile>]\n"
     . "[B<-xcert> I<file>]\n"
     . "[B<-xchain> I<file>]\n"
     . "[B<-xchain_build> I<file>]\n"
     . "[B<-xcertform> B<DER>|B<PEM>]>\n"
     . "[B<-xkeyform> B<DER>|B<PEM>]>",
-x_item => "\n"
+extverify_item => "\n"
     . "=item B<-xkey> I<infile>, B<-xcert> I<file>, B<-xchain> I<file>,\n"
     . "B<-xchain_build> I<file>, B<-xcertform> B<DER>|B<PEM>,\n"
     . "B<-xkeyform> B<DER>|B<PEM>\n"
     . "\n"
     . "Set extended certificate verification options.\n"
     . "See L<openssl-verification-options(1)/Extended Verification Options> for details.",
+
     # Name output options
 name_synopsis => ""
     . "[B<-nameopt> I<option>]",
@@ -78,14 +80,16 @@ name_item => "\n"
     . "\n"
     . "This specifies how the subject or issuer names are displayed.\n"
     . "See L<openssl-namedisplay-options(1)> for details.",
+
     # Random State Options
-r_synopsis => ""
+randstate_synopsis => ""
     . "[B<-rand> I<files>]\n"
     . "[B<-writerand> I<file>]",
-r_item => "\n"
+randstate_item => "\n"
     . "=item B<-rand> I<files>, B<-writerand> I<file>\n"
     . "\n"
     . "See L<openssl(1)/Random State Options> for details.",
+
     # Provider options
 provider_synopsis => ""
     . "[B<-provider> I<name>]\n"
@@ -99,6 +103,7 @@ provider_item => "\n"
     . "=item B<-propquery> I<propq>\n"
     . "\n"
     . "See L<openssl(1)/Provider Options>, L<provider(7)>, and L<property(7)>.",
+
     # Configuration option
 config_synopsis => ""
     . "[B<-config> I<configfile>]",
@@ -106,12 +111,19 @@ config_item => "\n"
     . "=item B<-config> I<configfile>\n"
     . "\n"
     . "See L<openssl(1)/Configuration Option>.",
-    # Engine option
+
+    # Engine options
+engine_synopsis => ""
+    . "[B<-engine> I<id>]",
 engine_item => "\n"
       . "=item B<-engine> I<id>\n"
       . "\n"
       . "See L<openssl(1)/Engine Options>.\n"
       . "This option is deprecated.",
+engineimpl_synopsis => ""
+    . "[B<-engine> I<id>]\n",
+    . "[B<-engine_impl> I<id>]",
+
     # Trusted certs options
 trust_synopsis => ""
     . "[B<-CAfile> I<file>]\n"
@@ -125,7 +137,8 @@ trust_item => "\n"
     . "B<-CAstore> I<uri>, B<-no-CAstore>\n"
     . "\n"
     . "See L<openssl-verification-options(1)/Trusted Certificate Options> for details.",
-    # TLS Version Options
+
+    # TLS Version Options (TLS/DTLS versions set below)
 versiontls_synopsis => ""
     . "[B<-no_ssl3>]\n"
     . "[B<-no_tls1>]\n"
@@ -142,9 +155,9 @@ versiontls_item => "\n"
     . "B<-ssl3>, B<-tls1>, B<-tls1_1>, B<-tls1_2>, B<-tls1_3>\n"
     . "\n"
     . "See L<openssl(1)/TLS Version Options>.",
-    # TLS/DTLS Version Options
+
     # SSL connection options.
-s_synopsis => ""
+connoptions_synopsis => ""
     . "[B<-bugs>]\n"
     . "[B<-no_comp>]\n"
     . "[B<-comp>]\n"
@@ -173,7 +186,7 @@ s_synopsis => ""
     . "[B<-record_padding> I<padding>]\n"
     . "[B<-debug_broken_protocol>]\n"
     . "[B<-no_middlebox>]",
-s_item => "\n"
+connoptions_item => "\n"
     . "=item B<-bugs>, B<-comp>, B<-no_comp>, B<-no_ticket>, B<-serverpref>,\n"
     . "B<-client_renegotiation>,\n"
     . "B<-legacy_renegotiation>, B<-no_renegotiation>,\n"
@@ -189,6 +202,7 @@ s_item => "\n"
     . "See L<SSL_CONF_cmd(3)/SUPPORTED COMMAND LINE COMMANDS> for details.",
 );
 
+    # TLS/DTLS Version Options set below
 $texts{"version_synopsis"} = ""
     . $texts{versiontls_synopsis}. "\n"
     . "[B<-dtls>]\n"

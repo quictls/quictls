@@ -53,9 +53,9 @@ B<openssl> B<req>
 [B<-batch>]
 [B<-verbose>]
 [B<-quiet>]
-[B<-engine> I<id>]
 #include name_synopsis
-#include r_synopsis
+#include randstate_synopsis
+#include engine_synopsis
 #include provider_synopsis
 
 =head1 DESCRIPTION
@@ -418,7 +418,7 @@ for key generation operations.
 
 #include name_item
 
-#include r_item
+#include randstate_item
 
 #include engine_item
 

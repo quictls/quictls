@@ -77,8 +77,8 @@ B<openssl> B<x509>
 [B<-addtrust> I<arg>]
 [B<-clrreject>]
 [B<-addreject> I<arg>]
-[B<-engine> I<id>]
-#include r_synopsis
+#include randstate_synopsis
+#include engine_synopsis
 #include provider_synopsis
 
 =head1 DESCRIPTION
@@ -606,7 +606,7 @@ It accepts the same values as the B<-addtrust> option.
 
 =over 4
 
-#include r_item
+#include randstate_item
 
 #include engine_item
 
