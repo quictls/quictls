@@ -13,8 +13,7 @@
 /tmp.*
 /configdata.pm
 /builddata.pm
-/cmake/include/**
-/cmake/**
+/cmake.*
 
 # Exporters
 /*.pc
