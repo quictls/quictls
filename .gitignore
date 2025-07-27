@@ -15,6 +15,11 @@
 /builddata.pm
 /cmake.*
 
+# CMake related
+cmake_install.cmake
+CMakeFiles
+CMakeCache.txt
+
 # Exporters
 /*.pc
 /OpenSSLConfig*.cmake
