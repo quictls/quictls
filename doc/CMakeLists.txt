@@ -1,60 +1,52 @@
 set(SUBDIRS man1 man3 man5 man7)
 
+# Put a list of all the names into ${OUTPUT_VARIABLE}
+function (get_manpage_names filename OUTPUT_VARIABLE)
+    file(STRINGS ${filename} LINES LIMIT_COUNT 30 NEWLINE_CONSUME)
+    list(JOIN LINES "" MANPAGE_CONTENTS)
+    string(REGEX MATCH "=head1 NAME([^=]*)=head1" dummy ${MANPAGE_CONTENTS})
+    string(REGEX REPLACE "[\n, ]+" " " NAMES ${CMAKE_MATCH_1})
+    string(REGEX REPLACE " - .*" "" NAMES ${NAMES})
+    string(STRIP ${NAMES} NAMES)
+    string(REPLACE " " ";" NAMES ${NAMES})
+    set(${OUTPUT_VARIABLE} ${NAMES} PARENT_SCOPE)
+endfunction ()
+
+# The variable named in ${VARNAME} has all the files for section ${SEC}.
+# Run pod2man and turn foo.pod into pod.${SEC}
 function (makeman SEC VARNAME)
     set(manX man${SEC})
     set(listvar ${${VARNAME}})
     set(MANPAGES)
     foreach (F ${listvar})
+        # Look for each file in source or binary (if generated) directory.
         set(in ${CMAKE_SOURCE_DIR}/doc/${manX}/${F})
         if (NOT EXISTS ${in})
             set(in ${CMAKE_BINARY_DIR}/doc/${manX}/${F})
         endif ()
         string(REPLACE .pod .${SEC} out ${F})
         add_custom_command(COMMENT "Generating ${out}"
-            OUTPUT ${out} DEPENDS ${F}
+            OUTPUT ${out} DEPENDS ${in}
             COMMAND ${POD2MAN} ${in} ${out}
             VERBATIM)
         list(APPEND MANPAGES ${out})
+        if (${SEC} MATCHES "[37]")
+           # Now create .so files for all alternate names
+           get_manpage_names(${in} NAMES)
+           cmake_path(GET in STEM main)
+           foreach (name ${NAMES})
+               if (NOT name STREQUAL main)
+                   set(target "${name}.${SEC}")
+                   add_custom_command(COMMENT "Symlinking ${target}"
+                       OUTPUT ${target}
+                       COMMAND ${CMAKE_COMMAND} -E create_symlink ${out} ${target})
+                   list(APPEND MANPAGES ${target})
+                endif ()
+             endforeach ()
+        endif ()
     endforeach ()
     add_custom_target(${manX} DEPENDS ${MANPAGES})
     install(FILES ${MANPAGES} DESTINATION ${MANDIR}/${manX})
-    installsymlinks(${MANPAGES} ${SEC})
-endfunction ()
-
-function(parse_manpage_name MANPAGE_PATH OUTPUT_VARIABLE)
-    #file(READ "${MANPAGE_PATH}" MANPAGE_CONTENTS)
-    file(STRINGS "${MANPAGE_PATH}" MANPAGE_CONTENTS
-        LIMIT_COUNT 100 NEWLINE_CONSUME)
-
-  string(REGEX MATCH "NAME\\s*\\n\\s*(.*)\\n" NAME_SECTION "${MANPAGE_CONTENTS}")
-  if(NAME_SECTION)
-    string(REGEX REPLACE "NAME\\s*\\n\\s*" "" NAME_SECTION "${NAME_SECTION}")
-    string(REGEX REPLACE "\\n.*" "" NAME_SECTION "${NAME_SECTION}")
-    string(STRIP "${NAME_SECTION}" PARSED_NAME)
-    set("${OUTPUT_VARIABLE}" "${PARSED_NAME}" PARENT_SCOPE)
-  else()
-    set("${OUTPUT_VARIABLE}" "" PARENT_SCOPE)
-  endif()
-endfunction()
-
-# Example Usage
-#set(MANPAGE_FILE "path/to/your/manpage.1")
-#parse_manpage_name("${MANPAGE_FILE}" MANPAGE_NAME)
-
-#if(MANPAGE_NAME)
-#  message("Manpage Name: ${MANPAGE_NAME}")
-#else()
-#  message(WARNING "Could not parse NAME section from ${MANPAGE_FILE}")
-#endif()
-
-function (installsymlinks MANPAGES SEC)
-    #    install(CODE
-    #    "execute_process( \
-    #COMMAND ${CMAKE_COMMAND} -E create_symlink \
-    #${target} \
-    #${link}   \
-    #)"
-    #)
 endfunction ()
 
 foreach (SD ${SUBDIRS})
