@@ -1,6 +1,6 @@
 #
-project(QuicTLS)
 cmake_minimum_required(VERSION 3.21)
+project(QuicTLS)
 enable_language(C ASM)
 
 # Build time, or epoch for reproducible
