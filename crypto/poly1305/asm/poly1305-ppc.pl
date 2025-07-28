@@ -1959,9 +1959,6 @@ LPICmeup:
 .quad	0x0000000000000000,0xffffffff00000000
 ___
 }}}
-$code.=<<___;
-.asciz	"Poly1305 for PPC, CRYPTOGAMS by \@dot-asm"
-___
 
 foreach (split("\n",$code)) {
 	s/\`([^\`]*)\`/eval($1)/ge;
