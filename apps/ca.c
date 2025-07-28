@@ -526,10 +526,6 @@ end_of_options:
     if (!add_oid_section(conf))
         goto end;
 
-    app_RAND_load_conf(conf, BASE_SECTION);
-    if (!app_RAND_load())
-        goto end;
-
     f = app_conf_try_string(conf, section, STRING_MASK);
     if (f != NULL && !ASN1_STRING_set_default_mask_asc(f)) {
         BIO_printf(bio_err, "Invalid global string mask setting %s\n", f);

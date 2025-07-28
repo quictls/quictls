@@ -604,9 +604,6 @@ int x509_main(int argc, char **argv)
     if (!opt_check_rest_arg(NULL))
         goto opthelp;
 
-    if (!app_RAND_load())
-        goto end;
-
     if (!opt_check_md(digest))
         goto opthelp;
 
