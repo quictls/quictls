@@ -21,7 +21,7 @@
 static size_t crv_len = 0;
 static EC_builtin_curve *curves = NULL;
 
-/* sanity checks field_inv function pointer in EC_METHOD */
+/* sanity checks field_inv function pointer in implementation */
 static int group_field_tests(const EC_GROUP *group, BN_CTX *ctx)
 {
     BIGNUM *a = NULL, *b = NULL, *c = NULL;
@@ -69,71 +69,6 @@ static int group_field_tests(const EC_GROUP *group, BN_CTX *ctx)
  err:
     BN_CTX_end(ctx);
     return ret;
-}
-
-/* wrapper for group_field_tests for explicit curve params and EC_METHOD */
-static int field_tests(const EC_METHOD *meth, const unsigned char *params,
-                       int len)
-{
-    BN_CTX *ctx = NULL;
-    BIGNUM *p = NULL, *a = NULL, *b = NULL;
-    EC_GROUP *group = NULL;
-    int ret = 0;
-
-    if (!TEST_ptr(ctx = BN_CTX_new()))
-        return 0;
-
-    BN_CTX_start(ctx);
-    p = BN_CTX_get(ctx);
-    a = BN_CTX_get(ctx);
-    if (!TEST_ptr(b = BN_CTX_get(ctx))
-        || !TEST_ptr(group = EC_GROUP_new(meth))
-        || !TEST_true(BN_bin2bn(params, len, p))
-        || !TEST_true(BN_bin2bn(params + len, len, a))
-        || !TEST_true(BN_bin2bn(params + 2 * len, len, b))
-        || !TEST_true(EC_GROUP_set_curve(group, p, a, b, ctx))
-        || !group_field_tests(group, ctx))
-        goto err;
-    ret = 1;
-
- err:
-    BN_CTX_end(ctx);
-    BN_CTX_free(ctx);
-    if (group != NULL)
-        EC_GROUP_free(group);
-    return ret;
-}
-
-/* NIST prime curve P-256 */
-static const unsigned char params_p256[] = {
-    /* p */
-    0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    /* a */
-    0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC,
-    /* b */
-    0x5A, 0xC6, 0x35, 0xD8, 0xAA, 0x3A, 0x93, 0xE7, 0xB3, 0xEB, 0xBD, 0x55,
-    0x76, 0x98, 0x86, 0xBC, 0x65, 0x1D, 0x06, 0xB0, 0xCC, 0x53, 0xB0, 0xF6,
-    0x3B, 0xCE, 0x3C, 0x3E, 0x27, 0xD2, 0x60, 0x4B
-};
-
-/* test EC_GFp_simple_method directly */
-static int field_tests_ecp_simple(void)
-{
-    TEST_info("Testing EC_GFp_simple_method()\n");
-    return field_tests(EC_GFp_simple_method(), params_p256,
-                       sizeof(params_p256) / 3);
-}
-
-/* test EC_GFp_mont_method directly */
-static int field_tests_ecp_mont(void)
-{
-    TEST_info("Testing EC_GFp_mont_method()\n");
-    return field_tests(EC_GFp_mont_method(), params_p256,
-                       sizeof(params_p256) / 3);
 }
 
 /* test default method for a named curve */
@@ -279,13 +214,6 @@ static int decoded_flag_test(void)
     int encodedlen;
     int testresult = 0;
 
-    /* Test EC_GROUP_new not setting the flag */
-    grp = EC_GROUP_new(EC_GFp_simple_method());
-    if (!TEST_ptr(grp)
-        || !TEST_int_eq(grp->decoded_from_explicit_params, 0))
-        goto err;
-    EC_GROUP_free(grp);
-
     /* Test EC_GROUP_new_by_curve_name not setting the flag */
     grp = EC_GROUP_new_by_curve_name(NID_X9_62_prime256v1);
     if (!TEST_ptr(grp)
@@ -412,8 +340,6 @@ int setup_tests(void)
         || !TEST_true(EC_get_builtin_curves(curves, crv_len)))
         return 0;
 
-    ADD_TEST(field_tests_ecp_simple);
-    ADD_TEST(field_tests_ecp_mont);
     ADD_ALL_TESTS(field_tests_default, crv_len);
 #ifndef OPENSSL_NO_EC_NISTP_64_GCC_128
     ADD_TEST(underflow_test);
