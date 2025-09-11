@@ -38,15 +38,9 @@ int FuzzerTestOneInput(const uint8_t *buf, size_t len)
 	BIO_write(in, header, strlen(header));
 	BIO_write(in, data, outlen);
     }
-    if (buf[0] & PEM_FLAG_SECURE) {
-        OPENSSL_secure_free(name);
-        OPENSSL_secure_free(header);
-        OPENSSL_secure_free(data);
-    } else {
-        OPENSSL_free(name);
-        OPENSSL_free(header);
-        OPENSSL_free(data);
-    }
+    OPENSSL_free(name);
+    OPENSSL_free(header);
+    OPENSSL_free(data);
 
     BIO_free(in);
     ERR_clear_error();

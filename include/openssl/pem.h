@@ -371,7 +371,7 @@ int PEM_do_header(EVP_CIPHER_INFO *cipher, unsigned char *data, long *len,
 
 int PEM_read_bio(BIO *bp, char **name, char **header,
                  unsigned char **data, long *len);
-#   define PEM_FLAG_SECURE             0x1
+#   define PEM_FLAG_SECURE             0x0
 #   define PEM_FLAG_EAY_COMPATIBLE     0x2
 #   define PEM_FLAG_ONLY_B64           0x4
 int PEM_read_bio_ex(BIO *bp, char **name, char **header,
