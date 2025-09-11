@@ -9,7 +9,7 @@ PEM_FLAG_ONLY_B64 - read PEM format files with custom processing
 
  #include <openssl/pem.h>
 
- #define PEM_FLAG_SECURE             0x1
+ #define PEM_FLAG_SECURE             0x0
  #define PEM_FLAG_EAY_COMPATIBLE     0x2
  #define PEM_FLAG_ONLY_B64           0x4
  int PEM_read_bio_ex(BIO *in, char **name, char **header,
@@ -24,8 +24,7 @@ It should generally only be used to implement PEM_read_bio_-family functions
 for specific data types or other usage, but is exposed to allow greater flexibility
 over how processing is performed, if needed.
 
-If PEM_FLAG_SECURE is set, the intermediate buffers used to read in lines of
-input are allocated from the secure heap.
+PEM_FLAG_SECURE is ignored.
 
 If PEM_FLAG_EAY_COMPATIBLE is set, a simple algorithm is used to remove whitespace
 and control characters from the end of each line, so as to be compatible with
@@ -43,8 +42,6 @@ these options are not compatible with each other.
 =head1 NOTES
 
 The caller must release the storage allocated for *name, *header, and *data.
-If PEM_FLAG_SECURE was set, use OPENSSL_secure_free(); otherwise,
-OPENSSL_free() is used.
 
 =head1 RETURN VALUES
 
