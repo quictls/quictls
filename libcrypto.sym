@@ -3884,7 +3884,6 @@ PEM_ASN1_read_bio
 PEM_ASN1_write
 PEM_ASN1_write_bio
 PEM_bytes_read_bio
-PEM_bytes_read_bio_secmem
 PEM_def_callback
 PEM_dek_info
 PEM_do_header

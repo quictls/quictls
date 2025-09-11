@@ -268,13 +268,6 @@ int PEM_bytes_read_bio(unsigned char **pdata, long *plen, char **pnm,
                                     PEM_FLAG_EAY_COMPATIBLE);
 }
 
-int PEM_bytes_read_bio_secmem(unsigned char **pdata, long *plen, char **pnm,
-                              const char *name, BIO *bp, pem_password_cb *cb,
-                              void *u) {
-    return pem_bytes_read_bio_flags(pdata, plen, pnm, name, bp, cb, u,
-                                    PEM_FLAG_SECURE | PEM_FLAG_EAY_COMPATIBLE);
-}
-
 #ifndef OPENSSL_NO_STDIO
 int PEM_ASN1_write(i2d_of_void *i2d, const char *name, FILE *fp,
                    const void *x, const EVP_CIPHER *enc,

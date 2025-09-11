@@ -111,9 +111,8 @@ static EVP_PKEY *pem_read_bio_key_legacy(BIO *bp, EVP_PKEY **x,
 
     ERR_set_mark();  /* not interested in PEM read errors */
     if ((selection & OSSL_KEYMGMT_SELECT_PRIVATE_KEY) != 0) {
-        if (!PEM_bytes_read_bio_secmem(&data, &len, &nm,
-                                       PEM_STRING_EVP_PKEY,
-                                       bp, cb, u)) {
+        if (!PEM_bytes_read_bio(&data, &len, &nm, PEM_STRING_EVP_PKEY,
+                                bp, cb, u)) {
             ERR_pop_to_mark();
             return NULL;
          }
@@ -206,8 +205,8 @@ static EVP_PKEY *pem_read_bio_key_legacy(BIO *bp, EVP_PKEY **x,
         /* ensure some error is reported but do not hide the real one */
         ERR_raise(ERR_LIB_PEM, ERR_R_ASN1_LIB);
  err:
-    OPENSSL_secure_free(nm);
-    OPENSSL_secure_clear_free(data, len);
+    OPENSSL_free(nm);
+    OPENSSL_free(data);
     return ret;
 }
 
