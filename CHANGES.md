@@ -55,7 +55,7 @@ removed the undocumented and otherwise unused "test non-blocking IO" BIO.
 - Several API changes were made:
   - The undocumented function `X509_OBJECT_up_ref_count` has been
 made private.
-  - Remove some depecrated (3.0) undocumented functions that were just
+  - Remove some deprecrated (3.0) undocumented functions that were just
 aliases for others: `BUF_strdup`, `BUF_strndup`, `BUF_memdup`,
 `BUF_strlcpy`, `BUF_strlcat`, and `BUF_strnlen`.
   - Removed some functions deprecated in the OpenSSL 1.1.0 release:
@@ -79,6 +79,7 @@ library number is dynamic not static.
 `OPENSSL_wipe_cpu` functions.
   - Add the missing X509_CRL_get0_tbs_sig() API to access the algorithm
 identifier in the signed portion of a CRL.
+  - Remove PEM_read_bio_secmem and PEM_FLAG_SECURE.
 
 - Header files were reorganized:
   - The redundant `#pragma once` and old-style header guards were removed.

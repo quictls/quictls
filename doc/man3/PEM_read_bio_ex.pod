@@ -2,14 +2,13 @@
 
 =head1 NAME
 
-PEM_read_bio_ex, PEM_FLAG_SECURE, PEM_FLAG_EAY_COMPATIBLE,
+PEM_read_bio_ex, PEM_FLAG_EAY_COMPATIBLE,
 PEM_FLAG_ONLY_B64 - read PEM format files with custom processing
 
 =head1 SYNOPSIS
 
  #include <openssl/pem.h>
 
- #define PEM_FLAG_SECURE             0x0
  #define PEM_FLAG_EAY_COMPATIBLE     0x2
  #define PEM_FLAG_ONLY_B64           0x4
  int PEM_read_bio_ex(BIO *in, char **name, char **header,
@@ -23,8 +22,6 @@ the possibly encrypted data, and the binary data payload (after base64 decoding)
 It should generally only be used to implement PEM_read_bio_-family functions
 for specific data types or other usage, but is exposed to allow greater flexibility
 over how processing is performed, if needed.
-
-PEM_FLAG_SECURE is ignored.
 
 If PEM_FLAG_EAY_COMPATIBLE is set, a simple algorithm is used to remove whitespace
 and control characters from the end of each line, so as to be compatible with
