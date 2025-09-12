@@ -501,7 +501,6 @@ OSSL_QUIC_ERR_CRYPTO_ERR                define
 OSSL_QUIC_LOCAL_ERR_IDLE_TIMEOUT        define
 PEM_FLAG_EAY_COMPATIBLE                 define
 PEM_FLAG_ONLY_B64                       define
-PEM_FLAG_SECURE                         define
 RAND_cleanup                            define deprecated 1.1.0
 SSL_COMP_free_compression_methods       define deprecated 1.1.0
 SSL_CTX_add0_chain_cert                 define

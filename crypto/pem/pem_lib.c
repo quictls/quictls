@@ -897,7 +897,6 @@ int PEM_read_bio_ex(BIO *bp, char **name_out, char **header,
                     unsigned char **data, long *len_out, unsigned int flags)
 {
     EVP_ENCODE_CTX *ctx = NULL;
-    const BIO_METHOD *bmeth;
     BIO *headerB = NULL, *dataB = NULL;
     char *name = NULL;
     int len, taillen, headerlen, ret = 0;
@@ -911,10 +910,9 @@ int PEM_read_bio_ex(BIO *bp, char **name_out, char **header,
         ERR_raise(ERR_LIB_PEM, ERR_R_PASSED_INVALID_ARGUMENT);
         goto end;
     }
-    bmeth = (flags & PEM_FLAG_SECURE) ? BIO_s_secmem() : BIO_s_mem();
 
-    headerB = BIO_new(bmeth);
-    dataB = BIO_new(bmeth);
+    headerB = BIO_new(BIO_s_mem());
+    dataB = BIO_new(BIO_s_mem());
     if (headerB == NULL || dataB == NULL) {
         ERR_raise(ERR_LIB_PEM, ERR_R_BIO_LIB);
         goto end;
