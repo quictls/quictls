@@ -21,6 +21,7 @@ Individuals
  * William Ahern
  * Ilia Shipitsin
  * Guillaume Hetier
+ * Zsombor Kalo
 
 
 Groups
