@@ -64,7 +64,7 @@ endif ()
 if (OPENSSL_NO_ASM)
     list(APPEND SOURCE bn_asm.c)
  else ()
-    list(APPEND SOURCE ${bnasm_x86_64})
+    list(APPEND SOURCE ${bnasm_${ARCH}})
 endif ()
 
 list(APPEND SOURCE
