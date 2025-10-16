@@ -227,6 +227,7 @@ int EVP_PKEY_derive_init_ex(EVP_PKEY_CTX *ctx, const OSSL_PARAM params[])
             || (pkey->keydata = evp_keymgmt_newdata(ctx->keymgmt)) == NULL) {
             ERR_clear_last_mark();
             EVP_PKEY_free(pkey);
+            pkey = NULL;
             ERR_raise(ERR_LIB_EVP, EVP_R_INITIALIZATION_ERROR);
             goto err;
         }
@@ -277,7 +278,9 @@ int EVP_PKEY_derive_init_ex(EVP_PKEY_CTX *ctx, const OSSL_PARAM params[])
          * iteration we're on.
          */
         EVP_KEYEXCH_free(exchange);
+        exchange = NULL;
         EVP_KEYMGMT_free(tmp_keymgmt);
+        tmp_keymgmt = NULL;
 
         switch (iter) {
         case 1:
@@ -314,12 +317,15 @@ int EVP_PKEY_derive_init_ex(EVP_PKEY_CTX *ctx, const OSSL_PARAM params[])
         if (tmp_keymgmt != NULL)
             provkey = evp_pkey_export_to_provider(ctx->pkey, ctx->libctx,
                                                   &tmp_keymgmt, ctx->propquery);
-        if (tmp_keymgmt == NULL)
+        if (tmp_keymgmt == NULL) {
             EVP_KEYMGMT_free(tmp_keymgmt_tofree);
+            tmp_keymgmt_tofree = NULL;
+        }
     }
 
     if (provkey == NULL) {
         EVP_KEYEXCH_free(exchange);
+        exchange = NULL;
         goto legacy;
     }
 
@@ -400,6 +406,7 @@ int EVP_PKEY_derive_set_peer_ex(EVP_PKEY_CTX *ctx, EVP_PKEY *peer,
             return -1;
         check = EVP_PKEY_public_check(check_ctx);
         EVP_PKEY_CTX_free(check_ctx);
+        check_ctx = NULL;
         if (check <= 0)
             return -1;
     }
@@ -424,6 +431,7 @@ int EVP_PKEY_derive_set_peer_ex(EVP_PKEY_CTX *ctx, EVP_PKEY *peer,
         provkey = evp_pkey_export_to_provider(peer, ctx->libctx,
                                               &tmp_keymgmt, ctx->propquery);
     EVP_KEYMGMT_free(tmp_keymgmt_tofree);
+    tmp_keymgmt_tofree = NULL;
 
     /*
      * If making the key provided wasn't possible, legacy may be able to pick

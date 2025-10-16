@@ -460,7 +460,9 @@ static int evp_pkey_signature_init(EVP_PKEY_CTX *ctx, int operation,
          * iteration we're on.
          */
         EVP_SIGNATURE_free(signature);
+        signature = NULL;
         EVP_KEYMGMT_free(tmp_keymgmt);
+        tmp_keymgmt = NULL;
 
         switch (iter) {
         case 1:
@@ -498,12 +500,15 @@ static int evp_pkey_signature_init(EVP_PKEY_CTX *ctx, int operation,
         if (tmp_keymgmt != NULL)
             provkey = evp_pkey_export_to_provider(ctx->pkey, ctx->libctx,
                                                   &tmp_keymgmt, ctx->propquery);
-        if (tmp_keymgmt == NULL)
+        if (tmp_keymgmt == NULL) {
             EVP_KEYMGMT_free(tmp_keymgmt_tofree);
+            tmp_keymgmt_tofree = NULL;
+        }
     }
 
     if (provkey == NULL) {
         EVP_SIGNATURE_free(signature);
+        signature = NULL;
         goto legacy;
     }
 

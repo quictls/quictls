@@ -87,7 +87,9 @@ static int evp_kem_init(EVP_PKEY_CTX *ctx, int operation,
          * iteration we're on.
          */
         EVP_KEM_free(kem);
+        kem = NULL;
         EVP_KEYMGMT_free(tmp_keymgmt);
+        tmp_keymgmt = NULL;
 
         switch (iter) {
         case 1:
@@ -132,17 +134,21 @@ static int evp_kem_init(EVP_PKEY_CTX *ctx, int operation,
                                                           ctx->propquery);
                 if (provauthkey == NULL) {
                     EVP_KEM_free(kem);
+                    kem = NULL;
                     ERR_raise(ERR_LIB_EVP, EVP_R_INITIALIZATION_ERROR);
                     goto err;
                 }
             }
         }
-        if (tmp_keymgmt == NULL)
+        if (tmp_keymgmt == NULL) {
             EVP_KEYMGMT_free(tmp_keymgmt_tofree);
+            tmp_keymgmt_tofree = NULL;
+        }
     }
 
     if (provkey == NULL) {
         EVP_KEM_free(kem);
+        kem = NULL;
         ERR_raise(ERR_LIB_EVP, EVP_R_INITIALIZATION_ERROR);
         goto err;
     }
