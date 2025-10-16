@@ -1,6 +1,6 @@
 set(SOURCE
     ADMISSIONS.pod ASN1_EXTERN_FUNCS.pod ASN1_INTEGER_get_int64.pod
-    ASN1_INTEGER_new.pod ASN1_ITEM_lookup.pod ASN1_OBJECT_new.pod
+    ASN1_INTEGER_new.pod ASN1_ITEM_lookup.pod ASN1_OBJECT_free.pod
     ASN1_STRING_TABLE_add.pod ASN1_STRING_length.pod ASN1_STRING_new.pod
     ASN1_STRING_print_ex.pod ASN1_TIME_set.pod ASN1_TYPE_get.pod
     ASN1_aux_cb.pod ASN1_generate_nconf.pod ASN1_item_d2i_bio.pod
