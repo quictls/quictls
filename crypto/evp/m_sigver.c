@@ -141,7 +141,9 @@ static int do_sigver_init(EVP_MD_CTX *ctx, EVP_PKEY_CTX **pctx,
          * iteration we're on.
          */
         EVP_SIGNATURE_free(signature);
+        signature = NULL;
         EVP_KEYMGMT_free(tmp_keymgmt);
+        tmp_keymgmt = NULL;
 
         switch (iter) {
         case 1:
@@ -179,12 +181,15 @@ static int do_sigver_init(EVP_MD_CTX *ctx, EVP_PKEY_CTX **pctx,
         if (tmp_keymgmt != NULL)
             provkey = evp_pkey_export_to_provider(locpctx->pkey, locpctx->libctx,
                                                   &tmp_keymgmt, locpctx->propquery);
-        if (tmp_keymgmt == NULL)
+        if (tmp_keymgmt == NULL) {
             EVP_KEYMGMT_free(tmp_keymgmt_tofree);
+            tmp_keymgmt_tofree = NULL;
+        }
     }
 
     if (provkey == NULL) {
         EVP_SIGNATURE_free(signature);
+        signature = NULL;
         ERR_clear_last_mark();
         ERR_raise(ERR_LIB_EVP, EVP_R_INITIALIZATION_ERROR);
         goto err;
@@ -557,6 +562,7 @@ int EVP_DigestSignFinal(EVP_MD_CTX *ctx, unsigned char *sigret,
             else
                 r = EVP_DigestFinal_ex(tmp_ctx, md, &mdlen);
             EVP_MD_CTX_free(tmp_ctx);
+            tmp_ctx = NULL;
         }
         if (sctx || !r)
             return r;
