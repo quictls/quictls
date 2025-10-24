@@ -46,12 +46,12 @@ EC_GROUP *EC_GROUP_new_curve_GFp(const BIGNUM *p, const BIGNUM *a,
      * prime method...
      *                                              <@dot-asm>
      */
-    meth = EC_GFp_mont_method();
+    meth = ossl_EC_GFp_mont_method();
 #else
     if (BN_nist_mod_func(p))
-        meth = EC_GFp_nist_method();
+        meth = ossl_EC_GFp_nist_method();
     else
-        meth = EC_GFp_mont_method();
+        meth = ossl_EC_GFp_mont_method();
 #endif
 
     ret = ossl_ec_group_new_ex(ossl_bn_get_libctx(ctx), NULL, meth);

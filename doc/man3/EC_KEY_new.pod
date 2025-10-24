@@ -95,7 +95,6 @@ curve, the library context to be used I<ctx> (see L<OSSL_LIB_CTX(3)>) and any
 property query string I<propq>.
 The I<ctx> parameter may be NULL in which case the default library context is
 used. The I<propq> value may also be NULL.
-See L<EC_GROUP_new(3)> for a description of curve names.
 This function simply wraps calls to EC_KEY_new_ex() and
 EC_GROUP_new_by_curve_name_ex().
 
@@ -220,10 +219,9 @@ of the buffer or 0 on error.
 =head1 SEE ALSO
 
 L<EVP_PKEY_Q_keygen(3)>
-L<crypto(7)>, L<EC_GROUP_new(3)>,
+L<crypto(7)>,
 L<EC_GROUP_copy(3)>, L<EC_POINT_new(3)>,
 L<EC_POINT_add(3)>,
-L<EC_GFp_simple_method(3)>,
 L<d2i_ECPKParameters(3)>,
 L<OSSL_LIB_CTX(3)>
 
