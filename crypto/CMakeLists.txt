@@ -114,6 +114,7 @@ if (FOUND)
     set(OPENSSL_CPUID_OBJ)
     target_compile_definitions(crypto PRIVATE OPENSSL_CPUID_OBJ)
 else ()
+    list(APPEND SOURCE mem_clr.c)
 endif ()
 
 if ((NOT OPENSSL_NO_ASM) AND "${ARCH}" STREQUAL "x86_64")
