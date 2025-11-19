@@ -71,38 +71,40 @@ if (NOT OPENSSL_NO_DEPRECATED_3_0)
     list(APPEND SOURCE aes_ige.c)
 endif ()
 
-generate_asm_from_perl(bsaes-armv8.S asm/bsaes-armv8.pl)
-generate_asm_from_perl(aes-586.S asm/aes-586.pl)
-generate_asm_from_perl(vpaes-x86.S asm/vpaes-x86.pl)
-generate_asm_from_perl(aesni-x86.S asm/aesni-x86.pl)
-generate_asm_from_perl(aes-sparcv9.S asm/aes-sparcv9.pl)
-generate_asm_from_perl(aest4-sparcv9.S asm/aest4-sparcv9.pl)
-generate_asm_from_perl(aesfx-sparcv9.S asm/aesfx-sparcv9.pl)
-generate_asm_from_perl(aes-mips.S asm/aes-mips.pl)
-generate_asm_from_perl(aesv8-armx.S asm/aesv8-armx.pl)
-generate_asm_from_perl(vpaes-armv8.S asm/vpaes-armv8.pl)
-generate_asm_from_perl(aes-armv4.S asm/aes-armv4.pl)
-generate_asm_from_perl(bsaes-armv7.S asm/bsaes-armv7.pl)
-generate_asm_from_perl(vpaes-loongarch64.S asm/vpaes-loongarch64.pl)
+if (NOT OPENSSL_NO_ASM)
+    generate_asm_from_perl(bsaes-armv8.S asm/bsaes-armv8.pl)
+    generate_asm_from_perl(aes-586.S asm/aes-586.pl)
+    generate_asm_from_perl(vpaes-x86.S asm/vpaes-x86.pl)
+    generate_asm_from_perl(aesni-x86.S asm/aesni-x86.pl)
+    generate_asm_from_perl(aes-sparcv9.S asm/aes-sparcv9.pl)
+    generate_asm_from_perl(aest4-sparcv9.S asm/aest4-sparcv9.pl)
+    generate_asm_from_perl(aesfx-sparcv9.S asm/aesfx-sparcv9.pl)
+    generate_asm_from_perl(aes-mips.S asm/aes-mips.pl)
+    generate_asm_from_perl(aesv8-armx.S asm/aesv8-armx.pl)
+    generate_asm_from_perl(vpaes-armv8.S asm/vpaes-armv8.pl)
+    generate_asm_from_perl(aes-armv4.S asm/aes-armv4.pl)
+    generate_asm_from_perl(bsaes-armv7.S asm/bsaes-armv7.pl)
+    generate_asm_from_perl(vpaes-loongarch64.S asm/vpaes-loongarch64.pl)
+    #DEPEND[aes-586.S]=../perlasm/x86asm.pl
+    #DEPEND[aesni-586.S]=../perlasm/x86asm.pl
+    #DEPEND[aest4-sparcv9.S]=../perlasm/sparcv9_modes.pl
+    #DEPEND[vpaes-586.S]=../perlasm/x86asm.pl
+    #GENERATE[aesni-mb-x86_64.s]=asm/aesni-mb-x86_64.pl
+    #GENERATE[aesni-sha1-x86_64.s]=asm/aesni-sha1-x86_64.pl
+    #GENERATE[aesni-sha256-x86_64.s]=asm/aesni-sha256-x86_64.pl
+    #GENERATE[aesni-x86_64.s]=asm/aesni-x86_64.pl
+    #GENERATE[aesp8-ppc.s]=asm/aesp8-ppc.pl
+    #GENERATE[aes-ppc.s]=asm/aes-ppc.pl
+    #GENERATE[aes-riscv32-zkn.s]=asm/aes-riscv32-zkn.pl
+    #GENERATE[aes-riscv64.s]=asm/aes-riscv64.pl
+    #GENERATE[aes-riscv64-zkn.s]=asm/aes-riscv64-zkn.pl
+    #GENERATE[aes-riscv64-zvbb-zvkg-zvkned.s]=asm/aes-riscv64-zvbb-zvkg-zvkned.pl
+    #GENERATE[aes-riscv64-zvkb-zvkned.s]=asm/aes-riscv64-zvkb-zvkned.pl
+    #GENERATE[aes-riscv64-zvkned.s]=asm/aes-riscv64-zvkned.pl
+    #GENERATE[aes-x86_64.s]=asm/aes-x86_64.pl
+    #GENERATE[bsaes-x86_64.s]=asm/bsaes-x86_64.pl
+    #GENERATE[vpaes-ppc.s]=asm/vpaes-ppc.pl
+    #GENERATE[vpaes-x86_64.s]=asm/vpaes-x86_64.pl
+endif ()
 
-#DEPEND[aes-586.S]=../perlasm/x86asm.pl
-#DEPEND[aesni-586.S]=../perlasm/x86asm.pl
-#DEPEND[aest4-sparcv9.S]=../perlasm/sparcv9_modes.pl
-#DEPEND[vpaes-586.S]=../perlasm/x86asm.pl
-#GENERATE[aesni-mb-x86_64.s]=asm/aesni-mb-x86_64.pl
-#GENERATE[aesni-sha1-x86_64.s]=asm/aesni-sha1-x86_64.pl
-#GENERATE[aesni-sha256-x86_64.s]=asm/aesni-sha256-x86_64.pl
-#GENERATE[aesni-x86_64.s]=asm/aesni-x86_64.pl
-#GENERATE[aesp8-ppc.s]=asm/aesp8-ppc.pl
-#GENERATE[aes-ppc.s]=asm/aes-ppc.pl
-#GENERATE[aes-riscv32-zkn.s]=asm/aes-riscv32-zkn.pl
-#GENERATE[aes-riscv64.s]=asm/aes-riscv64.pl
-#GENERATE[aes-riscv64-zkn.s]=asm/aes-riscv64-zkn.pl
-#GENERATE[aes-riscv64-zvbb-zvkg-zvkned.s]=asm/aes-riscv64-zvbb-zvkg-zvkned.pl
-#GENERATE[aes-riscv64-zvkb-zvkned.s]=asm/aes-riscv64-zvkb-zvkned.pl
-#GENERATE[aes-riscv64-zvkned.s]=asm/aes-riscv64-zvkned.pl
-#GENERATE[aes-x86_64.s]=asm/aes-x86_64.pl
-#GENERATE[bsaes-x86_64.s]=asm/bsaes-x86_64.pl
-#GENERATE[vpaes-ppc.s]=asm/vpaes-ppc.pl
-#GENERATE[vpaes-x86_64.s]=asm/vpaes-x86_64.pl
 target_sources(crypto PRIVATE ${SOURCE})
