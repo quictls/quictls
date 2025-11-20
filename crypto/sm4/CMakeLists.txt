@@ -6,12 +6,12 @@ if (NOT OPENSSL_NO_ASM)
     if (${ARCH} STREQUAL "aarch64")
         target_compile_defintions(crypto PUBLIC VPSM4_ASM)
     endif ()
+    generate_asm_from_perl(sm4-armv8.S asm/sm4-armv8.pl)
+    generate_asm_from_perl(vpsm4-armv8.S asm/vpsm4-armv8.pl)
+    generate_asm_from_perl(vpsm4_ex-armv8.S asm/vpsm4_ex-armv8.pl)
+    #GENERATE[sm4-riscv64-zvksed.s]=asm/sm4-riscv64-zvksed.pl
 endif ()
 
 list(APPEND SOURCE sm4.c)
 
-generate_asm_from_perl(sm4-armv8.S asm/sm4-armv8.pl)
-generate_asm_from_perl(vpsm4-armv8.S asm/vpsm4-armv8.pl)
-generate_asm_from_perl(vpsm4_ex-armv8.S asm/vpsm4_ex-armv8.pl)
-#GENERATE[sm4-riscv64-zvksed.s]=asm/sm4-riscv64-zvksed.pl
 target_sources(crypto PRIVATE ${SOURCE})
