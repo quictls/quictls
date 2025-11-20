@@ -11,16 +11,19 @@ on: [pull_request, push]
 
 jobs:
   check_tests:
-    runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
+    runs-on: ${{ matrix.platform.os }}
     strategy:
       matrix:
         platform: [
-          { cc: gcc, cxx: g++ },
-          { cc: clang, cxx: clang++ }
+          { os: ubuntu-24.04, cc: gcc, cxx: g++, CMAKE_EXTRA_ARGS: "" },
+          { os: ubuntu-24.04, cc: clang, cxx: clang++, CMAKE_EXTRA_ARGS: "" },
+          { os: ubuntu-24.04-arm, cc: gcc, cxx: g++, CMAKE_EXTRA_ARGS: "-DOPENSSL_NO_ASM=yes" },
+          { os: ubuntu-24.04-arm, cc: clang, cxx: clang++, CMAKE_EXTRA_ARGS: "-DOPENSSL_NO_ASM=yes" }
         ]
+      fail-fast: false
     env:
-      CC: ${{ matrix.cc }}
-      CXX: ${{ matrix.cxx }}
+      CC: ${{ matrix.platform.cc }}
+      CXX: ${{ matrix.platform.cxx }}
     steps:
     - name: install tools
       run: |
@@ -32,6 +35,6 @@ jobs:
     - name: make build dir
       run: mkdir build
     - name: run cmake
-      run: cd build && cmake .. -GNinja
+      run: cd build && cmake .. ${{ matrix.platform.CMAKE_EXTRA_ARGS }} -GNinja
     - name: run tests
       run: cd build && ninja test
