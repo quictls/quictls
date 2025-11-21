@@ -58,7 +58,7 @@ void AES_xts_decrypt(const unsigned char *inp, unsigned char *out, size_t len,
                      const unsigned char iv[16]);
 # endif /* AES_XTS_ASM */
 
-# if defined(OPENSSL_CPUID_OBJ)
+# if defined(OPENSSL_CPUID_OBJ) && !defined(OPENSSL_NO_ASM)
 #  if (defined(__powerpc__) || defined(__POWERPC__) || defined(_ARCH_PPC))
 #   include <crypto/ppc_arch.h>
 #   ifdef VPAES_ASM
