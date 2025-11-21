@@ -226,4 +226,3 @@ doc-nits
 # LSP (Language Server Protocol) support
 .cache/
 compile_commands.json
-build-noasm/
