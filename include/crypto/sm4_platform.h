@@ -10,7 +10,7 @@
 #ifndef OSSL_SM4_PLATFORM_H
 # define OSSL_SM4_PLATFORM_H
 
-# if defined(OPENSSL_CPUID_OBJ) && !defined(OPENSSL_NO_ASM)
+# if defined(OPENSSL_CPUID_OBJ)
 #  if defined(__aarch64__) ||  defined (_M_ARM64)
 #   include "arm_arch.h"
 extern unsigned int OPENSSL_arm_midr;
