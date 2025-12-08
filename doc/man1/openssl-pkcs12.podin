@@ -6,6 +6,8 @@ openssl-pkcs12 - PKCS#12 file command
 
 =head1 SYNOPSIS
 
+=for openssl duplicate options
+
 B<openssl> B<pkcs12>
 [B<-help>]
 [B<-passin> I<arg>]
