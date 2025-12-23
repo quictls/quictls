@@ -62,6 +62,7 @@ set(SOURCE
     provider_conf.c provider_core.c provider_predefined.c punycode.c
     self_test_core.c sleep.c sparse_array.c threads_lib.c threads_none.c
     threads_pthread.c threads_win.c time.c time.c trace.c uid.c
+    ssl_err.c
     )
 
 add_dependencies(crypto buildinf)
