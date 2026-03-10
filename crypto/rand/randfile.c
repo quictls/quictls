@@ -69,7 +69,7 @@ int RAND_write_file(const char *file)
         return -1;
     }
 
-    if (fwrite(buff, sizeof buff, 1, out) != sizeof buff) {
+    if (fwrite(buff, sizeof buff, 1, out) != 1) {
         fclose(out);
         return -1;
     }
