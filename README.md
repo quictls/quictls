@@ -19,6 +19,11 @@ cherry-picked from OpenSSL. If there's something you find missing, please
 [open an issue](https://github.com/quictls/quictls/issues) or -- better yet
 :) -- make a [pull request](https://github.com/quictls/quictls/pulls).
 
+How to Build this?
+------------------
+
+See start of the `INSTALL.md` file.
+
 What about FIPS?
 ----------------
 
