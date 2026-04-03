@@ -18,7 +18,7 @@
 
 #include "ec_local.h"
 
-const EC_METHOD *EC_GFp_simple_method(void)
+const EC_METHOD *ossl_EC_GFp_simple_method(void)
 {
     static const EC_METHOD ret = {
         .field_type = NID_X9_62_prime_field,

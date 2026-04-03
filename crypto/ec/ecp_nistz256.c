@@ -1444,7 +1444,7 @@ err:
 # define ecp_nistz256_inv_mod_ord NULL
 #endif
 
-const EC_METHOD *EC_GFp_nistz256_method(void)
+const EC_METHOD *ossl_EC_GFp_nistz256_method(void)
 {
     static const EC_METHOD ret = {
         .field_type = NID_X9_62_prime_field,

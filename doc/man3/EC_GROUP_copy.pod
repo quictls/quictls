@@ -3,7 +3,7 @@
 =head1 NAME
 
 EC_GROUP_get0_order, EC_GROUP_order_bits, EC_GROUP_get0_cofactor,
-EC_GROUP_copy, EC_GROUP_dup, EC_GROUP_method_of, EC_GROUP_set_generator,
+EC_GROUP_copy, EC_GROUP_dup, EC_GROUP_set_generator,
 EC_GROUP_get0_generator, EC_GROUP_get_order, EC_GROUP_get_cofactor,
 EC_GROUP_set_curve_name, EC_GROUP_get_curve_name, EC_GROUP_set_asn1_flag,
 EC_GROUP_get_asn1_flag, EC_GROUP_set_point_conversion_form,
@@ -60,21 +60,13 @@ EC_GROUP_get_field_type
 
  int EC_GROUP_get_field_type(const EC_GROUP *group);
 
-The following function has been deprecated since OpenSSL 3.0, and can be
-hidden entirely by defining B<OPENSSL_API_COMPAT> with a suitable version value,
-see L<openssl_user_macros(7)>:
-
- const EC_METHOD *EC_GROUP_method_of(const EC_GROUP *group);
-
 =head1 DESCRIPTION
 
-EC_GROUP_copy() copies the curve B<src> into B<dst>. Both B<src> and B<dst> must use the same EC_METHOD.
+EC_GROUP_copy() copies the curve B<src> into B<dst>. Both B<src> and B<dst>
+must be the same type of curve.
 
 EC_GROUP_dup() creates a new EC_GROUP object and copies the content from B<src> to the newly created
 EC_GROUP object.
-
-EC_GROUP_method_of() obtains the EC_METHOD of B<group>.
-This function was deprecated in OpenSSL 3.0, since EC_METHOD is no longer a public concept.
 
 EC_GROUP_set_generator() sets curve parameters that must be agreed by all participants using the curve. These
 parameters include the B<generator>, the B<order> and the B<cofactor>. The B<generator> is a well defined point on the
@@ -91,8 +83,8 @@ EC_GROUP_get_cofactor() retrieves the cofactor of B<group> and copies its value
 into B<cofactor>. It fails in case  B<group> is not fully initialized or if the
 cofactor is not set (or set to zero).
 
-The functions EC_GROUP_set_curve_name() and EC_GROUP_get_curve_name(), set and get the NID for the curve respectively
-(see L<EC_GROUP_new(3)>). If a curve does not have a NID associated with it, then EC_GROUP_get_curve_name
+The functions EC_GROUP_set_curve_name() and EC_GROUP_get_curve_name(), set and get the NID for the curve respectively.
+If a curve does not have a NID associated with it, then EC_GROUP_get_curve_name
 will return NID_undef.
 
 The asn1_flag value is used to determine whether the curve encoding uses
@@ -181,8 +173,6 @@ EC_GROUP_check_discriminant(), EC_GROUP_get_trinomial_basis() and EC_GROUP_get_p
 
 EC_GROUP_dup() returns a pointer to the duplicated curve, or NULL on error.
 
-EC_GROUP_method_of() returns the EC_METHOD implementation in use for the given curve or NULL on error.
-
 EC_GROUP_get0_generator() returns the generator for the given curve or NULL on error.
 
 EC_GROUP_get_order() returns 0 if the order is not set (or set to zero) for
@@ -221,13 +211,12 @@ EC_GROUP_get_basis_type() returns 0.
 
 =head1 SEE ALSO
 
-L<crypto(7)>, L<EC_GROUP_new(3)>,
+L<crypto(7)>,
 L<EC_POINT_new(3)>, L<EC_POINT_add(3)>, L<EC_KEY_new(3)>,
-L<EC_GFp_simple_method(3)>, L<d2i_ECPKParameters(3)>
+L<d2i_ECPKParameters(3)>
 
 =head1 HISTORY
 
-EC_GROUP_method_of() was deprecated in OpenSSL 3.0.
 EC_GROUP_get0_field(), EC_GROUP_check_named_curve() and EC_GROUP_get_field_type() were added in OpenSSL 3.0.
 EC_GROUP_get0_order(), EC_GROUP_order_bits() and EC_GROUP_get0_cofactor() were added in OpenSSL 1.1.0.
 

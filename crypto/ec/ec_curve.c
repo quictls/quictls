@@ -1444,7 +1444,7 @@ static const ec_list_element curve_list[] = {
     /* secg curves */
     {NID_secp224r1, &_EC_NIST_PRIME_224.h,
 # if !defined(OPENSSL_NO_EC_NISTP_64_GCC_128)
-     EC_GFp_nistp224_method,
+     ossl_EC_GFp_nistp224_method,
 # else
      0,
 # endif
@@ -1452,7 +1452,7 @@ static const ec_list_element curve_list[] = {
     /* SECG secp256r1 is the same as X9.62 prime256v1 and hence omitted */
     {NID_secp384r1, &_EC_NIST_PRIME_384.h,
 # if defined(S390X_EC_ASM)
-     EC_GFp_s390x_nistp384_method,
+     ossl_EC_GFp_s390x_nistp384_method,
 # elif !defined(OPENSSL_NO_EC_NISTP_64_GCC_128)
      ossl_ec_GFp_nistp384_method,
 # else
@@ -1462,9 +1462,9 @@ static const ec_list_element curve_list[] = {
 
     {NID_secp521r1, &_EC_NIST_PRIME_521.h,
 # if defined(S390X_EC_ASM)
-     EC_GFp_s390x_nistp521_method,
+     ossl_EC_GFp_s390x_nistp521_method,
 # elif !defined(OPENSSL_NO_EC_NISTP_64_GCC_128)
-     EC_GFp_nistp521_method,
+     ossl_EC_GFp_nistp521_method,
 # else
      0,
 # endif
@@ -1475,11 +1475,11 @@ static const ec_list_element curve_list[] = {
      "NIST/X9.62/SECG curve over a 192 bit prime field"},
     {NID_X9_62_prime256v1, &_EC_X9_62_PRIME_256V1.h,
 # if defined(ECP_NISTZ256_ASM)
-     EC_GFp_nistz256_method,
+     ossl_EC_GFp_nistz256_method,
 # elif defined(S390X_EC_ASM)
-     EC_GFp_s390x_nistp256_method,
+     ossl_EC_GFp_s390x_nistp256_method,
 # elif !defined(OPENSSL_NO_EC_NISTP_64_GCC_128)
-     EC_GFp_nistp256_method,
+     ossl_EC_GFp_nistp256_method,
 # else
      0,
 # endif
@@ -1511,7 +1511,7 @@ static const ec_list_element curve_list[] = {
     {NID_secp224k1, &_EC_SECG_PRIME_224K1.h, 0,
      "SECG curve over a 224 bit prime field"},
 # ifndef OPENSSL_NO_EC_NISTP_64_GCC_128
-    {NID_secp224r1, &_EC_NIST_PRIME_224.h, EC_GFp_nistp224_method,
+    {NID_secp224r1, &_EC_NIST_PRIME_224.h, ossl_EC_GFp_nistp224_method,
      "NIST/SECG curve over a 224 bit prime field"},
 # else
     {NID_secp224r1, &_EC_NIST_PRIME_224.h, 0,
@@ -1522,7 +1522,7 @@ static const ec_list_element curve_list[] = {
     /* SECG secp256r1 is the same as X9.62 prime256v1 and hence omitted */
     {NID_secp384r1, &_EC_NIST_PRIME_384.h,
 # if defined(S390X_EC_ASM)
-     EC_GFp_s390x_nistp384_method,
+     ossl_EC_GFp_s390x_nistp384_method,
 # elif !defined(OPENSSL_NO_EC_NISTP_64_GCC_128)
      ossl_ec_GFp_nistp384_method,
 # else
@@ -1531,9 +1531,9 @@ static const ec_list_element curve_list[] = {
      "NIST/SECG curve over a 384 bit prime field"},
     {NID_secp521r1, &_EC_NIST_PRIME_521.h,
 # if defined(S390X_EC_ASM)
-     EC_GFp_s390x_nistp521_method,
+     ossl_EC_GFp_s390x_nistp521_method,
 # elif !defined(OPENSSL_NO_EC_NISTP_64_GCC_128)
-     EC_GFp_nistp521_method,
+     ossl_EC_GFp_nistp521_method,
 # else
      0,
 # endif
@@ -1553,11 +1553,11 @@ static const ec_list_element curve_list[] = {
      "X9.62 curve over a 239 bit prime field"},
     {NID_X9_62_prime256v1, &_EC_X9_62_PRIME_256V1.h,
 # if defined(ECP_NISTZ256_ASM)
-     EC_GFp_nistz256_method,
+     ossl_EC_GFp_nistz256_method,
 # elif defined(S390X_EC_ASM)
-     EC_GFp_s390x_nistp256_method,
+     ossl_EC_GFp_s390x_nistp256_method,
 # elif !defined(OPENSSL_NO_EC_NISTP_64_GCC_128)
-     EC_GFp_nistp256_method,
+     ossl_EC_GFp_nistp256_method,
 # else
      0,
 # endif
@@ -1606,7 +1606,7 @@ static const ec_list_element curve_list[] = {
 #ifndef OPENSSL_NO_SM2
     {NID_sm2, &_EC_sm2p256v1.h,
 # ifdef ECP_SM2P256_ASM
-     EC_GFp_sm2p256_method,
+     ossl_EC_GFp_sm2p256_method,
 # else
      0,
 # endif
@@ -1722,8 +1722,8 @@ static EC_GROUP *ec_group_new_from_data(OSSL_LIB_CTX *libctx,
          * default to `OPENSSL_EC_NAMED_CURVE` encoding of parameters and
          * instead set the ASN1 flag to `OPENSSL_EC_EXPLICIT_CURVE`.
          *
-         * Note that `OPENSSL_EC_NAMED_CURVE` is set as the default ASN1 flag on
-         * `EC_GROUP_new()`, when we don't have enough elements to determine if
+         * Note that `OPENSSL_EC_NAMED_CURVE` is set as the default ASN1 flag
+         * when we don't have enough elements to determine if
          * an OID for the curve name actually exists.
          * We could implement this check on `EC_GROUP_set_curve_name()` but
          * overloading the simple setter with this lookup could have a negative
