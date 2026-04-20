@@ -130,7 +130,7 @@ See L<openssl-format-options(1)> for details.
 The key format; unspecified by default.
 See L<openssl-format-options(1)> for details.
 
-=item B<-stream>, B<-indef>, B<-noindef>
+=item B<-stream>, B<-indef>
 
 The B<-stream> and B<-indef> options are equivalent and enable streaming I/O
 for encoding operations. This permits single pass processing of data without
@@ -244,14 +244,6 @@ A signing certificate when signing or resigning a message, this option can be
 used multiple times if more than one signer is required. If a message is being
 verified then the signers certificates will be written to this file if the
 verification was successful.
-
-=item B<-nocerts>
-
-Don't include signers certificate when signing.
-
-=item B<-noattr>
-
-Don't include any signed attributes when signing.
 
 =item B<-recip> I<file>
 
