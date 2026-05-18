@@ -125,7 +125,7 @@ static OSSL_CMP_ITAV *get_genm_itav(OSSL_CMP_CTX *ctx,
         }
 
         if (OBJ_obj2txt(name + offset, sizeof(name) - offset, obj, 0) < 0)
-            OPENSSL_strlcat(name, "<unknown>", 128);
+            OPENSSL_strlcat(name, "<unknown>", sizeof(name));
         ossl_cmp_log2(WARN, ctx, "%s' while expecting 'id-it-%s'", name, desc);
         OSSL_CMP_ITAV_free(itav);
     }
