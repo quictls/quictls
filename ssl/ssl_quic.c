@@ -358,7 +358,7 @@ int quic_set_encryption_secrets(SSL *ssl, OSSL_ENCRYPTION_LEVEL level)
         }
     }
 
-    if (md == NULL) || (len = EVP_MD_size(md)) <= 0) {
+    if (md == NULL || (len = EVP_MD_size(md)) <= 0) {
         SSLfatal(sc, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
         return 0;
     }
