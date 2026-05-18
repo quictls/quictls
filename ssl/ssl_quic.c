@@ -289,7 +289,7 @@ int quic_set_encryption_secrets(SSL *ssl, OSSL_ENCRYPTION_LEVEL level)
 {
     uint8_t *c2s_secret = NULL;
     uint8_t *s2c_secret = NULL;
-    size_t len;
+    int len;
     const EVP_MD *md;
     SSL_CONNECTION *sc = SSL_CONNECTION_FROM_SSL(ssl);
 
@@ -358,7 +358,7 @@ int quic_set_encryption_secrets(SSL *ssl, OSSL_ENCRYPTION_LEVEL level)
         }
     }
 
-    if ((len = EVP_MD_size(md)) <= 0) {
+    if (md == NULL || (len = EVP_MD_size(md)) <= 0) {
         SSLfatal(sc, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
         return 0;
     }
