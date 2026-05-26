@@ -1705,7 +1705,7 @@ static int do_body(X509 **xret, EVP_PKEY *pkey, X509 *x509,
             if (verbose)
                 BIO_printf(bio_err,
                            "Successfully added extensions from file.\n");
-        } else if (ext_sect) {
+        } else {
             /* We found extensions to be set from config file */
             X509V3_set_nconf(&ext_ctx, lconf);
 
