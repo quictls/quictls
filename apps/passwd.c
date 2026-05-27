@@ -236,12 +236,10 @@ int passwd_main(int argc, char **argv)
             static char *passwds_static[2] = { NULL, NULL };
 
             passwds = passwds_static;
-            if (in == NULL) {
-                if (EVP_read_pw_string
-                    (passwd_malloc, passwd_malloc_size, "Password: ",
-                     !(passed_salt || in_noverify)) != 0)
-                    goto end;
-            }
+            if (EVP_read_pw_string
+                (passwd_malloc, passwd_malloc_size, "Password: ",
+                 !(passed_salt || in_noverify)) != 0)
+                goto end;
             passwds[0] = passwd_malloc;
         } else {
 #endif
