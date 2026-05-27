@@ -1011,10 +1011,13 @@ OSSL_STORE_CTX *OSSL_STORE_attach(BIO *bp, const char *scheme,
     if ((loader = ossl_store_get0_loader_int(scheme)) != NULL)
         loader_ctx = loader->attach(loader, bp, libctx, propq,
                                     ui_method, ui_data);
-#endif
     if (loader == NULL
         && (fetched_loader =
             OSSL_STORE_LOADER_fetch(libctx, scheme, propq)) != NULL) {
+#else
+    if ((fetched_loader =
+         OSSL_STORE_LOADER_fetch(libctx, scheme, propq)) != NULL) {
+#endif
         const OSSL_PROVIDER *provider =
             OSSL_STORE_LOADER_get0_provider(fetched_loader);
         void *provctx = OSSL_PROVIDER_get0_provider_ctx(provider);
