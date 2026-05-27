@@ -214,8 +214,8 @@ static int util_verbose(ENGINE *e, int verbose, BIO *out, const char *indent)
                 BIO_printf(out, "%s: %s\n", name,
                            (desc == NULL) ? "<no description>" : desc);
                 /* ... and sometimes input flags */
-                if ((verbose >= 3) && !util_flags(out, flags, indent))
-                    goto err;
+                if (verbose >= 3)
+                    util_flags(out, flags, indent);
                 xpos = 0;
             }
         }
