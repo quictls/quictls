@@ -1024,8 +1024,10 @@ OSSL_HTTP_REQ_CTX *OSSL_HTTP_open(const char *server, const char *port,
 
     (void)ERR_set_mark(); /* prepare removing any spurious libssl errors */
     if (rbio == NULL && BIO_do_connect_retry(cbio, overall_timeout, -1) <= 0) {
+#ifndef OPENSSL_NO_SOCK
         if (bio == NULL) /* cbio was not provided by caller */
             BIO_free_all(cbio);
+#endif
         goto end;
     }
     /* now overall_timeout is guaranteed to be >= 0 */
