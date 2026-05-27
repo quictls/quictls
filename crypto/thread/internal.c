@@ -47,7 +47,7 @@ void *ossl_crypto_thread_start(OSSL_LIB_CTX *ctx, CRYPTO_THREAD_ROUTINE start,
         return NULL;
 
     ossl_crypto_mutex_lock(tdata->lock);
-    if (tdata == NULL || tdata->max_threads == 0) {
+    if (tdata->max_threads == 0) {
         ossl_crypto_mutex_unlock(tdata->lock);
         return NULL;
     }
