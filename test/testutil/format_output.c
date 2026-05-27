@@ -94,7 +94,7 @@ static void test_fail_string_common(const char *prefix, const char *file,
             bdiff[i] = '\0';
         }
         if (n1 == n2 && !diff) {
-            test_printf_stderr("%4u:  '%s'\n", cnt, n2 > n1 ? b2 : b1);
+            test_printf_stderr("%4u:  '%s'\n", cnt, b1);
         } else {
             if (cnt == 0 && (m1 == NULL || *m1 == '\0'))
                 test_string_null_empty(m1, '-');
