@@ -1188,7 +1188,7 @@ static char *hexencode(const unsigned char *data, size_t len)
     size_t outlen = 2 * len + 1;
     int ilen = (int) outlen;
 
-    if (outlen < len || ilen < 0 || outlen != (size_t)ilen) {
+    if (outlen < len || outlen != (size_t)ilen) {
         BIO_printf(bio_err, "%s: %zu-byte buffer too large to hexencode\n",
                    opt_getprog(), len);
         exit(1);
