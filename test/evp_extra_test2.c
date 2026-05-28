@@ -453,16 +453,19 @@ static int test_dh_paramfromdata(void)
 static int test_ec_d2i_i2d_pubkey(void)
 {
     int ret = 0;
+    int fcret;
     FILE *fp = NULL;
     EVP_PKEY *key = NULL, *outkey = NULL;
     static const char *filename = "pubkey.der";
 
     if (!TEST_ptr(fp = fopen(filename, "wb"))
         || !TEST_ptr(key = EVP_PKEY_Q_keygen(mainctx, NULL, "EC", "P-256"))
-        || !TEST_true(i2d_PUBKEY_fp(fp, key))
-        || !TEST_int_eq(fclose(fp), 0))
+        || !TEST_true(i2d_PUBKEY_fp(fp, key)))
         goto err;
+    fcret = fclose(fp);
     fp = NULL;
+    if (!TEST_int_eq(fcret, 0))
+        goto err;
 
     if (!TEST_ptr(fp = fopen(filename, "rb"))
         || !TEST_ptr(outkey = d2i_PUBKEY_ex_fp(fp, NULL, mainctx, NULL))
@@ -474,7 +477,8 @@ static int test_ec_d2i_i2d_pubkey(void)
 err:
     EVP_PKEY_free(outkey);
     EVP_PKEY_free(key);
-    fclose(fp);
+    if (fp != NULL)
+        fclose(fp);
     return ret;
 }
 
