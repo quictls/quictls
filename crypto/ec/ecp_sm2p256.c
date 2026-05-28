@@ -578,7 +578,7 @@ static int ecp_sm2p256_points_mul(const EC_GROUP *group,
         P256_POINT_AFFINE a;
     } t, p;
 
-    if ((num + 1) == 0 || (num + 1) > OPENSSL_MALLOC_MAX_NELEMS(void *)) {
+    if (num > OPENSSL_MALLOC_MAX_NELEMS(void *) - 1) {
         ERR_raise(ERR_LIB_EC, ERR_R_MALLOC_FAILURE);
         goto err;
     }
