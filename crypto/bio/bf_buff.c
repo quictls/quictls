@@ -129,8 +129,7 @@ static int buffer_read(BIO *b, char *out, int outl)
                 BIO_copy_next_retry(b);
                 if (i < 0)
                     return ((num > 0) ? num : i);
-                if (i == 0)
-                    return num;
+                return num;
             }
             num += i;
             if (outl == i)
@@ -147,8 +146,7 @@ static int buffer_read(BIO *b, char *out, int outl)
         BIO_copy_next_retry(b);
         if (i < 0)
             return ((num > 0) ? num : i);
-        if (i == 0)
-            return num;
+        return num;
     }
     ctx->ibuf_off = 0;
     ctx->ibuf_len = i;
@@ -196,8 +194,7 @@ static int buffer_write(BIO *b, const char *in, int inl)
 
                 if (i < 0)
                     return ((num > 0) ? num : i);
-                if (i == 0)
-                    return num;
+                return num;
             }
             ctx->obuf_off += i;
             ctx->obuf_len -= i;
@@ -218,8 +215,7 @@ static int buffer_write(BIO *b, const char *in, int inl)
             BIO_copy_next_retry(b);
             if (i < 0)
                 return ((num > 0) ? num : i);
-            if (i == 0)
-                return num;
+            return num;
         }
         num += i;
         in += i;
@@ -456,8 +452,7 @@ static int buffer_gets(BIO *b, char *buf, int size)
                 *buf = '\0';
                 if (i < 0)
                     return ((num > 0) ? num : i);
-                if (i == 0)
-                    return num;
+                return num;
             }
             ctx->ibuf_len = i;
             ctx->ibuf_off = 0;

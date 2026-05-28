@@ -77,7 +77,7 @@ static char *strip_spaces(char *p)
 
     for (q = p + strlen(p) - 1; q != p && isspace((unsigned char)*q); )
         *q-- = '\0';
-    return *p ? p : NULL;
+    return p;
 }
 
 /*
