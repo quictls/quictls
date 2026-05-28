@@ -190,7 +190,7 @@ out:
 
 void get_sock_info_address(int asock, char **hostname, char **service)
 {
-    union BIO_sock_info_u info;
+    union BIO_sock_info_u info = {0};
 
     if (hostname != NULL)
         *hostname = NULL;
