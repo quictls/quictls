@@ -149,6 +149,10 @@ int main(int ac, char **av)
         exit(EXIT_FAILURE);
     }
     fp = fopen(av[0], "r");
+    if (fp == NULL) {
+        perror(av[0]);
+        exit(EXIT_FAILURE);
+    }
     if ((long)fread(contents, 1, sb.st_size, fp) != sb.st_size) {
         perror("fread");
         exit(EXIT_FAILURE);
