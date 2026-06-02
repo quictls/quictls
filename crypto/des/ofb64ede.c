@@ -28,7 +28,7 @@ void DES_ede3_ofb64_encrypt(register const unsigned char *in,
     register DES_LONG v0, v1;
     register int n = *num;
     register long l = length;
-    DES_cblock d;
+    DES_cblock d = {0};
     register char *dp;
     DES_LONG ti[2];
     unsigned char *iv;

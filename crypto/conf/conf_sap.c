@@ -63,7 +63,7 @@ int ossl_config_int(const OPENSSL_INIT_SETTINGS *settings)
 
 #ifdef OPENSSL_INIT_DEBUG
     fprintf(stderr, "OPENSSL_INIT: ossl_config_int(%s, %s, %lu)\n",
-            filename, appname, flags);
+            filename ? filename : "NULL", appname ? appname : "NULL", flags);
 #endif
 
 #ifndef OPENSSL_SYS_UEFI

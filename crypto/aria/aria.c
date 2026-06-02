@@ -1076,7 +1076,7 @@ static inline void FO(ARIA_u128 *o, const ARIA_u128 *d,
 static inline void FE(ARIA_u128 *o, const ARIA_u128 *d,
                            const ARIA_u128 *rk)
 {
-    ARIA_u128 y;
+    ARIA_u128 y = { {0} };
 
     sl2(y.c, d, rk);
     a(o, &y);
@@ -1123,7 +1123,7 @@ int ossl_aria_set_encrypt_key(const unsigned char *userKey, const int bits,
                               ARIA_KEY *key)
 {
     const ARIA_u128 *ck1, *ck2, *ck3;
-    ARIA_u128 kr, w0, w1, w2, w3;
+    ARIA_u128 kr = { {0} }, w0 = { {0} }, w1 = { {0} }, w2 = { {0} }, w3 = { {0} };
 
     if (!userKey || !key)
         return -1;

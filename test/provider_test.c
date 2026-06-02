@@ -151,7 +151,6 @@ static int test_provider(OSSL_LIB_CTX **libctx, const char *name,
     OSSL_PROVIDER_unload(base);
     OSSL_PROVIDER_unload(deflt);
     OSSL_PROVIDER_unload(legacy);
-    legacy = NULL;
     OSSL_PROVIDER_unload(prov);
     OSSL_LIB_CTX_free(*libctx);
     *libctx = NULL;
