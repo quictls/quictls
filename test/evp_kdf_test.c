@@ -684,7 +684,7 @@ static int test_kdf_pbkdf2_large_output(void)
     int mode = 0;
     OSSL_PARAM *params;
 
-    if (sizeof(len) > 32)
+    if (sizeof(len) * CHAR_BIT > 32)
         len = SIZE_MAX;
 
     params = construct_pbkdf2_params("passwordPASSWORDpassword", "sha256",
