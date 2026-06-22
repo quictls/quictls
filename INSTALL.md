@@ -1,5 +1,25 @@
 QuicTLS requires [cmake](https://www.cmake.org). It also requires Perl.
 
+TL;DR
+=====
+
+The bulk of this file details the various configuration options that
+you can specify in a cmake configuration file or on the command line.
+
+Here is the simplest command line for cxommon linux:
+
+    cmake . -DCMAKE_BUILD_TYPE=Debug -DTARGET=linux_generic64
+
+You can change the build type to Release.  If you do not assign the
+TARGET, the CMakefile will try to determine what you have.
+
+If you have an OpenSSL `configure` line that you use, you can
+use the Perl script `./util/config2cmake` which will output settings
+that you can view and then put into your own "target" file.  For example
+        ./uti/config2cmake ,,,options... >mine.cmake
+        export LOCAL_BUILD_SETTINGS=mine.cmake
+        cmake ,
+
 Environment variables
 =====================
 - `LOCAL_BUILD_SETTINGS`
