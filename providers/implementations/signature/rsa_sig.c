@@ -722,7 +722,7 @@ static int rsa_verify_recover(void *vprsactx,
             if (rout != prsactx->tbuf) {
                 if (routsize < (size_t)ret) {
                     ERR_raise_data(ERR_LIB_PROV, PROV_R_OUTPUT_BUFFER_TOO_SMALL,
-                                   "buffer size is %d, should be %d",
+                                   "buffer size is %zu, should be %d",
                                    routsize, ret);
                     return 0;
                 }
