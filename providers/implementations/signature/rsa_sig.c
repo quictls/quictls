@@ -805,7 +805,7 @@ static int rsa_verify(void *vprsactx, const unsigned char *sig, size_t siglen,
                 mdsize = rsa_get_md_size(prsactx);
                 if (tbslen != mdsize) {
                     ERR_raise_data(ERR_LIB_PROV, PROV_R_INVALID_DIGEST_LENGTH,
-                                   "Should be %d, but got %d",
+                                   "Should be %zu, but got %zu",
                                    mdsize, tbslen);
                     return 0;
                 }
