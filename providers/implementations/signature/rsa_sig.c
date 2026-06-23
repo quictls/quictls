@@ -574,7 +574,7 @@ static int rsa_sign(void *vprsactx, unsigned char *sig, size_t *siglen,
         case RSA_X931_PADDING:
             if ((size_t)RSA_size(prsactx->rsa) < tbslen + 1) {
                 ERR_raise_data(ERR_LIB_PROV, PROV_R_KEY_SIZE_TOO_SMALL,
-                               "RSA key size = %d, expected minimum = %d",
+                               "RSA key size = %d, expected minimum = %zu",
                                RSA_size(prsactx->rsa), tbslen + 1);
                 return 0;
             }
@@ -722,7 +722,7 @@ static int rsa_verify_recover(void *vprsactx,
             if (rout != prsactx->tbuf) {
                 if (routsize < (size_t)ret) {
                     ERR_raise_data(ERR_LIB_PROV, PROV_R_OUTPUT_BUFFER_TOO_SMALL,
-                                   "buffer size is %d, should be %d",
+                                   "buffer size is %zu, should be %d",
                                    routsize, ret);
                     return 0;
                 }
@@ -805,7 +805,7 @@ static int rsa_verify(void *vprsactx, const unsigned char *sig, size_t siglen,
                 mdsize = rsa_get_md_size(prsactx);
                 if (tbslen != mdsize) {
                     ERR_raise_data(ERR_LIB_PROV, PROV_R_INVALID_DIGEST_LENGTH,
-                                   "Should be %d, but got %d",
+                                   "Should be %zu, but got %zu",
                                    mdsize, tbslen);
                     return 0;
                 }
