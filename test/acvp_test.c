@@ -235,11 +235,12 @@ static int get_ecdsa_sig_rs_bytes(const unsigned char *sig, size_t sig_len,
     *rlen = r1_len;
     *slen = s1_len;
     ret = 1;
+    /* Ownership of allocated buffers is transferred to the caller. */
+    rbuf = NULL;
+    sbuf = NULL;
 err:
-    if (ret == 0) {
-        OPENSSL_free(rbuf);
-        OPENSSL_free(sbuf);
-    }
+    OPENSSL_free(rbuf);
+    OPENSSL_free(sbuf);
     ECDSA_SIG_free(sign);
     return ret;
 }
