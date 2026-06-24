@@ -577,11 +577,12 @@ static int get_dsa_sig_rs_bytes(const unsigned char *sig, size_t sig_len,
     *r_len = r1_len;
     *s_len = s1_len;
     ret = 1;
+    /* Ownership of allocated buffers is transferred to the caller. */
+    rbuf = NULL;
+    sbuf = NULL;
 err:
-    if (ret == 0) {
-        OPENSSL_free(rbuf);
-        OPENSSL_free(sbuf);
-    }
+    OPENSSL_free(rbuf);
+    OPENSSL_free(sbuf);
     DSA_SIG_free(sign);
     return ret;
 }
