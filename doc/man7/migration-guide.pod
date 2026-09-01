@@ -685,12 +685,6 @@ Use L<d2i_PrivateKey_ex_bio(3)> and L<d2i_PrivateKey_ex_fp(3)>
 
 =item *
 
-L<EC_GROUP_new(3)>
-
-Use L<EC_GROUP_new_by_curve_name_ex(3)> or L<EC_GROUP_new_from_params(3)>.
-
-=item *
-
 L<EVP_DigestSignInit(3)> and L<EVP_DigestVerifyInit(3)>
 
 =item *
@@ -1483,16 +1477,6 @@ Applications should use L<EVP_PKEY_get_size(3)>.
 
 =item *
 
-EC_GFp_mont_method(), EC_GFp_nist_method(),
-EC_GFp_nistp224_method(), EC_GFp_nistp256_method(), EC_GFp_nistp521_method(),
-EC_GFp_simple_method()
-
-There are no replacements for these functions. Applications should rely on the
-library automatically assigning a suitable method internally when an EC_GROUP
-is constructed.
-
-=item *
-
 EC_GROUP_clear_free()
 
 Use L<EC_GROUP_free(3)> instead.
@@ -1510,14 +1494,6 @@ EC_KEY_precompute_mult()
 
 These functions are not widely used. Applications should instead switch to
 named curves which OpenSSL has hardcoded lookup tables for.
-
-=item *
-
-EC_GROUP_new(), EC_GROUP_method_of(), EC_POINT_method_of()
-
-EC_METHOD is now an internal-only concept and a suitable EC_METHOD is assigned
-internally without application intervention.
-Users of EC_GROUP_new() should switch to a different suitable constructor.
 
 =item *
 
@@ -1575,13 +1551,6 @@ EC_KEY_new_method(), EC_KEY_get_ex_data(), EC_KEY_OpenSSL(),
 EC_KEY_set_ex_data(), EC_KEY_set_default_method(), EC_KEY_METHOD_*(),
 EC_KEY_set_method()
 
-See L</Providers are a replacement for engines and low-level method overrides>
-
-=item *
-
-EC_METHOD_get_field_type()
-
-Use L<EC_GROUP_get_field_type(3)> instead.
 See L</Providers are a replacement for engines and low-level method overrides>
 
 =item *

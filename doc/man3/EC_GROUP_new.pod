@@ -8,7 +8,6 @@ EC_GROUP_new_from_params,
 EC_GROUP_to_params,
 EC_GROUP_new_from_ecparameters,
 EC_GROUP_new_from_ecpkparameters,
-EC_GROUP_new,
 EC_GROUP_free,
 EC_GROUP_clear_free,
 EC_GROUP_new_curve_GFp,
@@ -57,7 +56,6 @@ The following functions have been deprecated since OpenSSL 3.0, and can be
 hidden entirely by defining B<OPENSSL_API_COMPAT> with a suitable version value,
 see L<openssl_user_macros(7)>:
 
- EC_GROUP *EC_GROUP_new(const EC_METHOD *meth);
  void EC_GROUP_clear_free(EC_GROUP *group);
 
  int EC_GROUP_set_curve_GFp(EC_GROUP *group, const BIGNUM *p,
@@ -71,15 +69,6 @@ Fp are the integers 0 to p-1, where p is a prime number. This gives us a revised
 elliptic curve equation as follows:
 
 y^2 mod p = x^3 +ax + b mod p
-
-Although deprecated since OpenSSL 3.0 and should no longer be used,
-a new curve can be constructed by calling EC_GROUP_new(), using the
-implementation provided by I<meth> (see L<EC_GFp_simple_method(3)>) and
-associated with the library context I<ctx> (see L<OSSL_LIB_CTX(3)>).
-The I<ctx> parameter may be NULL in which case the default library context is
-used.
-It is then necessary to call EC_GROUP_set_curve() to set the curve parameters.
-Applications should instead use one of the other EC_GROUP_new_* constructors.
 
 EC_GROUP_new_from_params() creates a group with parameters specified by I<params>.
 The library context I<libctx> (see L<OSSL_LIB_CTX(3)>) and property query string
@@ -117,9 +106,8 @@ EC_GROUP_get_curve_GFp() is an alias for
 EC_GROUP_get_curve(). It is defined for backwards compatibility only and
 should not be used.
 
-The functions EC_GROUP_new_curve_GFp() is a shortcut for calling EC_GROUP_new()
-and then the EC_GROUP_set_curve() function. An appropriate default implementation
-method will be used.
+The functions EC_GROUP_new_curve_GFp() sets a default implementation and
+then calls the EC_GROUP_set_curve() function.
 
 Whilst the library can be used to create any curve using the functions described
 above, there are also a number of predefined curves that are available. In order
@@ -166,7 +154,7 @@ OSSL_EC_curve_nid2name() converts a curve I<nid> into the corresponding name.
 
 =head1 RETURN VALUES
 
-All EC_GROUP_new* functions return a pointer to the newly constructed group, or
+All EC_GROUP "new" functions return a pointer to the newly constructed group, or
 NULL on error.
 
 EC_get_builtin_curves() returns the number of built-in curves that are
@@ -180,31 +168,19 @@ OSSL_EC_curve_nid2name() returns a character string constant, or NULL on error.
 
 L<crypto(7)>, L<EC_GROUP_copy(3)>,
 L<EC_POINT_new(3)>, L<EC_POINT_add(3)>, L<EC_KEY_new(3)>,
-L<EC_GFp_simple_method(3)>, L<d2i_ECPKParameters(3)>,
+L<d2i_ECPKParameters(3)>,
 L<OSSL_LIB_CTX(3)>, L<EVP_PKEY-EC(7)>
 
 =head1 HISTORY
 
-=over 2
-
-=item *
-
-EC_GROUP_new() was deprecated in OpenSSL 3.0.
-
 EC_GROUP_new_by_curve_name_ex() and EC_GROUP_new_from_params() were
 added in OpenSSL 3.0.
-
-=item *
 
 EC_GROUP_clear_free() was deprecated in OpenSSL 3.0; use EC_GROUP_free()
 instead.
 
-=item *
-
- EC_GROUP_set_curve_GFp(), EC_GROUP_get_curve_GFp(), were deprecated in
- OpenSSL 3.0; use EC_GROUP_set_curve() and EC_GROUP_get_curve() instead.
-
-=back
+EC_GROUP_set_curve_GFp(), EC_GROUP_get_curve_GFp(), were deprecated in
+OpenSSL 3.0; use EC_GROUP_set_curve() and EC_GROUP_get_curve() instead.
 
 =head1 COPYRIGHT
 
