@@ -48,11 +48,7 @@ make sure to have the conversation in an open manner.
 Where/how can I report vulnerabilities?
 ---------------------------------------
 
-Please see our [security
-policy](https://github.com/quictls/quictls/blob/main/SECURITY.md)
-for information on how to report vulnerabilities in
-QuicTLS to us. We are committed to sharing items with OpenSSL,
-BoringSSL, and LibreSSL as necessary.
+Best to send them to OpenSSL, probably.
 
 
 What about sonames and the like?
